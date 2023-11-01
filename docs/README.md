@@ -13,4 +13,4 @@ We ought to establish certain **coding conventions** in order to write concise, 
 ### Protocols:
 One may find information gathered at meetings in the following list:
 
-- [meeting notes](/docs/meeting_nodes.md)
+- [meeting notes](/docs/meeting_notes.md)
