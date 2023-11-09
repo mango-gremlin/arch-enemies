@@ -31,7 +31,6 @@
 - Player can run and jump but cannot fall into water
 - use animal-allies to form a bridge that Player can walk on and jump across
 - Animal Mechanics:
-	- 
 	- spider can stick to all surfaces (also upside down)
 - Environmental Mechanics:
 	- different environments in different areas
