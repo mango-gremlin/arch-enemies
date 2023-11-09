@@ -37,6 +37,8 @@
    	- geyser that shoots you up, blocking one geyser makes other geyser stronger
    	- vines with swinging platforms, vines for climbing up
    	- watermill that turns
+- success when Player stands on other side
+- (repeat player-path with other animal sprites to show your allies following you?)
 
 - If an animal is used, their associated cards will be exhausted, significantly weakening them
 	- Can be undone by spending resources and at the end of each level
