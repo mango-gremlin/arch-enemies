@@ -27,8 +27,18 @@
 	- each card has a type (i.e. mammalian), can interact with card abilities
 	- card role is designated by small symbol
 ## Bridging
-- Cross gap of varying length
-- Use animals to form bridges
+- Player Character (Fox?) needs to get from side A to side B
+- Player can run and jump but cannot fall into water
+- use animal-allies to form a bridge that Player can walk on and jump across
+- Animal Mechanics:
+	- 
+	- spider can stick to all surfaces (also upside down)
+- Environmental Mechanics:
+	- different environments in different areas
+   	- geyser that shoots you up, blocking one geyser makes other geyser stronger
+   	- vines with swinging platforms, vines for climbing up
+   	- watermill that turns
+
 - If an animal is used, their associated cards will be exhausted, significantly weakening them
 	- Can be undone by spending resources and at the end of each level
 
