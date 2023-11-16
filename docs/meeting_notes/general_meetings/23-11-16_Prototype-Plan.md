@@ -45,7 +45,7 @@ doc/..
 #### Ziele für Sonntag
 - alle programmieren mit, auch game design -> innerhalb dessen Teams für die erstellung dieses Prototyps
 	- für jede Gruppe 1 verantwortlichen, der progress updates an die anderen gibt
-	- man trifft sich dann in diesen Gruppen während der woche, so oft wie nötig
+	- man trifft sich dann in diesen Gruppen während der woche, so oft wie nötig (mindestens 1 mal, am besten 2 mal)
 	- ~2 Gruppen, die beide mal das ganze implementieren, mit 1-2 managern, die bisschen vorgeben wer was macht
 - Roadmap für was wir wann machen wollen
 - fragen zu godot klären
