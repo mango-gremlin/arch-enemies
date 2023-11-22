@@ -1,12 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://c5tl3m10s5tby"]
+[gd_scene load_steps=6 format=3 uid="uid://c5tl3m10s5tby"]
 
 [ext_resource type="Texture2D" uid="uid://47bt3n56d3fc" path="res://assets/box_snake.png" id="1_c08hy"]
 [ext_resource type="Script" path="res://DragObject.gd" id="1_gtwqh"]
+[ext_resource type="Script" path="res://allowed_snake_area.gd" id="3_fqrgl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i2o3k"]
 size = Vector2(57, 12.5)
 
-[node name="StaticBody2D" type="StaticBody2D" groups=["draggable"]]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lyvfn"]
+size = Vector2(48, 26)
+
+[node name="StaticBody2D" type="StaticBody2D" groups=["draggable", "dropable"]]
 script = ExtResource("1_gtwqh")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -15,10 +19,28 @@ texture = ExtResource("1_c08hy")
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_i2o3k")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="snake" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="snake"]
 shape = SubResource("RectangleShape2D_i2o3k")
 
-[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
-[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
+[node name="allowed_snake_area" type="Area2D" parent="." groups=["dropable"]]
+script = ExtResource("3_fqrgl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="allowed_snake_area" groups=["dropable"]]
+position = Vector2(-12, 0)
+shape = SubResource("RectangleShape2D_lyvfn")
+
+[node name="ColorRect" type="ColorRect" parent="allowed_snake_area"]
+z_index = -1
+offset_left = -36.0
+offset_top = -13.0
+offset_right = 12.0
+offset_bottom = 13.0
+
+[connection signal="area_entered" from="snake" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="snake" to="." method="_on_area_2d_area_exited"]
+[connection signal="mouse_entered" from="snake" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="snake" to="." method="_on_area_2d_mouse_exited"]
+[connection signal="body_entered" from="allowed_snake_area" to="." method="_on_allowed_snake_area_body_entered"]
+[connection signal="body_exited" from="allowed_snake_area" to="." method="_on_allowed_snake_area_body_exited"]

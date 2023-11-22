@@ -15,9 +15,7 @@ func _physics_process(delta):
 		velocity.y += gravity * delta
 
 	if Global.drag_mode:
-		velocity.x = 0
-		velocity.y = 0
-		global_position = Vector2(74, 111)
+		reset_fox()
 		return
 
 	# Handle Jump.
@@ -33,3 +31,12 @@ func _physics_process(delta):
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
 	move_and_slide()
+
+func reset_fox():
+	velocity.x = 0
+	velocity.y = 0
+	global_position = Vector2(74, 111)
+
+func _on_area_2d_body_entered(body):
+	# if fox touches water
+	reset_fox()
