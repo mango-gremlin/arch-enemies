@@ -21,6 +21,7 @@ func _process(delta):
 			offset = get_global_mouse_position() - self.global_position
 			self.is_dragging = true
 			Global.something_is_being_dragged = true
+			Global.currently_dragging = self.get_name()
 			#print("click")
 			
 		if Input.is_action_pressed("click"):
@@ -32,6 +33,7 @@ func _process(delta):
 		elif Input.is_action_just_released("click"):
 			self.is_dragging = false
 			Global.something_is_being_dragged = false
+			Global.currently_dragging = null
 
 			var tween = get_tree().create_tween()
 
@@ -66,24 +68,37 @@ func _on_area_2d_mouse_exited():
 		self.draggable = false
 		self.scale = Vector2(1, 1)
 
-func _on_area_2d_area_entered(area):
-	inside_object = true
-	#print("nooooooo")
-	
-func _on_area_2d_area_exited(area):
-	inside_object = false
-	#print("yeeeeeeees")
+
+#func _on_area_2d_area_entered(area):
+#	inside_object = true
+#	#print("nooooooo")
+#
+#func _on_area_2d_area_exited(area):
+#	inside_object = false
+#	#print("yeeeeeeees")
+
+#
+#func _on_allowed_snake_area_body_entered(body):
+#	if body.is_in_group('dropable') && not is_dragging:
+#		is_inside_dropable = true
+#		$allowed_snake_area.modulate = Color(Color.AQUAMARINE, 0.5)
+#		body_ref = body
+#		print("color changed")
+#
+#
+#func _on_allowed_snake_area_body_exited(body):
+#	if body.is_in_group('dropable') && not is_dragging:
+#		is_inside_dropable = false
+#		$allowed_snake_area.modulate = Color(Color.PALE_GREEN, 0.7)
 
 
-func _on_allowed_snake_area_body_entered(body):
+func _on_snake_body_entered(body:StaticBody2D):
 	if body.is_in_group('dropable'):
 		is_inside_dropable = true
-		$allowed_snake_area.modulate = Color(Color.AQUAMARINE, 0.5)
+		body.modulate = Color(Color.CORNFLOWER_BLUE, 1)
 		body_ref = body
-		print("color changed")
 
-
-func _on_allowed_snake_area_body_exited(body):
+func _on_snake_body_exited(body):
 	if body.is_in_group('dropable'):
 		is_inside_dropable = false
-		$allowed_snake_area.modulate = Color(Color.PALE_GREEN, 0.7)
+		body.modulate = Color(Color.AQUAMARINE, 0.7)

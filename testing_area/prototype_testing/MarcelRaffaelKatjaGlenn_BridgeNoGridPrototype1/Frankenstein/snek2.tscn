@@ -8,9 +8,9 @@
 size = Vector2(57, 12.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lyvfn"]
-size = Vector2(48, 26)
+size = Vector2(7, 14)
 
-[node name="StaticBody2D" type="StaticBody2D" groups=["draggable", "dropable"]]
+[node name="snakeBod" type="StaticBody2D" groups=["draggable"]]
 script = ExtResource("1_gtwqh")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -24,23 +24,23 @@ shape = SubResource("RectangleShape2D_i2o3k")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="snake"]
 shape = SubResource("RectangleShape2D_i2o3k")
 
-[node name="allowed_snake_area" type="Area2D" parent="." groups=["dropable"]]
+[node name="allowed_snake_area" type="StaticBody2D" parent="." groups=["dropable"]]
 script = ExtResource("3_fqrgl")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="allowed_snake_area" groups=["dropable"]]
-position = Vector2(-12, 0)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="allowed_snake_area"]
+position = Vector2(-32.5, 0)
 shape = SubResource("RectangleShape2D_lyvfn")
 
 [node name="ColorRect" type="ColorRect" parent="allowed_snake_area"]
 z_index = -1
 offset_left = -36.0
-offset_top = -13.0
-offset_right = 12.0
-offset_bottom = 13.0
+offset_top = -7.0
+offset_right = -29.0
+offset_bottom = 7.0
 
 [connection signal="area_entered" from="snake" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="snake" to="." method="_on_area_2d_area_exited"]
+[connection signal="body_entered" from="snake" to="." method="_on_snake_body_entered"]
+[connection signal="body_exited" from="snake" to="." method="_on_snake_body_exited"]
 [connection signal="mouse_entered" from="snake" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="snake" to="." method="_on_area_2d_mouse_exited"]
-[connection signal="body_entered" from="allowed_snake_area" to="." method="_on_allowed_snake_area_body_entered"]
-[connection signal="body_exited" from="allowed_snake_area" to="." method="_on_allowed_snake_area_body_exited"]
