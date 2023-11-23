@@ -33,3 +33,14 @@ func player_movement(delta):
 	
 	move_and_collide(velocity * delta)
 
+# ----- 
+# --- structure for interaction with Areas
+# -----
+
+ 
+func _on_interactionarea_area_entered(area):
+	pass # Replace with function body.
+
+
+func _on_interactionarea_area_exited(area):
+	pass # Replace with function body.
