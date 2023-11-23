@@ -1,11 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://p30p3o0e473c"]
+[gd_scene load_steps=12 format=3 uid="uid://p30p3o0e473c"]
 
 [ext_resource type="Texture2D" uid="uid://qeexqs6g3uhd" path="res://art/tilesets/plains.png" id="1_q75fb"]
 [ext_resource type="Texture2D" uid="uid://c7at8g0vo8sjc" path="res://art/tilesets/grass.png" id="2_quh5h"]
 [ext_resource type="Texture2D" uid="uid://ba53typnoc2dg" path="res://art/tilesets/fences.png" id="3_q3586"]
 [ext_resource type="Texture2D" uid="uid://cqmxk6tutkitn" path="res://art/objects/objects.png" id="4_k3qpt"]
 [ext_resource type="Texture2D" uid="uid://ck8dg66kww3sq" path="res://art/tilesets/decor_16x16.png" id="5_xp7f7"]
-[ext_resource type="PackedScene" uid="uid://dndu4pg1i3tlf" path="res://scenes/player.tscn" id="6_m3ejm"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_r544b"]
 texture = ExtResource("1_q75fb")
@@ -205,10 +204,10 @@ texture = ExtResource("4_k3qpt")
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/0/physics_layer_0/angular_velocity = 0.0
 0:1/0 = 0
-0:1/0/y_sort_origin = 1
+0:1/0/y_sort_origin = 3
 0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:1/0/physics_layer_0/angular_velocity = 0.0
-0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 2, 7, 2, 7, 8, -2, 8, -8, 4)
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 0:5/size_in_atlas = Vector2i(3, 4)
 0:5/0 = 0
 0:5/0/y_sort_origin = 15
@@ -268,9 +267,3 @@ layer_1/y_sort_enabled = true
 layer_1/y_sort_origin = 0
 layer_1/z_index = 0
 layer_1/tile_data = PackedInt32Array(589829, 4, 5, 1310726, 4, 5, 720905, 4, 5, 2097161, 4, 5, 1966093, 4, 5, 2818061, 4, 1, 2752526, 4, 1, 1441807, 4, 1, 3276816, 4, 5, 983058, 4, 5, 2555924, 4, 1, 1769494, 524292, 6, 393239, 4, 5, 3473431, 4, 5, 1048600, 4, 5, 2228248, 524292, 6, 3670042, 655364, 7, 2687003, 4, 1, 458781, 655364, 7, 1441821, 4, 5, 3145757, 4, 5, 2031646, 524292, 6, 1441824, 4, 5, 3342368, 4, 5, 655393, 4, 1, 983074, 655364, 7, 917541, 4, 1, 2949158, 4, 1, 1769511, 393220, 7, 720937, 655364, 7, 1703977, 393220, 7, 2949161, 4, 5, 2621482, 4, 1, 3342378, 4, 1, 1638444, 4, 5, 262189, 4, 5, 1114157, 4, 5, 2293806, 4, 5, 2949168, 4, 1, 196658, 4, 5, 1572914, 4, 5, 852023, 524292, 6, 3276857, 4, 5, 1441850, 524292, 6, 2621499, 4, 5, 3342396, 4, 5, 1441853, 524292, 6, 2752575, 4, 5, 2031680, 4, 1, 3342400, 4, 5, 1310786, 4, 1, 1441860, 524292, 6, 3145797, 4, 5, 720966, 4, 5, 1769544, 655364, 7, 3080265, 4, 1, 3342409, 524292, 6, 2490442, 4, 1, 2097227, 524292, 6, 917581, 4, 1, 3604557, 524292, 6, 3276879, 524292, 6, 3473487, 524292, 6, 1769552, 524292, 6, 262225, 4, 5, 2883665, 524292, 6)
-
-[node name="Player" parent="." instance=ExtResource("6_m3ejm")]
-position = Vector2(74, 69)
-slide_on_ceiling = false
-floor_block_on_wall = false
-SPEED = 100.0
