@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://bvt8odch5yeuu"]
+
+[ext_resource type="Script" path="res://DragDeer.gd" id="1_8iqxn"]
+[ext_resource type="Texture2D" uid="uid://clr5mb5lxvby8" path="res://assets/box_deer.png" id="1_lw7dc"]
+
+[node name="deer" type="StaticBody2D" groups=["draggable"]]
+script = ExtResource("1_8iqxn")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_lw7dc")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-20, -4, -20, 22, 7, 22, 7, -4, 11, -4, 11, -12, 20, -12, 20, -21, 11, -21, 11, -17, 0, -17, 0, -22, -12, -22, -12, -11, -1, -11, -1, -4)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(-20, -4, -20, 22, 7, 22, 7, -4, 11, -4, 11, -12, 20, -12, 20, -21, 11, -21, 11, -17, 0, -17, 0, -22, -12, -22, -12, -11, -1, -11, -1, -4)
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

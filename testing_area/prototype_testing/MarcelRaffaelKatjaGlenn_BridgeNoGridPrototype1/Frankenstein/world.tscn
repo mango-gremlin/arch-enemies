@@ -1,0 +1,120 @@
+[gd_scene load_steps=13 format=3 uid="uid://cf5udd6l65fuv"]
+
+[ext_resource type="Texture2D" uid="uid://d4khq8o7aaei" path="res://assets/green.png" id="1_m0btg"]
+[ext_resource type="Texture2D" uid="uid://dc2lxeyr45vp3" path="res://assets/blue_dark.png" id="2_640fj"]
+[ext_resource type="PackedScene" uid="uid://dvgr170gyuhpq" path="res://fox.tscn" id="2_u7ijr"]
+[ext_resource type="PackedScene" uid="uid://c5tl3m10s5tby" path="res://snek2.tscn" id="3_0bug4"]
+[ext_resource type="Script" path="res://ModeChangeButton.gd" id="6_8qx0u"]
+[ext_resource type="PackedScene" uid="uid://bvt8odch5yeuu" path="res://deer2_electricBogaloo.tscn" id="6_rhocy"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_s2tkw"]
+texture = ExtResource("1_m0btg")
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:0/0 = 0
+1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:0/0/physics_layer_0/angular_velocity = 0.0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:1/0 = 0
+0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:1/0/physics_layer_0/angular_velocity = 0.0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:1/0 = 0
+1:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:1/0/physics_layer_0/angular_velocity = 0.0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_udipr"]
+texture = ExtResource("2_640fj")
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:0/0 = 0
+1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:0/0/physics_layer_0/angular_velocity = 0.0
+0:1/0 = 0
+0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:1/0/physics_layer_0/angular_velocity = 0.0
+1:1/0 = 0
+1:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:1/0/physics_layer_0/angular_velocity = 0.0
+
+[sub_resource type="TileSet" id="TileSet_rwph5"]
+physics_layer_0/collision_layer = 1
+terrain_set_0/mode = 0
+sources/0 = SubResource("TileSetAtlasSource_s2tkw")
+sources/1 = SubResource("TileSetAtlasSource_udipr")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vsiy0"]
+texture = ExtResource("2_640fj")
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:0/0 = 0
+1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:0/0/physics_layer_0/angular_velocity = 0.0
+0:1/0 = 0
+0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:1/0/physics_layer_0/angular_velocity = 0.0
+1:1/0 = 0
+1:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:1/0/physics_layer_0/angular_velocity = 0.0
+
+[sub_resource type="TileSet" id="TileSet_ld1cc"]
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_vsiy0")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6rkrv"]
+size = Vector2(345, 54)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="TileMap" type="TileMap" parent="."]
+position = Vector2(47, 101)
+tile_set = SubResource("TileSet_rwph5")
+format = 2
+layer_0/tile_data = PackedInt32Array(262143, 0, 0, 196608, 0, 0, 196609, 0, 0, 196610, 0, 0, 196611, 0, 0, 262147, 0, 0, 327683, 0, 0, 393219, 0, 0, 458755, 0, 0, 524291, 0, 0, 589827, 0, 0, 589828, 0, 0, 589829, 0, 0, 589830, 0, 0, 589831, 0, 0, 589832, 0, 0, 589833, 0, 0, 589834, 0, 0, 589835, 0, 0, 589836, 0, 0, 589837, 0, 0, 589838, 0, 0, 589839, 0, 0, 589840, 0, 0, 327678, 0, 0, 393214, 0, 0, 458750, 0, 0, 524287, 0, 0, 589823, 0, 0, 655359, 0, 0, 720895, 0, 0, 786431, 0, 0, 851967, 0, 0, 786432, 0, 0, 786433, 0, 0, 786434, 0, 0, 786435, 0, 0, 786436, 0, 0, 786437, 0, 0, 786438, 0, 0, 786439, 0, 0, 786440, 0, 0, 786441, 0, 0, 720906, 0, 0, 720907, 0, 0, 720908, 0, 0, 720909, 0, 0, 720910, 0, 0, 720911, 0, 0, 720912, 0, 0, 655377, 0, 0, 655378, 0, 0, 655379, 0, 0, 655380, 0, 0, 589844, 0, 0, 524286, 0, 0, 589822, 0, 0, 655358, 0, 0, 720894, 0, 0, 786430, 0, 0, 851966, 0, 0, 786442, 0, 0, 786443, 0, 0, 786444, 0, 0, 786445, 0, 0, 720913, 0, 0, 720914, 0, 0, 720915, 0, 0, 720916, 0, 0, 786452, 0, 0, 786451, 0, 0, 786450, 0, 0, 786449, 0, 0, 786448, 0, 0, 786447, 0, 0, 786446, 0, 0, 720898, 0, 0, 655362, 0, 0, 589826, 0, 0, 524290, 0, 0, 458754, 0, 0, 393218, 0, 0, 327682, 0, 0, 262146, 0, 0, 262145, 0, 0, 262144, 0, 0, 327679, 0, 0, 393215, 0, 0, 458751, 0, 0, 393216, 0, 0, 327680, 0, 0, 327681, 0, 0, 393217, 0, 0, 458753, 0, 0, 458752, 0, 0, 524288, 0, 0, 589824, 0, 0, 655360, 0, 0, 720896, 0, 0, 720897, 0, 0, 655361, 0, 0, 589825, 0, 0, 524289, 0, 0, 655363, 0, 0, 720899, 0, 0, 720900, 0, 0, 655364, 0, 0, 655365, 0, 0, 720901, 0, 0, 720902, 0, 0, 655366, 0, 0, 655367, 0, 0, 720903, 0, 0, 720904, 0, 0, 655368, 0, 0, 655369, 0, 0, 720905, 0, 0, 655370, 0, 0, 655371, 0, 0, 655372, 0, 0, 655373, 0, 0, 655374, 0, 0, 655375, 0, 0, 655376, 0, 0, 589841, 0, 0, 589842, 0, 0, 589843, 0, 0, 786453, 0, 0, 720917, 0, 0, 655381, 0, 0, 589845, 0, 0, 589846, 0, 0, 589847, 0, 0, 524311, 0, 0, 458775, 0, 0, 393239, 0, 0, 393240, 0, 0, 327704, 0, 0, 262168, 0, 0, 262169, 0, 0, 262170, 0, 0, 196634, 0, 0, 131098, 0, 0, 131099, 0, 0, 131100, 0, 0, 131101, 0, 0, 196637, 0, 0, 262173, 0, 0, 327709, 0, 0, 393245, 0, 0, 458781, 0, 0, 524317, 0, 0, 589853, 0, 0, 655389, 0, 0, 720925, 0, 0, 786460, 0, 0, 786459, 0, 0, 786458, 0, 0, 786457, 0, 0, 786456, 0, 0, 786455, 0, 0, 786454, 0, 0, 720918, 0, 0, 655382, 0, 0, 524310, 0, 0, 589848, 0, 0, 655384, 0, 0, 720920, 0, 0, 720919, 0, 0, 524312, 0, 0, 524313, 0, 0, 589849, 0, 0, 655385, 0, 0, 720921, 0, 0, 655383, 0, 0, 458776, 0, 0, 458777, 0, 0, 458778, 0, 0, 393241, 0, 0, 393242, 0, 0, 393243, 0, 0, 458780, 0, 0, 458779, 0, 0, 524315, 0, 0, 327706, 0, 0, 327705, 0, 0, 327707, 0, 0, 327708, 0, 0, 262172, 0, 0, 262171, 0, 0, 196635, 0, 0, 196636, 0, 0, 393244, 0, 0, 524316, 0, 0, 589852, 0, 0, 655388, 0, 0, 720924, 0, 0, 720923, 0, 0, 524314, 0, 0, 589850, 0, 0, 589851, 0, 0, 655387, 0, 0, 720922, 0, 0, 655386, 0, 0)
+
+[node name="water" type="TileMap" parent="."]
+position = Vector2(-35, 21)
+tile_set = SubResource("TileSet_ld1cc")
+format = 2
+layer_0/z_index = -1
+layer_0/tile_data = PackedInt32Array(786439, 0, 0, 786440, 0, 0, 786441, 0, 0, 786442, 0, 0, 786443, 0, 0, 786444, 0, 0, 786445, 0, 0, 786446, 0, 0, 786447, 0, 0, 786448, 0, 0, 786449, 0, 0, 786450, 0, 0, 786451, 0, 0, 786452, 0, 0, 786453, 0, 0, 786454, 0, 0, 786455, 0, 0, 786456, 0, 0, 786457, 0, 0, 851993, 0, 0, 851992, 0, 0, 917528, 0, 0, 917527, 0, 0, 917526, 0, 0, 917525, 0, 0, 917524, 0, 0, 917523, 0, 0, 917522, 0, 0, 917521, 0, 0, 917520, 0, 0, 917519, 0, 0, 917518, 0, 0, 917517, 0, 0, 917516, 0, 0, 917515, 0, 0, 917514, 0, 0, 917513, 0, 0, 917512, 0, 0, 917511, 0, 0, 851975, 0, 0, 851976, 0, 0, 851977, 0, 0, 851978, 0, 0, 851979, 0, 0, 851980, 0, 0, 851981, 0, 0, 851982, 0, 0, 851983, 0, 0, 851984, 0, 0, 851985, 0, 0, 851986, 0, 0, 851987, 0, 0, 851988, 0, 0, 851989, 0, 0, 851990, 0, 0, 851991, 0, 0, 720904, 0, 0, 720905, 0, 0, 720906, 0, 0, 720907, 0, 0, 720908, 0, 0, 720909, 0, 0, 720910, 0, 0, 720911, 0, 0, 720912, 0, 0, 720913, 0, 0, 720914, 0, 0, 720915, 0, 0, 720916, 0, 0, 720917, 0, 0, 720918, 0, 0, 720919, 0, 0, 720920, 0, 0, 720921, 0, 0, 720922, 0, 0, 720923, 0, 0, 720924, 0, 0, 720925, 0, 0, 720926, 0, 0, 786462, 0, 0, 786461, 0, 0, 851997, 0, 0, 851996, 0, 0, 851995, 0, 0, 851994, 0, 0, 786458, 0, 0, 786459, 0, 0, 786460, 0, 0, 917531, 0, 0, 917530, 0, 0, 917529, 0, 0)
+
+[node name="Area2D" type="Area2D" parent="water"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="water/Area2D"]
+position = Vector2(300, 200)
+shape = SubResource("RectangleShape2D_6rkrv")
+
+[node name="fox" parent="." instance=ExtResource("2_u7ijr")]
+position = Vector2(73, 104)
+SPEED = 150.0
+JUMP_VELOCITY = -200.0
+
+[node name="snek" parent="." instance=ExtResource("3_0bug4")]
+position = Vector2(179, 115)
+
+[node name="snek2" parent="." instance=ExtResource("3_0bug4")]
+position = Vector2(298, 131)
+
+[node name="DragModeButton" type="CheckButton" parent="."]
+offset_left = 208.0
+offset_top = 4.0
+offset_right = 340.0
+offset_bottom = 35.0
+text = "drag mode"
+alignment = 1
+icon_alignment = 1
+script = ExtResource("6_8qx0u")
+
+[node name="deer" parent="." instance=ExtResource("6_rhocy")]
+position = Vector2(373, 112)
+
+[connection signal="body_entered" from="water/Area2D" to="fox" method="_on_area_2d_body_entered"]
+[connection signal="toggled" from="DragModeButton" to="DragModeButton" method="_on_toggled"]
