@@ -54,6 +54,7 @@ zoom_out={
 [layer_names]
 
 2d_render/layer_4="interaction"
+2d_physics/layer_4="interaction"
 
 [rendering]
 
