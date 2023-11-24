@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://cgfkelxiskcux"]
+[gd_scene load_steps=5 format=3 uid="uid://cgfkelxiskcux"]
 
 [ext_resource type="PackedScene" uid="uid://dndu4pg1i3tlf" path="res://scenes/player.tscn" id="1_33d5q"]
 [ext_resource type="PackedScene" uid="uid://p30p3o0e473c" path="res://scenes/world.tscn" id="2_h2q7u"]
 [ext_resource type="PackedScene" uid="uid://cgvraulefjyn8" path="res://ui/overworld_ui/overworld_ui.tscn" id="3_fbgu5"]
+[ext_resource type="PackedScene" uid="uid://cegpqm0j2vvbh" path="res://entities/interaction_overworld/interactionspot.tscn" id="4_b5ggn"]
 
 [node name="maingame" type="Node"]
 
@@ -11,3 +12,15 @@
 [node name="world" parent="." instance=ExtResource("2_h2q7u")]
 
 [node name="overworld_ui" parent="." instance=ExtResource("3_fbgu5")]
+
+[node name="interactionspot" parent="." instance=ExtResource("4_b5ggn")]
+position = Vector2(497, 130)
+interact_label = "Stone??"
+interact_type = "findStone"
+interact_value = "Thats a stone"
+
+[node name="interactionspot2" parent="." instance=ExtResource("4_b5ggn")]
+position = Vector2(471, 120)
+interact_label = "Tree"
+interact_type = "findStick"
+interact_value = "Now thats a stick, i've found"

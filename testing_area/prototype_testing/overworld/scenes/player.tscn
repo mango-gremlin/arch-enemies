@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dndu4pg1i3tlf"]
+[gd_scene load_steps=11 format=3 uid="uid://dndu4pg1i3tlf"]
 
 [ext_resource type="Script" path="res://script/Player.gd" id="1_lcx6v"]
 [ext_resource type="Texture2D" uid="uid://802nqkliaru4" path="res://art/characters/fox.png" id="2_tenk7"]
@@ -59,7 +59,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hpei2"]
-radius = 29.0689
+radius = 20.025
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_lcx6v")
@@ -93,9 +93,9 @@ monitorable = false
 shape = SubResource("CircleShape2D_hpei2")
 
 [node name="InteractLabel" type="Label" parent="interactioncomponents"]
-offset_left = -20.0
+offset_left = -94.0
 offset_top = -62.0
-offset_right = 20.0
+offset_right = 94.0
 offset_bottom = -36.0
 text = "xxx"
 horizontal_alignment = 1
