@@ -21,7 +21,7 @@ Global="*res://global.gd"
 
 [display]
 
-window/stretch/scale=1.5
+window/stretch/scale=2.0
 
 [input]
 

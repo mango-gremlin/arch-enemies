@@ -50,16 +50,21 @@ func _process(delta):
 				# dragged object ends up in the right place
 				
 				# save original position of dropable zone
-				self.original_pos_dropzone_left = self.dropzone_left.global_position
+				#self.original_pos_dropzone_left = self.dropzone_left.global_position
 				
 				# shift the position so it snaps perfectly to the side
-				# FIXME: this is still buggy but mostly works
-				self.dropzone_left.global_position.x = self.dropzone_left.global_position.x - (59/2) + (7/2)
+				# not buggy, unless snakes touch each other, probably
+				var drop_area = Vector2(self.dropzone_left.global_position.x - (59/2) + (7/2), self.dropzone_left.global_position.y)
 				
 				# if we can drop this here, play animation with the 
 				# final position being the position of the dropable zone
-				tween.tween_property(self, "position", self.dropzone_left.global_position, 0.2).set_ease(Tween.EASE_OUT)
-				self.dropzone_left_occupied = true
+				tween.tween_property(self, "position", drop_area, 0.2).set_ease(Tween.EASE_OUT)
+				
+				# if dropzone WAS occupied but we switched to something else it is
+				# no longer occupied
+				# if it wasnt, then now we switched to it and it is occupied
+				self.dropzone_left_occupied = not self.dropzone_left_occupied
+        
 			else:
 				# if we cannot drop it here, let it snap back to its original position
 				tween.tween_property(self, "global_position", self.initial_pos, 0.2).set_ease(Tween.EASE_OUT)
@@ -94,5 +99,5 @@ func _on_snake_body_exited(body):
 	if body.is_in_group('dropable'):
 		is_inside_dropable = false
 		body.modulate = Color(Color.AQUAMARINE, 0.7)
-		self.dropzone_left_occupied = false
-		self.dropzone_left.global_position = self.original_pos_dropzone_left
+
+		#self.dropzone_left.global_position = self.original_pos_dropzone_left
