@@ -97,10 +97,10 @@ SPEED = 150.0
 JUMP_VELOCITY = -200.0
 
 [node name="snek" parent="." instance=ExtResource("3_0bug4")]
-position = Vector2(179, 115)
+position = Vector2(180, 110)
 
 [node name="snek2" parent="." instance=ExtResource("3_0bug4")]
-position = Vector2(298, 131)
+position = Vector2(300, 130)
 
 [node name="DragModeButton" type="CheckButton" parent="."]
 offset_left = 208.0

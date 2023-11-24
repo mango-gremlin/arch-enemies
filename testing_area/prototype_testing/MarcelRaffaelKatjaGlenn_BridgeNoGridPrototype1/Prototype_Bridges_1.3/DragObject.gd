@@ -9,10 +9,10 @@ var initial_pos : Vector2
 var is_dragging = false
 var inside_object = false
 var dropzone_left_occupied = false
+var grid_size : float = 10.0 # size of a square in grid
 
 func _process(delta):
 	if draggable:
-		
 		if dropzone_left == null or original_pos_dropzone_left == null:
 			# THIS HAS SO MANY BUGS BUT THEY ARE NOT RELEVANT NOW
 			# this part initialises the positions, but it doesnt really work
@@ -36,6 +36,10 @@ func _process(delta):
 			
 		elif Input.is_action_just_released("click"):
 			# when click is released:
+			
+			# snap to nearest position in grid
+			self.position.x =  round_to_nearest(self.position.x, grid_size)
+			self.position.y = round_to_nearest(self.position.y, grid_size)
 			
 			# 1. nothing is being currently dragged
 			self.is_dragging = false
@@ -91,7 +95,6 @@ func _on_snake_body_entered(body):
 		is_inside_dropable = true
 		body.modulate = Color(Color.CORNFLOWER_BLUE, 1)
 		self.dropzone_left = body
-		
 
 func _on_snake_body_exited(body):
 	# if the snake body stops touching a staticbody that has the dropable group
@@ -101,3 +104,11 @@ func _on_snake_body_exited(body):
 		body.modulate = Color(Color.AQUAMARINE, 0.7)
 
 		#self.dropzone_left.global_position = self.original_pos_dropzone_left
+
+# rounds to nearest multiple of b to a
+func round_to_nearest(a:float, b:float):
+	var offset = fmod(a,b)
+	if offset < b:
+		return a - offset
+	else:
+		return a + (b - offset) 
