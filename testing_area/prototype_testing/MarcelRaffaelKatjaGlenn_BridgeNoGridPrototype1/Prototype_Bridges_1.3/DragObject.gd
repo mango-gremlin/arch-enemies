@@ -1,4 +1,4 @@
-extends Node2D
+extends StaticBody2D
 
 var draggable = false
 var is_inside_dropable = false
@@ -64,7 +64,7 @@ func _process(delta):
 				# no longer occupied
 				# if it wasnt, then now we switched to it and it is occupied
 				self.dropzone_left_occupied = not self.dropzone_left_occupied
-        
+		
 			else:
 				# if we cannot drop it here, let it snap back to its original position
 				tween.tween_property(self, "global_position", self.initial_pos, 0.2).set_ease(Tween.EASE_OUT)
@@ -82,7 +82,7 @@ func _on_area_2d_mouse_exited():
 		self.draggable = false
 		self.scale = Vector2(1, 1)
 
-func _on_snake_body_entered(body:StaticBody2D):
+func _on_snake_body_entered(body):
 	# if the snake body touches a staticbody hitbox (body)
 	# and this body is in the group drobable
 	# set inside dropable to true so the process can register it as a dropable zone
