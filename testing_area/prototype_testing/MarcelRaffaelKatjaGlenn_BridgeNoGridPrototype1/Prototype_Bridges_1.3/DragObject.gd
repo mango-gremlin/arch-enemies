@@ -64,7 +64,7 @@ func _process(delta):
 				# no longer occupied
 				# if it wasnt, then now we switched to it and it is occupied
 				self.dropzone_left_occupied = not self.dropzone_left_occupied
-					
+        
 			else:
 				# if we cannot drop it here, let it snap back to its original position
 				tween.tween_property(self, "global_position", self.initial_pos, 0.2).set_ease(Tween.EASE_OUT)
@@ -99,4 +99,5 @@ func _on_snake_body_exited(body):
 	if body.is_in_group('dropable'):
 		is_inside_dropable = false
 		body.modulate = Color(Color.AQUAMARINE, 0.7)
+
 		#self.dropzone_left.global_position = self.original_pos_dropzone_left

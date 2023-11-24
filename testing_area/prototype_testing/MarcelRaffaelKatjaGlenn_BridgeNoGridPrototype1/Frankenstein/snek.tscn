@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://c25aa0f825lra"]
+
+[ext_resource type="Texture2D" uid="uid://47bt3n56d3fc" path="res://assets/box_snake.png" id="1_cf4pf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pgw7o"]
+size = Vector2(86, 18)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Area2D"]
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("1_cf4pf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_pgw7o")
