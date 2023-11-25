@@ -38,5 +38,5 @@ func reset_fox():
 	global_position = Vector2(74, 111)
 
 func _on_area_2d_body_entered(_body):
-	# if fox touches water
+	# if fox touches water or hazard
 	reset_fox()

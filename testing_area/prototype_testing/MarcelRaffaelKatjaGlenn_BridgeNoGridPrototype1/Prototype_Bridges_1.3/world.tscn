@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://cf5udd6l65fuv"]
+[gd_scene load_steps=14 format=3 uid="uid://cf5udd6l65fuv"]
 
 [ext_resource type="Texture2D" uid="uid://d4khq8o7aaei" path="res://assets/green.png" id="1_m0btg"]
 [ext_resource type="Texture2D" uid="uid://dc2lxeyr45vp3" path="res://assets/blue_dark.png" id="2_640fj"]
 [ext_resource type="PackedScene" uid="uid://dvgr170gyuhpq" path="res://fox.tscn" id="2_u7ijr"]
 [ext_resource type="PackedScene" uid="uid://c5tl3m10s5tby" path="res://snek.tscn" id="3_0bug4"]
 [ext_resource type="Script" path="res://ModeChangeButton.gd" id="6_8qx0u"]
+[ext_resource type="Texture2D" uid="uid://rnhda3466ofv" path="res://assets/death_hazard_prototype.png" id="6_fr7v3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_s2tkw"]
 texture = ExtResource("1_m0btg")
@@ -70,6 +71,9 @@ sources/0 = SubResource("TileSetAtlasSource_vsiy0")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6rkrv"]
 size = Vector2(345, 54)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m4tka"]
+size = Vector2(116, 76)
+
 [node name="Node2D" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -100,7 +104,7 @@ JUMP_VELOCITY = -200.0
 position = Vector2(179, 115)
 
 [node name="snek2" parent="." instance=ExtResource("3_0bug4")]
-position = Vector2(298, 131)
+position = Vector2(361, 100)
 
 [node name="DragModeButton" type="CheckButton" parent="."]
 offset_left = 208.0
@@ -112,5 +116,16 @@ alignment = 1
 icon_alignment = 1
 script = ExtResource("6_8qx0u")
 
+[node name="Hazard" type="Area2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Hazard"]
+position = Vector2(267, 178)
+texture = ExtResource("6_fr7v3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hazard"]
+position = Vector2(266, 178)
+shape = SubResource("RectangleShape2D_m4tka")
+
 [connection signal="body_entered" from="water/Area2D" to="fox" method="_on_area_2d_body_entered"]
 [connection signal="toggled" from="DragModeButton" to="DragModeButton" method="_on_toggled"]
+[connection signal="body_entered" from="Hazard" to="fox" method="_on_area_2d_body_entered"]
