@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-signal InventoryUI(Array)
+signal updated_inventory(new_inventory)
 
 @export var SPEED = 100
 @export var zoomlevel:Vector2 = Vector2(1,1)
@@ -20,9 +20,8 @@ func _ready():
 func _physics_process(delta):
 	player_movement(delta)
 	# checking for interaction in world
-	if Input.is_action_just_pressed("interact_overworld"):
-		execute_interaction()
 	# debugging 
+	check_input()
 	update_interactionLabel()
 
 
@@ -70,6 +69,9 @@ func execute_interaction():
 		var active_interaction = all_interactions[0]
 		# we will match again a certain type
 		match active_interaction.interact_type:
+			"bridge_game":
+				print("entering bridge game")
+				enter_pause_menu()
 			"findStone": 
 				print("found a stone!")
 				print(active_interaction.interact_value)
@@ -83,11 +85,50 @@ func execute_interaction():
 				pass
 			
 
+func use_item():
+	# TODO could use pattern matching to use the item accordingly
+	if !inventory.is_empty():
+		# inventory not empty, using item
+		var used_item = inventory.pop_at(0)
+		
+		# TODO as long as this is a string, we can use this as debug
+		print(used_item)
+		# update UI
+		updated_inventory.emit(inventory)
+
+func check_input():
+	if Input.is_action_just_pressed("interact_overworld"):
+		execute_interaction()
+	if Input.is_action_just_pressed("use_item"):
+		use_item()
+	if Input.is_action_just_pressed("open_menu"):
+		enter_pause_menu()
+		
+	
+
 # this ought to improve, use enums or similar for patter matching
 func updateInventory(item:String):
-	inventory.append(item)
+	inventory.insert(0,item)
 	# emit signal to update Ui
-	InventoryUI.emit(inventory)
+	updated_inventory.emit(inventory)
+
+func enter_pause_menu():
+	print("pause menu")
+	exit_overworld()
+	get_tree().change_scene_to_file("res://ui/menu/pause_menu.tscn")
+
+func exit_overworld():
+	# TODO save coordinates
+	# TODO save state in file!
+	# TODO save Inventory 
+	print("save user position")
+	var player_pos = position
+	var player_inventory = inventory
+	
+	# saveState()
+	
+	
+	
 
 # ----- 
 # debugging
