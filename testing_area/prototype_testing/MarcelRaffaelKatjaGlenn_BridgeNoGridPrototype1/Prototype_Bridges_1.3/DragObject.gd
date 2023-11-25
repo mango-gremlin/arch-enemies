@@ -108,7 +108,7 @@ func _on_snake_body_exited(body):
 # rounds to nearest multiple of b to a
 func round_to_nearest(a:float, b:float):
 	var offset = fmod(a,b)
-	if offset < b:
+	if offset < b / 2:
 		return a - offset
 	else:
 		return a + (b - offset) 
