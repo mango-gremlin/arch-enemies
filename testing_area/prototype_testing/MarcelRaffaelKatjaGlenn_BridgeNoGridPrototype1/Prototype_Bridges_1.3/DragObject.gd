@@ -11,7 +11,7 @@ var inside_object = false
 var dropzone_left_occupied = false
 
 func _process(delta):
-	if draggable:
+	if draggable && Global.drag_mode == true:
 		
 		if dropzone_left == null or original_pos_dropzone_left == null:
 			# THIS HAS SO MANY BUGS BUT THEY ARE NOT RELEVANT NOW
@@ -72,7 +72,7 @@ func _process(delta):
 func _on_area_2d_mouse_entered():
 	# if the mouse enters the area and we are not currently dragging this object
 	# set this to draggable
-	if not self.is_dragging:
+	if not self.is_dragging && Global.drag_mode == true:
 		self.draggable = true
 		self.scale = Vector2(1.05, 1.05)
 
