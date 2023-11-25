@@ -2,23 +2,18 @@ extends StaticBody2D
 
 var draggable = false
 var is_inside_dropable = false
-var dropzone_left
-var original_pos_dropzone_left
+var dropzone
+var original_pos_dropzone
 var offset : Vector2
 var initial_pos : Vector2
 var is_dragging = false
 var inside_object = false
-var dropzone_left_occupied = false
+var dropzone_occupied = false
 
-func _process(delta):
+func _process(_delta):
 	if draggable:
 		
-		if dropzone_left == null or original_pos_dropzone_left == null:
-			# THIS HAS SO MANY BUGS BUT THEY ARE NOT RELEVANT NOW
-			# this part initialises the positions, but it doesnt really work
-			# exactly as intended
-			self.dropzone_left = self.get_children()[2]
-			self.original_pos_dropzone_left = self.dropzone_left.global_position
+		#initialize_dropzones()
 		
 		if Input.is_action_just_pressed("click"):
 			# will ensure the object follows mouse at begin of click
@@ -50,11 +45,9 @@ func _process(delta):
 				# dragged object ends up in the right place
 				
 				# save original position of dropable zone
-				#self.original_pos_dropzone_left = self.dropzone_left.global_position
-				
-				# shift the position so it snaps perfectly to the side
+				#self.original_pos_dropzone = self.dropzone_.global_position
 				# not buggy, unless snakes touch each other, probably
-				var drop_area = Vector2(self.dropzone_left.global_position.x - (59/2) + (7/2), self.dropzone_left.global_position.y)
+				var drop_area = calculate_droparea(self.dropzone)
 				
 				# if we can drop this here, play animation with the 
 				# final position being the position of the dropable zone
@@ -63,7 +56,7 @@ func _process(delta):
 				# if dropzone WAS occupied but we switched to something else it is
 				# no longer occupied
 				# if it wasnt, then now we switched to it and it is occupied
-				self.dropzone_left_occupied = not self.dropzone_left_occupied
+				self.dropzone_occupied = not self.dropzone_occupied
 		
 			else:
 				# if we cannot drop it here, let it snap back to its original position
@@ -90,7 +83,7 @@ func _on_snake_body_entered(body):
 	if body.is_in_group('dropable'):
 		is_inside_dropable = true
 		body.modulate = Color(Color.CORNFLOWER_BLUE, 1)
-		self.dropzone_left = body
+		self.dropzone = body
 		
 
 func _on_snake_body_exited(body):
@@ -100,4 +93,20 @@ func _on_snake_body_exited(body):
 		is_inside_dropable = false
 		body.modulate = Color(Color.AQUAMARINE, 0.7)
 
-		#self.dropzone_left.global_position = self.original_pos_dropzone_left
+#func initialize_dropzones():
+#	if dropzone == null or original_pos_dropzone == null:
+			# THIS HAS SO MANY BUGS BUT THEY ARE NOT RELEVANT NOW
+			# this part initialises the positions, but it doesnt really work
+			# exactly as intended
+#			self.dropzone = self.get_children()[2]
+#			self.original_pos_dropzone = self.dropzone.global_position
+
+func calculate_droparea(body):
+	# returns the new position of where to place the animal in relation to the dropzone,
+	# because right now, the anchor point is in the middle of a body
+	if body.is_in_group('left_dropzone'):
+		return Vector2(self.dropzone.global_position.x - (59.0/2) + (7.0/2), self.dropzone.global_position.y)
+	if body.is_in_group('top_dropzone'):
+		return Vector2(self.dropzone.global_position.x - 13, self.dropzone.global_position.y - 13)
+	if body.is_in_group('bottom_dropzone'):
+		return Vector2(self.dropzone.global_position.x - 13, self.dropzone.global_position.y + 13)
