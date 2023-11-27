@@ -11,10 +11,9 @@ var inside_object = false
 var dropzone_occupied = false
 
 func _process(_delta):
-	if draggable:
+	if draggable and (!Global.currently_dragging or Global.currently_dragging == self.get_name()):
 		
 		#initialize_dropzones()
-		
 		if Input.is_action_just_pressed("click"):
 			# will ensure the object follows mouse at begin of click
 			self.initial_pos = self.global_position
