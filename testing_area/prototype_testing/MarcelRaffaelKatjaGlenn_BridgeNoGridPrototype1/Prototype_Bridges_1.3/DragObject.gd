@@ -9,6 +9,7 @@ var initial_pos : Vector2
 var is_dragging = false
 var inside_object = false
 var dropzone_occupied = false
+var grid_size : float = 10.0 # size of a square in grid
 
 func _process(_delta):
 	if draggable:
@@ -32,6 +33,11 @@ func _process(_delta):
 		elif Input.is_action_just_released("click"):
 			# when click is released:
 			
+			# snap to nearest position in grid
+			print(self.position)
+			self.position.x =  round_to_nearest(self.position.x, grid_size)
+			self.position.y = round_to_nearest(self.position.y, grid_size)
+			print(self.position)
 			# 1. nothing is being currently dragged
 			self.is_dragging = false
 			Global.something_is_being_dragged = false
@@ -110,3 +116,11 @@ func calculate_droparea(body):
 		return Vector2(self.dropzone.global_position.x - 13, self.dropzone.global_position.y - 13)
 	if body.is_in_group('bottom_dropzone'):
 		return Vector2(self.dropzone.global_position.x - 13, self.dropzone.global_position.y + 13)
+		
+# rounds to nearest multiple of b to a
+func round_to_nearest(a:float, b:float):
+	var offset = fmod(a,b)
+	if offset < b / 2:
+		return a - offset
+	else:
+		return a + (b - offset) 
