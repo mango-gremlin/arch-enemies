@@ -37,6 +37,11 @@ func reset_fox():
 	velocity.y = 0
 	global_position = Vector2(74, 111)
 
-func _on_area_2d_body_entered(body):
+func _on_area_2d_body_entered(_body):
 	# if fox touches water
 	reset_fox()
+
+
+
+func _on_goal_area_2d_body_entered(_body):
+	get_parent().get_node("GoalMenu").visible = true
