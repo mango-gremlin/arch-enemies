@@ -11,8 +11,10 @@ var inside_object = false
 var dropzone_occupied = false
 var grid_size : float = 10.0 # size of a square in grid
 
+
 func _process(_delta):
-	if draggable:
+	if draggable && Global.drag_mode == true:
+
 		
 		#initialize_dropzones()
 		
@@ -71,7 +73,7 @@ func _process(_delta):
 func _on_area_2d_mouse_entered():
 	# if the mouse enters the area and we are not currently dragging this object
 	# set this to draggable
-	if not self.is_dragging:
+	if not self.is_dragging && Global.drag_mode == true:
 		self.draggable = true
 		self.scale = Vector2(1.05, 1.05)
 
