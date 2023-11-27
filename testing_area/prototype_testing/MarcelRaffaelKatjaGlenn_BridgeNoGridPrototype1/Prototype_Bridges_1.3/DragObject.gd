@@ -13,11 +13,11 @@ var grid_size : float = 10.0 # size of a square in grid
 
 
 func _process(_delta):
-	if draggable && Global.drag_mode == true:
+
+	if draggable and (!Global.currently_dragging or Global.currently_dragging == self.get_name())  && Global.drag_mode == true:
 
 		
 		#initialize_dropzones()
-		
 		if Input.is_action_just_pressed("click"):
 			# will ensure the object follows mouse at begin of click
 			self.initial_pos = self.global_position
