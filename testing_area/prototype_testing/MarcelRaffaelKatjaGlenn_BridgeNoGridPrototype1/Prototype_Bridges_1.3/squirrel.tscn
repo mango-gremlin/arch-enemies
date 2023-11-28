@@ -14,6 +14,8 @@ size = Vector2(10, 22)
 size = Vector2(10, 10)
 
 [node name="squirrelBod" type="StaticBody2D" groups=["draggable"]]
+collision_layer = 3
+collision_mask = 3
 script = ExtResource("1_ss8yf")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -24,12 +26,16 @@ texture = ExtResource("2_eib8h")
 shape = SubResource("RectangleShape2D_m8jht")
 
 [node name="squirrel" type="Area2D" parent="."]
+collision_layer = 3
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="squirrel"]
 shape = SubResource("RectangleShape2D_4bimj")
 
 [node name="left_dropzone" type="StaticBody2D" parent="." groups=["dropable", "left_dropzone"]]
 position = Vector2(-11, 6)
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("3_l28rr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="left_dropzone"]
@@ -45,6 +51,8 @@ metadata/_edit_use_anchors_ = true
 
 [node name="left_dropzone2" type="StaticBody2D" parent="." groups=["dropable", "left_dropzone"]]
 position = Vector2(-11, -6)
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("3_l28rr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="left_dropzone2"]
@@ -60,6 +68,8 @@ metadata/_edit_use_anchors_ = true
 
 [node name="right_dropzone" type="StaticBody2D" parent="." groups=["dropable", "right_dropzone"]]
 position = Vector2(11, -6)
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("3_l28rr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="right_dropzone"]
@@ -75,6 +85,8 @@ metadata/_edit_use_anchors_ = true
 
 [node name="right_dropzone2" type="StaticBody2D" parent="." groups=["dropable", "right_dropzone"]]
 position = Vector2(11, 6)
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("3_l28rr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="right_dropzone2"]
@@ -90,6 +102,8 @@ metadata/_edit_use_anchors_ = true
 
 [node name="top_dropzone" type="StaticBody2D" parent="." groups=["dropable", "top_dropzone"]]
 position = Vector2(0, -17)
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("3_l28rr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="top_dropzone"]
@@ -105,6 +119,8 @@ metadata/_edit_use_anchors_ = true
 
 [node name="bottom_dropzone" type="StaticBody2D" parent="." groups=["bottom_dropzone", "dropable"]]
 position = Vector2(0, 17)
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("3_l28rr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="bottom_dropzone"]

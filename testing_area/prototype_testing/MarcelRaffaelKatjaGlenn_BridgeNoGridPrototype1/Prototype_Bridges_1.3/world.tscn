@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cf5udd6l65fuv"]
+[gd_scene load_steps=17 format=3 uid="uid://cf5udd6l65fuv"]
 
 [ext_resource type="Texture2D" uid="uid://d4khq8o7aaei" path="res://assets/green.png" id="1_m0btg"]
 [ext_resource type="Texture2D" uid="uid://dc2lxeyr45vp3" path="res://assets/blue_dark.png" id="2_640fj"]
@@ -134,7 +134,7 @@ SPEED = 150.0
 JUMP_VELOCITY = -200.0
 
 [node name="snek" parent="." instance=ExtResource("3_0bug4")]
-position = Vector2(180, 110)
+position = Vector2(140, 154)
 
 [node name="snek2" parent="." instance=ExtResource("3_0bug4")]
 position = Vector2(300, 130)
