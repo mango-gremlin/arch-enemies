@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cf5udd6l65fuv"]
+[gd_scene load_steps=16 format=3 uid="uid://cf5udd6l65fuv"]
 
 [ext_resource type="Texture2D" uid="uid://d4khq8o7aaei" path="res://assets/green.png" id="1_m0btg"]
 [ext_resource type="Texture2D" uid="uid://dc2lxeyr45vp3" path="res://assets/blue_dark.png" id="2_640fj"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c5tl3m10s5tby" path="res://snek.tscn" id="3_0bug4"]
 [ext_resource type="Script" path="res://ModeChangeButton.gd" id="6_8qx0u"]
 [ext_resource type="PackedScene" uid="uid://cxj1q08s3i7i8" path="res://goal_menu.tscn" id="6_xdjb3"]
+[ext_resource type="PackedScene" uid="uid://dipauq7hxbt1f" path="res://squirrel.tscn" id="7_1743r"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_s2tkw"]
 texture = ExtResource("1_m0btg")
@@ -154,6 +155,9 @@ anchors_preset = -1
 offset_right = 3.0
 offset_bottom = -1.0
 script = SubResource("GDScript_62t5p")
+
+[node name="squirrel" parent="." instance=ExtResource("7_1743r")]
+position = Vector2(159, 71)
 
 [connection signal="body_entered" from="TileMap/GoalArea2D" to="fox" method="_on_goal_area_2d_body_entered"]
 [connection signal="body_entered" from="water/Area2D" to="fox" method="_on_area_2d_body_entered"]
