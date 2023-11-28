@@ -4,7 +4,7 @@ var draggable = false
 var is_inside_dropable = false
 var dropzone
 var original_pos_dropzone
-var offset : Vector2
+var mouse_offset : Vector2
 var initial_pos : Vector2
 var is_dragging = false
 var inside_object = false
@@ -22,7 +22,7 @@ func _process(_delta):
 			# will ensure the object follows mouse at begin of click
 			self.initial_pos = self.global_position
 			
-			offset = get_global_mouse_position() - self.global_position
+			mouse_offset = get_global_mouse_position() - self.global_position
 			self.is_dragging = true
 			Global.something_is_being_dragged = true
 			Global.currently_dragging = self.get_name()
@@ -30,16 +30,14 @@ func _process(_delta):
 		if Input.is_action_pressed("click"):
 			# during the time mouse click is held down,
 			# object continues following mouse
-			self.global_position = get_global_mouse_position() - offset
+			self.global_position = get_global_mouse_position() - mouse_offset
 			
 		elif Input.is_action_just_released("click"):
 			# when click is released:
 			
 			# snap to nearest position in grid
-			print(self.position)
 			self.position.x =  round_to_nearest(self.position.x, grid_size)
 			self.position.y = round_to_nearest(self.position.y, grid_size)
-			print(self.position)
 			# 1. nothing is being currently dragged
 			self.is_dragging = false
 			Global.something_is_being_dragged = false
@@ -101,28 +99,21 @@ func _on_snake_body_exited(body):
 		is_inside_dropable = false
 		body.modulate = Color(Color.AQUAMARINE, 0.7)
 
-#func initialize_dropzones():
-#	if dropzone == null or original_pos_dropzone == null:
-			# THIS HAS SO MANY BUGS BUT THEY ARE NOT RELEVANT NOW
-			# this part initialises the positions, but it doesnt really work
-			# exactly as intended
-#			self.dropzone = self.get_children()[2]
-#			self.original_pos_dropzone = self.dropzone.global_position
-
 func calculate_droparea(body):
 	# returns the new position of where to place the animal in relation to the dropzone,
 	# because right now, the anchor point is in the middle of a body
+	
 	if body.is_in_group('left_dropzone'):
 		return Vector2(self.dropzone.global_position.x - (59.0/2) + (7.0/2), self.dropzone.global_position.y)
 	if body.is_in_group('top_dropzone'):
-		return Vector2(self.dropzone.global_position.x - 13, self.dropzone.global_position.y - 13)
+		return body.global_position #Vector2(self.dropzone.global_position.x - 13, self.dropzone.global_position.y - 13)
 	if body.is_in_group('bottom_dropzone'):
-		return Vector2(self.dropzone.global_position.x - 13, self.dropzone.global_position.y + 13)
+		return body.global_position #Vector2(self.dropzone.global_position.x - 13, self.dropzone.global_position.y + 13)
 		
 # rounds to nearest multiple of b to a
 func round_to_nearest(a:float, b:float):
-	var offset = fmod(a,b)
-	if offset < b / 2:
-		return a - offset
+	var grid_offset = fmod(a,b)
+	if grid_offset < b / 2:
+		return a - grid_offset
 	else:
-		return a + (b - offset) 
+		return a + (b - grid_offset) 
