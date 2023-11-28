@@ -9,17 +9,23 @@ Please provide enough information so that others can review your pull request:
 (delete the part above before posting)
 
 ## Motivation
-closes issue #000
+closes #000
 
 Explain the **details** for making this change. What existing problem does the pull request solve?
 
 <!-- Example: When "Adding a function to do X", explain why it is necessary to have a way to do X. -->
 
 ## What was changed/added
-What did you do to solve the problem/what did you add, quickly explain what you did
+What did you do to solve the problem/what did you add, quickly explain what you did, where you changed things.
 
 ## Testing
-Demonstrate the code is solid. Example: The exact commands you ran and their output, screenshots / videos if the pull request changes UI.
+Demonstrate the code is solid. 
+
+If you changed something for the game:
+- video
+- or screenshot
+
+Example: The exact commands you ran and their output, screenshots / videos if the pull request changes UI.
 
 ## Additional Information
 if needed, if not, delete
