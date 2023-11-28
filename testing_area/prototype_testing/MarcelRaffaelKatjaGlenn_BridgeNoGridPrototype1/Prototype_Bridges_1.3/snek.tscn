@@ -5,19 +5,19 @@
 [ext_resource type="Script" path="res://allowed_snake_area.gd" id="3_fqrgl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_43xhd"]
-size = Vector2(58, 12)
+size = Vector2(57, 11)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i2o3k"]
-size = Vector2(57, 12.5)
+size = Vector2(57, 11)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lyvfn"]
-size = Vector2(7, 14)
+size = Vector2(10, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f3mbg"]
-size = Vector2(46, 9)
+size = Vector2(10, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f6euc"]
-size = Vector2(46, 10)
+size = Vector2(10, 10)
 
 [node name="snakeBod" type="StaticBody2D" groups=["draggable"]]
 script = ExtResource("1_gtwqh")
@@ -34,7 +34,7 @@ shape = SubResource("RectangleShape2D_43xhd")
 shape = SubResource("RectangleShape2D_i2o3k")
 
 [node name="left_dropzone" type="StaticBody2D" parent="." groups=["dropable", "left_dropzone"]]
-position = Vector2(-33, 0)
+position = Vector2(-34, 0)
 script = ExtResource("3_fqrgl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="left_dropzone"]
@@ -42,39 +42,131 @@ shape = SubResource("RectangleShape2D_lyvfn")
 
 [node name="ColorRect" type="ColorRect" parent="left_dropzone"]
 z_index = -1
-offset_left = -3.0
-offset_top = -7.0
-offset_right = 4.0
-offset_bottom = 7.0
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 5.0
 metadata/_edit_use_anchors_ = true
 
 [node name="top_dropzone" type="StaticBody2D" parent="." groups=["dropable", "top_dropzone"]]
+position = Vector2(-23, -11)
 script = ExtResource("3_fqrgl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="top_dropzone"]
-position = Vector2(-6, -11)
 shape = SubResource("RectangleShape2D_f3mbg")
 
 [node name="ColorRect" type="ColorRect" parent="top_dropzone"]
 z_index = -1
-offset_left = -29.0
-offset_top = -15.0
-offset_right = 17.0
-offset_bottom = -6.0
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 5.0
+metadata/_edit_use_anchors_ = true
+
+[node name="top_dropzone3" type="StaticBody2D" parent="." groups=["dropable", "top_dropzone"]]
+position = Vector2(-1, -11)
+script = ExtResource("3_fqrgl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="top_dropzone3"]
+shape = SubResource("RectangleShape2D_f3mbg")
+
+[node name="ColorRect" type="ColorRect" parent="top_dropzone3"]
+z_index = -1
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 5.0
+metadata/_edit_use_anchors_ = true
+
+[node name="top_dropzone4" type="StaticBody2D" parent="." groups=["dropable", "top_dropzone"]]
+position = Vector2(10, -11)
+script = ExtResource("3_fqrgl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="top_dropzone4"]
+shape = SubResource("RectangleShape2D_f3mbg")
+
+[node name="ColorRect" type="ColorRect" parent="top_dropzone4"]
+z_index = -1
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 5.0
+metadata/_edit_use_anchors_ = true
+
+[node name="top_dropzone2" type="StaticBody2D" parent="." groups=["dropable", "top_dropzone"]]
+position = Vector2(-12, -11)
+script = ExtResource("3_fqrgl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="top_dropzone2"]
+shape = SubResource("RectangleShape2D_f3mbg")
+
+[node name="ColorRect" type="ColorRect" parent="top_dropzone2"]
+z_index = -1
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 5.0
+metadata/_edit_use_anchors_ = true
 
 [node name="bottom_dropzone" type="StaticBody2D" parent="." groups=["bottom_dropzone", "dropable"]]
+position = Vector2(-23, 11)
 script = ExtResource("3_fqrgl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="bottom_dropzone"]
-position = Vector2(-6, 12)
 shape = SubResource("RectangleShape2D_f6euc")
 
 [node name="ColorRect" type="ColorRect" parent="bottom_dropzone"]
 z_index = -1
-offset_left = -29.0
-offset_top = 6.0
-offset_right = 16.0
-offset_bottom = 16.0
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 5.0
+metadata/_edit_use_anchors_ = true
+
+[node name="bottom_dropzone2" type="StaticBody2D" parent="." groups=["bottom_dropzone", "dropable"]]
+position = Vector2(-12, 11)
+script = ExtResource("3_fqrgl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bottom_dropzone2"]
+shape = SubResource("RectangleShape2D_f6euc")
+
+[node name="ColorRect" type="ColorRect" parent="bottom_dropzone2"]
+z_index = -1
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 5.0
+metadata/_edit_use_anchors_ = true
+
+[node name="bottom_dropzone3" type="StaticBody2D" parent="." groups=["bottom_dropzone", "dropable"]]
+position = Vector2(-1, 11)
+script = ExtResource("3_fqrgl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bottom_dropzone3"]
+shape = SubResource("RectangleShape2D_f6euc")
+
+[node name="ColorRect" type="ColorRect" parent="bottom_dropzone3"]
+z_index = -1
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 5.0
+metadata/_edit_use_anchors_ = true
+
+[node name="bottom_dropzone4" type="StaticBody2D" parent="." groups=["bottom_dropzone", "dropable"]]
+position = Vector2(10, 11)
+script = ExtResource("3_fqrgl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bottom_dropzone4"]
+shape = SubResource("RectangleShape2D_f6euc")
+
+[node name="ColorRect" type="ColorRect" parent="bottom_dropzone4"]
+z_index = -1
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 5.0
+metadata/_edit_use_anchors_ = true
 
 [connection signal="body_entered" from="snake" to="." method="_on_snake_body_entered"]
 [connection signal="body_exited" from="snake" to="." method="_on_snake_body_exited"]

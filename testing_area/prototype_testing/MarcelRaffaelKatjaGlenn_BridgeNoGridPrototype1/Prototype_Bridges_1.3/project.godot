@@ -23,6 +23,10 @@ Global="*res://global.gd"
 
 window/stretch/scale=2.0
 
+[dotnet]
+
+project/assembly_name="Bridge_Prototype_1.3"
+
 [input]
 
 ui_accept={

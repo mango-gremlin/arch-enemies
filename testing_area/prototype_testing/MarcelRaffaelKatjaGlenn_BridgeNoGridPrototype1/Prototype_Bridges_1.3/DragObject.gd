@@ -4,22 +4,28 @@ var draggable = false
 var is_inside_dropable = false
 var dropzone
 var original_pos_dropzone
-var offset : Vector2
+var mouse_offset : Vector2
 var initial_pos : Vector2
 var is_dragging = false
 var inside_object = false
 var dropzone_occupied = false
+var grid_size : float = 10.0 # size of a square in grid
+
 
 func _process(_delta):
-	if draggable:
+
+	if draggable and (!Global.currently_dragging or Global.currently_dragging == self.get_name())  && Global.drag_mode == true:
+
 		
 		#initialize_dropzones()
-		
 		if Input.is_action_just_pressed("click"):
+			# dragged object should be on top level
+			self.top_level = true
+			
 			# will ensure the object follows mouse at begin of click
 			self.initial_pos = self.global_position
 			
-			offset = get_global_mouse_position() - self.global_position
+			mouse_offset = get_global_mouse_position() - self.global_position
 			self.is_dragging = true
 			Global.something_is_being_dragged = true
 			Global.currently_dragging = self.get_name()
@@ -27,11 +33,17 @@ func _process(_delta):
 		if Input.is_action_pressed("click"):
 			# during the time mouse click is held down,
 			# object continues following mouse
-			self.global_position = get_global_mouse_position() - offset
+			self.global_position = get_global_mouse_position() - mouse_offset
 			
 		elif Input.is_action_just_released("click"):
 			# when click is released:
 			
+			# dropped object should not be on top level anymore
+			self.top_level = false
+			
+			# snap to nearest position in grid
+			self.position.x =  round_to_nearest(self.position.x, grid_size)
+			self.position.y = round_to_nearest(self.position.y, grid_size)
 			# 1. nothing is being currently dragged
 			self.is_dragging = false
 			Global.something_is_being_dragged = false
@@ -63,19 +75,28 @@ func _process(_delta):
 				tween.tween_property(self, "global_position", self.initial_pos, 0.2).set_ease(Tween.EASE_OUT)
 
 func _on_area_2d_mouse_entered():
+	mouse_entered()
+	
+func mouse_entered():
 	# if the mouse enters the area and we are not currently dragging this object
 	# set this to draggable
-	if not self.is_dragging:
+	if not self.is_dragging && Global.drag_mode == true:
 		self.draggable = true
 		self.scale = Vector2(1.05, 1.05)
 
 func _on_area_2d_mouse_exited():
+	mouse_exited()
+
+func mouse_exited():
 	# if mouse exits and this is not being dragged, it will not be dragged
 	if not self.is_dragging:
 		self.draggable = false
 		self.scale = Vector2(1, 1)
 
 func _on_snake_body_entered(body):
+	body_entered(body)
+	
+func body_entered(body):
 	# if the snake body touches a staticbody hitbox (body)
 	# and this body is in the group drobable
 	# set inside dropable to true so the process can register it as a dropable zone
@@ -87,26 +108,47 @@ func _on_snake_body_entered(body):
 		
 
 func _on_snake_body_exited(body):
+	body_exited(body)
+	
+func body_exited(body):
 	# if the snake body stops touching a staticbody that has the dropable group
 	# set inside dropable to false & change the colour of that body back to original 
 	if body.is_in_group('dropable'):
 		is_inside_dropable = false
 		body.modulate = Color(Color.AQUAMARINE, 0.7)
 
-#func initialize_dropzones():
-#	if dropzone == null or original_pos_dropzone == null:
-			# THIS HAS SO MANY BUGS BUT THEY ARE NOT RELEVANT NOW
-			# this part initialises the positions, but it doesnt really work
-			# exactly as intended
-#			self.dropzone = self.get_children()[2]
-#			self.original_pos_dropzone = self.dropzone.global_position
-
 func calculate_droparea(body):
 	# returns the new position of where to place the animal in relation to the dropzone,
 	# because right now, the anchor point is in the middle of a body
+	if body.is_in_group('right_dropzone'):
+		return Vector2(self.dropzone.global_position.x - (self.dropzone.get_children()[0].shape.size.x/2) + (self.get_children()[1].shape.size.x/2), self.dropzone.global_position.y)
 	if body.is_in_group('left_dropzone'):
-		return Vector2(self.dropzone.global_position.x - (59.0/2) + (7.0/2), self.dropzone.global_position.y)
+		return Vector2(self.dropzone.global_position.x + (self.dropzone.get_children()[0].shape.size.x/2) - (self.get_children()[1].shape.size.x/2), self.dropzone.global_position.y)
 	if body.is_in_group('top_dropzone'):
-		return Vector2(self.dropzone.global_position.x - 13, self.dropzone.global_position.y - 13)
+		return Vector2(self.dropzone.global_position.x, self.dropzone.global_position.y + (self.dropzone.get_children()[0].shape.size.y/2) - (self.get_children()[1].shape.size.y/2))
 	if body.is_in_group('bottom_dropzone'):
-		return Vector2(self.dropzone.global_position.x - 13, self.dropzone.global_position.y + 13)
+		return Vector2(self.dropzone.global_position.x, self.dropzone.global_position.y - (self.dropzone.get_children()[0].shape.size.y/2) + (self.get_children()[1].shape.size.y/2))
+		
+# rounds to nearest multiple of b to a
+func round_to_nearest(a:float, b:float):
+	var grid_offset = fmod(a,b)
+	if grid_offset < b / 2:
+		return a - grid_offset
+	else:
+		return a + (b - grid_offset) 
+
+# JUST SQUIRREL THINGS
+func _on_squirrel_body_entered(body):
+	body_entered(body)
+
+
+func _on_squirrel_body_exited(body):
+	body_exited(body)
+
+
+func _on_squirrel_mouse_entered():
+	mouse_entered()
+
+
+func _on_squirrel_mouse_exited():
+	mouse_exited()
