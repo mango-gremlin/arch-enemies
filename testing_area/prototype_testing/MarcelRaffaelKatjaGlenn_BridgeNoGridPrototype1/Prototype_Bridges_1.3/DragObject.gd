@@ -19,6 +19,9 @@ func _process(_delta):
 		
 		#initialize_dropzones()
 		if Input.is_action_just_pressed("click"):
+			# dragged object should be on top level
+			self.top_level = true
+			
 			# will ensure the object follows mouse at begin of click
 			self.initial_pos = self.global_position
 			
@@ -34,6 +37,9 @@ func _process(_delta):
 			
 		elif Input.is_action_just_released("click"):
 			# when click is released:
+			
+			# dropped object should not be on top level anymore
+			self.top_level = false
 			
 			# snap to nearest position in grid
 			self.position.x =  round_to_nearest(self.position.x, grid_size)
