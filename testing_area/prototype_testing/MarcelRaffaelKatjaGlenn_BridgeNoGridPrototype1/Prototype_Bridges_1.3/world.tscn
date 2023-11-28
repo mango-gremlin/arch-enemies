@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dvgr170gyuhpq" path="res://fox.tscn" id="2_u7ijr"]
 [ext_resource type="PackedScene" uid="uid://c5tl3m10s5tby" path="res://snek.tscn" id="3_0bug4"]
 [ext_resource type="Script" path="res://ModeChangeButton.gd" id="6_8qx0u"]
+[ext_resource type="PackedScene" uid="uid://hyihqgmvp0oj" path="res://DeahtHazard.tscn" id="6_l6n76"]
 [ext_resource type="PackedScene" uid="uid://cxj1q08s3i7i8" path="res://goal_menu.tscn" id="6_xdjb3"]
 [ext_resource type="PackedScene" uid="uid://dipauq7hxbt1f" path="res://squirrel.tscn" id="7_1743r"]
 
@@ -148,6 +149,8 @@ alignment = 1
 icon_alignment = 1
 script = ExtResource("6_8qx0u")
 
+[node name="DeathHazard" parent="." instance=ExtResource("6_l6n76")]
+
 [node name="GoalMenu" parent="." instance=ExtResource("6_xdjb3")]
 visible = false
 top_level = true
@@ -162,3 +165,4 @@ position = Vector2(159, 71)
 [connection signal="body_entered" from="TileMap/GoalArea2D" to="fox" method="_on_goal_area_2d_body_entered"]
 [connection signal="body_entered" from="water/Area2D" to="fox" method="_on_area_2d_body_entered"]
 [connection signal="toggled" from="DragModeButton" to="DragModeButton" method="_on_toggled"]
+[connection signal="body_entered" from="DeathHazard" to="fox" method="_on_death_hazard_body_entered"]
