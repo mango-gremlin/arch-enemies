@@ -12,23 +12,29 @@ var inside_object = false
 var dropzone_occupied = false
 @export var grid_size : float = 10.0 # size of a square in grid
 
+# use this function in issue #31
 func is_correct_placement(body):
 	var forbidden = false
 	var allowed = false # replace with animal specifics later on
-	print(body.get_overlapping_bodies())
-	for a in body.get_overlapping_bodies():
+	var body_area2D = body.get_children()[2] # gets Area2D child, which can check for overlapping bodies
+	
+	# list of all overlapping bodies, for future debugging
+	print(body_area2D.get_overlapping_bodies())
+	# iterate through all overlapping bodies, and check if they are allowed or not
+	for a in body_area2D.get_overlapping_bodies():
 		if a.is_in_group("forbidden"):
 			forbidden = true
 		elif a.is_in_group("dropable"):
 			allowed = true
+	# touches a forbidden zone, or no allowed zones at all
 	if forbidden or not allowed:
 		return false
+	# touches an allowed zone, and no forbidden zone
 	elif allowed and not forbidden:
 		return true
 
 func _process(_delta):
 	if draggable and (!Global.currently_dragging or Global.currently_dragging == self.get_name())  && Global.drag_mode == true:		
-		#initialize_dropzones()
 		if Input.is_action_just_pressed("click"):
 			# dragged object should be on top level
 			self.top_level = true
@@ -57,37 +63,20 @@ func _process(_delta):
 			# 2. create the animation that plays to make the snapping a bit smoother
 			var tween = get_tree().create_tween()
 			
-			# snap to nearest position in grid, but this doesn't update the corresponding variables
-			var new_x =  round_to_nearest(self.position.x, grid_size)
-			var new_y = round_to_nearest(self.position.y, grid_size)
+			# snap to nearest position in grid, but this doesn't update is_inside_forbidden/dropable
+			# 	may use signal emmited by clicks to snap to grid instead
+			# snaps the center of animal to the grid, which may become an issue for some sprite sizes
+			var new_x =  round_to_nearest(self.global_position.x, grid_size)
+			var new_y = round_to_nearest(self.global_position.y, grid_size)
 			self.global_position = Vector2(new_x, new_y)
 			
 			tween.tween_property(self, "position", self.position, 0.2).set_ease(Tween.EASE_OUT)
 			print("is_inside_dropable: ", is_inside_dropable) 
 			print("is_inside_forbidden: " , is_inside_forbidden)
-			if is_inside_dropable and not is_inside_forbidden:
-			#if is_correct_placement(self.get_node("snake")):
-				# tween.tween_property(self, "position", self.position, 0.2).set_ease(Tween.EASE_OUT)
-				print("snap to grid")
-				# shift the position of the dropable area so our 
-				# dragged object ends up in the right place
-				
-				# save original position of dropable zone
-				#self.original_pos_dropzone = self.dropzone_.global_position
-				# not buggy, unless snakes touch each other, probably
-				# var drop_area = calculate_droparea(self.dropzone)
-				
-				# if we can drop this here, play animation with the 
-				# final position being the position of the dropable zone
-				# tween.tween_property(self, "position", drop_area, 0.2).set_ease(Tween.EASE_OUT)
-				
-				# if dropzone WAS occupied but we switched to something else it is
-				# no longer occupied
-				# if it wasnt, then now we switched to it and it is occupied
-				# self.dropzone_occupied = not self.dropzone_occupied
-		
-			else:
-				# if we cannot drop it here, let it snap back to its original position
+			
+			# if placement is incorrect, snap back to original position
+			# otherwise animal remains in current position, snapped to grid
+			if not is_correct_placement(self):
 				tween.tween_property(self, "global_position", self.initial_pos, 0.2).set_ease(Tween.EASE_OUT)
 
 func _on_area_2d_mouse_entered():
@@ -122,6 +111,8 @@ func body_entered(body):
 		is_inside_dropable = true
 		body.modulate = Color(Color.CORNFLOWER_BLUE, 1)
 		self.dropzone = body
+	# "not body self" prevents some unexpected results with overlapping collision zones
+	# of self, but may also be a problem in the future 
 	if body.is_in_group('forbidden') and not body == self:
 		print("entered forbidden body")
 		print(body.get_owner().name)
@@ -143,18 +134,6 @@ func body_exited(body):
 		print("exited forbidden body")
 		is_inside_forbidden = false
 
-func calculate_droparea(body):
-	# returns the new position of where to place the animal in relation to the dropzone,
-	# because right now, the anchor point is in the middle of a body
-	if body.is_in_group('right_dropzone'):
-		return Vector2(self.dropzone.global_position.x - (self.dropzone.get_children()[0].shape.size.x/2) + (self.get_children()[1].shape.size.x/2), self.dropzone.global_position.y)
-	if body.is_in_group('left_dropzone'):
-		return Vector2(self.dropzone.global_position.x + (self.dropzone.get_children()[0].shape.size.x/2) - (self.get_children()[1].shape.size.x/2), self.dropzone.global_position.y)
-	if body.is_in_group('top_dropzone'):
-		return Vector2(self.dropzone.global_position.x, self.dropzone.global_position.y + (self.dropzone.get_children()[0].shape.size.y/2) - (self.get_children()[1].shape.size.y/2))
-	if body.is_in_group('bottom_dropzone'):
-		return Vector2(self.dropzone.global_position.x, self.dropzone.global_position.y - (self.dropzone.get_children()[0].shape.size.y/2) + (self.get_children()[1].shape.size.y/2))
-		
 # rounds to nearest multiple of b to a
 func round_to_nearest(a:float, b:float):
 	var grid_offset = fmod(a,b)
