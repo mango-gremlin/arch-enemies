@@ -65,8 +65,8 @@ func _process(_delta):
 			tween.tween_property(self, "position", self.position, 0.2).set_ease(Tween.EASE_OUT)
 			print("is_inside_dropable: ", is_inside_dropable) 
 			print("is_inside_forbidden: " , is_inside_forbidden)
-
-			if is_correct_placement(self.get_node("snake")):
+			if is_inside_dropable and not is_inside_forbidden:
+			#if is_correct_placement(self.get_node("snake")):
 				# tween.tween_property(self, "position", self.position, 0.2).set_ease(Tween.EASE_OUT)
 				print("snap to grid")
 				# shift the position of the dropable area so our 

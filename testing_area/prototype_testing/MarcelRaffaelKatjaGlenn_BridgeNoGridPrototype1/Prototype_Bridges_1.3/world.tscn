@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cf5udd6l65fuv"]
+[gd_scene load_steps=19 format=3 uid="uid://cf5udd6l65fuv"]
 
 [ext_resource type="Texture2D" uid="uid://d4khq8o7aaei" path="res://assets/green.png" id="1_m0btg"]
 [ext_resource type="Texture2D" uid="uid://dc2lxeyr45vp3" path="res://assets/blue_dark.png" id="2_640fj"]
@@ -7,9 +7,9 @@
 [ext_resource type="Script" path="res://ModeChangeButton.gd" id="6_8qx0u"]
 [ext_resource type="PackedScene" uid="uid://hyihqgmvp0oj" path="res://DeahtHazard.tscn" id="6_l6n76"]
 [ext_resource type="PackedScene" uid="uid://cxj1q08s3i7i8" path="res://goal_menu.tscn" id="6_xdjb3"]
+[ext_resource type="PackedScene" uid="uid://dipauq7hxbt1f" path="res://squirrel.tscn" id="7_1743r"]
 [ext_resource type="Texture2D" uid="uid://dp70liqt7qxpq" path="res://assets/Grid_10x10.png" id="7_lmu4n"]
 [ext_resource type="Script" path="res://gridVisibility.gd" id="8_puaob"]
-[ext_resource type="PackedScene" uid="uid://dipauq7hxbt1f" path="res://squirrel.tscn" id="7_1743r"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_s2tkw"]
 texture = ExtResource("1_m0btg")
@@ -166,6 +166,7 @@ z_index = 1
 position = Vector2(226, 255)
 texture = ExtResource("7_lmu4n")
 script = ExtResource("8_puaob")
+
 [node name="squirrel" parent="." instance=ExtResource("7_1743r")]
 position = Vector2(159, 71)
 
