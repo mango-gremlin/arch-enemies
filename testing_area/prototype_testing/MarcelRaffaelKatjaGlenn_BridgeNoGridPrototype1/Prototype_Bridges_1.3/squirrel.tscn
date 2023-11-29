@@ -39,31 +39,17 @@ collision_mask = 2
 script = ExtResource("3_l28rr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="left_dropzone"]
+position = Vector2(0, -6)
+scale = Vector2(1, 2)
 shape = SubResource("RectangleShape2D_2xjkc")
 
 [node name="ColorRect" type="ColorRect" parent="left_dropzone"]
 z_index = -1
 offset_left = -5.0
-offset_top = -5.0
+offset_top = -16.0
 offset_right = 5.0
-offset_bottom = 5.0
-metadata/_edit_use_anchors_ = true
-
-[node name="left_dropzone2" type="StaticBody2D" parent="." groups=["dropable", "left_dropzone"]]
-position = Vector2(-11, -6)
-collision_layer = 2
-collision_mask = 2
-script = ExtResource("3_l28rr")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="left_dropzone2"]
-shape = SubResource("RectangleShape2D_2xjkc")
-
-[node name="ColorRect" type="ColorRect" parent="left_dropzone2"]
-z_index = -1
-offset_left = -5.0
-offset_top = -5.0
-offset_right = 5.0
-offset_bottom = 5.0
+offset_bottom = -6.0
+scale = Vector2(1, 2)
 metadata/_edit_use_anchors_ = true
 
 [node name="right_dropzone" type="StaticBody2D" parent="." groups=["dropable", "right_dropzone"]]
@@ -73,31 +59,17 @@ collision_mask = 2
 script = ExtResource("3_l28rr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="right_dropzone"]
+position = Vector2(0, 6)
+scale = Vector2(1, 2)
 shape = SubResource("RectangleShape2D_2xjkc")
 
 [node name="ColorRect" type="ColorRect" parent="right_dropzone"]
 z_index = -1
 offset_left = -5.0
-offset_top = -5.0
+offset_top = -4.0
 offset_right = 5.0
-offset_bottom = 5.0
-metadata/_edit_use_anchors_ = true
-
-[node name="right_dropzone2" type="StaticBody2D" parent="." groups=["dropable", "right_dropzone"]]
-position = Vector2(11, 6)
-collision_layer = 2
-collision_mask = 2
-script = ExtResource("3_l28rr")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="right_dropzone2"]
-shape = SubResource("RectangleShape2D_2xjkc")
-
-[node name="ColorRect" type="ColorRect" parent="right_dropzone2"]
-z_index = -1
-offset_left = -5.0
-offset_top = -5.0
-offset_right = 5.0
-offset_bottom = 5.0
+offset_bottom = 6.0
+scale = Vector2(1, 2)
 metadata/_edit_use_anchors_ = true
 
 [node name="top_dropzone" type="StaticBody2D" parent="." groups=["dropable", "top_dropzone"]]
