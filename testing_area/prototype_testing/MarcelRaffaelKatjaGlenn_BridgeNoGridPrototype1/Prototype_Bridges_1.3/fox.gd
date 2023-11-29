@@ -41,7 +41,9 @@ func _on_area_2d_body_entered(_body):
 	# if fox touches water
 	reset_fox()
 
-
+func _on_death_hazard_body_entered(body):
+	# if fox comes in contact with DeathHazard
+	reset_fox()
 
 func _on_goal_area_2d_body_entered(_body):
 	get_parent().get_node("GoalMenu").visible = true
