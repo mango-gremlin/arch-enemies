@@ -42,8 +42,8 @@ func _process(_delta):
 			self.top_level = false
 			
 			# snap to nearest position in grid
-			self.position.x =  round_to_nearest(self.position.x, grid_size)
-			self.position.y = round_to_nearest(self.position.y, grid_size)
+			self.position.x = Global.round_to_nearest(self.position.x, grid_size)
+			self.position.y = Global.round_to_nearest(self.position.y, grid_size)
 			# 1. nothing is being currently dragged
 			self.is_dragging = false
 			Global.something_is_being_dragged = false
@@ -129,14 +129,6 @@ func calculate_droparea(body):
 	if body.is_in_group('bottom_dropzone'):
 		return Vector2(self.dropzone.global_position.x, self.dropzone.global_position.y - (self.dropzone.get_children()[0].shape.size.y/2) + (self.get_children()[1].shape.size.y/2))
 		
-# rounds to nearest multiple of b to a
-func round_to_nearest(a:float, b:float):
-	var grid_offset = fmod(a,b)
-	if grid_offset < b / 2:
-		return a - grid_offset
-	else:
-		return a + (b - grid_offset) 
-
 # JUST SQUIRREL THINGS
 func _on_squirrel_body_entered(body):
 	body_entered(body)
