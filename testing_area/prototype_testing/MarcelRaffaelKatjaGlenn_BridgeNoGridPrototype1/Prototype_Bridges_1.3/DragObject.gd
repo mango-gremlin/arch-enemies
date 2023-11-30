@@ -12,26 +12,34 @@ var inside_object = false
 var dropzone_occupied = false
 @export var grid_size : float = 10.0 # size of a square in grid
 
-# use this function in issue #31
+# checks if placement of animal relativ to other animal is correct
 func is_correct_placement(body):
-	var forbidden = false
-	var allowed = false # replace with animal specifics later on
 	var body_area2D = body.get_children()[2] # gets Area2D child, which can check for overlapping bodies
-	
-	# list of all overlapping bodies, for future debugging
-	print(body_area2D.get_overlapping_bodies())
+	var animal_type = Global.get_animal_type(body)
 	# iterate through all overlapping bodies, and check if they are allowed or not
-	for a in body_area2D.get_overlapping_bodies():
-		if a.is_in_group("forbidden"):
-			forbidden = true
-		elif a.is_in_group("dropable"):
-			allowed = true
-	# touches a forbidden zone, or no allowed zones at all
-	if forbidden or not allowed:
-		return false
-	# touches an allowed zone, and no forbidden zone
-	elif allowed and not forbidden:
-		return true
+	for overlapping_body in body_area2D.get_overlapping_bodies():
+		# if overlapping body is a forbidden one, it is never valid
+		if overlapping_body.is_in_group("forbidden"):
+			return false
+		# if overlapping body is dropable, check specifics for animals
+		elif overlapping_body.is_in_group("dropable"):
+			# get type of animal that overlapping drop zone belongs to
+			var overlapping_animal_type = Global.get_animal_type(overlapping_body.get_owner())
+			# if overlap zone belongs to a spider, it is always allowed
+			if overlapping_animal_type == "spider":
+				return true
+			# if not, normal rules apply
+			else:
+				# every animal can be dropped on another animal's top dropzone
+				if overlapping_body.is_in_group("top_dropzone"):
+					return true
+				# only squirrels and spiders can be dropped on another animal's side dropzones
+				elif overlapping_body.is_in_group("side_dropzone") and (animal_type == "squirrel" or animal_type == "spider"):
+					return true
+				# only spiders can be dropped on another animal's bottom dropzone
+				elif overlapping_body.is_in_group("bottom_dropzone") and animal_type == "spider":
+					return true
+	return false
 
 func _process(_delta):
 	if draggable and (!Global.currently_dragging or Global.currently_dragging == self.get_name())  && Global.drag_mode == true:		
