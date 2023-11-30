@@ -114,6 +114,8 @@ func calculate_droparea(body):
 	# because right now, the anchor point is in the middle of a body
 	if body.is_in_group('left_dropzone'):
 		return Vector2(self.dropzone.global_position.x - (59.0/2) + (7.0/2), self.dropzone.global_position.y)
+	if body.is_in_group('right_dropzone'):
+		return Vector2(self.dropzone.global_position.x + (59.0/2) + (7.0/2) - 6, self.dropzone.global_position.y)
 	if body.is_in_group('top_dropzone'):
 		return Vector2(self.dropzone.global_position.x - 13, self.dropzone.global_position.y - 13)
 	if body.is_in_group('bottom_dropzone'):
