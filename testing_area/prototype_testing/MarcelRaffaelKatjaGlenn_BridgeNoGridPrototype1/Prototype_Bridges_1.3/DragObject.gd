@@ -63,6 +63,12 @@ func _process(_delta):
 		elif Input.is_action_just_released("click"):
 			# when click is released:
 			
+			# dropped object should not be on top level anymore
+			self.top_level = false
+			
+			# snap to nearest position in grid
+			self.position.x = Global.round_to_nearest(self.position.x, grid_size)
+		
 			# 1. nothing is being currently dragged
 			self.is_dragging = false
 			Global.something_is_being_dragged = false
@@ -141,14 +147,6 @@ func body_exited(body):
 	if body.is_in_group('forbidden') and not body == self:
 		print("exited forbidden body")
 		is_inside_forbidden = false
-
-# rounds to nearest multiple of b to a
-func round_to_nearest(a:float, b:float):
-	var grid_offset = fmod(a,b)
-	if grid_offset < b / 2:
-		return a - grid_offset
-	else:
-		return a + (b - grid_offset) 
 
 # JUST SQUIRREL THINGS
 func _on_squirrel_body_entered(body):
