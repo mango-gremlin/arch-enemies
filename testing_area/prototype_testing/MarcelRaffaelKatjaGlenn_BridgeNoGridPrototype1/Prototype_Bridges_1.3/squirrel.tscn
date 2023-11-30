@@ -5,10 +5,10 @@
 [ext_resource type="Script" path="res://allowed_snake_area.gd" id="3_l28rr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m8jht"]
-size = Vector2(10, 22)
+size = Vector2(10, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4bimj"]
-size = Vector2(10, 22)
+size = Vector2(10, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2xjkc"]
 size = Vector2(10, 10)
@@ -19,7 +19,7 @@ collision_mask = 3
 script = ExtResource("1_ss8yf")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(1, 2)
+scale = Vector2(1, 1.8)
 texture = ExtResource("2_eib8h")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -33,47 +33,43 @@ collision_mask = 3
 shape = SubResource("RectangleShape2D_4bimj")
 
 [node name="left_dropzone" type="StaticBody2D" parent="." groups=["dropable", "side_dropzone"]]
-position = Vector2(-11, 6)
+position = Vector2(-10, 0)
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("3_l28rr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="left_dropzone"]
-position = Vector2(0, -6)
 scale = Vector2(1, 2)
 shape = SubResource("RectangleShape2D_2xjkc")
 
 [node name="ColorRect" type="ColorRect" parent="left_dropzone"]
 z_index = -1
 offset_left = -5.0
-offset_top = -16.0
+offset_top = -10.0
 offset_right = 5.0
-offset_bottom = -6.0
 scale = Vector2(1, 2)
 metadata/_edit_use_anchors_ = true
 
 [node name="right_dropzone" type="StaticBody2D" parent="." groups=["dropable", "side_dropzone"]]
-position = Vector2(11, -6)
+position = Vector2(10, 0)
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("3_l28rr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="right_dropzone"]
-position = Vector2(0, 6)
 scale = Vector2(1, 2)
 shape = SubResource("RectangleShape2D_2xjkc")
 
 [node name="ColorRect" type="ColorRect" parent="right_dropzone"]
 z_index = -1
 offset_left = -5.0
-offset_top = -4.0
+offset_top = -10.0
 offset_right = 5.0
-offset_bottom = 6.0
 scale = Vector2(1, 2)
 metadata/_edit_use_anchors_ = true
 
 [node name="top_dropzone" type="StaticBody2D" parent="." groups=["dropable", "top_dropzone"]]
-position = Vector2(0, -17)
+position = Vector2(0, -15)
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("3_l28rr")
@@ -90,7 +86,7 @@ offset_bottom = 5.0
 metadata/_edit_use_anchors_ = true
 
 [node name="bottom_dropzone" type="StaticBody2D" parent="." groups=["bottom_dropzone", "dropable"]]
-position = Vector2(0, 17)
+position = Vector2(0, 15)
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("3_l28rr")
