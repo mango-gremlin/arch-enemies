@@ -68,6 +68,7 @@ func _process(_delta):
 			
 			# snap to nearest position in grid
 			self.position.x = Global.round_to_nearest(self.position.x, grid_size)
+			self.position.y = Global.round_to_nearest(self.position.y, grid_size)
 		
 			# 1. nothing is being currently dragged
 			self.is_dragging = false
@@ -80,9 +81,6 @@ func _process(_delta):
 			# snap to nearest position in grid, but this doesn't update is_inside_forbidden/dropable
 			# 	may use signal emmited by clicks to snap to grid instead
 			# snaps the center of animal to the grid, which may become an issue for some sprite sizes
-			var new_x =  round_to_nearest(self.global_position.x, grid_size)
-			var new_y = round_to_nearest(self.global_position.y, grid_size)
-			self.global_position = Vector2(new_x, new_y)
 			
 			tween.tween_property(self, "position", self.position, 0.2).set_ease(Tween.EASE_OUT)
 			print("is_inside_dropable: ", is_inside_dropable) 

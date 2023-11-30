@@ -11,7 +11,7 @@ func round_to_nearest(a:float, b:float):
 		return a - grid_offset
 	else:
 		return a + (b - grid_offset) 
-    
+	
 # returns animal type of StaticBody2D as string
 # sadly required as I didn't find a function that returns all groups of given node
 func get_animal_type(body:StaticBody2D):
