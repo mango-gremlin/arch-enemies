@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cf5udd6l65fuv"]
+[gd_scene load_steps=20 format=3 uid="uid://cf5udd6l65fuv"]
 
 [ext_resource type="Texture2D" uid="uid://d4khq8o7aaei" path="res://assets/green.png" id="1_m0btg"]
 [ext_resource type="Texture2D" uid="uid://dc2lxeyr45vp3" path="res://assets/blue_dark.png" id="2_640fj"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://dipauq7hxbt1f" path="res://squirrel.tscn" id="7_1743r"]
 [ext_resource type="Texture2D" uid="uid://dp70liqt7qxpq" path="res://assets/Grid_10x10.png" id="7_lmu4n"]
 [ext_resource type="Script" path="res://gridVisibility.gd" id="8_puaob"]
+[ext_resource type="PackedScene" uid="uid://bqtg1c4s2pkab" path="res://spider.tscn" id="11_454qx"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_s2tkw"]
 texture = ExtResource("1_m0btg")
@@ -169,6 +170,9 @@ script = ExtResource("8_puaob")
 
 [node name="squirrel" parent="." instance=ExtResource("7_1743r")]
 position = Vector2(160, 70)
+
+[node name="spiderBod" parent="." instance=ExtResource("11_454qx")]
+position = Vector2(220, 50)
 
 [connection signal="body_entered" from="TileMap/GoalArea2D" to="fox" method="_on_goal_area_2d_body_entered"]
 [connection signal="body_entered" from="water/Area2D" to="fox" method="_on_area_2d_body_entered"]
