@@ -17,6 +17,7 @@ var maingame = null
 
 func _ready():
 	#debug 
+	$Camera2D.player_object = self
 	update_interactionLabel()
 
 func _physics_process(delta):
@@ -129,11 +130,9 @@ func exit_overworld():
 	
 func savePlayer():
 	if maingame == null:
-		print("ERROR maingame was not set, save state not available!")
 		return
  
 	print("save user position")
-	inventory = ["Hallo", "Welt"]
 	
 	maingame.save_config()	
 	
@@ -144,7 +143,8 @@ func saveState():
 		"parent" : get_parent().get_path(),
 		"pos_x" : position.x, # Vector2 is not supported by JSON
 		"pos_y" : position.y,
-		"inventory": inventory
+		"inventory": inventory,
+		"zoom": $Camera2D.current_zoom
 	}
 	return state
 	
