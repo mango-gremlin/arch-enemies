@@ -4,6 +4,7 @@ extends Node
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	player_object.maingame = self
 	load_config()
 
 
@@ -39,11 +40,9 @@ func load_config():
 		var node_data = json.get_data()
 
 		if node_data["name"] == "Player":
-			print("Wir laden den Spieler!")
 			var player = $Player
 			var position_x = node_data["pos_x"]
 			var position_y = node_data["pos_y"]
-			print(" Position des Spielers", position_x, position_y)
 			player.position = Vector2(position_x,position_y )
 			player.inventory = node_data["inventory"]
 			
@@ -57,7 +56,7 @@ func save_config():
 	# Storing player data
 	var player_state = player_object.saveState()
 	
-	print("Storing \"", player_object, "\" to ", state_path) 
+	print("Storing \"", player_state, "\" to ", state_path) 
 	
 	var json_string = JSON.stringify(player_state)
 	save.store_line(json_string)

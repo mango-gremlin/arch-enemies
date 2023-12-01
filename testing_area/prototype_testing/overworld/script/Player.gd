@@ -12,6 +12,8 @@ signal updated_inventory(new_inventory)
 @onready var all_interactions = []
 @onready var interactionLabel = $interactioncomponents/InteractLabel
 
+# reference to maingame, necessary for storing the configuration
+var maingame = null
 
 func _ready():
 	#debug 
@@ -71,6 +73,7 @@ func execute_interaction():
 		match active_interaction.interact_type:
 			"bridge_game":
 				print("entering bridge game")
+				savePlayer()
 				enter_pause_menu()
 			"findStone": 
 				print("found a stone!")
@@ -122,7 +125,17 @@ func exit_overworld():
 	# TODO save state in file!
 	# TODO save Inventory 
 	print("save user position")
-	saveState()
+	savePlayer()
+	
+func savePlayer():
+	if maingame == null:
+		print("ERROR maingame was not set, save state not available!")
+		return
+ 
+	print("save user position")
+	inventory = ["Hallo", "Welt"]
+	
+	maingame.save_config()	
 	
 func saveState():
 	var state = {
