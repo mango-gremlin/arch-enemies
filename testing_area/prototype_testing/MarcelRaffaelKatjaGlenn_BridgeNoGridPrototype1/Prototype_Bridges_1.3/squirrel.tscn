@@ -19,97 +19,90 @@ collision_mask = 3
 script = ExtResource("1_ss8yf")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, 4)
+position = Vector2(0, 5)
 scale = Vector2(1, 1.8)
 texture = ExtResource("2_eib8h")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 4)
+position = Vector2(0, 5)
 shape = SubResource("RectangleShape2D_m8jht")
 
 [node name="squirrel" type="Area2D" parent="."]
-position = Vector2(16, 9)
+position = Vector2(0, 5)
 collision_layer = 3
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="squirrel"]
-position = Vector2(-16, -5)
 shape = SubResource("RectangleShape2D_4bimj")
 
 [node name="left_dropzone" type="StaticBody2D" parent="." groups=["dropable", "side_dropzone"]]
-position = Vector2(-10, 0)
+position = Vector2(-10, 5)
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("3_l28rr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="left_dropzone"]
-position = Vector2(0, 4)
 scale = Vector2(1, 2)
 shape = SubResource("RectangleShape2D_2xjkc")
 
 [node name="ColorRect" type="ColorRect" parent="left_dropzone"]
 z_index = -1
 offset_left = -5.0
-offset_top = -6.0
+offset_top = -10.0
 offset_right = 5.0
-offset_bottom = 4.0
 scale = Vector2(1, 2)
 metadata/_edit_use_anchors_ = true
 
 [node name="right_dropzone" type="StaticBody2D" parent="." groups=["dropable", "side_dropzone"]]
-position = Vector2(10, 0)
+position = Vector2(10, 5)
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("3_l28rr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="right_dropzone"]
-position = Vector2(0, 4)
 scale = Vector2(1, 2)
 shape = SubResource("RectangleShape2D_2xjkc")
 
 [node name="ColorRect" type="ColorRect" parent="right_dropzone"]
 z_index = -1
 offset_left = -5.0
-offset_top = -6.0
+offset_top = -10.0
 offset_right = 5.0
-offset_bottom = 4.0
 scale = Vector2(1, 2)
 metadata/_edit_use_anchors_ = true
 
 [node name="top_dropzone" type="StaticBody2D" parent="." groups=["dropable", "top_dropzone"]]
-position = Vector2(0, -15)
+position = Vector2(0, -10)
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("3_l28rr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="top_dropzone"]
-position = Vector2(0, 4)
 shape = SubResource("RectangleShape2D_2xjkc")
 
 [node name="ColorRect" type="ColorRect" parent="top_dropzone"]
 z_index = -1
 offset_left = -5.0
-offset_top = -1.0
+offset_top = -5.0
 offset_right = 5.0
-offset_bottom = 9.0
+offset_bottom = 5.0
 metadata/_edit_use_anchors_ = true
 
 [node name="bottom_dropzone" type="StaticBody2D" parent="." groups=["bottom_dropzone", "dropable"]]
-position = Vector2(0, 15)
+position = Vector2(0, 20)
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("3_l28rr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="bottom_dropzone"]
-position = Vector2(0, 4)
 shape = SubResource("RectangleShape2D_2xjkc")
 
 [node name="ColorRect" type="ColorRect" parent="bottom_dropzone"]
 z_index = -1
 offset_left = -5.0
-offset_top = -1.0
+offset_top = -5.0
 offset_right = 5.0
-offset_bottom = 9.0
+offset_bottom = 5.0
 metadata/_edit_use_anchors_ = true
 
 [connection signal="body_entered" from="squirrel" to="." method="_on_squirrel_body_entered"]

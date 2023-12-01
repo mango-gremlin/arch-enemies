@@ -168,7 +168,7 @@ texture = ExtResource("7_lmu4n")
 script = ExtResource("8_puaob")
 
 [node name="squirrel" parent="." instance=ExtResource("7_1743r")]
-position = Vector2(160, 75)
+position = Vector2(160, 70)
 
 [connection signal="body_entered" from="TileMap/GoalArea2D" to="fox" method="_on_goal_area_2d_body_entered"]
 [connection signal="body_entered" from="water/Area2D" to="fox" method="_on_area_2d_body_entered"]
