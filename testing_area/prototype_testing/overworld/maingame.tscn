@@ -16,17 +16,25 @@
 
 [node name="interactionspot" parent="." instance=ExtResource("4_b5ggn")]
 position = Vector2(497, 130)
+interact_type = 3
 interact_label = "Thats a stone "
-interact_type = 2
-interact_value = "stone"
+item_type = 0
+item_description = "this is a stick,wow!"
 
 [node name="interactionspot2" parent="." instance=ExtResource("4_b5ggn")]
 position = Vector2(471, 120)
-interact_label = "Tree"
-interact_type = 2
-interact_value = "stick"
+interact_type = 3
+interact_label = "tree"
+item_type = 2
+item_description = "a small green leaf"
 
 [node name="bridge_interaction" parent="." instance=ExtResource("5_thogd")]
-position = Vector2(657, 86)
+position = Vector2(190, 28)
+bridge_id = 800
+description = "test  description"
+
+[node name="bridge_interaction2" parent="." instance=ExtResource("5_thogd")]
+position = Vector2(176, 80)
+bridge_id = 1
 
 [connection signal="updated_inventory" from="Player" to="overworld_ui" method="_on_player_updated_inventory"]

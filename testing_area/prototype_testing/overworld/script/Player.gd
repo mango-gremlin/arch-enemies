@@ -13,7 +13,7 @@ signal updated_inventory(new_inventory)
 # -- / player states
 
 # Array to hold the players useable items 
-@onready var inventory:Array = []
+@onready var inventory:Array[Item] = []
 
 # Array to hold hte players progess in the world 
 # used to check whether the user can traverse a certain region
@@ -66,7 +66,7 @@ func player_movement(delta):
 	move_and_collide(velocity * delta)
 
 # ----- 
-# --- structure for interaction with Areas
+# --- structure interaction areas
 # -----
 
  
@@ -79,20 +79,28 @@ func _on_interactionarea_area_exited(area):
 	all_interactions.erase(area)
 	
 
+# function denoting how to interact with a given interaction in stack
 func execute_interaction():
-	if all_interactions:
-		# drawing first element from interaction
+	
+	
+	if not all_interactions.is_empty(): # interaction not empty
+		
+		# taking first element from interaction
 		var active_interaction = all_interactions[0]
+		
 		# we will match again a certain type
 		match active_interaction.interact_type:
 			Interactable.InteractionType.BRIDGE:
 				print("entering bridge game")
-				enter_pause_menu()
+				# drawing ID from Bridge-Interaction
+				# TODO Gather bridge-ID before! to pass
+				var bridge_id = active_interaction.interact_value
+				enter_bridge_scene(bridge_id)
 			Interactable.InteractionType.ITEM: 
-				print("found a stone!")
-				print(active_interaction.interact_value)
+				print("found an item")
+				update_inventory(active_interaction.interact_value)
 				# adding to inventory! 
-				updateInventory("stone")
+				#updateInventory("stone")
 				# TODO REfactor to handle items accordingly
 			Interactable.InteractionType.NPC:
 				print("npc interaction")
@@ -124,16 +132,29 @@ func check_input():
 		
 	
 
-# this ought to improve, use enums or similar for patter matching
-func updateInventory(item:String):
+
+func update_inventory(item:Item):
 	inventory.insert(0,item)
 	# emit signal to update Ui
 	updated_inventory.emit(inventory)
+
+
+# ---- 
+# scene change management
+# ---- 
 
 func enter_pause_menu():
 	print("pause menu")
 	exit_overworld()
 	get_tree().change_scene_to_file("res://ui/menu/pause_menu.tscn")
+
+func enter_bridge_scene(bridge_id):
+	print("entering bridge game", bridge_id)
+	exit_overworld()
+	# search for bridgeGame with correct id! 
+	# load it afterwards
+	enter_pause_menu() # default until we merged
+	
 
 func exit_overworld():
 	# TODO save coordinates
@@ -146,11 +167,11 @@ func exit_overworld():
 	# saveState()
 	
 	
-	
 
 # ----- 
 # debugging
 # ----- 
+
 func update_interactionLabel():
 	if all_interactions:
 		# taking active interaction and insert its label --> descriptions

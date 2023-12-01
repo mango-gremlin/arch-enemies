@@ -6,22 +6,24 @@ class_name OverWorldUI
 @onready var playername_label = $Control/MarginContainer/VBoxContainer/HBoxContainer2/PlayerName
 @onready var quest_label = $Control/MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/QuestList
 
-var current_quests:Array = ["hello!","world?"]:
+var player_inventory:Array[Item] = []:
 	set(newArray):
 		# if a new array was given, we update its value, also the label
-		current_quests = newArray
-		_update_quest_label()
+		player_inventory = newArray
+		_update_inventory_label()
 
 var current_health:int = 100:
 	set(updatedHealth):
 		current_health = updatedHealth
 		_update_health_label()
 
-func _update_quest_label():
+func _update_inventory_label():
 	# iterate over item
 	var newString:String  = ""
-	for quest_string in current_quests:
-		newString += str(quest_string) + "\n"
+	for item in player_inventory:
+		var item_name = item.item_name
+		var item_description = item.item_description
+		newString += str(item_name) + "\n"
 	quest_label.text = newString
 
 func _update_health_label(): 
@@ -34,7 +36,7 @@ func _ready():
 	# not sure whether we should call  and always set this here?
 	playername_label.text = "Eve"
 	
-	_update_quest_label()
+	_update_inventory_label()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -43,5 +45,5 @@ func _process(delta):
 
 
 func _on_player_updated_inventory(inventory):
-	current_quests = inventory
+	player_inventory = inventory
 	

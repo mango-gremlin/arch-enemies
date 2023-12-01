@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://5llfgi2ysvie"]
+[gd_scene load_steps=4 format=3 uid="uid://5llfgi2ysvie"]
 
+[ext_resource type="Script" path="res://entities/interaction_overworld/bridge_interaction.gd" id="1_0fxgx"]
 [ext_resource type="Texture2D" uid="uid://jxy3j8rfygm1" path="res://art/bridge_dummy.png" id="1_0w4hd"]
 [ext_resource type="PackedScene" uid="uid://cegpqm0j2vvbh" path="res://entities/interaction_overworld/interactionspot.tscn" id="2_l2pv7"]
 
 [node name="bridge_interaction" type="Node2D"]
+script = ExtResource("1_0fxgx")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 clip_contents = true
@@ -14,6 +16,4 @@ offset_bottom = 9.0
 texture = ExtResource("1_0w4hd")
 
 [node name="interactionspot" parent="." instance=ExtResource("2_l2pv7")]
-interact_label = "Bridge"
 interact_type = 1
-interact_value = "Level"
