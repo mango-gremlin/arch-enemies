@@ -122,14 +122,19 @@ func exit_overworld():
 	# TODO save state in file!
 	# TODO save Inventory 
 	print("save user position")
-	var player_pos = position
-	var player_inventory = inventory
+	saveState()
 	
-	# saveState()
+func saveState():
+	var state = {
+		"filename", get_scene_file_path(), 
+		"name" : name,
+		"parent" : get_parent().get_path(),
+		"pos_x" : position.x, # Vector2 is not supported by JSON
+		"pos_y" : position.y,
+		"inventory": inventory
+	}
+	return state
 	
-	
-	
-
 # ----- 
 # debugging
 # ----- 
