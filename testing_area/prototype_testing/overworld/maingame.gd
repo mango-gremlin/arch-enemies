@@ -1,5 +1,6 @@
 extends Node
 
+@onready var player_object = $Player
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -21,7 +22,7 @@ func load_config():
 		return
 	
 	print("Configuration found. Attempting to read...")
-	
+	print(state_path)
 	var save = FileAccess.open(state_path, FileAccess.READ)
 	
 	while save.get_position() < save.get_length():
@@ -40,7 +41,10 @@ func load_config():
 		if node_data["name"] == "Player":
 			print("Wir laden den Spieler!")
 			var player = $Player
-			player.position = Vector2(node_data["pos_x"], node_data["pos_y"])
+			var position_x = node_data["pos_x"]
+			var position_y = node_data["pos_y"]
+			print(" Position des Spielers", position_x, position_y)
+			player.position = Vector2(position_x,position_y )
 			player.inventory = node_data["inventory"]
 			
 	print("Loading complete")
@@ -51,10 +55,9 @@ func save_config():
 	var save = FileAccess.open(state_path, FileAccess.WRITE)
 
 	# Storing player data
-	var p = $Player
-	var pState = p.saveState()
+	var player_state = player_object.saveState()
 	
-	print("Storing \"", pState, "\" to ", state_path) 
+	print("Storing \"", player_object, "\" to ", state_path) 
 	
-	var json_string = JSON.stringify(pState)
+	var json_string = JSON.stringify(player_state)
 	save.store_line(json_string)

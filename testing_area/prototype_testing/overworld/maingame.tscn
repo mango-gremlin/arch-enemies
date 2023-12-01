@@ -11,8 +11,6 @@
 script = ExtResource("1_wo2l0")
 
 [node name="Player" parent="." instance=ExtResource("1_33d5q")]
-SPEED = null
-zoomlevel = null
 
 [node name="world" parent="." instance=ExtResource("2_h2q7u")]
 

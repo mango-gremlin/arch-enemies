@@ -126,7 +126,7 @@ func exit_overworld():
 	
 func saveState():
 	var state = {
-		"filename", get_scene_file_path(), 
+		#"filename", get_scene_file_path(), 
 		"name" : name,
 		"parent" : get_parent().get_path(),
 		"pos_x" : position.x, # Vector2 is not supported by JSON
