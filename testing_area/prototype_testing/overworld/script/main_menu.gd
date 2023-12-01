@@ -19,4 +19,4 @@ func _on_about_pressed(): #about
 
 
 func _on_overworld_pressed():
-	get_tree().change_scene_to_file("res://maingame.tscn")
+	get_tree().change_scene_to_file("maingame.tscn")

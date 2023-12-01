@@ -1,12 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://cgfkelxiskcux"]
+[gd_scene load_steps=7 format=3 uid="uid://cgfkelxiskcux"]
 
 [ext_resource type="PackedScene" uid="uid://dndu4pg1i3tlf" path="res://scenes/player.tscn" id="1_33d5q"]
+[ext_resource type="Script" path="res://maingame.gd" id="1_wo2l0"]
 [ext_resource type="PackedScene" uid="uid://p30p3o0e473c" path="res://scenes/world.tscn" id="2_h2q7u"]
 [ext_resource type="PackedScene" uid="uid://cgvraulefjyn8" path="res://ui/overworld_ui/overworld_ui.tscn" id="3_fbgu5"]
 [ext_resource type="PackedScene" uid="uid://cegpqm0j2vvbh" path="res://entities/interaction_overworld/interactionspot.tscn" id="4_b5ggn"]
 [ext_resource type="PackedScene" uid="uid://5llfgi2ysvie" path="res://entities/interaction_overworld/bridge_interaction.tscn" id="5_thogd"]
 
 [node name="maingame" type="Node"]
+script = ExtResource("1_wo2l0")
 
 [node name="Player" parent="." instance=ExtResource("1_33d5q")]
 

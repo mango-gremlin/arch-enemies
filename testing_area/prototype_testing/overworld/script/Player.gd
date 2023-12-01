@@ -28,9 +28,12 @@ signal updated_inventory(new_inventory)
 @onready var all_interactions = []
 @onready var interactionLabel = $interactioncomponents/InteractLabel
 
+# reference to maingame, necessary for storing the configuration
+var maingame = null # TODO 
 
 func _ready():
 	#debug 
+	$Camera2D.player_object = self
 	update_interactionLabel()
 
 func _physics_process(delta):
@@ -100,8 +103,6 @@ func execute_interaction():
 				print("found an item")
 				update_inventory(active_interaction.interact_value)
 				# adding to inventory! 
-				#updateInventory("stone")
-				# TODO REfactor to handle items accordingly
 			Interactable.InteractionType.NPC:
 				print("npc interaction")
 				pass
@@ -161,13 +162,36 @@ func exit_overworld():
 	# TODO save state in file!
 	# TODO save Inventory 
 	print("save user position")
-	var player_pos = position
-	var player_inventory = inventory
-	
-	# saveState()
-	
+	savePlayer()
 	
 
+# ---- 
+#  saving player state
+# ---- 
+
+func savePlayer():
+	# TODO 
+	if maingame == null:
+		return
+ 
+	print("save user position")
+	
+	maingame.save_config()	
+	
+
+func saveState():
+	var state = {
+		#"filename", get_scene_file_path(), 
+		"name" : name,
+		"parent" : get_parent().get_path(),
+		"pos_x" : position.x, # Vector2 is not supported by JSON
+		"pos_y" : position.y,
+		#"inventory": inventory,
+		"inventory": ["debug1","debug2"],
+		"zoom": $Camera2D.current_zoom
+	}
+	return state
+	
 # ----- 
 # debugging
 # ----- 
