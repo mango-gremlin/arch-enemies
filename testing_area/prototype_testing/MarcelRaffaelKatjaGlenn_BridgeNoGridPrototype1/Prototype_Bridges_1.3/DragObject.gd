@@ -40,6 +40,7 @@ func is_correct_placement(body):
 					# only spiders can be dropped on another animal's bottom dropzone
 					elif overlapping_body.is_in_group("bottom_dropzone") and animal_type == "spider":
 						return true
+		return false
 	return false
 
 func _process(_delta):
