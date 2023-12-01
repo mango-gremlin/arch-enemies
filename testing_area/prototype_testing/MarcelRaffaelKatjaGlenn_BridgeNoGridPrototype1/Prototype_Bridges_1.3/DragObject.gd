@@ -22,8 +22,8 @@ func is_correct_placement(body):
 			# if overlapping body is a forbidden one, it is never valid
 			if overlapping_body.is_in_group("forbidden"):
 				return false
-			# if overlapping body is dropable, check specifics for animals
-			elif overlapping_body.is_in_group("dropable"):
+			# if overlapping body is dropable and not its own, check specifics for animals
+			elif overlapping_body.is_in_group("dropable") and not body == overlapping_body.get_owner():
 				# get type of animal that overlapping drop zone belongs to
 				var overlapping_animal_type = Global.get_animal_type(overlapping_body.get_owner())
 				# if overlap zone belongs to a spider, it is always allowed
@@ -85,9 +85,6 @@ func _process(_delta):
 			# snaps the center of animal to the grid, which may become an issue for some sprite sizes
 			
 			tween.tween_property(self, "position", self.position, 0.2).set_ease(Tween.EASE_OUT)
-			print("is_inside_dropable: ", is_inside_dropable) 
-			print("is_inside_forbidden: " , is_inside_forbidden)
-			
 			# if placement is incorrect, snap back to original position
 			# otherwise animal remains in current position, snapped to grid
 			if not is_correct_placement(self):
@@ -120,17 +117,13 @@ func body_entered(body):
 	# and this body is in the group drobable
 	# set inside dropable to true so the process can register it as a dropable zone
 	# and change the colour of the body we just touched to signify we can drop it here
-	if body.is_in_group('dropable'):
-		print("entered dropable body")
+	if body.is_in_group('dropable') and not body == self:
 		is_inside_dropable = true
 		body.modulate = Color(Color.CORNFLOWER_BLUE, 1)
 		self.dropzone = body
 	# "not body self" prevents some unexpected results with overlapping collision zones
 	# of self, but may also be a problem in the future 
 	if body.is_in_group('forbidden') and not body == self:
-		print("entered forbidden body")
-		print(body.get_owner().name)
-		print(self.name)
 		is_inside_forbidden = true
 		
 
@@ -140,12 +133,10 @@ func _on_snake_body_exited(body):
 func body_exited(body):
 	# if the snake body stops touching a staticbody that has the dropable group
 	# set inside dropable to false & change the colour of that body back to original 
-	if body.is_in_group('dropable'):
-		print("exited dropable body")
+	if body.is_in_group('dropable') and not body == self:
 		is_inside_dropable = false
 		body.modulate = Color(Color.AQUAMARINE, 0.7)
 	if body.is_in_group('forbidden') and not body == self:
-		print("exited forbidden body")
 		is_inside_forbidden = false
 
 # JUST SQUIRREL THINGS
