@@ -67,9 +67,18 @@ func _process(_delta):
 			self.top_level = false
 			
 			# snap to nearest position in grid
-			self.position.x = Global.round_to_nearest(self.position.x, grid_size)
-			self.position.y = Global.round_to_nearest(self.position.y, grid_size)
-		
+			var new_position_x
+			var new_position_y
+			
+			#self.position.x = Global.round_to_nearest(self.position.x, grid_size)
+			#self.position.y = Global.round_to_nearest(self.position.y, grid_size)
+			new_position_x = Global.round_to_nearest(self.position.x, grid_size)
+			new_position_y = Global.round_to_nearest(self.position.y, grid_size)
+			
+			if self.dropzone != null:
+				
+				var new_position = snap_into_dropzone(new_position_x, new_position_y)
+				
 			# 1. nothing is being currently dragged
 			self.is_dragging = false
 			Global.something_is_being_dragged = false
@@ -82,7 +91,7 @@ func _process(_delta):
 			# 	may use signal emmited by clicks to snap to grid instead
 			# snaps the center of animal to the grid, which may become an issue for some sprite sizes
 			
-			tween.tween_property(self, "position", self.position, 0.2).set_ease(Tween.EASE_OUT)
+			tween.tween_property(self, "position", Vector2(new_position_x, new_position_y), 0.2).set_ease(Tween.EASE_OUT)
 			print("is_inside_dropable: ", is_inside_dropable) 
 			print("is_inside_forbidden: " , is_inside_forbidden)
 			
@@ -90,6 +99,62 @@ func _process(_delta):
 			# otherwise animal remains in current position, snapped to grid
 			if not is_correct_placement(self):
 				tween.tween_property(self, "global_position", self.initial_pos, 0.2).set_ease(Tween.EASE_OUT)
+
+
+func snap_into_dropzone(new_position_x, new_position_y):
+	var number_of_children = self.get_child_count()
+				
+	# check if new position coordinates are actually inside the dropzone
+	# for this, make a new area2d with the calculated new coordinates and
+	# check if this area overlaps with the current dropzone
+	var test_body = Area2D.new()
+	add_child(test_body)
+	
+	var test_collision = CollisionShape2D.new()
+	var test_shape = RectangleShape2D.new()
+	test_shape.set_size(self.get_children()[2].get_children()[0].shape.size)
+	test_collision.set_shape(test_shape)
+	test_body.add_child(test_collision)
+	
+	test_body.global_position = Vector2(new_position_x, new_position_y)
+	
+	var inside_dropzone = test_body.overlaps_body(self.dropzone)
+	#print("inside dropzone? ", inside_dropzone)
+	
+	self.remove_child(self.get_children()[number_of_children])
+	
+	# if not, then turn around rounding:
+	#	if you would round up, round down
+	#   if you would round down, round up
+	if not inside_dropzone:
+		#print("original position x: ", self.position.x)
+		#print("new position before turn-around x: ", new_position_x)
+#		if (new_position_x - self.position.x) < grid_size/2 or (self.position.x - new_position_x) < grid_size/2: 
+#			pass
+		if new_position_x < self.position.x:
+			new_position_x = Global.round_to_nearest(self.position.x + grid_size, grid_size)
+		elif new_position_x > self.position.x:
+			new_position_x = Global.round_to_nearest(self.position.x - grid_size, grid_size)
+		elif new_position_x == self.position.x and self.position.x > self.dropzone.global_position.x:
+			new_position_x = Global.round_to_nearest(self.position.x + grid_size, grid_size)
+		elif new_position_x == self.position.x and self.position.x < self.dropzone.global_position.x:
+			new_position_x = Global.round_to_nearest(self.position.x - grid_size, grid_size)
+		#print("new position after turn-around x: ", new_position_x)
+		
+		#print("original position y: ", self.position.y)
+		#print("new position before turn-around y: ", new_position_y)
+		if ((new_position_y - self.position.y) < grid_size/2 or (self.position.y - new_position_y) < grid_size/2) and (self.dropzone.global_position.y - self.position.y < 5): 
+			pass
+		elif new_position_y > self.position.y:
+			new_position_y = Global.round_to_nearest(self.position.y - grid_size, grid_size)
+		elif new_position_y < self.position.y:
+			new_position_y = Global.round_to_nearest(self.position.y + grid_size, grid_size)
+		elif new_position_y == self.position.y and self.position.y < self.dropzone.global_position.y:
+			new_position_y = Global.round_to_nearest(self.position.y + grid_size, grid_size)
+		elif new_position_y == self.position.y and self.position.y > self.dropzone.global_position.y:
+			new_position_y = Global.round_to_nearest(self.position.y - grid_size, grid_size)
+		#print("new position after turn-around y: ", new_position_y, "\n ------ \n")
+
 
 func _on_area_2d_mouse_entered():
 	mouse_entered()
@@ -99,7 +164,7 @@ func mouse_entered():
 	# set this to draggable
 	if not self.is_dragging && Global.drag_mode == true:
 		self.draggable = true
-		#self.scale = Vector2(1.05, 1.05)
+		#self.get_children()[0].scale = Vector2(1.05, 1.05)
 
 func _on_area_2d_mouse_exited():
 	mouse_exited()
@@ -108,7 +173,7 @@ func mouse_exited():
 	# if mouse exits and this is not being dragged, it will not be dragged
 	if not self.is_dragging:
 		self.draggable = false
-		#self.scale = Vector2(1, 1)
+		#self.get_children()[0].scale = Vector2(1, 1)
 
 func _on_snake_body_entered(body):
 	body_entered(body)

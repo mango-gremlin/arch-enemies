@@ -5,19 +5,19 @@
 [ext_resource type="Script" path="res://allowed_snake_area.gd" id="3_fqrgl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_43xhd"]
-size = Vector2(50, 10)
+size = Vector2(48, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i2o3k"]
 size = Vector2(48, 8)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lyvfn"]
-size = Vector2(8, 8)
+size = Vector2(9, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f3mbg"]
-size = Vector2(38, 8)
+size = Vector2(39, 9)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f6euc"]
-size = Vector2(38, 8)
+size = Vector2(39, 9)
 
 [node name="snakeBod" type="StaticBody2D" groups=["draggable", "snake"]]
 collision_layer = 3
@@ -38,6 +38,25 @@ collision_mask = 3
 [node name="CollisionShape2D" type="CollisionShape2D" parent="snake"]
 shape = SubResource("RectangleShape2D_i2o3k")
 
+[node name="forbidden_dropzone" type="StaticBody2D" parent="." groups=["bottom_dropzone", "forbidden"]]
+position = Vector2(-23, 11)
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("3_fqrgl")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="forbidden_dropzone"]
+polygon = PackedVector2Array(40, -26, 40, -17, 49, -17, 49, -5, 40, -5, 40, 4, 59, 4, 59, -26)
+
+[node name="ColorRect" type="ColorRect" parent="forbidden_dropzone"]
+z_index = -1
+offset_left = 39.0
+offset_top = -26.0
+offset_right = 49.0
+offset_bottom = -16.0
+scale = Vector2(2, 3)
+color = Color(1, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
+
 [node name="left_dropzone" type="StaticBody2D" parent="." groups=["dropable", "side_dropzone"]]
 position = Vector2(-34, 0)
 collision_layer = 2
@@ -45,7 +64,7 @@ collision_mask = 2
 script = ExtResource("3_fqrgl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="left_dropzone"]
-position = Vector2(5, 0)
+position = Vector2(4.5, 0)
 shape = SubResource("RectangleShape2D_lyvfn")
 
 [node name="ColorRect" type="ColorRect" parent="left_dropzone"]
@@ -62,7 +81,7 @@ collision_mask = 2
 script = ExtResource("3_fqrgl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="top_dropzone"]
-position = Vector2(19, 1)
+position = Vector2(18.5, 0.5)
 shape = SubResource("RectangleShape2D_f3mbg")
 
 [node name="ColorRect" type="ColorRect" parent="top_dropzone"]
@@ -82,7 +101,7 @@ collision_mask = 2
 script = ExtResource("3_fqrgl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="bottom_dropzone"]
-position = Vector2(19, -1)
+position = Vector2(18.5, -0.5)
 shape = SubResource("RectangleShape2D_f6euc")
 
 [node name="ColorRect" type="ColorRect" parent="bottom_dropzone"]
@@ -93,25 +112,6 @@ offset_right = 9.0
 offset_bottom = 4.0
 scale = Vector2(4, 1)
 metadata/_edit_use_anchors_ = true
-
-[node name="forbidden_dropzone" type="StaticBody2D" parent="." groups=["bottom_dropzone", "forbidden"]]
-position = Vector2(-23, 11)
-collision_layer = 2
-collision_mask = 2
-script = ExtResource("3_fqrgl")
-
-[node name="ColorRect" type="ColorRect" parent="forbidden_dropzone"]
-z_index = -1
-offset_left = 40.0
-offset_top = -26.0
-offset_right = 50.0
-offset_bottom = -16.0
-scale = Vector2(2, 3)
-color = Color(1, 0, 0, 1)
-metadata/_edit_use_anchors_ = true
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="forbidden_dropzone"]
-polygon = PackedVector2Array(40, -26, 40, -17, 49, -17, 49, -5, 40, -5, 40, 4, 56, 4, 56, -26)
 
 [connection signal="body_entered" from="snake" to="." method="_on_snake_body_entered"]
 [connection signal="body_exited" from="snake" to="." method="_on_snake_body_exited"]

@@ -136,10 +136,13 @@ SPEED = 150.0
 JUMP_VELOCITY = -200.0
 
 [node name="snek" parent="." instance=ExtResource("3_0bug4")]
-position = Vector2(140, 150)
+position = Vector2(140, 130)
 
 [node name="snek2" parent="." instance=ExtResource("3_0bug4")]
-position = Vector2(300, 130)
+position = Vector2(290, 110)
+
+[node name="squirrel" parent="." instance=ExtResource("7_1743r")]
+position = Vector2(161, 65)
 
 [node name="DragModeButton" type="CheckButton" parent="."]
 offset_left = 208.0
@@ -163,12 +166,9 @@ script = SubResource("GDScript_62t5p")
 
 [node name="Grid10x10" type="Sprite2D" parent="."]
 z_index = 1
-position = Vector2(205, 205)
+position = Vector2(276, 245)
 texture = ExtResource("7_lmu4n")
 script = ExtResource("8_puaob")
-
-[node name="squirrel" parent="." instance=ExtResource("7_1743r")]
-position = Vector2(160, 70)
 
 [connection signal="body_entered" from="TileMap/GoalArea2D" to="fox" method="_on_goal_area_2d_body_entered"]
 [connection signal="body_entered" from="water/Area2D" to="fox" method="_on_area_2d_body_entered"]
