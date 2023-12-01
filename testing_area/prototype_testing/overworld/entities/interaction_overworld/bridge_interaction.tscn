@@ -15,5 +15,5 @@ texture = ExtResource("1_0w4hd")
 
 [node name="interactionspot" parent="." instance=ExtResource("2_l2pv7")]
 interact_label = "Bridge"
-interact_type = "bridge_game"
-interact_value = "Thats a bridge!"
+interact_type = 1
+interact_value = "Level"

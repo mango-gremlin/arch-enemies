@@ -2,10 +2,26 @@ extends CharacterBody2D
 
 signal updated_inventory(new_inventory)
 
+# --- / 
+# -- / default values for visualization
+
 @export var SPEED = 100
 @export var zoomlevel:Vector2 = Vector2(1,1)
 @onready var anim :  AnimatedSprite2D = $AnimatedSprite2D
+
+# --- / 
+# -- / player states
+
+# Array to hold the players useable items 
 @onready var inventory:Array = []
+
+# Array to hold hte players progess in the world 
+# used to check whether the user can traverse a certain region
+# here each item is of type INT denoting the LEVEL-ID 
+@onready var bridges_built:Array[int] = []
+
+
+
 
 # collects all interactions that we currently have 
 # Queue-like structure 
@@ -69,21 +85,23 @@ func execute_interaction():
 		var active_interaction = all_interactions[0]
 		# we will match again a certain type
 		match active_interaction.interact_type:
-			"bridge_game":
+			Interactable.InteractionType.BRIDGE:
 				print("entering bridge game")
 				enter_pause_menu()
-			"findStone": 
+			Interactable.InteractionType.ITEM: 
 				print("found a stone!")
 				print(active_interaction.interact_value)
 				# adding to inventory! 
 				updateInventory("stone")
-			"findStick":
-				print("found a stick!")
-				print(active_interaction.interact_value)
-				updateInventory("stick")
+				# TODO REfactor to handle items accordingly
+			Interactable.InteractionType.NPC:
+				print("npc interaction")
+				pass
+			Interactable.InteractionType.DEBUG:
+				print("debug interaction")
+				
 			_: #default
 				pass
-			
 
 func use_item():
 	# TODO could use pattern matching to use the item accordingly
