@@ -75,9 +75,11 @@ func _process(_delta):
 			new_position_x = Global.round_to_nearest(self.position.x, grid_size)
 			new_position_y = Global.round_to_nearest(self.position.y, grid_size)
 			
+			var new_position : Vector2
+			
 			if self.dropzone != null:
 				
-				var new_position = snap_into_dropzone(new_position_x, new_position_y)
+				new_position = snap_into_dropzone(new_position_x, new_position_y)
 				
 			# 1. nothing is being currently dragged
 			self.is_dragging = false
@@ -91,7 +93,7 @@ func _process(_delta):
 			# 	may use signal emmited by clicks to snap to grid instead
 			# snaps the center of animal to the grid, which may become an issue for some sprite sizes
 			
-			tween.tween_property(self, "position", Vector2(new_position_x, new_position_y), 0.2).set_ease(Tween.EASE_OUT)
+			tween.tween_property(self, "position", new_position, 0.2).set_ease(Tween.EASE_OUT)
 			print("is_inside_dropable: ", is_inside_dropable) 
 			print("is_inside_forbidden: " , is_inside_forbidden)
 			
@@ -129,8 +131,8 @@ func snap_into_dropzone(new_position_x, new_position_y):
 	if not inside_dropzone:
 		#print("original position x: ", self.position.x)
 		#print("new position before turn-around x: ", new_position_x)
-#		if (new_position_x - self.position.x) < grid_size/2 or (self.position.x - new_position_x) < grid_size/2: 
-#			pass
+		#if (new_position_x - self.position.x) < grid_size/2 or (self.position.x - new_position_x) < grid_size/2: # and (self.dropzone.global_position.x - self.position.x < grid_size/2): 
+		#	pass
 		if new_position_x < self.position.x:
 			new_position_x = Global.round_to_nearest(self.position.x + grid_size, grid_size)
 		elif new_position_x > self.position.x:
@@ -143,7 +145,7 @@ func snap_into_dropzone(new_position_x, new_position_y):
 		
 		#print("original position y: ", self.position.y)
 		#print("new position before turn-around y: ", new_position_y)
-		if ((new_position_y - self.position.y) < grid_size/2 or (self.position.y - new_position_y) < grid_size/2) and (self.dropzone.global_position.y - self.position.y < 5): 
+		if ((new_position_y - self.position.y) < grid_size/2 or (self.position.y - new_position_y) < grid_size/2) and (self.dropzone.global_position.y - self.position.y < grid_size/2): 
 			pass
 		elif new_position_y > self.position.y:
 			new_position_y = Global.round_to_nearest(self.position.y - grid_size, grid_size)
@@ -154,6 +156,10 @@ func snap_into_dropzone(new_position_x, new_position_y):
 		elif new_position_y == self.position.y and self.position.y > self.dropzone.global_position.y:
 			new_position_y = Global.round_to_nearest(self.position.y - grid_size, grid_size)
 		#print("new position after turn-around y: ", new_position_y, "\n ------ \n")
+	
+	var new_position = Vector2(new_position_x, new_position_y)
+	
+	return new_position
 
 
 func _on_area_2d_mouse_entered():
