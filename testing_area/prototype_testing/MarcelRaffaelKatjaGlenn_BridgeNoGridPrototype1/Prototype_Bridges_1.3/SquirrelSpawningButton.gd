@@ -15,4 +15,5 @@ func _process(delta):
 # creates a new instance of the snek class and adds it to the world.
 func _on_pressed():
 	var new_squirrel = new_animal.instantiate()
+	new_squirrel.position = Vector2(100,100)
 	self.get_parent().add_child(new_squirrel)
