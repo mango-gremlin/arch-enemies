@@ -1,7 +1,7 @@
 extends Button
 
 # The scene spawned by the button. Snek in this case
-var new_animal = preload("res://snek.tscn")
+var new_animal = preload("res://squirrel.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -14,5 +14,5 @@ func _process(delta):
 
 # creates a new instance of the snek class and adds it to the world.
 func _on_pressed():
-	var new_snake = new_animal.instantiate()
-	self.get_parent().add_child(new_snake)
+	var new_squirrel = new_animal.instantiate()
+	self.get_parent().add_child(new_squirrel)
