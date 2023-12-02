@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 signal updated_inventory(new_inventory)
+signal saved_player()
 
 # --- / 
 # -- / default values for visualization
@@ -27,9 +28,6 @@ signal updated_inventory(new_inventory)
 # Queue-like structure 
 @onready var all_interactions = []
 @onready var interactionLabel = $interactioncomponents/InteractLabel
-
-# reference to maingame, necessary for storing the configuration
-var maingame = null # TODO 
 
 func _ready():
 	#debug 
@@ -96,22 +94,23 @@ func execute_interaction():
 			Interactable.InteractionType.BRIDGE:
 				print("entering bridge game")
 				# drawing ID from Bridge-Interaction
-				# TODO Gather bridge-ID before! to pass
 				var bridge_id = active_interaction.interact_value
 				enter_bridge_scene(bridge_id)
 			Interactable.InteractionType.ITEM: 
 				print("found an item")
-				update_inventory(active_interaction.interact_value)
+				add_to_inventory(active_interaction.interact_value)
 				# adding to inventory! 
 			Interactable.InteractionType.NPC:
 				print("npc interaction")
 				pass
 			Interactable.InteractionType.DEBUG:
 				print("debug interaction")
+				pass
 				
 			_: #default
 				pass
 
+# uses item and removes its entry from inventory
 func use_item():
 	# TODO could use pattern matching to use the item accordingly
 	if !inventory.is_empty():
@@ -123,6 +122,8 @@ func use_item():
 		# update UI
 		updated_inventory.emit(inventory)
 
+# checks against definde inputs, takes action if action was registered
+# TODO naming could be improved
 func check_input():
 	if Input.is_action_just_pressed("interact_overworld"):
 		execute_interaction()
@@ -133,8 +134,8 @@ func check_input():
 		
 	
 
-
-func update_inventory(item:Item):
+# adding item to first position of inventory
+func add_to_inventory(item:Item):
 	inventory.insert(0,item)
 	# emit signal to update Ui
 	updated_inventory.emit(inventory)
@@ -157,9 +158,8 @@ func enter_bridge_scene(bridge_id):
 	enter_pause_menu() # default until we merged
 	
 
+# saves player state 
 func exit_overworld():
-	# TODO save coordinates
-	# TODO save state in file!
 	# TODO save Inventory 
 	print("save user position")
 	savePlayer()
@@ -170,13 +170,12 @@ func exit_overworld():
 # ---- 
 
 func savePlayer():
-	# TODO 
-	if maingame == null:
-		return
+	#signal 
+	#if maingame == null:		return
  
 	print("save user position")
-	
-	maingame.save_config()	
+	saved_player.emit()
+	#maingame.save_config()	
 	
 
 func saveState():

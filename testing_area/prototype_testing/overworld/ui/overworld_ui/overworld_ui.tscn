@@ -59,7 +59,7 @@ layout_mode = 2
 
 [node name="Quest_Descriptor" type="Label" parent="Control/MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer"]
 layout_mode = 2
-text = "Active Quests:"
+text = "Current Inventory"
 
 [node name="QuestList" type="Label" parent="Control/MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer"]
 layout_mode = 2
