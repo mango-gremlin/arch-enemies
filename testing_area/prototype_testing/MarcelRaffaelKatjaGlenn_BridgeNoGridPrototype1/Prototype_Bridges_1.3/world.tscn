@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cf5udd6l65fuv"]
+[gd_scene load_steps=20 format=3 uid="uid://cf5udd6l65fuv"]
 
 [ext_resource type="Texture2D" uid="uid://d4khq8o7aaei" path="res://assets/green.png" id="1_m0btg"]
 [ext_resource type="Texture2D" uid="uid://dc2lxeyr45vp3" path="res://assets/blue_dark.png" id="2_640fj"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://dipauq7hxbt1f" path="res://squirrel.tscn" id="7_1743r"]
 [ext_resource type="Texture2D" uid="uid://dp70liqt7qxpq" path="res://assets/Grid_10x10.png" id="7_lmu4n"]
 [ext_resource type="Script" path="res://gridVisibility.gd" id="8_puaob"]
+[ext_resource type="Script" path="res://SnakeSpawningButton.gd" id="11_g8gs2"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_s2tkw"]
 texture = ExtResource("1_m0btg")
@@ -162,6 +163,7 @@ offset_bottom = -1.0
 script = SubResource("GDScript_62t5p")
 
 [node name="Grid10x10" type="Sprite2D" parent="."]
+visible = false
 z_index = 1
 position = Vector2(205, 205)
 texture = ExtResource("7_lmu4n")
@@ -170,7 +172,16 @@ script = ExtResource("8_puaob")
 [node name="squirrel" parent="." instance=ExtResource("7_1743r")]
 position = Vector2(160, 70)
 
+[node name="Button" type="Button" parent="."]
+offset_left = 24.0
+offset_top = 178.0
+offset_right = 79.0
+offset_bottom = 209.0
+text = "Snake"
+script = ExtResource("11_g8gs2")
+
 [connection signal="body_entered" from="TileMap/GoalArea2D" to="fox" method="_on_goal_area_2d_body_entered"]
 [connection signal="body_entered" from="water/Area2D" to="fox" method="_on_area_2d_body_entered"]
 [connection signal="toggled" from="DragModeButton" to="DragModeButton" method="_on_toggled"]
 [connection signal="body_entered" from="DeathHazard" to="fox" method="_on_death_hazard_body_entered"]
+[connection signal="pressed" from="Button" to="Button" method="_on_pressed"]
