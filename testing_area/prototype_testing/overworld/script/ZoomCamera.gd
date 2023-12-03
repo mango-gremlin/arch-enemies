@@ -9,7 +9,7 @@ extends Camera2D
 var player_object = null
 var current_zoom = 1 
 
-func _set_current_zoom(value: float, store: bool = true):
+func _set_current_zoom(value: float, store: bool = false):
 	var tween = create_tween()
 	current_zoom = clamp(value, MIN_ZOOM, MAX_ZOOM)
 	

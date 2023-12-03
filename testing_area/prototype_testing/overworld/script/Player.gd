@@ -1,19 +1,33 @@
 extends CharacterBody2D
 
 signal updated_inventory(new_inventory)
+signal saved_player()
+
+# --- / 
+# -- / default values for visualization
 
 @export var SPEED = 100
 @export var zoomlevel:Vector2 = Vector2(1,1)
 @onready var anim :  AnimatedSprite2D = $AnimatedSprite2D
-@onready var inventory:Array = []
+
+# --- / 
+# -- / player states
+
+# Array to hold the players useable items 
+@onready var inventory:Array[Item] = []
+
+# Array to hold hte players progess in the world 
+# used to check whether the user can traverse a certain region
+# here each item is of type INT denoting the LEVEL-ID 
+@onready var bridges_built:Array[int] = []
+
+
+
 
 # collects all interactions that we currently have 
 # Queue-like structure 
 @onready var all_interactions = []
 @onready var interactionLabel = $interactioncomponents/InteractLabel
-
-# reference to maingame, necessary for storing the configuration
-var maingame = null
 
 func _ready():
 	#debug 
@@ -53,7 +67,7 @@ func player_movement(delta):
 	move_and_collide(velocity * delta)
 
 # ----- 
-# --- structure for interaction with Areas
+# --- structure interaction areas
 # -----
 
  
@@ -66,29 +80,37 @@ func _on_interactionarea_area_exited(area):
 	all_interactions.erase(area)
 	
 
+# function denoting how to interact with a given interaction in stack
 func execute_interaction():
-	if all_interactions:
-		# drawing first element from interaction
+	
+	
+	if not all_interactions.is_empty(): # interaction not empty
+		
+		# taking first element from interaction
 		var active_interaction = all_interactions[0]
+		
 		# we will match again a certain type
 		match active_interaction.interact_type:
-			"bridge_game":
+			Interactable.InteractionType.BRIDGE:
 				print("entering bridge game")
-				savePlayer()
-				enter_pause_menu()
-			"findStone": 
-				print("found a stone!")
-				print(active_interaction.interact_value)
+				# drawing ID from Bridge-Interaction
+				var bridge_id = active_interaction.interact_value
+				enter_bridge_scene(bridge_id)
+			Interactable.InteractionType.ITEM: 
+				print("found an item")
+				add_to_inventory(active_interaction.interact_value)
 				# adding to inventory! 
-				updateInventory("stone")
-			"findStick":
-				print("found a stick!")
-				print(active_interaction.interact_value)
-				updateInventory("stick")
+			Interactable.InteractionType.NPC:
+				print("npc interaction")
+				pass
+			Interactable.InteractionType.DEBUG:
+				print("debug interaction")
+				pass
+				
 			_: #default
 				pass
-			
 
+# uses item and removes its entry from inventory
 func use_item():
 	# TODO could use pattern matching to use the item accordingly
 	if !inventory.is_empty():
@@ -100,6 +122,8 @@ func use_item():
 		# update UI
 		updated_inventory.emit(inventory)
 
+# checks against definde inputs, takes action if action was registered
+# TODO naming could be improved
 func check_input():
 	if Input.is_action_just_pressed("interact_overworld"):
 		execute_interaction()
@@ -110,32 +134,50 @@ func check_input():
 		
 	
 
-# this ought to improve, use enums or similar for patter matching
-func updateInventory(item:String):
+# adding item to first position of inventory
+func add_to_inventory(item:Item):
 	inventory.insert(0,item)
 	# emit signal to update Ui
 	updated_inventory.emit(inventory)
+
+
+# ---- 
+# scene change management
+# ---- 
 
 func enter_pause_menu():
 	print("pause menu")
 	exit_overworld()
 	get_tree().change_scene_to_file("res://ui/menu/pause_menu.tscn")
 
+func enter_bridge_scene(bridge_id):
+	print("entering bridge game", bridge_id)
+	exit_overworld()
+	# search for bridgeGame with correct id! 
+	# load it afterwards
+	enter_pause_menu() # default until we merged
+	
+
+# saves player state 
 func exit_overworld():
-	# TODO save coordinates
-	# TODO save state in file!
 	# TODO save Inventory 
 	print("save user position")
 	savePlayer()
 	
+
+# ---- 
+#  saving player state
+# ---- 
+
 func savePlayer():
-	if maingame == null:
-		return
+	#signal 
+	#if maingame == null:		return
  
 	print("save user position")
+	saved_player.emit()
+	#maingame.save_config()	
 	
-	maingame.save_config()	
-	
+
 func saveState():
 	var state = {
 		#"filename", get_scene_file_path(), 
@@ -143,7 +185,8 @@ func saveState():
 		"parent" : get_parent().get_path(),
 		"pos_x" : position.x, # Vector2 is not supported by JSON
 		"pos_y" : position.y,
-		"inventory": inventory,
+		#"inventory": inventory,
+		"inventory": ["debug1","debug2"],
 		"zoom": $Camera2D.current_zoom
 	}
 	return state
@@ -151,6 +194,7 @@ func saveState():
 # ----- 
 # debugging
 # ----- 
+
 func update_interactionLabel():
 	if all_interactions:
 		# taking active interaction and insert its label --> descriptions
