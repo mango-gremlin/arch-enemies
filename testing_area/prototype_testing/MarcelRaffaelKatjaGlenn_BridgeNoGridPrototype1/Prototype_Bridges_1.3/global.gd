@@ -23,4 +23,6 @@ func get_animal_type(body:StaticBody2D):
 		return "deer"
 	elif body.is_in_group("spider"):
 		return "spider"
+	elif body.is_in_group("shore_dropzone"):
+		return "shore_dropzone"
 	return ""
