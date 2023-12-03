@@ -59,19 +59,18 @@ func _process(_delta):
 			
 		if Input.is_action_pressed("click"):
 			# during the time mouse click is held down,
-			# object continues following mouse
-			self.global_position = get_global_mouse_position() - mouse_offset
+			# object continues following mouse position, rounded to grid size.
+			var target_position_x = Global.round_to_nearest(get_global_mouse_position().x - mouse_offset.x, grid_size)
+			var target_position_y = Global.round_to_nearest(get_global_mouse_position().y - mouse_offset.y, grid_size)
+			self.global_position.x = target_position_x
+			self.global_position.y = target_position_y
 			
 		elif Input.is_action_just_released("click"):
 			# when click is released:
 			
 			# dropped object should not be on top level anymore
 			self.top_level = false
-			
-			# snap to nearest position in grid
-			self.position.x = Global.round_to_nearest(self.position.x, grid_size)
-			self.position.y = Global.round_to_nearest(self.position.y, grid_size)
-		
+
 			# 1. nothing is being currently dragged
 			self.is_dragging = false
 			Global.something_is_being_dragged = false
