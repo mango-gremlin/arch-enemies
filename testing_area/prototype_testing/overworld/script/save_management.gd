@@ -50,8 +50,7 @@ func load_config():
 			
 			player_object.position = Vector2(position_x, position_y)
 			
-			#player.inventory = generate_inventory(node_data["inventory"])
-			
+			player_object.inventory = generate_inventory(node_data["inventory"])
 			
 			camera_object._set_current_zoom(node_data["zoom"])
 			
@@ -62,9 +61,18 @@ func load_config():
 			
 	
 func generate_inventory(inventory_data):
-	print(inventory_data)
+	print("Generating inventory from string: \"", inventory_data, "\"")
 	# iterate over each item and generate an item from each 
-	return []
+	
+	var inventory:Array[Item] = []
+	
+	for inv in inventory_data:
+		var item_type = Item.string_to_item_type(inv["type"])
+		var item_description = inv["item_description"]
+		
+		inventory.append(Item.new(item_type, item_description))
+	
+	return inventory
 	
 
 func save_config():
@@ -91,7 +99,7 @@ func save_config():
 	var save = FileAccess.open(state_path, FileAccess.WRITE)
 
 	# Storing THE CURRENT player data
-	var player_state = player_object.saveState()
+	var player_state = player_object.save_state()
 	player_state["profile"] = current_profile
 	
 	print("Storing player state \"", player_state, " ...") 

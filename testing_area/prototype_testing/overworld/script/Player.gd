@@ -162,31 +162,33 @@ func enter_bridge_scene(bridge_id):
 func exit_overworld():
 	# TODO save Inventory 
 	print("save user position")
-	savePlayer()
+	save_player()
 	
 
 # ---- 
 #  saving player state
 # ---- 
 
-func savePlayer():
-	#signal 
-	#if maingame == null:		return
- 
+func save_player():
 	print("save user position")
+	inventory.append(Item.new(Item.ItemType.STICK, "Hallo du!"))
+	inventory.append(Item.new(Item.ItemType.STONE, "Ja genau!"))
+	
 	saved_player.emit()
-	#maingame.save_config()	
 	
 
-func saveState():
+func save_state():
+	var json_inventory = []
+	
+	for item in inventory:
+		json_inventory.append(item.to_json())
+	
 	var state = {
-		#"filename", get_scene_file_path(), 
 		"name" : name,
 		"parent" : get_parent().get_path(),
 		"pos_x" : position.x, # Vector2 is not supported by JSON
 		"pos_y" : position.y,
-		#"inventory": inventory,
-		"inventory": ["debug1","debug2"],
+		"inventory": json_inventory,
 		"zoom": $Camera2D.current_zoom
 	}
 	return state
