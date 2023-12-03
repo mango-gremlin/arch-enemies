@@ -21,6 +21,8 @@ Global="*res://global.gd"
 
 [display]
 
+window/size/viewport_width=1270
+window/size/viewport_height=700
 window/stretch/scale=2.0
 
 [dotnet]
