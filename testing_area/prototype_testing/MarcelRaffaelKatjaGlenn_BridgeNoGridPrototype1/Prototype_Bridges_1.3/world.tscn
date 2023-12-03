@@ -196,7 +196,7 @@ scale = Vector2(8, 1)
 color = Color(1, 100, 1, 1)
 metadata/_edit_use_anchors_ = true
 
-[node name="shore_right_dropzone2" type="StaticBody2D" parent="." groups=["dropable", "right_dropzone", "shore_dropzone"]]
+[node name="shore_right_dropzone2" type="StaticBody2D" parent="." groups=["dropable", "right_dropzone", "shore_dropzone", "side_dropzone"]]
 position = Vector2(112, 143)
 collision_layer = 2
 collision_mask = 2
