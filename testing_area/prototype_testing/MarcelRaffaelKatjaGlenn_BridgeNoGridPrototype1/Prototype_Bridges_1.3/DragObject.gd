@@ -24,22 +24,25 @@ func is_correct_placement(body):
 		# if overlapping body is dropable, check specifics for animals
 		elif overlapping_body.is_in_group("dropable"):
 			# get type of animal that overlapping drop zone belongs to
+			print("1: ") 
 			if not overlapping_body.is_in_group("shore_dropzone"):  #the shore has no animal_type therefore this check has to be skipped 
+				print("2: ") 
 				var overlapping_animal_type = Global.get_animal_type(overlapping_body.get_owner())
 				# if overlap zone belongs to a spider, it is always allowed
 				if overlapping_animal_type == "spider":
 					return true
 			# if not, normal rules apply
-			else:
-				# every animal can be dropped on another animal's top dropzone
-				if overlapping_body.is_in_group("top_dropzone"):
-					return true
-				# only squirrels and spiders can be dropped on another animal's side dropzones
-				elif overlapping_body.is_in_group("side_dropzone") and (animal_type == "squirrel" or animal_type == "spider"):
-					return true
-				# only spiders can be dropped on another animal's bottom dropzone
-				elif overlapping_body.is_in_group("bottom_dropzone") and animal_type == "spider":
-					return true
+			
+			print("3: ") 
+			# every animal can be dropped on another animal's top dropzone
+			if overlapping_body.is_in_group("top_dropzone"):
+				return true
+			# only squirrels and spiders can be dropped on another animal's side dropzones
+			elif overlapping_body.is_in_group("side_dropzone") and (animal_type == "squirrel" or animal_type == "spider"):
+				return true
+			# only spiders can be dropped on another animal's bottom dropzone
+			elif overlapping_body.is_in_group("bottom_dropzone") and animal_type == "spider":
+				return true
 	return false
 
 func _process(_delta):
