@@ -14,31 +14,33 @@ var dropzone_occupied = false
 
 # checks if placement of animal relativ to other animal is correct
 func is_correct_placement(body):
-	var body_area2D = body.get_children()[2] # gets Area2D child, which can check for overlapping bodies
-	var animal_type = Global.get_animal_type(body)
-	# iterate through all overlapping bodies, and check if they are allowed or not
-	for overlapping_body in body_area2D.get_overlapping_bodies():
-		# if overlapping body is a forbidden one, it is never valid
-		if overlapping_body.is_in_group("forbidden"):
-			return false
-		# if overlapping body is dropable, check specifics for animals
-		elif overlapping_body.is_in_group("dropable"):
-			# get type of animal that overlapping drop zone belongs to
-			var overlapping_animal_type = Global.get_animal_type(overlapping_body.get_owner())
-			# if overlap zone belongs to a spider, it is always allowed
-			if overlapping_animal_type == "spider":
-				return true
-			# if not, normal rules apply
-			else:
-				# every animal can be dropped on another animal's top dropzone
-				if overlapping_body.is_in_group("top_dropzone"):
+	if is_inside_dropable:
+		var body_area2D = body.get_children()[2] # gets Area2D child, which can check for overlapping bodies
+		var animal_type = Global.get_animal_type(body)
+		# iterate through all overlapping bodies, and check if they are allowed or not
+		for overlapping_body in body_area2D.get_overlapping_bodies():
+			# if overlapping body is a forbidden one, it is never valid
+			if overlapping_body.is_in_group("forbidden"):
+				return false
+			# if overlapping body is dropable and not its own, check specifics for animals
+			elif overlapping_body.is_in_group("dropable") and not body == overlapping_body.get_owner():
+				# get type of animal that overlapping drop zone belongs to
+				var overlapping_animal_type = Global.get_animal_type(overlapping_body.get_owner())
+				# if overlap zone belongs to a spider, it is always allowed
+				if overlapping_animal_type == "spider":
 					return true
-				# only squirrels and spiders can be dropped on another animal's side dropzones
-				elif overlapping_body.is_in_group("side_dropzone") and (animal_type == "squirrel" or animal_type == "spider"):
-					return true
-				# only spiders can be dropped on another animal's bottom dropzone
-				elif overlapping_body.is_in_group("bottom_dropzone") and animal_type == "spider":
-					return true
+				# if not, normal rules apply
+				else:
+					# every animal can be dropped on another animal's top dropzone
+					if overlapping_body.is_in_group("top_dropzone"):
+						return true
+					# only squirrels and spiders can be dropped on another animal's side dropzones
+					elif overlapping_body.is_in_group("side_dropzone") and (animal_type == "squirrel" or animal_type == "spider"):
+						return true
+					# only spiders can be dropped on another animal's bottom dropzone
+					elif overlapping_body.is_in_group("bottom_dropzone") and animal_type == "spider":
+						return true
+		return false
 	return false
 
 func _process(_delta):
@@ -57,19 +59,18 @@ func _process(_delta):
 			
 		if Input.is_action_pressed("click"):
 			# during the time mouse click is held down,
-			# object continues following mouse
-			self.global_position = get_global_mouse_position() - mouse_offset
+			# object continues following mouse position, rounded to grid size.
+			var target_position_x = Global.round_to_nearest(get_global_mouse_position().x - mouse_offset.x, grid_size)
+			var target_position_y = Global.round_to_nearest(get_global_mouse_position().y - mouse_offset.y, grid_size)
+			self.global_position.x = target_position_x
+			self.global_position.y = target_position_y
 			
 		elif Input.is_action_just_released("click"):
 			# when click is released:
 			
 			# dropped object should not be on top level anymore
 			self.top_level = false
-			
-			# snap to nearest position in grid
-			self.position.x = Global.round_to_nearest(self.position.x, grid_size)
-			self.position.y = Global.round_to_nearest(self.position.y, grid_size)
-		
+
 			# 1. nothing is being currently dragged
 			self.is_dragging = false
 			Global.something_is_being_dragged = false
@@ -83,9 +84,6 @@ func _process(_delta):
 			# snaps the center of animal to the grid, which may become an issue for some sprite sizes
 			
 			tween.tween_property(self, "position", self.position, 0.2).set_ease(Tween.EASE_OUT)
-			print("is_inside_dropable: ", is_inside_dropable) 
-			print("is_inside_forbidden: " , is_inside_forbidden)
-			
 			# if placement is incorrect, snap back to original position
 			# otherwise animal remains in current position, snapped to grid
 			if not is_correct_placement(self):
@@ -118,17 +116,13 @@ func body_entered(body):
 	# and this body is in the group drobable
 	# set inside dropable to true so the process can register it as a dropable zone
 	# and change the colour of the body we just touched to signify we can drop it here
-	if body.is_in_group('dropable'):
-		print("entered dropable body")
+	if body.is_in_group('dropable') and not body == self:
 		is_inside_dropable = true
 		body.modulate = Color(Color.CORNFLOWER_BLUE, 1)
 		self.dropzone = body
 	# "not body self" prevents some unexpected results with overlapping collision zones
 	# of self, but may also be a problem in the future 
 	if body.is_in_group('forbidden') and not body == self:
-		print("entered forbidden body")
-		print(body.get_owner().name)
-		print(self.name)
 		is_inside_forbidden = true
 		
 
@@ -138,12 +132,10 @@ func _on_snake_body_exited(body):
 func body_exited(body):
 	# if the snake body stops touching a staticbody that has the dropable group
 	# set inside dropable to false & change the colour of that body back to original 
-	if body.is_in_group('dropable'):
-		print("exited dropable body")
+	if body.is_in_group('dropable') and not body == self:
 		is_inside_dropable = false
 		body.modulate = Color(Color.AQUAMARINE, 0.7)
 	if body.is_in_group('forbidden') and not body == self:
-		print("exited forbidden body")
 		is_inside_forbidden = false
 
 # JUST SQUIRREL THINGS
