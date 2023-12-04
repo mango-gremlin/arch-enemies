@@ -197,7 +197,7 @@ script = ExtResource("8_puaob")
 
 [node name="Grid1" type="Sprite2D" parent="."]
 z_index = 1
-position = Vector2(216, 205)
+position = Vector2(215, 205)
 texture = ExtResource("7_lmu4n")
 script = ExtResource("8_puaob")
 
@@ -250,7 +250,7 @@ text = "Spider"
 script = ExtResource("15_dx35d")
 
 [node name="shore_right_dropzone2" type="StaticBody2D" parent="." groups=["dropable", "shore_dropzone", "side_dropzone"]]
-position = Vector2(106, 175)
+position = Vector2(105, 175)
 scale = Vector2(1, 4)
 collision_layer = 2
 collision_mask = 2
@@ -268,7 +268,7 @@ offset_bottom = 5.0
 metadata/_edit_use_anchors_ = true
 
 [node name="shore_top_dropzone" type="StaticBody2D" parent="." groups=["dropable", "shore_dropzone", "top_dropzone"]]
-position = Vector2(67, 149)
+position = Vector2(66, 149)
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("16_u6wh6")
