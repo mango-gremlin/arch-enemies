@@ -35,7 +35,7 @@ func _physics_process(delta):
 func reset_fox():
 	velocity.x = 0
 	velocity.y = 0
-	global_position = Vector2(74, 111)
+	global_position = Vector2(25, 50)
 
 func _on_area_2d_body_entered(_body):
 	# if fox touches water
