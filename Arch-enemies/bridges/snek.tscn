@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=3 uid="uid://c5tl3m10s5tby"]
 
-[ext_resource type="Texture2D" uid="uid://47bt3n56d3fc" path="res://assets/box_snake.png" id="1_c08hy"]
-[ext_resource type="Script" path="res://DragObject.gd" id="1_gtwqh"]
-[ext_resource type="Script" path="res://allowed_snake_area.gd" id="3_fqrgl"]
+[ext_resource type="Texture2D" uid="uid://47bt3n56d3fc" path="res://bridges/assets/box_snake.png" id="1_c08hy"]
+[ext_resource type="Script" path="res://bridges/DragObject.gd" id="1_gtwqh"]
+[ext_resource type="Script" path="res://bridges/allowed_snake_area.gd" id="3_fqrgl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_43xhd"]
 size = Vector2(48, 10)

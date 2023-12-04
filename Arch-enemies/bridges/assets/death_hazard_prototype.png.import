@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://47bt3n56d3fc"
-path="res://.godot/imported/box_snake.png-231c1347756ef8a7d3507846f06322f8.ctex"
+uid="uid://rnhda3466ofv"
+path="res://.godot/imported/death_hazard_prototype.png-7e9f53ec6ddc98deaeb5c6a3fb41b281.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/box_snake.png"
-dest_files=["res://.godot/imported/box_snake.png-231c1347756ef8a7d3507846f06322f8.ctex"]
+source_file="res://bridges/assets/death_hazard_prototype.png"
+dest_files=["res://.godot/imported/death_hazard_prototype.png-7e9f53ec6ddc98deaeb5c6a3fb41b281.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b4v4into7dah"
-path="res://.godot/imported/darkest green.png-8a8c52dbb51629f03bd856a5737e0bbc.ctex"
+uid="uid://bctrmmslp74vt"
+path="res://.godot/imported/icon.svg-8b96d0b2817726ab1f015190b4715c1f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/darkest green.png"
-dest_files=["res://.godot/imported/darkest green.png-8a8c52dbb51629f03bd856a5737e0bbc.ctex"]
+source_file="res://bridges/icon.svg"
+dest_files=["res://.godot/imported/icon.svg-8b96d0b2817726ab1f015190b4715c1f.ctex"]
 
 [params]
 
@@ -32,3 +32,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false

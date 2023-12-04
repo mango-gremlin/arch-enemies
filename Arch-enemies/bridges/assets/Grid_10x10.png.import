@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d0o2q6fijmd1"
-path="res://.godot/imported/dark green.png-dba8307b3bbac00a0eadea8d71911682.ctex"
+uid="uid://dp70liqt7qxpq"
+path="res://.godot/imported/Grid_10x10.png-e3b9e0f556ad0edb6d69ce549528248f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/dark green.png"
-dest_files=["res://.godot/imported/dark green.png-dba8307b3bbac00a0eadea8d71911682.ctex"]
+source_file="res://bridges/assets/Grid_10x10.png"
+dest_files=["res://.godot/imported/Grid_10x10.png-e3b9e0f556ad0edb6d69ce549528248f.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dc2lxeyr45vp3"
-path="res://.godot/imported/blue_dark.png-77e9a4c5ef32d9bed6d53b960bce5266.ctex"
+uid="uid://clr5mb5lxvby8"
+path="res://.godot/imported/box_deer.png-269d653cc07495b16840de3bd57d6f3b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/blue_dark.png"
-dest_files=["res://.godot/imported/blue_dark.png-77e9a4c5ef32d9bed6d53b960bce5266.ctex"]
+source_file="res://bridges/assets/box_deer.png"
+dest_files=["res://.godot/imported/box_deer.png-269d653cc07495b16840de3bd57d6f3b.ctex"]
 
 [params]
 

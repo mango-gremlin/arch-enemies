@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dp70liqt7qxpq"
-path="res://.godot/imported/Grid_10x10.png-9e0d2756e7bc921aa39d1eb1d3b5cf32.ctex"
+uid="uid://47bt3n56d3fc"
+path="res://.godot/imported/box_snake.png-6346ce9198d61214b73ccecf378927ed.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Grid_10x10.png"
-dest_files=["res://.godot/imported/Grid_10x10.png-9e0d2756e7bc921aa39d1eb1d3b5cf32.ctex"]
+source_file="res://bridges/assets/box_snake.png"
+dest_files=["res://.godot/imported/box_snake.png-6346ce9198d61214b73ccecf378927ed.ctex"]
 
 [params]
 

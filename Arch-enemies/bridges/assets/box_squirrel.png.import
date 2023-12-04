@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cagtqr073bxj2"
-path="res://.godot/imported/spider.png-b39d6117054d9ec3c796d37fbb0a7fdc.ctex"
+uid="uid://smnm35pbv18o"
+path="res://.godot/imported/box_squirrel.png-0d0683710d4d9e66deecaa87baa99fc3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/spider.png"
-dest_files=["res://.godot/imported/spider.png-b39d6117054d9ec3c796d37fbb0a7fdc.ctex"]
+source_file="res://bridges/assets/box_squirrel.png"
+dest_files=["res://.godot/imported/box_squirrel.png-0d0683710d4d9e66deecaa87baa99fc3.ctex"]
 
 [params]
 

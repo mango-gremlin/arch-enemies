@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://rnhda3466ofv"
-path="res://.godot/imported/death_hazard_prototype.png-41f90ceaa21eb8cbddce10cc3f75b810.ctex"
+uid="uid://d0o2q6fijmd1"
+path="res://.godot/imported/dark green.png-1059c411622d102289d601e1e6a9f687.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/death_hazard_prototype.png"
-dest_files=["res://.godot/imported/death_hazard_prototype.png-41f90ceaa21eb8cbddce10cc3f75b810.ctex"]
+source_file="res://bridges/assets/dark green.png"
+dest_files=["res://.godot/imported/dark green.png-1059c411622d102289d601e1e6a9f687.ctex"]
 
 [params]
 
