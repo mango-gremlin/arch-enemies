@@ -8,7 +8,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	load("res://global.gd")
+	load("res://bridges/global.gd")
 	if Global.something_is_being_dragged:
 		visible = true
 	else:

@@ -1,21 +1,22 @@
-[gd_scene load_steps=26 format=3 uid="uid://cf5udd6l65fuv"]
+[gd_scene load_steps=27 format=3 uid="uid://cf5udd6l65fuv"]
 
-[ext_resource type="Texture2D" uid="uid://d4khq8o7aaei" path="res://bridges/assets/green.png" id="1_m0btg"]
-[ext_resource type="Texture2D" uid="uid://dc2lxeyr45vp3" path="res://bridges/assets/blue_dark.png" id="2_640fj"]
-[ext_resource type="PackedScene" uid="uid://dvgr170gyuhpq" path="res://bridges/fox.tscn" id="2_u7ijr"]
-[ext_resource type="Texture2D" uid="uid://d0o2q6fijmd1" path="res://bridges/assets/dark green.png" id="3_rivix"]
-[ext_resource type="Texture2D" uid="uid://b4v4into7dah" path="res://bridges/assets/darkest green.png" id="4_o3r3v"]
-[ext_resource type="Script" path="res://bridges/ModeChangeButton.gd" id="6_8qx0u"]
-[ext_resource type="PackedScene" uid="uid://hyihqgmvp0oj" path="res://bridges/DeahtHazard.tscn" id="6_l6n76"]
-[ext_resource type="PackedScene" uid="uid://cxj1q08s3i7i8" path="res://bridges/goal_menu.tscn" id="6_xdjb3"]
-[ext_resource type="Texture2D" uid="uid://dp70liqt7qxpq" path="res://bridges/assets/Grid_10x10.png" id="7_lmu4n"]
-[ext_resource type="Script" path="res://bridges/gridVisibility.gd" id="8_puaob"]
-[ext_resource type="Script" path="res://bridges/SquirrelSpawningButton.gd" id="11_g8gs2"]
-[ext_resource type="Script" path="res://bridges/SpiderSpawningButton.gd" id="15_dx35d"]
-[ext_resource type="Script" path="res://bridges/allowed_snake_area.gd" id="16_u6wh6"]
+[ext_resource type="Texture2D" uid="uid://d4khq8o7aaei" path="res://bridges/assets/green.png" id="1_rsd3v"]
+[ext_resource type="Texture2D" uid="uid://dc2lxeyr45vp3" path="res://bridges/assets/blue_dark.png" id="2_kpwak"]
+[ext_resource type="Texture2D" uid="uid://d0o2q6fijmd1" path="res://bridges/assets/dark green.png" id="3_iwap0"]
+[ext_resource type="Texture2D" uid="uid://b4v4into7dah" path="res://bridges/assets/darkest green.png" id="4_w8ky0"]
+[ext_resource type="PackedScene" uid="uid://dvgr170gyuhpq" path="res://bridges/fox.tscn" id="5_tp4g7"]
+[ext_resource type="PackedScene" uid="uid://hyihqgmvp0oj" path="res://bridges/DeahtHazard.tscn" id="6_s42ti"]
+[ext_resource type="Texture2D" uid="uid://dp70liqt7qxpq" path="res://bridges/assets/Grid_10x10.png" id="7_0csdo"]
+[ext_resource type="Script" path="res://bridges/gridVisibility.gd" id="8_airam"]
+[ext_resource type="Script" path="res://bridges/ModeChangeButton.gd" id="9_7yjaf"]
+[ext_resource type="PackedScene" uid="uid://cxj1q08s3i7i8" path="res://bridges/goal_menu.tscn" id="10_8a5g4"]
+[ext_resource type="Script" path="res://bridges/SpiderSpawningButton.gd" id="11_v86ca"]
+[ext_resource type="Script" path="res://bridges/SnakeSpawningButton.gd" id="12_nrhcc"]
+[ext_resource type="Script" path="res://bridges/SquirrelSpawningButton.gd" id="12_vyiap"]
+[ext_resource type="Script" path="res://bridges/allowed_snake_area.gd" id="13_cp5c4"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_s2tkw"]
-texture = ExtResource("1_m0btg")
+texture = ExtResource("1_rsd3v")
 texture_region_size = Vector2i(10, 10)
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
@@ -35,7 +36,7 @@ texture_region_size = Vector2i(10, 10)
 1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-5, -5, 5, -5, 5, 5, -5, 5)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_udipr"]
-texture = ExtResource("2_640fj")
+texture = ExtResource("2_kpwak")
 texture_region_size = Vector2i(10, 10)
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
@@ -55,7 +56,7 @@ texture_region_size = Vector2i(10, 10)
 1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-5, -5, 5, -5, 5, 5, -5, 5)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ycunn"]
-texture = ExtResource("3_rivix")
+texture = ExtResource("3_iwap0")
 texture_region_size = Vector2i(10, 10)
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
@@ -71,7 +72,7 @@ texture_region_size = Vector2i(10, 10)
 1:1/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2l45q"]
-texture = ExtResource("4_o3r3v")
+texture = ExtResource("4_w8ky0")
 texture_region_size = Vector2i(10, 10)
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
@@ -99,7 +100,7 @@ sources/6 = SubResource("TileSetAtlasSource_2l45q")
 size = Vector2(63, 59.75)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vsiy0"]
-texture = ExtResource("2_640fj")
+texture = ExtResource("2_kpwak")
 texture_region_size = Vector2i(10, 10)
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
@@ -126,6 +127,12 @@ sources/0 = SubResource("TileSetAtlasSource_vsiy0")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6rkrv"]
 size = Vector2(243.5, 54)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0tifu"]
+size = Vector2(8, 9.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_63llj"]
+size = Vector2(78, 8)
+
 [sub_resource type="GDScript" id="GDScript_62t5p"]
 script/source = "extends Control
 
@@ -146,15 +153,9 @@ func _on_retry_button_pressed():
 
 
 func _on_continue_button_pressed():
-	print(\"lets go to the overworld now\")
+	get_tree().change_scene_to_file(\"res://overworld/overworld.tscn\")
 	
 "
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_0tifu"]
-size = Vector2(8, 9.5)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_63llj"]
-size = Vector2(78, 8)
 
 [node name="Node2D" type="Node2D"]
 scale = Vector2(1, 1.00277)
@@ -189,12 +190,12 @@ layer_0/tile_data = PackedInt32Array(786439, 0, 0, 786440, 0, 0, 786441, 0, 0, 7
 position = Vector2(190, 130)
 shape = SubResource("RectangleShape2D_6rkrv")
 
-[node name="fox" parent="." instance=ExtResource("2_u7ijr")]
+[node name="fox" parent="." instance=ExtResource("5_tp4g7")]
 position = Vector2(25, 50)
 SPEED = 100.0
 JUMP_VELOCITY = -230.0
 
-[node name="DeathHazard" parent="." instance=ExtResource("6_l6n76")]
+[node name="DeathHazard" parent="." instance=ExtResource("6_s42ti")]
 position = Vector2(100, 25)
 scale = Vector2(0.5, 0.5)
 
@@ -202,15 +203,15 @@ scale = Vector2(0.5, 0.5)
 visible = false
 z_index = 1
 position = Vector2(705, 205)
-texture = ExtResource("7_lmu4n")
-script = ExtResource("8_puaob")
+texture = ExtResource("7_0csdo")
+script = ExtResource("8_airam")
 
 [node name="Grid1" type="Sprite2D" parent="."]
 visible = false
 z_index = 1
 position = Vector2(245, 245)
-texture = ExtResource("7_lmu4n")
-script = ExtResource("8_puaob")
+texture = ExtResource("7_0csdo")
+script = ExtResource("8_airam")
 
 [node name="DragModeButton" type="CheckButton" parent="."]
 offset_left = 123.0
@@ -221,19 +222,7 @@ scale = Vector2(0.5, 0.5)
 text = "drag mode"
 alignment = 1
 icon_alignment = 1
-script = ExtResource("6_8qx0u")
-
-[node name="GoalMenu" parent="." instance=ExtResource("6_xdjb3")]
-top_level = true
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-scale = Vector2(0.5, 0.5)
-size_flags_horizontal = 4
-size_flags_vertical = 6
-script = SubResource("GDScript_62t5p")
+script = ExtResource("9_7yjaf")
 
 [node name="AnimalSpawnButtons" type="HBoxContainer" parent="."]
 offset_left = 80.0
@@ -247,24 +236,24 @@ theme_override_constants/separation = 30
 [node name="SpiderButton" type="Button" parent="AnimalSpawnButtons"]
 layout_mode = 2
 text = "Spider"
-script = ExtResource("15_dx35d")
+script = ExtResource("11_v86ca")
 
 [node name="SquirrelButton" type="Button" parent="AnimalSpawnButtons"]
 layout_mode = 2
 text = "Squirrel"
-script = ExtResource("11_g8gs2")
+script = ExtResource("12_vyiap")
 
 [node name="SnakeButton" type="Button" parent="AnimalSpawnButtons"]
 layout_mode = 2
 text = "Snake"
-script = ExtResource("11_g8gs2")
+script = ExtResource("12_nrhcc")
 
 [node name="shore_right_dropzone2" type="StaticBody2D" parent="." groups=["dropable", "shore_dropzone", "side_dropzone"]]
 position = Vector2(35, 114.754)
 scale = Vector2(1, 4)
 collision_layer = 2
 collision_mask = 2
-script = ExtResource("16_u6wh6")
+script = ExtResource("13_cp5c4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="shore_right_dropzone2"]
 position = Vector2(5, -2.4931)
@@ -283,7 +272,7 @@ metadata/_edit_use_anchors_ = true
 position = Vector2(21, 88.7542)
 collision_layer = 2
 collision_mask = 2
-script = ExtResource("16_u6wh6")
+script = ExtResource("13_cp5c4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="shore_top_dropzone"]
 position = Vector2(-1, 1)
@@ -299,6 +288,32 @@ offset_bottom = 6.01104
 scale = Vector2(3, 1)
 color = Color(1, 100, 1, 1)
 metadata/_edit_use_anchors_ = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(155, 94.7376)
+zoom = Vector2(3.5, 3.5)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Control"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="GoalMenu" parent="Control/MarginContainer" instance=ExtResource("10_8a5g4")]
+top_level = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+script = SubResource("GDScript_62t5p")
 
 [connection signal="body_entered" from="TileMap/GoalArea2D" to="fox" method="_on_goal_area_2d_body_entered"]
 [connection signal="body_entered" from="water/Area2D" to="fox" method="_on_area_2d_body_entered"]

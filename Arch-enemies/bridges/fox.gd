@@ -46,4 +46,5 @@ func _on_death_hazard_body_entered(body):
 	reset_fox()
 
 func _on_goal_area_2d_body_entered(_body):
-	get_parent().get_node("GoalMenu").visible = true
+	var goalmenu = get_parent().get_node("Control/MarginContainer/GoalMenu")
+	goalmenu.visible = true

@@ -1,7 +1,7 @@
 extends Button
 
-# The scene spawned by the button. Snek in this case
-var new_animal = preload("res://squirrel.tscn")
+# The scene spawned by the button. Squirrel in this case
+var new_animal = preload("res://bridges/squirrel.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
