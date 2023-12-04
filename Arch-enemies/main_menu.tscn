@@ -1,0 +1,69 @@
+[gd_scene load_steps=3 format=3 uid="uid://bm4bdq6ka013n"]
+
+[ext_resource type="Script" path="res://overworld/script/main_menu.gd" id="1_j0rda"]
+[ext_resource type="Texture2D" uid="uid://cm1xjw1g442ht" path="res://assets/main_menu_background.png" id="2_fyuxt"]
+
+[node name="main_menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_j0rda")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_fyuxt")
+expand_mode = 2
+
+[node name="overworld" type="Button" parent="."]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 352.0
+offset_right = 436.0
+offset_bottom = 437.0
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 56
+text = "overworld
+"
+
+[node name="Options" type="Button" parent="."]
+layout_mode = 0
+offset_left = 73.0
+offset_top = 442.0
+offset_right = 490.0
+offset_bottom = 527.0
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 56
+text = "Options"
+
+[node name="Exit" type="Button" parent="."]
+layout_mode = 0
+offset_left = 129.0
+offset_top = 537.0
+offset_right = 546.0
+offset_bottom = 622.0
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 56
+text = "Exit"
+
+[node name="About" type="Button" parent="."]
+layout_mode = 0
+offset_left = 720.0
+offset_top = 536.0
+offset_right = 1137.0
+offset_bottom = 621.0
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 56
+text = "About"
+
+[connection signal="pressed" from="overworld" to="." method="_on_overworld_pressed"]
+[connection signal="pressed" from="Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="About" to="." method="_on_about_pressed"]

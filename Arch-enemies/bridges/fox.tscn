@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://dvgr170gyuhpq"]
+
+[ext_resource type="Texture2D" uid="uid://b8bwhybkyvib1" path="res://bridges/assets/fox_2.png" id="1_0mu8k"]
+[ext_resource type="Script" path="res://bridges/fox.gd" id="1_uy84w"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nxo30"]
+radius = 11.0
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+script = ExtResource("1_uy84w")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_0mu8k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_nxo30")

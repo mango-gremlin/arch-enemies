@@ -1,0 +1,54 @@
+[gd_scene load_steps=2 format=3 uid="uid://cxj1q08s3i7i8"]
+
+[ext_resource type="Script" path="res://bridges/goal_menu.gd" id="1_e6stn"]
+
+[node name="GoalMenu" type="Control"]
+layout_mode = 3
+anchor_right = 0.359
+anchor_bottom = 0.377
+offset_right = 0.431976
+offset_bottom = -0.296005
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.76, 0.76)
+script = ExtResource("1_e6stn")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -93.5
+offset_top = -51.0
+offset_right = 93.5
+offset_bottom = 51.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "Success!"
+horizontal_alignment = 1
+
+[node name="ContinueButton" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "Continue"
+
+[node name="RetryButton" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "Retry"
+
+[connection signal="pressed" from="Panel/VBoxContainer/ContinueButton" to="." method="_on_continue_button_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/RetryButton" to="." method="_on_retry_button_pressed"]
