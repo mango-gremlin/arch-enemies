@@ -155,7 +155,8 @@ func enter_bridge_scene(bridge_id):
 	exit_overworld()
 	# search for bridgeGame with correct id! 
 	# load it afterwards
-	enter_pause_menu() # default until we merged
+	# enter_pause_menu() # default until we merged
+	get_tree().change_scene_to_file("res://bridges/bridge_1.tscn")
 	
 
 # saves player state 
@@ -171,9 +172,6 @@ func exit_overworld():
 
 func save_player():
 	print("save user position")
-	inventory.append(Item.new(Item.ItemType.STICK, "Hallo du!"))
-	inventory.append(Item.new(Item.ItemType.STONE, "Ja genau!"))
-	
 	saved_player.emit()
 	
 

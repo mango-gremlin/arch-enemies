@@ -172,7 +172,7 @@ layer_0/tile_data = PackedInt32Array(262143, 0, 0, 196608, 0, 0, 196609, 0, 0, 3
 [node name="GoalArea2D" type="Area2D" parent="TileMap"]
 
 [node name="GoalCollisionShape2D" type="CollisionShape2D" parent="TileMap/GoalArea2D"]
-position = Vector2(295, -10)
+position = Vector2(60, 1.81493)
 shape = SubResource("RectangleShape2D_3avum")
 debug_color = Color(0.521569, 0.560784, 0.341176, 0.419608)
 
