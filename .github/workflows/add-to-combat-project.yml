@@ -1,4 +1,4 @@
-# This is a basic workflow to help you get started with Actions
+# This workflow is supposed to automatically add prs and issues tagged with combat to the combat project.
 
 name: ADD-TO-COMBAT-PROJECT
 
@@ -15,7 +15,7 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
+  # This workflow contains a single job which adds the pr or issue to the project if the right tags are present.
   add-to-project:
     name: Add issue to combat project
     runs-on: ubuntu-latest
