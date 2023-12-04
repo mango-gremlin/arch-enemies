@@ -14,7 +14,7 @@ var dropzone_occupied = false
 
 # checks if placement of animal relativ to other animal is correct
 func is_correct_placement(body):
-	if is_inside_dropable:
+	if is_inside_dropable and not is_inside_forbidden:
 		var body_area2D = body.get_children()[2] # gets Area2D child, which can check for overlapping bodies
 		var animal_type = Global.get_animal_type(body)
 		# iterate through all overlapping bodies, and check if they are allowed or not
