@@ -1,0 +1,105 @@
+[gd_scene load_steps=11 format=3 uid="uid://dndu4pg1i3tlf"]
+
+[ext_resource type="Script" path="res://script/Player.gd" id="1_lcx6v"]
+[ext_resource type="Texture2D" uid="uid://802nqkliaru4" path="res://art/characters/fox.png" id="2_tenk7"]
+[ext_resource type="Script" path="res://script/ZoomCamera.gd" id="3_y8j37"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8xcpl"]
+size = Vector2(23, 9)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cjcnu"]
+atlas = ExtResource("2_tenk7")
+region = Rect2(0, 40, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s0w6j"]
+atlas = ExtResource("2_tenk7")
+region = Rect2(0, 80, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o2ebo"]
+atlas = ExtResource("2_tenk7")
+region = Rect2(0, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1lohf"]
+atlas = ExtResource("2_tenk7")
+region = Rect2(0, 80, 40, 40)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_q5uuj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cjcnu")
+}],
+"loop": true,
+"name": &"back_walk",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s0w6j")
+}],
+"loop": true,
+"name": &"front_idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o2ebo")
+}],
+"loop": true,
+"name": &"front_walk",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1lohf")
+}],
+"loop": true,
+"name": &"side_walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hpei2"]
+radius = 20.025
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_lcx6v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1.5, 0.5)
+shape = SubResource("RectangleShape2D_8xcpl")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+y_sort_enabled = true
+position = Vector2(-5.04871e-29, -3)
+scale = Vector2(0.8, 0.8)
+sprite_frames = SubResource("SpriteFrames_q5uuj")
+animation = &"front_idle"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-1, -3)
+zoom = Vector2(10, 10)
+script = ExtResource("3_y8j37")
+MAX_ZOOM = 10.0
+
+[node name="interactioncomponents" type="Node2D" parent="."]
+z_index = 1
+
+[node name="interactionarea" type="Area2D" parent="interactioncomponents"]
+collision_layer = 0
+collision_mask = 8
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="interactioncomponents/interactionarea"]
+shape = SubResource("CircleShape2D_hpei2")
+
+[node name="InteractLabel" type="Label" parent="interactioncomponents"]
+offset_left = -94.0
+offset_top = -62.0
+offset_right = 94.0
+offset_bottom = -36.0
+text = "xxx"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="area_entered" from="interactioncomponents/interactionarea" to="." method="_on_interactionarea_area_entered"]
+[connection signal="area_exited" from="interactioncomponents/interactionarea" to="." method="_on_interactionarea_area_exited"]
