@@ -148,7 +148,7 @@ func _process(_delta):
 
 
 func _on_retry_button_pressed():
-	get_parent().get_node(\"fox\").reset_fox()
+	get_parent().get_parent().get_parent().get_node(\"fox\").reset_fox()
 	visible = false
 
 
@@ -163,7 +163,6 @@ scale = Vector2(1, 1.00277)
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(15, 65)
 tile_set = SubResource("TileSet_rwph5")
-rendering_quadrant_size = 10
 format = 2
 layer_0/name = "Background"
 layer_0/z_index = -1
@@ -172,14 +171,13 @@ layer_0/tile_data = PackedInt32Array(262143, 0, 0, 196608, 0, 0, 196609, 0, 0, 3
 [node name="GoalArea2D" type="Area2D" parent="TileMap"]
 
 [node name="GoalCollisionShape2D" type="CollisionShape2D" parent="TileMap/GoalArea2D"]
-position = Vector2(60, 1.81493)
+position = Vector2(293, -10.1519)
 shape = SubResource("RectangleShape2D_3avum")
 debug_color = Color(0.521569, 0.560784, 0.341176, 0.419608)
 
 [node name="water" type="TileMap" parent="."]
 position = Vector2(-35, 15)
 tile_set = SubResource("TileSet_ld1cc")
-rendering_quadrant_size = 10
 format = 2
 layer_0/z_index = -1
 layer_0/tile_data = PackedInt32Array(786439, 0, 0, 786440, 0, 0, 786441, 0, 0, 786442, 0, 0, 786443, 0, 0, 786444, 0, 0, 786445, 0, 0, 786446, 0, 0, 786447, 0, 0, 786448, 0, 0, 786449, 0, 0, 786450, 0, 0, 786451, 0, 0, 786452, 0, 0, 786453, 0, 0, 786454, 0, 0, 786455, 0, 0, 786456, 0, 0, 786457, 0, 0, 851993, 0, 0, 851992, 0, 0, 917528, 0, 0, 917527, 0, 0, 917526, 0, 0, 917525, 0, 0, 917524, 0, 0, 917523, 0, 0, 917522, 0, 0, 917521, 0, 0, 917520, 0, 0, 917519, 0, 0, 917518, 0, 0, 917517, 0, 0, 917516, 0, 0, 917515, 0, 0, 917514, 0, 0, 917513, 0, 0, 917512, 0, 0, 917511, 0, 0, 851975, 0, 0, 851976, 0, 0, 851977, 0, 0, 851978, 0, 0, 851979, 0, 0, 851980, 0, 0, 851981, 0, 0, 851982, 0, 0, 851983, 0, 0, 851984, 0, 0, 851985, 0, 0, 851986, 0, 0, 851987, 0, 0, 851988, 0, 0, 851989, 0, 0, 851990, 0, 0, 851991, 0, 0, 720904, 0, 0, 720905, 0, 0, 720906, 0, 0, 720907, 0, 0, 720908, 0, 0, 720909, 0, 0, 720910, 0, 0, 720911, 0, 0, 720912, 0, 0, 720913, 0, 0, 720914, 0, 0, 720915, 0, 0, 720916, 0, 0, 720917, 0, 0, 720918, 0, 0, 720919, 0, 0, 720920, 0, 0, 720921, 0, 0, 720922, 0, 0, 720923, 0, 0, 720924, 0, 0, 720925, 0, 0, 720926, 0, 0, 786462, 0, 0, 786461, 0, 0, 851997, 0, 0, 851996, 0, 0, 851995, 0, 0, 851994, 0, 0, 786458, 0, 0, 786459, 0, 0, 786460, 0, 0, 917531, 0, 0, 917530, 0, 0, 917529, 0, 0, 720903, 0, 0)
@@ -295,14 +293,34 @@ zoom = Vector2(3.5, 3.5)
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(-0.5, -0.5)
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
 [node name="MarginContainer" type="MarginContainer" parent="Control"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
@@ -312,7 +330,7 @@ theme_override_constants/margin_bottom = 10
 top_level = true
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 6
+size_flags_vertical = 4
 script = SubResource("GDScript_62t5p")
 
 [connection signal="body_entered" from="TileMap/GoalArea2D" to="fox" method="_on_goal_area_2d_body_entered"]
