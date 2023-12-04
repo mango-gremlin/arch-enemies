@@ -288,7 +288,8 @@ color = Color(1, 100, 1, 1)
 metadata/_edit_use_anchors_ = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(155, 94.7376)
+position = Vector2(155, 87.7569)
+scale = Vector2(1.19636, 1.18473)
 zoom = Vector2(3.5, 3.5)
 
 [node name="Control" type="Control" parent="."]
@@ -327,6 +328,7 @@ theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
 [node name="GoalMenu" parent="Control/MarginContainer" instance=ExtResource("10_8a5g4")]
+visible = false
 top_level = true
 layout_mode = 2
 size_flags_horizontal = 4

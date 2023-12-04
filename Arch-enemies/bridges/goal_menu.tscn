@@ -10,6 +10,7 @@ offset_right = 0.431976
 offset_bottom = -0.296005
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(0.76, 0.76)
 script = ExtResource("1_e6stn")
 
 [node name="Panel" type="Panel" parent="."]
