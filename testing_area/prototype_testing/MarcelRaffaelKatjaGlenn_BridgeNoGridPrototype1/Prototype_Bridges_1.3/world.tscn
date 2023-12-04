@@ -1,9 +1,8 @@
-[gd_scene load_steps=25 format=3 uid="uid://cf5udd6l65fuv"]
+[gd_scene load_steps=27 format=3 uid="uid://cf5udd6l65fuv"]
 
 [ext_resource type="Texture2D" uid="uid://d4khq8o7aaei" path="res://assets/green.png" id="1_m0btg"]
 [ext_resource type="Texture2D" uid="uid://dc2lxeyr45vp3" path="res://assets/blue_dark.png" id="2_640fj"]
 [ext_resource type="PackedScene" uid="uid://dvgr170gyuhpq" path="res://fox.tscn" id="2_u7ijr"]
-[ext_resource type="PackedScene" uid="uid://c5tl3m10s5tby" path="res://snek.tscn" id="3_0bug4"]
 [ext_resource type="Texture2D" uid="uid://d0o2q6fijmd1" path="res://assets/dark green.png" id="3_rivix"]
 [ext_resource type="Texture2D" uid="uid://b4v4into7dah" path="res://assets/darkest green.png" id="4_o3r3v"]
 [ext_resource type="Script" path="res://ModeChangeButton.gd" id="6_8qx0u"]
@@ -14,6 +13,7 @@
 [ext_resource type="Script" path="res://SnakeSpawningButton.gd" id="11_g8gs2"]
 [ext_resource type="Script" path="res://SquirrelSpawningButton.gd" id="12_mkafk"]
 [ext_resource type="Script" path="res://SpiderSpawningButton.gd" id="15_dx35d"]
+[ext_resource type="Script" path="res://allowed_snake_area.gd" id="16_u6wh6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_s2tkw"]
 texture = ExtResource("1_m0btg")
@@ -151,6 +151,12 @@ func _on_continue_button_pressed():
 	
 "
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0tifu"]
+size = Vector2(8, 9.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_63llj"]
+size = Vector2(78, 8)
+
 [node name="Node2D" type="Node2D"]
 scale = Vector2(1, 1.00277)
 
@@ -188,9 +194,6 @@ shape = SubResource("RectangleShape2D_6rkrv")
 position = Vector2(25, 50)
 SPEED = 100.0
 JUMP_VELOCITY = -230.0
-
-[node name="snek" parent="." instance=ExtResource("3_0bug4")]
-position = Vector2(50, 90)
 
 [node name="DeathHazard" parent="." instance=ExtResource("6_l6n76")]
 position = Vector2(100, 25)
@@ -256,6 +259,47 @@ script = ExtResource("12_mkafk")
 layout_mode = 2
 text = "Snake"
 script = ExtResource("11_g8gs2")
+
+[node name="shore_right_dropzone2" type="StaticBody2D" parent="." groups=["dropable", "shore_dropzone", "side_dropzone"]]
+position = Vector2(35, 114.754)
+scale = Vector2(1, 4)
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("16_u6wh6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="shore_right_dropzone2"]
+position = Vector2(5, -2.4931)
+scale = Vector2(1, 0.5)
+shape = SubResource("RectangleShape2D_0tifu")
+
+[node name="ColorRect" type="ColorRect" parent="shore_right_dropzone2"]
+z_index = -1
+offset_top = -5.0
+offset_right = 10.0
+offset_bottom = 5.0
+scale = Vector2(1, 0.5)
+metadata/_edit_use_anchors_ = true
+
+[node name="shore_top_dropzone" type="StaticBody2D" parent="." groups=["dropable", "shore_dropzone", "top_dropzone"]]
+position = Vector2(21, 88.7542)
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("16_u6wh6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="shore_top_dropzone"]
+position = Vector2(-1, 1)
+scale = Vector2(0.375, 1)
+shape = SubResource("RectangleShape2D_63llj")
+
+[node name="ColorRect" type="ColorRect" parent="shore_top_dropzone"]
+z_index = -1
+offset_left = -16.0
+offset_top = -3.98896
+offset_right = -6.0
+offset_bottom = 6.01104
+scale = Vector2(3, 1)
+color = Color(1, 100, 1, 1)
+metadata/_edit_use_anchors_ = true
 
 [connection signal="body_entered" from="TileMap/GoalArea2D" to="fox" method="_on_goal_area_2d_body_entered"]
 [connection signal="body_entered" from="water/Area2D" to="fox" method="_on_area_2d_body_entered"]
