@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://d3vimjlvrs7ge"]
-
-[ext_resource type="Script" path="res://UserInterfaceElements.gd" id="1_etov8"]
-
-[node name="UserInterfaceElements" type="Node2D"]
-script = ExtResource("1_etov8")
