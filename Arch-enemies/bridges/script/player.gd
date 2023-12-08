@@ -49,7 +49,7 @@ func _on_area_2d_body_entered(_body):
 	reset_player()
 
 # if fox comes in contact with DeathHazard
-func _on_death_hazard_body_entered(body):
+func _on_death_hazard_body_entered(_body):
 	reset_player()
 
 func _on_goal_area_2d_body_entered(_body):

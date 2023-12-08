@@ -1,93 +1,88 @@
-[gd_scene load_steps=10 format=3 uid="uid://dipauq7hxbt1f"]
+[gd_scene load_steps=10 format=3 uid="uid://bqtg1c4s2pkab"]
 
-[ext_resource type="Script" path="res://bridges/drag_handler.gd" id="1_ss8yf"]
-[ext_resource type="Texture2D" uid="uid://smnm35pbv18o" path="res://bridges/assets/box_squirrel.png" id="2_eib8h"]
-[ext_resource type="Script" path="res://bridges/dropzones_visibility.gd" id="3_l28rr"]
-
+[ext_resource type="Script" path="res://bridges/script/drag_handler.gd" id="1_fk6ir"]
+[ext_resource type="Texture2D" uid="uid://cagtqr073bxj2" path="res://bridges/assets/spider.png" id="2_87e2g"]
+[ext_resource type="Script" path="res://bridges/script/dropzones_visibility.gd" id="3_i8vs8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m8jht"]
-size = Vector2(10, 20)
+size = Vector2(10, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4bimj"]
-size = Vector2(10, 20)
+size = Vector2(10, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2xjkc"]
 size = Vector2(9, 10)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ar825"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v5quv"]
 size = Vector2(10, 9)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_r1da8"]
-size = Vector2(9, 20)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mvc5n"]
+size = Vector2(9, 10)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_abhdq"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cfceg"]
 size = Vector2(10, 9)
 
-[node name="squirrelBod" type="StaticBody2D" node_paths=PackedStringArray("body_area2D") groups=["draggable", "squirrel"]]
+[node name="spiderBod" type="StaticBody2D" node_paths=PackedStringArray("body_area2D") groups=["draggable", "spider"]]
 collision_layer = 3
 collision_mask = 3
-script = ExtResource("1_ss8yf")
-body_area2D = NodePath("squirrel")
+script = ExtResource("1_fk6ir")
+body_area2D = NodePath("spider")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, 5)
-scale = Vector2(1, 1.8)
-texture = ExtResource("2_eib8h")
+[node name="Spider" type="Sprite2D" parent="."]
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("2_87e2g")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 5)
 shape = SubResource("RectangleShape2D_m8jht")
 
-[node name="squirrel" type="Area2D" parent="."]
-position = Vector2(0, 5)
+[node name="spider" type="Area2D" parent="."]
 collision_layer = 3
 collision_mask = 3
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="squirrel"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="spider"]
 shape = SubResource("RectangleShape2D_4bimj")
 
 [node name="left_dropzone" type="StaticBody2D" parent="." groups=["dropable", "side_dropzone"]]
-position = Vector2(-10, 5)
+position = Vector2(-10, 0)
 collision_layer = 2
 collision_mask = 2
-script = ExtResource("3_l28rr")
+script = ExtResource("3_i8vs8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="left_dropzone"]
 position = Vector2(-0.5, 0)
-scale = Vector2(1, 2)
 shape = SubResource("RectangleShape2D_2xjkc")
 
 [node name="ColorRect" type="ColorRect" parent="left_dropzone"]
 z_index = -1
 offset_left = -5.0
-offset_top = -10.0
+offset_top = -5.0
 offset_right = 5.0
-scale = Vector2(1, 2)
+offset_bottom = 5.0
 metadata/_edit_use_anchors_ = true
 
 [node name="right_dropzone" type="StaticBody2D" parent="." groups=["dropable", "side_dropzone"]]
-position = Vector2(10, 5)
+position = Vector2(10, 0)
 collision_layer = 2
 collision_mask = 2
-script = ExtResource("3_l28rr")
+script = ExtResource("3_i8vs8")
 
 [node name="ColorRect" type="ColorRect" parent="right_dropzone"]
 z_index = -1
 offset_left = -5.0
-offset_top = -10.0
+offset_top = -5.0
 offset_right = 5.0
-scale = Vector2(1, 2)
+offset_bottom = 5.0
 metadata/_edit_use_anchors_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="right_dropzone"]
-position = Vector2(-10, -15.5)
-shape = SubResource("RectangleShape2D_ar825")
+position = Vector2(-10, -10.5)
+shape = SubResource("RectangleShape2D_v5quv")
 
 [node name="top_dropzone" type="StaticBody2D" parent="." groups=["dropable", "top_dropzone"]]
 position = Vector2(0, -10)
 collision_layer = 2
 collision_mask = 2
-script = ExtResource("3_l28rr")
+script = ExtResource("3_i8vs8")
 
 [node name="ColorRect" type="ColorRect" parent="top_dropzone"]
 z_index = -1
@@ -98,14 +93,14 @@ offset_bottom = 5.0
 metadata/_edit_use_anchors_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="top_dropzone"]
-position = Vector2(10.5, 15)
-shape = SubResource("RectangleShape2D_r1da8")
+position = Vector2(10.5, 10)
+shape = SubResource("RectangleShape2D_mvc5n")
 
 [node name="bottom_dropzone" type="StaticBody2D" parent="." groups=["bottom_dropzone", "dropable"]]
-position = Vector2(0, 20)
+position = Vector2(0, 10)
 collision_layer = 2
 collision_mask = 2
-script = ExtResource("3_l28rr")
+script = ExtResource("3_i8vs8")
 
 [node name="ColorRect" type="ColorRect" parent="bottom_dropzone"]
 z_index = -1
@@ -117,9 +112,9 @@ metadata/_edit_use_anchors_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="bottom_dropzone"]
 position = Vector2(0, 0.5)
-shape = SubResource("RectangleShape2D_abhdq")
+shape = SubResource("RectangleShape2D_cfceg")
 
-[connection signal="body_entered" from="squirrel" to="." method="_on_squirrel_body_entered"]
-[connection signal="body_exited" from="squirrel" to="." method="_on_squirrel_body_exited"]
-[connection signal="mouse_entered" from="squirrel" to="." method="_on_squirrel_mouse_entered"]
-[connection signal="mouse_exited" from="squirrel" to="." method="_on_squirrel_mouse_exited"]
+[connection signal="body_entered" from="spider" to="." method="_on_spider_body_entered"]
+[connection signal="body_exited" from="spider" to="." method="_on_spider_body_exited"]
+[connection signal="mouse_entered" from="spider" to="." method="_on_spider_mouse_entered"]
+[connection signal="mouse_exited" from="spider" to="." method="_on_spider_mouse_exited"]
