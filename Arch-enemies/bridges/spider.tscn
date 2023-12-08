@@ -22,10 +22,11 @@ size = Vector2(9, 10)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cfceg"]
 size = Vector2(10, 9)
 
-[node name="spiderBod" type="StaticBody2D" groups=["draggable", "spider"]]
+[node name="spiderBod" type="StaticBody2D" node_paths=PackedStringArray("body_area2D") groups=["draggable", "spider"]]
 collision_layer = 3
 collision_mask = 3
 script = ExtResource("1_fk6ir")
+body_area2D = NodePath("spider")
 
 [node name="Spider" type="Sprite2D" parent="."]
 scale = Vector2(0.9, 0.9)
@@ -34,11 +35,11 @@ texture = ExtResource("2_87e2g")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_m8jht")
 
-[node name="squirrel" type="Area2D" parent="."]
+[node name="spider" type="Area2D" parent="."]
 collision_layer = 3
 collision_mask = 3
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="squirrel"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="spider"]
 shape = SubResource("RectangleShape2D_4bimj")
 
 [node name="left_dropzone" type="StaticBody2D" parent="." groups=["dropable", "side_dropzone"]]
@@ -113,7 +114,7 @@ metadata/_edit_use_anchors_ = true
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_cfceg")
 
-[connection signal="body_entered" from="squirrel" to="." method="_on_squirrel_body_entered"]
-[connection signal="body_exited" from="squirrel" to="." method="_on_squirrel_body_exited"]
-[connection signal="mouse_entered" from="squirrel" to="." method="_on_squirrel_mouse_entered"]
-[connection signal="mouse_exited" from="squirrel" to="." method="_on_squirrel_mouse_exited"]
+[connection signal="body_entered" from="spider" to="." method="_on_spider_body_entered"]
+[connection signal="body_exited" from="spider" to="." method="_on_spider_body_exited"]
+[connection signal="mouse_entered" from="spider" to="." method="_on_spider_mouse_entered"]
+[connection signal="mouse_exited" from="spider" to="." method="_on_spider_mouse_exited"]

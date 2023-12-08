@@ -189,9 +189,7 @@ position = Vector2(190, 130)
 shape = SubResource("RectangleShape2D_6rkrv")
 
 [node name="fox" parent="." instance=ExtResource("5_tp4g7")]
-position = Vector2(25, 50)
-SPEED = 100.0
-JUMP_VELOCITY = -230.0
+position = Vector2(19, 47.8674)
 
 [node name="DeathHazard" parent="." instance=ExtResource("6_s42ti")]
 position = Vector2(100, 25)

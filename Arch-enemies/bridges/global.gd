@@ -1,19 +1,20 @@
 extends Node
 
-#var is_dragging = false
-var drag_mode = true
-var something_is_being_dragged = false
-var currently_dragging 
+var drag_mode := true
+var something_is_being_dragged := false
+var currently_dragging
 
-func round_to_nearest(a:float, b:float):
-	var grid_offset = fmod(a,b)
-	if grid_offset < b / 2:
-		return a - grid_offset
+
+# round to nearest multiple of grid_size
+func round_to_nearest(position:float, grid_size:float):
+	var offset = fmod(position, grid_size)
+	if offset < grid_size / 2:
+		return position - offset
 	else:
-		return a + (b - grid_offset) 
-	
+		return position + (grid_size - offset) 
+
+
 # returns animal type of StaticBody2D as string
-# sadly required as I didn't find a function that returns all groups of given node
 func get_animal_type(body:StaticBody2D):
 	if body.is_in_group("snake"):
 		return "snake"

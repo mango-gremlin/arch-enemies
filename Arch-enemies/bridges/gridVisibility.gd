@@ -1,12 +1,7 @@
 extends Sprite2D
 
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+# if an object is being dragged, show grid
 func _process(delta):
 	load("res://bridges/global.gd")
 	if Global.something_is_being_dragged:

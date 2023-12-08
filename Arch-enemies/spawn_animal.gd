@@ -1,7 +1,10 @@
 extends Button
 
+@export var animal_scene : StaticBody2D
+
 # The scene spawned by the button. Snek in this case
 var new_animal = preload("res://bridges/spider.tscn")
+
 
 # creates a new instance of the snek class and adds it to the world.
 func _on_pressed():

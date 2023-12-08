@@ -8,6 +8,8 @@ radius = 11.0
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 script = ExtResource("1_uy84w")
+speed = 100.0
+jump_velocity = -230.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_0mu8k")

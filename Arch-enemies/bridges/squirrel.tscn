@@ -22,10 +22,11 @@ size = Vector2(9, 20)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_abhdq"]
 size = Vector2(10, 9)
 
-[node name="squirrelBod" type="StaticBody2D" groups=["draggable", "squirrel"]]
+[node name="squirrelBod" type="StaticBody2D" node_paths=PackedStringArray("body_area2D") groups=["draggable", "squirrel"]]
 collision_layer = 3
 collision_mask = 3
 script = ExtResource("1_ss8yf")
+body_area2D = NodePath("squirrel")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, 5)

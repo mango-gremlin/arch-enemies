@@ -1,12 +1,16 @@
 extends CharacterBody2D
 
 
-@export var SPEED : float = 300.0
-@export var JUMP_VELOCITY : float = -400.0
+@export var speed : float
+@export var jump_velocity : float
+
+var start_position : Vector2
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
+func _ready():
+	start_position = self.global_position
 
 func _physics_process(delta):
 	
@@ -14,40 +18,40 @@ func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
 
+	# if drag mode is entered, return fox to original position
 	if Global.drag_mode:
 		reset_fox()
 		return
 
 	# Handle Jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
+		velocity.y = jump_velocity
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction = Input.get_axis("left", "right")
 	if direction:
-		velocity.x = direction * SPEED
+		velocity.x = direction * speed
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+		velocity.x = move_toward(velocity.x, 0, speed)
 
 	move_and_slide()
 
-func reset_fox():
-	velocity.x = 0
-	velocity.y = 0
-	global_position = Vector2(25, 50)
 
+# reset fox to start position, and remove velocity
+func reset_fox():
+	velocity = Vector2.ZERO
+	global_position = start_position
+
+
+# if fox touches water
 func _on_area_2d_body_entered(_body):
-	# if fox touches water
 	reset_fox()
 
+# if fox comes in contact with DeathHazard
 func _on_death_hazard_body_entered(body):
-	# if fox comes in contact with DeathHazard
 	reset_fox()
 
 func _on_goal_area_2d_body_entered(_body):
 	var goalmenu = get_parent().find_child("GoalMenu")
-	
-	#var number_of_children = get_parent().get_child_count()
-	#var goalmenu = get_parent().get_children()[number_of_children-1].get_children()[0].get_children()[0]
 	goalmenu.visible = true
