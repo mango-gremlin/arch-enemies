@@ -4,16 +4,16 @@
 [ext_resource type="Texture2D" uid="uid://dc2lxeyr45vp3" path="res://bridges/assets/blue_dark.png" id="2_kpwak"]
 [ext_resource type="Texture2D" uid="uid://d0o2q6fijmd1" path="res://bridges/assets/dark green.png" id="3_iwap0"]
 [ext_resource type="Texture2D" uid="uid://b4v4into7dah" path="res://bridges/assets/darkest green.png" id="4_w8ky0"]
-[ext_resource type="PackedScene" uid="uid://dvgr170gyuhpq" path="res://bridges/fox.tscn" id="5_tp4g7"]
-[ext_resource type="PackedScene" uid="uid://hyihqgmvp0oj" path="res://bridges/DeahtHazard.tscn" id="6_s42ti"]
+[ext_resource type="PackedScene" uid="uid://dvgr170gyuhpq" path="res://bridges/player.tscn" id="5_tp4g7"]
+[ext_resource type="PackedScene" uid="uid://hyihqgmvp0oj" path="res://bridges/death_hazard.tscn" id="6_s42ti"]
 [ext_resource type="Texture2D" uid="uid://dp70liqt7qxpq" path="res://bridges/assets/Grid_10x10.png" id="7_0csdo"]
-[ext_resource type="Script" path="res://bridges/gridVisibility.gd" id="8_airam"]
-[ext_resource type="Script" path="res://bridges/ModeChangeButton.gd" id="9_7yjaf"]
+[ext_resource type="Script" path="res://bridges/grid_visibility.gd" id="8_airam"]
+[ext_resource type="Script" path="res://bridges/toggle_mode_button.gd" id="9_7yjaf"]
 [ext_resource type="PackedScene" uid="uid://cxj1q08s3i7i8" path="res://bridges/goal_menu.tscn" id="10_8a5g4"]
 [ext_resource type="Script" path="res://bridges/spawn_animal.gd" id="10_njtro"]
 [ext_resource type="PackedScene" uid="uid://dipauq7hxbt1f" path="res://bridges/squirrel.tscn" id="11_1d812"]
 [ext_resource type="PackedScene" uid="uid://bqtg1c4s2pkab" path="res://bridges/spider.tscn" id="11_daeky"]
-[ext_resource type="PackedScene" uid="uid://c5tl3m10s5tby" path="res://bridges/snek.tscn" id="13_cijaf"]
+[ext_resource type="PackedScene" uid="uid://c5tl3m10s5tby" path="res://bridges/snake.tscn" id="13_cijaf"]
 [ext_resource type="Script" path="res://bridges/dropzones_visibility.gd" id="13_qdl2b"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_s2tkw"]
@@ -158,7 +158,7 @@ func _on_continue_button_pressed():
 	
 "
 
-[node name="Node2D" type="Node2D"]
+[node name="main_scene" type="Node2D"]
 scale = Vector2(1, 1.00277)
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -189,28 +189,28 @@ layer_0/tile_data = PackedInt32Array(786439, 0, 0, 786440, 0, 0, 786441, 0, 0, 7
 position = Vector2(190, 130)
 shape = SubResource("RectangleShape2D_6rkrv")
 
-[node name="fox" parent="." instance=ExtResource("5_tp4g7")]
+[node name="player" parent="." instance=ExtResource("5_tp4g7")]
 position = Vector2(19, 47.8674)
 
-[node name="DeathHazard" parent="." instance=ExtResource("6_s42ti")]
+[node name="death_hazard" parent="." instance=ExtResource("6_s42ti")]
 position = Vector2(100, 25)
 scale = Vector2(0.5, 0.5)
 
-[node name="Grid2" type="Sprite2D" parent="."]
+[node name="grid_right" type="Sprite2D" parent="."]
 visible = false
 z_index = 1
 position = Vector2(705, 205)
 texture = ExtResource("7_0csdo")
 script = ExtResource("8_airam")
 
-[node name="Grid1" type="Sprite2D" parent="."]
+[node name="grid_left" type="Sprite2D" parent="."]
 visible = false
 z_index = 1
 position = Vector2(245, 245)
 texture = ExtResource("7_0csdo")
 script = ExtResource("8_airam")
 
-[node name="DragModeButton" type="CheckButton" parent="."]
+[node name="mode_button" type="CheckButton" parent="."]
 offset_left = 123.0
 offset_top = -3.0
 offset_right = 255.0
@@ -221,7 +221,7 @@ alignment = 1
 icon_alignment = 1
 script = ExtResource("9_7yjaf")
 
-[node name="AnimalSpawnButtons" type="HBoxContainer" parent="."]
+[node name="spawn_button_container" type="HBoxContainer" parent="."]
 offset_left = 60.0
 offset_top = 144.599
 offset_right = 302.0
@@ -230,37 +230,37 @@ scale = Vector2(0.515057, 0.526558)
 size_flags_horizontal = 4
 theme_override_constants/separation = 30
 
-[node name="SpiderButton" type="Button" parent="AnimalSpawnButtons"]
+[node name="spider_button" type="Button" parent="spawn_button_container"]
 layout_mode = 2
 text = "Spider"
 script = ExtResource("10_njtro")
 animal_scene = ExtResource("11_daeky")
 
-[node name="SquirrelButton" type="Button" parent="AnimalSpawnButtons"]
+[node name="squirrel_button" type="Button" parent="spawn_button_container"]
 layout_mode = 2
 text = "Squirrel"
 script = ExtResource("10_njtro")
 animal_scene = ExtResource("11_1d812")
 
-[node name="SnakeButton" type="Button" parent="AnimalSpawnButtons"]
+[node name="snake_button" type="Button" parent="spawn_button_container"]
 layout_mode = 2
 text = "Snake"
 script = ExtResource("10_njtro")
 animal_scene = ExtResource("13_cijaf")
 
-[node name="shore_right_dropzone2" type="StaticBody2D" parent="." groups=["dropable", "shore_dropzone", "side_dropzone"]]
+[node name="shore_right_dropzone" type="StaticBody2D" parent="." groups=["dropable", "shore_dropzone", "side_dropzone"]]
 position = Vector2(35, 114.754)
 scale = Vector2(1, 4)
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("13_qdl2b")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="shore_right_dropzone2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="shore_right_dropzone"]
 position = Vector2(5, -2.4931)
 scale = Vector2(1, 0.5)
 shape = SubResource("RectangleShape2D_0tifu")
 
-[node name="ColorRect" type="ColorRect" parent="shore_right_dropzone2"]
+[node name="ColorRect" type="ColorRect" parent="shore_right_dropzone"]
 z_index = -1
 offset_top = -5.0
 offset_right = 10.0
@@ -337,10 +337,10 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 script = SubResource("GDScript_62t5p")
 
-[connection signal="body_entered" from="TileMap/GoalArea2D" to="fox" method="_on_goal_area_2d_body_entered"]
-[connection signal="body_entered" from="water/Area2D" to="fox" method="_on_area_2d_body_entered"]
-[connection signal="body_entered" from="DeathHazard" to="fox" method="_on_death_hazard_body_entered"]
-[connection signal="toggled" from="DragModeButton" to="DragModeButton" method="_on_toggled"]
-[connection signal="pressed" from="AnimalSpawnButtons/SpiderButton" to="AnimalSpawnButtons/SpiderButton" method="_on_pressed"]
-[connection signal="pressed" from="AnimalSpawnButtons/SquirrelButton" to="AnimalSpawnButtons/SquirrelButton" method="_on_pressed"]
-[connection signal="pressed" from="AnimalSpawnButtons/SnakeButton" to="AnimalSpawnButtons/SnakeButton" method="_on_pressed"]
+[connection signal="body_entered" from="TileMap/GoalArea2D" to="player" method="_on_goal_area_2d_body_entered"]
+[connection signal="body_entered" from="water/Area2D" to="player" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="death_hazard" to="player" method="_on_death_hazard_body_entered"]
+[connection signal="toggled" from="mode_button" to="mode_button" method="_on_toggled"]
+[connection signal="pressed" from="spawn_button_container/spider_button" to="spawn_button_container/spider_button" method="_on_pressed"]
+[connection signal="pressed" from="spawn_button_container/squirrel_button" to="spawn_button_container/squirrel_button" method="_on_pressed"]
+[connection signal="pressed" from="spawn_button_container/snake_button" to="spawn_button_container/snake_button" method="_on_pressed"]

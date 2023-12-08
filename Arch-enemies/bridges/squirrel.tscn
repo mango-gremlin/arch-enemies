@@ -1,8 +1,9 @@
 [gd_scene load_steps=10 format=3 uid="uid://dipauq7hxbt1f"]
 
-[ext_resource type="Script" path="res://bridges/DragObject.gd" id="1_ss8yf"]
+[ext_resource type="Script" path="res://bridges/drag_handler.gd" id="1_ss8yf"]
 [ext_resource type="Texture2D" uid="uid://smnm35pbv18o" path="res://bridges/assets/box_squirrel.png" id="2_eib8h"]
 [ext_resource type="Script" path="res://bridges/dropzones_visibility.gd" id="3_l28rr"]
+
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m8jht"]
 size = Vector2(10, 20)

@@ -20,7 +20,7 @@ func _physics_process(delta):
 
 	# if drag mode is entered, return fox to original position
 	if Global.drag_mode:
-		reset_fox()
+		reset_player()
 		return
 
 	# Handle Jump.
@@ -39,18 +39,18 @@ func _physics_process(delta):
 
 
 # reset fox to start position, and remove velocity
-func reset_fox():
+func reset_player():
 	velocity = Vector2.ZERO
 	global_position = start_position
 
 
 # if fox touches water
 func _on_area_2d_body_entered(_body):
-	reset_fox()
+	reset_player()
 
 # if fox comes in contact with DeathHazard
 func _on_death_hazard_body_entered(body):
-	reset_fox()
+	reset_player()
 
 func _on_goal_area_2d_body_entered(_body):
 	var goalmenu = get_parent().find_child("GoalMenu")

@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://bqtg1c4s2pkab"]
 
-[ext_resource type="Script" path="res://bridges/DragObject.gd" id="1_fk6ir"]
+[ext_resource type="Script" path="res://bridges/drag_handler.gd" id="1_fk6ir"]
 [ext_resource type="Texture2D" uid="uid://cagtqr073bxj2" path="res://bridges/assets/spider.png" id="2_87e2g"]
 [ext_resource type="Script" path="res://bridges/dropzones_visibility.gd" id="3_i8vs8"]
 
