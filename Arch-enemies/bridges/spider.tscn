@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://bridges/DragObject.gd" id="1_fk6ir"]
 [ext_resource type="Texture2D" uid="uid://cagtqr073bxj2" path="res://bridges/assets/spider.png" id="2_87e2g"]
-[ext_resource type="Script" path="res://bridges/allowed_snake_area.gd" id="3_i8vs8"]
+[ext_resource type="Script" path="res://bridges/dropzones_visibility.gd" id="3_i8vs8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m8jht"]
 size = Vector2(10, 10)

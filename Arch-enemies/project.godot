@@ -22,6 +22,10 @@ Global="*res://bridges/global.gd"
 
 project/assembly_name="Go Dot"
 
+[editor]
+
+script/search_in_file_extensions=PackedStringArray("gd", "gdshader", "tscn")
+
 [input]
 
 ui_accept={

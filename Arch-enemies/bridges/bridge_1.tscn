@@ -13,7 +13,7 @@
 [ext_resource type="Script" path="res://bridges/SpiderSpawningButton.gd" id="11_v86ca"]
 [ext_resource type="Script" path="res://bridges/SnakeSpawningButton.gd" id="12_nrhcc"]
 [ext_resource type="Script" path="res://bridges/SquirrelSpawningButton.gd" id="12_vyiap"]
-[ext_resource type="Script" path="res://bridges/allowed_snake_area.gd" id="13_cp5c4"]
+[ext_resource type="Script" path="res://bridges/dropzones_visibility.gd" id="13_qdl2b"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_s2tkw"]
 texture = ExtResource("1_rsd3v")
@@ -251,7 +251,7 @@ position = Vector2(35, 114.754)
 scale = Vector2(1, 4)
 collision_layer = 2
 collision_mask = 2
-script = ExtResource("13_cp5c4")
+script = ExtResource("13_qdl2b")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="shore_right_dropzone2"]
 position = Vector2(5, -2.4931)
@@ -270,7 +270,7 @@ metadata/_edit_use_anchors_ = true
 position = Vector2(21, 88.7542)
 collision_layer = 2
 collision_mask = 2
-script = ExtResource("13_cp5c4")
+script = ExtResource("13_qdl2b")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="shore_top_dropzone"]
 position = Vector2(-1, 1)
