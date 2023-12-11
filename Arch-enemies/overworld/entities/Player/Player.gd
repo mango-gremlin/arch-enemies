@@ -98,7 +98,8 @@ func execute_interaction():
 				enter_bridge_scene(bridge_id)
 			Interactable.InteractionType.ITEM: 
 				print("found an item")
-				add_to_inventory(active_interaction.interact_value)
+				active_interaction.interact_with_area()
+				#add_to_inventory(active_interaction.interact_value)
 				# adding to inventory! 
 			Interactable.InteractionType.NPC:
 				print("npc interaction")
@@ -148,7 +149,8 @@ func add_to_inventory(item:Item):
 func enter_pause_menu():
 	print("pause menu")
 	exit_overworld()
-	get_tree().change_scene_to_file("res://overworld/ui/menu/pause_menu.tscn")
+	# TODO 
+	get_tree().change_scene_to_file("res://overworld/ui/menu/menu/pause_menu.tscn")
 
 func enter_bridge_scene(bridge_id):
 	print("entering bridge game", bridge_id)

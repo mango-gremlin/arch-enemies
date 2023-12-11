@@ -14,7 +14,7 @@ func _process(delta):
 
 func _on_overworld_pressed():
 	# TODO improve  by constantly saving the previous scene in a variable!
-	get_tree().change_scene_to_file("res://overworld/overworld.tscn")
+	get_tree().change_scene_to_file("res://maingame.tscn")
 
 
 func _on_exit_pressed():

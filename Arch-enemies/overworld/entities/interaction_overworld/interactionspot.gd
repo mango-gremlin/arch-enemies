@@ -12,19 +12,21 @@ enum InteractionType {
 
 # --- / 
 # -- / base properties 
+var parent_node:Node2D
+
 # defines type of action, used to identify what to do next ... 
-@export var interact_type:InteractionType = InteractionType.DEBUG
+var interact_type:InteractionType = InteractionType.DEBUG
 
 # denotes the value contained 
 var interact_value = "no interaction"
 
 # debugging : denotes what this interaction is about
-@export var interact_label = "none"
+var interact_label = " "
 
 # --- / 
 # -- / necessary options for ITEM
-@export var item_type:Item.ItemType = Item.ItemType.NOTHING
-@export var item_description:String = "description of item, is showcased on interaction"
+var item_type:Item.ItemType = Item.ItemType.NOTHING
+var item_description:String = "description of item, is showcased on interaction"
 
 # --- / 
 # -- / necessary options for BRIDGE
@@ -36,13 +38,13 @@ var bridge_id:int
 
 
 
-
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	# debugging 
 	# constructing the according type:
 	match interact_type: 
 		InteractionType.ITEM:
+			# FIXME should not be instantiated with every creation 
 			# generating new item
 			var newItem = Item.new(item_type,item_description)
 			interact_label = newItem.item_description
@@ -60,7 +62,18 @@ func _ready():
 			pass
 			
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+# --- / 
+# -- / 
+# called whenever player wants to interact with area
+func interact_with_area():
+	print("interacting with area")
+	match interact_type:
+		InteractionType.ITEM:
+			var received_value = parent_node.signal_existence()
+			print(received_value)
+			# interact according to item requirements
+			pass
+			
+		_: 
+			pass
+	

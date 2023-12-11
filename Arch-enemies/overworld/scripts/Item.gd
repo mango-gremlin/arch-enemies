@@ -34,6 +34,9 @@ func _init(new_item_type:ItemType,description:String):
 	
 	
 	
+
+# returns string representation of obtained item 
+# TODO Where is it used?
 func set_item_name(type:ItemType):
 	match type:
 		ItemType.STICK: 
@@ -47,7 +50,9 @@ func set_item_name(type:ItemType):
 		_: 
 			return " "
 			
-# maybe there's a better solution, the first google search was inconlusive. str() and to_string()
+
+
+# FIXME maybe there's a better solution, the first google search was inconlusive. str() and to_string()
 # does not work on enums?
 func item_type_to_string(item_type_enum: ItemType):
 	match item_type_enum:
@@ -65,6 +70,9 @@ func item_type_to_string(item_type_enum: ItemType):
 			return "ERROR"			
 		
 			
+
+# converts itemtype to json representation 
+# returns json-string representing item
 func to_json():
 	var data = {
 		"type" : item_type_to_string(item_type),
@@ -73,6 +81,9 @@ func to_json():
 	
 	return data
 	
+
+# converts string to enum of type item
+# returns obtained type
 static func string_to_item_type(str):
 	match str:
 		"STICK": 
@@ -83,9 +94,10 @@ static func string_to_item_type(str):
 			return ItemType.LEAF
 		"HONEY": 
 			return ItemType.HONEY
-		"NOTHING": 
-			return ItemType.NOTHING
+		#"NOTHING": 
+		#	return ItemType.NOTHING
 		_:
-			print("Invalid string item type representation!")
-			return ItemType.NOTHING  # ????
+			# usually not the case 
+			print("Invalid string representation received")
+			return ItemType.NOTHING
 	

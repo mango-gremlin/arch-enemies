@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bj3a1sw80l6wj"]
+
+[ext_resource type="Script" path="res://overworld/entities/interaction_overworld/item_interaction.gd" id="1_ektp2"]
+[ext_resource type="PackedScene" uid="uid://cegpqm0j2vvbh" path="res://overworld/entities/interaction_overworld/interactionspot.tscn" id="2_agwop"]
+
+[node name="item_interaction" type="Node2D"]
+script = ExtResource("1_ektp2")
+item_type = null
+item_amount = null
+item_dialogue_box = null
+obtain_threshold = null
+obtain_condition = null
+
+[node name="interactionspot" parent="." instance=ExtResource("2_agwop")]
