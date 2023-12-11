@@ -16,11 +16,15 @@ config/features=PackedStringArray("4.2", "Forward Plus")
 
 [autoload]
 
-Global="*res://bridges/global.gd"
+Global="*res://bridges/script/global.gd"
 
 [dotnet]
 
 project/assembly_name="Go Dot"
+
+[editor]
+
+script/search_in_file_extensions=PackedStringArray("gd", "gdshader", "tscn")
 
 [input]
 

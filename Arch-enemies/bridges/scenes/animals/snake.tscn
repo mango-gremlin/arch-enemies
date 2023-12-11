@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=3 uid="uid://c5tl3m10s5tby"]
 
 [ext_resource type="Texture2D" uid="uid://47bt3n56d3fc" path="res://bridges/assets/box_snake.png" id="1_c08hy"]
-[ext_resource type="Script" path="res://bridges/DragObject.gd" id="1_gtwqh"]
-[ext_resource type="Script" path="res://bridges/allowed_snake_area.gd" id="3_fqrgl"]
+[ext_resource type="Script" path="res://bridges/script/drag_handler.gd" id="1_gtwqh"]
+[ext_resource type="Script" path="res://bridges/script/dropzones_visibility.gd" id="3_fqrgl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_43xhd"]
 size = Vector2(48, 10)
@@ -19,10 +19,11 @@ size = Vector2(40, 9)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f6euc"]
 size = Vector2(39, 9)
 
-[node name="snakeBod" type="StaticBody2D" groups=["draggable", "snake"]]
+[node name="snakeBod" type="StaticBody2D" node_paths=PackedStringArray("body_area2D") groups=["draggable", "snake"]]
 collision_layer = 3
 collision_mask = 3
 script = ExtResource("1_gtwqh")
+body_area2D = NodePath("snake")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.87, 0.925)

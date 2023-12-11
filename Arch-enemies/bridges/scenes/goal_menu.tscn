@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cxj1q08s3i7i8"]
 
-[ext_resource type="Script" path="res://bridges/goal_menu.gd" id="1_e6stn"]
+[ext_resource type="Script" path="res://bridges/script/goal_menu.gd" id="1_e6stn"]
 
 [node name="GoalMenu" type="Control"]
 layout_mode = 3

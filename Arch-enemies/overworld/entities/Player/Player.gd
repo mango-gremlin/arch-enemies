@@ -176,7 +176,7 @@ func enter_bridge_scene(bridge_id):
 	# search for bridgeGame with correct id! 
 	# load it afterwards
 	# enter_pause_menu() # default until we merged
-	get_tree().change_scene_to_file("res://bridges/bridge_1.tscn")
+	get_tree().change_scene_to_file("res://bridges/scenes/bridge_1.tscn")
 	
 
 # saves player state 
