@@ -5,7 +5,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m4tka"]
 size = Vector2(116, 76)
 
-[node name="DeathHazard" type="Area2D"]
+[node name="death_hazard" type="Area2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(267, 178)
