@@ -25,8 +25,6 @@ var interact_label = " "
 
 # --- / 
 # -- / necessary options for ITEM
-var item_type:Item.ItemType = Item.ItemType.NOTHING
-var item_description:String = "description of item, is showcased on interaction"
 
 # --- / 
 # -- / necessary options for BRIDGE
@@ -44,18 +42,13 @@ func _ready():
 	# constructing the according type:
 	match interact_type: 
 		InteractionType.ITEM:
-			# FIXME should not be instantiated with every creation 
-			# generating new item
-			var newItem = Item.new(item_type,item_description)
-			interact_label = newItem.item_description
-			interact_value = newItem
+			pass
 		InteractionType.NPC:
 			pass
 		InteractionType.BRIDGE:
 			pass
 			#interact_value = bridge_id
 			# should be replaced by DATASTRUCTURE denoting a bridge-Level
-			
 		InteractionType.BLOCKADE:
 			pass
 		InteractionType.DEBUG:
@@ -65,15 +58,18 @@ func _ready():
 # --- / 
 # -- / 
 # called whenever player wants to interact with area
-func interact_with_area():
+func interact_with_area() -> Dictionary:
 	print("interacting with area")
 	match interact_type:
 		InteractionType.ITEM:
-			var received_value = parent_node.signal_existence()
-			print(received_value)
+			# querying item to receive 
+			var received_item = parent_node.obtain_item()
+			var received_dialogue = parent_node.obtain_dialogue()
+			return {"item": received_item, "dialogue": received_dialogue}
 			# interact according to item requirements
 			pass
 			
 		_: 
+			return {}
 			pass
 	

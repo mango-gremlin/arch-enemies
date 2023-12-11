@@ -5,10 +5,6 @@
 
 [node name="item_interaction" type="Node2D"]
 script = ExtResource("1_ektp2")
-item_type = null
-item_amount = null
-item_dialogue_box = null
-obtain_threshold = null
-obtain_condition = null
+item_type = 1
 
 [node name="interactionspot" parent="." instance=ExtResource("2_agwop")]

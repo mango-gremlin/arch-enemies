@@ -68,9 +68,9 @@ func generate_inventory(inventory_data):
 	
 	for inv in inventory_data:
 		var item_type = Item.string_to_item_type(inv["type"])
-		var item_description = inv["item_description"]
+		#var item_description = inv["item_description"]
 		
-		inventory.append(Item.new(item_type, item_description))
+		inventory.append(Item.new(item_type))
 	
 	return inventory
 	

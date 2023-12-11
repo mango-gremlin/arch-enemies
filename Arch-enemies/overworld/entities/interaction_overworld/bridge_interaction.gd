@@ -14,3 +14,13 @@ func _ready():
 	interactionspot_object.interact_value = bridge_id
 	# updating description 
 	interactionspot_object.interact_label = description
+
+
+## --- / 
+## -- / INTERACTION WITH PLAYER 
+
+# gathers bridge Id linked to this interactionspot
+func obtain_bridge_id() -> int:
+	return bridge_id
+
+# 

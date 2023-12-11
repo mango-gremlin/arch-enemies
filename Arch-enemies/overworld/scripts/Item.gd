@@ -27,13 +27,30 @@ var item_type:ItemType
 
 # --- /
 # -- / class constructor 
-func _init(new_item_type:ItemType,description:String):
+func _init(new_item_type:ItemType):
 	item_type= new_item_type
-	item_description = description
+	item_description = obtain_item_description(item_type)
 	item_name = set_item_name(new_item_type)
 	
 	
 	
+
+# set description according to given itemType:
+func obtain_item_description(Item:ItemType) -> String:
+	match Item:
+		ItemType.STICK:
+			return "simple stick, nothing special"
+		ItemType.STONE:
+			return "yet another stone"
+		ItemType.LEAF:
+			return "leaf of unspecified tree origin"
+		ItemType.HONEY:
+			return "sweet honey"
+		ItemType.NOTHING:
+			return ""
+		_:
+			# should not occur
+			return ""
 
 # returns string representation of obtained item 
 # TODO Where is it used?

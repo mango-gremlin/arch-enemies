@@ -98,7 +98,9 @@ func execute_interaction():
 				enter_bridge_scene(bridge_id)
 			Interactable.InteractionType.ITEM: 
 				print("found an item")
-				active_interaction.interact_with_area()
+				var resulting_dict: Dictionary = active_interaction.interact_with_area()
+				set_interactionLabel(resulting_dict["dialogue"])
+				add_to_inventory(resulting_dict["item"])
 				#add_to_inventory(active_interaction.interact_value)
 				# adding to inventory! 
 			Interactable.InteractionType.NPC:
@@ -137,9 +139,13 @@ func check_input():
 
 # adding item to first position of inventory
 func add_to_inventory(item:Item):
-	inventory.insert(0,item)
-	# emit signal to update Ui
-	updated_inventory.emit(inventory)
+	if item.item_type == Item.ItemType.NOTHING:
+		# received a value that is not valid 
+		return
+	else:
+		inventory.insert(0,item)
+		# emit signal to update Ui
+		updated_inventory.emit(inventory)
 
 
 # ---- 
@@ -196,6 +202,10 @@ func save_state():
 # ----- 
 # debugging
 # ----- 
+
+func set_interactionLabel(label:String):
+	interactionLabel.text = label
+	
 
 func update_interactionLabel():
 	if all_interactions:
