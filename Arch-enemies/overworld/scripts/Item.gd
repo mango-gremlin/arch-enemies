@@ -13,7 +13,16 @@ enum ItemType {
 	STONE,
 	LEAF,
 	HONEY,
-	NOTHING,
+	NONE,
+	
+	# according to **Requirements set by Game design group** 
+	# those Types are the final ones that will be implemented  
+	# HONEY 
+	# FLUTE
+	# HAZELNUT
+	# TASTY LEAVES 
+	# SILK SPOOL 
+	
 }
 
 # --- / 
@@ -46,7 +55,7 @@ func obtain_item_description(Item:ItemType) -> String:
 			return "leaf of unspecified tree origin"
 		ItemType.HONEY:
 			return "sweet honey"
-		ItemType.NOTHING:
+		ItemType.NONE:
 			return ""
 		_:
 			# should not occur
@@ -81,7 +90,7 @@ func item_type_to_string(item_type_enum: ItemType):
 			return "LEAF"
 		ItemType.HONEY:
 			return "HONEY"
-		ItemType.NOTHING:
+		ItemType.NONE:
 			return "NOTHING"
 		_:
 			return "ERROR"			
@@ -116,5 +125,5 @@ static func string_to_item_type(str):
 		_:
 			# usually not the case 
 			print("Invalid string representation received")
-			return ItemType.NOTHING
+			return ItemType.NONE
 	

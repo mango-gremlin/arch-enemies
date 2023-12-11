@@ -14,7 +14,7 @@ var interaction_type: Interactable.InteractionType = Interactable.InteractionTyp
 @export var item_type:Item.ItemType
 # FIXME this value is not persistent but resets with every game! 
 # TODO convert to Issue on Github to track!
-@export var item_amount:int = 2
+@export var item_amount:int = 1
 
 # denotes item Object
 var item_instance:Item
@@ -75,7 +75,7 @@ func obtain_item() -> Item:
 		print("not obtainable")
 		# is not obtainable
 		# FIXME NO NULL TYPES!
-		return Item.new(Item.ItemType.NOTHING)
+		return Item.new(Item.ItemType.NONE)
 
 # returns dialogue-String for displaying in dialogue-Box
 # if item obtainable -> return item_dialogue_succes

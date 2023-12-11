@@ -18,10 +18,10 @@ var parent_node:Node2D
 var interact_type:InteractionType = InteractionType.DEBUG
 
 # denotes the value contained 
-var interact_value = "no interaction"
+#var interact_value = "no interaction"
 
 # debugging : denotes what this interaction is about
-var interact_label = " "
+#var interact_label = " "
 
 # --- / 
 # -- / necessary options for ITEM
@@ -31,33 +31,15 @@ var interact_label = " "
 var bridge_id:int
 # should be referencing to the to the bridge-game 
 
-
-
-
-
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	# debugging 
-	# constructing the according type:
-	match interact_type: 
-		InteractionType.ITEM:
-			pass
-		InteractionType.NPC:
-			pass
-		InteractionType.BRIDGE:
-			pass
-			#interact_value = bridge_id
-			# should be replaced by DATASTRUCTURE denoting a bridge-Level
-		InteractionType.BLOCKADE:
-			pass
-		InteractionType.DEBUG:
-			pass
-			
+	pass
+	
 
 # --- / 
 # -- / 
 # called whenever player wants to interact with area
+# depending on set type different interactions will happen
 func interact_with_area() -> Dictionary:
 	print("interacting with area")
 	match interact_type:
@@ -66,9 +48,32 @@ func interact_with_area() -> Dictionary:
 			var received_item = parent_node.obtain_item()
 			var received_dialogue = parent_node.obtain_dialogue()
 			return {"item": received_item, "dialogue": received_dialogue}
-			# interact according to item requirements
-			pass
+		InteractionType.BRIDGE:
+			# TODO 
+			# display 
+			var is_solved = parent_node.is_solved()
+			var received_bridge_id:int = parent_node.obtain_bridge_id()
+			var received_description:String = "this level was solved already"
+			if not is_solved:
+				received_description = parent_node.obtain_description()
+			return {"id": received_bridge_id, "description": received_description}
+			#var received_dialogue =
 			
+		InteractionType.NPC:
+			# FIXME  requires state management to check where the dialogue is based and structured in
+			# TODO might be a separate scene that is called to run player through the interaction?
+			var dialogue_string = parent_node.obtain_formatted_dialogue()
+			var received_value = parent_node.obtain_value()
+			
+			# querying required item
+			var required_item_type = parent_node.obtain_quest_item_type()
+			# check if item in inventory of player
+			
+			# matching against received Value! 
+			#match received_value:
+			# FIXME requires enum of Type "QUEST" to match against!
+				
+			return {"dialogue":dialogue_string,"value":received_value}
 		_: 
 			return {}
 			pass
