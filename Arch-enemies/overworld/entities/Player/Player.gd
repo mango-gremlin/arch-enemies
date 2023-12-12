@@ -147,13 +147,12 @@ func check_input():
 
 # adding item to first position of inventory
 func add_to_inventory(item:Item):
-	if item.item_type == Item.ItemType.NONE:
-		# received a value that is not valid 
-		return
-	else:
+	if item.item_type != Item.ItemType.NONE:
 		inventory.insert(0,item)
 		# emit signal to update Ui
 		updated_inventory.emit(inventory)
+	# doing nothing otherwise 
+	# --> no item was received
 
 # query for specific item 
 func search_in_inventory(item:Item):
