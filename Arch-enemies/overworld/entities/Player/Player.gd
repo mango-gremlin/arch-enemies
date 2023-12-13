@@ -32,14 +32,14 @@ signal saved_player()
 func _ready():
 	#debug 
 	$Camera2D.player_object = self
-	update_interactionLabel()
+	#update_interactionLabel()
 
 func _physics_process(delta):
 	player_movement(delta)
 	# checking for interaction in world
 	# debugging 
 	check_input()
-	update_interactionLabel()
+	#update_interactionLabel()
 
 
 func player_movement(delta):
@@ -94,15 +94,26 @@ func execute_interaction():
 			Interactable.InteractionType.BRIDGE:
 				print("entering bridge game")
 				# drawing ID from Bridge-Interaction
-				var bridge_id = active_interaction.interact_value
-				enter_bridge_scene(bridge_id)
+				# FIXME maybe we should instead use a standardized interaction type?
+				var resulting_dict: Dictionary = active_interaction.interact_with_area()
+				
+				print(resulting_dict["id"])
+				set_interactionLabel(resulting_dict["description"])
+				#enter_bridge_scene(bridge_id)
 			Interactable.InteractionType.ITEM: 
 				print("found an item")
-				add_to_inventory(active_interaction.interact_value)
+				var resulting_dict: Dictionary = active_interaction.interact_with_area()
+				set_interactionLabel(resulting_dict["dialogue"])
+				add_to_inventory(resulting_dict["item"])
+				#add_to_inventory(active_interaction.interact_value)
 				# adding to inventory! 
 			Interactable.InteractionType.NPC:
 				print("npc interaction")
-				pass
+				var resulting_dict: Dictionary = active_interaction.interact_with_area()
+				set_interactionLabel(resulting_dict["dialogue"])
+				# FIXME requires enum "QUEST" to match against!
+				# FIXME should be easier when done with separate **dialogue system**
+				add_to_inventory(resulting_dict["value"])
 			Interactable.InteractionType.DEBUG:
 				print("debug interaction")
 				pass
@@ -136,10 +147,17 @@ func check_input():
 
 # adding item to first position of inventory
 func add_to_inventory(item:Item):
-	inventory.insert(0,item)
-	# emit signal to update Ui
-	updated_inventory.emit(inventory)
+	if item.item_type != Item.ItemType.NONE:
+		inventory.insert(0,item)
+		# emit signal to update Ui
+		updated_inventory.emit(inventory)
+	# doing nothing otherwise 
+	# --> no item was received
 
+# query for specific item 
+func search_in_inventory(item:Item):
+	# FIXME requires new structure of inventory
+	pass
 
 # ---- 
 # scene change management
@@ -148,7 +166,8 @@ func add_to_inventory(item:Item):
 func enter_pause_menu():
 	print("pause menu")
 	exit_overworld()
-	get_tree().change_scene_to_file("res://overworld/ui/menu/pause_menu.tscn")
+	# TODO 
+	get_tree().change_scene_to_file("res://overworld/ui/menu/menu/pause_menu.tscn")
 
 func enter_bridge_scene(bridge_id):
 	print("entering bridge game", bridge_id)
@@ -195,9 +214,13 @@ func save_state():
 # debugging
 # ----- 
 
-func update_interactionLabel():
-	if all_interactions:
-		# taking active interaction and insert its label --> descriptions
-		interactionLabel.text = all_interactions[0].interact_label
-	else:
-		interactionLabel.text = ""
+func set_interactionLabel(label:String):
+	interactionLabel.text = label
+	
+
+#func update_interactionLabel():
+#	if all_interactions:
+#		# taking active interaction and insert its label --> descriptions
+#		interactionLabel.text = all_interactions[0].interact_label
+#	else:
+#		interactionLabel.text = ""

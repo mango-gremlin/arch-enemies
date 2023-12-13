@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://bj3a1sw80l6wj"]
+
+[ext_resource type="Script" path="res://overworld/entities/interaction_overworld/item_interaction.gd" id="1_ektp2"]
+[ext_resource type="PackedScene" uid="uid://cegpqm0j2vvbh" path="res://overworld/entities/interaction_overworld/interactionspot.tscn" id="2_agwop"]
+
+[node name="item_interaction" type="Node2D"]
+script = ExtResource("1_ektp2")
+item_type = 1
+
+[node name="interactionspot" parent="." instance=ExtResource("2_agwop")]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0, 0, 1)
