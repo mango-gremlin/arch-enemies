@@ -37,7 +37,7 @@ var item_type:ItemType
 # --- /
 # -- / class constructor 
 func _init(new_item_type:ItemType):
-	item_type= new_item_type
+	item_type = new_item_type
 	item_description = obtain_item_description(item_type)
 	item_name = set_item_name(new_item_type)
 	
@@ -102,7 +102,7 @@ func item_type_to_string(item_type_enum: ItemType):
 func to_json():
 	var data = {
 		"type" : item_type_to_string(item_type),
-		"item_description" : item_description
+		# "item_description" : item_description
 	}
 	
 	return data

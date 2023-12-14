@@ -6,10 +6,10 @@ class_name OverWorldUI
 @onready var playername_label = $Control/MarginContainer/VBoxContainer/HBoxContainer2/PlayerName
 @onready var quest_label = $Control/MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/QuestList
 
-var player_inventory:Array[Item] = []:
-	set(newArray):
+var player_inventory:Dictionary = {}:
+	set(newDict):
 		# if a new array was given, we update its value, also the label
-		player_inventory = newArray
+		player_inventory = newDict
 		_update_inventory_label()
 
 var current_health:int = 100:
@@ -21,9 +21,14 @@ func _update_inventory_label():
 	# iterate over item
 	var newString:String  = ""
 	for item in player_inventory:
+		var amount = player_inventory[item]
+		
+		if amount == 0:
+			continue
+		
 		var item_name = item.item_name
 		var item_description = item.item_description
-		newString += str(item_name) + "\n"
+		newString += str(amount) + "x " + str(item_name) + "\n"
 	quest_label.text = newString
 
 func _update_health_label(): 

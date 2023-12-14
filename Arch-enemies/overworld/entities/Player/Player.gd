@@ -14,7 +14,9 @@ signal saved_player()
 # -- / player states
 
 # Array to hold the players useable items 
-@onready var inventory:Array[Item] = []
+# FIXME specifying the type didn't work, tried Dictionary[Item, int], Dictionary{Item, int},
+# Dictionary<Item, int> :/
+@onready var inventory:Dictionary = {}
 
 # Array to hold hte players progess in the world 
 # used to check whether the user can traverse a certain region
@@ -82,8 +84,6 @@ func _on_interactionarea_area_exited(area):
 
 # function denoting how to interact with a given interaction in stack
 func execute_interaction():
-	
-	
 	if not all_interactions.is_empty(): # interaction not empty
 		
 		# taking first element from interaction
@@ -126,7 +126,18 @@ func use_item():
 	# TODO could use pattern matching to use the item accordingly
 	if !inventory.is_empty():
 		# inventory not empty, using item
-		var used_item = inventory.pop_at(0)
+		
+		var itemToRemove = null
+		
+		for item in inventory:
+			var amount = inventory[item]
+			
+			if amount != 0:
+				itemToRemove = item
+		
+		inventory[itemToRemove] -= 1
+		
+		var used_item = itemToRemove
 		
 		# TODO as long as this is a string, we can use this as debug
 		print(used_item)
@@ -148,7 +159,13 @@ func check_input():
 # adding item to first position of inventory
 func add_to_inventory(item:Item):
 	if item.item_type != Item.ItemType.NONE:
-		inventory.insert(0,item)
+		var tmp = find_item_instance(item)
+		
+		if tmp == null:
+			inventory[item] = 1
+		else:
+			inventory[tmp] += 1
+		
 		# emit signal to update Ui
 		updated_inventory.emit(inventory)
 	# doing nothing otherwise 
@@ -198,7 +215,13 @@ func save_state():
 	var json_inventory = []
 	
 	for item in inventory:
-		json_inventory.append(item.to_json())
+		var amount = inventory[item]
+		
+		# store amount
+		var itemDictionary = item.to_json()
+		itemDictionary["amount"] = amount
+		
+		json_inventory.append(itemDictionary)
 	
 	var state = {
 		"name" : name,
@@ -209,6 +232,16 @@ func save_state():
 		"zoom": $Camera2D.current_zoom
 	}
 	return state
+
+# FIXME: Would it be better to save the itemtype in the dictionary, not the item itself?
+# This seems to be the only solution, preventing find_item_instance, there is no way of 
+# overriding the equal or hash function of a class to influence the dictionary in godot.
+func find_item_instance(item:Item):
+	for tmp in inventory:
+		if tmp.item_type == item.item_type:
+			return tmp
+	
+	return null
 	
 # ----- 
 # debugging
