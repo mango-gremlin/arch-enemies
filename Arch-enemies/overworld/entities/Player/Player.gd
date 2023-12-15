@@ -8,23 +8,13 @@ signal saved_player()
 
 @export var SPEED = 100
 @export var zoomlevel:Vector2 = Vector2(1,1)
-@onready var anim :  AnimatedSprite2D = $AnimatedSprite2D
+@onready var anim:AnimatedSprite2D = $AnimatedSprite2D
 
 # --- / 
 # -- / player states
 
 # Array to hold the players useable items 
-# FIXME specifying the type didn't work, tried Dictionary[Item, int], Dictionary{Item, int},
-# Dictionary<Item, int> :/
-
-# FIXME this is the temporary solution to get the base structure
-# in #134 it should be refactored and be available easier / more beautiful xd 
-@onready var inventory:Dictionary = {
-	Item.ItemType.STONE : Item.new(Item.ItemType.STONE),
-	Item.ItemType.LEAF : Item.new(Item.ItemType.LEAF),
-	Item.ItemType.HONEY : Item.new(Item.ItemType.HONEY),
-	Item.ItemType.STICK : Item.new(Item.ItemType.STICK),
-}
+@onready var inventory:Dictionary = Item.init_items()
 
 # Array to hold hte players progess in the world 
 # used to check whether the user can traverse a certain region
@@ -168,9 +158,15 @@ func search_in_inventory(item:Item) -> bool:
 # checks whether requested item is contained 
 # returns true if it was and decreases amount by one
 # returns false otherwise
-func request_item(requested_item:Item) -> Item.ItemType: 
-	# TODO complete 
-	return Item.ItemType.NONE
+func request_item(requested_item:Item) -> bool: 
+	if inventory.has(requested_item.item_type):
+		var item_instance:Item = inventory[requested_item.item_type]
+		
+		if item_instance.obtain_amount() >= 1:
+			item_instance.set_amount(item_instance.obtain_amount() - 1)
+			return true
+		
+	return false
 	
 	
 
@@ -216,8 +212,6 @@ func save_state():
 		var selected_item = inventory[item]
 		var item_dictionary = selected_item.to_json()
 		
-		
-		
 		var item_amount = selected_item.obtain_amount()
 		item_dictionary["amount"] = item_amount
 		# store amount
@@ -235,18 +229,6 @@ func save_state():
 		"zoom": $Camera2D.current_zoom
 	}
 	return state
-
-# FIXME: Would it be better to save the itemtype in the dictionary, not the item itself? -> yes 
-# This seems to be the only solution, preventing find_item_instance, there is no way of 
-# overriding the equal or hash function of a class to influence the dictionary in godot.
-# TODO maybe remove as this is not necessary --> covered by request_item I would argue 
-func find_item_instance(item:Item):
-	for inventory_item in inventory:
-		var selected_item = inventory[inventory_item]
-		if selected_item.item_type == item.item_type:
-			return inventory_item
-	
-	return null
 	
 # ----- 
 # debugging

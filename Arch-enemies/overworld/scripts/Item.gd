@@ -8,16 +8,6 @@ extends Node
 # - .... 
 class_name Item
 
-#TODO refactor to be contained in Singleton of Player
-# see #134
-# makes it easier to create a new inventory --> save management or initializing player
-# easier to update structure then!
-#var inventory_structure: Dictionary ={
-	#Item.ItemType.STONE : Item.new(ItemType.STONE),
-	#Item.ItemType.LEAF : Item.new(ItemType.LEAF),
-	#Item.ItemType.HONEY : Item.new(ItemType.HONEY),
-	#Item.ItemType.STICK : Item.new(ItemType.STICK),
-#}
 
 enum ItemType {
 	STICK,
@@ -76,18 +66,23 @@ func obtain_item_description(Item:ItemType) -> String:
 			# should not occur
 			return ""
 
+
 # return item name
 func obtain_name() -> String:
 	return item_name 
 
+
 func obtain_amount() -> int:
 	return item_amount
-	
+
+
 func increase_amount():
-	item_amount +=1 
+	item_amount += 1
+
 
 func set_amount(newamount:int):
 	item_amount = newamount
+
 
 # returns string representation of obtained item 
 # TODO Where is it used?
@@ -103,7 +98,6 @@ func set_item_name(type:ItemType):
 			return "Honey"
 		_: 
 			return " "
-			
 
 
 # FIXME maybe there's a better solution, the first google search was inconlusive. str() and to_string()
@@ -119,11 +113,10 @@ func item_type_to_string(item_type_enum: ItemType):
 		ItemType.HONEY:
 			return "HONEY"
 		ItemType.NONE:
-			return "NOTHING"
+			return "NONE"
 		_:
 			return "ERROR"			
 		
-			
 
 # converts itemtype to json representation 
 # returns json-string representing item
@@ -154,4 +147,16 @@ static func string_to_item_type(str):
 			# usually not the case 
 			print("Invalid string representation received")
 			return ItemType.NONE
+			
+
+# initalizes inventory with the corrosponding Item instances
+static func init_items():
+	var inventory:Dictionary = {}
+	
+	for item_type:ItemType in ItemType.values():
+		if item_type == ItemType.NONE:
+			continue
+		inventory[item_type] = Item.new(item_type)
+	
+	return inventory
 	
