@@ -143,6 +143,12 @@ func check_input():
 		
 	
 
+# replaces inventory with given Array of items
+func set_inventory(new_inventory:Dictionary):
+	inventory = new_inventory
+	updated_inventory.emit(inventory)
+	
+
 # takes new item and updates amount stored in inventory 
 # if ItemType is "None" nothing will be changed 
 func add_to_inventory(new_item:Item):
