@@ -72,6 +72,8 @@ func _process(_delta):
 			# object continues following mouse position, rounded to grid size.
 			var target_position_x = Global.round_to_nearest(get_global_mouse_position().x - mouse_offset.x, grid_size)
 			var target_position_y = Global.round_to_nearest(get_global_mouse_position().y - mouse_offset.y, grid_size)
+			if self.is_in_group("squirrel"):
+				target_position_y += 5
 			self.global_position.x = target_position_x
 			self.global_position.y = target_position_y
 			
