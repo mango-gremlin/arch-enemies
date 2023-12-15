@@ -14,10 +14,10 @@ size = Vector2(10, 10)
 size = Vector2(9, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v5quv"]
-size = Vector2(10, 9)
+size = Vector2(9, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mvc5n"]
-size = Vector2(9, 10)
+size = Vector2(10, 9)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cfceg"]
 size = Vector2(10, 9)
@@ -49,7 +49,6 @@ collision_mask = 2
 script = ExtResource("3_i8vs8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="left_dropzone"]
-position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_2xjkc")
 
 [node name="ColorRect" type="ColorRect" parent="left_dropzone"]
@@ -75,7 +74,6 @@ offset_bottom = 5.0
 metadata/_edit_use_anchors_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="right_dropzone"]
-position = Vector2(-10, -10.5)
 shape = SubResource("RectangleShape2D_v5quv")
 
 [node name="top_dropzone" type="StaticBody2D" parent="." groups=["dropable", "top_dropzone"]]
@@ -93,7 +91,6 @@ offset_bottom = 5.0
 metadata/_edit_use_anchors_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="top_dropzone"]
-position = Vector2(10.5, 10)
 shape = SubResource("RectangleShape2D_mvc5n")
 
 [node name="bottom_dropzone" type="StaticBody2D" parent="." groups=["bottom_dropzone", "dropable"]]
@@ -111,7 +108,6 @@ offset_bottom = 5.0
 metadata/_edit_use_anchors_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="bottom_dropzone"]
-position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_cfceg")
 
 [connection signal="body_entered" from="spider" to="." method="_on_spider_body_entered"]
