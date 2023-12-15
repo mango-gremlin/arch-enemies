@@ -145,6 +145,12 @@ func check_input():
 		
 	
 
+# replaces inventory with given Array of items
+func set_inventory(new_inventory:Array[Item]):
+	inventory = new_inventory
+	updated_inventory.emit(inventory)
+	
+
 # adding item to first position of inventory
 func add_to_inventory(item:Item):
 	if item.item_type != Item.ItemType.NONE:

@@ -50,7 +50,10 @@ func load_config():
 			
 			player_object.position = Vector2(position_x, position_y)
 			
-			player_object.inventory = generate_inventory(node_data["inventory"])
+			var new_inventory: Array[Item] = generate_inventory(node_data["inventory"])
+			player_object.set_inventory(new_inventory)
+			
+			
 			
 			camera_object._set_current_zoom(node_data["zoom"])
 			
