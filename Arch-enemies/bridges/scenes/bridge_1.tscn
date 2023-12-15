@@ -129,10 +129,10 @@ sources/0 = SubResource("TileSetAtlasSource_vsiy0")
 size = Vector2(243.5, 54)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0tifu"]
-size = Vector2(8, 9.5)
+size = Vector2(8, 4.48757)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_63llj"]
-size = Vector2(78, 8)
+size = Vector2(28, 7.99175)
 
 [sub_resource type="GDScript" id="GDScript_62t5p"]
 script/source = "extends Control
@@ -256,8 +256,7 @@ collision_mask = 2
 script = ExtResource("13_qdl2b")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="shore_right_dropzone"]
-position = Vector2(5, -2.4931)
-scale = Vector2(1, 0.5)
+position = Vector2(5, -2.5)
 shape = SubResource("RectangleShape2D_0tifu")
 
 [node name="ColorRect" type="ColorRect" parent="shore_right_dropzone"]
@@ -276,16 +275,14 @@ script = ExtResource("13_qdl2b")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="shore_top_dropzone"]
 position = Vector2(-1, 1)
-scale = Vector2(0.375, 1)
 shape = SubResource("RectangleShape2D_63llj")
 
 [node name="ColorRect" type="ColorRect" parent="shore_top_dropzone"]
 z_index = -1
 offset_left = -16.0
-offset_top = -3.98896
-offset_right = -6.0
-offset_bottom = 6.01104
-scale = Vector2(3, 1)
+offset_top = -4.0
+offset_right = 14.0
+offset_bottom = 6.0
 color = Color(1, 100, 1, 1)
 metadata/_edit_use_anchors_ = true
 
