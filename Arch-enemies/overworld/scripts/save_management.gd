@@ -59,19 +59,28 @@ func load_config():
 			
 	print("Loading complete")
 			
-	
+
+# takes dictionary and 
 func generate_inventory(inventory_data):
 	print("Generating inventory from string: \"", inventory_data, "\"")
 	# iterate over each item and generate an item from each 
 	
-	var inventory:Dictionary = {}
+	# FIXME with #134 this will be improved
+	# provides a basic structure for a dictionary
+	var inventory:Dictionary = {
+	Item.ItemType.STONE : Item.new(Item.ItemType.STONE),
+	Item.ItemType.LEAF : Item.new(Item.ItemType.LEAF),
+	Item.ItemType.HONEY : Item.new(Item.ItemType.HONEY),
+	Item.ItemType.STICK : Item.new(Item.ItemType.STICK),
+	}
 	
 	for inv in inventory_data:
 		var item_type = Item.string_to_item_type(inv["type"])
 		var amount = inv["amount"]
 		#var item_description = inv["item_description"]
 		
-		inventory[Item.new(item_type)] = amount
+		var selected_item = inventory[item_type]
+		selected_item.set_amount(amount)
 	
 	return inventory
 	

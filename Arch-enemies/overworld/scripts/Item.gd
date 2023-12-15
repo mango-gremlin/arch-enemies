@@ -8,6 +8,17 @@ extends Node
 # - .... 
 class_name Item
 
+#TODO refactor to be contained in Singleton of Player
+# see #134
+# makes it easier to create a new inventory --> save management or initializing player
+# easier to update structure then!
+#var inventory_structure: Dictionary ={
+	#Item.ItemType.STONE : Item.new(ItemType.STONE),
+	#Item.ItemType.LEAF : Item.new(ItemType.LEAF),
+	#Item.ItemType.HONEY : Item.new(ItemType.HONEY),
+	#Item.ItemType.STICK : Item.new(ItemType.STICK),
+#}
+
 enum ItemType {
 	STICK,
 	STONE,
@@ -31,6 +42,8 @@ enum ItemType {
 var item_name:String
 var item_description:String
 var item_type:ItemType
+# denotes amount of this item available
+var item_amount:int 
 
 
 
@@ -40,11 +53,13 @@ func _init(new_item_type:ItemType):
 	item_type = new_item_type
 	item_description = obtain_item_description(item_type)
 	item_name = set_item_name(new_item_type)
+	item_amount = 0
 	
 	
 	
 
 # set description according to given itemType:
+# TODO update according to #148
 func obtain_item_description(Item:ItemType) -> String:
 	match Item:
 		ItemType.STICK:
@@ -60,6 +75,19 @@ func obtain_item_description(Item:ItemType) -> String:
 		_:
 			# should not occur
 			return ""
+
+# return item name
+func obtain_name() -> String:
+	return item_name 
+
+func obtain_amount() -> int:
+	return item_amount
+	
+func increase_amount():
+	item_amount +=1 
+
+func set_amount(newamount:int):
+	item_amount = newamount
 
 # returns string representation of obtained item 
 # TODO Where is it used?

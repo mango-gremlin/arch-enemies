@@ -16,7 +16,15 @@ signal saved_player()
 # Array to hold the players useable items 
 # FIXME specifying the type didn't work, tried Dictionary[Item, int], Dictionary{Item, int},
 # Dictionary<Item, int> :/
-@onready var inventory:Dictionary = {}
+
+# FIXME this is the temporary solution to get the base structure
+# in #134 it should be refactored and be available easier / more beautiful xd 
+@onready var inventory:Dictionary = {
+	Item.ItemType.STONE : Item.new(Item.ItemType.STONE),
+	Item.ItemType.LEAF : Item.new(Item.ItemType.LEAF),
+	Item.ItemType.HONEY : Item.new(Item.ItemType.HONEY),
+	Item.ItemType.STICK : Item.new(Item.ItemType.STICK),
+}
 
 # Array to hold hte players progess in the world 
 # used to check whether the user can traverse a certain region
@@ -121,28 +129,6 @@ func execute_interaction():
 			_: #default
 				pass
 
-# uses item and removes its entry from inventory
-func use_item():
-	# TODO could use pattern matching to use the item accordingly
-	if !inventory.is_empty():
-		# inventory not empty, using item
-		
-		var itemToRemove = null
-		
-		for item in inventory:
-			var amount = inventory[item]
-			
-			if amount != 0:
-				itemToRemove = item
-		
-		inventory[itemToRemove] -= 1
-		
-		var used_item = itemToRemove
-		
-		# TODO as long as this is a string, we can use this as debug
-		print(used_item)
-		# update UI
-		updated_inventory.emit(inventory)
 
 # checks against definde inputs, takes action if action was registered
 # TODO naming could be improved
@@ -150,31 +136,37 @@ func check_input():
 	if Input.is_action_just_pressed("interact_overworld"):
 		execute_interaction()
 	if Input.is_action_just_pressed("use_item"):
-		use_item()
+		#use_item()
+		pass
 	if Input.is_action_just_pressed("open_menu"):
 		enter_pause_menu()
 		
 	
 
-# adding item to first position of inventory
-func add_to_inventory(item:Item):
-	if item.item_type != Item.ItemType.NONE:
-		var tmp = find_item_instance(item)
-		
-		if tmp == null:
-			inventory[item] = 1
-		else:
-			inventory[tmp] += 1
-		
+# takes new item and updates amount stored in inventory 
+# if ItemType is "None" nothing will be changed 
+func add_to_inventory(new_item:Item):
+	if new_item.item_type != Item.ItemType.NONE:
+		# we can verify that every item is constantly available!
+		var selected_item = inventory[new_item.item_type]
+		selected_item.increase_amount()
 		# emit signal to update Ui
 		updated_inventory.emit(inventory)
-	# doing nothing otherwise 
 	# --> no item was received
 
 # query for specific item 
-func search_in_inventory(item:Item):
+func search_in_inventory(item:Item) -> bool:
 	# FIXME requires new structure of inventory
-	pass
+	return false 
+
+# checks whether requested item is contained 
+# returns true if it was and decreases amount by one
+# returns false otherwise
+func request_item(requested_item:Item) -> Item.ItemType: 
+	# TODO complete 
+	return Item.ItemType.NONE
+	
+	
 
 # ---- 
 # scene change management
@@ -215,13 +207,18 @@ func save_state():
 	var json_inventory = []
 	
 	for item in inventory:
-		var amount = inventory[item]
+		var selected_item = inventory[item]
+		var item_dictionary = selected_item.to_json()
 		
+		
+		
+		var item_amount = selected_item.obtain_amount()
+		item_dictionary["amount"] = item_amount
 		# store amount
-		var itemDictionary = item.to_json()
-		itemDictionary["amount"] = amount
 		
-		json_inventory.append(itemDictionary)
+		
+		
+		json_inventory.append(item_dictionary)
 	
 	var state = {
 		"name" : name,
@@ -233,13 +230,15 @@ func save_state():
 	}
 	return state
 
-# FIXME: Would it be better to save the itemtype in the dictionary, not the item itself?
+# FIXME: Would it be better to save the itemtype in the dictionary, not the item itself? -> yes 
 # This seems to be the only solution, preventing find_item_instance, there is no way of 
 # overriding the equal or hash function of a class to influence the dictionary in godot.
+# TODO maybe remove as this is not necessary --> covered by request_item I would argue 
 func find_item_instance(item:Item):
-	for tmp in inventory:
-		if tmp.item_type == item.item_type:
-			return tmp
+	for inventory_item in inventory:
+		var selected_item = inventory[inventory_item]
+		if selected_item.item_type == item.item_type:
+			return inventory_item
 	
 	return null
 	

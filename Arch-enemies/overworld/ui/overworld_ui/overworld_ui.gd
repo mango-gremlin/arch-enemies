@@ -21,14 +21,14 @@ func _update_inventory_label():
 	# iterate over item
 	var newString:String  = ""
 	for item in player_inventory:
-		var amount = player_inventory[item]
+		var selected_item = player_inventory[item]
 		
-		if amount == 0:
-			continue
-		
-		var item_name = item.item_name
-		var item_description = item.item_description
-		newString += str(amount) + "x " + str(item_name) + "\n"
+		#if amount == 0:
+		#	continue
+		var item_amount = selected_item.obtain_amount()
+		var item_name = selected_item.obtain_name()
+		#var item_description = selected_item.obtain_item_description()
+		newString += str(item_amount) + "x " + str(item_name) + "\n"
 	quest_label.text = newString
 
 func _update_health_label(): 
