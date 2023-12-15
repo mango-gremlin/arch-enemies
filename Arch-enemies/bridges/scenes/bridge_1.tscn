@@ -134,7 +134,6 @@ func _on_continue_button_pressed():
 "
 
 [node name="main_scene" type="Node2D"]
-scale = Vector2(1, 1.00277)
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(15, 65)
