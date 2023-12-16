@@ -19,7 +19,7 @@ signal saved_player()
 # Array to hold hte players progess in the world 
 # used to check whether the user can traverse a certain region
 # here each item is of type INT denoting the LEVEL-ID 
-@onready var bridges_built:Array[int] = []
+#@onready var bridges_built:Array[int] = []
 
 
 
@@ -27,6 +27,8 @@ signal saved_player()
 # collects all interactions that we currently have 
 # Queue-like structure 
 @onready var all_interactions = []
+
+# TODO might be removed, for debugging only
 @onready var interactionLabel = $interactioncomponents/InteractLabel
 
 func _ready():
@@ -43,7 +45,9 @@ func _physics_process(delta):
 
 
 func player_movement(delta):
-	
+	# disallow movement when in dialogue
+	if SingletonPlayer.is_in_dialogue:
+		return
 	velocity = Vector2.ZERO
 	if Input.is_action_pressed("move_up"):
 		velocity.y -= SPEED
@@ -107,7 +111,12 @@ func execute_interaction():
 				# adding to inventory! 
 			Interactable.InteractionType.NPC:
 				print("npc interaction")
+				
 				var resulting_dict: Dictionary = active_interaction.interact_with_area()
+				
+				# entering dialogue, disable movement
+				SingletonPlayer.enter_dialogue(resulting_dict["npc_id"])
+				
 				set_interactionLabel(resulting_dict["dialogue"])
 				# FIXME requires enum "QUEST" to match against!
 				# FIXME should be easier when done with separate **dialogue system**
@@ -127,6 +136,10 @@ func check_input():
 		execute_interaction()
 	if Input.is_action_just_pressed("use_item"):
 		#use_item()
+		# FIXME debugging dialogue  --> resetting is_in_dialogue
+		# TODO handled in Dialogue-System instead
+		SingletonPlayer.exit_dialogue()
+		set_interactionLabel("")
 		pass
 	if Input.is_action_just_pressed("open_menu"):
 		enter_pause_menu()
@@ -134,6 +147,7 @@ func check_input():
 	
 
 # replaces inventory with given Array of items
+# FIXME --> Singleton Conversion
 func set_inventory(new_inventory:Dictionary):
 	inventory = new_inventory
 	updated_inventory.emit(inventory)
@@ -141,6 +155,7 @@ func set_inventory(new_inventory:Dictionary):
 
 # takes new item and updates amount stored in inventory 
 # if ItemType is "None" nothing will be changed 
+# FIXME --> Singleton Conversion
 func add_to_inventory(new_item:Item):
 	if new_item.item_type != Item.ItemType.NONE:
 		# we can verify that every item is constantly available!
@@ -151,6 +166,7 @@ func add_to_inventory(new_item:Item):
 	# --> no item was received
 
 # query for specific item 
+# FIXME --> Singleton Conversion
 func search_in_inventory(item:Item) -> bool:
 	# FIXME requires new structure of inventory
 	return false 
@@ -158,6 +174,7 @@ func search_in_inventory(item:Item) -> bool:
 # checks whether requested item is contained 
 # returns true if it was and decreases amount by one
 # returns false otherwise
+# FIXME --> Singleton Conversion
 func request_item(requested_item:Item) -> bool: 
 	if inventory.has(requested_item.item_type):
 		var item_instance:Item = inventory[requested_item.item_type]
@@ -183,19 +200,17 @@ func enter_pause_menu():
 func enter_bridge_scene(bridge_id):
 	print("entering bridge game", bridge_id)
 	exit_overworld()
-	# search for bridgeGame with correct id! 
+	# TODO search for bridgeGame with correct id! 
 	# load it afterwards
 	# enter_pause_menu() # default until we merged
 	get_tree().change_scene_to_file("res://bridges/scenes/bridge_1.tscn")
 	
 
-# saves player state 
+# prepare player to leave overworld, store its state 
 func exit_overworld():
-	# TODO save Inventory 
 	print("save user position")
 	save_player()
 	
-
 # ---- 
 #  saving player state
 # ---- 
@@ -204,7 +219,7 @@ func save_player():
 	print("save user position")
 	saved_player.emit()
 	
-
+# TODO --> Singleton conversion!
 func save_state():
 	var json_inventory = []
 	
@@ -223,6 +238,7 @@ func save_state():
 	var state = {
 		"name" : name,
 		"parent" : get_parent().get_path(),
+		# FIXME --> Singleton Conversion
 		"pos_x" : position.x, # Vector2 is not supported by JSON
 		"pos_y" : position.y,
 		"inventory": json_inventory,
@@ -238,9 +254,3 @@ func set_interactionLabel(label:String):
 	interactionLabel.text = label
 	
 
-#func update_interactionLabel():
-#	if all_interactions:
-#		# taking active interaction and insert its label --> descriptions
-#		interactionLabel.text = all_interactions[0].interact_label
-#	else:
-#		interactionLabel.text = ""

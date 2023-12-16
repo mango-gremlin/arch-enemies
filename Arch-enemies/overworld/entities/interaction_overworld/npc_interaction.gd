@@ -92,6 +92,10 @@ func _ready():
 # --- / 
 # -- / interaction with player 
 
+# returns ncp id
+func obtain_id() -> int:
+	return npc_id
+
 # returns npc name
 func obtain_name() -> String:
 	return npc_name
