@@ -12,7 +12,7 @@ var is_dragging := false
 var inside_object := false
 var dropzone_occupied := false
 @export var grid_size : float = 10.0 # size of a square in grid
- 
+@export var body_area2D : Area2D
 var connected_to = null
 var someone_connects_to_this = false
 
