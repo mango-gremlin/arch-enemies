@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bctrmmslp74vt"
-path="res://.godot/imported/icon.svg-8b96d0b2817726ab1f015190b4715c1f.ctex"
+uid="uid://diwvqonlr6748"
+path="res://.godot/imported/box_squirrel_tall.png-ebd2492f34594c25c40b528ff708e423.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://bridges/icon.svg"
-dest_files=["res://.godot/imported/icon.svg-8b96d0b2817726ab1f015190b4715c1f.ctex"]
+source_file="res://bridges/assets/box_squirrel_tall.png"
+dest_files=["res://.godot/imported/box_squirrel_tall.png-ebd2492f34594c25c40b528ff708e423.ctex"]
 
 [params]
 
@@ -32,6 +32,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false

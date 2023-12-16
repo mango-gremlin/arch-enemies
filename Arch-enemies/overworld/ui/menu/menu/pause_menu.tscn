@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cv4r3ql0yg1la"]
 
-[ext_resource type="Script" path="res://overworld/ui/menu/pause_menu.gd" id="1_vyga1"]
+[ext_resource type="Script" path="res://overworld/ui/menu/menu/pause_menu.gd" id="1_vyga1"]
 
 [node name="pause_menu" type="Control"]
 layout_mode = 3

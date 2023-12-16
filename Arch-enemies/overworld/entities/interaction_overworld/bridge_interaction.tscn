@@ -16,4 +16,3 @@ offset_bottom = 9.0
 texture = ExtResource("1_0w4hd")
 
 [node name="interactionspot" parent="." instance=ExtResource("2_l2pv7")]
-interact_type = 1

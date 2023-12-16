@@ -8,13 +8,13 @@ signal saved_player()
 
 @export var SPEED = 100
 @export var zoomlevel:Vector2 = Vector2(1,1)
-@onready var anim :  AnimatedSprite2D = $AnimatedSprite2D
+@onready var anim:AnimatedSprite2D = $AnimatedSprite2D
 
 # --- / 
 # -- / player states
 
 # Array to hold the players useable items 
-@onready var inventory:Array[Item] = []
+@onready var inventory:Dictionary = Item.init_items()
 
 # Array to hold hte players progess in the world 
 # used to check whether the user can traverse a certain region
@@ -32,14 +32,14 @@ signal saved_player()
 func _ready():
 	#debug 
 	$Camera2D.player_object = self
-	update_interactionLabel()
+	#update_interactionLabel()
 
 func _physics_process(delta):
 	player_movement(delta)
 	# checking for interaction in world
 	# debugging 
 	check_input()
-	update_interactionLabel()
+	#update_interactionLabel()
 
 
 func player_movement(delta):
@@ -82,8 +82,6 @@ func _on_interactionarea_area_exited(area):
 
 # function denoting how to interact with a given interaction in stack
 func execute_interaction():
-	
-	
 	if not all_interactions.is_empty(): # interaction not empty
 		
 		# taking first element from interaction
@@ -94,15 +92,26 @@ func execute_interaction():
 			Interactable.InteractionType.BRIDGE:
 				print("entering bridge game")
 				# drawing ID from Bridge-Interaction
-				var bridge_id = active_interaction.interact_value
-				enter_bridge_scene(bridge_id)
+				# FIXME maybe we should instead use a standardized interaction type?
+				var resulting_dict: Dictionary = active_interaction.interact_with_area()
+				
+				print(resulting_dict["id"])
+				set_interactionLabel(resulting_dict["description"])
+				#enter_bridge_scene(bridge_id)
 			Interactable.InteractionType.ITEM: 
 				print("found an item")
-				add_to_inventory(active_interaction.interact_value)
+				var resulting_dict: Dictionary = active_interaction.interact_with_area()
+				set_interactionLabel(resulting_dict["dialogue"])
+				add_to_inventory(resulting_dict["item"])
+				#add_to_inventory(active_interaction.interact_value)
 				# adding to inventory! 
 			Interactable.InteractionType.NPC:
 				print("npc interaction")
-				pass
+				var resulting_dict: Dictionary = active_interaction.interact_with_area()
+				set_interactionLabel(resulting_dict["dialogue"])
+				# FIXME requires enum "QUEST" to match against!
+				# FIXME should be easier when done with separate **dialogue system**
+				add_to_inventory(resulting_dict["value"])
 			Interactable.InteractionType.DEBUG:
 				print("debug interaction")
 				pass
@@ -110,17 +119,6 @@ func execute_interaction():
 			_: #default
 				pass
 
-# uses item and removes its entry from inventory
-func use_item():
-	# TODO could use pattern matching to use the item accordingly
-	if !inventory.is_empty():
-		# inventory not empty, using item
-		var used_item = inventory.pop_at(0)
-		
-		# TODO as long as this is a string, we can use this as debug
-		print(used_item)
-		# update UI
-		updated_inventory.emit(inventory)
 
 # checks against definde inputs, takes action if action was registered
 # TODO naming could be improved
@@ -128,18 +126,49 @@ func check_input():
 	if Input.is_action_just_pressed("interact_overworld"):
 		execute_interaction()
 	if Input.is_action_just_pressed("use_item"):
-		use_item()
+		#use_item()
+		pass
 	if Input.is_action_just_pressed("open_menu"):
 		enter_pause_menu()
 		
 	
 
-# adding item to first position of inventory
-func add_to_inventory(item:Item):
-	inventory.insert(0,item)
-	# emit signal to update Ui
+# replaces inventory with given Array of items
+func set_inventory(new_inventory:Dictionary):
+	inventory = new_inventory
 	updated_inventory.emit(inventory)
+	
 
+# takes new item and updates amount stored in inventory 
+# if ItemType is "None" nothing will be changed 
+func add_to_inventory(new_item:Item):
+	if new_item.item_type != Item.ItemType.NONE:
+		# we can verify that every item is constantly available!
+		var selected_item = inventory[new_item.item_type]
+		selected_item.increase_amount()
+		# emit signal to update Ui
+		updated_inventory.emit(inventory)
+	# --> no item was received
+
+# query for specific item 
+func search_in_inventory(item:Item) -> bool:
+	# FIXME requires new structure of inventory
+	return false 
+
+# checks whether requested item is contained 
+# returns true if it was and decreases amount by one
+# returns false otherwise
+func request_item(requested_item:Item) -> bool: 
+	if inventory.has(requested_item.item_type):
+		var item_instance:Item = inventory[requested_item.item_type]
+		
+		if item_instance.obtain_amount() >= 1:
+			item_instance.set_amount(item_instance.obtain_amount() - 1)
+			return true
+		
+	return false
+	
+	
 
 # ---- 
 # scene change management
@@ -148,7 +177,8 @@ func add_to_inventory(item:Item):
 func enter_pause_menu():
 	print("pause menu")
 	exit_overworld()
-	get_tree().change_scene_to_file("res://overworld/ui/menu/pause_menu.tscn")
+	# TODO 
+	get_tree().change_scene_to_file("res://overworld/ui/menu/menu/pause_menu.tscn")
 
 func enter_bridge_scene(bridge_id):
 	print("entering bridge game", bridge_id)
@@ -156,7 +186,7 @@ func enter_bridge_scene(bridge_id):
 	# search for bridgeGame with correct id! 
 	# load it afterwards
 	# enter_pause_menu() # default until we merged
-	get_tree().change_scene_to_file("res://bridges/bridge_1.tscn")
+	get_tree().change_scene_to_file("res://bridges/scenes/bridge_1.tscn")
 	
 
 # saves player state 
@@ -179,7 +209,16 @@ func save_state():
 	var json_inventory = []
 	
 	for item in inventory:
-		json_inventory.append(item.to_json())
+		var selected_item = inventory[item]
+		var item_dictionary = selected_item.to_json()
+		
+		var item_amount = selected_item.obtain_amount()
+		item_dictionary["amount"] = item_amount
+		# store amount
+		
+		
+		
+		json_inventory.append(item_dictionary)
 	
 	var state = {
 		"name" : name,
@@ -195,9 +234,13 @@ func save_state():
 # debugging
 # ----- 
 
-func update_interactionLabel():
-	if all_interactions:
-		# taking active interaction and insert its label --> descriptions
-		interactionLabel.text = all_interactions[0].interact_label
-	else:
-		interactionLabel.text = ""
+func set_interactionLabel(label:String):
+	interactionLabel.text = label
+	
+
+#func update_interactionLabel():
+#	if all_interactions:
+#		# taking active interaction and insert its label --> descriptions
+#		interactionLabel.text = all_interactions[0].interact_label
+#	else:
+#		interactionLabel.text = ""

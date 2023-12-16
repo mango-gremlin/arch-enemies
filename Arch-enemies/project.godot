@@ -11,16 +11,22 @@ config_version=5
 [application]
 
 config/name="Arch-Enemies"
-run/main_scene="res://bridges/bridge_1.tscn"
+
+run/main_scene="res://overworld/ui/main_menu/main_menu.tscn"
+
 config/features=PackedStringArray("4.2", "Forward Plus")
 
 [autoload]
 
-Global="*res://bridges/global.gd"
+Global="*res://bridges/script/global.gd"
 
 [dotnet]
 
 project/assembly_name="Go Dot"
+
+[editor]
+
+script/search_in_file_extensions=PackedStringArray("gd", "gdshader", "tscn")
 
 [input]
 

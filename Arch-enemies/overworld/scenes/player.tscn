@@ -1,8 +1,8 @@
 [gd_scene load_steps=11 format=3 uid="uid://dndu4pg1i3tlf"]
 
-[ext_resource type="Script" path="res://overworld/script/Player.gd" id="1_lcx6v"]
+[ext_resource type="Script" path="res://overworld/entities/Player/Player.gd" id="1_lcx6v"]
 [ext_resource type="Texture2D" uid="uid://802nqkliaru4" path="res://assets/art/characters/fox.png" id="2_tenk7"]
-[ext_resource type="Script" path="res://overworld/script/ZoomCamera.gd" id="3_y8j37"]
+[ext_resource type="Script" path="res://overworld/entities/Player/ZoomCamera.gd" id="3_y8j37"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8xcpl"]
 size = Vector2(23, 9)
