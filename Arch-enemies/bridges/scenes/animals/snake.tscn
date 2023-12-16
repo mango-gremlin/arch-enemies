@@ -65,7 +65,6 @@ collision_mask = 2
 script = ExtResource("3_fqrgl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="left_dropzone"]
-position = Vector2(5, 0)
 shape = SubResource("RectangleShape2D_lyvfn")
 
 [node name="ColorRect" type="ColorRect" parent="left_dropzone"]
@@ -83,7 +82,6 @@ collision_mask = 2
 script = ExtResource("3_fqrgl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="top_dropzone"]
-position = Vector2(19, 1)
 shape = SubResource("RectangleShape2D_f3mbg")
 
 [node name="ColorRect" type="ColorRect" parent="top_dropzone"]
@@ -103,7 +101,6 @@ collision_mask = 2
 script = ExtResource("3_fqrgl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="bottom_dropzone"]
-position = Vector2(19, -1)
 shape = SubResource("RectangleShape2D_f6euc")
 
 [node name="ColorRect" type="ColorRect" parent="bottom_dropzone"]

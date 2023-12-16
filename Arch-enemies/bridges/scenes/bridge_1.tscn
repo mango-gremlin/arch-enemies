@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://cf5udd6l65fuv"]
+[gd_scene load_steps=27 format=3 uid="uid://cf5udd6l65fuv"]
 
 [ext_resource type="Texture2D" uid="uid://d4khq8o7aaei" path="res://bridges/assets/green.png" id="1_rsd3v"]
 [ext_resource type="Texture2D" uid="uid://dc2lxeyr45vp3" path="res://bridges/assets/blue_dark.png" id="2_kpwak"]
@@ -98,39 +98,11 @@ sources/1 = SubResource("TileSetAtlasSource_udipr")
 sources/5 = SubResource("TileSetAtlasSource_ycunn")
 sources/6 = SubResource("TileSetAtlasSource_2l45q")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_3avum"]
-size = Vector2(37.5, 59.75)
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vsiy0"]
-texture = ExtResource("2_kpwak")
-texture_region_size = Vector2i(10, 10)
-0:0/0 = 0
-0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-0:0/0/physics_layer_0/angular_velocity = 0.0
-0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-5, -5, 5, -5, 5, 5, -5, 5)
-1:0/0 = 0
-1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-1:0/0/physics_layer_0/angular_velocity = 0.0
-1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-5, -5, 5, -5, 5, 5, -5, 5)
-0:1/0 = 0
-0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-0:1/0/physics_layer_0/angular_velocity = 0.0
-0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-5, -5, 5, -5, 5, 5, -5, 5)
-1:1/0 = 0
-1:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-1:1/0/physics_layer_0/angular_velocity = 0.0
-1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-5, -5, 5, -5, 5, 5, -5, 5)
-
-[sub_resource type="TileSet" id="TileSet_ld1cc"]
-tile_size = Vector2i(10, 10)
-physics_layer_0/collision_layer = 1
-sources/0 = SubResource("TileSetAtlasSource_vsiy0")
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6rkrv"]
 size = Vector2(243.5, 54)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3avum"]
-size = Vector2(63, 59.75)
+size = Vector2(38, 37.6385)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0tifu"]
 size = Vector2(9, 20)
@@ -179,10 +151,9 @@ position = Vector2(142, 82.5912)
 shape = SubResource("RectangleShape2D_6rkrv")
 
 [node name="GoalArea2D" type="Area2D" parent="TileMap"]
-position = Vector2(292, -10.1519)
 
 [node name="GoalCollisionShape2D" type="CollisionShape2D" parent="TileMap/GoalArea2D"]
-position = Vector2(280.25, -10.1519)
+position = Vector2(279, 0.180771)
 shape = SubResource("RectangleShape2D_3avum")
 debug_color = Color(0.521569, 0.560784, 0.341176, 0.419608)
 
@@ -252,7 +223,6 @@ collision_mask = 2
 script = ExtResource("13_qdl2b")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="shore_right_dropzone"]
-position = Vector2(5, -2.5)
 shape = SubResource("RectangleShape2D_0tifu")
 
 [node name="ColorRect" type="ColorRect" parent="shore_right_dropzone"]
@@ -270,7 +240,6 @@ collision_mask = 2
 script = ExtResource("13_qdl2b")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="shore_top_dropzone"]
-position = Vector2(-1, 1)
 shape = SubResource("RectangleShape2D_63llj")
 
 [node name="ColorRect" type="ColorRect" parent="shore_top_dropzone"]
@@ -331,7 +300,6 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 script = SubResource("GDScript_62t5p")
 
-[connection signal="body_entered" from="TileMap/Area2D" to="player" method="_on_area_2d_body_entered"]
 [node name="world_edge_left" parent="." instance=ExtResource("16_jmtqp")]
 position = Vector2(-15, 5.98343)
 scale = Vector2(1, 10)
@@ -340,6 +308,7 @@ scale = Vector2(1, 10)
 position = Vector2(325, -4.98619)
 scale = Vector2(1, 9)
 
+[connection signal="body_entered" from="TileMap/Area2D" to="player" method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="TileMap/GoalArea2D" to="player" method="_on_goal_area_2d_body_entered"]
 [connection signal="body_entered" from="death_hazard" to="player" method="_on_death_hazard_body_entered"]
 [connection signal="toggled" from="mode_button" to="mode_button" method="_on_toggled"]
