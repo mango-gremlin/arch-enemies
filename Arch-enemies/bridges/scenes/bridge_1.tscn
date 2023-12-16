@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://cf5udd6l65fuv"]
+[gd_scene load_steps=24 format=3 uid="uid://cf5udd6l65fuv"]
 
 [ext_resource type="Texture2D" uid="uid://d4khq8o7aaei" path="res://bridges/assets/green.png" id="1_rsd3v"]
 [ext_resource type="Texture2D" uid="uid://dc2lxeyr45vp3" path="res://bridges/assets/blue_dark.png" id="2_kpwak"]
@@ -14,8 +14,8 @@
 [ext_resource type="PackedScene" uid="uid://dipauq7hxbt1f" path="res://bridges/scenes/animals/squirrel.tscn" id="11_1d812"]
 [ext_resource type="PackedScene" uid="uid://bqtg1c4s2pkab" path="res://bridges/scenes/animals/spider.tscn" id="11_daeky"]
 [ext_resource type="PackedScene" uid="uid://c5tl3m10s5tby" path="res://bridges/scenes/animals/snake.tscn" id="13_cijaf"]
-[ext_resource type="Script" path="res://bridges/script/dropzones_visibility.gd" id="13_qdl2b"]
 [ext_resource type="PackedScene" uid="uid://cbremi6mc4sua" path="res://bridges/scenes/world_edge.tscn" id="16_jmtqp"]
+[ext_resource type="PackedScene" uid="uid://cekfh8lbohea" path="res://shore.tscn" id="16_mfxt7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_s2tkw"]
 texture = ExtResource("1_rsd3v")
@@ -104,12 +104,6 @@ size = Vector2(243.5, 54)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3avum"]
 size = Vector2(38, 37.6385)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_0tifu"]
-size = Vector2(9, 20)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_63llj"]
-size = Vector2(30, 9)
-
 [node name="main_scene" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -192,42 +186,6 @@ text = "Snake"
 script = ExtResource("10_njtro")
 animal_scene = ExtResource("13_cijaf")
 
-[node name="shore_right_dropzone" type="StaticBody2D" parent="." groups=["dropable", "shore_dropzone", "side_dropzone"]]
-position = Vector2(40, 105)
-collision_layer = 2
-collision_mask = 2
-script = ExtResource("13_qdl2b")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="shore_right_dropzone"]
-shape = SubResource("RectangleShape2D_0tifu")
-
-[node name="ColorRect" type="ColorRect" parent="shore_right_dropzone"]
-z_index = -1
-offset_left = -5.0
-offset_top = -10.0
-offset_right = 5.0
-scale = Vector2(1, 2)
-metadata/_edit_use_anchors_ = true
-
-[node name="shore_top_dropzone" type="StaticBody2D" parent="." groups=["dropable", "shore_dropzone", "top_dropzone"]]
-position = Vector2(20, 90)
-collision_layer = 2
-collision_mask = 2
-script = ExtResource("13_qdl2b")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="shore_top_dropzone"]
-shape = SubResource("RectangleShape2D_63llj")
-
-[node name="ColorRect" type="ColorRect" parent="shore_top_dropzone"]
-z_index = -1
-offset_left = -15.0
-offset_top = -5.0
-offset_right = -5.0
-offset_bottom = 5.0
-scale = Vector2(3, 1)
-color = Color(1, 100, 1, 1)
-metadata/_edit_use_anchors_ = true
-
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(155, 87.7569)
 scale = Vector2(1.19636, 1.18473)
@@ -246,6 +204,14 @@ scale = Vector2(1, 10)
 [node name="world_edge_right" parent="." instance=ExtResource("16_jmtqp")]
 position = Vector2(325, -4.98619)
 scale = Vector2(1, 9)
+
+[node name="shore_dropzone_top" parent="." groups=["top_dropzone"] instance=ExtResource("16_mfxt7")]
+position = Vector2(20, 90)
+scale = Vector2(3, 1)
+
+[node name="shore_dropzone_side" parent="." groups=["side_dropzone"] instance=ExtResource("16_mfxt7")]
+position = Vector2(40, 105)
+scale = Vector2(1, 2)
 
 [connection signal="body_entered" from="TileMap/Area2D" to="player" method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="TileMap/GoalArea2D" to="player" method="_on_goal_area_2d_body_entered"]
