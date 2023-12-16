@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://cf5udd6l65fuv"]
+[gd_scene load_steps=29 format=3 uid="uid://cf5udd6l65fuv"]
 
 [ext_resource type="Texture2D" uid="uid://d4khq8o7aaei" path="res://bridges/assets/green.png" id="1_rsd3v"]
 [ext_resource type="Texture2D" uid="uid://dc2lxeyr45vp3" path="res://bridges/assets/blue_dark.png" id="2_kpwak"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://bqtg1c4s2pkab" path="res://bridges/scenes/animals/spider.tscn" id="11_daeky"]
 [ext_resource type="PackedScene" uid="uid://c5tl3m10s5tby" path="res://bridges/scenes/animals/snake.tscn" id="13_cijaf"]
 [ext_resource type="Script" path="res://bridges/script/dropzones_visibility.gd" id="13_qdl2b"]
+[ext_resource type="PackedScene" uid="uid://cbremi6mc4sua" path="res://bridges/scenes/world_edge.tscn" id="16_jmtqp"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_s2tkw"]
 texture = ExtResource("1_rsd3v")
@@ -98,7 +99,7 @@ sources/5 = SubResource("TileSetAtlasSource_ycunn")
 sources/6 = SubResource("TileSetAtlasSource_2l45q")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3avum"]
-size = Vector2(63, 59.75)
+size = Vector2(37.5, 59.75)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vsiy0"]
 texture = ExtResource("2_kpwak")
@@ -172,7 +173,7 @@ layer_0/tile_data = PackedInt32Array(262143, 0, 0, 196608, 0, 0, 196609, 0, 0, 3
 [node name="GoalArea2D" type="Area2D" parent="TileMap"]
 
 [node name="GoalCollisionShape2D" type="CollisionShape2D" parent="TileMap/GoalArea2D"]
-position = Vector2(293, -10.1519)
+position = Vector2(280.25, -10.1519)
 shape = SubResource("RectangleShape2D_3avum")
 debug_color = Color(0.521569, 0.560784, 0.341176, 0.419608)
 
@@ -333,6 +334,14 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 script = SubResource("GDScript_62t5p")
+
+[node name="world_edge_left" parent="." instance=ExtResource("16_jmtqp")]
+position = Vector2(-15, 5.98343)
+scale = Vector2(1, 10)
+
+[node name="world_edge_right" parent="." instance=ExtResource("16_jmtqp")]
+position = Vector2(325, -4.98619)
+scale = Vector2(1, 9)
 
 [connection signal="body_entered" from="TileMap/GoalArea2D" to="player" method="_on_goal_area_2d_body_entered"]
 [connection signal="body_entered" from="water/Area2D" to="player" method="_on_area_2d_body_entered"]
