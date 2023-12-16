@@ -39,22 +39,38 @@ collision_mask = 3
 [node name="CollisionShape2D" type="CollisionShape2D" parent="snake"]
 shape = SubResource("RectangleShape2D_i2o3k")
 
-[node name="forbidden_dropzone" type="StaticBody2D" parent="." groups=["bottom_dropzone", "forbidden"]]
+[node name="forbidden_Area2D" type="Area2D" parent="."]
+
+[node name="forbidden_dropzone" type="StaticBody2D" parent="forbidden_Area2D" groups=["bottom_dropzone", "forbidden"]]
 position = Vector2(-23, 11)
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("3_fqrgl")
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="forbidden_dropzone"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="forbidden_Area2D/forbidden_dropzone"]
 position = Vector2(-1, 0)
 polygon = PackedVector2Array(40, -26, 40, -17, 49, -17, 49, -5, 40, -5, 40, 4, 59, 4, 59, -26)
 
-[node name="ColorRect" type="ColorRect" parent="forbidden_dropzone"]
+[node name="ColorRect" type="ColorRect" parent="forbidden_Area2D/forbidden_dropzone"]
 z_index = -1
 offset_left = 38.0
 offset_top = -26.0
 offset_right = 48.0
 offset_bottom = -16.0
+scale = Vector2(2, 3)
+color = Color(1, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="forbidden_Area2D"]
+position = Vector2(-24.3, 11)
+polygon = PackedVector2Array(40, -26, 40, -17, 49, -17, 49, -5, 40, -5, 40, 4, 59, 4, 59, -26)
+
+[node name="ColorRect" type="ColorRect" parent="forbidden_Area2D"]
+z_index = -1
+offset_left = 14.7
+offset_top = -15.0
+offset_right = 24.7
+offset_bottom = -5.0
 scale = Vector2(2, 3)
 color = Color(1, 0, 0, 1)
 metadata/_edit_use_anchors_ = true
