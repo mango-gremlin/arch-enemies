@@ -50,7 +50,7 @@ func load_config():
 			
 			player_object.position = Vector2(position_x, position_y)
 			
-			var new_inventory: Array[Item] = generate_inventory(node_data["inventory"])
+			var new_inventory: Dictionary = generate_inventory(node_data["inventory"])
 			player_object.set_inventory(new_inventory)
 			
 			
@@ -62,18 +62,20 @@ func load_config():
 			
 	print("Loading complete")
 			
-	
-func generate_inventory(inventory_data):
+
+# takes dictionary and 
+func generate_inventory(inventory_data:Array):
 	print("Generating inventory from string: \"", inventory_data, "\"")
 	# iterate over each item and generate an item from each 
 	
-	var inventory:Array[Item] = []
+	var inventory:Dictionary = Item.init_items()
 	
-	for inv in inventory_data:
-		var item_type = Item.string_to_item_type(inv["type"])
-		#var item_description = inv["item_description"]
+	for item:Dictionary in inventory_data:
+		var item_type = Item.string_to_item_type(item["type"])
+		var amount = item["amount"]
 		
-		inventory.append(Item.new(item_type))
+		var selected_item = inventory[item_type]
+		selected_item.set_amount(amount)
 	
 	return inventory
 	
