@@ -53,5 +53,5 @@ func _on_death_hazard_body_entered(_body):
 	reset_player()
 
 func _on_goal_area_2d_body_entered(_body):
-	var goalmenu = get_parent().find_child("GoalMenu")
-	goalmenu.visible = true
+	var goal_menu = get_parent().find_child("goal_menu")
+	goal_menu.visible = true

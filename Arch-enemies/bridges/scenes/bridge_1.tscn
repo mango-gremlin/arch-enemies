@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://cf5udd6l65fuv"]
+[gd_scene load_steps=27 format=3 uid="uid://cf5udd6l65fuv"]
 
 [ext_resource type="Texture2D" uid="uid://d4khq8o7aaei" path="res://bridges/assets/green.png" id="1_rsd3v"]
 [ext_resource type="Texture2D" uid="uid://dc2lxeyr45vp3" path="res://bridges/assets/blue_dark.png" id="2_kpwak"]
@@ -134,30 +134,6 @@ size = Vector2(8, 4.48757)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_63llj"]
 size = Vector2(28, 7.99175)
 
-[sub_resource type="GDScript" id="GDScript_62t5p"]
-script/source = "extends Control
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	visible = false
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	pass
-
-
-func _on_retry_button_pressed():
-	get_parent().get_parent().get_parent().get_node(\"player\").reset_player()
-	visible = false
-
-
-func _on_continue_button_pressed():
-	get_tree().change_scene_to_file(\"res://overworld/overworld.tscn\")
-	
-"
-
 [node name="main_scene" type="Node2D"]
 scale = Vector2(1, 1.00277)
 
@@ -291,48 +267,11 @@ position = Vector2(155, 87.7569)
 scale = Vector2(1.19636, 1.18473)
 zoom = Vector2(3.5, 3.5)
 
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(-0.5, -0.5)
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="MarginContainer" type="MarginContainer" parent="Control"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="GoalMenu" parent="Control/MarginContainer" instance=ExtResource("10_8a5g4")]
+[node name="goal_menu" parent="." instance=ExtResource("10_8a5g4")]
 visible = false
 top_level = true
-layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-script = SubResource("GDScript_62t5p")
 
 [connection signal="body_entered" from="TileMap/GoalArea2D" to="player" method="_on_goal_area_2d_body_entered"]
 [connection signal="body_entered" from="water/Area2D" to="player" method="_on_area_2d_body_entered"]

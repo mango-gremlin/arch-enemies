@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://bridges/script/goal_menu.gd" id="1_e6stn"]
 
-[node name="GoalMenu" type="Control"]
+[node name="goal_menu" type="Control"]
 layout_mode = 3
 anchor_right = 0.359
 anchor_bottom = 0.377
