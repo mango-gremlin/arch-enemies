@@ -35,7 +35,7 @@ texture = ExtResource("2_87e2g")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_m8jht")
 
-[node name="spider" type="Area2D" parent="."]
+[node name="spider" type="Area2D" parent="." groups=["animal_body"]]
 collision_layer = 3
 collision_mask = 3
 
