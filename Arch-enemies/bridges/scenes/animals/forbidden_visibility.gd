@@ -7,7 +7,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	if Global.something_is_being_dragged && self.get_parent().get_name() != Global.currently_dragging:
+	if Global.something_is_being_dragged:
 		visible = true
 	else:
 		visible = false
