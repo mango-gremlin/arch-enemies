@@ -18,12 +18,12 @@ script = ExtResource("1_pwtu4")
 [node name="overworld_ui" parent="." instance=ExtResource("4_4hawq")]
 
 [node name="bridge_interaction" parent="." instance=ExtResource("6_iairi")]
-position = Vector2(190, 28)
+position = Vector2(219, 14)
 bridge_id = 800
 bridge_description = "this is bridge level with id 800"
 
 [node name="bridge_interaction2" parent="." instance=ExtResource("6_iairi")]
-position = Vector2(176, 80)
+position = Vector2(101, 6)
 bridge_id = 1
 bridge_description = "this is bridge level with id 1"
 
@@ -40,7 +40,7 @@ item_dialogue_success = "item? "
 item_dialogue_failure = "item :("
 
 [node name="NpcInteraction" parent="." instance=ExtResource("7_33ud0")]
-position = Vector2(86, 23)
+position = Vector2(125, 60)
 npc_name = "Rubert"
 npc_type = 1
 has_quest = 3
