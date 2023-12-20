@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://dipauq7hxbt1f"]
 
 [ext_resource type="Script" path="res://bridges/script/drag_handler.gd" id="1_ss8yf"]
-[ext_resource type="Texture2D" uid="uid://smnm35pbv18o" path="res://bridges/assets/box_squirrel.png" id="2_eib8h"]
+[ext_resource type="Texture2D" uid="uid://diwvqonlr6748" path="res://bridges/assets/box_squirrel_tall.png" id="2_f60pg"]
 [ext_resource type="Script" path="res://bridges/script/dropzones_visibility.gd" id="3_l28rr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m8jht"]
@@ -11,16 +11,16 @@ size = Vector2(10, 20)
 size = Vector2(10, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2xjkc"]
-size = Vector2(9, 10)
+size = Vector2(8, 9)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ar825"]
-size = Vector2(10, 9)
+size = Vector2(8, 18)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r1da8"]
-size = Vector2(9, 20)
+size = Vector2(8, 8)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_abhdq"]
-size = Vector2(10, 9)
+size = Vector2(8, 8)
 
 [node name="squirrelBod" type="StaticBody2D" node_paths=PackedStringArray("body_area2D") groups=["draggable", "squirrel"]]
 collision_layer = 3
@@ -30,8 +30,7 @@ body_area2D = NodePath("squirrel")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, 5)
-scale = Vector2(1, 1.8)
-texture = ExtResource("2_eib8h")
+texture = ExtResource("2_f60pg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 5)
@@ -52,7 +51,6 @@ collision_mask = 2
 script = ExtResource("3_l28rr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="left_dropzone"]
-position = Vector2(-0.5, 0)
 scale = Vector2(1, 2)
 shape = SubResource("RectangleShape2D_2xjkc")
 
@@ -79,7 +77,6 @@ scale = Vector2(1, 2)
 metadata/_edit_use_anchors_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="right_dropzone"]
-position = Vector2(-10, -15.5)
 shape = SubResource("RectangleShape2D_ar825")
 
 [node name="top_dropzone" type="StaticBody2D" parent="." groups=["dropable", "top_dropzone"]]
@@ -97,7 +94,6 @@ offset_bottom = 5.0
 metadata/_edit_use_anchors_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="top_dropzone"]
-position = Vector2(10.5, 15)
 shape = SubResource("RectangleShape2D_r1da8")
 
 [node name="bottom_dropzone" type="StaticBody2D" parent="." groups=["bottom_dropzone", "dropable"]]
@@ -115,7 +111,6 @@ offset_bottom = 5.0
 metadata/_edit_use_anchors_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="bottom_dropzone"]
-position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_abhdq")
 
 [connection signal="body_entered" from="squirrel" to="." method="_on_squirrel_body_entered"]

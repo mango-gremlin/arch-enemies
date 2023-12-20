@@ -8,9 +8,7 @@ size = Vector2(116, 76)
 [node name="death_hazard" type="Area2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(267, 178)
 texture = ExtResource("1_ng0la")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(266, 178)
 shape = SubResource("RectangleShape2D_m4tka")

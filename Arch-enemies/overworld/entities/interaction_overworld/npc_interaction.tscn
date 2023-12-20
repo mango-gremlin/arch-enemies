@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://drn1loe1wknbq"]
+
+[ext_resource type="Script" path="res://overworld/entities/interaction_overworld/npc_interaction.gd" id="1_cdxnf"]
+[ext_resource type="PackedScene" uid="uid://cegpqm0j2vvbh" path="res://overworld/entities/interaction_overworld/interactionspot.tscn" id="2_y76uy"]
+
+[node name="NpcInteraction" type="Node2D"]
+script = ExtResource("1_cdxnf")
+
+[node name="interactionspot" parent="." instance=ExtResource("2_y76uy")]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.835294, 0.564706, 0.27451, 1)
