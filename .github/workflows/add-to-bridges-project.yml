@@ -24,6 +24,6 @@ jobs:
         with:
           # You can target a project in a different organization
           # to the issue
-          project-url: https://github.com/users/mango-gremlin/projects/2/views/1
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          project-url: https://github.com/users/mango-gremlin/projects/2
+          github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
           labeled: bridges
