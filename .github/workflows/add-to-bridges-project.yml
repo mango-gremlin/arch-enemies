@@ -1,6 +1,6 @@
 # This workflow is supposed to automatically add prs and issues tagged with combat to the combat project.
 
-name: ADD-TO-COMBAT-PROJECT
+name: ADD-TO-BRIDGES-PROJECT
 
 # Controls when the workflow will run
 on:
@@ -17,7 +17,7 @@ on:
 jobs:
   # This workflow contains a single job which adds the pr or issue to the project if the right tags are present.
   add-to-project:
-    name: Add issue to combat project
+    name: Add issue to bridges project
     runs-on: ubuntu-latest
     steps:
       - uses: actions/add-to-project@v0.5.0
@@ -25,5 +25,5 @@ jobs:
           # You can target a project in a different organization
           # to the issue
           project-url: https://github.com/users/mango-gremlin/projects/2
-          github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
-          labeled: combat
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          labeled: bridges
