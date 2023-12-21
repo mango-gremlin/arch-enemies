@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b26sjntfpftsd"
-path="res://.godot/imported/natural_environment_objects.png-9dfcaa2eb69894c112fba18695a63624.ctex"
+uid="uid://cmyh0321x42dd"
+path="res://.godot/imported/overworld_water_edges.png-3159e80990ba0f740f606c7b3161ca47.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/objects/natural_environment_objects.png"
-dest_files=["res://.godot/imported/natural_environment_objects.png-9dfcaa2eb69894c112fba18695a63624.ctex"]
+source_file="res://assets/art/tilesets/overworld_water_edges.png"
+dest_files=["res://.godot/imported/overworld_water_edges.png-3159e80990ba0f740f606c7b3161ca47.ctex"]
 
 [params]
 
