@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://clr5mb5lxvby8"
-path="res://.godot/imported/box_deer.png-269d653cc07495b16840de3bd57d6f3b.ctex"
+uid="uid://cw66eehxwh20w"
+path="res://.godot/imported/snake_50x10.png-9e0e3a2ec8a98bc1fa1eca4223ee52ff.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://bridges/assets/box_deer.png"
-dest_files=["res://.godot/imported/box_deer.png-269d653cc07495b16840de3bd57d6f3b.ctex"]
+source_file="res://bridges/assets/snake_50x10.png"
+dest_files=["res://.godot/imported/snake_50x10.png-9e0e3a2ec8a98bc1fa1eca4223ee52ff.ctex"]
 
 [params]
 
