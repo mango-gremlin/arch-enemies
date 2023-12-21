@@ -18,12 +18,12 @@ script = ExtResource("1_pwtu4")
 [node name="overworld_ui" parent="." instance=ExtResource("4_4hawq")]
 
 [node name="bridge_interaction" parent="." instance=ExtResource("6_iairi")]
-position = Vector2(193, 14)
+position = Vector2(194, 19)
 bridge_id = 800
 bridge_description = "this is bridge level with id 800"
 
 [node name="bridge_interaction2" parent="." instance=ExtResource("6_iairi")]
-position = Vector2(94, 27)
+position = Vector2(109, 15)
 bridge_id = 1
 bridge_description = "this is bridge level with id 1"
 
@@ -34,20 +34,20 @@ item_dialogue_success = "you got an item!"
 item_dialogue_failure = "no item found"
 
 [node name="item_interaction2" parent="." instance=ExtResource("6_66i44")]
-position = Vector2(148, 29)
+position = Vector2(137, 35)
 item_type = 3
 item_dialogue_success = "item? "
 item_dialogue_failure = "item :("
 
 [node name="NpcInteraction" parent="." instance=ExtResource("7_33ud0")]
-position = Vector2(114, 80)
+position = Vector2(94, 99)
 npc_name = "Rubert"
 npc_type = 1
 has_quest = 3
 dialogue_quest_done = "does not have a quest on default!"
 
 [node name="NpcInteraction2" parent="." instance=ExtResource("7_33ud0")]
-position = Vector2(35, 59)
+position = Vector2(43, 67)
 npc_id = 1
 npc_name = "Evelyn?"
 npc_type = 2
