@@ -28,26 +28,26 @@ bridge_id = 1
 bridge_description = "this is bridge level with id 1"
 
 [node name="item_interaction" parent="." instance=ExtResource("6_66i44")]
-position = Vector2(378, 113)
+position = Vector2(317, 106)
 item_type = 2
 item_dialogue_success = "you got an item!"
 item_dialogue_failure = "no item found"
 
 [node name="item_interaction2" parent="." instance=ExtResource("6_66i44")]
-position = Vector2(137, 35)
+position = Vector2(204, 94)
 item_type = 3
 item_dialogue_success = "item? "
 item_dialogue_failure = "item :("
 
 [node name="NpcInteraction" parent="." instance=ExtResource("7_33ud0")]
-position = Vector2(94, 99)
+position = Vector2(149, 131)
 npc_name = "Rubert"
-npc_type = 1
+npc_type = 3
 has_quest = 3
 dialogue_quest_done = "does not have a quest on default!"
 
 [node name="NpcInteraction2" parent="." instance=ExtResource("7_33ud0")]
-position = Vector2(43, 67)
+position = Vector2(77, 86)
 npc_id = 1
 npc_name = "Evelyn?"
 npc_type = 2
