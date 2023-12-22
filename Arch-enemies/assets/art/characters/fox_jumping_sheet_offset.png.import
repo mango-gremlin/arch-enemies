@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://barg72ohqobpg"
-path="res://.godot/imported/fox_jumping_sheet.png-67844b09b1b3bf0ff1d9862437a1fbf9.ctex"
+uid="uid://ci0ibhty1e2yg"
+path="res://.godot/imported/fox_jumping_sheet_offset.png-ae8a5fa26c0553ed88a4256fe61f3e01.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/characters/fox_jumping_sheet.png"
-dest_files=["res://.godot/imported/fox_jumping_sheet.png-67844b09b1b3bf0ff1d9862437a1fbf9.ctex"]
+source_file="res://assets/art/characters/fox_jumping_sheet_offset.png"
+dest_files=["res://.godot/imported/fox_jumping_sheet_offset.png-ae8a5fa26c0553ed88a4256fe61f3e01.ctex"]
 
 [params]
 
