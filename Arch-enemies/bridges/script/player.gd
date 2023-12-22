@@ -21,7 +21,7 @@ func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y += gravity * delta
-		if direction.y > 0:
+		if velocity.y > 250:
 			animated_sprite.play("jump_fall")
 		was_in_air = true
 	elif was_in_air == true:

@@ -41,10 +41,6 @@ region = Rect2(259, 0, 37, 24)
 atlas = ExtResource("2_y8apf")
 region = Rect2(296, 0, 37, 24)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_uca40"]
-atlas = ExtResource("3_pj1su")
-region = Rect2(259, 0, 37, 40)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_xpb7x"]
 atlas = ExtResource("3_pj1su")
 region = Rect2(296, 0, 37, 40)
@@ -57,13 +53,13 @@ region = Rect2(333, 0, 37, 40)
 atlas = ExtResource("3_pj1su")
 region = Rect2(370, 0, 37, 40)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_4xanc"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_22hru"]
+atlas = ExtResource("3_pj1su")
+region = Rect2(296, 0, 37, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a82nb"]
 atlas = ExtResource("3_pj1su")
 region = Rect2(259, 0, 37, 40)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jgfi3"]
-atlas = ExtResource("3_pj1su")
-region = Rect2(222, 0, 37, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_npp4k"]
 atlas = ExtResource("3_pj1su")
@@ -88,6 +84,10 @@ region = Rect2(148, 0, 37, 40)
 [sub_resource type="AtlasTexture" id="AtlasTexture_hly0q"]
 atlas = ExtResource("3_pj1su")
 region = Rect2(185, 0, 37, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ori07"]
+atlas = ExtResource("3_pj1su")
+region = Rect2(222, 0, 37, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_treoe"]
 atlas = ExtResource("4_wk3ii")
@@ -173,9 +173,6 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_uca40")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_xpb7x")
 }, {
 "duration": 1.0,
@@ -190,7 +187,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_4xanc")
+"texture": SubResource("AtlasTexture_22hru")
 }],
 "loop": true,
 "name": &"jump_fall",
@@ -198,7 +195,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_jgfi3")
+"texture": SubResource("AtlasTexture_a82nb")
 }],
 "loop": true,
 "name": &"jump_fly",
@@ -222,6 +219,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_hly0q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ori07")
 }],
 "loop": false,
 "name": &"jump_up",
@@ -278,8 +278,9 @@ speed = 100.0
 jump_velocity = -230.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 2
 sprite_frames = SubResource("SpriteFrames_xl276")
-animation = &"idle"
+animation = &"jump_fly"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

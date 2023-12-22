@@ -129,6 +129,7 @@ debug_color = Color(0.521569, 0.560784, 0.341176, 0.419608)
 
 [node name="player" parent="." instance=ExtResource("5_tp4g7")]
 position = Vector2(19, 47.8674)
+jump_velocity = -235.0
 
 [node name="death_hazard" parent="." instance=ExtResource("6_s42ti")]
 position = Vector2(229, 112.688)
