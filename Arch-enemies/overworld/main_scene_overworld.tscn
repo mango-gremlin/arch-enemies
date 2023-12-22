@@ -23,18 +23,18 @@ bridge_id = 800
 bridge_description = "this is bridge level with id 800"
 
 [node name="bridge_interaction2" parent="." instance=ExtResource("6_iairi")]
-position = Vector2(109, 15)
+position = Vector2(122, 18)
 bridge_id = 1
 bridge_description = "this is bridge level with id 1"
 
 [node name="item_interaction" parent="." instance=ExtResource("6_66i44")]
-position = Vector2(317, 106)
+position = Vector2(289, 191)
 item_type = 2
 item_dialogue_success = "you got an item!"
 item_dialogue_failure = "no item found"
 
 [node name="item_interaction2" parent="." instance=ExtResource("6_66i44")]
-position = Vector2(204, 94)
+position = Vector2(184, 81)
 item_type = 3
 item_dialogue_success = "item? "
 item_dialogue_failure = "item :("
