@@ -52,11 +52,13 @@ func interact_with_area() -> Dictionary:
 		InteractionType.BRIDGE:
 			# TODO  refactor
 			var is_solved = parent_node.is_solved()
-			var received_bridge_id:int = parent_node.obtain_bridge_id()
-			var received_description:String = "this level was solved already"
-			if not is_solved:
-				received_description = parent_node.obtain_description()
-			return {"id": received_bridge_id, "description": received_description}
+			var received_bridge_edge:SingletonPlayer.BridgeEdge = parent_node.obtain_bridge_edge()
+			
+			# should be made easier --> returning a dictionary might not be the best option? maybe enum tho 
+			SingletonPlayer.check_bridge_connection(received_bridge_edge)
+			#if not is_solved:
+				#received_description = parent_node.obtain_description()
+			return {"bridge_edge": received_bridge_edge, "description": "test"}
 			#var received_dialogue =
 			
 		InteractionType.NPC:

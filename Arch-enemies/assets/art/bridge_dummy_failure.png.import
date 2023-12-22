@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://jxy3j8rfygm1"
-path="res://.godot/imported/bridge_dummy.png-b0d5fa9418281699aa476211d091475b.ctex"
+uid="uid://08plwlb60wib"
+path="res://.godot/imported/bridge_dummy_failure.png-6aa98ad95903e2fa8f48dfcd2b570b91.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/bridge_dummy.png"
-dest_files=["res://.godot/imported/bridge_dummy.png-b0d5fa9418281699aa476211d091475b.ctex"]
+source_file="res://assets/art/bridge_dummy_failure.png"
+dest_files=["res://.godot/imported/bridge_dummy_failure.png-6aa98ad95903e2fa8f48dfcd2b570b91.ctex"]
 
 [params]
 
