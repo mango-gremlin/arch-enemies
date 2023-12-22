@@ -21,6 +21,7 @@ func is_correct_placement(body) -> bool:
 		# gets Area2D child, which can check for overlapping bodies
 		var animal_type : String = Global.get_animal_type(body)
 		
+		# checks for other animals beeing overlapped by the current placement
 		for area in body_area2D.get_overlapping_areas():
 			if(area.is_in_group("animal_body")):
 				return false
