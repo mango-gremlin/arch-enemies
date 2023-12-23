@@ -50,7 +50,7 @@ script = ExtResource("3_fqrgl")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="forbidden_Area2D/forbidden_dropzone"]
 position = Vector2(-50, 11)
-polygon = PackedVector2Array(40, -26, 40, -17, 50, -17, 50, -5, 40, -5, 40, 4, 59, 4, 59, -26)
+polygon = PackedVector2Array(40, -25, 40, -17, 50, -17, 50, -5, 40, -5, 40, 3, 58, 3, 58, -25)
 
 [node name="ColorRect" type="ColorRect" parent="forbidden_Area2D/forbidden_dropzone"]
 z_index = -1
