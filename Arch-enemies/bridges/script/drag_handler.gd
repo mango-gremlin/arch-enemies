@@ -4,7 +4,6 @@ const STANDARD_COLOR = Color(Color.AQUAMARINE, 0.7)
 const TRIGGERED_COLOR = Color(Color.CORNFLOWER_BLUE, 1)
 
 var draggable := false
-var is_inside_dropable := false
 var is_inside_forbidden := false
 var mouse_offset : Vector2
 var initial_pos : Vector2
@@ -23,12 +22,11 @@ func is_correct_placement(body):
 		print("Reject: Cannot move connecting piece")
 		return false
  
-	print("is_inside_dropable: ", is_inside_dropable)
 	print("is_inside_forbidden: ", is_inside_forbidden)
 	print("\n-----\n")
 	print(body_area2D.get_overlapping_areas())
 	print("\n-----\n")
-	if is_inside_dropable and not is_inside_forbidden:
+	if not is_inside_forbidden:
 		# gets Area2D child, which can check for overlapping bodies
 		var animal_type : String = Global.get_animal_type(body)
 		
@@ -182,7 +180,6 @@ func body_entered(body):
 	# set inside dropable to true so the process can register it as a dropable zone
 	# and change the colour of the body we just touched to signify we can drop it here
 	if body.is_in_group('dropable') and not body == self:
-		is_inside_dropable = true
 		body.modulate = TRIGGERED_COLOR
 	# "not body self" prevents some unexpected results with overlapping collision zones
 	# of self, but may also be a problem in the future 
@@ -195,7 +192,6 @@ func body_exited(body):
 	# if the snake body stops touching a staticbody that has the dropable group
 	# set inside dropable to false & change the colour of that body back to original 
 	if body.is_in_group('dropable') and not body == self:
-		is_inside_dropable = false
 		body.modulate = STANDARD_COLOR
 	# "not body self" prevents some unexpected results with overlapping collision zones
 	# of self, but may also be a problem in the future 
