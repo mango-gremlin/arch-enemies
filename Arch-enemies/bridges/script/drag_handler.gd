@@ -25,16 +25,23 @@ func is_correct_placement(body):
  
 	print("is_inside_dropable: ", is_inside_dropable)
 	print("is_inside_forbidden: ", is_inside_forbidden)
-	print("\n")
+	print("\n-----\n")
+	print(body_area2D.get_overlapping_areas())
+	print("\n-----\n")
 	if is_inside_dropable and not is_inside_forbidden:
 		# gets Area2D child, which can check for overlapping bodies
 		var animal_type : String = Global.get_animal_type(body)
 		
-		# check if head of snake is overlapping with anything
+		# check if head of snake is overlapping with an animal
 		if animal_type == "snake":
-			if body.get_node("forbidden_Area2D").has_overlapping_bodies():
-				print("Reject: Head of snake overlaps")
-				return false
+			for overlapping_body in body.get_node("forbidden_Area2D").get_overlapping_bodies():
+				if (overlapping_body.is_in_group("snake") 
+					or overlapping_body.is_in_group("spider") 
+					or overlapping_body.is_in_group("squirrel")
+					or overlapping_body.is_in_group("deer")):
+					print(body.get_node("forbidden_Area2D").get_overlapping_bodies())
+					print("Reject: Head of snake overlaps")
+					return false
 		
 		# iterate through all overlapping bodies, and check if they are allowed or not
 		for overlapping_body in body_area2D.get_overlapping_bodies():
@@ -193,7 +200,7 @@ func body_exited(body):
 	# "not body self" prevents some unexpected results with overlapping collision zones
 	# of self, but may also be a problem in the future 
 	if body.is_in_group('forbidden') and not body == self:
-		print("left forbidden body ", body)
+		print("Left forbidden body ", body)
 		is_inside_forbidden = false
 
 
