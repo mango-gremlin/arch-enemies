@@ -18,9 +18,14 @@ var someone_connects_to_this = false
 
 # checks if placement of animal relativ to other animal is correct
 func is_correct_placement(body):
-	if body.someone_connects_to_this:		# if another animal holds on to this one it cant move
+	# if another animal holds on to this one it cant move
+	if body.someone_connects_to_this:
+		print("Reject: Cannot move connecting piece")
 		return false
  
+	print("is_inside_dropable: ", is_inside_dropable)
+	print("is_inside_forbidden: ", is_inside_forbidden)
+	print("\n")
 	if is_inside_dropable and not is_inside_forbidden:
 		# gets Area2D child, which can check for overlapping bodies
 		var animal_type : String = Global.get_animal_type(body)
@@ -28,17 +33,21 @@ func is_correct_placement(body):
 		# check if head of snake is overlapping with anything
 		if animal_type == "snake":
 			if body.get_node("forbidden_Area2D").has_overlapping_bodies():
+				print("Reject: Head of snake overlaps")
 				return false
 		
 		# iterate through all overlapping bodies, and check if they are allowed or not
 		for overlapping_body in body_area2D.get_overlapping_bodies():
 			# if overlapping body is a forbidden one, it is never valid
 			if overlapping_body.is_in_group("forbidden"):
+				print("Reject: is inside forbidden")
 				return false
 			
 			# if overlapping body is dropable and not its own, check specifics for animals
 			elif overlapping_body.is_in_group("dropable") and not body == overlapping_body.get_owner():
-				if not overlapping_body.is_in_group("shore_dropzone") and not overlapping_body.get_owner().is_bridge_connected_to_shore(): #if the overlapping_body is not connected to the shore the current animal cant be connected to it
+				 #if the overlapping_body is not connected to the shore the current animal cant be connected to it
+				if not overlapping_body.is_in_group("shore_dropzone") and not overlapping_body.get_owner().is_bridge_connected_to_shore():
+					print("Reject: Not connected to shore")
 					return false
 				if not overlapping_body.is_in_group("shore_dropzone"):  #the shore has no animal_type therefore this check has to be skipped 
 					# get type of animal that overlapping drop zone belongs to
@@ -46,22 +55,28 @@ func is_correct_placement(body):
 					# if overlap zone belongs to a spider, it is always allowed
 					if overlapping_animal_type == "spider":
 						body.connect_to_animal(overlapping_body)
+						print("Accept: Connected to spider")
 						return true
 					
 				# if not, normal rules apply
 				# every animal can be dropped on another animal's top dropzone
 				if overlapping_body.is_in_group("top_dropzone"):
 					body.connect_to_animal(overlapping_body)
+					print("Accept: On top dropzone of animal")
 					return true
 				# only squirrels and spiders can be dropped on another animal's side dropzones
 				elif overlapping_body.is_in_group("side_dropzone") and (animal_type == "squirrel" or animal_type == "spider"):
 					body.connect_to_animal(overlapping_body)
+					print("Accept: Squirrel on side dropzone of animal")
 					return true
 				# only spiders can be dropped on another animal's bottom dropzone
 				elif overlapping_body.is_in_group("bottom_dropzone") and animal_type == "spider":
 					body.connect_to_animal(overlapping_body)
+					print("Accept: Spider on bottom dropzone of animal")
 					return true
+		print("Reject: Not inside any recognized dropzone")
 		return false
+	print("Reject: Not inside dropable, or inside forbidden")
 	return false
 
 
@@ -165,6 +180,7 @@ func body_entered(body):
 	# "not body self" prevents some unexpected results with overlapping collision zones
 	# of self, but may also be a problem in the future 
 	if body.is_in_group('forbidden') and not body == self:
+		print("Entered forbidden body ", body)
 		is_inside_forbidden = true
 
 
@@ -177,6 +193,7 @@ func body_exited(body):
 	# "not body self" prevents some unexpected results with overlapping collision zones
 	# of self, but may also be a problem in the future 
 	if body.is_in_group('forbidden') and not body == self:
+		print("left forbidden body ", body)
 		is_inside_forbidden = false
 
 
