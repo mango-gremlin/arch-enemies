@@ -40,7 +40,7 @@ func interact_with_area() -> InteractionValue:
 	print("interacting with area")
 	match interact_type:
 		InteractionType.ITEM:
-			var interaction : InteractionValue = interact_item()
+			var interaction:InteractionValue = interact_item()
 			return interaction
 		InteractionType.BRIDGE:
 			# FIXME this checking is not necessary --> we will see whether it was solved
@@ -50,27 +50,7 @@ func interact_with_area() -> InteractionValue:
 			var interaction:InteractionValue = interact_bridge()
 			return interaction
 		InteractionType.NPC:
-			# TODO refactor
-			# FIXME  requires state management to check where the dialogue is based and structured in
-			# TODO might be a separate scene that is called to run player through the interaction?
-			# within a simple interaction witn an NPC: 
-			# talk to them --> check whether we've talked already 
-			# if they have a quest --> get the required item 
-			# with required_item --> check if user owns it --> update their inventory and the reward-value
-			var received_id = parent_node.obtain_id()
-			var dialogue_string = parent_node.obtain_formatted_dialogue()
-			var required_item = parent_node.obtain_required_item()
-			
-			# only useful when we have an item-reward!
-			# contains value retrieved from querying status 
-			var received_reward = parent_node.check_and_return_reward()
-				
-			var interaction_dict:Dictionary = {
-				"dialogue":dialogue_string,
-				"reward":received_reward,
-				"npc_id":received_id
-				}
-			var interaction : InteractionValue = InteractionValue.new(InteractionType.NPC, interaction_dict)
+			var interaction:InteractionValue = interact_npc()
 			return interaction
 		_: 
 			return 
@@ -107,3 +87,22 @@ func interact_item() -> InteractionValue:
 	}
 	var interaction_result:InteractionValue = InteractionValue.new(InteractionType.ITEM,queried_values)
 	return interaction_result
+
+func interact_npc() -> InteractionValue: 
+	# FIXME  requires state management to check where the dialogue is based and structured in
+	# TODO might be a separate scene that is called to run player through the interaction?	
+	var received_id = parent_node.obtain_id()
+	var dialogue_string = parent_node.obtain_formatted_dialogue()
+	var required_item = parent_node.obtain_required_item()
+	
+	# only useful when we have an item-reward!
+	# contains value retrieved from querying status 
+	var received_reward = parent_node.request_reward()
+		
+	var interaction_dict:Dictionary = {
+		"dialogue":dialogue_string,
+		"reward":received_reward,
+		"npc_id":received_id
+		}
+	var interaction:InteractionValue = InteractionValue.new(InteractionType.NPC, interaction_dict)
+	return interaction

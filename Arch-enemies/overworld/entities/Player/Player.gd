@@ -91,6 +91,19 @@ func execute_interaction():
 		# taking first element from interaction
 		var active_interaction = all_interactions[0]
 		
+		# query result from obtained interation 
+		var obtained_interaction: Interactable.InteractionValue = active_interaction.interact_with_area()
+		match obtained_interaction.type:
+			Interactable.InteractionType.BRIDGE: 
+				print("entering bridge game") 
+			Interactable.InteractionType.ITEM: 
+				print("obtained item")
+			Interactable.InteractionType.NPC:
+				print("interacting with npc")
+			Interactable.InteractionType.DEBUG:
+				print("debug")
+			_: 
+				return 
 		# we will match again a certain type
 		match active_interaction.interact_type:
 			Interactable.InteractionType.BRIDGE:

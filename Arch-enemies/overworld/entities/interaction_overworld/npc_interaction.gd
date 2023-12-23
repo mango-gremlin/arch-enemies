@@ -51,8 +51,12 @@ var interaction_type: Interactable.InteractionType = Interactable.InteractionTyp
 # --- / 
 # -- / Quest descriptions / setup
 @export var required_item:Item.ItemType
-#denotes required bridge id built
-@export var required_bridge_id:int
+#denotes required connection
+# FIXME maybe find simpler representation
+#@export var required_bridge_edge: SingletonPlayer.BridgeEdge
+@export var required_edge_start:int
+@export var required_edge_dest:int
+@onready var required_bridge_edge:SingletonPlayer.BridgeEdge
 
 # denotes required ncp_id to talk with
 @export var required_npc_id:int 
@@ -110,7 +114,7 @@ func obtain_dialogue() -> String:
 
 # checks whether conditions for completing quest were acquired 
 # updates "is_recruited" accordingly
-func check_quest_condition():
+func check_quest_condition() -> bool:
 	# FIXME IMPROVE WRITING / CONDITIONS 
 	if not is_recruited : 
 	#TODO prone to change with better implementation of dialogue!
@@ -118,43 +122,45 @@ func check_quest_condition():
 			Quest.ITEM:
 				if check_item_condition():
 					# matching item was provided 
-					is_recruited = true
+					return true 
+				return false 
 			Quest.BRIDGE:
-				#TODO check in "Player-Singleton, whether player built certain bridge!
-				is_recruited = true 
+				if SingletonPlayer.check_bridge_connection(required_bridge_edge):
+					return true 
+				return false 
 			Quest.NPC:
-				#TODO check in "Player-Singleton, whether communication happened with given npc already 
-				is_recruited = true 
+				if SingletonPlayer.check_npc_state(required_npc_id): 
+					# visited npc already 
+					return true 
+				return false 
 			_:
-				pass
+				return false 
+	return true
 
 func check_item_condition() -> bool:
 	var is_obtained_item:bool = SingletonPlayer.request_item(required_item)
 	if not is_obtained_item: 
 		# gathered requested item --> condition met!
-		is_recruited = true
 		#return reward_item
 		return true 
 	return false 
 	#return Item.ItemType.NONE
 	
 
-func check_and_return_reward(): 
-	check_quest_condition()
-	obtain_reward()
-	
-
 # returns either Animal/Item if quest was complete before 
 # if quest is not done, returns Item of Type "ItemType.NONE"
-func obtain_reward(): 
-	if is_recruited:
-		print("npc is done ")
-		match quest_reward:
-			QuestReward.ITEM:
-				return reward_item
-			QuestReward.ANIMAL:
-				return npc_type
-					
+func request_reward(): 
+	# 
+	if not is_recruited: 
+		# check whether we satisfy the conditions
+		if check_quest_condition(): 
+			print("npc is done ")
+			match quest_reward:
+				QuestReward.ITEM:
+					return reward_item
+				QuestReward.ANIMAL:
+					return npc_type
+						
 	return Item.new(Item.ItemType.NONE)
 
 # returns formatted dialogue

@@ -65,7 +65,7 @@ func is_obtainable_by_player() -> bool:
 # returns nothing if requirement is not met 
 func obtain_item() -> Item:
 	if is_obtainable_by_player():
-		# can be obtained, returning and updating count for intenral representation 
+		# can be obtained, returning and updating count for internal representation 
 		item_amount -= 1
 		# FIXME construct a struct that contains
 		# ITEM ( if available ) 
@@ -73,8 +73,6 @@ func obtain_item() -> Item:
 		return item_instance
 	else: 
 		print("not obtainable")
-		# is not obtainable
-		# FIXME NO NULL TYPES!
 		return Item.new(Item.ItemType.NONE)
 
 # returns dialogue-String for displaying in dialogue-Box
