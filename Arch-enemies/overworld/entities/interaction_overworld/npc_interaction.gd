@@ -1,5 +1,6 @@
 extends Node2D
 
+class_name NPC_interaction
 # --- / 
 # -- / 
 # -- | base properties for npc instance
@@ -75,7 +76,7 @@ var is_recruited:bool = false
 # - // also denoted in #134 
 
 # denotes item given by player 
-var received_item:Item = Item.new(Item.ItemType.NONE)
+var received_item:Item.ItemType = Item.ItemType.NONE
 
 
 func _ready():
@@ -110,29 +111,47 @@ func obtain_dialogue() -> String:
 # checks whether conditions for completing quest were acquired 
 # updates "is_recruited" accordingly
 func check_quest_condition():
+	# FIXME IMPROVE WRITING / CONDITIONS 
+	if not is_recruited : 
 	#TODO prone to change with better implementation of dialogue!
-	match has_quest:
-		Quest.ITEM:
-			if received_item.item_type == required_item:
-				# matching item was provided 
-				is_recruited = true
-		Quest.BRIDGE:
-			#TODO check in "Player-Singleton, whether player built certain bridge!
-			is_recruited = true 
-		Quest.NPC:
-			#TODO check in "Player-Singleton, whether communication happened with given npc already 
-			is_recruited = true 
-		_:
-			pass
+		match has_quest:
+			Quest.ITEM:
+				if check_item_condition():
+					# matching item was provided 
+					is_recruited = true
+			Quest.BRIDGE:
+				#TODO check in "Player-Singleton, whether player built certain bridge!
+				is_recruited = true 
+			Quest.NPC:
+				#TODO check in "Player-Singleton, whether communication happened with given npc already 
+				is_recruited = true 
+			_:
+				pass
+
+func check_item_condition() -> bool:
+	var is_obtained_item:bool = SingletonPlayer.request_item(required_item)
+	if not is_obtained_item: 
+		# gathered requested item --> condition met!
+		is_recruited = true
+		#return reward_item
+		return true 
+	return false 
+	#return Item.ItemType.NONE
+	
+
+func check_and_return_reward(): 
+	check_quest_condition()
+	obtain_reward()
+	
 
 # returns either Animal/Item if quest was complete before 
 # if quest is not done, returns Item of Type "ItemType.NONE"
-func obtain_value(): 
+func obtain_reward(): 
 	if is_recruited:
 		print("npc is done ")
 		match quest_reward:
 			QuestReward.ITEM:
-				return Item.new(reward_item)
+				return reward_item
 			QuestReward.ANIMAL:
 				return npc_type
 					
@@ -151,3 +170,10 @@ func obtain_formatted_dialogue() ->String:
 # FIXME should be more abstract and matched against in "Player.gd"
 func obtain_quest_item_type() -> Item.ItemType:
 	return required_item
+
+func set_recruitment():
+	is_recruited = true 
+
+func obtain_required_item() -> Item.ItemType:
+	return required_item
+

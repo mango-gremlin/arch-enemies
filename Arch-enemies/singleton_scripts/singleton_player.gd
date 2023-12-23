@@ -7,14 +7,39 @@ extends Node
 # - user profiles 
 
 # --- / 
-# -- / Save management 
+# -- / Item management 
+
+@onready var inventory:Dictionary = Item.init_items()
+
+
+# takes new item and updates amount stored in inventory 
+# if ItemType is "None" nothing will be changed 
+func add_to_inventory(new_item:Item.ItemType):
+	if new_item != Item.ItemType.NONE:
+		# we can verify that every item is constantly available!
+		var selected_item = inventory[new_item]
+		selected_item.increase_amount()
+		# emit signal to update Ui
+		#updated_inventory.emit(inventory)
+	# --> no item was received
+
+# checks whether requested item is contained 
+# returns true if it was and decreases amount by one
+# returns false otherwise
+func request_item(requested_item:Item.ItemType) -> bool: 
+	if inventory.has(requested_item):
+		var item_instance:Item = inventory[requested_item]
+		
+		if item_instance.obtain_amount() >= 1:
+			item_instance.set_amount(item_instance.obtain_amount() - 1)
+			return true
+		
+	return false
+
 
 
 # --- / 
 # -- / Overworld management 
-
-# denoting inventory of player 
-@onready var inventory:Dictionary = Item.init_items()
 
 # denotes amount of islands available
 var TOTAL_ISLANDS:int = 2
@@ -49,9 +74,14 @@ var test:Array
 # Dictionary of NPC's that have been talked to
 # -> key: integer : denoting npc_id
 # -> value: bool : denoting whether interaction was done or not 
-var npc_talked_to: Dictionary = {
+# FIXME might lead to wrong interpretation ? 
+var npc_talked_to: Array = [0]
 
-}
+# checks whether player already interacted with npc 
+func check_npc_state(npc_id:int) -> bool: 
+	if npc_talked_to.has(npc_id):
+		return true 
+	return false 
 
 # --- / 
 # -- / Bridge management 
@@ -63,7 +93,6 @@ class BridgeEdge:
 	var start_id:int 
 	var dest_id:int
 
-
 # checks whether connection between two given values is possible or not
 func check_bridge_connection(bridge_edge:BridgeEdge) -> bool: 
 	var edge_start = bridge_edge.start_id 
@@ -71,7 +100,6 @@ func check_bridge_connection(bridge_edge:BridgeEdge) -> bool:
 	if bridges_built[edge_start].has(edge_dest):
 		return true 
 	return false 
-	
 
 # adds new connection between starting point and ending point 
 # adds this corresponding to representation 

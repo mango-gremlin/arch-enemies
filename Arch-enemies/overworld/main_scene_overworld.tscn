@@ -19,13 +19,30 @@ script = ExtResource("1_pwtu4")
 
 [node name="bridge_interaction" parent="." instance=ExtResource("6_iairi")]
 position = Vector2(190, 28)
-bridge_id = 800
-bridge_description = "this is bridge level with id 800"
+dest_island_id = 1
+bridge_description = "connects from 0 to 1 "
+
+[node name="bridge_parts" type="Node2D" parent="bridge_interaction"]
+visible = false
+
+[node name="bridge_part" type="ColorRect" parent="bridge_interaction/bridge_parts"]
+offset_left = 12.0
+offset_top = -7.0
+offset_right = 37.0
+offset_bottom = 13.0
 
 [node name="bridge_interaction2" parent="." instance=ExtResource("6_iairi")]
 position = Vector2(176, 80)
-bridge_id = 1
-bridge_description = "this is bridge level with id 1"
+bridge_description = "connects from 0 to 0"
+
+[node name="bridge_parts" type="Node2D" parent="bridge_interaction2"]
+visible = false
+
+[node name="bridge_part" type="ColorRect" parent="bridge_interaction2/bridge_parts"]
+offset_left = 12.0
+offset_top = -7.0
+offset_right = 37.0
+offset_bottom = 13.0
 
 [node name="item_interaction" parent="." instance=ExtResource("6_66i44")]
 position = Vector2(378, 113)
@@ -54,6 +71,20 @@ npc_type = 2
 quest_reward = 1
 dialogue_quest_undone = "missing the item :("
 dialogue_quest_done = "thanks for the item!"
+
+[node name="bridge_interaction3" parent="." instance=ExtResource("6_iairi")]
+position = Vector2(107, 20)
+start_island_id = 2
+bridge_description = "this connects 2 and 0 "
+
+[node name="bridge_parts" type="Node2D" parent="bridge_interaction3"]
+visible = false
+
+[node name="bridge_part" type="ColorRect" parent="bridge_interaction3/bridge_parts"]
+offset_left = 12.0
+offset_top = -7.0
+offset_right = 37.0
+offset_bottom = 13.0
 
 [connection signal="saved_player" from="Player" to="." method="_on_player_saved_player"]
 [connection signal="updated_inventory" from="Player" to="overworld_ui" method="_on_player_updated_inventory"]

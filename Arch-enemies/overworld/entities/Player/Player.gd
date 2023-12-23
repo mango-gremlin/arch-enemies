@@ -165,12 +165,6 @@ func add_to_inventory(new_item:Item):
 		updated_inventory.emit(inventory)
 	# --> no item was received
 
-# query for specific item 
-# FIXME --> Singleton Conversion
-func search_in_inventory(item:Item) -> bool:
-	# FIXME requires new structure of inventory
-	return false 
-
 # checks whether requested item is contained 
 # returns true if it was and decreases amount by one
 # returns false otherwise

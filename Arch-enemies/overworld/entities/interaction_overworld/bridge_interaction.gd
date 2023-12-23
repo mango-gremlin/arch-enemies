@@ -63,6 +63,7 @@ func is_solved() -> bool:
 	return connection_status
 	
 # changes appearance of bridge_node if it was solved 
+# takes elements from "bridge_parts" and toggles their visibility
 func visualize_status(): 
 	if is_solved():
 		var path_to_texture = "res://assets/art/bridge_dummy_success.png"
@@ -70,4 +71,7 @@ func visualize_status():
 		
 		var referenced_rect:TextureRect = $TextureRect
 		referenced_rect.texture = new_texture
+		var referenced_bridge_parts = $bridge_parts
+		referenced_bridge_parts.visible = true 
+		
 	
