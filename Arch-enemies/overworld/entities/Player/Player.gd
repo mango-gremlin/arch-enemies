@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+# --- / 
+# -- / defining usage of signals 
 signal updated_inventory(new_inventory)
 signal saved_player()
 
@@ -14,15 +16,8 @@ signal saved_player()
 # -- / player states
 
 # Array to hold the players useable items 
+# FIXME --> singleton conversion!
 @onready var inventory:Dictionary = Item.init_items()
-
-# Array to hold hte players progess in the world 
-# used to check whether the user can traverse a certain region
-# here each item is of type INT denoting the LEVEL-ID 
-#@onready var bridges_built:Array[int] = []
-
-
-
 
 # collects all interactions that we currently have 
 # Queue-like structure 
@@ -39,9 +34,7 @@ func _ready():
 func _physics_process(delta):
 	player_movement(delta)
 	# checking for interaction in world
-	# debugging 
 	check_input()
-	#update_interactionLabel()
 
 
 func player_movement(delta):
@@ -74,15 +67,12 @@ func player_movement(delta):
 # --- structure interaction areas
 # -----
 
- 
 func _on_interactionarea_area_entered(area):
 	# we enter a new interaction into our list 
 	all_interactions.insert(0,area)
 
-
 func _on_interactionarea_area_exited(area):
 	all_interactions.erase(area)
-	
 
 # function denoting how to interact with a given interaction in stack
 func execute_interaction():
@@ -148,7 +138,6 @@ func check_input():
 	if Input.is_action_just_pressed("interact_overworld"):
 		execute_interaction()
 	if Input.is_action_just_pressed("use_item"):
-		#use_item()
 		# FIXME debugging dialogue  --> resetting is_in_dialogue
 		# TODO handled in Dialogue-System instead
 		SingletonPlayer.exit_dialogue()

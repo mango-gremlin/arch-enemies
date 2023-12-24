@@ -7,6 +7,14 @@ extends Node
 # - user profiles 
 
 # --- / 
+# -- / Player management
+
+@onready var player_coordinate:Vector2 = Vector2.ZERO
+
+func set_player_coord(new_coordinate:Vector2):
+	player_coordinate = new_coordinate
+
+# --- / 
 # -- / Item management 
 
 @onready var inventory:Dictionary = Item.init_items()
@@ -62,6 +70,7 @@ var islands_reachable:Array[bool]
 	1 : [1,0],
 	2 : [2],
 }
+
 
 # --- / 
 # -- / NPC interaction management

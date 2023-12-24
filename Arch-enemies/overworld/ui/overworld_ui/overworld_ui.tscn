@@ -29,17 +29,6 @@ theme_override_constants/margin_bottom = 50
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Control/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Health_Descriptor" type="Label" parent="Control/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-text = "Health: "
-
-[node name="Health" type="Label" parent="Control/MarginContainer/VBoxContainer/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-
 [node name="HBoxContainer2" type="HBoxContainer" parent="Control/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
@@ -57,9 +46,35 @@ layout_mode = 2
 [node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer/VBoxContainer/HBoxContainer3"]
 layout_mode = 2
 
-[node name="Quest_Descriptor" type="Label" parent="Control/MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer"]
+[node name="item_descriptor" type="Label" parent="Control/MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer"]
 layout_mode = 2
-text = "Current Inventory"
+text = "avail Items: "
 
-[node name="QuestList" type="Label" parent="Control/MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer"]
+[node name="item_list" type="Label" parent="Control/MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+
+[node name="animal_descriptor" type="Label" parent="Control/MarginContainer/VBoxContainer/HBoxContainer4/VBoxContainer"]
+layout_mode = 2
+text = "avail Animals:"
+
+[node name="animal_list" type="Label" parent="Control/MarginContainer/VBoxContainer/HBoxContainer4/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer/VBoxContainer/HBoxContainer5"]
+layout_mode = 2
+
+[node name="quest_descriptor" type="Label" parent="Control/MarginContainer/VBoxContainer/HBoxContainer5/VBoxContainer"]
+layout_mode = 2
+text = "Quests :"
+
+[node name="quest_list" type="Label" parent="Control/MarginContainer/VBoxContainer/HBoxContainer5/VBoxContainer"]
 layout_mode = 2
