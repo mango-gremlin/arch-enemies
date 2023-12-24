@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://smnm35pbv18o"
-path="res://.godot/imported/box_squirrel.png-0d0683710d4d9e66deecaa87baa99fc3.ctex"
+uid="uid://bbktakyncn7nc"
+path="res://.godot/imported/deer_40x40.png-d1bde2004afa9ce35927c5a2afae0f0b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://bridges/assets/box_squirrel.png"
-dest_files=["res://.godot/imported/box_squirrel.png-0d0683710d4d9e66deecaa87baa99fc3.ctex"]
+source_file="res://bridges/assets/deer_40x40.png"
+dest_files=["res://.godot/imported/deer_40x40.png-d1bde2004afa9ce35927c5a2afae0f0b.ctex"]
 
 [params]
 

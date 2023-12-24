@@ -1,0 +1,29 @@
+# This workflow is supposed to automatically add prs and issues tagged with combat to the combat project.
+
+name: ADD-TO-UI-PROJECT
+
+# Controls when the workflow will run
+on:
+  issues:
+    types:
+      - labeled
+      - opened
+  pull_request:
+    types:
+      - labeled
+      - opened
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job which adds the pr or issue to the project if the right tags are present.
+  add-to-project:
+    name: Add issue to ui project
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/add-to-project@v0.5.0
+        with:
+          # You can target a project in a different organization
+          # to the issue
+          project-url: https://github.com/users/mango-gremlin/projects/3
+          github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
+          labeled: ui-assets

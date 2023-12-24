@@ -8,13 +8,13 @@ signal saved_player()
 
 @export var SPEED = 100
 @export var zoomlevel:Vector2 = Vector2(1,1)
-@onready var anim :  AnimatedSprite2D = $AnimatedSprite2D
+@onready var anim:AnimatedSprite2D = $AnimatedSprite2D
 
 # --- / 
 # -- / player states
 
 # Array to hold the players useable items 
-@onready var inventory:Array[Item] = []
+@onready var inventory:Dictionary = Item.init_items()
 
 # Array to hold hte players progess in the world 
 # used to check whether the user can traverse a certain region
@@ -82,8 +82,6 @@ func _on_interactionarea_area_exited(area):
 
 # function denoting how to interact with a given interaction in stack
 func execute_interaction():
-	
-	
 	if not all_interactions.is_empty(): # interaction not empty
 		
 		# taking first element from interaction
@@ -121,17 +119,6 @@ func execute_interaction():
 			_: #default
 				pass
 
-# uses item and removes its entry from inventory
-func use_item():
-	# TODO could use pattern matching to use the item accordingly
-	if !inventory.is_empty():
-		# inventory not empty, using item
-		var used_item = inventory.pop_at(0)
-		
-		# TODO as long as this is a string, we can use this as debug
-		print(used_item)
-		# update UI
-		updated_inventory.emit(inventory)
 
 # checks against definde inputs, takes action if action was registered
 # TODO naming could be improved
@@ -139,31 +126,49 @@ func check_input():
 	if Input.is_action_just_pressed("interact_overworld"):
 		execute_interaction()
 	if Input.is_action_just_pressed("use_item"):
-		use_item()
+		#use_item()
+		pass
 	if Input.is_action_just_pressed("open_menu"):
 		enter_pause_menu()
 		
 	
 
 # replaces inventory with given Array of items
-func set_inventory(new_inventory:Array[Item]):
+func set_inventory(new_inventory:Dictionary):
 	inventory = new_inventory
 	updated_inventory.emit(inventory)
 	
 
-# adding item to first position of inventory
-func add_to_inventory(item:Item):
-	if item.item_type != Item.ItemType.NONE:
-		inventory.insert(0,item)
+# takes new item and updates amount stored in inventory 
+# if ItemType is "None" nothing will be changed 
+func add_to_inventory(new_item:Item):
+	if new_item.item_type != Item.ItemType.NONE:
+		# we can verify that every item is constantly available!
+		var selected_item = inventory[new_item.item_type]
+		selected_item.increase_amount()
 		# emit signal to update Ui
 		updated_inventory.emit(inventory)
-	# doing nothing otherwise 
 	# --> no item was received
 
 # query for specific item 
-func search_in_inventory(item:Item):
+func search_in_inventory(item:Item) -> bool:
 	# FIXME requires new structure of inventory
-	pass
+	return false 
+
+# checks whether requested item is contained 
+# returns true if it was and decreases amount by one
+# returns false otherwise
+func request_item(requested_item:Item) -> bool: 
+	if inventory.has(requested_item.item_type):
+		var item_instance:Item = inventory[requested_item.item_type]
+		
+		if item_instance.obtain_amount() >= 1:
+			item_instance.set_amount(item_instance.obtain_amount() - 1)
+			return true
+		
+	return false
+	
+	
 
 # ---- 
 # scene change management
@@ -204,7 +209,16 @@ func save_state():
 	var json_inventory = []
 	
 	for item in inventory:
-		json_inventory.append(item.to_json())
+		var selected_item = inventory[item]
+		var item_dictionary = selected_item.to_json()
+		
+		var item_amount = selected_item.obtain_amount()
+		item_dictionary["amount"] = item_amount
+		# store amount
+		
+		
+		
+		json_inventory.append(item_dictionary)
 	
 	var state = {
 		"name" : name,

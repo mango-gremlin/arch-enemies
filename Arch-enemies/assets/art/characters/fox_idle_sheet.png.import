@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cagtqr073bxj2"
-path="res://.godot/imported/spider.png-bc4a3acc79ae9bd28851f5e5edd91f8a.ctex"
+uid="uid://dx3f23bd68cju"
+path="res://.godot/imported/fox_idle_sheet.png-9fe3498bcabc64dec42cfb6e2e329405.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://bridges/assets/spider.png"
-dest_files=["res://.godot/imported/spider.png-bc4a3acc79ae9bd28851f5e5edd91f8a.ctex"]
+source_file="res://assets/art/characters/fox_idle_sheet.png"
+dest_files=["res://.godot/imported/fox_idle_sheet.png-9fe3498bcabc64dec42cfb6e2e329405.ctex"]
 
 [params]
 
