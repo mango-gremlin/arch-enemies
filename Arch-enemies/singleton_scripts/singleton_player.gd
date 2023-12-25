@@ -10,14 +10,24 @@ extends Node
 # -- / Player management
 
 @onready var player_coordinate:Vector2 = Vector2.ZERO
+@onready var zoomlevel:Vector2 = Vector2(1,1)
+
+func get_player_coord() -> Vector2: 
+	return player_coordinate
 
 func set_player_coord(new_coordinate:Vector2):
 	player_coordinate = new_coordinate
 
-# --- / 
-# -- / Item management 
 
-@onready var inventory:Dictionary = Item.init_items()
+func get_player_zoom() -> Vector2: 
+	return zoomlevel
+
+# --- / 
+# -- / Item / Inventory management 
+
+@onready var item_inventory:Dictionary = Item.init_items()
+# FIXME 
+@onready var animal_inventory:Dictionary = {}
 
 
 # takes new item and updates amount stored in inventory 
@@ -25,18 +35,21 @@ func set_player_coord(new_coordinate:Vector2):
 func add_to_inventory(new_item:Item.ItemType):
 	if new_item != Item.ItemType.NONE:
 		# we can verify that every item is constantly available!
-		var selected_item = inventory[new_item]
+		var selected_item = item_inventory[new_item]
 		selected_item.increase_amount()
 		# emit signal to update Ui
 		#updated_inventory.emit(inventory)
 	# --> no item was received
 
+func set_item_inventory(new_inventory:Dictionary):
+	item_inventory = new_inventory
+
 # checks whether requested item is contained 
 # returns true if it was and decreases amount by one
 # returns false otherwise
 func request_item(requested_item:Item.ItemType) -> bool: 
-	if inventory.has(requested_item):
-		var item_instance:Item = inventory[requested_item]
+	if item_inventory.has(requested_item):
+		var item_instance:Item = item_inventory[requested_item]
 		
 		if item_instance.obtain_amount() >= 1:
 			item_instance.set_amount(item_instance.obtain_amount() - 1)
@@ -44,6 +57,11 @@ func request_item(requested_item:Item.ItemType) -> bool:
 		
 	return false
 
+func add_to_animal_inventory(new_animal:NPC_interaction.AnimalType): 
+	if new_animal != NPC_interaction.AnimalType.NONE:
+		# valid entry given 
+		var selected_animal = animal_inventory[new_animal]
+		selected_animal.increase_amount
 
 
 # --- / 

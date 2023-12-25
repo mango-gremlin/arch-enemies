@@ -7,6 +7,8 @@ class_name OverWorldUI
 @onready var animal_list_label = $Control/MarginContainer/VBoxContainer/HBoxContainer4/VBoxContainer/animal_list
 @onready var quest_list_label = $Control/MarginContainer/VBoxContainer/HBoxContainer5/VBoxContainer/quest_list
 
+# FIXME remove internal representation 
+# --> We only need one reference to the actual dictionary containing the information
 var player_inventory:Dictionary = {}:
 	set(newDict):
 		# if a new array was given, we update its value, also the label
@@ -30,6 +32,8 @@ func _update_inventory_label():
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	
+	# set current inventory 
+	_on_player_updated_inventory(SingletonPlayer.item_inventory)
 	# initialize ui
 	_update_inventory_label()
 

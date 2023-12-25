@@ -1,11 +1,11 @@
 extends Node2D
 
-class_name NPC_interaction
+#class_name NPC_interaction
 # --- / 
 # -- / 
 # -- | base properties for npc instance
 
-# -- / 
+# -- / FIXME REMOVE BECAUSE STORED IN NPC NOW !
 # NPC can be flagged
 # -> interaction with another npc required to obtain this one 
 # -> item required to obtain this one 
@@ -15,6 +15,7 @@ enum AnimalType{
 	DEER,
 	SQUIRREL,
 	SPIDER,
+	NONE
 	#FOX.
 	# possibly more 
 }
@@ -41,11 +42,11 @@ var interaction_type: Interactable.InteractionType = Interactable.InteractionTyp
 @export var npc_id:int = 0
 # string denoting what is shown upon interaction with bridge
 @export var npc_name: String
-@export var npc_type:AnimalType # type animal 
-@export var has_quest:Quest 
+@export var npc_type:NPC_interaction.AnimalType
+@export var has_quest:NPC_interaction.Quest
 
 # should not be set in case reward is of type NPC
-@export var quest_reward:QuestReward
+@export var quest_reward:NPC_interaction.QuestReward
 @export var reward_item:Item.ItemType
 
 # --- / 
@@ -100,6 +101,10 @@ func _ready():
 # returns ncp id
 func obtain_id() -> int:
 	return npc_id
+
+# returns rewardType
+func obtain_reward_type() -> NPC_interaction.QuestReward:
+	return quest_reward
 
 # returns npc name
 func obtain_name() -> String:

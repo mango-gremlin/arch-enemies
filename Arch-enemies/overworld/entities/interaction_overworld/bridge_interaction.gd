@@ -4,7 +4,7 @@ extends Node2D
 # -- / 
 # -- | base properties for bridge instance
 var interaction_type: Interactable.InteractionType = Interactable.InteractionType.BRIDGE
-
+@export var bridge_reward:NPC_interaction.QuestReward
 
 # denotes id of bridge-level this will be linked to
 @export var start_island_id:int 
@@ -36,6 +36,7 @@ func _ready():
 	bridge_edge = SingletonPlayer.BridgeEdge.new()
 	bridge_edge.dest_id = dest_island_id 
 	bridge_edge.start_id = start_island_id
+	set_passability()
 	visualize_status()
 
 
@@ -73,5 +74,13 @@ func visualize_status():
 		referenced_rect.texture = new_texture
 		var referenced_bridge_parts = $bridge_parts
 		referenced_bridge_parts.visible = true 
-		
+
+# sets collision of static_body attached 
+func set_passability():
+	# FIXME no perfect referecne 
+	# however we are enforcing this structure with every bridge_interaction
+	var referenced_bridge_shape:CollisionShape2D = $bridge_collision_shape/bridge_collision
+	referenced_bridge_shape.disabled = is_solved()
+	
+	
 	

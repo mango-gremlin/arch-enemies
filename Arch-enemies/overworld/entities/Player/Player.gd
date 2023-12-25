@@ -9,7 +9,7 @@ signal saved_player()
 # -- / default values for visualization
 
 @export var SPEED = 100
-@export var zoomlevel:Vector2 = Vector2(1,1)
+@onready var zoomlevel:Vector2 = SingletonPlayer.get_player_zoom()
 @onready var anim:AnimatedSprite2D = $AnimatedSprite2D
 
 # --- / 
@@ -17,7 +17,7 @@ signal saved_player()
 
 # Array to hold the players useable items 
 # FIXME --> singleton conversion!
-@onready var inventory:Dictionary = Item.init_items()
+#@onready var inventory:Dictionary = Item.init_items()
 
 # collects all interactions that we currently have 
 # Queue-like structure 
@@ -35,7 +35,6 @@ func _physics_process(delta):
 	player_movement(delta)
 	# checking for interaction in world
 	check_input()
-
 
 func player_movement(delta):
 	# disallow movement when in dialogue
@@ -83,53 +82,53 @@ func execute_interaction():
 		
 		# query result from obtained interation 
 		var obtained_interaction: Interactable.InteractionValue = active_interaction.interact_with_area()
+		var interaction_data:Dictionary = obtained_interaction.valueDictionary
 		match obtained_interaction.type:
 			Interactable.InteractionType.BRIDGE: 
-				print("entering bridge game") 
+				# upon interaction with a bridge: 
+				# check the following: 
+				# solved already? 
+				#	true  -> dont do anything 
+				# 	false -> display information and allow to play game too 
+				print("entering bridge game")
+				# FIXME debugging until interaction works accordingly
+				print("value from interaction") 
+				print(interaction_data["text"])
+				print(interaction_data["issolved"])
+				if interaction_data["issolved"]: 
+					set_interactionLabel("Was solved already") 
+				else: 
+					set_interactionLabel(interaction_data["text"])
+					
+				var bridge_edge:SingletonPlayer.BridgeEdge = interaction_data["bridge_edge"]
+				# FIXME map BridgeEdge data to given level accordingly
+				#enter_bridge_scene(bridge_id)
 			Interactable.InteractionType.ITEM: 
 				print("obtained item")
+				set_interactionLabel(interaction_data["text"])
+				SingletonPlayer.add_to_inventory(interaction_data["item"])
+				#add_to_inventory(active_interaction.interact_value)
+				# adding to inventory! 
 			Interactable.InteractionType.NPC:
 				print("interacting with npc")
+				# entering dialogue, disable movement
+				SingletonPlayer.enter_dialogue(interaction_data["npc_id"])
+				
+				set_interactionLabel(interaction_data["dialogue"])
+				# FIXME should be easier when done with separate **dialogue system**
+				var reward_type:NPC_interaction.QuestReward = interaction_data["reward_type"]
+				var received_reward = interaction_data["reward"]
+				match reward_type:
+					NPC_interaction.QuestReward.ANIMAL: 
+						# adding animal to inventory of player 
+						SingletonPlayer.add_to_animal_inventory(received_reward)
+					NPC_interaction.QuestReward.ITEM: 
+						SingletonPlayer.add_to_inventory(received_reward)
+
 			Interactable.InteractionType.DEBUG:
 				print("debug")
 			_: 
 				return 
-		# we will match again a certain type
-		match active_interaction.interact_type:
-			Interactable.InteractionType.BRIDGE:
-				print("entering bridge game")
-				# drawing ID from Bridge-Interaction
-				# FIXME maybe we should instead use a standardized interaction type?
-				var resulting_dict: Dictionary = active_interaction.interact_with_area()
-				
-				print(resulting_dict["id"])
-				set_interactionLabel(resulting_dict["description"])
-				#enter_bridge_scene(bridge_id)
-			Interactable.InteractionType.ITEM: 
-				print("found an item")
-				var resulting_dict: Dictionary = active_interaction.interact_with_area()
-				set_interactionLabel(resulting_dict["dialogue"])
-				add_to_inventory(resulting_dict["item"])
-				#add_to_inventory(active_interaction.interact_value)
-				# adding to inventory! 
-			Interactable.InteractionType.NPC:
-				print("npc interaction")
-				
-				var resulting_dict: Dictionary = active_interaction.interact_with_area()
-				
-				# entering dialogue, disable movement
-				SingletonPlayer.enter_dialogue(resulting_dict["npc_id"])
-				
-				set_interactionLabel(resulting_dict["dialogue"])
-				# FIXME requires enum "QUEST" to match against!
-				# FIXME should be easier when done with separate **dialogue system**
-				add_to_inventory(resulting_dict["value"])
-			Interactable.InteractionType.DEBUG:
-				print("debug interaction")
-				pass
-				
-			_: #default
-				pass
 
 
 # checks against definde inputs, takes action if action was registered
@@ -150,38 +149,26 @@ func check_input():
 
 # replaces inventory with given Array of items
 # FIXME --> Singleton Conversion
-func set_inventory(new_inventory:Dictionary):
-	inventory = new_inventory
-	updated_inventory.emit(inventory)
+#func set_inventory(new_inventory:Dictionary):
+#	inventory = new_inventory
+#	updated_inventory.emit(inventory)
 	
 
 # takes new item and updates amount stored in inventory 
 # if ItemType is "None" nothing will be changed 
 # FIXME --> Singleton Conversion
-func add_to_inventory(new_item:Item):
-	if new_item.item_type != Item.ItemType.NONE:
-		# we can verify that every item is constantly available!
-		var selected_item = inventory[new_item.item_type]
-		selected_item.increase_amount()
-		# emit signal to update Ui
-		updated_inventory.emit(inventory)
+#func add_to_inventory(new_item:Item):
+#	if new_item.item_type != Item.ItemType.NONE:
+#		# we can verify that every item is constantly available!
+#		var selected_item = inventory[new_item.item_type]
+#		selected_item.increase_amount()
+#		# emit signal to update Ui
+#		updated_inventory.emit(inventory)
 	# --> no item was received
 
 # checks whether requested item is contained 
 # returns true if it was and decreases amount by one
 # returns false otherwise
-# FIXME --> Singleton Conversion
-func request_item(requested_item:Item) -> bool: 
-	if inventory.has(requested_item.item_type):
-		var item_instance:Item = inventory[requested_item.item_type]
-		
-		if item_instance.obtain_amount() >= 1:
-			item_instance.set_amount(item_instance.obtain_amount() - 1)
-			return true
-		
-	return false
-	
-	
 
 # ---- 
 # scene change management
@@ -193,8 +180,12 @@ func enter_pause_menu():
 	# TODO 
 	get_tree().change_scene_to_file("res://overworld/ui/menu/menu/pause_menu.tscn")
 
-func enter_bridge_scene(bridge_id):
-	print("entering bridge game", bridge_id)
+# TODO Outdated --> we dont have bridge_ids anymore 
+func enter_bridge_scene(bridgeEdge:SingletonPlayer.BridgeEdge):
+	var bridge_start:int = bridgeEdge.start_id
+	var bridge_dest:int = bridgeEdge.dest_id
+	
+	print("entering bridge game from ", bridge_start, " to ", bridge_dest )
 	exit_overworld()
 	# TODO search for bridgeGame with correct id! 
 	# load it afterwards
@@ -204,6 +195,8 @@ func enter_bridge_scene(bridge_id):
 
 # prepare player to leave overworld, store its state 
 func exit_overworld():
+	# FIXME with SINGLETON conversion
+	# -> only requires saving position of player for the given time 
 	print("save user position")
 	save_player()
 	
@@ -213,14 +206,15 @@ func exit_overworld():
 
 func save_player():
 	print("save user position")
+	SingletonPlayer.set_player_coord(position)
 	saved_player.emit()
 	
 # TODO --> Singleton conversion!
 func save_state():
 	var json_inventory = []
-	
-	for item in inventory:
-		var selected_item = inventory[item]
+	var item_inventory = SingletonPlayer.item_inventory
+	for item in item_inventory:
+		var selected_item = item_inventory[item]
 		var item_dictionary = selected_item.to_json()
 		
 		var item_amount = selected_item.obtain_amount()

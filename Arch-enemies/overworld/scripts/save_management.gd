@@ -51,7 +51,8 @@ func load_config():
 			player_object.position = Vector2(position_x, position_y)
 			
 			var new_inventory: Dictionary = generate_inventory(node_data["inventory"])
-			player_object.set_inventory(new_inventory)
+			SingletonPlayer.set_item_inventory(new_inventory)
+			#player_object.set_inventory(new_inventory)
 			
 			
 			

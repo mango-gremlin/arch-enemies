@@ -59,17 +59,14 @@ func interact_with_area() -> InteractionValue:
 # handles interaction with bridge, by returning 
 # edge and description of selected bridge 
 func interact_bridge() -> InteractionValue:
-# upon interaction with a bridge: 
-# check the following: 
-# solved already? 
-#	true  -> dont do anything 
-# 	false -> display information and allow to play game too 
 # gathering information to return 
 	var received_bridge_edge:SingletonPlayer.BridgeEdge = parent_node.obtain_bridge_edge()
-	var received_description = parent_node.obtain_description()
+	var received_description:String = parent_node.obtain_description()
+	var received_bridge_status:bool = parent_node.is_solved()
 	var queried_values:Dictionary = {
 		"bridge_edge" : received_bridge_edge,
 		"text" : received_description,
+		"issolved" : received_bridge_status
 	}
 	var interaction_result:InteractionValue = InteractionValue.new(InteractionType.BRIDGE, queried_values)
 	return interaction_result
@@ -98,11 +95,14 @@ func interact_npc() -> InteractionValue:
 	# only useful when we have an item-reward!
 	# contains value retrieved from querying status 
 	var received_reward = parent_node.request_reward()
-		
+	var reward_type = parent_node.obtain_reward_type()
+	
 	var interaction_dict:Dictionary = {
+		"npc_id":received_id,
 		"dialogue":dialogue_string,
 		"reward":received_reward,
-		"npc_id":received_id
+		"reward_type": reward_type
+		
 		}
 	var interaction:InteractionValue = InteractionValue.new(InteractionType.NPC, interaction_dict)
 	return interaction
