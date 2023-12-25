@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://bridges/script/drag_handler.gd" id="1_gtwqh"]
 [ext_resource type="Texture2D" uid="uid://cw66eehxwh20w" path="res://assets/art/objects/bridge_snake.png" id="2_2xwec"]
+[ext_resource type="Script" path="res://bridges/script/forbidden_visibility.gd" id="3_dmbrf"]
 [ext_resource type="Script" path="res://bridges/script/dropzones_visibility.gd" id="3_fqrgl"]
-[ext_resource type="Script" path="res://bridges/scenes/animals/forbidden_visibility.gd" id="3_i22jp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_43xhd"]
 size = Vector2(50, 10)
@@ -41,7 +41,7 @@ shape = SubResource("RectangleShape2D_i2o3k")
 
 [node name="forbidden_Area2D" type="Area2D" parent="." groups=["bottom_dropzone", "forbidden"]]
 position = Vector2(26, 0)
-script = ExtResource("3_i22jp")
+script = ExtResource("3_dmbrf")
 
 [node name="forbidden_dropzone" type="StaticBody2D" parent="forbidden_Area2D" groups=["bottom_dropzone", "forbidden"]]
 collision_layer = 2

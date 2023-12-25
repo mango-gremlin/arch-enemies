@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://bqtg1c4s2pkab" path="res://bridges/scenes/animals/spider.tscn" id="11_daeky"]
 [ext_resource type="PackedScene" uid="uid://c5tl3m10s5tby" path="res://bridges/scenes/animals/snake.tscn" id="13_cijaf"]
 [ext_resource type="PackedScene" uid="uid://cbremi6mc4sua" path="res://bridges/scenes/world_edge.tscn" id="16_jmtqp"]
-[ext_resource type="PackedScene" uid="uid://cekfh8lbohea" path="res://shore.tscn" id="16_mfxt7"]
+[ext_resource type="PackedScene" uid="uid://cekfh8lbohea" path="res://bridges/scenes/shore.tscn" id="16_mfxt7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6rkrv"]
 size = Vector2(243.5, 45.4088)
