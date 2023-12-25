@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://desp8tcpswyl4"
-path="res://.godot/imported/spider_10x10.png-26958656e20fc39448a5f2743495d2c5.ctex"
+uid="uid://bbktakyncn7nc"
+path="res://.godot/imported/bridge_deer.png-8885ce56df70b1f871c5ce8c069d78c9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://bridges/assets/spider_10x10.png"
-dest_files=["res://.godot/imported/spider_10x10.png-26958656e20fc39448a5f2743495d2c5.ctex"]
+source_file="res://assets/art/objects/bridge_deer.png"
+dest_files=["res://.godot/imported/bridge_deer.png-8885ce56df70b1f871c5ce8c069d78c9.ctex"]
 
 [params]
 

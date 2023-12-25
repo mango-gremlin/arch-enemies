@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://dipauq7hxbt1f"]
 
 [ext_resource type="Script" path="res://bridges/script/drag_handler.gd" id="1_ss8yf"]
-[ext_resource type="Texture2D" uid="uid://diwvqonlr6748" path="res://bridges/assets/box_squirrel_tall.png" id="2_f60pg"]
+[ext_resource type="Texture2D" uid="uid://diwvqonlr6748" path="res://assets/art/objects/bridge_squirrel.png" id="2_8hc41"]
 [ext_resource type="Script" path="res://bridges/script/dropzones_visibility.gd" id="3_l28rr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m8jht"]
@@ -30,7 +30,7 @@ body_area2D = NodePath("squirrel")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, 5)
-texture = ExtResource("2_f60pg")
+texture = ExtResource("2_8hc41")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 5)

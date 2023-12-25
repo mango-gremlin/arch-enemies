@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://diwvqonlr6748"
-path="res://.godot/imported/box_squirrel_tall.png-ebd2492f34594c25c40b528ff708e423.ctex"
+path="res://.godot/imported/bridge_squirrel.png-52b6cacd9b37a175eab2b95ae1e850cb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://bridges/assets/box_squirrel_tall.png"
-dest_files=["res://.godot/imported/box_squirrel_tall.png-ebd2492f34594c25c40b528ff708e423.ctex"]
+source_file="res://assets/art/objects/bridge_squirrel.png"
+dest_files=["res://.godot/imported/bridge_squirrel.png-52b6cacd9b37a175eab2b95ae1e850cb.ctex"]
 
 [params]
 

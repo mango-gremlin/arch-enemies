@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b8bwhybkyvib1"
-path="res://.godot/imported/fox_2.png-4bf6d47ac383b0d5a6639f659f4a1153.ctex"
+uid="uid://dp70liqt7qxpq"
+path="res://.godot/imported/bridge_grid.png-3dcf9955dd4d9d4c01b1b9252cd859d9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://bridges/assets/fox_2.png"
-dest_files=["res://.godot/imported/fox_2.png-4bf6d47ac383b0d5a6639f659f4a1153.ctex"]
+source_file="res://assets/art/objects/bridge_grid.png"
+dest_files=["res://.godot/imported/bridge_grid.png-3dcf9955dd4d9d4c01b1b9252cd859d9.ctex"]
 
 [params]
 

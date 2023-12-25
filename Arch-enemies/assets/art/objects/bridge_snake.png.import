@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://rnhda3466ofv"
-path="res://.godot/imported/death_hazard_prototype.png-7e9f53ec6ddc98deaeb5c6a3fb41b281.ctex"
+uid="uid://cw66eehxwh20w"
+path="res://.godot/imported/bridge_snake.png-f0d70815a902070f6391df8aba1b7bb1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://bridges/assets/death_hazard_prototype.png"
-dest_files=["res://.godot/imported/death_hazard_prototype.png-7e9f53ec6ddc98deaeb5c6a3fb41b281.ctex"]
+source_file="res://assets/art/objects/bridge_snake.png"
+dest_files=["res://.godot/imported/bridge_snake.png-f0d70815a902070f6391df8aba1b7bb1.ctex"]
 
 [params]
 

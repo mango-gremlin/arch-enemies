@@ -3,7 +3,7 @@
 [ext_resource type="TileSet" uid="uid://cqhu2jb8xrw78" path="res://assets/art/tilesets/bridge_tileset/bridge_tileset.tres" id="1_sjbuy"]
 [ext_resource type="PackedScene" uid="uid://dvgr170gyuhpq" path="res://bridges/scenes/player.tscn" id="5_tp4g7"]
 [ext_resource type="PackedScene" uid="uid://hyihqgmvp0oj" path="res://bridges/scenes/death_hazard.tscn" id="6_s42ti"]
-[ext_resource type="Texture2D" uid="uid://dp70liqt7qxpq" path="res://bridges/assets/Grid_10x10.png" id="7_0csdo"]
+[ext_resource type="Texture2D" uid="uid://dp70liqt7qxpq" path="res://assets/art/objects/bridge_grid.png" id="7_0csdo"]
 [ext_resource type="Script" path="res://bridges/script/grid_visibility.gd" id="8_airam"]
 [ext_resource type="Script" path="res://bridges/script/toggle_mode_button.gd" id="9_7yjaf"]
 [ext_resource type="PackedScene" uid="uid://cxj1q08s3i7i8" path="res://bridges/scenes/goal_menu.tscn" id="10_8a5g4"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://c5tl3m10s5tby"]
 
 [ext_resource type="Script" path="res://bridges/script/drag_handler.gd" id="1_gtwqh"]
-[ext_resource type="Texture2D" uid="uid://cw66eehxwh20w" path="res://bridges/assets/snake_50x10.png" id="2_2nd48"]
+[ext_resource type="Texture2D" uid="uid://cw66eehxwh20w" path="res://assets/art/objects/bridge_snake.png" id="2_2xwec"]
 [ext_resource type="Script" path="res://bridges/script/dropzones_visibility.gd" id="3_fqrgl"]
 [ext_resource type="Script" path="res://bridges/scenes/animals/forbidden_visibility.gd" id="3_i22jp"]
 
@@ -27,7 +27,7 @@ script = ExtResource("1_gtwqh")
 body_area2D = NodePath("snake")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_2nd48")
+texture = ExtResource("2_2xwec")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_43xhd")
