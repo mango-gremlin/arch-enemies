@@ -33,16 +33,18 @@ func is_correct_placement(body):
 		# check if head of snake is overlapping with an animal
 		if animal_type == "snake":
 			for overlapping_body in body.get_node("forbidden_Area2D").get_overlapping_bodies():
-				if (overlapping_body.is_in_group("snake") 
-					or overlapping_body.is_in_group("spider") 
+				print(body.get_node("forbidden_Area2D").get_overlapping_bodies())
+				if (overlapping_body.is_in_group("snake")
+					or overlapping_body.is_in_group("spider")
 					or overlapping_body.is_in_group("squirrel")
 					or overlapping_body.is_in_group("deer")):
-					print(body.get_node("forbidden_Area2D").get_overlapping_bodies())
 					print("Reject: Head of snake overlaps")
 					return false
+		
 		# checks for other animals beeing overlapped by the current placement
 		for area in body_area2D.get_overlapping_areas():
 			if(area.is_in_group("animal_body")):
+				print("Reject: Overlaps with animal")
 				return false
 		
 		# iterate through all overlapping bodies, and check if they are allowed or not
