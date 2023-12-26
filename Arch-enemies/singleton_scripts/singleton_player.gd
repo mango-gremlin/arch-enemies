@@ -93,6 +93,16 @@ var islands_reachable:Array[bool]
 # --- / 
 # -- / NPC interaction management
 
+enum AnimalType{
+	SNAKE,
+	DEER,
+	SQUIRREL,
+	SPIDER,
+	NONE
+	#FOX.
+	# possibly more 
+}
+
 var is_in_dialogue:bool = false 
 # may be improved 
 var active_dialogue:int = 0
@@ -119,6 +129,11 @@ func check_npc_state(npc_id:int) -> bool:
 class BridgeEdge: 
 	var start_id:int 
 	var dest_id:int
+	
+	func _init(starting_id:int, destination_id:int):
+		start_id = starting_id
+		dest_id = destination_id
+		
 
 # checks whether connection between two given values is possible or not
 func check_bridge_connection(bridge_edge:BridgeEdge) -> bool: 
