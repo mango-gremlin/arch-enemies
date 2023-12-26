@@ -21,19 +21,17 @@ func is_correct_placement(body):
 	if body.someone_connects_to_this:
 		print("Reject: Cannot move connecting piece")
 		return false
- 
-	print("is_inside_forbidden: ", is_inside_forbidden)
-	print("\n-----\n")
-	print(body_area2D.get_overlapping_areas())
-	print("\n-----\n")
+	
+	# check if body is inside a forbidden zone
 	if not is_inside_forbidden:
 		# gets Area2D child, which can check for overlapping bodies
 		var animal_type : String = Global.get_animal_type(body)
 		
 		# check if head of snake is overlapping with an animal
 		if animal_type == "snake":
+			# iterate through all bodies overlapping with the head collision zone
 			for overlapping_body in body.get_node("forbidden_Area2D").get_overlapping_bodies():
-				print(body.get_node("forbidden_Area2D").get_overlapping_bodies())
+				# check if root StaticBody2D belongs to an animal group
 				if (overlapping_body.is_in_group("snake")
 					or overlapping_body.is_in_group("spider")
 					or overlapping_body.is_in_group("squirrel")
@@ -41,7 +39,7 @@ func is_correct_placement(body):
 					print("Reject: Head of snake overlaps")
 					return false
 		
-		# checks for other animals beeing overlapped by the current placement
+		# checks for other animals being overlapped by the current placement
 		for area in body_area2D.get_overlapping_areas():
 			if(area.is_in_group("animal_body")):
 				print("Reject: Overlaps with animal")
@@ -54,8 +52,8 @@ func is_correct_placement(body):
 				print("Reject: is inside forbidden")
 				return false
 			
-			# if overlapping body is dropable and not its own, check specifics for animals
-			elif overlapping_body.is_in_group("dropable") and not body == overlapping_body.get_owner():
+			# if overlapping body is dropable, check specifics for animals
+			elif overlapping_body.is_in_group("dropable"):
 				 #if the overlapping_body is not connected to the shore the current animal cant be connected to it
 				if not overlapping_body.is_in_group("shore_dropzone") and not overlapping_body.get_owner().is_bridge_connected_to_shore():
 					print("Reject: Not connected to shore")
@@ -87,7 +85,7 @@ func is_correct_placement(body):
 					return true
 		print("Reject: Not inside any recognized dropzone")
 		return false
-	print("Reject: Not inside dropable, or inside forbidden")
+	print("Reject: Is inside forbidden")
 	return false
 
 
@@ -145,19 +143,24 @@ func connect_to_animal(overlapping_body):
 		overlapping_body.get_owner().someone_connects_to_this = true
 		
 
-func is_bridge_connected_to_shore():	#checks recursivly if an animal is connected to the shore through other animals
+
+# checks recursivly if an animal is connected to the shore through other animals
+func is_bridge_connected_to_shore():
 	print("self animal type:",Global.get_animal_type(self))
-	
-	if self.connected_to == null:								#connected to nothing
+	#connected to nothing
+	if self.connected_to == null:
 		print("is_bridge_connected_to_shore null False")
 		return false
 	else:
-		if self.connected_to.is_in_group("shore_dropzone"): 	# end of recursion connected to the shore
+		# end of recursion connected to the shore
+		if self.connected_to.is_in_group("shore_dropzone"):
 			print("is_bridge_connected_to_shore connected_to: shore")
 			return true
-		else:													#connected to another animal
+		#connected to another animal
+		else:
 			print("is_bridge_connected_to_shore connected_to:",Global.get_animal_type( self.connected_to.get_owner() ))
 			return self.connected_to.get_owner().is_bridge_connected_to_shore()
+
 
 func _on_area_2d_mouse_entered():
 	mouse_entered()
@@ -181,27 +184,23 @@ func mouse_exited():
 
 
 func body_entered(body):
-	# if the snake body touches a staticbody hitbox (body)
-	# and this body is in the group drobable
-	# set inside dropable to true so the process can register it as a dropable zone
-	# and change the colour of the body we just touched to signify we can drop it here
-	if body.is_in_group('dropable') and not body == self:
+	# if body stops touching a staticbody that has the dropable group
+	# change the colour of that body
+	if body.is_in_group('dropable'):
 		body.modulate = TRIGGERED_COLOR
-	# "not body self" prevents some unexpected results with overlapping collision zones
-	# of self, but may also be a problem in the future 
-	if body.is_in_group('forbidden') and not body == self:
+	# if body stops touching a forbidden group, update the variable
+	if body.is_in_group('forbidden'):
 		print("Entered forbidden body ", body)
 		is_inside_forbidden = true
 
 
 func body_exited(body):
-	# if the snake body stops touching a staticbody that has the dropable group
-	# set inside dropable to false & change the colour of that body back to original 
-	if body.is_in_group('dropable') and not body == self:
+	# if body stops touching a staticbody that has the dropable group
+	# change the colour of that body back to original 
+	if body.is_in_group('dropable'):
 		body.modulate = STANDARD_COLOR
-	# "not body self" prevents some unexpected results with overlapping collision zones
-	# of self, but may also be a problem in the future 
-	if body.is_in_group('forbidden') and not body == self:
+	# if body stops touching a forbidden group, update the variable 
+	if body.is_in_group('forbidden'):
 		print("Left forbidden body ", body)
 		is_inside_forbidden = false
 
