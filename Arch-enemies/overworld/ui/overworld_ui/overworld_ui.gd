@@ -9,17 +9,17 @@ class_name OverWorldUI
 
 # FIXME remove internal representation 
 # --> We only need one reference to the actual dictionary containing the information
-var player_inventory:Dictionary = {}:
+var player_item_inventory:Dictionary = {}:
 	set(newDict):
 		# if a new array was given, we update its value, also the label
-		player_inventory = newDict
+		player_item_inventory = newDict
 		_update_inventory_label()
 
 func _update_inventory_label():
 	# iterate over item
 	var newString:String  = ""
-	for item in player_inventory:
-		var selected_item = player_inventory[item]
+	for item in player_item_inventory:
+		var selected_item = player_item_inventory[item]
 		
 		#if amount == 0:
 		#	continue
@@ -31,21 +31,17 @@ func _update_inventory_label():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	
-	# set current inventory 
-	_on_player_updated_inventory(SingletonPlayer.item_inventory)
+	# connecting signal to singleton
+	SingletonPlayer.connect("updated_item_inventory",_on_player_updated_inventory) 
 	# initialize ui
 	_update_inventory_label()
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	#FIXME use to update UI every frame? 
-	# --> might be too much work for nothing, 
-	# instead -> only update whenever inventory changed!
 	pass
 
 
+# updates the internal item_inventory upon signal received
 func _on_player_updated_inventory(inventory):
-	player_inventory = inventory
+	player_item_inventory = inventory
 	

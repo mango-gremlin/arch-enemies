@@ -6,6 +6,10 @@ extends Node
 # - track progress of game 
 # - user profiles 
 
+# -- Signals 
+signal updated_item_inventory(new_inventory)
+
+
 # --- / 
 # -- / Player management
 
@@ -44,9 +48,13 @@ func add_to_inventory(new_item:Item.ItemType):
 		var selected_item = item_inventory[new_item]
 		selected_item.increase_amount()
 		# emit signal to update Ui
+		updated_item_inventory.emit(item_inventory)
 
 func set_item_inventory(new_inventory:Dictionary):
 	item_inventory = new_inventory
+	print("setting loaded inventory")
+	updated_item_inventory.emit(item_inventory)
+	
 
 # checks whether requested item is contained 
 # returns true if it was and decreases amount by one

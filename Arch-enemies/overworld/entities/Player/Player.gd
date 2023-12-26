@@ -2,7 +2,6 @@ extends CharacterBody2D
 
 # --- / 
 # -- / defining usage of signals 
-signal updated_inventory(new_inventory)
 signal saved_player()
 
 # --- / 
@@ -106,8 +105,6 @@ func execute_interaction():
 				# adding to inventory 
 				SingletonPlayer.add_to_inventory(received_item)
 				# updating ui 
-				updated_inventory.emit(SingletonPlayer.item_inventory)
-				#add_to_inventory(active_interaction.interact_value)
 				# adding to inventory! 
 			Interactable.InteractionType.NPC:
 				print("interacting with npc")
