@@ -47,13 +47,8 @@ func is_correct_placement(body):
 		
 		# iterate through all overlapping bodies, and check if they are allowed or not
 		for overlapping_body in body_area2D.get_overlapping_bodies():
-			# if overlapping body is a forbidden one, it is never valid
-			if overlapping_body.is_in_group("forbidden"):
-				print("Reject: is inside forbidden")
-				return false
-			
 			# if overlapping body is dropable, check specifics for animals
-			elif overlapping_body.is_in_group("dropable"):
+			if overlapping_body.is_in_group("dropable"):
 				 #if the overlapping_body is not connected to the shore the current animal cant be connected to it
 				if not overlapping_body.is_in_group("shore_dropzone") and not overlapping_body.get_owner().is_bridge_connected_to_shore():
 					print("Reject: Not connected to shore")
