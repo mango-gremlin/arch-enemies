@@ -26,8 +26,14 @@ func get_player_zoom() -> Vector2:
 # -- / Item / Inventory management 
 
 @onready var item_inventory:Dictionary = Item.init_items()
-# FIXME 
-@onready var animal_inventory:Dictionary = {}
+
+# FIXME should be automatically instantiated like the items above
+@onready var animal_inventory:Dictionary = {
+	AnimalType.SNAKE: 0 ,
+	AnimalType.DEER: 0,
+	AnimalType.SQUIRREL :0 ,
+	AnimalType.SPIDER : 0,
+	}
 
 
 # takes new item and updates amount stored in inventory 
@@ -58,8 +64,8 @@ func request_item(requested_item:Item.ItemType) -> bool:
 func add_to_animal_inventory(new_animal:AnimalType): 
 	if new_animal != AnimalType.NONE:
 		# valid entry given 
-		var selected_animal = animal_inventory[new_animal]
-		selected_animal.increase_amount
+		animal_inventory[new_animal] += 1
+		#selected_animal.increase_amount
 
 
 # --- / 

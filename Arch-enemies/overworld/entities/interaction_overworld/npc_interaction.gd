@@ -121,11 +121,8 @@ func check_item_condition() -> bool:
 	var is_obtained_item:bool = SingletonPlayer.request_item(required_item)
 	if not is_obtained_item: 
 		# gathered requested item --> condition met!
-		#return reward_item
 		return true 
 	return false 
-	#return Item.ItemType.NONE
-	
 
 # returns either Animal/Item if quest was complete before 
 # if quest is not done, returns Item of Type "ItemType.NONE"
@@ -141,7 +138,13 @@ func request_reward():
 				NPC_interaction.QuestReward.ANIMAL:
 					return npc_type
 						
-	return Item.ItemType.NONE
+	# FIXME improve readability 
+	# FIXME reduce complexity of this simple statement
+	match quest_reward:
+		NPC_interaction.QuestReward.ITEM:
+				return Item.ItemType.NONE
+		NPC_interaction.QuestReward.ANIMAL:
+				return SingletonPlayer.AnimalType.NONE
 
 # returns formatted dialogue
 # TODO should maybe contain the active state of the conversation 
