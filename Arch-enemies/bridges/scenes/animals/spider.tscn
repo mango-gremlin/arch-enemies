@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://bqtg1c4s2pkab"]
 
 [ext_resource type="Script" path="res://bridges/script/drag_handler.gd" id="1_fk6ir"]
-[ext_resource type="Texture2D" uid="uid://desp8tcpswyl4" path="res://bridges/assets/spider_10x10.png" id="2_fera1"]
+[ext_resource type="Texture2D" uid="uid://desp8tcpswyl4" path="res://assets/art/objects/bridge_spider.png" id="2_7iq3g"]
 [ext_resource type="Script" path="res://bridges/script/dropzones_visibility.gd" id="3_i8vs8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m8jht"]
@@ -29,7 +29,7 @@ script = ExtResource("1_fk6ir")
 body_area2D = NodePath("spider")
 
 [node name="Spider" type="Sprite2D" parent="."]
-texture = ExtResource("2_fera1")
+texture = ExtResource("2_7iq3g")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_m8jht")

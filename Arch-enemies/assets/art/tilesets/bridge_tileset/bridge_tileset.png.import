@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://desp8tcpswyl4"
-path="res://.godot/imported/spider_10x10.png-26958656e20fc39448a5f2743495d2c5.ctex"
+uid="uid://p31almd67lu3"
+path="res://.godot/imported/bridge_tileset.png-4fbd5ca38408530fbb70bffdeed8d11b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://bridges/assets/spider_10x10.png"
-dest_files=["res://.godot/imported/spider_10x10.png-26958656e20fc39448a5f2743495d2c5.ctex"]
+source_file="res://assets/art/tilesets/bridge_tileset/bridge_tileset.png"
+dest_files=["res://.godot/imported/bridge_tileset.png-4fbd5ca38408530fbb70bffdeed8d11b.ctex"]
 
 [params]
 

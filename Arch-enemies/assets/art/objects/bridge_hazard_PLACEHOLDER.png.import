@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d0o2q6fijmd1"
-path="res://.godot/imported/dark green.png-1059c411622d102289d601e1e6a9f687.ctex"
+uid="uid://rnhda3466ofv"
+path="res://.godot/imported/bridge_hazard_PLACEHOLDER.png-0c281974ebdb92989be96457a288d9bd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://bridges/assets/dark green.png"
-dest_files=["res://.godot/imported/dark green.png-1059c411622d102289d601e1e6a9f687.ctex"]
+source_file="res://assets/art/objects/bridge_hazard_PLACEHOLDER.png"
+dest_files=["res://.godot/imported/bridge_hazard_PLACEHOLDER.png-0c281974ebdb92989be96457a288d9bd.ctex"]
 
 [params]
 
