@@ -57,8 +57,8 @@ func request_item(requested_item:Item.ItemType) -> bool:
 		
 	return false
 
-func add_to_animal_inventory(new_animal:NPC_interaction.AnimalType): 
-	if new_animal != NPC_interaction.AnimalType.NONE:
+func add_to_animal_inventory(new_animal:AnimalType): 
+	if new_animal != AnimalType.NONE:
 		# valid entry given 
 		var selected_animal = animal_inventory[new_animal]
 		selected_animal.increase_amount
