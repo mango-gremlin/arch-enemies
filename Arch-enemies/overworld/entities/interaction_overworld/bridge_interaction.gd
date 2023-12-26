@@ -33,9 +33,8 @@ func _ready():
 	interactionspot_object.parent_node = self
 	interactionspot_object.interact_type = interaction_type
 	# constructing bridge edge 
-	bridge_edge = SingletonPlayer.BridgeEdge.new()
-	bridge_edge.dest_id = dest_island_id 
-	bridge_edge.start_id = start_island_id
+	bridge_edge = SingletonPlayer.BridgeEdge.new(start_island_id,dest_island_id)
+	
 	set_passability()
 	visualize_status()
 

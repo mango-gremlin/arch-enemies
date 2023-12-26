@@ -14,15 +14,7 @@ class_name NPC_interaction
 # -> interaction with another npc required to obtain this one 
 # -> item required to obtain this one 
 # -> build a certain bridge ( or the itme behind it )
-enum AnimalType{
-	SNAKE,
-	DEER,
-	SQUIRREL,
-	SPIDER,
-	NONE
-	#FOX.
-	# possibly more 
-}
+
 
 # denotes Quest-Type of NPC
 enum Quest{
@@ -49,6 +41,11 @@ enum QuestReward{
 
 var npc_name:String
 var npc_id:int
+# denotes in which state of the dialogue the npc is currently
+# example: we just started talking to them and they now await an item from us 
+var dialogue_state:int 
+
+var has_quest:bool 
 
 
 # --- /
@@ -57,3 +54,15 @@ func _init(name,id,linked_dialogue):
 	pass
 	
 
+# generates dictionary containing every animal stored in AnimalType and returns it 
+# here AnimalType.NONE is left out 
+# FIXME --> this requires Animals to be represented as **Objects** of a class
+# because they ought to hold their amount within!
+static func init_animal_inventory():
+	var animal_inventory:Dictionary = {}
+	for animal_type:SingletonPlayer.AnimalType in SingletonPlayer.AnimalType.values():
+		if not animal_type == SingletonPlayer.AnimalType.NONE:
+			#animal_inventory[item_type] = Item.new(item_type)
+			pass
+	
+	return animal_inventory

@@ -6,43 +6,13 @@ extends Node2D
 # -- | base properties for npc instance
 
 # -- / FIXME REMOVE BECAUSE STORED IN NPC NOW !
-# NPC can be flagged
-# -> interaction with another npc required to obtain this one 
-# -> item required to obtain this one 
-# -> build a certain bridge ( or the itme behind it )
-enum AnimalType{
-	SNAKE,
-	DEER,
-	SQUIRREL,
-	SPIDER,
-	NONE
-	#FOX.
-	# possibly more 
-}
-
-# denotes Quest-Type of NPC
-enum Quest{
-	ITEM,
-	BRIDGE,
-	NPC,
-	NONE,
-}
-
-# denotes which type of quest-reward is obtained 
-# after solving npcs quest
-enum QuestReward{
-	ITEM,
-	ANIMAL,
-	NONE
-}
-
 var interaction_type: Interactable.InteractionType = Interactable.InteractionType.NPC
 
 # denotes id of bridge-level this will be linked to
 @export var npc_id:int = 0
 # string denoting what is shown upon interaction with bridge
 @export var npc_name: String
-@export var npc_type:NPC_interaction.AnimalType
+@export var npc_type:SingletonPlayer.AnimalType
 @export var has_quest:NPC_interaction.Quest
 
 # should not be set in case reward is of type NPC
@@ -86,8 +56,13 @@ var received_item:Item.ItemType = Item.ItemType.NONE
 
 func _ready():
 	# if no quest was selected, we automatically set it to "done"
-	if has_quest == Quest.NONE:
-		is_recruited = true 
+	match has_quest:
+		NPC_interaction.Quest.BRIDGE: 
+			required_bridge_edge = SingletonPlayer.BridgeEdge.new(required_edge_start,required_edge_dest)
+			
+		_:
+			is_recruited = true 
+		
 	
 	# linking to interaction spot accordingly
 	var interactionspot_object = get_node("interactionspot")
@@ -124,16 +99,16 @@ func check_quest_condition() -> bool:
 	if not is_recruited : 
 	#TODO prone to change with better implementation of dialogue!
 		match has_quest:
-			Quest.ITEM:
+			NPC_interaction.Quest.ITEM:
 				if check_item_condition():
 					# matching item was provided 
 					return true 
 				return false 
-			Quest.BRIDGE:
+			NPC_interaction.Quest.BRIDGE:
 				if SingletonPlayer.check_bridge_connection(required_bridge_edge):
 					return true 
 				return false 
-			Quest.NPC:
+			NPC_interaction.Quest.NPC:
 				if SingletonPlayer.check_npc_state(required_npc_id): 
 					# visited npc already 
 					return true 
@@ -161,12 +136,12 @@ func request_reward():
 		if check_quest_condition(): 
 			print("npc is done ")
 			match quest_reward:
-				QuestReward.ITEM:
+				NPC_interaction.QuestReward.ITEM:
 					return reward_item
-				QuestReward.ANIMAL:
+				NPC_interaction.QuestReward.ANIMAL:
 					return npc_type
 						
-	return Item.new(Item.ItemType.NONE)
+	return Item.ItemType.NONE
 
 # returns formatted dialogue
 # TODO should maybe contain the active state of the conversation 
