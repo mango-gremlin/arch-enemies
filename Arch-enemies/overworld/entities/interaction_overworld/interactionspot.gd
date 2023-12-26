@@ -43,10 +43,6 @@ func interact_with_area() -> InteractionValue:
 			var interaction:InteractionValue = interact_item()
 			return interaction
 		InteractionType.BRIDGE:
-			# FIXME this checking is not necessary --> we will see whether it was solved
-			# when using the returning value ( and check whether it was solved!)
-			#var is_solved = parent_node.is_solved()
-			#if not is_solved: 
 			var interaction:InteractionValue = interact_bridge()
 			return interaction
 		InteractionType.NPC:
@@ -85,6 +81,9 @@ func interact_item() -> InteractionValue:
 	var interaction_result:InteractionValue = InteractionValue.new(InteractionType.ITEM,queried_values)
 	return interaction_result
 
+# handles interaction with an npc, 
+# returns "InteractionValue" with InteractionType 
+# Dictionary contains: npc_id, dialogue String, reward-item, reward-type 
 func interact_npc() -> InteractionValue: 
 	# FIXME  requires state management to check where the dialogue is based and structured in
 	# TODO might be a separate scene that is called to run player through the interaction?	

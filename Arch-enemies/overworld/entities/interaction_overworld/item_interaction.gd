@@ -5,8 +5,9 @@ extends Node2D
 # -- | piped to _interactionspot_ upon initialization
 
 # ---- 
-# Idea: denoted in #133 on github!
-# - items can be locked until a given threshold was met 
+# FIXME : load the state of this item node upon world construction 
+# this requires the usage of an **item_interaction_spot_id 
+# those have to be stored and initialized accordingly
 # ----
 
 # choose which item is contained
@@ -15,9 +16,10 @@ var interaction_type: Interactable.InteractionType = Interactable.InteractionTyp
 # FIXME this value is not persistent but resets with every game! 
 # TODO convert to Issue on Github to track!
 @export var item_amount:int = 1
+@export var itemspot_id:int = 0
 
 # denotes item Object
-var item_instance:Item
+#var item_instance:Item
 
 # string denoting what is shown upon gathering the item 
 @export var item_dialogue_success: String
@@ -39,15 +41,6 @@ func _ready():
 	# set interaction type for child node
 	interactionspot_object.parent_node = self
 	interactionspot_object.interact_type = interaction_type
-	# set item_type
-	# FIXME may not be necessary as we only interact with this instance anyway!
-	#interactionspot_object.item_type = item_type
-	#interactionspot_object.item_description = item_dialogue_box
-	
-	## -- / initialize item
-	# FIXME should not be instantiated with every creation 
-	# generating new item
-	item_instance = Item.new(item_type)
 
 # checks whether item can be obtained by player 
 # returns true, if possible
@@ -63,17 +56,15 @@ func is_obtainable_by_player() -> bool:
 
 # returns contained item and reduced amount available 
 # returns nothing if requirement is not met 
-func obtain_item() -> Item:
+func obtain_item() -> Item.ItemType:
 	if is_obtainable_by_player():
 		# can be obtained, returning and updating count for internal representation 
 		item_amount -= 1
-		# FIXME construct a struct that contains
-		# ITEM ( if available ) 
-		# DIALOGUE-OPTION
-		return item_instance
+		return item_type
 	else: 
 		print("not obtainable")
-		return Item.new(Item.ItemType.NONE)
+		# signals an empty return --> wont be saved in inventory
+		return Item.ItemType.NONE
 
 # returns dialogue-String for displaying in dialogue-Box
 # if item obtainable -> return item_dialogue_succes

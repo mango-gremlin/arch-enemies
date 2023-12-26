@@ -38,8 +38,6 @@ func add_to_inventory(new_item:Item.ItemType):
 		var selected_item = item_inventory[new_item]
 		selected_item.increase_amount()
 		# emit signal to update Ui
-		#updated_inventory.emit(inventory)
-	# --> no item was received
 
 func set_item_inventory(new_inventory:Dictionary):
 	item_inventory = new_inventory

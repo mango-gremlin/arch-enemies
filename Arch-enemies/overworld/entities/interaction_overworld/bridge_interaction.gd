@@ -12,8 +12,6 @@ var interaction_type: Interactable.InteractionType = Interactable.InteractionTyp
 # denotes 
 var bridge_edge:SingletonPlayer.BridgeEdge
 
-#@export var bridge_id:int
-
 # string denoting what is shown upon interaction with bridge
 @export var bridge_description: String
 
@@ -57,7 +55,6 @@ func obtain_bridge_edge() -> SingletonPlayer.BridgeEdge:
 	return bridge_edge
 
 # returns true if it was solved already 
-# referenced in #137
 func is_solved() -> bool:
 	var connection_status:bool = SingletonPlayer.check_bridge_connection(bridge_edge)
 	return connection_status
@@ -76,7 +73,7 @@ func visualize_status():
 
 # sets collision of static_body attached 
 func set_passability():
-	# FIXME no perfect referecne 
+	# FIXME no perfect reference
 	# however we are enforcing this structure with every bridge_interaction
 	var referenced_bridge_shape:CollisionShape2D = $bridge_collision_shape/bridge_collision
 	referenced_bridge_shape.disabled = is_solved()

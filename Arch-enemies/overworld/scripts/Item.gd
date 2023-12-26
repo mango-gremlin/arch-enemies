@@ -8,8 +8,7 @@ extends Node
 # - .... 
 class_name Item
 
-# FIXME --> Singleton Conversion
-# maybe extract to make it available globally? 
+# denotes available items to represent those internally
 enum ItemType {
 	HONEY,
 	FLUTE,

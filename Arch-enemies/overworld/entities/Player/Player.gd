@@ -14,11 +14,6 @@ signal saved_player()
 
 # --- / 
 # -- / player states
-
-# Array to hold the players useable items 
-# FIXME --> singleton conversion!
-#@onready var inventory:Dictionary = Item.init_items()
-
 # collects all interactions that we currently have 
 # Queue-like structure 
 @onready var all_interactions = []
@@ -74,6 +69,7 @@ func _on_interactionarea_area_exited(area):
 	all_interactions.erase(area)
 
 # function denoting how to interact with a given interaction in stack
+# FIXME refactor!
 func execute_interaction():
 	if not all_interactions.is_empty(): # interaction not empty
 		
@@ -106,7 +102,11 @@ func execute_interaction():
 			Interactable.InteractionType.ITEM: 
 				print("obtained item")
 				set_interactionLabel(interaction_data["text"])
-				SingletonPlayer.add_to_inventory(interaction_data["item"])
+				var received_item = interaction_data["item"]
+				# adding to inventory 
+				SingletonPlayer.add_to_inventory(received_item)
+				# updating ui 
+				updated_inventory.emit(SingletonPlayer.item_inventory)
 				#add_to_inventory(active_interaction.interact_value)
 				# adding to inventory! 
 			Interactable.InteractionType.NPC:
@@ -147,28 +147,6 @@ func check_input():
 		
 	
 
-# replaces inventory with given Array of items
-# FIXME --> Singleton Conversion
-#func set_inventory(new_inventory:Dictionary):
-#	inventory = new_inventory
-#	updated_inventory.emit(inventory)
-	
-
-# takes new item and updates amount stored in inventory 
-# if ItemType is "None" nothing will be changed 
-# FIXME --> Singleton Conversion
-#func add_to_inventory(new_item:Item):
-#	if new_item.item_type != Item.ItemType.NONE:
-#		# we can verify that every item is constantly available!
-#		var selected_item = inventory[new_item.item_type]
-#		selected_item.increase_amount()
-#		# emit signal to update Ui
-#		updated_inventory.emit(inventory)
-	# --> no item was received
-
-# checks whether requested item is contained 
-# returns true if it was and decreases amount by one
-# returns false otherwise
 
 # ---- 
 # scene change management
