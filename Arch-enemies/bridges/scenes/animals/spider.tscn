@@ -5,10 +5,10 @@
 [ext_resource type="Script" path="res://bridges/script/dropzones_visibility.gd" id="3_i8vs8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m8jht"]
-size = Vector2(10, 10)
+size = Vector2(8, 8)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4bimj"]
-size = Vector2(10, 10)
+size = Vector2(8, 8)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2xjkc"]
 size = Vector2(8, 8)
