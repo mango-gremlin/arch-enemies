@@ -111,6 +111,7 @@ func execute_interaction():
 				# entering dialogue, disable movement
 				SingletonPlayer.enter_dialogue(interaction_data["npc_id"])
 				SingletonPlayer.add_npc_talked_to(interaction_data["npc_id"])
+				# debug --> visualize visited npcs
 				print(SingletonPlayer.npc_talked_to)
 				
 				set_interactionLabel(interaction_data["dialogue"])

@@ -217,12 +217,13 @@ func stringify_quest() -> String:
 			requirement_string = string_format % [required_bridge_edge.start_id, required_bridge_edge.dest_id]
 			pass
 		Quest.NPC:
-			var target_npc:NPC_interaction  = SingletonPlayer.obtain_npc_object(npc_id)
+			var target_npc:NPC_interaction  = SingletonPlayer.obtain_npc_object(required_npc_id)
 			var target_npc_name = target_npc.obtain_name()
 			requirement_string = " wants you to talk to " + target_npc_name 
 	
 	# done querying information based on type!
-	var combined_message = source_npc_name + requirement_string 
+	# WITH NAME BEFORE var combined_message = source_npc_name + requirement_string 
+	var combined_message = requirement_string 
 	return combined_message
 
 # --- / 
@@ -234,7 +235,7 @@ func obtain_dialogue() -> String:
 	if quest_resolved:
 		return dialogue_quest_done
 	else:
-		return dialogue_quest_undone
+		return stringify_quest()
 
 # returns formatted dialogue
 # FIXME placehold for dialogue-system
