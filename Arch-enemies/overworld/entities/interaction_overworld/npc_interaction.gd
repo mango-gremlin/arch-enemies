@@ -6,6 +6,7 @@ extends Node2D
 # -- | base properties for npc instance
 
 # -- / FIXME REMOVE BECAUSE STORED IN NPC NOW !
+# not fully implemented your NPC_interaction, i don't see the necessarity yet
 var interaction_type: Interactable.InteractionType = Interactable.InteractionType.NPC
 
 # denotes id of bridge-level this will be linked to
@@ -36,6 +37,12 @@ var interaction_type: Interactable.InteractionType = Interactable.InteractionTyp
 # -- / Dialoque options
 #FIXME 
 # requires option to represent and set a dialogue
+
+# this is our created dialogue
+# THIS IS NOT A GOOD SOLUTION, GODOT DOESN'T ALLOW FOR SETTING NON NODE OBJECT AS @export
+# two solutions: create node in scope for each dialogue or a dict npc_id, dialogue_data
+var dialogue_data: Dialogue_Data = ExampleData.new()
+
 @export var dialogue_quest_undone: String = "quest undone so far"
 @export var dialogue_quest_done :String = "quest is done"
 
@@ -86,9 +93,11 @@ func obtain_name() -> String:
 	return npc_name
 
 # return the dialogue based on conditio ( quest done / undone ) 
+# @Evelyn: check_quest_condition contains the new finished condition, where do you actually update is_recruited = true?
+# didn't find that, so, a small work around to show that everything works
 func obtain_dialogue() -> String:
 	if is_recruited:
-		return dialogue_quest_done
+		return dialogue_quest_done # with my dialogue system, there's no need to show this anymore, it just opens the window
 	else:
 		return dialogue_quest_undone
 
@@ -109,7 +118,7 @@ func check_quest_condition() -> bool:
 					return true 
 				return false 
 			NPC_interaction.Quest.NPC:
-				if SingletonPlayer.check_npc_state(required_npc_id): 
+				if dialogue_data.finished: # correct?
 					# visited npc already 
 					return true 
 				return false 
@@ -147,7 +156,8 @@ func request_reward():
 				return SingletonPlayer.AnimalType.NONE
 
 # returns formatted dialogue
-# TODO should maybe contain the active state of the conversation 
+# TODO should maybe contain the active state of the conversation
+# how? the message might be to long to display, see example dialogue
 func obtain_formatted_dialogue() ->String:
 	var dialogue_string:String = "%s :: %s!"
 	var received_name = obtain_name()

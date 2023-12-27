@@ -1,8 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://dndu4pg1i3tlf"]
+[gd_scene load_steps=13 format=3 uid="uid://dndu4pg1i3tlf"]
 
 [ext_resource type="Script" path="res://overworld/entities/Player/Player.gd" id="1_lcx6v"]
 [ext_resource type="Texture2D" uid="uid://802nqkliaru4" path="res://assets/art/characters/fox.png" id="2_tenk7"]
 [ext_resource type="Script" path="res://overworld/entities/Player/ZoomCamera.gd" id="3_y8j37"]
+[ext_resource type="Texture2D" uid="uid://b140cjg8pebfw" path="res://assets/art/objects/npc-background.png" id="4_h0meo"]
+[ext_resource type="Script" path="res://overworld/entities/Player/npc.gd" id="4_nsusk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8xcpl"]
 size = Vector2(23, 9)
@@ -85,14 +87,17 @@ MAX_ZOOM = 10.0
 z_index = 1
 
 [node name="interactionarea" type="Area2D" parent="interactioncomponents"]
+visible = false
 collision_layer = 0
 collision_mask = 8
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="interactioncomponents/interactionarea"]
+visible = false
 shape = SubResource("CircleShape2D_hpei2")
 
 [node name="InteractLabel" type="Label" parent="interactioncomponents"]
+visible = false
 offset_left = -94.0
 offset_top = -62.0
 offset_right = 94.0
@@ -101,5 +106,65 @@ text = "xxx"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="npc" type="Panel" parent="interactioncomponents"]
+offset_left = -90.0
+offset_top = -90.0
+offset_right = 90.0
+offset_bottom = 90.0
+script = ExtResource("4_nsusk")
+
+[node name="background" type="Sprite2D" parent="interactioncomponents/npc"]
+position = Vector2(90, 90)
+scale = Vector2(180, 180)
+texture = ExtResource("4_h0meo")
+
+[node name="row" type="VBoxContainer" parent="interactioncomponents/npc"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -90.0
+offset_top = -90.0
+offset_right = 90.0
+offset_bottom = 90.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="name" type="Label" parent="interactioncomponents/npc/row"]
+layout_mode = 2
+text = "Das ist der NPC Name"
+
+[node name="content" type="Label" parent="interactioncomponents/npc/row"]
+custom_minimum_size = Vector2(0, 115)
+layout_mode = 2
+theme_override_constants/line_spacing = -5
+theme_override_font_sizes/font_size = 14
+text = "designed by a swabian skiller with much love
+LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
+LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL"
+autowrap_mode = 1
+clip_text = true
+
+[node name="buttons" type="HBoxContainer" parent="interactioncomponents/npc/row"]
+layout_mode = 2
+alignment = 1
+
+[node name="Btn1" type="Button" parent="interactioncomponents/npc/row/buttons"]
+layout_mode = 2
+text = "Accept"
+
+[node name="Btn2" type="Button" parent="interactioncomponents/npc/row/buttons"]
+layout_mode = 2
+text = "Decline"
+
+[node name="Btn3" type="Button" parent="interactioncomponents/npc/row/buttons"]
+layout_mode = 2
+text = "Exit"
+
 [connection signal="area_entered" from="interactioncomponents/interactionarea" to="." method="_on_interactionarea_area_entered"]
 [connection signal="area_exited" from="interactioncomponents/interactionarea" to="." method="_on_interactionarea_area_exited"]
+[connection signal="pressed" from="interactioncomponents/npc/row/buttons/Btn1" to="interactioncomponents/npc" method="_on_btn_1_pressed"]
+[connection signal="pressed" from="interactioncomponents/npc/row/buttons/Btn2" to="interactioncomponents/npc" method="_on_btn_2_pressed"]
+[connection signal="pressed" from="interactioncomponents/npc/row/buttons/Btn3" to="interactioncomponents/npc" method="_on_btn_3_pressed"]

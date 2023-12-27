@@ -89,6 +89,7 @@ func interact_npc() -> InteractionValue:
 	# TODO might be a separate scene that is called to run player through the interaction?	
 	var received_id = parent_node.obtain_id()
 	var dialogue_string = parent_node.obtain_formatted_dialogue()
+	var dialogue_data = parent_node.dialogue_data
 	var required_item = parent_node.obtain_required_item()
 	
 	# only useful when we have an item-reward!
@@ -99,6 +100,7 @@ func interact_npc() -> InteractionValue:
 	var interaction_dict:Dictionary = {
 		"npc_id":received_id,
 		"dialogue":dialogue_string,
+		"dialogue_data":dialogue_data,
 		"reward":received_reward,
 		"reward_type": reward_type
 		
