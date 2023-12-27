@@ -44,6 +44,10 @@ func _physics_process(delta):
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
 	
+	# pressing esc -> pause-menu
+	if Input.is_action_just_pressed("open_menu"):
+		enter_pause_menu()
+	
 	move_and_slide()
 	update_animation()
 	update_facing_direction()
@@ -99,3 +103,15 @@ func _on_animated_sprite_2d_animation_finished():
 		animation_locked = false
 	elif animated_sprite.animation == "jump_up":
 		animated_sprite.play("jump_fly")
+
+
+func enter_pause_menu():
+	print("pause menu")
+	save_bridge()
+	# TODO ? (overworld team not happy with this but why?)
+	get_tree().change_scene_to_file("res://overworld/ui/menu/menu/pause_menu.tscn")
+
+# saves placed bridge 
+func save_bridge():
+	# TODO save what animals have been placed where 
+	print("save placed bridge")
