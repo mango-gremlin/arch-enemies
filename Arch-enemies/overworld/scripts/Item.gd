@@ -69,14 +69,15 @@ func obtain_amount() -> int:
 func increase_amount():
 	item_amount += 1
 
+func decrease_amount():
+	item_amount -= 1
 
 func set_amount(newamount:int):
 	item_amount = newamount
 
 
 # returns string representation of obtained item 
-# TODO Where is it used?
-func set_item_name(type:ItemType):
+static func set_item_name(type:ItemType):
 	match type:
 		ItemType.HONEY:
 			return "Honey"

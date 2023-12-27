@@ -110,6 +110,8 @@ func execute_interaction():
 				print("interacting with npc")
 				# entering dialogue, disable movement
 				SingletonPlayer.enter_dialogue(interaction_data["npc_id"])
+				SingletonPlayer.add_npc_talked_to(interaction_data["npc_id"])
+				print(SingletonPlayer.npc_talked_to)
 				
 				set_interactionLabel(interaction_data["dialogue"])
 				# FIXME should be easier when done with separate **dialogue system**

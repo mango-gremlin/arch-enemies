@@ -9,7 +9,6 @@ extends Node
 # -- Signals 
 signal updated_item_inventory(new_inventory)
 
-
 # --- / 
 # -- / Player management
 
@@ -57,17 +56,30 @@ func set_item_inventory(new_inventory:Dictionary):
 	
 
 # checks whether requested item is contained 
-# returns true if it was and decreases amount by one
+# returns true if it is
 # returns false otherwise
 func request_item(requested_item:Item.ItemType) -> bool: 
 	if item_inventory.has(requested_item):
 		var item_instance:Item = item_inventory[requested_item]
 		
 		if item_instance.obtain_amount() >= 1:
-			item_instance.set_amount(item_instance.obtain_amount() - 1)
 			return true
 		
 	return false
+
+# reduce amount of item by one 
+# ought to be preceeded by request_item()
+# FIXME combine with request_item again
+# this introduces calling request_item twice
+# but makes sure to prevent wrong allocations or negative values 
+func use_item(requested_item:Item.ItemType): 
+	if request_item(requested_item):
+		var queried_item = item_inventory[requested_item]
+		queried_item.decrease_amount()
+
+
+# --- / 
+# -- / animal inventory
 
 func add_to_animal_inventory(new_animal:AnimalType): 
 	if new_animal != AnimalType.NONE:
@@ -75,6 +87,18 @@ func add_to_animal_inventory(new_animal:AnimalType):
 		animal_inventory[new_animal] += 1
 		#selected_animal.increase_amount
 
+# generates dictionary containing every animal stored in AnimalType and returns it 
+# here AnimalType.NONE is left out 
+# FIXME --> this requires Animals to be represented as **Objects** of a class
+# because they ought to hold their amount within!
+static func init_animal_inventory():
+	var animal_inventory:Dictionary = {}
+	for animal_type:SingletonPlayer.AnimalType in SingletonPlayer.AnimalType.values():
+		if not animal_type == SingletonPlayer.AnimalType.NONE:
+			# creating entry and filling it with 0
+			animal_inventory[animal_type] = 0
+	
+	return animal_inventory
 
 # --- / 
 # -- / Overworld management 
@@ -105,6 +129,19 @@ var islands_reachable:Array[bool]
 # --- / 
 # -- / NPC interaction management
 
+# denotes all NPCs available in current overworld 
+# key ==> value ; npcid ==> NPC Object
+var dictionary_npc:Dictionary = {
+	
+} 
+
+# adds npc object corresponding to its npc id 
+func add_npc_instance(npc_id:int,npc_object:NPC_interaction):
+	dictionary_npc[npc_id] = npc_object
+
+func obtain_npc_object(npc_id) -> NPC_interaction:
+	return dictionary_npc[npc_id]
+
 enum AnimalType{
 	SNAKE,
 	DEER,
@@ -131,6 +168,15 @@ func check_npc_state(npc_id:int) -> bool:
 	if npc_talked_to.has(npc_id):
 		return true 
 	return false 
+
+# takes npc Id and adds it to array of npcs talked to 
+# does not change if it was contained already
+func add_npc_talked_to(npc_id:int):
+	if npc_talked_to.has(npc_id):
+		return 
+	# adding to array
+	npc_talked_to.append(npc_id)
+	
 
 # --- / 
 # -- / Bridge management 
