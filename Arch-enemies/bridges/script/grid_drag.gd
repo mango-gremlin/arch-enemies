@@ -2,7 +2,7 @@ extends TextureRect
 
 #Here we define the elements we need to operate on the grid
 var grid = []
-enum ENTITY_TYPES {GROUND, WATER, ANIMAL, FORBIDDEN, ALLOWED, AIR}
+enum ENTITY_TYPES {GROUND, WATER, ANIMAL, FORBIDDEN, ALLOWED, CONDITIONAL, AIR}
 
 #And the signal we need to communicate with the grid
 signal need_grid
@@ -108,7 +108,7 @@ func is_snake_allowed(pos):
 func is_spider_allowed(pos):
 	#This works just like Snake
 	var is_allowed = false
-	if(grid[pos.x][pos.y] == ENTITY_TYPES.ALLOWED):
+	if(grid[pos.x][pos.y] == ENTITY_TYPES.ALLOWED or grid[pos.x][pos.y] == ENTITY_TYPES.CONDITIONAL):
 		is_allowed = true
 	return is_allowed
 

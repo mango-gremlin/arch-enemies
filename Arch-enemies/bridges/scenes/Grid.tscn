@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://bl1jporj7hosu"]
+[gd_scene load_steps=24 format=3 uid="uid://bl1jporj7hosu"]
 
 [ext_resource type="Texture2D" uid="uid://d0o2q6fijmd1" path="res://bridges/assets/dark green.png" id="1_uowbf"]
 [ext_resource type="Script" path="res://bridges/script/grid.gd" id="1_xtvvi"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://d4khq8o7aaei" path="res://bridges/assets/green.png" id="3_m852x"]
 [ext_resource type="Texture2D" uid="uid://bbktakyncn7nc" path="res://bridges/assets/deer_40x40.png" id="3_x44oq"]
 [ext_resource type="Texture2D" uid="uid://dc2lxeyr45vp3" path="res://bridges/assets/blue_dark.png" id="4_j4qyx"]
+[ext_resource type="Texture2D" uid="uid://ckghjw6ynsyxv" path="res://bridges/assets/yellow.png" id="6_ue1m2"]
 [ext_resource type="Texture2D" uid="uid://cw66eehxwh20w" path="res://bridges/assets/snake_50x10.png" id="7_jp1m1"]
 [ext_resource type="Texture2D" uid="uid://bax18833oqune" path="res://bridges/assets/red.png" id="8_6e2b2"]
 [ext_resource type="Texture2D" uid="uid://desp8tcpswyl4" path="res://bridges/assets/spider_10x10.png" id="8_rtjqf"]
@@ -109,6 +110,26 @@ texture_region_size = Vector2i(10, 10)
 2:3/0 = 0
 3:3/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vg7ik"]
+texture = ExtResource("6_ue1m2")
+texture_region_size = Vector2i(10, 10)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6cc0j"]
 texture = ExtResource("8_6e2b2")
 texture_region_size = Vector2i(10, 10)
@@ -153,6 +174,7 @@ sources/7 = SubResource("TileSetAtlasSource_6cc0j")
 sources/8 = SubResource("TileSetAtlasSource_olvdf")
 sources/9 = SubResource("TileSetAtlasSource_tbudc")
 sources/10 = SubResource("TileSetAtlasSource_l8uy3")
+sources/4 = SubResource("TileSetAtlasSource_vg7ik")
 
 [node name="Node2D" type="Node2D"]
 

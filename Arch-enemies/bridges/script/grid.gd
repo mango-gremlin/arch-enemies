@@ -17,7 +17,7 @@ var last_states = []
 var save_states = 10
 var state = 0
 
-#This defined the start-zone for the bridge
+#This defined the start-zone and conditional-zone for the bridge
 var start_zone = [Vector2(11, 50), Vector2(12, 50), Vector2(13, 50), Vector2(14, 50)]
 
 #And the start zone for the Fox
@@ -30,7 +30,7 @@ var fox_start = [Vector2(4, 50), Vector2(5, 50), Vector2(6, 50), Vector2(7, 50),
 signal current_grid(current_grid)
 
 #These are the different kind of object we can have in grid cells
-enum ENTITY_TYPES {GROUND, WATER, ANIMAL, FORBIDDEN, ALLOWED, AIR}
+enum ENTITY_TYPES {GROUND, WATER, ANIMAL, FORBIDDEN, ALLOWED, CONDITIONAL, AIR}
 
 func _ready():
 	#We save the previous states of the grid in an array, this array is initalized here
@@ -76,7 +76,7 @@ func color_grid():
 					ENTITY_TYPES.AIR:
 						set_cell(0, Vector2i(x, y), 0, Vector2i(1, 1))
 					_:
-						set_cell(0, Vector2i(x, y), 0, Vector2i(1, 1))	
+						set_cell(0, Vector2i(x, y), 0, Vector2i(1, 1))
 
 func update_grid(pos, data):
 	#If we drag an animal onto a cell we update the grid here
@@ -91,6 +91,9 @@ func update_grid(pos, data):
 			#Similarly we need to define what new tiles are now ALLOWED for dragging
 			var new_allowed = [Vector2i(0, 3), Vector2i(1, 4), Vector2i(2, 4), Vector2i(3, 4)]
 			#These two loops just iterate over the grid cells we want to fill
+			#Same for CONDITIONAL tiles
+			var new_conditional = [Vector2i(4, 3), Vector2i(3, 0), Vector2i(3, 1), Vector2i(3, 2),
+			Vector2i(-1, 0), Vector2i(-1, 1)]
 			for delta in range(4):
 				for epsilon in range(4):
 					var tile_pos = Vector2i(delta, epsilon) 
@@ -99,12 +102,17 @@ func update_grid(pos, data):
 						set_cell(0, Vector2i(x + delta, y - epsilon), 10, Vector2i(delta, 3 - epsilon))
 			for position in new_allowed:
 				if(grid[x + position.x][y - position.y] == ENTITY_TYPES.AIR):
-					grid[x + position.x][y - position.y] = ENTITY_TYPES.ALLOWED					
+					grid[x + position.x][y - position.y] = ENTITY_TYPES.ALLOWED	
+			for position in new_conditional:
+				if(grid[x + position.x][y - position.y] == ENTITY_TYPES.AIR):
+					grid[x + position.x][y - position.y] = ENTITY_TYPES.CONDITIONAL
 		"SNAKE":
 			#Snake works just like Deer
 			var new_allowed = [Vector2i(0, 1), Vector2i(1, 1), Vector2i(2, 1), Vector2i(3, 1)]
 			#Except we have FORBIDDEN tiles, which we also have to mark in the grid
 			var new_forbidden = [Vector2i(4, 1), Vector2i(5, 1), Vector2i(5, 0), Vector2i(5, -1), Vector2i(4, -1)]
+			#Same for CONDITIONAL tiles
+			var new_conditional = [Vector2i(0, -1), Vector2i(1, -1), Vector2i(2, -1), Vector2i(3, -1)]
 			for delta in range(5):
 				grid[x + delta][y] = ENTITY_TYPES.ANIMAL
 				set_cell(0, Vector2i(x + delta, y), 8, Vector2i(delta, 0))
@@ -114,6 +122,9 @@ func update_grid(pos, data):
 			for position in new_forbidden:
 				if(grid[x + position.x][y - position.y] == ENTITY_TYPES.AIR):
 					grid[x + position.x][y - position.y] = ENTITY_TYPES.FORBIDDEN
+			for position in new_conditional:
+				if(grid[x + position.x][y - position.y] == ENTITY_TYPES.AIR):
+					grid[x + position.x][y - position.y] = ENTITY_TYPES.CONDITIONAL
 		"SPIDER":
 			#Spider is the easiest, nothing much happens here
 			var new_allowed = [Vector2i(0, 1), Vector2i(1, 0), Vector2i(0, -1), Vector2i(-1, -1)]
@@ -136,12 +147,15 @@ func make_visible():
 				set_cell(0, Vector2i(x, y), 7, Vector2i(1, 1))
 			elif(grid[x][y] == ENTITY_TYPES.ALLOWED):
 				set_cell(0, Vector2i(x, y), 2, Vector2i(1, 1))
+			elif(grid[x][y] == ENTITY_TYPES.CONDITIONAL):
+				set_cell(0, Vector2i(x, y), 4, Vector2i(1, 1))
 
 func make_invisible():
 	#Similarly when we are done dragging we want to return the FORBIDDEN and ALLOWED cells invisible
 	for x in range(grid_size.x):
 		for y in range(grid_size.y):
-			if(grid[x][y] == ENTITY_TYPES.FORBIDDEN or grid[x][y] == ENTITY_TYPES.ALLOWED):
+			if(grid[x][y] == ENTITY_TYPES.FORBIDDEN or grid[x][y] == ENTITY_TYPES.ALLOWED
+			or grid[x][y] == ENTITY_TYPES.CONDITIONAL):
 				set_cell(0, Vector2i(x, y), 0, Vector2i(1, 1))
 
 func reset_grid():
