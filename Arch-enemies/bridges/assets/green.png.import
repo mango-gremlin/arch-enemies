@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://7trictxw8omf"
-path="res://.godot/imported/yellow.png-b9a1020b4a0e06f7f2005bfe6e5a44e2.ctex"
+uid="uid://ov5neb7a3t48"
+path="res://.godot/imported/green.png-b61b3b583705e2dd60b8388db9a8c2d3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://bridges/scenes/yellow.png"
-dest_files=["res://.godot/imported/yellow.png-b9a1020b4a0e06f7f2005bfe6e5a44e2.ctex"]
+source_file="res://bridges/assets/green.png"
+dest_files=["res://.godot/imported/green.png-b61b3b583705e2dd60b8388db9a8c2d3.ctex"]
 
 [params]
 

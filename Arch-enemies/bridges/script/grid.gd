@@ -17,14 +17,28 @@ var last_states = []
 var save_states = 10
 var state = 0
 
-#This defined the start-zone and conditional-zone for the bridge
-var start_zone = [Vector2(11, 50), Vector2(12, 50), Vector2(13, 50), Vector2(14, 50)]
+#We have to define what parts of the tile-set are ground/water
+var ground = [Vector2i(7, 0), Vector2i(1, 1), Vector2i(2, 1), Vector2i(3, 1), Vector2i(4, 1),
+Vector2i(5, 1), Vector2i(7, 1), Vector2i(0, 2), Vector2i(1, 2), Vector2i(2, 2), Vector2i(3, 2),
+Vector2i(4, 2), Vector2i(5, 2), Vector2i(6, 2), Vector2i(7, 2), Vector2i(1, 3), Vector2i(2, 3), 
+Vector2i(3, 3), Vector2i(4, 3), Vector2i(5, 3), Vector2i(6, 3), Vector2i(7, 3), Vector2i(1, 4), 
+Vector2i(2, 4), Vector2i(3, 4), Vector2i(0, 5), Vector2i(0, 6), Vector2i(0, 7), Vector2i(4, 5), 
+Vector2i(4, 6), Vector2i(4, 7), Vector2i(5, 5), Vector2i(5, 6), Vector2i(5, 7), Vector2i(7, 6),
+Vector2i(1, 8), Vector2i(2, 8), Vector2i(3, 8), Vector2i(6, 8), Vector2i(6, 9)]
+
+var water = [Vector2i(7, 4), Vector2i(8, 4), Vector2i(8, 5), Vector2i(8, 6), Vector2i(6, 6), 
+Vector2i(6, 7), Vector2i(1, 5), Vector2i(2, 5), Vector2i(3, 5), Vector2i(1, 6), Vector2i(2, 6), 
+Vector2i(3, 6), Vector2i(1, 7), Vector2i(2, 7), Vector2i(3, 7), Vector2i(0, 8), Vector2i(0, 9),
+Vector2i(1, 9), Vector2i(2, 9), Vector2i(3, 9), Vector2i(4, 9), Vector2i(7, 7), Vector2i(8, 7),
+Vector2i(7, 8), Vector2i(8, 8), Vector2i(7, 9), Vector2i(8, 9), Vector2i(5, 8), Vector2i(5, 9)]
 
 #And the start zone for the Fox
 var fox_start = [Vector2(4, 50), Vector2(5, 50), Vector2(6, 50), Vector2(7, 50), Vector2(8, 50),
 				Vector2(4, 49), Vector2(5, 49), Vector2(6, 49), Vector2(7, 49), Vector2(8, 49), 
 				Vector2(4, 48), Vector2(5, 48), Vector2(6, 48), Vector2(7, 48), Vector2(8, 48),
 				Vector2(4, 47), Vector2(5, 47), Vector2(6, 47), Vector2(7, 47), Vector2(8, 47)]
+				
+var start_zone = [Vector2i(7, 58), Vector2i(8, 58), Vector2i(9, 58), Vector2i(10, 58)]
 
 #This is the signal we use to transfer the current grid to child nodes
 signal current_grid(current_grid)
@@ -40,43 +54,44 @@ func _ready():
 	for x in range(grid_size.x):
 		grid.append([])
 		for y in range(grid_size.y):
-			#These are the specific fields we want to fill, essentially the level is defined here
-			if((x < 15 or (x < x_size and x > (x_size - 15))) and y > (y_size - 15)):
-				grid[x].append(ENTITY_TYPES.GROUND)
-			elif(Vector2(x, y) in start_zone):
-				grid[x].append(ENTITY_TYPES.ALLOWED)
-			elif(Vector2(x, y) in fox_start):
-				grid[x].append(ENTITY_TYPES.FORBIDDEN)
-			elif(y > (y_size - 10)):
-				grid[x].append(ENTITY_TYPES.WATER)
+			#We check each tile in your tilemap (which is the same size as the grid)
+			var square = Vector2i(x, y)
+			#If that tile is one of the ones we use for ground
+			var tile_id = get_cell_source_id(0, square)
+			#Which has ID 5
+			if(tile_id == 11):
+				#We check what tile it is and add it as either GROUND or WATER to the grid
+				var atlas_field = get_cell_atlas_coords(0, square)
+				if(atlas_field in ground):
+					grid[x].append(ENTITY_TYPES.GROUND)
+				elif(atlas_field in water):
+					grid[x].append(ENTITY_TYPES.WATER)
 			else:
+				#Make the start tiles into allowed zones
+				if(square in start_zone):
+					grid[x].append(ENTITY_TYPES.ALLOWED)
+				#Currently every other tile becomes AIR
+				#This is subject to change
 				grid[x].append(ENTITY_TYPES.AIR)
-	#The previous function only filled the internal represtation of grid
-	#With color Grid we fill the displayed grid with color
 	color_grid()
-	
 	#Now we save the inital state of the grid for reset and previous state
 	start_grid = grid.duplicate(true)
 	last_states[0] = grid.duplicate(true)
 	
 func color_grid():
-	#This function color the grid
+	#This function colors the grid cells that are not predefined, i.e. the background
 	#We iterate over all the cells
 	for x in range(grid_size.x):
 		for y in range(grid_size.y):
 			var square = grid[x][y]
 			#An fill them with the correct tile
 			#We ignore animals. Animals can have many different tiles and are handeled seperate
-			if (square != ENTITY_TYPES.ANIMAL):
+			if (square == ENTITY_TYPES.AIR):
 				match square:
-					ENTITY_TYPES.GROUND:
-						set_cell(0, Vector2i(x, y), 1, Vector2i(1, 1))
-					ENTITY_TYPES.WATER:
-						set_cell(0, Vector2i(x, y), 3, Vector2i(1, 1))
 					ENTITY_TYPES.AIR:
-						set_cell(0, Vector2i(x, y), 0, Vector2i(1, 1))
+						set_cell(0, Vector2i(x, y), 0, Vector2i(-1, -1))
 					_:
-						set_cell(0, Vector2i(x, y), 0, Vector2i(1, 1))
+						set_cell(0, Vector2i(x, y), 0, Vector2i(-1, -1))
 
 func update_grid(pos, data):
 	#If we drag an animal onto a cell we update the grid here
@@ -146,7 +161,7 @@ func make_visible():
 			if(grid[x][y] == ENTITY_TYPES.FORBIDDEN):
 				set_cell(0, Vector2i(x, y), 7, Vector2i(1, 1))
 			elif(grid[x][y] == ENTITY_TYPES.ALLOWED):
-				set_cell(0, Vector2i(x, y), 2, Vector2i(1, 1))
+				set_cell(0, Vector2i(x, y), 6, Vector2i(1, 1))
 			elif(grid[x][y] == ENTITY_TYPES.CONDITIONAL):
 				set_cell(0, Vector2i(x, y), 4, Vector2i(1, 1))
 
@@ -156,7 +171,7 @@ func make_invisible():
 		for y in range(grid_size.y):
 			if(grid[x][y] == ENTITY_TYPES.FORBIDDEN or grid[x][y] == ENTITY_TYPES.ALLOWED
 			or grid[x][y] == ENTITY_TYPES.CONDITIONAL):
-				set_cell(0, Vector2i(x, y), 0, Vector2i(1, 1))
+				set_cell(0, Vector2i(x, y), 0, Vector2i(-1, -1))
 
 func reset_grid():
 	#To reset the grid we simple return it to the state we saved in the begining
