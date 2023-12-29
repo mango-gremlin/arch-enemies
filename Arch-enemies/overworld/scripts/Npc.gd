@@ -32,13 +32,13 @@ enum QuestReward{
 # -- / base properties
 var npc_name:String
 var npc_id:int
-var npc_animal_type:SingletonPlayer.AnimalType
+var npc_animal_type:Animal.AnimalType
 
 
 # should not be set in case reward is of type NPC
 var quest_reward:QuestReward = QuestReward.NONE
 var reward_item:Item.ItemType = Item.ItemType.NONE
-var reward_animal:SingletonPlayer.AnimalType = npc_animal_type
+var reward_animal:Animal.AnimalType = npc_animal_type
 
 # --- / 
 # -- / Quest specific properties
@@ -69,7 +69,7 @@ var npc_sprite:Image
 func _init(
 	received_name:String,
 	received_id:int,
-	received_animal_type:SingletonPlayer.AnimalType
+	received_animal_type:Animal.AnimalType
 	):
 	npc_name = received_name
 	npc_id = received_id 
@@ -128,7 +128,7 @@ func set_quest_parameter(
 func set_quest_reward(
 	received_quest_reward:QuestReward,
 	received_reward_item:Item.ItemType,
-	received_reward_animal:SingletonPlayer.AnimalType,
+	received_reward_animal:Animal.AnimalType,
 	):
 	quest_reward = received_quest_reward
 	match quest_reward: 
@@ -199,7 +199,7 @@ func request_reward():
 		NPC_interaction.QuestReward.ITEM:
 				return Item.ItemType.NONE
 		NPC_interaction.QuestReward.ANIMAL:
-				return SingletonPlayer.AnimalType.NONE
+				return Animal.AnimalType.NONE
 
 # constructs string representation of current quest 
 # returns this String

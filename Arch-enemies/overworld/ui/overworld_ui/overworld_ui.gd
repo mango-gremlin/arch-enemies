@@ -7,8 +7,17 @@ class_name OverWorldUI
 @onready var animal_list_label = $Control/MarginContainer/VBoxContainer/HBoxContainer4/VBoxContainer/animal_list
 @onready var quest_list_label = $Control/MarginContainer/VBoxContainer/HBoxContainer5/VBoxContainer/quest_list
 
-# FIXME remove internal representation 
-# --> We only need one reference to the actual dictionary containing the information
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	# connecting signal to singleton
+	SingletonPlayer.connect("updated_item_inventory",_on_player_updated_inventory) 
+	SingletonPlayer.connect("updated_animal_inventory",_on_animal_inventory_updated)
+	# initialize ui
+	_update_item_inventory_label()
+	_update_animal_inventory_label()
+
+
 var player_item_inventory:Dictionary = {}:
 	set(newDict):
 		# if a new array was given, we update its value, also the label
@@ -32,23 +41,14 @@ func _update_item_inventory_label():
 # iteratesover each animaltyp and display their properties
 func _update_animal_inventory_label():
 	var label_string:String = ""
-	for animal:SingletonPlayer.AnimalType in player_animal_inventory:
+	for animal:Animal.AnimalType in player_animal_inventory:
 		var animal_amount:int = player_animal_inventory[animal]
-		var animal_name:String = ""
+		var animal_name:String = Animal.type_to_string(animal)
 		label_string += str(animal_amount) + "x " + str(animal_name) + "\n"
 	animal_list_label.text = label_string
 		
 		
 	
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	# connecting signal to singleton
-	SingletonPlayer.connect("updated_item_inventory",_on_player_updated_inventory) 
-	SingletonPlayer.connect("updated_animal_inventory",_on_animal_inventory_updated)
-	# initialize ui
-	_update_item_inventory_label()
-	_update_animal_inventory_label()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

@@ -6,7 +6,7 @@ extends Node2D
 # -- | base properties for npc instance
 @export var npc_name:String
 @export var npc_id:int
-@export var npc_animal_type:SingletonPlayer.AnimalType
+@export var npc_animal_type:Animal.AnimalType
 @export var quest_type:NPC_interaction.Quest = NPC_interaction.Quest.NONE
 @export var required_edge_start:int
 @export var required_edge_dest:int

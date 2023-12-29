@@ -5,6 +5,16 @@
 
 [node name="NpcInteraction" type="Node2D"]
 script = ExtResource("1_cdxnf")
+npc_name = null
+npc_id = null
+npc_animal_type = null
+quest_type = null
+required_edge_start = null
+required_edge_dest = null
+required_item = null
+required_npc_id = null
+quest_reward = null
+reward_item = null
 
 [node name="interactionspot" parent="." instance=ExtResource("2_y76uy")]
 

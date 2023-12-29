@@ -30,7 +30,7 @@ func get_player_zoom() -> Vector2:
 # -- / Item / Inventory management 
 
 @onready var item_inventory:Dictionary = Item.init_item_inventory()
-@onready var animal_inventory:Dictionary = init_animal_inventory()
+@onready var animal_inventory:Dictionary = Animal.init_animal_inventory()
 
 
 # takes new item and updates amount stored in inventory 
@@ -48,6 +48,13 @@ func set_item_inventory(new_inventory:Dictionary):
 	item_inventory = new_inventory
 	print("setting loaded inventory")
 	updated_item_inventory.emit(item_inventory)
+
+
+func set_animal_inventory(new_inventory:Dictionary):
+	animal_inventory = new_inventory
+	print("loaded animal inventory")
+	updated_animal_inventory.emit(animal_inventory)
+
 
 # checks whether requested item is contained 
 # returns true if it is
@@ -75,25 +82,13 @@ func use_item(requested_item:Item.ItemType):
 # --- / 
 # -- / animal inventory
 
-func add_to_animal_inventory(new_animal:AnimalType): 
-	if new_animal != AnimalType.NONE:
+func add_to_animal_inventory(new_animal:Animal.AnimalType): 
+	if new_animal != Animal.AnimalType.NONE:
 		# valid entry given 
 		animal_inventory[new_animal] += 1
 		#selected_animal.increase_amount
 		updated_animal_inventory.emit(animal_inventory)
 
-# generates dictionary containing every animal stored in AnimalType and returns it 
-# here AnimalType.NONE is left out 
-# FIXME --> this requires Animals to be represented as **Objects** of a class
-# because they ought to hold their amount within!
-func init_animal_inventory():
-	var animal_inventory:Dictionary = {}
-	for animal_type:SingletonPlayer.AnimalType in SingletonPlayer.AnimalType.values():
-		if not animal_type == SingletonPlayer.AnimalType.NONE:
-			# creating entry and filling it with 0
-			animal_inventory[animal_type] = 0
-	updated_animal_inventory.emit(animal_inventory)
-	return animal_inventory
 
 # --- / 
 # -- / Overworld management 
@@ -137,15 +132,6 @@ func add_npc_instance(npc_id:int,npc_object:NPC_interaction):
 func obtain_npc_object(npc_id) -> NPC_interaction:
 	return dictionary_npc[npc_id]
 
-enum AnimalType{
-	SNAKE,
-	DEER,
-	SQUIRREL,
-	SPIDER,
-	NONE
-	#FOX.
-	# possibly more 
-}
 
 var is_in_dialogue:bool = false 
 # may be improved 
