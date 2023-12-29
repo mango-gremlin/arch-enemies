@@ -197,20 +197,19 @@ func last_state():
 		if(state == 0):
 			reset_grid()
 		else:
-			#Similarly the previous state might be empty for various rare reasons
-			#We catch that here, but it is not very necessary
+			#Lastly we check if the previous state exists
+			state -= 1
 			if(last_states[state % save_states] == [[]]):
-				reset_grid()
-			else:
-				#Lastly we check if the previous state exists
-				state -= 1
-				if(last_states[state % save_states] == [[]]):
+				if(state > 0):
 					state += 1
 					return
-				#If it does we return the grid to it and recolor it
-				grid = last_states[state % save_states].duplicate(true)
-				last_states[(state + 1) % save_states] = [[]]
-				color_grid()
+				else:
+					reset_grid()
+					return
+			#If it does we return the grid to it and recolor it
+			grid = last_states[state % save_states].duplicate(true)
+			last_states[(state + 1) % save_states] = [[]]
+			color_grid()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

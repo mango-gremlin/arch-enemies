@@ -3,6 +3,7 @@ extends TextureRect
 #Here we define the elements we need to operate on the grid
 var grid = []
 enum ENTITY_TYPES {GROUND, WATER, ANIMAL, FORBIDDEN, ALLOWED, CONDITIONAL, AIR}
+#We have to use our own preview scene because otherwise things are terrible
 const DRAGPREVIEW = preload("res://bridges/scenes/dragpreview.tscn")
 
 #And the signal we need to communicate with the grid
@@ -102,6 +103,7 @@ func _on_grid_current_grid(current_grid):
 
 func is_snake_allowed(pos):
 	var is_allowed = false
+	var snake_head = [Vector2i(4, 1), Vector2i(5, 1), Vector2i(5, 0), Vector2i(5, -1), Vector2i(4, -1)]
 	#For a cell to be legal we work from the bottom left corner of the animal
 	#And check each square of the grid cell that would in the sprite
 	if(grid[pos.x][pos.y] == ENTITY_TYPES.ALLOWED):
@@ -115,6 +117,9 @@ func is_snake_allowed(pos):
 				break
 		if(is_free):
 			is_allowed = true
+	for position in snake_head:
+		if(grid[pos.x + position.x][pos.y + position.y] == ENTITY_TYPES.ANIMAL):
+			is_allowed = false
 	return is_allowed
 
 func is_spider_allowed(pos):
