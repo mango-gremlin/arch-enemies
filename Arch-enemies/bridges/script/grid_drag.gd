@@ -3,6 +3,8 @@ extends TextureRect
 #Here we define the elements we need to operate on the grid
 var grid = []
 enum ENTITY_TYPES {GROUND, WATER, ANIMAL, FORBIDDEN, ALLOWED, CONDITIONAL, AIR}
+#We have to use our own preview scene because otherwise things are terrible
+const DRAGPREVIEW = preload("res://bridges/scenes/dragpreview.tscn")
 
 #And the signal we need to communicate with the grid
 signal need_grid
@@ -16,50 +18,55 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	pass	
 
 func _get_drag_data(at_position):
-	#When we try to drag something we first need to know what the grid looks like
-	need_grid.emit()
-	#Then we tell the grid that we are currently dragging something
-	#This allows us to see FORBIDDEN and ALLOWED zones
-	is_dragging.emit()
-	
-	#We create the data we want to transmit
-	var data = {}
-	#And the preview that is shown as we move the cursor
-	var preview = TextureRect.new()
-	
-	#These are the two things we save in the data:
-	#1) The texture of the TRect
-	var sprite = texture
-	#2) And the Tooltip, which identifies the animal
-	var animal = tooltip_text 
-	
-	#This adds a control node that allows us to fix the position of the preview
-	var c = Control.new()
-	c.add_child(preview)
-	
-	if(sprite != null):
-		#If we are not trying to drag the TRect that represent the grid we create the preview
-		preview.expand = true
-		preview.texture = sprite
-		#The actualy size of the sprite depends on the animal, this is what the "animal" var is used
-		#for, to identify the animal.
-		match animal:
-			"DEER":
-				preview.set_size(Vector2(40, 40))
-				#This sets the position of the cursor such that it is in the left-bottom corner
-				preview.position = Vector2(0, -40)
-			"SNAKE":
-				preview.set_size(Vector2(50, 10))
-			"SPIDER":
-				preview.set_size(Vector2(10, 10))
-	
-	data["sprite"] = sprite
-	data["animal"] = animal
-	set_drag_preview(c)
-	return data
+	if Global.drag_mode:
+		#When we try to drag something we first need to know what the grid looks like
+		need_grid.emit()
+		#Then we tell the grid that we are currently dragging something
+		#This allows us to see FORBIDDEN and ALLOWED zones
+		is_dragging.emit()
+		
+		#We create the data we want to transmit
+		var data = {}
+		#And the preview that is shown as we move the cursor
+		var preview = DRAGPREVIEW.instantiate()
+		
+		#These are the two things we save in the data:
+		#1) The texture of the TRect
+		var sprite = texture
+		#2) And the Tooltip, which identifies the animal
+		var animal = tooltip_text 
+		
+		#This adds a control node that allows us to fix the position of the preview
+		var c = Control.new()
+		c.add_child(preview)
+		
+		if(sprite != null):
+			#If we are not trying to drag the TRect that represent the grid we create the preview
+			preview.expand = true
+			preview.texture = sprite
+			#The actualy size of the sprite depends on the animal, this is what the "animal" var is used
+			#for, to identify the animal.
+			match animal:
+				"DEER":
+					preview.set_size(Vector2(40, 40))
+					preview.tooltip_text = "DEER"
+				"SNAKE":
+					preview.set_size(Vector2(50, 10))
+					preview.tooltip_text = "SNAKE"
+				"SPIDER":
+					preview.set_size(Vector2(10, 10))
+					preview.tooltip_text = "SPIDER"
+		
+		c.set_global_position(Vector2i(0, 0))
+		
+		add_child(c)
+		
+		data["sprite"] = sprite
+		data["animal"] = animal
+		return data
 
 func _can_drop_data(at_position, data):
 	#To check if we can drop we need to check the grid
@@ -71,7 +78,6 @@ func _can_drop_data(at_position, data):
 	var pos = Vector2i(x, y)
 	var is_allowed = false
 	var animal = data["animal"]
-	
 	
 	#Here we check for a given animal with its own sub-function if the grid cell is legal
 	match animal:
@@ -97,6 +103,7 @@ func _on_grid_current_grid(current_grid):
 
 func is_snake_allowed(pos):
 	var is_allowed = false
+	var snake_head = [Vector2i(4, 1), Vector2i(5, 1), Vector2i(5, 0), Vector2i(5, -1), Vector2i(4, -1)]
 	#For a cell to be legal we work from the bottom left corner of the animal
 	#And check each square of the grid cell that would in the sprite
 	if(grid[pos.x][pos.y] == ENTITY_TYPES.ALLOWED):
@@ -110,6 +117,9 @@ func is_snake_allowed(pos):
 				break
 		if(is_free):
 			is_allowed = true
+	for position in snake_head:
+		if(grid[pos.x + position.x][pos.y + position.y] == ENTITY_TYPES.ANIMAL):
+			is_allowed = false
 	return is_allowed
 
 func is_spider_allowed(pos):

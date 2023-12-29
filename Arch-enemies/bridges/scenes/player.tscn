@@ -270,7 +270,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o13fk"]
-size = Vector2(21, 18)
+size = Vector2(18, 18)
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 script = ExtResource("1_uy84w")
@@ -280,7 +280,7 @@ jump_velocity = -230.0
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 2
 sprite_frames = SubResource("SpriteFrames_xl276")
-animation = &"jump_fly"
+animation = &"idle"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

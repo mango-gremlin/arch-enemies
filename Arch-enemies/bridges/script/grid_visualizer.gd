@@ -5,6 +5,14 @@ extends Node2D
 func _ready():
 	pass
 
+# if an object is being dragged, show grid
+func _process(_delta):
+	load("res://bridges/script/global.gd")
+	if Global.something_is_being_dragged:
+		visible = true
+	else:
+		visible = false
+
 func _draw():
 	var LINE_COLOR = Color(0, 0, 0)
 	var LINE_WIDTH = 1

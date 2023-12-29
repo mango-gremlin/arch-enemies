@@ -6,8 +6,8 @@ extends TileMap
 var tile_size = tile_set.tile_size
 
 #The Dimensions of the Grid
-var x_size = 115
-var y_size = 65
+var x_size = 39
+var y_size = 22
 
 #And finally some values we need later
 var grid_size = Vector2(x_size, y_size)
@@ -33,12 +33,11 @@ Vector2i(1, 9), Vector2i(2, 9), Vector2i(3, 9), Vector2i(4, 9), Vector2i(7, 7), 
 Vector2i(7, 8), Vector2i(8, 8), Vector2i(7, 9), Vector2i(8, 9), Vector2i(5, 8), Vector2i(5, 9)]
 
 #And the start zone for the Fox
-var fox_start = [Vector2(4, 50), Vector2(5, 50), Vector2(6, 50), Vector2(7, 50), Vector2(8, 50),
-				Vector2(4, 49), Vector2(5, 49), Vector2(6, 49), Vector2(7, 49), Vector2(8, 49), 
-				Vector2(4, 48), Vector2(5, 48), Vector2(6, 48), Vector2(7, 48), Vector2(8, 48),
-				Vector2(4, 47), Vector2(5, 47), Vector2(6, 47), Vector2(7, 47), Vector2(8, 47)]
+var fox_start = [Vector2i(1,9), Vector2i(2,9), Vector2i(3,9), Vector2i(4,9),
+Vector2i(1,8), Vector2i(2,8), Vector2i(3,8), Vector2i(4,8),
+Vector2i(1,7), Vector2i(2,7), Vector2i(3,7), Vector2i(4,7)]
 				
-var start_zone = [Vector2i(7, 58), Vector2i(8, 58), Vector2i(9, 58), Vector2i(10, 58)]
+var start_zone = [Vector2i(3,12),Vector2i(4,12),Vector2i(5,12)]
 
 #This is the signal we use to transfer the current grid to child nodes
 signal current_grid(current_grid)
@@ -66,10 +65,12 @@ func _ready():
 					grid[x].append(ENTITY_TYPES.GROUND)
 				elif(atlas_field in water):
 					grid[x].append(ENTITY_TYPES.WATER)
+			#Make the start tiles into allowed zones
+			elif(square in start_zone):
+				grid[x].append(ENTITY_TYPES.ALLOWED)
+			elif(square in fox_start):
+				grid[x].append(ENTITY_TYPES.FORBIDDEN)
 			else:
-				#Make the start tiles into allowed zones
-				if(square in start_zone):
-					grid[x].append(ENTITY_TYPES.ALLOWED)
 				#Currently every other tile becomes AIR
 				#This is subject to change
 				grid[x].append(ENTITY_TYPES.AIR)
@@ -166,6 +167,7 @@ func make_visible():
 				set_cell(0, Vector2i(x, y), 0, Vector2i(1, 1))
 			elif(grid[x][y] == ENTITY_TYPES.CONDITIONAL):
 				set_cell(0, Vector2i(x, y), 4, Vector2i(1, 1))
+	Global.something_is_being_dragged = true
 
 func make_invisible():
 	#Similarly when we are done dragging we want to return the FORBIDDEN and ALLOWED cells invisible
@@ -174,34 +176,36 @@ func make_invisible():
 			if(grid[x][y] == ENTITY_TYPES.FORBIDDEN or grid[x][y] == ENTITY_TYPES.ALLOWED
 			or grid[x][y] == ENTITY_TYPES.CONDITIONAL):
 				set_cell(0, Vector2i(x, y), 0, Vector2i(-1, -1))
+	Global.something_is_being_dragged = false
 
 func reset_grid():
 	#To reset the grid we simple return it to the state we saved in the begining
-	grid = start_grid.duplicate(true)
-	#Then we recolor it
-	color_grid()
-	#And clean the save-states
-	last_states = []
-	for i in range(save_states):
-		last_states.append([[]])
-	state = 0
+	if Global.drag_mode:
+		grid = start_grid.duplicate(true)
+		#Then we recolor it
+		color_grid()
+		#And clean the save-states
+		last_states = []
+		for i in range(save_states):
+			last_states.append([[]])
+		state = 0
 
 func last_state():
 	#To return to the previous state of the grid we have to make sure that such a state exists
 	#Here we check if somebody tried to reset the start, this is not allowed
-	if(state == 0):
-		reset_grid()
-	else:
-		#Similarly the previous state might be empty for various rare reasons
-		#We catch that here, but it is not very necessary
-		if(last_states[state % save_states] == [[]]):
+	if Global.drag_mode:
+		if(state == 0):
 			reset_grid()
 		else:
 			#Lastly we check if the previous state exists
 			state -= 1
 			if(last_states[state % save_states] == [[]]):
-				state += 1
-				return
+				if(state > 0):
+					state += 1
+					return
+				else:
+					reset_grid()
+					return
 			#If it does we return the grid to it and recolor it
 			grid = last_states[state % save_states].duplicate(true)
 			last_states[(state + 1) % save_states] = [[]]

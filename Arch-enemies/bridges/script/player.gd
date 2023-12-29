@@ -54,11 +54,6 @@ func reset_player():
 	velocity = Vector2.ZERO
 	global_position = start_position
 
-
-# if fox touches water
-func _on_area_2d_body_entered(_body):
-	reset_player()
-
 # if fox comes in contact with DeathHazard
 func _on_death_hazard_body_entered(_body):
 	reset_player()
@@ -99,3 +94,7 @@ func _on_animated_sprite_2d_animation_finished():
 		animation_locked = false
 	elif animated_sprite.animation == "jump_up":
 		animated_sprite.play("jump_fly")
+
+
+func _on_water_detection_body_entered(body):
+	reset_player()

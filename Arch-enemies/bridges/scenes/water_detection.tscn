@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://021q4tynwnot"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2c38o"]
+size = Vector2(272, 43)
+
+[node name="water_detection" type="Area2D"]
+position = Vector2(194, 168)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_2c38o")

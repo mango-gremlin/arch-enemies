@@ -18,6 +18,10 @@ config/features=PackedStringArray("4.2", "Forward Plus")
 
 Global="*res://bridges/script/global.gd"
 
+[display]
+
+window/stretch/mode="canvas_items"
+
 [dotnet]
 
 project/assembly_name="Go Dot"
