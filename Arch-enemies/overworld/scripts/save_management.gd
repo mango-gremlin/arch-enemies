@@ -69,17 +69,13 @@ func generate_inventory(inventory_data:Array):
 	print("Generating inventory from string: \"", inventory_data, "\"")
 	# iterate over each item and generate an item from each 
 	
-	var inventory:Dictionary = Item.init_items()
+	var item_inventory:Dictionary = Item.init_item_inventory()
 	
 	for item:Dictionary in inventory_data:
 		var item_type = Item.string_to_item_type(item["type"])
 		var amount = item["amount"]
-		
-		var selected_item = inventory[item_type]
-		selected_item.set_amount(amount)
 	
-	return inventory
-	
+	return item_inventory
 
 func save_config():
 	var oldPlayers = []

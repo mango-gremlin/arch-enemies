@@ -101,7 +101,7 @@ func execute_interaction():
 			Interactable.InteractionType.ITEM: 
 				print("obtained item")
 				set_interactionLabel(interaction_data["text"])
-				var received_item = interaction_data["item"]
+				var received_item:Item.ItemType = interaction_data["item"]
 				# adding to inventory 
 				SingletonPlayer.add_to_inventory(received_item)
 				# updating ui 
@@ -191,18 +191,20 @@ func save_player():
 func save_state():
 	var json_inventory = []
 	var item_inventory = SingletonPlayer.item_inventory
-	for item in item_inventory:
-		var selected_item = item_inventory[item]
-		var item_dictionary = selected_item.to_json()
-		
-		var item_amount = selected_item.obtain_amount()
+	for item:Item.ItemType in item_inventory:
+		var item_amount = item_inventory[item]
+		var item_string:String = Item.item_type_to_string(item)
+		var item_dictionary:Dictionary = {
+			"type": item,
+			"amount": item_amount
+		}
 		item_dictionary["amount"] = item_amount
 		# store amount
 		
 		
 		
 		json_inventory.append(item_dictionary)
-	
+
 	var state = {
 		"name" : name,
 		"parent" : get_parent().get_path(),
