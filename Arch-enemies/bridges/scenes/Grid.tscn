@@ -1,41 +1,19 @@
-[gd_scene load_steps=24 format=3 uid="uid://bl1jporj7hosu"]
+[gd_scene load_steps=20 format=3 uid="uid://bl1jporj7hosu"]
 
-[ext_resource type="Texture2D" uid="uid://d0o2q6fijmd1" path="res://bridges/assets/dark green.png" id="1_uowbf"]
+[ext_resource type="Texture2D" uid="uid://d0o2q6fijmd1" path="res://assets/art/tilesets/bridge_tileset/bridge_background_color.png" id="1_uowbf"]
 [ext_resource type="Script" path="res://bridges/script/grid.gd" id="1_xtvvi"]
-[ext_resource type="Texture2D" uid="uid://b4v4into7dah" path="res://bridges/assets/darkest green.png" id="2_7c3ba"]
 [ext_resource type="Script" path="res://bridges/script/grid_visualizer.gd" id="2_d8ovy"]
-[ext_resource type="Texture2D" uid="uid://d4khq8o7aaei" path="res://bridges/assets/green.png" id="3_m852x"]
-[ext_resource type="Texture2D" uid="uid://bbktakyncn7nc" path="res://bridges/assets/deer_40x40.png" id="3_x44oq"]
-[ext_resource type="Texture2D" uid="uid://dc2lxeyr45vp3" path="res://bridges/assets/blue_dark.png" id="4_j4qyx"]
+[ext_resource type="Texture2D" uid="uid://bbktakyncn7nc" path="res://assets/art/objects/bridge_deer.png" id="3_x44oq"]
+[ext_resource type="Texture2D" uid="uid://p31almd67lu3" path="res://assets/art/tilesets/bridge_tileset/bridge_tileset.png" id="4_m4vsq"]
 [ext_resource type="Texture2D" uid="uid://ckghjw6ynsyxv" path="res://bridges/assets/yellow.png" id="6_ue1m2"]
-[ext_resource type="Texture2D" uid="uid://cw66eehxwh20w" path="res://bridges/assets/snake_50x10.png" id="7_jp1m1"]
+[ext_resource type="Texture2D" uid="uid://cw66eehxwh20w" path="res://assets/art/objects/bridge_snake.png" id="7_jp1m1"]
 [ext_resource type="Texture2D" uid="uid://bax18833oqune" path="res://bridges/assets/red.png" id="8_6e2b2"]
-[ext_resource type="Texture2D" uid="uid://desp8tcpswyl4" path="res://bridges/assets/spider_10x10.png" id="8_rtjqf"]
+[ext_resource type="Texture2D" uid="uid://desp8tcpswyl4" path="res://assets/art/objects/bridge_spider.png" id="8_rtjqf"]
 [ext_resource type="Script" path="res://bridges/script/grid_drag.gd" id="12_re1q8"]
 [ext_resource type="PackedScene" uid="uid://dvgr170gyuhpq" path="res://bridges/scenes/player.tscn" id="12_y7gdk"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gxf1m"]
 texture = ExtResource("1_uowbf")
-texture_region_size = Vector2i(10, 10)
-0:0/0 = 0
-1:0/0 = 0
-2:0/0 = 0
-3:0/0 = 0
-0:1/0 = 0
-1:1/0 = 0
-2:1/0 = 0
-3:1/0 = 0
-0:2/0 = 0
-1:2/0 = 0
-2:2/0 = 0
-3:2/0 = 0
-0:3/0 = 0
-1:3/0 = 0
-2:3/0 = 0
-3:3/0 = 0
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bm1vh"]
-texture = ExtResource("2_7c3ba")
 texture_region_size = Vector2i(10, 10)
 0:0/0 = 0
 1:0/0 = 0
@@ -70,45 +48,95 @@ texture_region_size = Vector2i(10, 10)
 1:3/0 = 0
 2:3/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_q7stx"]
-texture = ExtResource("3_m852x")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8m2j8"]
+texture = ExtResource("4_m4vsq")
 texture_region_size = Vector2i(10, 10)
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
 3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
 0:1/0 = 0
 1:1/0 = 0
 2:1/0 = 0
 3:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+7:1/0 = 0
 0:2/0 = 0
 1:2/0 = 0
 2:2/0 = 0
 3:2/0 = 0
+4:2/0 = 0
+5:2/0 = 0
+6:2/0 = 0
+7:2/0 = 0
+8:2/0 = 0
 0:3/0 = 0
 1:3/0 = 0
 2:3/0 = 0
 3:3/0 = 0
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0sulk"]
-texture = ExtResource("4_j4qyx")
-texture_region_size = Vector2i(10, 10)
-0:0/0 = 0
-1:0/0 = 0
-2:0/0 = 0
-3:0/0 = 0
-0:1/0 = 0
-1:1/0 = 0
-2:1/0 = 0
-3:1/0 = 0
-0:2/0 = 0
-1:2/0 = 0
-2:2/0 = 0
-3:2/0 = 0
-0:3/0 = 0
-1:3/0 = 0
-2:3/0 = 0
-3:3/0 = 0
+4:3/0 = 0
+5:3/0 = 0
+6:3/0 = 0
+7:3/0 = 0
+8:3/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+2:4/0 = 0
+3:4/0 = 0
+5:4/0 = 0
+6:4/0 = 0
+7:4/0 = 0
+8:4/0 = 0
+0:5/0 = 0
+1:5/0 = 0
+2:5/0 = 0
+3:5/0 = 0
+4:5/0 = 0
+5:5/0 = 0
+6:5/0 = 0
+7:5/0 = 0
+8:5/0 = 0
+0:6/0 = 0
+1:6/0 = 0
+2:6/0 = 0
+3:6/0 = 0
+4:6/0 = 0
+5:6/0 = 0
+6:6/0 = 0
+7:6/0 = 0
+8:6/0 = 0
+0:7/0 = 0
+1:7/0 = 0
+2:7/0 = 0
+3:7/0 = 0
+4:7/0 = 0
+5:7/0 = 0
+6:7/0 = 0
+7:7/0 = 0
+8:7/0 = 0
+0:8/0 = 0
+1:8/0 = 0
+2:8/0 = 0
+3:8/0 = 0
+4:8/0 = 0
+5:8/0 = 0
+6:8/0 = 0
+7:8/0 = 0
+8:8/0 = 0
+0:9/0 = 0
+1:9/0 = 0
+2:9/0 = 0
+3:9/0 = 0
+4:9/0 = 0
+5:9/0 = 0
+6:9/0 = 0
+7:9/0 = 0
+8:9/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vg7ik"]
 texture = ExtResource("6_ue1m2")
@@ -167,14 +195,12 @@ texture_region_size = Vector2i(10, 10)
 [sub_resource type="TileSet" id="TileSet_ne4ig"]
 tile_size = Vector2i(10, 10)
 sources/0 = SubResource("TileSetAtlasSource_gxf1m")
-sources/1 = SubResource("TileSetAtlasSource_bm1vh")
-sources/2 = SubResource("TileSetAtlasSource_q7stx")
-sources/3 = SubResource("TileSetAtlasSource_0sulk")
 sources/7 = SubResource("TileSetAtlasSource_6cc0j")
 sources/8 = SubResource("TileSetAtlasSource_olvdf")
 sources/9 = SubResource("TileSetAtlasSource_tbudc")
 sources/10 = SubResource("TileSetAtlasSource_l8uy3")
 sources/4 = SubResource("TileSetAtlasSource_vg7ik")
+sources/11 = SubResource("TileSetAtlasSource_8m2j8")
 
 [node name="Node2D" type="Node2D"]
 

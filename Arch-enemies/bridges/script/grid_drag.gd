@@ -36,6 +36,10 @@ func _get_drag_data(at_position):
 	#2) And the Tooltip, which identifies the animal
 	var animal = tooltip_text 
 	
+	#This adds a control node that allows us to fix the position of the preview
+	var c = Control.new()
+	c.add_child(preview)
+	
 	if(sprite != null):
 		#If we are not trying to drag the TRect that represent the grid we create the preview
 		preview.expand = true
@@ -45,6 +49,8 @@ func _get_drag_data(at_position):
 		match animal:
 			"DEER":
 				preview.set_size(Vector2(40, 40))
+				#This sets the position of the cursor such that it is in the left-bottom corner
+				preview.position = Vector2(0, -40)
 			"SNAKE":
 				preview.set_size(Vector2(50, 10))
 			"SPIDER":
@@ -52,7 +58,7 @@ func _get_drag_data(at_position):
 	
 	data["sprite"] = sprite
 	data["animal"] = animal
-	set_drag_preview(preview)
+	set_drag_preview(c)
 	return data
 
 func _can_drop_data(at_position, data):
@@ -66,6 +72,7 @@ func _can_drop_data(at_position, data):
 	var is_allowed = false
 	var animal = data["animal"]
 	
+	
 	#Here we check for a given animal with its own sub-function if the grid cell is legal
 	match animal:
 		"DEER":
@@ -73,8 +80,8 @@ func _can_drop_data(at_position, data):
 		"SNAKE":
 			is_allowed = is_snake_allowed(pos)
 		"SPIDER":
-			is_allowed = is_spider_allowed(pos)
-
+			is_allowed = is_spider_allowed(pos)	
+	
 	return is_allowed
 
 func _drop_data(at_position, data):
