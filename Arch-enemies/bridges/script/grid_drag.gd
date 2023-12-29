@@ -19,41 +19,42 @@ func _process(delta):
 	pass
 
 func _get_drag_data(at_position):
-	#When we try to drag something we first need to know what the grid looks like
-	need_grid.emit()
-	#Then we tell the grid that we are currently dragging something
-	#This allows us to see FORBIDDEN and ALLOWED zones
-	is_dragging.emit()
-	
-	#We create the data we want to transmit
-	var data = {}
-	#And the preview that is shown as we move the cursor
-	var preview = TextureRect.new()
-	
-	#These are the two things we save in the data:
-	#1) The texture of the TRect
-	var sprite = texture
-	#2) And the Tooltip, which identifies the animal
-	var animal = tooltip_text 
-	
-	if(sprite != null):
-		#If we are not trying to drag the TRect that represent the grid we create the preview
-		preview.expand = true
-		preview.texture = sprite
-		#The actualy size of the sprite depends on the animal, this is what the "animal" var is used
-		#for, to identify the animal.
-		match animal:
-			"DEER":
-				preview.set_size(Vector2(40, 40))
-			"SNAKE":
-				preview.set_size(Vector2(50, 10))
-			"SPIDER":
-				preview.set_size(Vector2(10, 10))
-	
-	data["sprite"] = sprite
-	data["animal"] = animal
-	set_drag_preview(preview)
-	return data
+	if Global.drag_mode:
+		#When we try to drag something we first need to know what the grid looks like
+		need_grid.emit()
+		#Then we tell the grid that we are currently dragging something
+		#This allows us to see FORBIDDEN and ALLOWED zones
+		is_dragging.emit()
+		
+		#We create the data we want to transmit
+		var data = {}
+		#And the preview that is shown as we move the cursor
+		var preview = TextureRect.new()
+		
+		#These are the two things we save in the data:
+		#1) The texture of the TRect
+		var sprite = texture
+		#2) And the Tooltip, which identifies the animal
+		var animal = tooltip_text 
+		
+		if(sprite != null):
+			#If we are not trying to drag the TRect that represent the grid we create the preview
+			preview.expand = true
+			preview.texture = sprite
+			#The actualy size of the sprite depends on the animal, this is what the "animal" var is used
+			#for, to identify the animal.
+			match animal:
+				"DEER":
+					preview.set_size(Vector2(40, 40))
+				"SNAKE":
+					preview.set_size(Vector2(50, 10))
+				"SPIDER":
+					preview.set_size(Vector2(10, 10))
+		
+		data["sprite"] = sprite
+		data["animal"] = animal
+		set_drag_preview(preview)
+		return data
 
 func _can_drop_data(at_position, data):
 	#To check if we can drop we need to check the grid
