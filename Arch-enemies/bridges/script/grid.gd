@@ -162,6 +162,7 @@ func make_visible():
 				set_cell(0, Vector2i(x, y), 6, Vector2i(1, 1))
 			elif(grid[x][y] == ENTITY_TYPES.CONDITIONAL):
 				set_cell(0, Vector2i(x, y), 4, Vector2i(1, 1))
+	Global.something_is_being_dragged = true
 
 func make_invisible():
 	#Similarly when we are done dragging we want to return the FORBIDDEN and ALLOWED cells invisible
@@ -170,6 +171,7 @@ func make_invisible():
 			if(grid[x][y] == ENTITY_TYPES.FORBIDDEN or grid[x][y] == ENTITY_TYPES.ALLOWED
 			or grid[x][y] == ENTITY_TYPES.CONDITIONAL):
 				set_cell(0, Vector2i(x, y), 0, Vector2i(-1, -1))
+	Global.something_is_being_dragged = false
 
 func reset_grid():
 	#To reset the grid we simple return it to the state we saved in the begining
