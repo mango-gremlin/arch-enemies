@@ -86,7 +86,8 @@ func color_grid():
 			var square = grid[x][y]
 			#An fill them with the correct tile
 			#We ignore animals. Animals can have many different tiles and are handeled seperate
-			if (square == ENTITY_TYPES.AIR):
+			if (square != ENTITY_TYPES.GROUND and square != ENTITY_TYPES.WATER and 
+			square != ENTITY_TYPES.ANIMAL):
 				match square:
 					ENTITY_TYPES.AIR:
 					#Note that this effectively just makes them transparent
@@ -209,7 +210,6 @@ func last_state():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
-
 
 #Down here we handle all the signal. There will be many, but most of them don't do much.
 func _on_drag_grid_need_grid():
