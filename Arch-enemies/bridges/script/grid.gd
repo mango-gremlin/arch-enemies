@@ -67,10 +67,8 @@ func _ready():
 					grid[x].append(ENTITY_TYPES.WATER)
 			#Make the start tiles into allowed zones
 			elif(square in start_zone):
-				#print("grid id of allowed zones: ", grid[x], square)
 				grid[x].append(ENTITY_TYPES.ALLOWED)
 			elif(square in fox_start):
-				#print("grid id of allowed zones: ", grid[x], square)
 				grid[x].append(ENTITY_TYPES.FORBIDDEN)
 			else:
 				#Currently every other tile becomes AIR
@@ -182,42 +180,41 @@ func make_invisible():
 
 func reset_grid():
 	#To reset the grid we simple return it to the state we saved in the begining
-	grid = start_grid.duplicate(true)
-	#Then we recolor it
-	color_grid()
-	#And clean the save-states
-	last_states = []
-	for i in range(save_states):
-		last_states.append([[]])
-	state = 0
+	if Global.drag_mode:
+		grid = start_grid.duplicate(true)
+		#Then we recolor it
+		color_grid()
+		#And clean the save-states
+		last_states = []
+		for i in range(save_states):
+			last_states.append([[]])
+		state = 0
 
 func last_state():
 	#To return to the previous state of the grid we have to make sure that such a state exists
 	#Here we check if somebody tried to reset the start, this is not allowed
-	if(state == 0):
-		reset_grid()
-	else:
-		#Similarly the previous state might be empty for various rare reasons
-		#We catch that here, but it is not very necessary
-		if(last_states[state % save_states] == [[]]):
+	if Global.drag_mode:
+		if(state == 0):
 			reset_grid()
 		else:
-			#Lastly we check if the previous state exists
-			state -= 1
+			#Similarly the previous state might be empty for various rare reasons
+			#We catch that here, but it is not very necessary
 			if(last_states[state % save_states] == [[]]):
-				state += 1
-				return
-			#If it does we return the grid to it and recolor it
-			grid = last_states[state % save_states].duplicate(true)
-			last_states[(state + 1) % save_states] = [[]]
-			color_grid()
+				reset_grid()
+			else:
+				#Lastly we check if the previous state exists
+				state -= 1
+				if(last_states[state % save_states] == [[]]):
+					state += 1
+					return
+				#If it does we return the grid to it and recolor it
+				grid = last_states[state % save_states].duplicate(true)
+				last_states[(state + 1) % save_states] = [[]]
+				color_grid()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	var position = get_global_mouse_position()
-	var y = int(position.y/10)
-	var x = int(position.x/10)
-	print(Vector2i(x, y))
+	pass
 
 #Down here we handle all the signal. There will be many, but most of them don't do much.
 func _on_drag_grid_need_grid():
