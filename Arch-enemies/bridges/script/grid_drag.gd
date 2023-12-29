@@ -3,6 +3,7 @@ extends TextureRect
 #Here we define the elements we need to operate on the grid
 var grid = []
 enum ENTITY_TYPES {GROUND, WATER, ANIMAL, FORBIDDEN, ALLOWED, CONDITIONAL, AIR}
+const DRAGPREVIEW = preload("res://bridges/scenes/dragpreview.tscn")
 
 #And the signal we need to communicate with the grid
 signal need_grid
@@ -16,7 +17,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	pass	
 
 func _get_drag_data(at_position):
 	if Global.drag_mode:
@@ -29,7 +30,7 @@ func _get_drag_data(at_position):
 		#We create the data we want to transmit
 		var data = {}
 		#And the preview that is shown as we move the cursor
-		var preview = TextureRect.new()
+		var preview = DRAGPREVIEW.instantiate()
 		
 		#These are the two things we save in the data:
 		#1) The texture of the TRect
@@ -50,16 +51,20 @@ func _get_drag_data(at_position):
 			match animal:
 				"DEER":
 					preview.set_size(Vector2(40, 40))
-					#This sets the position of the cursor such that it is in the left-bottom corner
-					preview.position = Vector2(0, -40)
+					preview.tooltip_text = "DEER"
 				"SNAKE":
 					preview.set_size(Vector2(50, 10))
+					preview.tooltip_text = "SNAKE"
 				"SPIDER":
 					preview.set_size(Vector2(10, 10))
+					preview.tooltip_text = "SPIDER"
+		
+		c.set_global_position(Vector2i(0, 0))
+		
+		add_child(c)
 		
 		data["sprite"] = sprite
 		data["animal"] = animal
-		set_drag_preview(c)
 		return data
 
 func _can_drop_data(at_position, data):
@@ -72,7 +77,6 @@ func _can_drop_data(at_position, data):
 	var pos = Vector2i(x, y)
 	var is_allowed = false
 	var animal = data["animal"]
-	
 	
 	#Here we check for a given animal with its own sub-function if the grid cell is legal
 	match animal:
