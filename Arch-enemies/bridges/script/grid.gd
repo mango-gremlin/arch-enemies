@@ -33,7 +33,9 @@ Vector2i(1, 9), Vector2i(2, 9), Vector2i(3, 9), Vector2i(4, 9), Vector2i(7, 7), 
 Vector2i(7, 8), Vector2i(8, 8), Vector2i(7, 9), Vector2i(8, 9), Vector2i(5, 8), Vector2i(5, 9)]
 
 #And the start zone for the Fox
-var fox_start = [Vector2(1,9), Vector2(2,9), Vector2(3,9), Vector2(4,9), Vector2(5,9)]
+var fox_start = [Vector2i(1,9), Vector2i(2,9), Vector2i(3,9), Vector2i(4,9),
+Vector2i(1,8), Vector2i(2,8), Vector2i(3,8), Vector2i(4,8),
+Vector2i(1,7), Vector2i(2,7), Vector2i(3,7), Vector2i(4,7)]
 				
 var start_zone = [Vector2i(3,12),Vector2i(4,12),Vector2i(5,12)]
 
@@ -67,6 +69,9 @@ func _ready():
 			elif(square in start_zone):
 				#print("grid id of allowed zones: ", grid[x], square)
 				grid[x].append(ENTITY_TYPES.ALLOWED)
+			elif(square in fox_start):
+				#print("grid id of allowed zones: ", grid[x], square)
+				grid[x].append(ENTITY_TYPES.FORBIDDEN)
 			else:
 				#Currently every other tile becomes AIR
 				#This is subject to change

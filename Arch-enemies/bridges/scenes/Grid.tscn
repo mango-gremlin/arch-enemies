@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bl1jporj7hosu"]
+[gd_scene load_steps=23 format=3 uid="uid://bl1jporj7hosu"]
 
 [ext_resource type="Texture2D" uid="uid://d0o2q6fijmd1" path="res://assets/art/tilesets/bridge_tileset/bridge_background_color.png" id="1_uowbf"]
 [ext_resource type="Script" path="res://bridges/script/grid.gd" id="1_xtvvi"]
