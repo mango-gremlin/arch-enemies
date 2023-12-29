@@ -6,8 +6,8 @@ extends TileMap
 var tile_size = tile_set.tile_size
 
 #The Dimensions of the Grid
-var x_size = 115
-var y_size = 65
+var x_size = 39
+var y_size = 22
 
 #And finally some values we need later
 var grid_size = Vector2(x_size, y_size)
@@ -33,12 +33,9 @@ Vector2i(1, 9), Vector2i(2, 9), Vector2i(3, 9), Vector2i(4, 9), Vector2i(7, 7), 
 Vector2i(7, 8), Vector2i(8, 8), Vector2i(7, 9), Vector2i(8, 9), Vector2i(5, 8), Vector2i(5, 9)]
 
 #And the start zone for the Fox
-var fox_start = [Vector2(4, 50), Vector2(5, 50), Vector2(6, 50), Vector2(7, 50), Vector2(8, 50),
-				Vector2(4, 49), Vector2(5, 49), Vector2(6, 49), Vector2(7, 49), Vector2(8, 49), 
-				Vector2(4, 48), Vector2(5, 48), Vector2(6, 48), Vector2(7, 48), Vector2(8, 48),
-				Vector2(4, 47), Vector2(5, 47), Vector2(6, 47), Vector2(7, 47), Vector2(8, 47)]
+var fox_start = [Vector2(1,9), Vector2(2,9), Vector2(3,9), Vector2(4,9), Vector2(5,9)]
 				
-var start_zone = [Vector2i(7, 58), Vector2i(8, 58), Vector2i(9, 58), Vector2i(10, 58)]
+var start_zone = [Vector2i(3,12),Vector2i(4,12),Vector2i(5,12)]
 
 #This is the signal we use to transfer the current grid to child nodes
 signal current_grid(current_grid)
@@ -66,10 +63,11 @@ func _ready():
 					grid[x].append(ENTITY_TYPES.GROUND)
 				elif(atlas_field in water):
 					grid[x].append(ENTITY_TYPES.WATER)
+			#Make the start tiles into allowed zones
+			elif(square in start_zone):
+				#print("grid id of allowed zones: ", grid[x], square)
+				grid[x].append(ENTITY_TYPES.ALLOWED)
 			else:
-				#Make the start tiles into allowed zones
-				if(square in start_zone):
-					grid[x].append(ENTITY_TYPES.ALLOWED)
 				#Currently every other tile becomes AIR
 				#This is subject to change
 				grid[x].append(ENTITY_TYPES.AIR)
@@ -207,7 +205,10 @@ func last_state():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	var position = get_global_mouse_position()
+	var y = int(position.y/10)
+	var x = int(position.x/10)
+	print(Vector2i(x, y))
 
 
 #Down here we handle all the signal. There will be many, but most of them don't do much.
