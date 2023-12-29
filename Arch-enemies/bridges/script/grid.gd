@@ -89,6 +89,7 @@ func color_grid():
 			if (square == ENTITY_TYPES.AIR):
 				match square:
 					ENTITY_TYPES.AIR:
+					#Note that this effectively just makes them transparent
 						set_cell(0, Vector2i(x, y), 0, Vector2i(-1, -1))
 					_:
 						set_cell(0, Vector2i(x, y), 0, Vector2i(-1, -1))
@@ -142,7 +143,7 @@ func update_grid(pos, data):
 					grid[x + position.x][y - position.y] = ENTITY_TYPES.CONDITIONAL
 		"SPIDER":
 			#Spider is the easiest, nothing much happens here
-			var new_allowed = [Vector2i(0, 1), Vector2i(1, 0), Vector2i(0, -1), Vector2i(-1, -1)]
+			var new_allowed = [Vector2i(0, 1), Vector2i(1, 0), Vector2i(0, -1), Vector2i(-1, 0)]
 			grid[x][y] = ENTITY_TYPES.ANIMAL
 			set_cell(0, Vector2i(x, y), 9, Vector2i(0, 0))
 			for position in new_allowed:
@@ -161,7 +162,7 @@ func make_visible():
 			if(grid[x][y] == ENTITY_TYPES.FORBIDDEN):
 				set_cell(0, Vector2i(x, y), 7, Vector2i(1, 1))
 			elif(grid[x][y] == ENTITY_TYPES.ALLOWED):
-				set_cell(0, Vector2i(x, y), 6, Vector2i(1, 1))
+				set_cell(0, Vector2i(x, y), 0, Vector2i(1, 1))
 			elif(grid[x][y] == ENTITY_TYPES.CONDITIONAL):
 				set_cell(0, Vector2i(x, y), 4, Vector2i(1, 1))
 
