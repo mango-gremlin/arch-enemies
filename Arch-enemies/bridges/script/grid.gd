@@ -84,9 +84,11 @@ func color_grid():
 			var square = grid[x][y]
 			#An fill them with the correct tile
 			#We ignore animals. Animals can have many different tiles and are handeled seperate
-			if (square == ENTITY_TYPES.AIR):
+			if (square != ENTITY_TYPES.GROUND and square != ENTITY_TYPES.WATER and 
+			square != ENTITY_TYPES.ANIMAL):
 				match square:
 					ENTITY_TYPES.AIR:
+					#Note that this effectively just makes them transparent
 						set_cell(0, Vector2i(x, y), 0, Vector2i(-1, -1))
 					_:
 						set_cell(0, Vector2i(x, y), 0, Vector2i(-1, -1))
@@ -140,7 +142,7 @@ func update_grid(pos, data):
 					grid[x + position.x][y - position.y] = ENTITY_TYPES.CONDITIONAL
 		"SPIDER":
 			#Spider is the easiest, nothing much happens here
-			var new_allowed = [Vector2i(0, 1), Vector2i(1, 0), Vector2i(0, -1), Vector2i(-1, -1)]
+			var new_allowed = [Vector2i(0, 1), Vector2i(1, 0), Vector2i(0, -1), Vector2i(-1, 0)]
 			grid[x][y] = ENTITY_TYPES.ANIMAL
 			set_cell(0, Vector2i(x, y), 9, Vector2i(0, 0))
 			for position in new_allowed:
@@ -159,7 +161,7 @@ func make_visible():
 			if(grid[x][y] == ENTITY_TYPES.FORBIDDEN):
 				set_cell(0, Vector2i(x, y), 7, Vector2i(1, 1))
 			elif(grid[x][y] == ENTITY_TYPES.ALLOWED):
-				set_cell(0, Vector2i(x, y), 6, Vector2i(1, 1))
+				set_cell(0, Vector2i(x, y), 0, Vector2i(1, 1))
 			elif(grid[x][y] == ENTITY_TYPES.CONDITIONAL):
 				set_cell(0, Vector2i(x, y), 4, Vector2i(1, 1))
 	Global.something_is_being_dragged = true
@@ -211,7 +213,6 @@ func _process(delta):
 	var y = int(position.y/10)
 	var x = int(position.x/10)
 	print(Vector2i(x, y))
-
 
 #Down here we handle all the signal. There will be many, but most of them don't do much.
 func _on_drag_grid_need_grid():
