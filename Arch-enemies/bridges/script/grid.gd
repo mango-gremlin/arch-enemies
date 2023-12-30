@@ -37,11 +37,9 @@ var fox_start = [Vector2i(1,9), Vector2i(2,9), Vector2i(3,9), Vector2i(4,9),
 Vector2i(1,8), Vector2i(2,8), Vector2i(3,8), Vector2i(4,8),
 Vector2i(1,7), Vector2i(2,7), Vector2i(3,7), Vector2i(4,7)]
 
-# top shore dropzones (allowed)
-var shore_top = [Vector2i(0,12), Vector2i(1,12), Vector2i(2,12), Vector2i(3,12), Vector2i(4,12), Vector2i(5,12),
-Vector2i(33,12), Vector2i(34,12), Vector2i(35,12), Vector2i(36,12), Vector2i(37,12), Vector2i(38,12)]
-# side shore dropzones
-var shore_side = [Vector2i(6,13), Vector2i(6,14), Vector2i(32,13), Vector2i(32,14)]
+var shore_top = []
+var shore_side = []
+# = [Vector2i(6,13), Vector2i(6,14), Vector2i(32,13), Vector2i(32,14)]
 
 #This is the signal we use to transfer the current grid to child nodes
 signal current_grid(current_grid)
@@ -61,17 +59,42 @@ func _ready():
 			var square = Vector2i(x, y)
 			#If that tile is one of the ones we use for ground
 			var tile_id = get_cell_source_id(0, square)
-			#Which has ID 5
+			# which is contained in the tileset with id 11
 			if(tile_id == 11):
 				#We check what tile it is and add it as either GROUND or WATER to the grid
 				var atlas_field = get_cell_atlas_coords(0, square)
 				if(atlas_field in ground):
 					grid[x].append(ENTITY_TYPES.GROUND)
+					
+					# check if the tile above is in ground or water
+					var top_square = Vector2i(x, y - 1)
+					var top_square_atlas_field = get_cell_atlas_coords(0, top_square)
+					if (top_square_atlas_field not in ground 
+						and top_square_atlas_field not in water
+						and top_square.y >= 0):
+						shore_top.append(top_square)
+					
+					# check if the tile to the left is in ground or water
+					var left_square = Vector2i(x - 1, y)
+					var left_square_atlas_field = get_cell_atlas_coords(0, left_square)
+					if (left_square_atlas_field not in ground 
+						and left_square_atlas_field not in water
+						and left_square.x > 0):
+						print("left square added:\n", left_square, left_square_atlas_field)
+						shore_side.append(left_square)
+					
+					# check if the tile to the right is in ground or water
+					#var right_square = Vector2i(x + 1, y)
+					#var right_square_atlas_field = get_cell_atlas_coords(0, left_square)
+					#if (right_square_atlas_field not in ground 
+					#	and right_square_atlas_field not in water
+					#	and right_square.x < grid_size.x):
+					#	print("right square added:\n", right_square, right_square_atlas_field)
+					#	shore_side.append(right_square)
+					
 				elif(atlas_field in water):
 					grid[x].append(ENTITY_TYPES.WATER)
 			#Make the start tiles into allowed zones
-			elif(square in shore_top):
-				grid[x].append(ENTITY_TYPES.ALLOWED)
 			elif(square in shore_side):
 				grid[x].append(ENTITY_TYPES.CONDITIONAL) 
 			elif(square in fox_start):
@@ -80,6 +103,26 @@ func _ready():
 				#Currently every other tile becomes AIR
 				#This is subject to change
 				grid[x].append(ENTITY_TYPES.AIR)
+	
+	# assign shore dropzones
+	# needs to be a separate for loop, as grid is built dynamically, else we get index errors and overwritten content
+	# initiating grid before and preventing overlap for ALLOWED and CONDITIONAL is possible
+	print("shore_top: \n", shore_top)
+	for top_square in shore_top:
+		var x = top_square.x
+		var y = top_square.y
+		# checks if within bounds of grid
+		if x >= 0 and y >= 0 and x < grid_size.x and y < grid_size.y:
+			grid[x][y] = ENTITY_TYPES.ALLOWED
+	
+	print("shore_side: \n", shore_side)
+	for side_square in shore_side:
+		var x = side_square.x
+		var y = side_square.y
+		# checks if within bounds of grid
+		if x >= 0 and y >= 0 and x < grid_size.x and y < grid_size.y:
+			grid[x][y] = ENTITY_TYPES.CONDITIONAL
+
 	color_grid()
 	#Now we save the inital state of the grid for reset and previous state
 	start_grid = grid.duplicate(true)
