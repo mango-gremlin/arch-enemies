@@ -32,8 +32,15 @@ func _physics_process(delta):
 
 func player_movement(delta):
 	# disallow movement when in dialogue
-	if SingletonPlayer.is_in_dialogue:
-		return
+	if SingletonPlayer.dialogue.in_dialogue():
+		if Input.is_action_just_pressed("move_left"): # work around for not working button pressed listeners
+			SingletonPlayer.dialogue.btn_action(0)
+		elif Input.is_action_just_pressed("move_down"):
+			SingletonPlayer.dialogue.btn_action(1)
+		elif Input.is_action_just_pressed("move_right"):
+			SingletonPlayer.dialogue.btn_action(2)
+		
+		return	
 	velocity = Vector2.ZERO
 	if Input.is_action_pressed("move_up"):
 		velocity.y -= SPEED
@@ -108,10 +115,18 @@ func execute_interaction():
 				# adding to inventory! 
 			Interactable.InteractionType.NPC:
 				print("interacting with npc")
-				# entering dialogue, disable movement
-				SingletonPlayer.enter_dialogue(interaction_data["npc_id"])
 				
+				# entering dialogue, disable movement
+				if Dialogue_Registry.npc_dialogues.has(interaction_data["npc_id"]):
+					var dialogue_data = Dialogue_Registry.npc_dialogues[interaction_data["npc_id"]]
+					
+					if not dialogue_data.finished:
+						SingletonPlayer.enter_dialogue(dialogue_data)
+				
+				print("setting interaction label " + interaction_data["dialogue"])
 				set_interactionLabel(interaction_data["dialogue"])
+				# EVELYN, is this my fault that the interaction labels don't update anymore? 
+				
 				# FIXME should be easier when done with separate **dialogue system**
 				var reward_type:NPC_interaction.QuestReward = interaction_data["reward_type"]
 				var received_reward = interaction_data["reward"]
@@ -217,5 +232,3 @@ func save_state():
 
 func set_interactionLabel(label:String):
 	interactionLabel.text = label
-	
-

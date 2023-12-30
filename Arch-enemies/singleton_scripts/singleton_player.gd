@@ -115,22 +115,7 @@ enum AnimalType{
 	# possibly more 
 }
 
-var is_in_dialogue:bool = false 
-# may be improved 
-var active_dialogue:int = 0
-var test:Array
-
-# Dictionary of NPC's that have been talked to
-# -> key: integer : denoting npc_id
-# -> value: bool : denoting whether interaction was done or not 
-# FIXME might lead to wrong interpretation ? 
-var npc_talked_to: Array = [0]
-
-# checks whether player already interacted with npc 
-func check_npc_state(npc_id:int) -> bool: 
-	if npc_talked_to.has(npc_id):
-		return true 
-	return false 
+var dialogue = Dialogue.new()
 
 # --- / 
 # -- / Bridge management 
@@ -205,17 +190,10 @@ func save_profile_configuration():
 
 # takes npc_id, sets is_in_dialogue to true, 
 # queries dialogue to display from given id
-# TODO handle dialogue and query dialogue from given npc_id
-func enter_dialogue(npc_id:int):
-	
-
-	is_in_dialogue = true 
-	active_dialogue = npc_id
-
-	pass
+func enter_dialogue(dialogue_data:Dialogue_Data):
+	dialogue.enter_dialogue(dialogue_data)
 
 # ends dialogue -> sets is_in_dialogue to false 
 func exit_dialogue():
-	is_in_dialogue = false 
-	active_dialogue = 0
+	dialogue.exit_dialogue()
 	

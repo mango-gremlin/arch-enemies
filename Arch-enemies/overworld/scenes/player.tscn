@@ -1,6 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://dndu4pg1i3tlf"]
+[gd_scene load_steps=12 format=3 uid="uid://dndu4pg1i3tlf"]
 
 [ext_resource type="Script" path="res://overworld/entities/Player/Player.gd" id="1_lcx6v"]
+[ext_resource type="PackedScene" uid="uid://ha5qv05ppumk" path="res://overworld/dialogue/DialogueGui.tscn" id="2_sqo8r"]
 [ext_resource type="Texture2D" uid="uid://802nqkliaru4" path="res://assets/art/characters/fox.png" id="2_tenk7"]
 [ext_resource type="Script" path="res://overworld/entities/Player/ZoomCamera.gd" id="3_y8j37"]
 
@@ -85,14 +86,17 @@ MAX_ZOOM = 10.0
 z_index = 1
 
 [node name="interactionarea" type="Area2D" parent="interactioncomponents"]
+visible = false
 collision_layer = 0
 collision_mask = 8
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="interactioncomponents/interactionarea"]
+visible = false
 shape = SubResource("CircleShape2D_hpei2")
 
 [node name="InteractLabel" type="Label" parent="interactioncomponents"]
+visible = false
 offset_left = -94.0
 offset_top = -62.0
 offset_right = 94.0
@@ -100,6 +104,8 @@ offset_bottom = -36.0
 text = "xxx"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="DialogueGui" parent="interactioncomponents" instance=ExtResource("2_sqo8r")]
 
 [connection signal="area_entered" from="interactioncomponents/interactionarea" to="." method="_on_interactionarea_area_entered"]
 [connection signal="area_exited" from="interactioncomponents/interactionarea" to="." method="_on_interactionarea_area_exited"]
