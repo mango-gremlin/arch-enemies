@@ -68,34 +68,22 @@ func _ready():
 					
 					# check if the tile above is in ground or water
 					var top_square = Vector2i(x, y - 1)
-					var top_square_atlas_field = get_cell_atlas_coords(0, top_square)
-					if (top_square_atlas_field not in ground 
-						and top_square_atlas_field not in water
-						and top_square.y >= 0):
+					if is_shore_dropzone(top_square):
 						shore_top.append(top_square)
 					
 					# check if the tile below is in ground or water
 					var bottom_square = Vector2i(x, y + 1)
-					var bottom_square_atlas_field = get_cell_atlas_coords(0, bottom_square)
-					if (bottom_square_atlas_field not in ground 
-						and bottom_square_atlas_field not in water
-						and bottom_square.y < grid_size.y):
+					if is_shore_dropzone(bottom_square):
 						shore_bottom.append(bottom_square)
 					
 					# check if the tile to the left is in ground or water
 					var left_square = Vector2i(x - 1, y)
-					var left_square_atlas_field = get_cell_atlas_coords(0, left_square)
-					if (left_square_atlas_field not in ground 
-						and left_square_atlas_field not in water
-						and left_square.x > 0):
+					if is_shore_dropzone(left_square):
 						shore_side.append(left_square)
 					
 					# check if the tile to the right is in ground or water
 					var right_square = Vector2i(x + 1, y)
-					var right_square_atlas_field = get_cell_atlas_coords(0, right_square)
-					if (right_square_atlas_field not in ground 
-						and right_square_atlas_field not in water
-						and right_square.x < grid_size.x):
+					if is_shore_dropzone(right_square):
 						shore_side.append(right_square)
 					
 				elif(atlas_field in water):
@@ -111,34 +99,33 @@ func _ready():
 				grid[x].append(ENTITY_TYPES.AIR)
 	
 	# assign shore dropzones
-	for top_square in shore_top:
-		var x = top_square.x
-		var y = top_square.y
-		# checks if within bounds of grid
-		if x >= 0 and y >= 0 and x < grid_size.x and y < grid_size.y:
-			grid[x][y] = ENTITY_TYPES.ALLOWED
+	grid = assign_shore_dropzones(grid, shore_top, ENTITY_TYPES.ALLOWED)
 	# assign to SIDE in #199
-	for side_square in shore_side:
-		var x = side_square.x
-		var y = side_square.y
-		# checks if within bounds of grid
-		if x >= 0 and y >= 0 and x < grid_size.x and y < grid_size.y:
-			grid[x][y] = ENTITY_TYPES.CONDITIONAL
-	
+	grid = assign_shore_dropzones(grid, shore_side, ENTITY_TYPES.CONDITIONAL)
 	# assign to BOTTOM in #99
-	for bottom_square in shore_bottom:
-		var x = bottom_square.x
-		var y = bottom_square.y
-		# checks if within bounds of grid
-		if x >= 0 and y >= 0 and x < grid_size.x and y < grid_size.y:
-			grid[x][y] = ENTITY_TYPES.CONDITIONAL
-	
+	grid = assign_shore_dropzones(grid, shore_bottom, ENTITY_TYPES.CONDITIONAL)
 
 	color_grid()
 	#Now we save the inital state of the grid for reset and previous state
 	start_grid = grid.duplicate(true)
 	last_states[0] = grid.duplicate(true)
-	
+
+# iterates through list and assignes all squares to desired type
+func assign_shore_dropzones(grid:Array, squares:Array, type:ENTITY_TYPES) -> Array:
+	for square in squares:
+		grid[square.x][square.y] = type
+	return grid
+
+# checks if square isn't in ground or water, and is within grid bounds
+func is_shore_dropzone(square:Vector2i) -> bool:
+	var atlas_field = get_cell_atlas_coords(0, square)
+	if (atlas_field not in ground 
+		and atlas_field not in water
+		and square.x >= 0 and square.y >= 0
+		and square.x < grid_size.x and square.y < grid_size.y):
+		return true
+	return false
+
 func color_grid():
 	#This function colors the grid cells that are not predefined, i.e. the background
 	#We iterate over all the cells
