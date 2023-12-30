@@ -195,14 +195,11 @@ func save_state():
 		var item_amount = item_inventory[item]
 		var item_string:String = Item.item_type_to_string(item)
 		var item_dictionary:Dictionary = {
-			"type": item,
+			"type": item_string,
 			"amount": item_amount
 		}
-		item_dictionary["amount"] = item_amount
 		# store amount
-		
-		
-		
+		item_dictionary["amount"] = item_amount
 		json_inventory.append(item_dictionary)
 
 	var state = {
