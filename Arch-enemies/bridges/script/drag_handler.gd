@@ -13,13 +13,22 @@ var inside_object := false
 var dropzone_occupied := false
 @export var grid_size : float = 10.0 # size of a square in grid
 @export var body_area2D : Area2D
-
+var connected_to = null
+var someone_connects_to_this = false
 
 # checks if placement of animal relativ to other animal is correct
-func is_correct_placement(body) -> bool:
+func is_correct_placement(body):
+	if body.someone_connects_to_this:		# if another animal holds on to this one it cant move
+		return false
+ 
 	if is_inside_dropable and not is_inside_forbidden:
 		# gets Area2D child, which can check for overlapping bodies
 		var animal_type : String = Global.get_animal_type(body)
+		
+		# checks for other animals beeing overlapped by the current placement
+		for area in body_area2D.get_overlapping_areas():
+			if(area.is_in_group("animal_body")):
+				return false
 		
 		# iterate through all overlapping bodies, and check if they are allowed or not
 		for overlapping_body in body_area2D.get_overlapping_bodies():
@@ -29,23 +38,28 @@ func is_correct_placement(body) -> bool:
 			
 			# if overlapping body is dropable and not its own, check specifics for animals
 			elif overlapping_body.is_in_group("dropable") and not body == overlapping_body.get_owner():
-				# get type of animal that overlapping drop zone belongs to
-				# the shore has no animal_type therefore this check has to be skipped 
-				if not overlapping_body.is_in_group("shore_dropzone"): 
-					var overlapping_animal_type : String = Global.get_animal_type(overlapping_body.get_owner())
+				if not overlapping_body.is_in_group("shore_dropzone") and not overlapping_body.get_owner().is_bridge_connected_to_shore(): #if the overlapping_body is not connected to the shore the current animal cant be connected to it
+					return false
+				if not overlapping_body.is_in_group("shore_dropzone"):  #the shore has no animal_type therefore this check has to be skipped 
+					# get type of animal that overlapping drop zone belongs to
+					var overlapping_animal_type = Global.get_animal_type(overlapping_body.get_owner())
 					# if overlap zone belongs to a spider, it is always allowed
 					if overlapping_animal_type == "spider":
+						body.connect_to_animal(overlapping_body)
 						return true
 					
 				# if not, normal rules apply
 				# every animal can be dropped on another animal's top dropzone
 				if overlapping_body.is_in_group("top_dropzone"):
+					body.connect_to_animal(overlapping_body)
 					return true
 				# only squirrels and spiders can be dropped on another animal's side dropzones
 				elif overlapping_body.is_in_group("side_dropzone") and (animal_type == "squirrel" or animal_type == "spider"):
+					body.connect_to_animal(overlapping_body)
 					return true
 				# only spiders can be dropped on another animal's bottom dropzone
 				elif overlapping_body.is_in_group("bottom_dropzone") and animal_type == "spider":
+					body.connect_to_animal(overlapping_body)
 					return true
 		return false
 	return false
@@ -96,6 +110,28 @@ func _process(_delta):
 			if not is_correct_placement(self):
 				tween.tween_property(self, "global_position", self.initial_pos, 0.2).set_ease(Tween.EASE_OUT)
 
+
+func connect_to_animal(overlapping_body):
+	if connected_to != null and not connected_to.is_in_group("shore_dropzone"):
+		connected_to.get_owner().someone_connects_to_this = false
+	connected_to = overlapping_body
+	if not overlapping_body.is_in_group("shore_dropzone"):
+		overlapping_body.get_owner().someone_connects_to_this = true
+		
+
+func is_bridge_connected_to_shore():	#checks recursivly if an animal is connected to the shore through other animals
+	print("self animal type:",Global.get_animal_type(self))
+	
+	if self.connected_to == null:								#connected to nothing
+		print("is_bridge_connected_to_shore null False")
+		return false
+	else:
+		if self.connected_to.is_in_group("shore_dropzone"): 	# end of recursion connected to the shore
+			print("is_bridge_connected_to_shore connected_to: shore")
+			return true
+		else:													#connected to another animal
+			print("is_bridge_connected_to_shore connected_to:",Global.get_animal_type( self.connected_to.get_owner() ))
+			return self.connected_to.get_owner().is_bridge_connected_to_shore()
 
 func _on_area_2d_mouse_entered():
 	mouse_entered()

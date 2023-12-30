@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://drn1loe1wknbq"]
+[gd_scene load_steps=4 format=3 uid="uid://drn1loe1wknbq"]
 
 [ext_resource type="Script" path="res://overworld/entities/interaction_overworld/npc_interaction.gd" id="1_cdxnf"]
+[ext_resource type="Texture2D" uid="uid://xd2wfewwwcqc" path="res://assets/art/characters/squirrel.png" id="2_83185"]
 [ext_resource type="PackedScene" uid="uid://cegpqm0j2vvbh" path="res://overworld/entities/interaction_overworld/interactionspot.tscn" id="2_y76uy"]
 
 [node name="NpcInteraction" type="Node2D"]
+y_sort_enabled = true
 script = ExtResource("1_cdxnf")
 npc_name = null
 npc_id = null
@@ -15,6 +17,10 @@ required_item = null
 required_npc_id = null
 quest_reward = null
 reward_item = null
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_83185")
+flip_h = true
 
 [node name="interactionspot" parent="." instance=ExtResource("2_y76uy")]
 
