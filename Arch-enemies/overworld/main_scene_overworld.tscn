@@ -61,7 +61,7 @@ shape = SubResource("RectangleShape2D_25akq")
 
 [node name="item_interaction" parent="." instance=ExtResource("6_66i44")]
 position = Vector2(289, 191)
-item_type = 2
+item_type = 0
 item_dialogue_success = "you got an item!"
 item_dialogue_failure = "no item found"
 
@@ -74,15 +74,8 @@ item_dialogue_failure = "item :("
 [node name="NpcInteraction" parent="." instance=ExtResource("7_33ud0")]
 position = Vector2(185, 51)
 npc_name = "Rubert"
-npc_id = 0
-npc_animal_type = 0
 quest_type = 1
-required_edge_start = 0
-required_edge_dest = 0
-required_item = 0
-required_npc_id = 0
 quest_reward = 1
-reward_item = 6
 
 [node name="NpcInteraction2" parent="." instance=ExtResource("7_33ud0")]
 position = Vector2(235, 143)
@@ -90,9 +83,6 @@ npc_name = "Evillyn"
 npc_id = 1
 npc_animal_type = 3
 quest_type = 2
-required_edge_start = 0
-required_edge_dest = 0
-required_item = 0
 required_npc_id = 3
 quest_reward = 0
 reward_item = 1
@@ -123,12 +113,8 @@ npc_name = "glnnn"
 npc_id = 2
 npc_animal_type = 1
 quest_type = 0
-required_edge_start = 0
-required_edge_dest = 0
 required_item = 2
-required_npc_id = 0
 quest_reward = 1
-reward_item = 6
 
 [node name="NpcInteraction3" parent="." instance=ExtResource("7_33ud0")]
 position = Vector2(409, 335)

@@ -77,7 +77,7 @@ func set_amount(newamount:int):
 
 
 # returns string representation of obtained item 
-static func set_item_name(type:ItemType):
+static func set_item_name(type:ItemType) -> String:
 	match type:
 		ItemType.HONEY:
 			return "Honey"

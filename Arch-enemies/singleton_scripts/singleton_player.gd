@@ -32,6 +32,13 @@ func get_player_zoom() -> Vector2:
 @onready var item_inventory:Dictionary = Item.init_item_inventory()
 @onready var animal_inventory:Dictionary = Animal.init_animal_inventory()
 
+# retrieve inventory of items from singleton instance
+func get_item_inventory() -> Dictionary:
+	return item_inventory
+
+# retrieve inventory of animals from singleton instance
+func get_animal_inventory() -> Dictionary:
+	return animal_inventory
 
 # takes new item and updates amount stored in inventory 
 # if ItemType is "None" nothing will be changed 
@@ -44,12 +51,14 @@ func add_to_inventory(new_item:Item.ItemType):
 		# emit signal to update Ui
 		updated_item_inventory.emit(item_inventory)
 
+# takes new item inventory and replaces the internal item_inventory 
+# may be used to load a saved inventory to the singleton ( save management )
 func set_item_inventory(new_inventory:Dictionary):
 	item_inventory = new_inventory
 	print("setting loaded inventory")
 	updated_item_inventory.emit(item_inventory)
 
-
+# takes new animal inventory and replaces the internal animal_inventory
 func set_animal_inventory(new_inventory:Dictionary):
 	animal_inventory = new_inventory
 	print("loaded animal inventory")
@@ -77,7 +86,6 @@ func use_item(requested_item:Item.ItemType):
 	if request_item(requested_item):
 		var queried_item = item_inventory[requested_item]
 		item_inventory[requested_item] = queried_item -1
-		#queried_item.decrease_amount()
 
 # --- / 
 # -- / animal inventory
