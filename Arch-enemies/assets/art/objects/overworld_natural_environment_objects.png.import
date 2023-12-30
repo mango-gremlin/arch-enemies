@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c7at8g0vo8sjc"
-path="res://.godot/imported/grass.png-9af18bfbdce561c5b42a43c1f0f71877.ctex"
+uid="uid://b26sjntfpftsd"
+path="res://.godot/imported/overworld_natural_environment_objects.png-27b17ae3bdf09ef0f3ede3ea9faf2e4b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/tilesets/grass.png"
-dest_files=["res://.godot/imported/grass.png-9af18bfbdce561c5b42a43c1f0f71877.ctex"]
+source_file="res://assets/art/objects/overworld_natural_environment_objects.png"
+dest_files=["res://.godot/imported/overworld_natural_environment_objects.png-27b17ae3bdf09ef0f3ede3ea9faf2e4b.ctex"]
 
 [params]
 

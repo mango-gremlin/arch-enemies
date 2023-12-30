@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ba53typnoc2dg"
-path="res://.godot/imported/fences.png-1e4a88df3edea150a63c7024055c5d80.ctex"
+uid="uid://5fxwrsdtkovq"
+path="res://.godot/imported/overworld_ground_textures.png-d36f9402e8bfe2a1f18ea0d6d5393a64.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/tilesets/fences.png"
-dest_files=["res://.godot/imported/fences.png-1e4a88df3edea150a63c7024055c5d80.ctex"]
+source_file="res://assets/art/tilesets/overworld_ground_textures.png"
+dest_files=["res://.godot/imported/overworld_ground_textures.png-d36f9402e8bfe2a1f18ea0d6d5393a64.ctex"]
 
 [params]
 

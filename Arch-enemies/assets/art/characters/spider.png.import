@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://qeexqs6g3uhd"
-path="res://.godot/imported/plains.png-920ac52d991e461bf86052cf742fbd73.ctex"
+uid="uid://bxrt2ulp85yuy"
+path="res://.godot/imported/spider.png-71bf59b03576f76a7d4dffc99b692201.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/tilesets/plains.png"
-dest_files=["res://.godot/imported/plains.png-920ac52d991e461bf86052cf742fbd73.ctex"]
+source_file="res://assets/art/characters/spider.png"
+dest_files=["res://.godot/imported/spider.png-71bf59b03576f76a7d4dffc99b692201.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://du365kdstle8e"
-path="res://.godot/imported/chest_01.png-8e27015f4e0f9c064d7b0579be1248fe.ctex"
+uid="uid://cmyh0321x42dd"
+path="res://.godot/imported/overworld_water_edges.png-3159e80990ba0f740f606c7b3161ca47.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/objects/chest_01.png"
-dest_files=["res://.godot/imported/chest_01.png-8e27015f4e0f9c064d7b0579be1248fe.ctex"]
+source_file="res://assets/art/tilesets/overworld_water_edges.png"
+dest_files=["res://.godot/imported/overworld_water_edges.png-3159e80990ba0f740f606c7b3161ca47.ctex"]
 
 [params]
 
