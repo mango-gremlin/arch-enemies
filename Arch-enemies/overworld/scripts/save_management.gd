@@ -43,6 +43,7 @@ func load_config():
 		var node_data = json.get_data()
 
 		if node_data["name"] == "Player" and node_data["profile"] == current_profile:
+			# TODO refactor
 			print("Loading player state for profile \"" + current_profile + "\"")
 			
 			var position_x = node_data["pos_x"]
@@ -51,7 +52,10 @@ func load_config():
 			player_object.position = Vector2(position_x, position_y)
 			
 			var new_inventory: Dictionary = generate_inventory(node_data["inventory"])
-			player_object.set_inventory(new_inventory)
+			SingletonPlayer.set_item_inventory(new_inventory)
+			var animal_inventory:Dictionary = Animal.init_animal_inventory()
+			SingletonPlayer.set_animal_inventory(animal_inventory)
+			#player_object.set_inventory(new_inventory)
 			
 			
 			
@@ -63,22 +67,24 @@ func load_config():
 	print("Loading complete")
 			
 
-# takes dictionary and 
-func generate_inventory(inventory_data:Array):
+# takes array of items as json and
+# generates dictionary representing the inventory 
+func generate_inventory(inventory_data:Array) -> Dictionary:
 	print("Generating inventory from string: \"", inventory_data, "\"")
 	# iterate over each item and generate an item from each 
 	
-	var inventory:Dictionary = Item.init_items()
+	# creating empty inventory
+	var item_inventory:Dictionary = Item.init_item_inventory()
 	
 	for item:Dictionary in inventory_data:
 		var item_type = Item.string_to_item_type(item["type"])
 		var amount = item["amount"]
-		
-		var selected_item = inventory[item_type]
-		selected_item.set_amount(amount)
+		# setting value in inventory
+		item_inventory[item_type] = amount
+		print(Item.item_type_to_string(item_type))
+		print(amount)
 	
-	return inventory
-	
+	return item_inventory
 
 func save_config():
 	var oldPlayers = []

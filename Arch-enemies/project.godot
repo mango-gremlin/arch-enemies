@@ -17,6 +17,7 @@ config/features=PackedStringArray("4.2", "Forward Plus")
 [autoload]
 
 Global="*res://bridges/script/global.gd"
+SingletonPlayer="*res://singleton_scripts/singleton_player.gd"
 
 [display]
 
