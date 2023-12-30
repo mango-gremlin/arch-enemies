@@ -88,9 +88,6 @@ func _ready():
 					
 				elif(atlas_field in water):
 					grid[x].append(ENTITY_TYPES.WATER)
-			#Make the start tiles into allowed zones
-			elif(square in shore_side):
-				grid[x].append(ENTITY_TYPES.CONDITIONAL) 
 			elif(square in fox_start):
 				grid[x].append(ENTITY_TYPES.FORBIDDEN)
 			else:
