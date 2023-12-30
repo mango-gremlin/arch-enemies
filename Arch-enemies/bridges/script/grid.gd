@@ -36,8 +36,12 @@ Vector2i(7, 8), Vector2i(8, 8), Vector2i(7, 9), Vector2i(8, 9), Vector2i(5, 8), 
 var fox_start = [Vector2i(1,9), Vector2i(2,9), Vector2i(3,9), Vector2i(4,9),
 Vector2i(1,8), Vector2i(2,8), Vector2i(3,8), Vector2i(4,8),
 Vector2i(1,7), Vector2i(2,7), Vector2i(3,7), Vector2i(4,7)]
-				
-var start_zone = [Vector2i(3,12),Vector2i(4,12),Vector2i(5,12)]
+
+# top shore dropzones (allowed)
+var shore_top = [Vector2i(0,12), Vector2i(1,12), Vector2i(2,12), Vector2i(3,12), Vector2i(4,12), Vector2i(5,12),
+Vector2i(33,12), Vector2i(34,12), Vector2i(35,12), Vector2i(36,12), Vector2i(37,12), Vector2i(38,12)]
+# side shore dropzones
+var shore_side = [Vector2i(6,13), Vector2i(6,14), Vector2i(32,13), Vector2i(32,14)]
 
 #This is the signal we use to transfer the current grid to child nodes
 signal current_grid(current_grid)
@@ -66,8 +70,10 @@ func _ready():
 				elif(atlas_field in water):
 					grid[x].append(ENTITY_TYPES.WATER)
 			#Make the start tiles into allowed zones
-			elif(square in start_zone):
+			elif(square in shore_top):
 				grid[x].append(ENTITY_TYPES.ALLOWED)
+			elif(square in shore_side):
+				grid[x].append(ENTITY_TYPES.CONDITIONAL) 
 			elif(square in fox_start):
 				grid[x].append(ENTITY_TYPES.FORBIDDEN)
 			else:
