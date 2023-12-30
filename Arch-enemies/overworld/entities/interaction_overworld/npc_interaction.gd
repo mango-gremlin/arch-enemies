@@ -37,7 +37,8 @@ func _ready():
 		
 	# adding npc_object to list of globally known npcs 
 	SingletonPlayer.add_npc_instance(npc_id,npc_object)
-	print(npc_object.stringify_quest())
+	# debug to display the npc quest
+	#print(npc_object.stringify_quest())
 	# linking to interaction spot accordingly
 	# helps to interact with interactionspot afterwards
 	var interactionspot_object = get_node("interactionspot")
