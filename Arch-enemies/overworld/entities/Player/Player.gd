@@ -115,10 +115,13 @@ func execute_interaction():
 				# adding to inventory! 
 			Interactable.InteractionType.NPC:
 				print("interacting with npc")
+				
 				# entering dialogue, disable movement
-			
-				if interaction_data["dialogue_data"] != null and not interaction_data["dialogue_data"].finished:
-					SingletonPlayer.enter_dialogue(interaction_data["dialogue_data"])
+				if Dialogue_Registry.npc_dialogues.has(interaction_data["npc_id"]):
+					var dialogue_data = Dialogue_Registry.npc_dialogues[interaction_data["npc_id"]]
+					
+					if not dialogue_data.finished:
+						SingletonPlayer.enter_dialogue(dialogue_data)
 				
 				print("setting interaction label " + interaction_data["dialogue"])
 				set_interactionLabel(interaction_data["dialogue"])

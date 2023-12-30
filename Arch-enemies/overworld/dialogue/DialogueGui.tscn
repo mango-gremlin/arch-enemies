@@ -1,0 +1,67 @@
+[gd_scene load_steps=3 format=3 uid="uid://ha5qv05ppumk"]
+
+[ext_resource type="Script" path="res://overworld/dialogue/DialogueGui.gd" id="1_dvgqb"]
+[ext_resource type="Texture2D" uid="uid://b140cjg8pebfw" path="res://assets/art/objects/npc-background.png" id="2_mlgwe"]
+
+[node name="DialogueGui" type="Node2D"]
+
+[node name="npc" type="Panel" parent="."]
+offset_left = -90.0
+offset_top = -90.0
+offset_right = 90.0
+offset_bottom = 90.0
+script = ExtResource("1_dvgqb")
+
+[node name="background" type="Sprite2D" parent="npc"]
+position = Vector2(90, 90)
+scale = Vector2(180, 180)
+texture = ExtResource("2_mlgwe")
+
+[node name="row" type="VBoxContainer" parent="npc"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -90.0
+offset_top = -90.0
+offset_right = 90.0
+offset_bottom = 90.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="name" type="Label" parent="npc/row"]
+layout_mode = 2
+text = "Das ist der NPC Name"
+
+[node name="content" type="Label" parent="npc/row"]
+custom_minimum_size = Vector2(0, 115)
+layout_mode = 2
+theme_override_constants/line_spacing = -5
+theme_override_font_sizes/font_size = 14
+text = "designed by a swabian skiller with much love
+LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
+LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL"
+autowrap_mode = 1
+clip_text = true
+
+[node name="buttons" type="HBoxContainer" parent="npc/row"]
+layout_mode = 2
+alignment = 1
+
+[node name="Btn1" type="Button" parent="npc/row/buttons"]
+layout_mode = 2
+text = "Accept"
+
+[node name="Btn2" type="Button" parent="npc/row/buttons"]
+layout_mode = 2
+text = "Decline"
+
+[node name="Btn3" type="Button" parent="npc/row/buttons"]
+layout_mode = 2
+text = "Exit"
+
+[connection signal="pressed" from="npc/row/buttons/Btn1" to="npc" method="_on_btn_1_pressed"]
+[connection signal="pressed" from="npc/row/buttons/Btn2" to="npc" method="_on_btn_2_pressed"]
+[connection signal="pressed" from="npc/row/buttons/Btn3" to="npc" method="_on_btn_3_pressed"]

@@ -38,11 +38,6 @@ var interaction_type: Interactable.InteractionType = Interactable.InteractionTyp
 #FIXME 
 # requires option to represent and set a dialogue
 
-# this is our created dialogue
-# THIS IS NOT A GOOD SOLUTION, GODOT DOESN'T ALLOW FOR SETTING NON NODE OBJECT AS @export
-# two solutions: create node in scope for each dialogue or a dict npc_id, dialogue_data
-var dialogue_data: Dialogue_Data = ExampleData.new()
-
 @export var dialogue_quest_undone: String = "quest undone so far"
 @export var dialogue_quest_done :String = "quest is done"
 
@@ -118,9 +113,13 @@ func check_quest_condition() -> bool:
 					return true 
 				return false 
 			NPC_interaction.Quest.NPC:
-				if dialogue_data.finished: # correct?
-					# visited npc already 
-					return true 
+				# check first whether a dialogue is registered with the npc
+				if Dialogue_Registry.npc_dialogues.has(npc_id):
+					var dialogue_data = Dialogue_Registry.npc_dialogues[npc_id]
+					
+					if dialogue_data.finished:
+						return true
+						
 				return false 
 			_:
 				return false 

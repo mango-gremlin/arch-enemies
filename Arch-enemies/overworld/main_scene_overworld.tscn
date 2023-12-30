@@ -15,6 +15,7 @@ size = Vector2(36, 20)
 script = ExtResource("1_pwtu4")
 
 [node name="Player" parent="." instance=ExtResource("2_mpe4y")]
+SPEED = 100
 
 [node name="world" parent="." instance=ExtResource("3_xuy1h")]
 
