@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b140cjg8pebfw"
-path="res://.godot/imported/npc-background.png-05c5d05fb8dfceb1ba24e961383e4eae.ctex"
+uid="uid://dm44mipi2x8pq"
+path="res://.godot/imported/blue.png-febd417ce7db2a7ddc2e4dbfd4311277.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/objects/npc-background.png"
-dest_files=["res://.godot/imported/npc-background.png-05c5d05fb8dfceb1ba24e961383e4eae.ctex"]
+source_file="res://overworld/dialogues/test_dialogue/blue.png"
+dest_files=["res://.godot/imported/blue.png-febd417ce7db2a7ddc2e4dbfd4311277.ctex"]
 
 [params]
 

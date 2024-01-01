@@ -26,10 +26,13 @@ func select_page(page: int):
 	var entry: Dialogue_Entry = entries[currentEntry]
 	
 	# set title and content
-	control_instance.set_text(entry.title(), entry.content())
+	control_instance.set_text(entry.content())
 	
 	# set button text
 	control_instance.set_buttons(entry.btn_text())
+	
+	# set image resource
+	control_instance.set_image_texture(entry.image_src())
 	
 	# show panel
 	control_instance.show()

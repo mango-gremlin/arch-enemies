@@ -8,11 +8,12 @@ class_name Dialogue_Entry
 # -- / class constructor 
 func _init():
 	pass
-
-
-func title() -> String:
-	return "default"
 	
+# this inserts automatically the default godot image
+# insert a src path here, something like res://assets/art/dialogue/sample-icon.svg,
+# the picture should have a size of 60 x 60
+func image_src() -> String:
+	return ""
 
 func content() -> String:
 	return "no text specified"
