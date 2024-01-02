@@ -8,6 +8,7 @@ var tile_size = tile_set.tile_size
 #The Dimensions of the Grid
 var x_size = 39
 var y_size = 22
+const square_size = 10
 
 #And finally some values we need later
 var grid_size = Vector2(x_size, y_size)
@@ -92,20 +93,24 @@ func _ready():
 	grid = assign_shore_dropzones(grid, shore_top, ENTITY_TYPES.ALLOWED)
 	# assign to SIDE in #199
 	grid = assign_shore_dropzones(grid, shore_side, ENTITY_TYPES.CONDITIONAL)
-	# assign to BOTTOM in #99
+	# assign to BOTTOM in #199
 	grid = assign_shore_dropzones(grid, shore_bottom, ENTITY_TYPES.CONDITIONAL)
+	
+	# assign forbidden zones around fox sprite
 	
 	# get position of fox
 	var fox_global_position = $Player.global_position
-	# round to nearest square
-	var fox_grid_x = Global.round_to_nearest(fox_global_position.x, 10) / 10
-	var fox_grid_y = Global.round_to_nearest(fox_global_position.y, 10) / 10
+	
+	# round to nearest grid square
+	var fox_grid_x = Global.round_to_nearest(fox_global_position.x, square_size) / square_size
+	var fox_grid_y = Global.round_to_nearest(fox_global_position.y, square_size) / square_size
 	var fox_grid_position = Vector2i(fox_grid_x, fox_grid_y)
 	
 	# iterate over 4x3 squares with (1,2) being fox centre
 	for x_offset in range(-2,2):
 		for y_offset in range(-1,2):
 			var crt_square = Vector2i(fox_grid_position.x + x_offset, fox_grid_position.y + y_offset)
+			# assign each square as forbidden
 			grid[crt_square.x][crt_square.y] = ENTITY_TYPES.FORBIDDEN
 	
 	color_grid()
