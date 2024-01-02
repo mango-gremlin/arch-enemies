@@ -96,22 +96,7 @@ func _ready():
 	# assign to BOTTOM in #199
 	grid = assign_shore_dropzones(grid, shore_bottom, ENTITY_TYPES.CONDITIONAL)
 	
-	# assign forbidden zones around fox sprite
-	
-	# get position of fox
-	var fox_global_position = $Player.global_position
-	
-	# round to nearest grid square
-	var fox_grid_x = Global.round_to_nearest(fox_global_position.x, square_size) / square_size
-	var fox_grid_y = Global.round_to_nearest(fox_global_position.y, square_size) / square_size
-	var fox_grid_position = Vector2i(fox_grid_x, fox_grid_y)
-	
-	# iterate over 4x3 squares with (1,2) being fox centre
-	for x_offset in range(-2,2):
-		for y_offset in range(-1,2):
-			var crt_square = Vector2i(fox_grid_position.x + x_offset, fox_grid_position.y + y_offset)
-			# assign each square as forbidden
-			grid[crt_square.x][crt_square.y] = ENTITY_TYPES.FORBIDDEN
+	grid = assign_fox_forbidden_zones(grid)
 	
 	color_grid()
 	#Now we save the inital state of the grid for reset and previous state
@@ -133,6 +118,24 @@ func is_shore_dropzone(square:Vector2i) -> bool:
 		and square.x < grid_size.x and square.y < grid_size.y):
 		return true
 	return false
+
+# takes grid as input, assigns forbidden zones around the fox sprite
+func assign_fox_forbidden_zones(grid:Array) -> Array:
+	# get position of fox
+	var fox_global_position = $Player.global_position
+	
+	# round to nearest grid square
+	var fox_grid_x = Global.round_to_nearest(fox_global_position.x, square_size) / square_size
+	var fox_grid_y = Global.round_to_nearest(fox_global_position.y, square_size) / square_size
+	var fox_grid_position = Vector2i(fox_grid_x, fox_grid_y)
+	
+	# iterate over 4x3 squares with (1,2) being fox centre
+	for x_offset in range(-2,2):
+		for y_offset in range(-1,2):
+			var crt_square = Vector2i(fox_grid_position.x + x_offset, fox_grid_position.y + y_offset)
+			# assign each square as forbidden
+			grid[crt_square.x][crt_square.y] = ENTITY_TYPES.FORBIDDEN
+	return grid
 
 func color_grid():
 	#This function colors the grid cells that are not predefined, i.e. the background
