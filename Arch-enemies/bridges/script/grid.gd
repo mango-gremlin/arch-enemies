@@ -45,7 +45,7 @@ var shore_bottom = []
 signal current_grid(current_grid)
 
 #These are the different kind of object we can have in grid cells
-enum ENTITY_TYPES {GROUND, WATER, ANIMAL, FORBIDDEN, ALLOWED, CONDITIONAL, AIR}
+enum ENTITY_TYPES {GROUND, WATER, AIR, ANIMAL, FORBIDDEN, ALLOWED, SIDE, BOTTOM}
 
 func _ready():
 	#We save the previous states of the grid in an array, this array is initalized here
@@ -97,10 +97,8 @@ func _ready():
 	
 	# assign shore dropzones
 	grid = assign_shore_dropzones(grid, shore_top, ENTITY_TYPES.ALLOWED)
-	# assign to SIDE in #199
-	grid = assign_shore_dropzones(grid, shore_side, ENTITY_TYPES.CONDITIONAL)
-	# assign to BOTTOM in #99
-	grid = assign_shore_dropzones(grid, shore_bottom, ENTITY_TYPES.CONDITIONAL)
+	grid = assign_shore_dropzones(grid, shore_side, ENTITY_TYPES.SIDE)
+	grid = assign_shore_dropzones(grid, shore_bottom, ENTITY_TYPES.BOTTOM)
 
 	color_grid()
 	#Now we save the inital state of the grid for reset and previous state
@@ -153,9 +151,11 @@ func update_grid(pos, data):
 			#Similarly we need to define what new tiles are now ALLOWED for dragging
 			var new_allowed = [Vector2i(0, 3), Vector2i(1, 4), Vector2i(2, 4), Vector2i(3, 4)]
 			#These two loops just iterate over the grid cells we want to fill
-			#Same for CONDITIONAL tiles
-			var new_conditional = [Vector2i(4, 3), Vector2i(3, 0), Vector2i(3, 1), Vector2i(3, 2),
+			#Same for SIDE tiles
+			var new_side = [Vector2i(4, 3), Vector2i(3, 0), Vector2i(3, 1), Vector2i(3, 2),
 			Vector2i(-1, 0), Vector2i(-1, 1)]
+			#Same for BoTTOM tiles
+			var new_bottom = [Vector2i(0, -1), Vector2i(1, -1), Vector2i(2, -1)]
 			for delta in range(4):
 				for epsilon in range(4):
 					var tile_pos = Vector2i(delta, epsilon) 
@@ -165,16 +165,21 @@ func update_grid(pos, data):
 			for position in new_allowed:
 				if(grid[x + position.x][y - position.y] == ENTITY_TYPES.AIR):
 					grid[x + position.x][y - position.y] = ENTITY_TYPES.ALLOWED	
-			for position in new_conditional:
+			for position in new_side:
 				if(grid[x + position.x][y - position.y] == ENTITY_TYPES.AIR):
-					grid[x + position.x][y - position.y] = ENTITY_TYPES.CONDITIONAL
+					grid[x + position.x][y - position.y] = ENTITY_TYPES.SIDE
+			for position in new_bottom:
+				if(grid[x + position.x][y - position.y] == ENTITY_TYPES.AIR):
+					grid[x + position.x][y - position.y] = ENTITY_TYPES.BOTTOM
 		"SNAKE":
 			#Snake works just like Deer
 			var new_allowed = [Vector2i(0, 1), Vector2i(1, 1), Vector2i(2, 1), Vector2i(3, 1)]
 			#Except we have FORBIDDEN tiles, which we also have to mark in the grid
 			var new_forbidden = [Vector2i(4, 1), Vector2i(5, 1), Vector2i(5, 0), Vector2i(5, -1), Vector2i(4, -1)]
-			#Same for CONDITIONAL tiles
-			var new_conditional = [Vector2i(0, -1), Vector2i(1, -1), Vector2i(2, -1), Vector2i(3, -1)]
+			#Same for SIDE tiles
+			var new_side = [Vector2i(-1, 0)]
+			#Same for BOTTOM tiles
+			var new_bottom = [Vector2i(0, -1), Vector2i(1, -1), Vector2i(2, -1), Vector2i(3, -1)]
 			for delta in range(5):
 				grid[x + delta][y] = ENTITY_TYPES.ANIMAL
 				set_cell(0, Vector2i(x + delta, y), 8, Vector2i(delta, 0))
@@ -184,9 +189,12 @@ func update_grid(pos, data):
 			for position in new_forbidden:
 				if(grid[x + position.x][y - position.y] == ENTITY_TYPES.AIR):
 					grid[x + position.x][y - position.y] = ENTITY_TYPES.FORBIDDEN
-			for position in new_conditional:
+			for position in new_side:
 				if(grid[x + position.x][y - position.y] == ENTITY_TYPES.AIR):
-					grid[x + position.x][y - position.y] = ENTITY_TYPES.CONDITIONAL
+					grid[x + position.x][y - position.y] = ENTITY_TYPES.SIDE
+			for position in new_bottom:
+				if(grid[x + position.x][y - position.y] == ENTITY_TYPES.AIR):
+					grid[x + position.x][y - position.y] = ENTITY_TYPES.BOTTOM
 		"SPIDER":
 			#Spider is the easiest, nothing much happens here
 			var new_allowed = [Vector2i(0, 1), Vector2i(1, 0), Vector2i(0, -1), Vector2i(-1, 0)]
@@ -205,14 +213,17 @@ func update_grid(pos, data):
 
 func make_visible():
 	#We do not color the FORBIDDEN or ALLOWED cells on ready
-	#Instead we only color them we are dragging, this function does that
+	#Instead we only color them when we are dragging, this function does that
 	for x in range(grid_size.x):
 		for y in range(grid_size.y):
 			if(grid[x][y] == ENTITY_TYPES.FORBIDDEN):
 				set_cell(0, Vector2i(x, y), 7, Vector2i(1, 1))
 			elif(grid[x][y] == ENTITY_TYPES.ALLOWED):
 				set_cell(0, Vector2i(x, y), 0, Vector2i(1, 1))
-			elif(grid[x][y] == ENTITY_TYPES.CONDITIONAL):
+			#SIDE and BOTTOM have the same color but this can be changed
+			elif(grid[x][y] == ENTITY_TYPES.SIDE):
+				set_cell(0, Vector2i(x, y), 4, Vector2i(1, 1))
+			elif(grid[x][y] == ENTITY_TYPES.BOTTOM):
 				set_cell(0, Vector2i(x, y), 4, Vector2i(1, 1))
 	Global.something_is_being_dragged = true
 
@@ -221,7 +232,7 @@ func make_invisible():
 	for x in range(grid_size.x):
 		for y in range(grid_size.y):
 			if(grid[x][y] == ENTITY_TYPES.FORBIDDEN or grid[x][y] == ENTITY_TYPES.ALLOWED
-			or grid[x][y] == ENTITY_TYPES.CONDITIONAL):
+			or grid[x][y] == ENTITY_TYPES.SIDE or grid[x][y] == ENTITY_TYPES.BOTTOM):
 				set_cell(0, Vector2i(x, y), 0, Vector2i(-1, -1))
 	Global.something_is_being_dragged = false
 
