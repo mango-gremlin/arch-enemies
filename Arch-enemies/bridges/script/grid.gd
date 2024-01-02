@@ -97,15 +97,14 @@ func _ready():
 	
 	# get position of fox
 	var fox_global_position = $Player.global_position
-	print(fox_global_position)
-	# round to nearest square. may improve this later with round_to_nearest
-	var fox_grid_position = Vector2i(int(fox_global_position.x/10), int(fox_global_position.y/10))
-	print(fox_grid_position)
+	# round to nearest square
+	var fox_grid_x = Global.round_to_nearest(fox_global_position.x, 10) / 10
+	var fox_grid_y = Global.round_to_nearest(fox_global_position.y, 10) / 10
+	var fox_grid_position = Vector2i(fox_grid_x, fox_grid_y)
+	
 	# iterate over 4x3 squares with (1,2) being fox centre
 	for x_offset in range(-2,2):
-		print("\nx_offset: ", x_offset)
 		for y_offset in range(-1,2):
-			print("y_offset: ", y_offset)
 			var crt_square = Vector2i(fox_grid_position.x + x_offset, fox_grid_position.y + y_offset)
 			grid[crt_square.x][crt_square.y] = ENTITY_TYPES.FORBIDDEN
 	
