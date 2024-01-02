@@ -2,7 +2,7 @@ extends TextureRect
 
 #Here we define the elements we need to operate on the grid
 var grid = []
-enum ENTITY_TYPES {GROUND, WATER, ANIMAL, FORBIDDEN, ALLOWED, CONDITIONAL, AIR}
+enum ENTITY_TYPES {GROUND, WATER, AIR, ANIMAL, FORBIDDEN, ALLOWED, SIDE, BOTTOM}
 #We have to use our own preview scene because otherwise things are terrible
 const DRAGPREVIEW = preload("res://bridges/scenes/dragpreview.tscn")
 
@@ -125,7 +125,8 @@ func is_snake_allowed(pos):
 func is_spider_allowed(pos):
 	#This works just like Snake
 	var is_allowed = false
-	if(grid[pos.x][pos.y] == ENTITY_TYPES.ALLOWED or grid[pos.x][pos.y] == ENTITY_TYPES.CONDITIONAL):
+	if(grid[pos.x][pos.y] == ENTITY_TYPES.ALLOWED 
+	or grid[pos.x][pos.y] == ENTITY_TYPES.SIDE or grid[pos.x][pos.y] == ENTITY_TYPES.BOTTOM):
 		is_allowed = true
 	return is_allowed
 
