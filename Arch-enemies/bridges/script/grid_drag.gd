@@ -18,7 +18,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass	
+	pass
 
 func _get_drag_data(at_position):
 	if Global.drag_mode:
@@ -101,6 +101,12 @@ func _drop_data(at_position, data):
 func _on_grid_current_grid(current_grid):
 	grid = current_grid
 
+func in_grid_bounds(grid, pos):
+	if (pos.x < 0 or pos.y < 0 
+		or pos.x >= len(grid) or pos.y >= len(grid[0])):
+		return false
+	return true
+
 func is_snake_allowed(pos):
 	var is_allowed = false
 	var snake_head = [Vector2i(4, 1), Vector2i(5, 1), Vector2i(5, 0), Vector2i(5, -1), Vector2i(4, -1)]
@@ -118,8 +124,9 @@ func is_snake_allowed(pos):
 		if(is_free):
 			is_allowed = true
 	for position in snake_head:
-		if(grid[pos.x + position.x][pos.y + position.y] == ENTITY_TYPES.ANIMAL):
-			is_allowed = false
+		if in_grid_bounds(grid, Vector2i(pos.x + position.x, pos.y + position.y)):
+			if(grid[pos.x + position.x][pos.y + position.y] == ENTITY_TYPES.ANIMAL):
+				is_allowed = false
 	return is_allowed
 
 func is_spider_allowed(pos):
