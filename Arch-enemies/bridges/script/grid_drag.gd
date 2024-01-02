@@ -154,7 +154,7 @@ func is_deer_allowed(pos):
 	return is_allowed
 
 func is_squirrel_allowed(pos):
-	# TODO 
+	#works just like spider 
 	var is_allowed = false
 	if(grid[pos.x][pos.y] == ENTITY_TYPES.ALLOWED or grid[pos.x][pos.y] == ENTITY_TYPES.SIDE):
 		is_allowed = true
