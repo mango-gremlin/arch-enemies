@@ -195,6 +195,9 @@ func update_grid(pos, data):
 			for position in new_allowed:
 				if(grid[x + position.x][y - position.y] == ENTITY_TYPES.AIR):
 					grid[x + position.x][y - position.y] = ENTITY_TYPES.ALLOWED
+		"SQUIRREL":
+			# TODO Squirrel
+			var new_allowed
 	#Whenever we change the grid, i.e. update it, we have to track that here
 	state += 1
 	#This allows us to track the previous states and return to them
@@ -272,6 +275,9 @@ func _on_snake_item_need_grid():
 func _on_spider_item_need_grid():
 	current_grid.emit(grid)
 
+func _on_squirrel_item_need_grid():
+	current_grid.emit(grid)
+
 func _on_drag_grid_update_grid(pos, data):
 	update_grid(pos, data)
 
@@ -282,6 +288,9 @@ func _on_snake_item_update_grid(pos, data):
 	update_grid(pos, data)
 
 func _on_spider_item_update_grid(pos, data):
+	update_grid(pos, data)
+
+func _on_squirrel_item_update_grid(pos, data):
 	update_grid(pos, data)
 
 func _on_drag_grid_dragging_done():
@@ -306,6 +315,12 @@ func _on_spider_item_dragging_done():
 	make_invisible()
 
 func _on_spider_item_is_dragging():
+	make_visible()
+
+func _on_squirrel_item_dragging_done():
+	make_invisible()
+
+func _on_squirrel_item_is_dragging():
 	make_visible()
 
 func _on_reset_pressed():

@@ -59,6 +59,9 @@ func _get_drag_data(at_position):
 				"SPIDER":
 					preview.set_size(Vector2(10, 10))
 					preview.tooltip_text = "SPIDER"
+				"SQUIRREL":
+					preview.set_size(Vector2(10, 20))
+					preview.tooltip_text = "SQUIRREL"
 		
 		c.set_global_position(Vector2i(0, 0))
 		
@@ -87,6 +90,8 @@ func _can_drop_data(at_position, data):
 			is_allowed = is_snake_allowed(pos)
 		"SPIDER":
 			is_allowed = is_spider_allowed(pos)	
+		"SQUIRREL":
+			is_allowed = is_squirrel_allowed(pos)
 	
 	return is_allowed
 
@@ -145,4 +150,8 @@ func is_deer_allowed(pos):
 						break
 		if(is_free):
 			is_allowed = true
+	return is_allowed
+
+func is_squirrel_allowed(pos)
+	var is_allowed = false
 	return is_allowed
