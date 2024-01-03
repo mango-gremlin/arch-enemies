@@ -220,7 +220,7 @@ func update_grid(pos, data):
 			var new_bottom = [Vector2i(0, -1)]
 			for epsilon in range(2):
 				grid[x][y - epsilon] = ENTITY_TYPES.ANIMAL
-				set_cell(0, Vector2i(x, y - epsilon), SQUIRREL_TILE_ID, Vector2i(0, 1 - epsilon))
+				set_cell(1, Vector2i(x, y - epsilon), SQUIRREL_TILE_ID, Vector2i(0, 1 - epsilon))
 			for position in new_allowed:
 				if(grid[x + position.x][y - position.y] == ENTITY_TYPES.AIR):
 					grid[x + position.x][y - position.y] = ENTITY_TYPES.ALLOWED
