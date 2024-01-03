@@ -204,7 +204,7 @@ func update_grid(pos, data):
 				if(grid[x + position.x][y - position.y] == ENTITY_TYPES.AIR):
 					grid[x + position.x][y - position.y] = ENTITY_TYPES.ALLOWED
 		"SQUIRREL":
-			# TODO Squirrel
+			#Squirrel like the other animals
 			var new_allowed = [Vector2i(0, 2)]
 			var new_side = [Vector2i(-1, 0), Vector2i(-1, 1), Vector2i(1, 0), Vector2i(1, 1)]
 			var new_bottom = [Vector2i(0, -1)]

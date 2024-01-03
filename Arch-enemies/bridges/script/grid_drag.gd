@@ -154,8 +154,13 @@ func is_deer_allowed(pos):
 	return is_allowed
 
 func is_squirrel_allowed(pos):
-	#works just like spider 
+	#Check if one tile is in necessary ALLOWED or SIDE and if all other tiles are free
 	var is_allowed = false
-	if(grid[pos.x][pos.y] == ENTITY_TYPES.ALLOWED or grid[pos.x][pos.y] == ENTITY_TYPES.SIDE):
-		is_allowed = true
-	return is_allowed
+	var is_free = true
+	for epsilon in range(2):
+		if(grid[pos.x][pos.y-epsilon] == ENTITY_TYPES.ALLOWED or grid[pos.x][pos.y-epsilon] == ENTITY_TYPES.SIDE):
+			is_allowed = true
+		if(grid[pos.x][pos.y-epsilon] == ENTITY_TYPES.FORBIDDEN or grid[pos.x][pos.y-epsilon] == ENTITY_TYPES.GROUND or
+			grid[pos.x][pos.y-epsilon] == ENTITY_TYPES.WATER or grid[pos.x][pos.y-epsilon] == ENTITY_TYPES.ANIMAL):
+			is_free = false
+	return is_allowed and is_free
