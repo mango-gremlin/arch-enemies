@@ -134,24 +134,26 @@ func is_spider_allowed(pos):
 	or grid[pos.x][pos.y] == ENTITY_TYPES.SIDE or grid[pos.x][pos.y] == ENTITY_TYPES.BOTTOM):
 		is_allowed = true
 	return is_allowed
-
+	
 func is_deer_allowed(pos):
-	var is_allowed = false
-	#The Deer has empty slots in it sprite, it is allowed for them to have something in them
-	var allowed = [Vector2i(0, 3), Vector2i(3, 0), Vector2i(3, 1), Vector2i(3, 2)]
-	if(grid[pos.x][pos.y] == ENTITY_TYPES.ALLOWED):
-		var is_free = true
-		for delta in range(4):
-			for epsilon in range(4):
-				if(not (grid[pos.x + delta][pos.y - epsilon] == ENTITY_TYPES.AIR or 
-				grid[pos.x + delta][pos.y - epsilon] == ENTITY_TYPES.ALLOWED)):
-					#Therefore we only flag the squares which are not in allowed
-					if(Vector2i(delta, epsilon) not in allowed):
-						is_free = false
-						break
-		if(is_free):
-			is_allowed = true
-	return is_allowed
+	var is_allowed = false 
+	var is_free = true 
+	#The empty slots in the deer sprite
+	var ignore = [Vector2i(0, 3), Vector2i(3, 0), Vector2i(3, 1), Vector2i(3, 2)]
+	for delta in range(4):
+		for epsilon in range(4):
+			#These slots need to be ignored
+			if(Vector2i(delta,epsilon) in ignore):
+				break
+			var pos_Type = grid[pos.x+delta][pos.y-epsilon]
+			#Is there something to attach the animal to?
+			if(pos_Type == ENTITY_TYPES.ALLOWED):
+				is_allowed = true
+			#Is there space for the animal?	
+			if(pos_Type == ENTITY_TYPES.FORBIDDEN or pos_Type == ENTITY_TYPES.GROUND or 
+			pos_Type == ENTITY_TYPES.WATER or pos_Type == ENTITY_TYPES.ANIMAL):
+				is_free = false
+	return is_allowed and is_free
 
 func is_squirrel_allowed(pos):
 	#Check if one tile is in necessary ALLOWED or SIDE and if all other tiles are free
