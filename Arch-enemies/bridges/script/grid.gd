@@ -87,7 +87,7 @@ func _ready():
 	# assign forbidden zones around the fox' starting position
 	grid = assign_fox_forbidden_zones(grid)
 	
-	#color_grid()
+	color_grid()
 	#Now we save the inital state of the grid for reset and previous state
 	start_grid = grid.duplicate(true)
 	last_states[0] = grid.duplicate(true)
@@ -138,13 +138,10 @@ func color_grid():
 			square != ENTITY_TYPES.ANIMAL):
 				match square:
 					ENTITY_TYPES.AIR:
-						var square_as_vector = Vector2i(x, y)
-						var tile_id = get_cell_source_id(0, square_as_vector)
-						if not ((square_as_vector in shore_top) or (tile_id == AIR_TILE_ID)):
 						#Note that this effectively just makes them transparent
-							set_cell(0, Vector2i(x, y), 0, Vector2i(-1, -1))
-					#_:
-					#	set_cell(0, Vector2i(x, y), 0, Vector2i(-1, -1))
+						set_cell(1, Vector2i(x, y), 0, Vector2i(-1, -1))
+					_:
+						set_cell(1, Vector2i(x, y), 0, Vector2i(-1, -1))
 
 func update_grid(pos, data):
 	#If we drag an animal onto a cell we update the grid here
@@ -242,11 +239,11 @@ func make_invisible():
 	Global.something_is_being_dragged = false
 
 func reset_grid():
-	#To reset the grid we simple return it to the state we saved in the begining
+	#To reset the grid we simple return it to the state we saved in the beginning
 	if Global.drag_mode:
 		grid = start_grid.duplicate(true)
 		#Then we recolor it
-		#color_grid()
+		color_grid()
 		#And clean the save-states
 		last_states = []
 		for i in range(save_states):
@@ -272,7 +269,7 @@ func last_state():
 			#If it does we return the grid to it and recolor it
 			grid = last_states[state % save_states].duplicate(true)
 			last_states[(state + 1) % save_states] = [[]]
-			#color_grid()
+			color_grid()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
