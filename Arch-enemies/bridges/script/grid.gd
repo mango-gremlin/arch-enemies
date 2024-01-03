@@ -18,21 +18,12 @@ var last_states = []
 var save_states = 10
 var state = 0
 
-#We have to define what parts of the tile-set are ground/water
-var ground = [Vector2i(7, 0), Vector2i(1, 1), Vector2i(2, 1), Vector2i(3, 1), Vector2i(4, 1),
-Vector2i(5, 1), Vector2i(7, 1), Vector2i(0, 2), Vector2i(1, 2), Vector2i(2, 2), Vector2i(3, 2),
-Vector2i(4, 2), Vector2i(5, 2), Vector2i(6, 2), Vector2i(7, 2), Vector2i(1, 3), Vector2i(2, 3), 
-Vector2i(3, 3), Vector2i(4, 3), Vector2i(5, 3), Vector2i(6, 3), Vector2i(7, 3), Vector2i(1, 4), 
-Vector2i(2, 4), Vector2i(3, 4), Vector2i(0, 5), Vector2i(0, 6), Vector2i(0, 7), Vector2i(4, 5), 
-Vector2i(4, 6), Vector2i(4, 7), Vector2i(5, 5), Vector2i(5, 6), Vector2i(5, 7), Vector2i(7, 6),
-Vector2i(1, 8), Vector2i(2, 8), Vector2i(3, 8), Vector2i(6, 8), Vector2i(6, 9)]
+# ids of our tilesets for their respective types
+const AIR_TILE_ID = 1
+const GROUND_TILE_ID = 2
+const WATER_TILE_ID = 3
 
-var water = [Vector2i(7, 4), Vector2i(8, 4), Vector2i(8, 5), Vector2i(8, 6), Vector2i(6, 6), 
-Vector2i(6, 7), Vector2i(1, 5), Vector2i(2, 5), Vector2i(3, 5), Vector2i(1, 6), Vector2i(2, 6), 
-Vector2i(3, 6), Vector2i(1, 7), Vector2i(2, 7), Vector2i(3, 7), Vector2i(0, 8), Vector2i(0, 9),
-Vector2i(1, 9), Vector2i(2, 9), Vector2i(3, 9), Vector2i(4, 9), Vector2i(7, 7), Vector2i(8, 7),
-Vector2i(7, 8), Vector2i(8, 8), Vector2i(7, 9), Vector2i(8, 9), Vector2i(5, 8), Vector2i(5, 9)]
-
+# list of starting dropzones of their respective type
 var shore_top = []
 var shore_side = []
 var shore_bottom = []
@@ -53,46 +44,47 @@ func _ready():
 		for y in range(grid_size.y):
 			#We check each tile in your tilemap (which is the same size as the grid)
 			var square = Vector2i(x, y)
-			#If that tile is one of the ones we use for ground
+			# get id of the tile of the current square
 			var tile_id = get_cell_source_id(0, square)
-			# which is contained in the tileset with id 11
-			if(tile_id == 11):
-				#We check what tile it is and add it as either GROUND or WATER to the grid
-				var atlas_field = get_cell_atlas_coords(0, square)
-				if(atlas_field in ground):
-					grid[x].append(ENTITY_TYPES.GROUND)
-					
-					# check if the tile above is in ground or water
-					var top_square = Vector2i(x, y - 1)
-					if is_shore_dropzone(top_square):
-						shore_top.append(top_square)
-					
-					# check if the tile below is in ground or water
-					var bottom_square = Vector2i(x, y + 1)
-					if is_shore_dropzone(bottom_square):
-						shore_bottom.append(bottom_square)
-					
-					# check if the tile to the left is in ground or water
-					var left_square = Vector2i(x - 1, y)
-					if is_shore_dropzone(left_square):
-						shore_side.append(left_square)
-					
-					# check if the tile to the right is in ground or water
-					var right_square = Vector2i(x + 1, y)
-					if is_shore_dropzone(right_square):
-						shore_side.append(right_square)
-					
-				elif(atlas_field in water):
-					grid[x].append(ENTITY_TYPES.WATER)
+			# if that tileset is ground, assing it to that type, and check for startzones
+			if(tile_id == GROUND_TILE_ID):
+				grid[x].append(ENTITY_TYPES.GROUND)
+				
+				# check if the tile above is in ground or water
+				var top_square = Vector2i(x, y - 1)
+				if is_shore_dropzone(top_square):
+					shore_top.append(top_square)
+				
+				# check if the tile below is in ground or water
+				var bottom_square = Vector2i(x, y + 1)
+				if is_shore_dropzone(bottom_square):
+					shore_bottom.append(bottom_square)
+				
+				# check if the tile to the left is in ground or water
+				var left_square = Vector2i(x - 1, y)
+				if is_shore_dropzone(left_square):
+					shore_side.append(left_square)
+				
+				# check if the tile to the right is in ground or water
+				var right_square = Vector2i(x + 1, y)
+				if is_shore_dropzone(right_square):
+					shore_side.append(right_square)
+			
+			# if that tileset is water, assign to that type
+			elif(tile_id == WATER_TILE_ID):
+				grid[x].append(ENTITY_TYPES.WATER)
+			
+			# if that tileset is air, assign to that type
 			else:
 				#Currently every other tile becomes AIR
-				#This is subject to change
 				grid[x].append(ENTITY_TYPES.AIR)
 	
 	# assign shore dropzones
-	grid = assign_shore_dropzones(grid, shore_top, ENTITY_TYPES.ALLOWED)
-	grid = assign_shore_dropzones(grid, shore_side, ENTITY_TYPES.SIDE)
 	grid = assign_shore_dropzones(grid, shore_bottom, ENTITY_TYPES.BOTTOM)
+	grid = assign_shore_dropzones(grid, shore_side, ENTITY_TYPES.SIDE)
+	grid = assign_shore_dropzones(grid, shore_top, ENTITY_TYPES.ALLOWED)
+	
+	# assign forbidden zones around the fox' starting position
 	grid = assign_fox_forbidden_zones(grid)
 	
 	color_grid()
@@ -108,9 +100,9 @@ func assign_shore_dropzones(grid:Array, squares:Array, type:ENTITY_TYPES) -> Arr
 
 # checks if square isn't in ground or water, and is within grid bounds
 func is_shore_dropzone(square:Vector2i) -> bool:
-	var atlas_field = get_cell_atlas_coords(0, square)
-	if (atlas_field not in ground 
-		and atlas_field not in water
+	var tile_id = get_cell_source_id(0, square)
+	if (tile_id != GROUND_TILE_ID
+		and tile_id != WATER_TILE_ID
 		and square.x >= 0 and square.y >= 0
 		and square.x < grid_size.x and square.y < grid_size.y):
 		return true
