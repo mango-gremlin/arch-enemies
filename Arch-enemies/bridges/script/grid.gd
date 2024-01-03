@@ -87,7 +87,7 @@ func _ready():
 	# assign forbidden zones around the fox' starting position
 	grid = assign_fox_forbidden_zones(grid)
 	
-	color_grid()
+	#color_grid()
 	#Now we save the inital state of the grid for reset and previous state
 	start_grid = grid.duplicate(true)
 	last_states[0] = grid.duplicate(true)
@@ -169,7 +169,7 @@ func update_grid(pos, data):
 					var tile_pos = Vector2i(delta, epsilon) 
 					if(tile_pos not in empty):
 						grid[x + delta][y - epsilon] = ENTITY_TYPES.ANIMAL
-						set_cell(0, Vector2i(x + delta, y - epsilon), 10, Vector2i(delta, 3 - epsilon))
+						set_cell(1, Vector2i(x + delta, y - epsilon), 10, Vector2i(delta, 3 - epsilon))
 			for position in new_allowed:
 				if(grid[x + position.x][y - position.y] == ENTITY_TYPES.AIR):
 					grid[x + position.x][y - position.y] = ENTITY_TYPES.ALLOWED	
@@ -190,7 +190,7 @@ func update_grid(pos, data):
 			var new_bottom = [Vector2i(0, -1), Vector2i(1, -1), Vector2i(2, -1), Vector2i(3, -1)]
 			for delta in range(5):
 				grid[x + delta][y] = ENTITY_TYPES.ANIMAL
-				set_cell(0, Vector2i(x + delta, y), 8, Vector2i(delta, 0))
+				set_cell(1, Vector2i(x + delta, y), 8, Vector2i(delta, 0))
 			for position in new_allowed:
 				if(grid[x + position.x][y - position.y] == ENTITY_TYPES.AIR):
 					grid[x + position.x][y - position.y] = ENTITY_TYPES.ALLOWED
@@ -207,7 +207,7 @@ func update_grid(pos, data):
 			#Spider is the easiest, nothing much happens here
 			var new_allowed = [Vector2i(0, 1), Vector2i(1, 0), Vector2i(0, -1), Vector2i(-1, 0)]
 			grid[x][y] = ENTITY_TYPES.ANIMAL
-			set_cell(0, Vector2i(x, y), 9, Vector2i(0, 0))
+			set_cell(1, Vector2i(x, y), 9, Vector2i(0, 0))
 			for position in new_allowed:
 				if(grid[x + position.x][y - position.y] == ENTITY_TYPES.AIR):
 					grid[x + position.x][y - position.y] = ENTITY_TYPES.ALLOWED
@@ -222,14 +222,14 @@ func make_visible():
 	for x in range(grid_size.x):
 		for y in range(grid_size.y):
 			if(grid[x][y] == ENTITY_TYPES.FORBIDDEN):
-				set_cell(0, Vector2i(x, y), 7, Vector2i(1, 1))
+				set_cell(1, Vector2i(x, y), 7, Vector2i(1, 1))
 			elif(grid[x][y] == ENTITY_TYPES.ALLOWED):
-				set_cell(0, Vector2i(x, y), 0, Vector2i(1, 1))
+				set_cell(1, Vector2i(x, y), 0, Vector2i(1, 1))
 			#SIDE and BOTTOM have the same color but this can be changed
 			elif(grid[x][y] == ENTITY_TYPES.SIDE):
-				set_cell(0, Vector2i(x, y), 4, Vector2i(1, 1))
+				set_cell(1, Vector2i(x, y), 4, Vector2i(1, 1))
 			elif(grid[x][y] == ENTITY_TYPES.BOTTOM):
-				set_cell(0, Vector2i(x, y), 4, Vector2i(1, 1))
+				set_cell(1, Vector2i(x, y), 4, Vector2i(1, 1))
 	Global.something_is_being_dragged = true
 
 func make_invisible():
@@ -238,7 +238,7 @@ func make_invisible():
 		for y in range(grid_size.y):
 			if(grid[x][y] == ENTITY_TYPES.FORBIDDEN or grid[x][y] == ENTITY_TYPES.ALLOWED
 			or grid[x][y] == ENTITY_TYPES.SIDE or grid[x][y] == ENTITY_TYPES.BOTTOM):
-				set_cell(0, Vector2i(x, y), 0, Vector2i(-1, -1))
+				set_cell(1, Vector2i(x, y), 0, Vector2i(-1, -1))
 	Global.something_is_being_dragged = false
 
 func reset_grid():
@@ -246,7 +246,7 @@ func reset_grid():
 	if Global.drag_mode:
 		grid = start_grid.duplicate(true)
 		#Then we recolor it
-		color_grid()
+		#color_grid()
 		#And clean the save-states
 		last_states = []
 		for i in range(save_states):
@@ -272,7 +272,7 @@ func last_state():
 			#If it does we return the grid to it and recolor it
 			grid = last_states[state % save_states].duplicate(true)
 			last_states[(state + 1) % save_states] = [[]]
-			color_grid()
+			#color_grid()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
