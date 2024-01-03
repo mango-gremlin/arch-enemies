@@ -158,9 +158,10 @@ func is_squirrel_allowed(pos):
 	var is_allowed = false
 	var is_free = true
 	for epsilon in range(2):
-		if(grid[pos.x][pos.y-epsilon] == ENTITY_TYPES.ALLOWED or grid[pos.x][pos.y-epsilon] == ENTITY_TYPES.SIDE):
+		var pos_Type = grid[pos.x][pos.y-epsilon]
+		if(pos_Type == ENTITY_TYPES.ALLOWED or pos_Type == ENTITY_TYPES.SIDE):
 			is_allowed = true
-		if(grid[pos.x][pos.y-epsilon] == ENTITY_TYPES.FORBIDDEN or grid[pos.x][pos.y-epsilon] == ENTITY_TYPES.GROUND or
-			grid[pos.x][pos.y-epsilon] == ENTITY_TYPES.WATER or grid[pos.x][pos.y-epsilon] == ENTITY_TYPES.ANIMAL):
+		if(pos_Type == ENTITY_TYPES.FORBIDDEN or pos_Type == ENTITY_TYPES.GROUND or
+			pos_Type == ENTITY_TYPES.WATER or pos_Type == ENTITY_TYPES.ANIMAL):
 			is_free = false
 	return is_allowed and is_free
