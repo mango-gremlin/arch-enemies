@@ -128,12 +128,10 @@ func is_snake_allowed(pos):
 	return is_allowed
 
 func is_spider_allowed(pos):
-	#This works just like Snake
-	var is_allowed = false
-	if(grid[pos.x][pos.y] == ENTITY_TYPES.ALLOWED 
-	or grid[pos.x][pos.y] == ENTITY_TYPES.SIDE or grid[pos.x][pos.y] == ENTITY_TYPES.BOTTOM):
-		is_allowed = true
-	return is_allowed
+	var pos_Type = grid[pos.x][pos.y]
+	var is_allowed_and_free = pos_Type == ENTITY_TYPES.ALLOWED \
+		or pos_Type == ENTITY_TYPES.SIDE or pos_Type == ENTITY_TYPES.BOTTOM
+	return is_allowed_and_free
 	
 func is_deer_allowed(pos):
 	var is_allowed = false 
