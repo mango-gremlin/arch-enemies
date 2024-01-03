@@ -105,27 +105,27 @@ func _drop_data(at_position, data):
 
 func _on_grid_current_grid(current_grid):
 	grid = current_grid
-
+	
 func is_snake_allowed(pos):
 	var is_allowed = false
-	var snake_head = [Vector2i(4, 1), Vector2i(5, 1), Vector2i(5, 0), Vector2i(5, -1), Vector2i(4, -1)]
-	#For a cell to be legal we work from the bottom left corner of the animal
-	#And check each square of the grid cell that would in the sprite
-	if(grid[pos.x][pos.y] == ENTITY_TYPES.ALLOWED):
-		var is_free = true
-		for delta in range(1, 5):
-			#If it is AIR (i.e. empty) or ALLOWED we are good
-			if(not (grid[pos.x + delta][pos.y] == ENTITY_TYPES.AIR or 
-			grid[pos.x + delta][pos.y] == ENTITY_TYPES.ALLOWED)):
-				#Otherwise we are not
-				is_free = false
-				break
-		if(is_free):
+	var is_free = true
+	var head_free = true
+	for delta in range(5):
+		var pos_Type = grid[pos.x+delta][pos.y]
+		#Is there something to attach the animal to?
+		if(pos_Type == ENTITY_TYPES.ALLOWED):
 			is_allowed = true
-	for position in snake_head:
-		if(grid[pos.x + position.x][pos.y + position.y] == ENTITY_TYPES.ANIMAL):
-			is_allowed = false
-	return is_allowed
+		#Is there space for the animal?	
+		if(pos_Type == ENTITY_TYPES.FORBIDDEN or pos_Type == ENTITY_TYPES.GROUND
+		or pos_Type == ENTITY_TYPES.WATER or pos_Type == ENTITY_TYPES.ANIMAL):
+			is_free = false
+	var snake_head = [Vector2i(4, 1), Vector2i(5, 1), Vector2i(5, 0), Vector2i(5, -1), Vector2i(4, -1)]
+	for tile in snake_head:
+		var pos_Type = grid[pos.x+tile.x][pos.y-tile.y]
+		#Are there animals around the head of the snake?
+		if(pos_Type == ENTITY_TYPES.ANIMAL):
+			head_free = false
+	return is_allowed and is_free and head_free
 
 func is_spider_allowed(pos):
 	var pos_Type = grid[pos.x][pos.y]
