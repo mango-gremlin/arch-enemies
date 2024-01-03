@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bl1jporj7hosu"]
+[gd_scene load_steps=25 format=3 uid="uid://bl1jporj7hosu"]
 
 [ext_resource type="Texture2D" uid="uid://d0o2q6fijmd1" path="res://assets/art/tilesets/bridge_tileset/bridge_background_color.png" id="1_uowbf"]
 [ext_resource type="Script" path="res://bridges/script/grid.gd" id="1_xtvvi"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://cw66eehxwh20w" path="res://assets/art/objects/bridge_snake.png" id="7_jp1m1"]
 [ext_resource type="Texture2D" uid="uid://bax18833oqune" path="res://bridges/assets/red.png" id="8_6e2b2"]
 [ext_resource type="Texture2D" uid="uid://desp8tcpswyl4" path="res://assets/art/objects/bridge_spider.png" id="8_rtjqf"]
+[ext_resource type="Texture2D" uid="uid://diwvqonlr6748" path="res://assets/art/objects/bridge_squirrel.png" id="11_a366g"]
 [ext_resource type="Script" path="res://bridges/scenes/toggle_build_fox_mode.gd" id="12_o1ngo"]
 [ext_resource type="Script" path="res://bridges/script/grid_drag.gd" id="12_re1q8"]
 [ext_resource type="PackedScene" uid="uid://dvgr170gyuhpq" path="res://bridges/scenes/player.tscn" id="12_y7gdk"]
@@ -450,6 +451,18 @@ texture_region_size = Vector2i(10, 10)
 8:9/0/physics_layer_0/angular_velocity = 0.0
 8:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-5, -5, 5, -5, 5, 5, -5, 5)
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ajim0"]
+texture = ExtResource("11_a366g")
+texture_region_size = Vector2i(10, 10)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-5, -5, 5, -5, 5, 5, -5, 5)
+0:1/0 = 0
+0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:1/0/physics_layer_0/angular_velocity = 0.0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-5, -5, 5, -5, 5, 5, -5, 5)
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vg7ik"]
 texture = ExtResource("6_ue1m2")
 texture_region_size = Vector2i(10, 10)
@@ -596,6 +609,7 @@ sources/9 = SubResource("TileSetAtlasSource_tbudc")
 sources/10 = SubResource("TileSetAtlasSource_l8uy3")
 sources/4 = SubResource("TileSetAtlasSource_vg7ik")
 sources/11 = SubResource("TileSetAtlasSource_8m2j8")
+sources/3 = SubResource("TileSetAtlasSource_ajim0")
 
 [node name="Node2D" type="Node2D"]
 
@@ -652,6 +666,13 @@ texture = ExtResource("8_rtjqf")
 stretch_mode = 3
 script = ExtResource("12_re1q8")
 
+[node name="Squirrel_Item" type="TextureRect" parent="Grid/Control/Animal_Inventory"]
+layout_mode = 2
+tooltip_text = "SQUIRREL"
+texture = ExtResource("11_a366g")
+stretch_mode = 3
+script = ExtResource("12_re1q8")
+
 [node name="Drag_or_Fox" type="CheckButton" parent="Grid/Control"]
 layout_mode = 0
 offset_left = 155.0
@@ -697,6 +718,7 @@ scale = Vector2(1, 10)
 [connection signal="current_grid" from="Grid" to="Grid/Control/Animal_Inventory/Deer_Item" method="_on_grid_current_grid"]
 [connection signal="current_grid" from="Grid" to="Grid/Control/Animal_Inventory/Snake_Item" method="_on_grid_current_grid"]
 [connection signal="current_grid" from="Grid" to="Grid/Control/Animal_Inventory/Spider_Item" method="_on_grid_current_grid"]
+[connection signal="current_grid" from="Grid" to="Grid/Control/Animal_Inventory/Squirrel_Item" method="_on_grid_current_grid"]
 [connection signal="dragging_done" from="Grid/Control/Drag_Grid" to="Grid" method="_on_drag_grid_dragging_done"]
 [connection signal="is_dragging" from="Grid/Control/Drag_Grid" to="Grid" method="_on_drag_grid_is_dragging"]
 [connection signal="need_grid" from="Grid/Control/Drag_Grid" to="Grid" method="_on_drag_grid_need_grid"]
@@ -713,6 +735,10 @@ scale = Vector2(1, 10)
 [connection signal="is_dragging" from="Grid/Control/Animal_Inventory/Spider_Item" to="Grid" method="_on_spider_item_is_dragging"]
 [connection signal="need_grid" from="Grid/Control/Animal_Inventory/Spider_Item" to="Grid" method="_on_spider_item_need_grid"]
 [connection signal="update_grid" from="Grid/Control/Animal_Inventory/Spider_Item" to="Grid" method="_on_spider_item_update_grid"]
+[connection signal="dragging_done" from="Grid/Control/Animal_Inventory/Squirrel_Item" to="Grid" method="_on_squirrel_item_dragging_done"]
+[connection signal="is_dragging" from="Grid/Control/Animal_Inventory/Squirrel_Item" to="Grid" method="_on_squirrel_item_is_dragging"]
+[connection signal="need_grid" from="Grid/Control/Animal_Inventory/Squirrel_Item" to="Grid" method="_on_squirrel_item_need_grid"]
+[connection signal="update_grid" from="Grid/Control/Animal_Inventory/Squirrel_Item" to="Grid" method="_on_squirrel_item_update_grid"]
 [connection signal="toggled" from="Grid/Control/Drag_or_Fox" to="Grid/Control/Drag_or_Fox" method="_on_toggled"]
 [connection signal="pressed" from="Grid/Control/Reset" to="Grid" method="_on_reset_pressed"]
 [connection signal="pressed" from="Grid/Control/Last_State" to="Grid" method="_on_last_state_pressed"]

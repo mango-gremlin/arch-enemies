@@ -59,6 +59,9 @@ func _get_drag_data(at_position):
 				"SPIDER":
 					preview.set_size(Vector2(10, 10))
 					preview.tooltip_text = "SPIDER"
+				"SQUIRREL":
+					preview.set_size(Vector2(10, 20))
+					preview.tooltip_text = "SQUIRREL"
 		
 		c.set_global_position(Vector2i(0, 0))
 		
@@ -87,6 +90,8 @@ func _can_drop_data(at_position, data):
 			is_allowed = is_snake_allowed(pos)
 		"SPIDER":
 			is_allowed = is_spider_allowed(pos)	
+		"SQUIRREL":
+			is_allowed = is_squirrel_allowed(pos)
 	
 	return is_allowed
 
@@ -147,3 +152,16 @@ func is_deer_allowed(pos):
 		if(is_free):
 			is_allowed = true
 	return is_allowed
+
+func is_squirrel_allowed(pos):
+	#Check if one tile is in necessary ALLOWED or SIDE and if all other tiles are free
+	var is_allowed = false
+	var is_free = true
+	for epsilon in range(2):
+		var pos_Type = grid[pos.x][pos.y-epsilon]
+		if(pos_Type == ENTITY_TYPES.ALLOWED or pos_Type == ENTITY_TYPES.SIDE):
+			is_allowed = true
+		if(pos_Type == ENTITY_TYPES.FORBIDDEN or pos_Type == ENTITY_TYPES.GROUND or
+			pos_Type == ENTITY_TYPES.WATER or pos_Type == ENTITY_TYPES.ANIMAL):
+			is_free = false
+	return is_allowed and is_free

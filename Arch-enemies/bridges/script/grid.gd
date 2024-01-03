@@ -163,12 +163,12 @@ func update_grid(pos, data):
 			var empty = [Vector2i(0, 3), Vector2i(3, 0), Vector2i(3, 1), Vector2i(3, 2)]
 			#Similarly we need to define what new tiles are now ALLOWED for dragging
 			var new_allowed = [Vector2i(0, 3), Vector2i(1, 4), Vector2i(2, 4), Vector2i(3, 4)]
-			#These two loops just iterate over the grid cells we want to fill
 			#Same for SIDE tiles
 			var new_side = [Vector2i(4, 3), Vector2i(3, 0), Vector2i(3, 1), Vector2i(3, 2),
 			Vector2i(-1, 0), Vector2i(-1, 1)]
-			#Same for BoTTOM tiles
+			#Same for BOTTOM tiles
 			var new_bottom = [Vector2i(0, -1), Vector2i(1, -1), Vector2i(2, -1)]
+			#These two loops just iterate over the grid cells we want to fill
 			for delta in range(4):
 				for epsilon in range(4):
 					var tile_pos = Vector2i(delta, epsilon) 
@@ -216,6 +216,24 @@ func update_grid(pos, data):
 			for position in new_allowed:
 				if(grid[x + position.x][y - position.y] == ENTITY_TYPES.AIR):
 					grid[x + position.x][y - position.y] = ENTITY_TYPES.ALLOWED
+		"SQUIRREL":
+			#Squirrel like the other animals
+			var new_allowed = [Vector2i(0, 2)]
+			var new_side = [Vector2i(-1, 0), Vector2i(-1, 1), Vector2i(1, 0), Vector2i(1, 1)]
+			var new_bottom = [Vector2i(0, -1)]
+			for epsilon in range(2):
+				grid[x][y - epsilon] = ENTITY_TYPES.ANIMAL
+				set_cell(0, Vector2i(x, y - epsilon), 3, Vector2i(0, 1 - epsilon))
+			for position in new_allowed:
+				if(grid[x + position.x][y - position.y] == ENTITY_TYPES.AIR):
+					grid[x + position.x][y - position.y] = ENTITY_TYPES.ALLOWED
+			for position in new_side:
+				if(grid[x + position.x][y - position.y] == ENTITY_TYPES.AIR):
+					grid[x + position.x][y - position.y] = ENTITY_TYPES.SIDE
+			for position in new_bottom:
+				if(grid[x + position.x][y - position.y] == ENTITY_TYPES.AIR):
+					grid[x + position.x][y - position.y] = ENTITY_TYPES.BOTTOM
+			
 	#Whenever we change the grid, i.e. update it, we have to track that here
 	state += 1
 	#This allows us to track the previous states and return to them
@@ -296,6 +314,9 @@ func _on_snake_item_need_grid():
 func _on_spider_item_need_grid():
 	current_grid.emit(grid)
 
+func _on_squirrel_item_need_grid():
+	current_grid.emit(grid)
+
 func _on_drag_grid_update_grid(pos, data):
 	update_grid(pos, data)
 
@@ -306,6 +327,9 @@ func _on_snake_item_update_grid(pos, data):
 	update_grid(pos, data)
 
 func _on_spider_item_update_grid(pos, data):
+	update_grid(pos, data)
+
+func _on_squirrel_item_update_grid(pos, data):
 	update_grid(pos, data)
 
 func _on_drag_grid_dragging_done():
@@ -330,6 +354,12 @@ func _on_spider_item_dragging_done():
 	make_invisible()
 
 func _on_spider_item_is_dragging():
+	make_visible()
+
+func _on_squirrel_item_dragging_done():
+	make_invisible()
+
+func _on_squirrel_item_is_dragging():
 	make_visible()
 
 func _on_reset_pressed():
