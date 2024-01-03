@@ -681,7 +681,7 @@ scale = Vector2(0.5, 0.5)
 text = "One Step Back"
 
 [node name="Player" parent="Grid" instance=ExtResource("12_y7gdk")]
-position = Vector2(29, 85)
+position = Vector2(30, 82)
 
 [node name="water_detection" parent="Grid" instance=ExtResource("14_yxqwc")]
 

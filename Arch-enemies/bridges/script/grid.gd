@@ -1,6 +1,6 @@
 extends TileMap
 
-#We define the basical variables here
+#We define the basic variables here
 
 #Like the Tile Size
 var tile_size = tile_set.tile_size
@@ -8,6 +8,7 @@ var tile_size = tile_set.tile_size
 #The Dimensions of the Grid
 var x_size = 39
 var y_size = 22
+const square_size = 10
 
 #And finally some values we need later
 var grid_size = Vector2(x_size, y_size)
@@ -31,11 +32,6 @@ Vector2i(6, 7), Vector2i(1, 5), Vector2i(2, 5), Vector2i(3, 5), Vector2i(1, 6), 
 Vector2i(3, 6), Vector2i(1, 7), Vector2i(2, 7), Vector2i(3, 7), Vector2i(0, 8), Vector2i(0, 9),
 Vector2i(1, 9), Vector2i(2, 9), Vector2i(3, 9), Vector2i(4, 9), Vector2i(7, 7), Vector2i(8, 7),
 Vector2i(7, 8), Vector2i(8, 8), Vector2i(7, 9), Vector2i(8, 9), Vector2i(5, 8), Vector2i(5, 9)]
-
-#And the start zone for the Fox
-var fox_start = [Vector2i(1,9), Vector2i(2,9), Vector2i(3,9), Vector2i(4,9),
-Vector2i(1,8), Vector2i(2,8), Vector2i(3,8), Vector2i(4,8),
-Vector2i(1,7), Vector2i(2,7), Vector2i(3,7), Vector2i(4,7)]
 
 var shore_top = []
 var shore_side = []
@@ -88,8 +84,6 @@ func _ready():
 					
 				elif(atlas_field in water):
 					grid[x].append(ENTITY_TYPES.WATER)
-			elif(square in fox_start):
-				grid[x].append(ENTITY_TYPES.FORBIDDEN)
 			else:
 				#Currently every other tile becomes AIR
 				#This is subject to change
@@ -99,7 +93,8 @@ func _ready():
 	grid = assign_shore_dropzones(grid, shore_top, ENTITY_TYPES.ALLOWED)
 	grid = assign_shore_dropzones(grid, shore_side, ENTITY_TYPES.SIDE)
 	grid = assign_shore_dropzones(grid, shore_bottom, ENTITY_TYPES.BOTTOM)
-
+	grid = assign_fox_forbidden_zones(grid)
+	
 	color_grid()
 	#Now we save the inital state of the grid for reset and previous state
 	start_grid = grid.duplicate(true)
@@ -120,6 +115,24 @@ func is_shore_dropzone(square:Vector2i) -> bool:
 		and square.x < grid_size.x and square.y < grid_size.y):
 		return true
 	return false
+
+# takes grid as input, assigns forbidden zones around the fox sprite
+func assign_fox_forbidden_zones(grid:Array) -> Array:
+	# get position of fox
+	var fox_global_position = $Player.global_position
+	
+	# round to nearest grid square
+	var fox_grid_x = Global.round_to_nearest(fox_global_position.x, square_size) / square_size
+	var fox_grid_y = Global.round_to_nearest(fox_global_position.y, square_size) / square_size
+	var fox_grid_position = Vector2i(fox_grid_x, fox_grid_y)
+	
+	# iterate over 4x3 squares with (1,2) being fox centre
+	for x_offset in range(-2,2):
+		for y_offset in range(-1,2):
+			var crt_square = Vector2i(fox_grid_position.x + x_offset, fox_grid_position.y + y_offset)
+			# assign each square as forbidden
+			grid[crt_square.x][crt_square.y] = ENTITY_TYPES.FORBIDDEN
+	return grid
 
 func color_grid():
 	#This function colors the grid cells that are not predefined, i.e. the background
