@@ -205,7 +205,8 @@ func update_grid(pos, data):
 					grid[x + position.x][y - position.y] = ENTITY_TYPES.ALLOWED
 		"SQUIRREL":
 			# TODO Squirrel
-			var new_allowed = [Vector2i(-1, 0), Vector2i(-1, 1), Vector2i(0, 2), Vector2i(1, 0), Vector2i(1, 1)]
+			var new_allowed = [Vector2i(0, 2)]
+			var new_side = [Vector2i(-1, 0), Vector2i(-1, 1), Vector2i(1, 0), Vector2i(1, 1)]
 			var new_bottom = [Vector2i(0, -1)]
 			for epsilon in range(2):
 				grid[x][y - epsilon] = ENTITY_TYPES.ANIMAL
@@ -213,6 +214,9 @@ func update_grid(pos, data):
 			for position in new_allowed:
 				if(grid[x + position.x][y - position.y] == ENTITY_TYPES.AIR):
 					grid[x + position.x][y - position.y] = ENTITY_TYPES.ALLOWED
+			for position in new_side:
+				if(grid[x + position.x][y - position.y] == ENTITY_TYPES.AIR):
+					grid[x + position.x][y - position.y] = ENTITY_TYPES.SIDE
 			for position in new_bottom:
 				if(grid[x + position.x][y - position.y] == ENTITY_TYPES.AIR):
 					grid[x + position.x][y - position.y] = ENTITY_TYPES.BOTTOM
