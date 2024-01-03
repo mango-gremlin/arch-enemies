@@ -23,6 +23,11 @@ const AIR_TILE_ID = 1
 const GROUND_TILE_ID = 2
 const WATER_TILE_ID = 3
 
+const SQUIRREL_TILE_ID = 5 
+const SNAKE_TILE_ID = 8
+const SPIDER_TILE_ID = 9
+const DEER_TILE_ID = 10
+
 # list of starting dropzones of their respective type
 var shore_top = []
 var shore_side = []
@@ -166,7 +171,7 @@ func update_grid(pos, data):
 					var tile_pos = Vector2i(delta, epsilon) 
 					if(tile_pos not in empty):
 						grid[x + delta][y - epsilon] = ENTITY_TYPES.ANIMAL
-						set_cell(1, Vector2i(x + delta, y - epsilon), 10, Vector2i(delta, 3 - epsilon))
+						set_cell(1, Vector2i(x + delta, y - epsilon), DEER_TILE_ID, Vector2i(delta, 3 - epsilon))
 			for position in new_allowed:
 				if(grid[x + position.x][y - position.y] == ENTITY_TYPES.AIR):
 					grid[x + position.x][y - position.y] = ENTITY_TYPES.ALLOWED	
@@ -187,7 +192,7 @@ func update_grid(pos, data):
 			var new_bottom = [Vector2i(0, -1), Vector2i(1, -1), Vector2i(2, -1), Vector2i(3, -1)]
 			for delta in range(5):
 				grid[x + delta][y] = ENTITY_TYPES.ANIMAL
-				set_cell(1, Vector2i(x + delta, y), 8, Vector2i(delta, 0))
+				set_cell(1, Vector2i(x + delta, y), SNAKE_TILE_ID, Vector2i(delta, 0))
 			for position in new_allowed:
 				if(grid[x + position.x][y - position.y] == ENTITY_TYPES.AIR):
 					grid[x + position.x][y - position.y] = ENTITY_TYPES.ALLOWED
@@ -204,7 +209,7 @@ func update_grid(pos, data):
 			#Spider is the easiest, nothing much happens here
 			var new_allowed = [Vector2i(0, 1), Vector2i(1, 0), Vector2i(0, -1), Vector2i(-1, 0)]
 			grid[x][y] = ENTITY_TYPES.ANIMAL
-			set_cell(1, Vector2i(x, y), 9, Vector2i(0, 0))
+			set_cell(1, Vector2i(x, y), SPIDER_TILE_ID, Vector2i(0, 0))
 			for position in new_allowed:
 				if(grid[x + position.x][y - position.y] == ENTITY_TYPES.AIR):
 					grid[x + position.x][y - position.y] = ENTITY_TYPES.ALLOWED
@@ -215,7 +220,7 @@ func update_grid(pos, data):
 			var new_bottom = [Vector2i(0, -1)]
 			for epsilon in range(2):
 				grid[x][y - epsilon] = ENTITY_TYPES.ANIMAL
-				set_cell(0, Vector2i(x, y - epsilon), 5, Vector2i(0, 1 - epsilon))
+				set_cell(0, Vector2i(x, y - epsilon), SQUIRREL_TILE_ID, Vector2i(0, 1 - epsilon))
 			for position in new_allowed:
 				if(grid[x + position.x][y - position.y] == ENTITY_TYPES.AIR):
 					grid[x + position.x][y - position.y] = ENTITY_TYPES.ALLOWED
