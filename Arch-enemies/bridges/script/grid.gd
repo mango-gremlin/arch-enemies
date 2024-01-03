@@ -138,10 +138,13 @@ func color_grid():
 			square != ENTITY_TYPES.ANIMAL):
 				match square:
 					ENTITY_TYPES.AIR:
-					#Note that this effectively just makes them transparent
-						set_cell(0, Vector2i(x, y), 0, Vector2i(-1, -1))
-					_:
-						set_cell(0, Vector2i(x, y), 0, Vector2i(-1, -1))
+						var square_as_vector = Vector2i(x, y)
+						var tile_id = get_cell_source_id(0, square_as_vector)
+						if not ((square_as_vector in shore_top) or (tile_id == AIR_TILE_ID)):
+						#Note that this effectively just makes them transparent
+							set_cell(0, Vector2i(x, y), 0, Vector2i(-1, -1))
+					#_:
+					#	set_cell(0, Vector2i(x, y), 0, Vector2i(-1, -1))
 
 func update_grid(pos, data):
 	#If we drag an animal onto a cell we update the grid here
