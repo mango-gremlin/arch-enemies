@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://bl1jporj7hosu"]
+[gd_scene load_steps=29 format=3 uid="uid://bl1jporj7hosu"]
 
 [ext_resource type="Texture2D" uid="uid://d0o2q6fijmd1" path="res://assets/art/tilesets/bridge_tileset/bridge_background_color.png" id="1_uowbf"]
 [ext_resource type="Script" path="res://bridges/script/grid.gd" id="1_xtvvi"]
@@ -8,7 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://gyfjmxefsxu0" path="res://assets/art/tilesets/bridge_tileset/bridge_ground_tiles.png" id="4_jv8nt"]
 [ext_resource type="Texture2D" uid="uid://2dqqm3b306my" path="res://assets/art/tilesets/bridge_tileset/bridge_water_tiles.png" id="5_satv3"]
 [ext_resource type="Texture2D" uid="uid://ckghjw6ynsyxv" path="res://bridges/assets/yellow.png" id="6_ue1m2"]
-[ext_resource type="Texture2D" uid="uid://xd2wfewwwcqc" path="res://assets/art/characters/squirrel.png" id="7_fe4iy"]
 [ext_resource type="Texture2D" uid="uid://cw66eehxwh20w" path="res://assets/art/objects/bridge_snake.png" id="7_jp1m1"]
 [ext_resource type="Texture2D" uid="uid://bax18833oqune" path="res://bridges/assets/red.png" id="8_6e2b2"]
 [ext_resource type="Texture2D" uid="uid://desp8tcpswyl4" path="res://assets/art/objects/bridge_spider.png" id="8_rtjqf"]
@@ -558,8 +557,8 @@ texture_region_size = Vector2i(10, 10)
 3:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 3:3/0/physics_layer_0/angular_velocity = 0.0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0isn1"]
-texture = ExtResource("7_fe4iy")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xun2x"]
+texture = ExtResource("11_a366g")
 texture_region_size = Vector2i(10, 10)
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
@@ -664,7 +663,7 @@ sources/4 = SubResource("TileSetAtlasSource_vg7ik")
 sources/1 = SubResource("TileSetAtlasSource_55mo1")
 sources/2 = SubResource("TileSetAtlasSource_71dc5")
 sources/3 = SubResource("TileSetAtlasSource_1v7j0")
-sources/5 = SubResource("TileSetAtlasSource_0isn1")
+sources/5 = SubResource("TileSetAtlasSource_xun2x")
 
 [node name="Node2D" type="Node2D"]
 
