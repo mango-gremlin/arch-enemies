@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://bl1jporj7hosu"]
+[gd_scene load_steps=25 format=3 uid="uid://bl1jporj7hosu"]
 
 [ext_resource type="Texture2D" uid="uid://d0o2q6fijmd1" path="res://assets/art/tilesets/bridge_tileset/bridge_background_color.png" id="1_uowbf"]
 [ext_resource type="Script" path="res://bridges/script/grid.gd" id="1_xtvvi"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://dvgr170gyuhpq" path="res://bridges/scenes/player.tscn" id="12_y7gdk"]
 [ext_resource type="PackedScene" uid="uid://021q4tynwnot" path="res://bridges/scenes/water_detection.tscn" id="14_yxqwc"]
 [ext_resource type="PackedScene" uid="uid://cbremi6mc4sua" path="res://bridges/scenes/world_edge.tscn" id="15_7vrq2"]
+[ext_resource type="PackedScene" uid="uid://cxj1q08s3i7i8" path="res://bridges/scenes/goal_menu.tscn" id="15_sf441"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gxf1m"]
 texture = ExtResource("1_uowbf")
@@ -683,7 +684,7 @@ offset_bottom = 52.0
 scale = Vector2(0.5, 0.5)
 text = "One Step Back"
 
-[node name="Player" parent="Grid" instance=ExtResource("12_y7gdk")]
+[node name="Player" parent="Grid" groups=["player"] instance=ExtResource("12_y7gdk")]
 position = Vector2(29, 85)
 
 [node name="water_detection" parent="Grid" instance=ExtResource("14_yxqwc")]
@@ -697,12 +698,18 @@ position = Vector2(-10, 40)
 scale = Vector2(1, 10)
 
 [node name="GoalArea2D" type="Area2D" parent="Grid"]
-position = Vector2(-211, 110)
+position = Vector2(344, 94)
 
 [node name="GoalCollisionShape2D" type="CollisionShape2D" parent="Grid/GoalArea2D"]
-position = Vector2(279, 0.180771)
+position = Vector2(20, 19)
 shape = SubResource("RectangleShape2D_a0wvi")
 debug_color = Color(0.521569, 0.560784, 0.341176, 0.419608)
+
+[node name="goal_menu" parent="Grid" instance=ExtResource("15_sf441")]
+visible = false
+top_level = true
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
 [connection signal="current_grid" from="Grid" to="Grid/Control/Drag_Grid" method="_on_grid_current_grid"]
 [connection signal="current_grid" from="Grid" to="Grid/Control/Animal_Inventory/Deer_Item" method="_on_grid_current_grid"]
