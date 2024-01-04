@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bl1jporj7hosu"]
+[gd_scene load_steps=24 format=3 uid="uid://bl1jporj7hosu"]
 
 [ext_resource type="Texture2D" uid="uid://d0o2q6fijmd1" path="res://assets/art/tilesets/bridge_tileset/bridge_background_color.png" id="1_uowbf"]
 [ext_resource type="Script" path="res://bridges/script/grid.gd" id="1_xtvvi"]
@@ -597,6 +597,9 @@ sources/10 = SubResource("TileSetAtlasSource_l8uy3")
 sources/4 = SubResource("TileSetAtlasSource_vg7ik")
 sources/11 = SubResource("TileSetAtlasSource_8m2j8")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a0wvi"]
+size = Vector2(38, 37.6385)
+
 [node name="Node2D" type="Node2D"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -693,6 +696,14 @@ scale = Vector2(1, 10)
 position = Vector2(-10, 40)
 scale = Vector2(1, 10)
 
+[node name="GoalArea2D" type="Area2D" parent="Grid"]
+position = Vector2(-211, 110)
+
+[node name="GoalCollisionShape2D" type="CollisionShape2D" parent="Grid/GoalArea2D"]
+position = Vector2(279, 0.180771)
+shape = SubResource("RectangleShape2D_a0wvi")
+debug_color = Color(0.521569, 0.560784, 0.341176, 0.419608)
+
 [connection signal="current_grid" from="Grid" to="Grid/Control/Drag_Grid" method="_on_grid_current_grid"]
 [connection signal="current_grid" from="Grid" to="Grid/Control/Animal_Inventory/Deer_Item" method="_on_grid_current_grid"]
 [connection signal="current_grid" from="Grid" to="Grid/Control/Animal_Inventory/Snake_Item" method="_on_grid_current_grid"]
@@ -717,3 +728,4 @@ scale = Vector2(1, 10)
 [connection signal="pressed" from="Grid/Control/Reset" to="Grid" method="_on_reset_pressed"]
 [connection signal="pressed" from="Grid/Control/Last_State" to="Grid" method="_on_last_state_pressed"]
 [connection signal="body_entered" from="Grid/water_detection" to="Grid/Player" method="_on_water_detection_body_entered"]
+[connection signal="body_entered" from="Grid/GoalArea2D" to="Grid/Player" method="_on_goal_area_2d_body_entered"]
