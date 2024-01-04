@@ -2,6 +2,7 @@ extends TextureRect
 
 #Here we define the elements we need to operate on the grid
 var grid = []
+@export var square_size = 10
 enum ENTITY_TYPES {GROUND, WATER, AIR, ANIMAL, FORBIDDEN, ALLOWED, SIDE, BOTTOM}
 #We have to use our own preview scene because otherwise things are terrible
 const DRAGPREVIEW = preload("res://bridges/scenes/dragpreview.tscn")
@@ -76,8 +77,8 @@ func _can_drop_data(at_position, data):
 	#The Mouse is on a pixel base, while the grid has 10x10 cells
 	#Therefore we convert
 	var position = get_global_mouse_position()
-	var y = int(position.y/10)
-	var x = int(position.x/10)
+	var y = int(position.y/square_size)
+	var x = int(position.x/square_size)
 	var pos = Vector2i(x, y)
 	var is_allowed = false
 	var animal = data["animal"]
@@ -98,8 +99,8 @@ func _can_drop_data(at_position, data):
 func _drop_data(at_position, data):
 	#The dropping itself is simple
 	#We just return the position to the grid and update it
-	var position = Vector2(int(get_global_mouse_position().x / 10), 
-	int(get_global_mouse_position().y / 10))
+	var position = Vector2(int(get_global_mouse_position().x /square_size), 
+	int(get_global_mouse_position().y /square_size))
 	dragging_done.emit()
 	update_grid.emit(position, data)
 

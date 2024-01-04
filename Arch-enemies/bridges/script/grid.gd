@@ -6,9 +6,9 @@ extends TileMap
 var tile_size = tile_set.tile_size
 
 #The Dimensions of the Grid
-var x_size = 39
-var y_size = 22
-const square_size = 10
+@export var x_size = 39
+@export var y_size = 22
+@export var square_size = 10
 
 #And finally some values we need later
 var grid_size = Vector2(x_size, y_size)
@@ -17,6 +17,10 @@ var start_grid = [[[]]]
 var last_states = []
 var save_states = 10
 var state = 0
+
+# ids of all tilemap layers
+const BACKGROUND_LAYER_ID = 0
+const ACTIVE_LAYER_ID = 1
 
 # ids of our tilesets for their respective types
 const AIR_TILE_ID = 1
@@ -50,7 +54,7 @@ func _ready():
 			#We check each tile in your tilemap (which is the same size as the grid)
 			var square = Vector2i(x, y)
 			# get id of the tile of the current square
-			var tile_id = get_cell_source_id(0, square)
+			var tile_id = get_cell_source_id(BACKGROUND_LAYER_ID, square)
 			# if that tileset is ground, assing it to that type, and check for startzones
 			if(tile_id == GROUND_TILE_ID):
 				grid[x].append(ENTITY_TYPES.GROUND)
@@ -105,7 +109,7 @@ func assign_shore_dropzones(grid:Array, squares:Array, type:ENTITY_TYPES) -> Arr
 
 # checks if square isn't in ground or water, and is within grid bounds
 func is_shore_dropzone(square:Vector2i) -> bool:
-	var tile_id = get_cell_source_id(0, square)
+	var tile_id = get_cell_source_id(BACKGROUND_LAYER_ID, square)
 	if (tile_id != GROUND_TILE_ID
 		and tile_id != WATER_TILE_ID
 		and square.x >= 0 and square.y >= 0
@@ -144,9 +148,9 @@ func color_grid():
 				match square:
 					ENTITY_TYPES.AIR:
 						#Note that this effectively just makes them transparent
-						set_cell(1, Vector2i(x, y), 0, Vector2i(-1, -1))
+						set_cell(ACTIVE_LAYER_ID, Vector2i(x, y), 0, Vector2i(-1, -1))
 					_:
-						set_cell(1, Vector2i(x, y), 0, Vector2i(-1, -1))
+						set_cell(ACTIVE_LAYER_ID, Vector2i(x, y), 0, Vector2i(-1, -1))
 
 func update_grid(pos, data):
 	#If we drag an animal onto a cell we update the grid here
@@ -171,7 +175,7 @@ func update_grid(pos, data):
 					var tile_pos = Vector2i(delta, epsilon) 
 					if(tile_pos not in empty):
 						grid[x + delta][y - epsilon] = ENTITY_TYPES.ANIMAL
-						set_cell(1, Vector2i(x + delta, y - epsilon), DEER_TILE_ID, Vector2i(delta, 3 - epsilon))
+						set_cell(ACTIVE_LAYER_ID, Vector2i(x + delta, y - epsilon), DEER_TILE_ID, Vector2i(delta, 3 - epsilon))
 			for position in new_allowed:
 				if(grid[x + position.x][y - position.y] == ENTITY_TYPES.AIR):
 					grid[x + position.x][y - position.y] = ENTITY_TYPES.ALLOWED	
@@ -192,7 +196,7 @@ func update_grid(pos, data):
 			var new_bottom = [Vector2i(0, -1), Vector2i(1, -1), Vector2i(2, -1), Vector2i(3, -1)]
 			for delta in range(5):
 				grid[x + delta][y] = ENTITY_TYPES.ANIMAL
-				set_cell(1, Vector2i(x + delta, y), SNAKE_TILE_ID, Vector2i(delta, 0))
+				set_cell(ACTIVE_LAYER_ID, Vector2i(x + delta, y), SNAKE_TILE_ID, Vector2i(delta, 0))
 			for position in new_allowed:
 				if(grid[x + position.x][y - position.y] == ENTITY_TYPES.AIR):
 					grid[x + position.x][y - position.y] = ENTITY_TYPES.ALLOWED
@@ -209,7 +213,7 @@ func update_grid(pos, data):
 			#Spider is the easiest, nothing much happens here
 			var new_allowed = [Vector2i(0, 1), Vector2i(1, 0), Vector2i(0, -1), Vector2i(-1, 0)]
 			grid[x][y] = ENTITY_TYPES.ANIMAL
-			set_cell(1, Vector2i(x, y), SPIDER_TILE_ID, Vector2i(0, 0))
+			set_cell(ACTIVE_LAYER_ID, Vector2i(x, y), SPIDER_TILE_ID, Vector2i(0, 0))
 			for position in new_allowed:
 				if(grid[x + position.x][y - position.y] == ENTITY_TYPES.AIR):
 					grid[x + position.x][y - position.y] = ENTITY_TYPES.ALLOWED
@@ -220,7 +224,7 @@ func update_grid(pos, data):
 			var new_bottom = [Vector2i(0, -1)]
 			for epsilon in range(2):
 				grid[x][y - epsilon] = ENTITY_TYPES.ANIMAL
-				set_cell(1, Vector2i(x, y - epsilon), SQUIRREL_TILE_ID, Vector2i(0, 1 - epsilon))
+				set_cell(ACTIVE_LAYER_ID, Vector2i(x, y - epsilon), SQUIRREL_TILE_ID, Vector2i(0, 1 - epsilon))
 			for position in new_allowed:
 				if(grid[x + position.x][y - position.y] == ENTITY_TYPES.AIR):
 					grid[x + position.x][y - position.y] = ENTITY_TYPES.ALLOWED
@@ -242,14 +246,14 @@ func make_visible():
 	for x in range(grid_size.x):
 		for y in range(grid_size.y):
 			if(grid[x][y] == ENTITY_TYPES.FORBIDDEN):
-				set_cell(1, Vector2i(x, y), 7, Vector2i(1, 1))
+				set_cell(ACTIVE_LAYER_ID, Vector2i(x, y), 7, Vector2i(1, 1))
 			elif(grid[x][y] == ENTITY_TYPES.ALLOWED):
-				set_cell(1, Vector2i(x, y), 0, Vector2i(1, 1))
+				set_cell(ACTIVE_LAYER_ID, Vector2i(x, y), 0, Vector2i(1, 1))
 			#SIDE and BOTTOM have the same color but this can be changed
 			elif(grid[x][y] == ENTITY_TYPES.SIDE):
-				set_cell(1, Vector2i(x, y), 4, Vector2i(1, 1))
+				set_cell(ACTIVE_LAYER_ID, Vector2i(x, y), 4, Vector2i(1, 1))
 			elif(grid[x][y] == ENTITY_TYPES.BOTTOM):
-				set_cell(1, Vector2i(x, y), 4, Vector2i(1, 1))
+				set_cell(ACTIVE_LAYER_ID, Vector2i(x, y), 4, Vector2i(1, 1))
 	Global.something_is_being_dragged = true
 
 func make_invisible():
@@ -258,7 +262,7 @@ func make_invisible():
 		for y in range(grid_size.y):
 			if(grid[x][y] == ENTITY_TYPES.FORBIDDEN or grid[x][y] == ENTITY_TYPES.ALLOWED
 			or grid[x][y] == ENTITY_TYPES.SIDE or grid[x][y] == ENTITY_TYPES.BOTTOM):
-				set_cell(1, Vector2i(x, y), 0, Vector2i(-1, -1))
+				set_cell(ACTIVE_LAYER_ID, Vector2i(x, y), 0, Vector2i(-1, -1))
 	Global.something_is_being_dragged = false
 
 func reset_grid():
