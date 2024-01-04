@@ -18,5 +18,7 @@ func _process(delta):
 					position = Vector2(global.x-42, global.y-5)
 		"SPIDER":
 					position = Vector2(global.x-100, global.y-10)
+		"SQUIRREL":
+					position = Vector2(global.x-110, global.y-20)
 	if Input.is_action_just_released("click"):
 		queue_free()
