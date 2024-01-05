@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://bl1jporj7hosu"]
+[gd_scene load_steps=30 format=3 uid="uid://bl1jporj7hosu"]
 
 [ext_resource type="Texture2D" uid="uid://d0o2q6fijmd1" path="res://assets/art/tilesets/bridge_tileset/bridge_background_color.png" id="1_uowbf"]
 [ext_resource type="Script" path="res://bridges/script/grid.gd" id="1_xtvvi"]
@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://dvgr170gyuhpq" path="res://bridges/scenes/player.tscn" id="12_y7gdk"]
 [ext_resource type="PackedScene" uid="uid://021q4tynwnot" path="res://bridges/scenes/water_detection.tscn" id="14_yxqwc"]
 [ext_resource type="PackedScene" uid="uid://cbremi6mc4sua" path="res://bridges/scenes/world_edge.tscn" id="15_7vrq2"]
+[ext_resource type="PackedScene" uid="uid://dynxnwixd1bke" path="res://bridges/scenes/parallax_background.tscn" id="18_uekha"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gxf1m"]
 texture = ExtResource("1_uowbf")
@@ -772,6 +773,8 @@ scale = Vector2(1, 10)
 [node name="world_edge_left" parent="Grid" instance=ExtResource("15_7vrq2")]
 position = Vector2(-10, 40)
 scale = Vector2(1, 10)
+
+[node name="parallax_background" parent="." instance=ExtResource("18_uekha")]
 
 [connection signal="current_grid" from="Grid" to="Grid/Control/Drag_Grid" method="_on_grid_current_grid"]
 [connection signal="current_grid" from="Grid" to="Grid/Control/Animal_Inventory/Deer_Item" method="_on_grid_current_grid"]
