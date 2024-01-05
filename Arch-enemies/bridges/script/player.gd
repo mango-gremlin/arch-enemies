@@ -98,3 +98,7 @@ func _on_animated_sprite_2d_animation_finished():
 
 func _on_water_detection_body_entered(body):
 	reset_player()
+
+
+func _on_hazard_detection_body_entered(body):
+	reset_player()

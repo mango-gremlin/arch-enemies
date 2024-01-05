@@ -26,6 +26,7 @@ const ACTIVE_LAYER_ID = 1
 const AIR_TILE_ID = 1
 const GROUND_TILE_ID = 2
 const WATER_TILE_ID = 3
+const BRAMBLE_TILE_ID = 6
 
 const SQUIRREL_TILE_ID = 5 
 const SNAKE_TILE_ID = 8
@@ -41,7 +42,7 @@ var shore_bottom = []
 signal current_grid(current_grid)
 
 #These are the different kind of object we can have in grid cells
-enum ENTITY_TYPES {GROUND, WATER, AIR, ANIMAL, FORBIDDEN, ALLOWED, SIDE, BOTTOM}
+enum ENTITY_TYPES {GROUND, WATER, AIR, ANIMAL, FORBIDDEN, ALLOWED, SIDE, BOTTOM, HAZARD}
 
 func _ready():
 	#We save the previous states of the grid in an array, this array is initalized here
@@ -82,6 +83,9 @@ func _ready():
 			# if that tileset is water, assign to that type
 			elif(tile_id == WATER_TILE_ID):
 				grid[x].append(ENTITY_TYPES.WATER)
+				
+			elif(tile_id == BRAMBLE_TILE_ID):
+				grid[x].append(ENTITY_TYPES.HAZARD)
 			
 			# if that tileset is air, assign to that type
 			else:
