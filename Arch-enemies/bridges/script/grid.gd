@@ -38,6 +38,7 @@ var shore_top = []
 var shore_side = []
 var shore_bottom = []
 var hazard_squares = []
+var water_squares = []
 
 #This is the signal we use to transfer the current grid to child nodes
 signal current_grid(current_grid)
@@ -84,6 +85,7 @@ func _ready():
 			# if that tileset is water, assign to that type
 			elif(tile_id == WATER_TILE_ID):
 				grid[x].append(ENTITY_TYPES.WATER)
+				water_squares.append(square)
 				
 			elif(tile_id == BRAMBLE_TILE_ID):
 				grid[x].append(ENTITY_TYPES.FORBIDDEN)
@@ -107,6 +109,7 @@ func _ready():
 	grid = assign_fox_forbidden_zones(grid)
 	
 	spawn_hazard_collisions(hazard_squares)
+	spawn_water_collisions(water_squares)
 	
 	color_grid()
 	#Now we save the inital state of the grid for reset and previous state
@@ -153,6 +156,14 @@ func spawn_hazard_collisions(hazard_squares):
 	for square in hazard_squares:
 		var hazard_instance = hazard_area.instantiate()
 		hazard_instance.global_position = Vector2(square.x * 10, square.y * 10)
+		
+
+# instantiate collisions on water and shallows
+func spawn_water_collisions(water_squares):
+	var water_area = preload("res://bridges/scenes/water_detection.tscn")
+	for square in water_squares:
+		var water_instance = water_area.instantiate()
+		water_instance.global_position = Vector2(square.x * 10, square.y * 10)
 
 func color_grid():
 	#This function colors the grid cells that are not predefined, i.e. the background

@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://bl1jporj7hosu"]
+[gd_scene load_steps=30 format=3 uid="uid://bl1jporj7hosu"]
 
 [ext_resource type="Texture2D" uid="uid://d0o2q6fijmd1" path="res://assets/art/tilesets/bridge_tileset/bridge_background_color.png" id="1_uowbf"]
 [ext_resource type="Script" path="res://bridges/script/grid.gd" id="1_xtvvi"]
@@ -16,7 +16,6 @@
 [ext_resource type="Script" path="res://bridges/scenes/toggle_build_fox_mode.gd" id="12_o1ngo"]
 [ext_resource type="Script" path="res://bridges/script/grid_drag.gd" id="12_re1q8"]
 [ext_resource type="PackedScene" uid="uid://dvgr170gyuhpq" path="res://bridges/scenes/player.tscn" id="12_y7gdk"]
-[ext_resource type="PackedScene" uid="uid://021q4tynwnot" path="res://bridges/scenes/water_detection.tscn" id="14_yxqwc"]
 [ext_resource type="PackedScene" uid="uid://cbremi6mc4sua" path="res://bridges/scenes/world_edge.tscn" id="15_7vrq2"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gxf1m"]
@@ -861,8 +860,6 @@ text = "One Step Back"
 [node name="Player" parent="Grid" instance=ExtResource("12_y7gdk")]
 position = Vector2(30, 82)
 
-[node name="water_detection" parent="Grid" instance=ExtResource("14_yxqwc")]
-
 [node name="world_edge_right" parent="Grid" instance=ExtResource("15_7vrq2")]
 position = Vector2(400, 40)
 scale = Vector2(1, 10)
@@ -899,4 +896,3 @@ scale = Vector2(1, 10)
 [connection signal="toggled" from="Grid/Control/Drag_or_Fox" to="Grid/Control/Drag_or_Fox" method="_on_toggled"]
 [connection signal="pressed" from="Grid/Control/Reset" to="Grid" method="_on_reset_pressed"]
 [connection signal="pressed" from="Grid/Control/Last_State" to="Grid" method="_on_last_state_pressed"]
-[connection signal="body_entered" from="Grid/water_detection" to="Grid/Player" method="_on_water_detection_body_entered"]
