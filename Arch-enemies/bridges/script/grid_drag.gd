@@ -146,7 +146,9 @@ func is_deer_allowed(pos):
 			for epsilon in range(4):
 				if(not (grid[pos.x + delta][pos.y - epsilon] == ENTITY_TYPES.AIR 
 					or grid[pos.x + delta][pos.y - epsilon] == ENTITY_TYPES.ALLOWED
-					or grid[pos.x + delta][pos.y - epsilon] == ENTITY_TYPES.SHALLOW)):
+					or grid[pos.x + delta][pos.y - epsilon] == ENTITY_TYPES.SHALLOW
+					or grid[pos.x + delta][pos.y - epsilon] == ENTITY_TYPES.SIDE
+					or grid[pos.x + delta][pos.y - epsilon] == ENTITY_TYPES.BOTTOM)):
 					#Therefore we only flag the squares which are not in allowed
 					if(Vector2i(delta, epsilon) not in allowed):
 						is_free = false
