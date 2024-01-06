@@ -113,13 +113,13 @@ func set_npc_sprite():
 	var path_to_sprite:String 
 	match npc_animal_type:
 		Animal.AnimalType.SNAKE: 
-			path_to_sprite = "res://assets/art/objects/bridge_snake.png"
+			path_to_sprite = "res://assets/art/characters/snek.png"
 		Animal.AnimalType.DEER:
-			path_to_sprite = "res://assets/art/objects/bridge_deer.png"
+			path_to_sprite = "res://assets/art/characters/deer.png"
 		Animal.AnimalType.SQUIRREL: 
-			path_to_sprite = "res://assets/art/objects/bridge_squirrel.png"
+			path_to_sprite = "res://assets/art/characters/squirrel.png"
 		Animal.AnimalType.SPIDER:
-			path_to_sprite = "res://assets/art/objects/bridge_spider.png"
+			path_to_sprite = "res://assets/art/characters/spider.png"
 	# loading texture 
 	var npc_sprite:Texture2D = load(path_to_sprite)
 	referenced_sprite.texture = npc_sprite
