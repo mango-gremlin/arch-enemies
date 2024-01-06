@@ -32,6 +32,10 @@ const SNAKE_TILE_ID = 8
 const SPIDER_TILE_ID = 9
 const DEER_TILE_ID = 10
 
+const GREEN_TILE_ID = 0
+const YELLOW_TILE_ID = 4
+const RED_TILE_ID = 7
+
 # list of starting dropzones of their respective type
 var shore_top = []
 var shore_side = []
@@ -257,14 +261,14 @@ func make_visible():
 	for x in range(grid_size.x):
 		for y in range(grid_size.y):
 			if(grid[x][y] == ENTITY_TYPES.FORBIDDEN):
-				set_cell(ACTIVE_LAYER_ID, Vector2i(x, y), 7, Vector2i(1, 1))
+				set_cell(ACTIVE_LAYER_ID, Vector2i(x, y), RED_TILE_ID, Vector2i(1, 1))
 			elif(grid[x][y] == ENTITY_TYPES.ALLOWED):
-				set_cell(ACTIVE_LAYER_ID, Vector2i(x, y), 0, Vector2i(1, 1))
+				set_cell(ACTIVE_LAYER_ID, Vector2i(x, y), GREEN_TILE_ID, Vector2i(1, 1))
 			#SIDE, BOTTOM and SHALLOW have the same color but this can be changed
 			elif((grid[x][y] == ENTITY_TYPES.SIDE) 
 				or grid[x][y] == ENTITY_TYPES.BOTTOM
 				or grid[x][y] == ENTITY_TYPES.SHALLOW):
-				set_cell(ACTIVE_LAYER_ID, Vector2i(x, y), 4, Vector2i(1, 1))
+				set_cell(ACTIVE_LAYER_ID, Vector2i(x, y), YELLOW_TILE_ID, Vector2i(1, 1))
 	Global.something_is_being_dragged = true
 
 func make_invisible():
