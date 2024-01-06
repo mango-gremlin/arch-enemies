@@ -106,6 +106,8 @@ func _ready():
 	# assign forbidden zones around the fox' starting position
 	grid = assign_fox_forbidden_zones(grid)
 	
+	spawn_hazard_collisions(hazard_squares)
+	
 	color_grid()
 	#Now we save the inital state of the grid for reset and previous state
 	start_grid = grid.duplicate(true)
@@ -144,6 +146,13 @@ func assign_fox_forbidden_zones(grid:Array) -> Array:
 			# assign each square as forbidden
 			grid[crt_square.x][crt_square.y] = ENTITY_TYPES.FORBIDDEN
 	return grid
+
+# instantiate collisions on hazards
+func spawn_hazard_collisions(hazard_squares):
+	var hazard_area = preload("res://bridges/scenes/hazard_detection.tscn")
+	for square in hazard_squares:
+		var hazard_instance = hazard_area.instantiate()
+		hazard_instance.global_position = Vector2(square.x * 10, square.y * 10)
 
 func color_grid():
 	#This function colors the grid cells that are not predefined, i.e. the background
