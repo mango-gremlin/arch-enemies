@@ -37,6 +37,7 @@ const DEER_TILE_ID = 10
 var shore_top = []
 var shore_side = []
 var shore_bottom = []
+var hazard_squares = []
 
 #This is the signal we use to transfer the current grid to child nodes
 signal current_grid(current_grid)
@@ -85,6 +86,7 @@ func _ready():
 				grid[x].append(ENTITY_TYPES.WATER)
 				
 			elif(tile_id == BRAMBLE_TILE_ID):
+				hazard_squares.append(square)
 				grid[x].append(ENTITY_TYPES.HAZARD)
 			
 			# if that tileset is air, assign to that type
@@ -93,9 +95,12 @@ func _ready():
 				grid[x].append(ENTITY_TYPES.AIR)
 	
 	# assign shore dropzones
-	grid = assign_shore_dropzones(grid, shore_bottom, ENTITY_TYPES.BOTTOM)
-	grid = assign_shore_dropzones(grid, shore_side, ENTITY_TYPES.SIDE)
-	grid = assign_shore_dropzones(grid, shore_top, ENTITY_TYPES.ALLOWED)
+	grid = assign_dropzones(grid, shore_bottom, ENTITY_TYPES.BOTTOM)
+	grid = assign_dropzones(grid, shore_side, ENTITY_TYPES.SIDE)
+	grid = assign_dropzones(grid, shore_top, ENTITY_TYPES.ALLOWED)
+	
+	# assign hazard forbidden zone
+	grid = assign_dropzones(grid, hazard_squares, ENTITY_TYPES.FORBIDDEN)
 	
 	# assign forbidden zones around the fox' starting position
 	grid = assign_fox_forbidden_zones(grid)
@@ -106,7 +111,7 @@ func _ready():
 	last_states[0] = grid.duplicate(true)
 
 # iterates through list and assignes all squares to desired type
-func assign_shore_dropzones(grid:Array, squares:Array, type:ENTITY_TYPES) -> Array:
+func assign_dropzones(grid:Array, squares:Array, type:ENTITY_TYPES) -> Array:
 	for square in squares:
 		grid[square.x][square.y] = type
 	return grid
