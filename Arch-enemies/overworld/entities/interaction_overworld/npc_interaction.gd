@@ -16,11 +16,17 @@ extends Node2D
 @export var quest_reward:NPC_interaction.QuestReward = NPC_interaction.QuestReward.NONE
 @export var reward_item:Item.ItemType = Item.ItemType.NONE
 
+# VISUALIZATION 
+# only set whenever a special sprite is required for this npc!
+@export var npc_special_sprite:Texture2D 
+
 # denotes NPC object tied to this node 
 var interaction_type: Interactable.InteractionType = Interactable.InteractionType.NPC
 @onready var npc_object:NPC_interaction 
 
 func _ready():
+	# load visualization 
+	set_npc_sprite()
 	# constructing NPC accordingly
 	npc_object = NPC_interaction.new(npc_name,npc_id,npc_animal_type)
 	
@@ -91,3 +97,29 @@ func set_quest_resolved():
 func obtain_required_item() -> Item.ItemType:
 	return required_item
 
+# --- / 
+# -- / VISUALIZATION
+# this section is for visualization within the overworld 
+
+# deriving sprite to load from animal type
+# OR a set special_sprite 
+func set_npc_sprite():
+	# initialize reference
+	var referenced_sprite:Sprite2D = $Sprite2D
+	
+	if npc_special_sprite != null:
+		referenced_sprite.texture = npc_special_sprite
+		return
+	var path_to_sprite:String 
+	match npc_animal_type:
+		Animal.AnimalType.SNAKE: 
+			path_to_sprite = "res://assets/art/objects/bridge_snake.png"
+		Animal.AnimalType.DEER:
+			path_to_sprite = "res://assets/art/objects/bridge_deer.png"
+		Animal.AnimalType.SQUIRREL: 
+			path_to_sprite = "res://assets/art/objects/bridge_squirrel.png"
+		Animal.AnimalType.SPIDER:
+			path_to_sprite = "res://assets/art/objects/bridge_spider.png"
+	# loading texture 
+	var npc_sprite:Texture2D = load(path_to_sprite)
+	referenced_sprite.texture = npc_sprite
