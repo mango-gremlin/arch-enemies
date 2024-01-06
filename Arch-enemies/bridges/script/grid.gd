@@ -112,8 +112,8 @@ func _ready():
 	# assign shore dropzones
 	grid = assign_dropzones(grid, shore_bottom, ENTITY_TYPES.BOTTOM)
 	grid = assign_dropzones(grid, shore_side, ENTITY_TYPES.SIDE)
-	grid = assign_dropzones(grid, shallow_squares, ENTITY_TYPES.SHALLOW)
 	grid = assign_dropzones(grid, shore_top, ENTITY_TYPES.ALLOWED)
+	grid = assign_dropzones(grid, shallow_squares, ENTITY_TYPES.SHALLOW)
 	
 	# assign hazard forbidden zone
 	# is handled separately here, so it doesn't get overwritten earlier
