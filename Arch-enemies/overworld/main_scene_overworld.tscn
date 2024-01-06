@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cgfkelxiskcux"]
+[gd_scene load_steps=8 format=3 uid="uid://cgfkelxiskcux"]
 
 [ext_resource type="Script" path="res://overworld/overworld.gd" id="1_pwtu4"]
 [ext_resource type="PackedScene" uid="uid://dndu4pg1i3tlf" path="res://overworld/scenes/player.tscn" id="2_mpe4y"]
@@ -7,9 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://bj3a1sw80l6wj" path="res://overworld/entities/interaction_overworld/item_interaction.tscn" id="6_66i44"]
 [ext_resource type="PackedScene" uid="uid://5llfgi2ysvie" path="res://overworld/entities/interaction_overworld/bridge_interaction.tscn" id="6_iairi"]
 [ext_resource type="PackedScene" uid="uid://drn1loe1wknbq" path="res://overworld/entities/interaction_overworld/npc_interaction.tscn" id="7_33ud0"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_25akq"]
-size = Vector2(36, 20)
 
 [node name="maingame" type="Node"]
 script = ExtResource("1_pwtu4")
@@ -25,39 +22,12 @@ position = Vector2(314, 79)
 dest_island_id = 1
 bridge_description = "connects from 0 to 1 "
 
-[node name="bridge_parts" type="Node2D" parent="bridge_interaction"]
-visible = false
-
-[node name="bridge_part" type="ColorRect" parent="bridge_interaction/bridge_parts"]
-offset_left = 12.0
-offset_top = -7.0
-offset_right = 37.0
-offset_bottom = 13.0
-
-[node name="bridge_collision_shape" type="StaticBody2D" parent="bridge_interaction"]
-
-[node name="bridge_collision" type="CollisionShape2D" parent="bridge_interaction/bridge_collision_shape"]
-position = Vector2(-27, 2)
-shape = SubResource("RectangleShape2D_25akq")
+[node name="bridge_collision" parent="bridge_interaction/bridge_collision_shape" index="0"]
+position = Vector2(-22, 2)
 
 [node name="bridge_interaction2" parent="." instance=ExtResource("6_iairi")]
 position = Vector2(211, 81)
 bridge_description = "connects from 0 to 0"
-
-[node name="bridge_parts" type="Node2D" parent="bridge_interaction2"]
-visible = false
-
-[node name="bridge_part" type="ColorRect" parent="bridge_interaction2/bridge_parts"]
-offset_left = 12.0
-offset_top = -7.0
-offset_right = 37.0
-offset_bottom = 13.0
-
-[node name="bridge_collision_shape" type="StaticBody2D" parent="bridge_interaction2"]
-
-[node name="bridge_collision" type="CollisionShape2D" parent="bridge_interaction2/bridge_collision_shape"]
-position = Vector2(27, 0)
-shape = SubResource("RectangleShape2D_25akq")
 
 [node name="item_interaction" parent="." instance=ExtResource("6_66i44")]
 position = Vector2(289, 191)
@@ -91,21 +61,16 @@ reward_item = 1
 position = Vector2(119, 13)
 start_island_id = 2
 bridge_description = "this connects 2 and 0 "
+bridge_sprite_direction = 2
 
-[node name="bridge_parts" type="Node2D" parent="bridge_interaction3"]
-visible = false
+[node name="TextureRect" parent="bridge_interaction3/bridge_parts" index="0"]
+offset_left = -17.0
+offset_top = -52.0
+offset_right = 23.0
+offset_bottom = -12.0
 
-[node name="bridge_part" type="ColorRect" parent="bridge_interaction3/bridge_parts"]
-offset_left = 12.0
-offset_top = -7.0
-offset_right = 37.0
-offset_bottom = 13.0
-
-[node name="bridge_collision_shape" type="StaticBody2D" parent="bridge_interaction3"]
-
-[node name="bridge_collision" type="CollisionShape2D" parent="bridge_interaction3/bridge_collision_shape"]
-position = Vector2(4, -16)
-shape = SubResource("RectangleShape2D_25akq")
+[node name="bridge_collision" parent="bridge_interaction3/bridge_collision_shape" index="0"]
+position = Vector2(3, -12)
 
 [node name="NpcInteraction" parent="bridge_interaction3" instance=ExtResource("7_33ud0")]
 position = Vector2(38, 194)
@@ -123,3 +88,6 @@ npc_id = 3
 npc_animal_type = 3
 
 [connection signal="saved_player" from="Player" to="." method="_on_player_saved_player"]
+
+[editable path="bridge_interaction"]
+[editable path="bridge_interaction3"]

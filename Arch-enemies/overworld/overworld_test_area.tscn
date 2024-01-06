@@ -7,9 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://5llfgi2ysvie" path="res://overworld/entities/interaction_overworld/bridge_interaction.tscn" id="5_f6jxn"]
 [ext_resource type="PackedScene" uid="uid://bj3a1sw80l6wj" path="res://overworld/entities/interaction_overworld/item_interaction.tscn" id="6_ij5ah"]
 [ext_resource type="PackedScene" uid="uid://drn1loe1wknbq" path="res://overworld/entities/interaction_overworld/npc_interaction.tscn" id="7_06f0y"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_25akq"]
-size = Vector2(36, 20)
+[ext_resource type="PackedScene" uid="uid://bettv6p5clh6t" path="res://overworld/entities/interaction_overworld/template/bridge_template.tscn" id="8_khye4"]
 
 [node name="maingame" type="Node"]
 script = ExtResource("1_ui4aw")
@@ -25,68 +23,29 @@ position = Vector2(206, 23)
 dest_island_id = 1
 bridge_description = "connects from 0 to 1 "
 
-[node name="bridge_parts" type="Node2D" parent="bridge_interaction"]
-visible = false
-
-[node name="bridge_part" type="ColorRect" parent="bridge_interaction/bridge_parts"]
-offset_left = 12.0
-offset_top = -7.0
-offset_right = 37.0
-offset_bottom = 13.0
-
-[node name="bridge_collision_shape" type="StaticBody2D" parent="bridge_interaction"]
-
-[node name="bridge_collision" type="CollisionShape2D" parent="bridge_interaction/bridge_collision_shape"]
-position = Vector2(25, 1)
-shape = SubResource("RectangleShape2D_25akq")
-
 [node name="bridge_interaction3" parent="." instance=ExtResource("5_f6jxn")]
-position = Vector2(109, -32)
+position = Vector2(119, 14)
 start_island_id = 2
 bridge_description = "this connects 2 and 0 "
 
-[node name="bridge_parts" type="Node2D" parent="bridge_interaction3"]
-visible = false
+[node name="TextureRect" parent="bridge_interaction3/bridge_parts" index="0"]
+offset_left = -14.0
+offset_top = -29.0
+offset_right = 26.0
+offset_bottom = 11.0
+rotation = -1.57966
 
-[node name="bridge_part" type="ColorRect" parent="bridge_interaction3/bridge_parts"]
-offset_left = 12.0
-offset_top = -7.0
-offset_right = 37.0
-offset_bottom = 13.0
-
-[node name="bridge_collision_shape" type="StaticBody2D" parent="bridge_interaction3"]
-
-[node name="bridge_collision" type="CollisionShape2D" parent="bridge_interaction3/bridge_collision_shape"]
-position = Vector2(25, 1)
-shape = SubResource("RectangleShape2D_25akq")
-
-[node name="bridge_interaction2" parent="." instance=ExtResource("5_f6jxn")]
-position = Vector2(204, 88)
-bridge_description = "connects from 0 to 0"
-
-[node name="bridge_parts" type="Node2D" parent="bridge_interaction2"]
-visible = false
-
-[node name="bridge_part" type="ColorRect" parent="bridge_interaction2/bridge_parts"]
-offset_left = 12.0
-offset_top = -7.0
-offset_right = 37.0
-offset_bottom = 13.0
-
-[node name="bridge_collision_shape" type="StaticBody2D" parent="bridge_interaction2"]
-
-[node name="bridge_collision" type="CollisionShape2D" parent="bridge_interaction2/bridge_collision_shape"]
-position = Vector2(25, 1)
-shape = SubResource("RectangleShape2D_25akq")
+[node name="bridge_collision" parent="bridge_interaction3/bridge_collision_shape" index="0"]
+position = Vector2(4, -23)
 
 [node name="item_interaction" parent="." instance=ExtResource("6_ij5ah")]
-position = Vector2(378, 113)
+position = Vector2(356, 105)
 item_type = 2
 item_dialogue_success = "you got an item!"
 item_dialogue_failure = "no item found"
 
 [node name="item_interaction2" parent="." instance=ExtResource("6_ij5ah")]
-position = Vector2(130, 17)
+position = Vector2(158, 52)
 item_type = 3
 item_dialogue_success = "item? "
 item_dialogue_failure = "item :("
@@ -170,3 +129,43 @@ quest_type = 2
 required_item = 1
 required_npc_id = 1
 quest_reward = 1
+
+[node name="BridgeTemplate" parent="." instance=ExtResource("8_khye4")]
+visible = false
+position = Vector2(248, 78)
+
+[node name="bridge_interaction" parent="BridgeTemplate/left_bridge_start" index="0"]
+dest_island_id = 1
+
+[node name="TextureRect" parent="BridgeTemplate/left_bridge_start" index="1"]
+offset_left = -51.0
+offset_right = -11.0
+metadata/_edit_use_anchors_ = true
+
+[node name="bridge_interaction2" parent="BridgeTemplate/right_bridge_start" index="0"]
+start_island_id = 1
+
+[node name="interactionspot" parent="BridgeTemplate/right_bridge_start/bridge_interaction2" index="1"]
+position = Vector2(-27, 1)
+rotation = 0.785397
+
+[node name="TextureRect" parent="BridgeTemplate/right_bridge_start/bridge_interaction2/bridge_parts" index="0"]
+offset_left = -90.0
+offset_top = -22.0
+offset_right = -50.0
+offset_bottom = 18.0
+
+[node name="bridge_collision" parent="BridgeTemplate/right_bridge_start/bridge_interaction2/bridge_collision_shape" index="0"]
+position = Vector2(-52, 0)
+rotation = 1.57079
+
+[node name="TextureRect" parent="BridgeTemplate/right_bridge_start" index="1"]
+offset_left = 36.0
+offset_right = 76.0
+metadata/_edit_use_anchors_ = true
+
+[editable path="bridge_interaction"]
+[editable path="bridge_interaction3"]
+[editable path="BridgeTemplate"]
+[editable path="BridgeTemplate/left_bridge_start/bridge_interaction"]
+[editable path="BridgeTemplate/right_bridge_start/bridge_interaction2"]
