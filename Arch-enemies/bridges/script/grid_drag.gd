@@ -39,6 +39,10 @@ func _get_drag_data(at_position):
 		var sprite = texture
 		#2) And the Tooltip, which identifies the animal
 		var animal = tooltip_text 
+
+		#due to we use the tooltip we need to check if the string is valid... this is not secure for typos!
+		if animal != "" and SingletonPlayer.get_animal_inventory()[Animal.string_to_type(animal)] <= 0:
+			return
 		
 		#This adds a control node that allows us to fix the position of the preview
 		var c = Control.new()
@@ -64,10 +68,10 @@ func _get_drag_data(at_position):
 					preview.set_size(Vector2(10, 20))
 					preview.tooltip_text = "SQUIRREL"
 		
-		c.set_global_position(Vector2i(0, 0))
-		
-		add_child(c)
-		
+			c.set_global_position(Vector2i(0, 0))
+			#this must be in the if case, otherwise we instantiate the drag_grid
+			add_child(c)
+
 		data["sprite"] = sprite
 		data["animal"] = animal
 		return data
