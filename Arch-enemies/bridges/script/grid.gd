@@ -43,7 +43,7 @@ var hazard_squares = []
 signal current_grid(current_grid)
 
 #These are the different kind of object we can have in grid cells
-enum ENTITY_TYPES {GROUND, WATER, AIR, ANIMAL, FORBIDDEN, ALLOWED, SIDE, BOTTOM, HAZARD}
+enum ENTITY_TYPES {GROUND, WATER, AIR, ANIMAL, FORBIDDEN, ALLOWED, SIDE, BOTTOM}
 
 func _ready():
 	#We save the previous states of the grid in an array, this array is initalized here
@@ -86,8 +86,8 @@ func _ready():
 				grid[x].append(ENTITY_TYPES.WATER)
 				
 			elif(tile_id == BRAMBLE_TILE_ID):
+				grid[x].append(ENTITY_TYPES.FORBIDDEN)
 				hazard_squares.append(square)
-				grid[x].append(ENTITY_TYPES.HAZARD)
 			
 			# if that tileset is air, assign to that type
 			else:
@@ -100,6 +100,7 @@ func _ready():
 	grid = assign_dropzones(grid, shore_top, ENTITY_TYPES.ALLOWED)
 	
 	# assign hazard forbidden zone
+	# is handled separately here, so it doesn't get overwritten earlier
 	grid = assign_dropzones(grid, hazard_squares, ENTITY_TYPES.FORBIDDEN)
 	
 	# assign forbidden zones around the fox' starting position
