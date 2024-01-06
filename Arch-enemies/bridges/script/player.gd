@@ -58,10 +58,6 @@ func reset_player():
 func _on_death_hazard_body_entered(_body):
 	reset_player()
 
-# if fox comes in contact with goal zone
-func _on_goal_area_2d_body_entered(_body):
-	var goal_menu = get_parent().find_child("goal_menu")
-	goal_menu.visible = true
 
 # flip the sprite to the direction the player should be facing
 func update_facing_direction():
