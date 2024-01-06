@@ -54,10 +54,6 @@ func reset_player():
 	velocity = Vector2.ZERO
 	global_position = start_position
 
-# if fox comes in contact with DeathHazard
-func _on_death_hazard_body_entered(_body):
-	reset_player()
-
 
 # flip the sprite to the direction the player should be facing
 func update_facing_direction():

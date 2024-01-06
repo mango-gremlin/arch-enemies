@@ -1,7 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dcjyh0fonb2du"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_llvid"]
-radius = 9.0
 height = 40.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lr4ol"]
