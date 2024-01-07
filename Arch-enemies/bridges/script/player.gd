@@ -54,10 +54,6 @@ func reset_player():
 	velocity = Vector2.ZERO
 	global_position = start_position
 
-# if fox comes in contact with DeathHazard
-func _on_death_hazard_body_entered(_body):
-	reset_player()
-
 # if fox comes in contact with goal zone
 func _on_goal_area_2d_body_entered(_body):
 	var goal_menu = get_parent().find_child("goal_menu")
