@@ -108,8 +108,10 @@ func _ready():
 	# assign forbidden zones around the fox' starting position
 	grid = assign_fox_forbidden_zones(grid)
 	
-	spawn_hazard_collisions(hazard_squares)
-	spawn_water_collisions(water_squares)
+	var hazard_area = preload("res://bridges/scenes/hazard_detection.tscn")
+	var water_area = preload("res://bridges/scenes/water_detection.tscn")
+	spawn_danger_area2D(hazard_area, hazard_squares)
+	spawn_danger_area2D(water_area, water_squares)
 	
 	color_grid()
 	#Now we save the inital state of the grid for reset and previous state
@@ -150,28 +152,17 @@ func assign_fox_forbidden_zones(grid:Array) -> Array:
 			grid[crt_square.x][crt_square.y] = ENTITY_TYPES.FORBIDDEN
 	return grid
 
-# instantiate collisions on hazards
-func spawn_hazard_collisions(hazard_squares):
-	var hazard_area = preload("res://bridges/scenes/hazard_detection.tscn")
-	for square in hazard_squares:
-		var hazard_instance = hazard_area.instantiate()
-		self.add_child(hazard_instance)
-		hazard_instance.global_position = Vector2(square.x * 10 + 5, square.y * 10 + 5)
-		hazard_instance.body_entered.connect(on_contact_hazard)
+# instantiate area2D with their respective collision shapes
+# as they are dangers, add a signal that is emitted when fox touches them
+func spawn_danger_area2D(area, squares):
+	for square in squares:
+		var instance = area.instantiate()
+		self.add_child(instance)
+		instance.global_position = Vector2(square.x * 10 + 5, square.y * 10 + 5)
+		instance.body_entered.connect(on_contact_danger)
 
-# instantiate collisions on water and shallows
-func spawn_water_collisions(water_squares):
-	var water_area = preload("res://bridges/scenes/water_detection.tscn")
-	for square in water_squares:
-		var water_instance = water_area.instantiate()
-		self.add_child(water_instance)
-		water_instance.global_position = Vector2(square.x * 10 + 5, square.y * 10 + 5)
-		water_instance.body_entered.connect(on_contact_water)
-
-func on_contact_water(body):
-	$Player.reset_player()
-
-func on_contact_hazard(body):
+# when contacting a danger, reset the position of fox
+func on_contact_danger(body):
 	$Player.reset_player()
 
 func color_grid():
