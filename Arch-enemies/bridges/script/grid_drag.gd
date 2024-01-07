@@ -3,7 +3,7 @@ extends TextureRect
 #Here we define the elements we need to operate on the grid
 var grid = []
 @export var square_size = 10
-enum ENTITY_TYPES {GROUND, WATER, AIR, ANIMAL, FORBIDDEN, ALLOWED, SIDE, BOTTOM}
+enum ENTITY_TYPES {GROUND, WATER, AIR, ANIMAL, FORBIDDEN, ALLOWED, SIDE, BOTTOM, SHALLOW}
 #We have to use our own preview scene because otherwise things are terrible
 const DRAGPREVIEW = preload("res://bridges/scenes/dragpreview.tscn")
 
@@ -140,12 +140,15 @@ func is_deer_allowed(pos):
 	var is_allowed = false
 	#The Deer has empty slots in it sprite, it is allowed for them to have something in them
 	var allowed = [Vector2i(0, 3), Vector2i(3, 0), Vector2i(3, 1), Vector2i(3, 2)]
-	if(grid[pos.x][pos.y] == ENTITY_TYPES.ALLOWED):
+	if(grid[pos.x][pos.y] == ENTITY_TYPES.ALLOWED or grid[pos.x][pos.y] == ENTITY_TYPES.SHALLOW):
 		var is_free = true
 		for delta in range(4):
 			for epsilon in range(4):
-				if(not (grid[pos.x + delta][pos.y - epsilon] == ENTITY_TYPES.AIR or 
-				grid[pos.x + delta][pos.y - epsilon] == ENTITY_TYPES.ALLOWED)):
+				if(not (grid[pos.x + delta][pos.y - epsilon] == ENTITY_TYPES.AIR 
+					or grid[pos.x + delta][pos.y - epsilon] == ENTITY_TYPES.ALLOWED
+					or grid[pos.x + delta][pos.y - epsilon] == ENTITY_TYPES.SHALLOW
+					or grid[pos.x + delta][pos.y - epsilon] == ENTITY_TYPES.SIDE
+					or grid[pos.x + delta][pos.y - epsilon] == ENTITY_TYPES.BOTTOM)):
 					#Therefore we only flag the squares which are not in allowed
 					if(Vector2i(delta, epsilon) not in allowed):
 						is_free = false

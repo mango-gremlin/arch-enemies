@@ -33,10 +33,15 @@ const SNAKE_TILE_ID = 8
 const SPIDER_TILE_ID = 9
 const DEER_TILE_ID = 10
 
+const GREEN_TILE_ID = 0
+const YELLOW_TILE_ID = 4
+const RED_TILE_ID = 7
+
 # list of starting dropzones of their respective type
 var shore_top = []
 var shore_side = []
 var shore_bottom = []
+var shallow_squares = []
 var hazard_squares = []
 var water_squares = []
 
@@ -44,7 +49,7 @@ var water_squares = []
 signal current_grid(current_grid)
 
 #These are the different kind of object we can have in grid cells
-enum ENTITY_TYPES {GROUND, WATER, AIR, ANIMAL, FORBIDDEN, ALLOWED, SIDE, BOTTOM}
+enum ENTITY_TYPES {GROUND, WATER, AIR, ANIMAL, FORBIDDEN, ALLOWED, SIDE, BOTTOM, SHALLOW}
 
 func _ready():
 	#We save the previous states of the grid in an array, this array is initalized here
@@ -87,6 +92,16 @@ func _ready():
 				grid[x].append(ENTITY_TYPES.WATER)
 				water_squares.append(square)
 				
+				# check if square is a shallow
+				# a shallow has air or decoration above, and ground below
+				var top_square = Vector2i(x, y - 1)
+				var top_square_tile_id = get_cell_source_id(BACKGROUND_LAYER_ID, top_square)
+				var bottom_square = Vector2i(x, y + 1)
+				var bottom_square_tile_id = get_cell_source_id(BACKGROUND_LAYER_ID, bottom_square)
+				if ((top_square_tile_id == AIR_TILE_ID or top_square_tile_id == -1)
+					and bottom_square_tile_id == GROUND_TILE_ID):
+					shallow_squares.append(square) 
+				
 			elif(tile_id == BRAMBLE_TILE_ID):
 				grid[x].append(ENTITY_TYPES.FORBIDDEN)
 				hazard_squares.append(square)
@@ -99,6 +114,7 @@ func _ready():
 	# assign shore dropzones
 	grid = assign_dropzones(grid, shore_bottom, ENTITY_TYPES.BOTTOM)
 	grid = assign_dropzones(grid, shore_side, ENTITY_TYPES.SIDE)
+	grid = assign_dropzones(grid, shallow_squares, ENTITY_TYPES.SHALLOW)
 	grid = assign_dropzones(grid, shore_top, ENTITY_TYPES.ALLOWED)
 	
 	# assign hazard forbidden zone
@@ -276,22 +292,25 @@ func make_visible():
 	for x in range(grid_size.x):
 		for y in range(grid_size.y):
 			if(grid[x][y] == ENTITY_TYPES.FORBIDDEN):
-				set_cell(ACTIVE_LAYER_ID, Vector2i(x, y), 7, Vector2i(1, 1))
+				set_cell(ACTIVE_LAYER_ID, Vector2i(x, y), RED_TILE_ID, Vector2i(1, 1))
 			elif(grid[x][y] == ENTITY_TYPES.ALLOWED):
-				set_cell(ACTIVE_LAYER_ID, Vector2i(x, y), 0, Vector2i(1, 1))
-			#SIDE and BOTTOM have the same color but this can be changed
-			elif(grid[x][y] == ENTITY_TYPES.SIDE):
-				set_cell(ACTIVE_LAYER_ID, Vector2i(x, y), 4, Vector2i(1, 1))
-			elif(grid[x][y] == ENTITY_TYPES.BOTTOM):
-				set_cell(ACTIVE_LAYER_ID, Vector2i(x, y), 4, Vector2i(1, 1))
+				set_cell(ACTIVE_LAYER_ID, Vector2i(x, y), GREEN_TILE_ID, Vector2i(1, 1))
+			#SIDE, BOTTOM and SHALLOW have the same color but this can be changed
+			elif((grid[x][y] == ENTITY_TYPES.SIDE) 
+				or grid[x][y] == ENTITY_TYPES.BOTTOM
+				or grid[x][y] == ENTITY_TYPES.SHALLOW):
+				set_cell(ACTIVE_LAYER_ID, Vector2i(x, y), YELLOW_TILE_ID, Vector2i(1, 1))
 	Global.something_is_being_dragged = true
 
 func make_invisible():
 	#Similarly when we are done dragging we want to return the FORBIDDEN and ALLOWED cells invisible
 	for x in range(grid_size.x):
 		for y in range(grid_size.y):
-			if(grid[x][y] == ENTITY_TYPES.FORBIDDEN or grid[x][y] == ENTITY_TYPES.ALLOWED
-			or grid[x][y] == ENTITY_TYPES.SIDE or grid[x][y] == ENTITY_TYPES.BOTTOM):
+			if(grid[x][y] == ENTITY_TYPES.FORBIDDEN 
+				or grid[x][y] == ENTITY_TYPES.ALLOWED
+				or grid[x][y] == ENTITY_TYPES.SIDE 
+				or grid[x][y] == ENTITY_TYPES.BOTTOM
+				or grid[x][y] == ENTITY_TYPES.SHALLOW):
 				set_cell(ACTIVE_LAYER_ID, Vector2i(x, y), 0, Vector2i(-1, -1))
 	Global.something_is_being_dragged = false
 

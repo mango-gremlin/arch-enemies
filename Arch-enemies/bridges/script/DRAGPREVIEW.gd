@@ -13,12 +13,12 @@ func _process(delta):
 	match tooltip_text:
 		#We have to adjust the offset based on the animal
 		"DEER":
-					position = Vector2(global.x, global.y-40)
+			position = Vector2(global.x, global.y-40)
 		"SNAKE":
-					position = Vector2(global.x-42, global.y-5)
+			position = Vector2(global.x-42, global.y-5)
 		"SPIDER":
-					position = Vector2(global.x-100, global.y-10)
+			position = Vector2(global.x-100, global.y-10)
 		"SQUIRREL":
-					position = Vector2(global.x-110, global.y-20)
+			position = Vector2(global.x-110, global.y-20)
 	if Input.is_action_just_released("click"):
 		queue_free()
