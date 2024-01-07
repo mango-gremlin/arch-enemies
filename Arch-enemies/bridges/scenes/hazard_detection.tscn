@@ -1,7 +1,7 @@
 [gd_scene load_steps=2 format=3 uid="uid://ui2o8be45h8p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ub64v"]
-size = Vector2(8, 8)
+size = Vector2(11, 11)
 
 [node name="hazard_detection" type="Area2D"]
 

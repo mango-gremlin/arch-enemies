@@ -94,13 +94,3 @@ func _on_animated_sprite_2d_animation_finished():
 		animation_locked = false
 	elif animated_sprite.animation == "jump_up":
 		animated_sprite.play("jump_fly")
-
-
-func _on_water_detection_body_entered(body):
-	print("touched watwer")
-	reset_player()
-
-
-func _on_hazard_detection_body_entered(body):
-	print("touched hazard")
-	reset_player()

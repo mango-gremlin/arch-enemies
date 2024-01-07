@@ -157,7 +157,7 @@ func spawn_hazard_collisions(hazard_squares):
 		var hazard_instance = hazard_area.instantiate()
 		self.add_child(hazard_instance)
 		hazard_instance.global_position = Vector2(square.x * 10 + 5, square.y * 10 + 5)
-		
+		hazard_instance.body_entered.connect(on_contact_hazard)
 
 # instantiate collisions on water and shallows
 func spawn_water_collisions(water_squares):
@@ -166,6 +166,13 @@ func spawn_water_collisions(water_squares):
 		var water_instance = water_area.instantiate()
 		self.add_child(water_instance)
 		water_instance.global_position = Vector2(square.x * 10 + 5, square.y * 10 + 5)
+		water_instance.body_entered.connect(on_contact_water)
+
+func on_contact_water(body):
+	$Player.reset_player()
+
+func on_contact_hazard(body):
+	$Player.reset_player()
 
 func color_grid():
 	#This function colors the grid cells that are not predefined, i.e. the background
