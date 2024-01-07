@@ -10,6 +10,11 @@ var tile_size = tile_set.tile_size
 @export var y_size = 22
 @export var square_size = 10
 
+@export var inventory_deer : Label
+@export var inventory_snake : Label
+@export var inventory_spider : Label
+@export var inventory_squirrel : Label
+
 #And finally some values we need later
 var grid_size = Vector2(x_size, y_size)
 var grid = []
@@ -17,6 +22,10 @@ var start_grid = [[[]]]
 var last_states = []
 var save_states = 10
 var state = 0
+
+#for the inventory
+@onready var start_animals : Dictionary = SingletonPlayer.get_animal_inventory().duplicate(true)
+var placed_animals : Array = []
 
 # ids of all tilemap layers
 const BACKGROUND_LAYER_ID = 0
@@ -51,6 +60,9 @@ signal current_grid(current_grid)
 enum ENTITY_TYPES {GROUND, WATER, AIR, ANIMAL, FORBIDDEN, ALLOWED, SIDE, BOTTOM, SHALLOW}
 
 func _ready():
+	#update the ui
+	update_inventory()
+	
 	#We save the previous states of the grid in an array, this array is initalized here
 	for i in range(save_states):
 		last_states.append([[]])
@@ -183,6 +195,10 @@ func update_grid(pos, data):
 	var animal = data["animal"]
 	var x = pos.x
 	var y = pos.y
+	
+	#Whenever we change the grid, i.e. update it, we have to track that here
+	state += 1
+	
 	#Based on the animal we use the apprioate filling
 	match animal:
 		"DEER":
@@ -211,6 +227,10 @@ func update_grid(pos, data):
 			for position in new_bottom:
 				if(grid[x + position.x][y - position.y] == ENTITY_TYPES.AIR):
 					grid[x + position.x][y - position.y] = ENTITY_TYPES.BOTTOM
+					
+			#this seems to be the only way to keep track of the placed animals
+			placed_animals.append(Animal.AnimalType.DEER)
+			SingletonPlayer.add_to_animal_inventory(Animal.AnimalType.DEER, -1)
 		"SNAKE":
 			#Snake works just like Deer
 			var new_allowed = [Vector2i(0, 1), Vector2i(1, 1), Vector2i(2, 1), Vector2i(3, 1)]
@@ -235,6 +255,10 @@ func update_grid(pos, data):
 			for position in new_bottom:
 				if(grid[x + position.x][y - position.y] == ENTITY_TYPES.AIR):
 					grid[x + position.x][y - position.y] = ENTITY_TYPES.BOTTOM
+			
+			#this seems to be the only way to keep track of the placed animals
+			placed_animals.append(Animal.AnimalType.SNAKE)
+			SingletonPlayer.add_to_animal_inventory(Animal.AnimalType.SNAKE, -1)
 		"SPIDER":
 			#Spider is the easiest, nothing much happens here
 			var new_allowed = [Vector2i(0, 1), Vector2i(1, 0), Vector2i(0, -1), Vector2i(-1, 0)]
@@ -243,6 +267,10 @@ func update_grid(pos, data):
 			for position in new_allowed:
 				if(grid[x + position.x][y - position.y] == ENTITY_TYPES.AIR):
 					grid[x + position.x][y - position.y] = ENTITY_TYPES.ALLOWED
+					
+			#this seems to be the only way to keep track of the placed animals
+			placed_animals.append(Animal.AnimalType.SPIDER)
+			SingletonPlayer.add_to_animal_inventory(Animal.AnimalType.SPIDER, -1)
 		"SQUIRREL":
 			#Squirrel like the other animals
 			var new_allowed = [Vector2i(0, 2)]
@@ -261,10 +289,15 @@ func update_grid(pos, data):
 				if(grid[x + position.x][y - position.y] == ENTITY_TYPES.AIR):
 					grid[x + position.x][y - position.y] = ENTITY_TYPES.BOTTOM
 			
-	#Whenever we change the grid, i.e. update it, we have to track that here
-	state += 1
+			#this seems to be the only way to keep track of the placed animals
+			placed_animals.append(Animal.AnimalType.SQUIRREL)
+			SingletonPlayer.add_to_animal_inventory(Animal.AnimalType.SQUIRREL, -1)
+			
 	#This allows us to track the previous states and return to them
 	last_states[state % save_states] = grid.duplicate(true)
+	
+	#update the global inventory
+	update_inventory()
 
 func make_visible():
 	#We do not color the FORBIDDEN or ALLOWED cells on ready
@@ -297,6 +330,10 @@ func make_invisible():
 func reset_grid():
 	#To reset the grid we simple return it to the state we saved in the beginning
 	if Global.drag_mode:
+		#reset the inventory to the original amount of animals
+		SingletonPlayer.set_animal_inventory(start_animals.duplicate(true))
+		update_inventory()
+		
 		grid = start_grid.duplicate(true)
 		#Then we recolor it
 		color_grid()
@@ -304,6 +341,8 @@ func reset_grid():
 		last_states = []
 		for i in range(save_states):
 			last_states.append([[]])
+			
+		placed_animals.clear()
 		state = 0
 
 func last_state():
@@ -326,10 +365,20 @@ func last_state():
 			grid = last_states[state % save_states].duplicate(true)
 			last_states[(state + 1) % save_states] = [[]]
 			color_grid()
-
+			
+			SingletonPlayer.add_to_animal_inventory(placed_animals.pop_back())
+			update_inventory()
+			
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
+
+#updates the ui-counters for the inventory
+func update_inventory():
+	inventory_deer.text = str(SingletonPlayer.get_animal_inventory()[Animal.AnimalType.DEER])
+	inventory_snake.text = str(SingletonPlayer.get_animal_inventory()[Animal.AnimalType.SNAKE])
+	inventory_spider.text = str(SingletonPlayer.get_animal_inventory()[Animal.AnimalType.SPIDER])
+	inventory_squirrel.text = str(SingletonPlayer.get_animal_inventory()[Animal.AnimalType.SQUIRREL])
 
 #Down here we handle all the signal. There will be many, but most of them don't do much.
 func _on_drag_grid_need_grid():
