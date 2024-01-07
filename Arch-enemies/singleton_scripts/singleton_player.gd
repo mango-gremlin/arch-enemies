@@ -121,8 +121,27 @@ var islands_reachable:Array[bool]
 	0 : [0,1],	
 	1 : [1,0],
 	2 : [2],
+	3 : [3]
 }
 
+# denotes the level to choose for each interaction!
+
+@onready var bridge_level_scenes: Dictionary = {
+	BridgeEdge.new(0,2): "res://bridges/scenes/Grid.tscn",
+}
+
+# queries dictionary of available bridge-level for requested level
+# returns modified bridge-edge with path set if found 
+# returns unchanged bridge-edge otherwise
+func obtain_bridge_scene(requested_edge:BridgeEdge) -> BridgeEdge:
+	for bridge_level:BridgeEdge in bridge_level_scenes:
+		# traversing bridge_level scenes
+		if (bridge_level.is_same_as(requested_edge)):
+			# found match 
+			var bridge_level_path:String = bridge_level_scenes[bridge_level]
+			requested_edge.set_path(bridge_level_path)
+	# returning the edge given  ( either with new path or without) 
+	return requested_edge
 
 # --- / 
 # -- / NPC interaction management
@@ -170,6 +189,12 @@ func add_npc_talked_to(npc_id:int):
 # --- / 
 # -- / Bridge management 
 
+# enum to indicate whether a path to a level is available
+# or not
+enum BridgeLevelPathState{
+	AVAILABLE,
+	NONE
+}
 # class denoting an edge in a graph 
 # start_id denotes the node where the edge begins 
 # dest_id denotes the node where the edge ends 
@@ -177,10 +202,30 @@ class BridgeEdge:
 	var start_id:int 
 	var dest_id:int
 	
+	# used for deriving path to level denoted by this edge
+	var path_state: BridgeLevelPathState = BridgeLevelPathState.NONE
+	var path:String
+	
 	func _init(starting_id:int, destination_id:int):
 		start_id = starting_id
 		dest_id = destination_id
-		
+	
+	# method to compare this edge with another given
+	# returns true if they are equal, false otherwise
+	# denote: edges are undirected so  (1,2) == (2,1)
+	func is_same_as(other_edge:BridgeEdge) -> bool:
+		var compared_start = other_edge.start_id
+		var compared_end = other_edge.dest_id
+		var comparison_start:bool = (start_id == compared_start) or ( compared_start == dest_id)  
+		var comparison_dest:bool = (dest_id == compared_end) or (compared_end == start_id)
+		if(comparison_start and comparison_dest):
+			return true 
+		return false
+	
+	# takes path as string and links it to this edge
+	func set_path(new_path:String):
+		path = new_path
+		path_state = BridgeLevelPathState.AVAILABLE
 
 # checks whether connection between two given values is possible or not
 func check_bridge_connection(bridge_edge:BridgeEdge) -> bool: 
