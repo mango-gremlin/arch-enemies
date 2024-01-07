@@ -2,6 +2,8 @@ extends TextureRect
 
 #Here we define the elements we need to operate on the grid
 var grid = []
+var sign_x = 1
+var sign_y = -1
 @export var square_size = 10
 enum ENTITY_TYPES {GROUND, WATER, AIR, ANIMAL, FORBIDDEN, ALLOWED, SIDE, BOTTOM, SHALLOW}
 #We have to use our own preview scene because otherwise things are terrible
@@ -19,7 +21,22 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass	
+	if Global.drag_mode and Input.is_action_just_pressed("rotate"):
+		Global.rotate = (Global.rotate + 1) % 4
+		match Global.rotate:
+			0:
+				sign_x = 1
+				sign_y = -1
+			1:
+				sign_x = 1
+				sign_y = 1
+			2:
+				sign_x = -1
+				sign_y = 1
+			3:
+				sign_x = -1
+				sign_y = -1
+	pass
 
 func _get_drag_data(at_position):
 	if Global.drag_mode:
@@ -28,7 +45,8 @@ func _get_drag_data(at_position):
 		#Then we tell the grid that we are currently dragging something
 		#This allows us to see FORBIDDEN and ALLOWED zones
 		is_dragging.emit()
-		
+		#We need to reset the rotate to align with the preview
+		Global.rotate = 0
 		#We create the data we want to transmit
 		var data = {}
 		#And the preview that is shown as we move the cursor
@@ -90,7 +108,7 @@ func _can_drop_data(at_position, data):
 		"SNAKE":
 			is_allowed = is_snake_allowed(pos)
 		"SPIDER":
-			is_allowed = is_spider_allowed(pos)	
+			is_allowed = is_spider_allowed(pos)
 		"SQUIRREL":
 			is_allowed = is_squirrel_allowed(pos)
 	
@@ -99,33 +117,50 @@ func _can_drop_data(at_position, data):
 func _drop_data(at_position, data):
 	#The dropping itself is simple
 	#We just return the position to the grid and update it
-	var position = Vector2(int(get_global_mouse_position().x /square_size), 
+	var pos = Vector2(int(get_global_mouse_position().x /square_size), 
 	int(get_global_mouse_position().y /square_size))
 	dragging_done.emit()
-	update_grid.emit(position, data)
+	update_grid.emit(pos, data)
 
 func _on_grid_current_grid(current_grid):
 	grid = current_grid
 
 func is_snake_allowed(pos):
 	var is_allowed = false
-	var snake_head = [Vector2i(4, 1), Vector2i(5, 1), Vector2i(5, 0), Vector2i(5, -1), Vector2i(4, -1)]
-	#For a cell to be legal we work from the bottom left corner of the animal
-	#And check each square of the grid cell that would in the sprite
-	if(grid[pos.x][pos.y] == ENTITY_TYPES.ALLOWED):
-		var is_free = true
-		for delta in range(1, 5):
-			#If it is AIR (i.e. empty) or ALLOWED we are good
-			if(not (grid[pos.x + delta][pos.y] == ENTITY_TYPES.AIR or 
-			grid[pos.x + delta][pos.y] == ENTITY_TYPES.ALLOWED)):
-				#Otherwise we are not
-				is_free = false
-				break
-		if(is_free):
-			is_allowed = true
-	for position in snake_head:
-		if(grid[pos.x + position.x][pos.y + position.y] == ENTITY_TYPES.ANIMAL):
-			is_allowed = false
+	var is_free = true
+	if Global.rotate % 2 == 0:
+		if(grid[pos.x][pos.y] == ENTITY_TYPES.ALLOWED):
+			var snake_head = [Vector2i(sign_x * 4, 1), Vector2i(sign_x * 5, 1), 
+			Vector2i(sign_x * 5, 0), Vector2i(sign_x * 5, -1), Vector2i(sign_x * 4, -1)]
+			for delta in range(1, 5):
+				if(not (grid[pos.x + sign_x * delta][pos.y] == ENTITY_TYPES.AIR or 
+				grid[pos.x + sign_x * delta][pos.y] == ENTITY_TYPES.ALLOWED or 
+				grid[pos.x + sign_x * delta][pos.y] == ENTITY_TYPES.SIDE or 
+				grid[pos.x + sign_x * delta][pos.y] == ENTITY_TYPES.BOTTOM)):
+					is_free = false
+					break
+			if(is_free):
+				is_allowed = true
+			for head in snake_head:
+				if(grid[pos.x + head.x][pos.y + head.y] == ENTITY_TYPES.ANIMAL):
+					is_allowed = false
+	else:
+		if(grid[pos.x][pos.y] == ENTITY_TYPES.ALLOWED):
+			var snake_head = [Vector2i(1,sign_y * -4), Vector2i(1,sign_y * -5), 
+			Vector2i(0,sign_y * -5), Vector2i(-1,sign_y * -5), Vector2i(-1,sign_y * -4)]
+			for delta in range(1, 5):
+				if(not (grid[pos.x][pos.y + sign_y * delta] == ENTITY_TYPES.AIR or 
+				grid[pos.x][pos.y + sign_y * delta] == ENTITY_TYPES.ALLOWED or 
+				grid[pos.x][pos.y + sign_y * delta] == ENTITY_TYPES.SIDE or 
+				grid[pos.x][pos.y + sign_y * delta] == ENTITY_TYPES.BOTTOM)):
+					is_free = false
+					break
+			if(is_free):
+				is_allowed = true
+			for head in snake_head:
+				if(grid[pos.x + head.x][pos.y + head.y] == ENTITY_TYPES.ANIMAL):
+					is_allowed = false
+	
 	return is_allowed
 
 func is_spider_allowed(pos):
@@ -144,28 +179,38 @@ func is_deer_allowed(pos):
 		var is_free = true
 		for delta in range(4):
 			for epsilon in range(4):
-				if(not (grid[pos.x + delta][pos.y - epsilon] == ENTITY_TYPES.AIR 
-					or grid[pos.x + delta][pos.y - epsilon] == ENTITY_TYPES.ALLOWED
-					or grid[pos.x + delta][pos.y - epsilon] == ENTITY_TYPES.SHALLOW
-					or grid[pos.x + delta][pos.y - epsilon] == ENTITY_TYPES.SIDE
-					or grid[pos.x + delta][pos.y - epsilon] == ENTITY_TYPES.BOTTOM)):
+				var pos_Type = grid[pos.x + (sign_x * delta)][pos.y + (sign_y * epsilon)]
+				if(not (pos_Type == ENTITY_TYPES.AIR or pos_Type == ENTITY_TYPES.ALLOWED
+					or pos_Type == ENTITY_TYPES.SHALLOW or pos_Type == ENTITY_TYPES.SIDE
+					or pos_Type == ENTITY_TYPES.BOTTOM)):
 					#Therefore we only flag the squares which are not in allowed
 					if(Vector2i(delta, epsilon) not in allowed):
 						is_free = false
 						break
 		if(is_free):
 			is_allowed = true
+	
 	return is_allowed
 
 func is_squirrel_allowed(pos):
 	#Check if one tile is in necessary ALLOWED or SIDE and if all other tiles are free
 	var is_allowed = false
 	var is_free = true
-	for epsilon in range(2):
-		var pos_Type = grid[pos.x][pos.y-epsilon]
-		if(pos_Type == ENTITY_TYPES.ALLOWED or pos_Type == ENTITY_TYPES.SIDE):
-			is_allowed = true
-		if(pos_Type == ENTITY_TYPES.FORBIDDEN or pos_Type == ENTITY_TYPES.GROUND or
-			pos_Type == ENTITY_TYPES.WATER or pos_Type == ENTITY_TYPES.ANIMAL):
-			is_free = false
+	if Global.rotate % 2 == 0:
+		for epsilon in range(2):
+			var pos_Type = grid[pos.x][pos.y + (sign_y * epsilon)]
+			if(pos_Type == ENTITY_TYPES.ALLOWED or pos_Type == ENTITY_TYPES.SIDE):
+				is_allowed = true
+			if(pos_Type == ENTITY_TYPES.FORBIDDEN or pos_Type == ENTITY_TYPES.GROUND or
+				pos_Type == ENTITY_TYPES.WATER or pos_Type == ENTITY_TYPES.ANIMAL):
+				is_free = false
+	else:
+		for epsilon in range(2):
+			var pos_Type = grid[pos.x + (sign_x * epsilon)][pos.y]
+			if(grid[pos.x][pos.y] == ENTITY_TYPES.ALLOWED or grid[pos.x][pos.y] == ENTITY_TYPES.SIDE):
+				is_allowed = true
+			if(pos_Type == ENTITY_TYPES.FORBIDDEN or pos_Type == ENTITY_TYPES.GROUND or
+				pos_Type == ENTITY_TYPES.WATER or pos_Type == ENTITY_TYPES.ANIMAL):
+				is_free = false
+	
 	return is_allowed and is_free

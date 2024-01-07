@@ -181,8 +181,25 @@ func color_grid():
 func update_grid(pos, data):
 	#If we drag an animal onto a cell we update the grid here
 	var animal = data["animal"]
+	var rotate = Global.rotate
 	var x = pos.x
 	var y = pos.y
+	var sign_x = 1
+	var sign_y = -1
+	match rotate:
+			0:
+				sign_x = 1
+				sign_y = -1
+			1:
+				sign_x = 1
+				sign_y = 1
+			2:
+				sign_x = -1
+				sign_y = 1
+			3:
+				sign_x = -1
+				sign_y = -1
+				
 	#Based on the animal we use the apprioate filling
 	match animal:
 		"DEER":
@@ -200,8 +217,9 @@ func update_grid(pos, data):
 				for epsilon in range(4):
 					var tile_pos = Vector2i(delta, epsilon) 
 					if(tile_pos not in empty):
-						grid[x + delta][y - epsilon] = ENTITY_TYPES.ANIMAL
-						set_cell(ACTIVE_LAYER_ID, Vector2i(x + delta, y - epsilon), DEER_TILE_ID, Vector2i(delta, 3 - epsilon))
+						grid[x + sign_x * delta][y + sign_y * epsilon] = ENTITY_TYPES.ANIMAL
+						set_cell(ACTIVE_LAYER_ID, Vector2i(x + sign_x * delta, y + sign_y * epsilon), 
+						DEER_TILE_ID, Vector2i(delta, 3 - epsilon))
 			for position in new_allowed:
 				if(grid[x + position.x][y - position.y] == ENTITY_TYPES.AIR):
 					grid[x + position.x][y - position.y] = ENTITY_TYPES.ALLOWED	
@@ -212,29 +230,71 @@ func update_grid(pos, data):
 				if(grid[x + position.x][y - position.y] == ENTITY_TYPES.AIR):
 					grid[x + position.x][y - position.y] = ENTITY_TYPES.BOTTOM
 		"SNAKE":
-			#Snake works just like Deer
-			var new_allowed = [Vector2i(0, 1), Vector2i(1, 1), Vector2i(2, 1), Vector2i(3, 1)]
-			#Except we have FORBIDDEN tiles, which we also have to mark in the grid
-			var new_forbidden = [Vector2i(4, 1), Vector2i(5, 1), Vector2i(5, 0), Vector2i(5, -1), Vector2i(4, -1)]
-			#Same for SIDE tiles
-			var new_side = [Vector2i(-1, 0)]
-			#Same for BOTTOM tiles
-			var new_bottom = [Vector2i(0, -1), Vector2i(1, -1), Vector2i(2, -1), Vector2i(3, -1)]
-			for delta in range(5):
-				grid[x + delta][y] = ENTITY_TYPES.ANIMAL
-				set_cell(ACTIVE_LAYER_ID, Vector2i(x + delta, y), SNAKE_TILE_ID, Vector2i(delta, 0))
-			for position in new_allowed:
-				if(grid[x + position.x][y - position.y] == ENTITY_TYPES.AIR):
-					grid[x + position.x][y - position.y] = ENTITY_TYPES.ALLOWED
-			for position in new_forbidden:
-				if(grid[x + position.x][y - position.y] == ENTITY_TYPES.AIR):
-					grid[x + position.x][y - position.y] = ENTITY_TYPES.FORBIDDEN
-			for position in new_side:
-				if(grid[x + position.x][y - position.y] == ENTITY_TYPES.AIR):
-					grid[x + position.x][y - position.y] = ENTITY_TYPES.SIDE
-			for position in new_bottom:
-				if(grid[x + position.x][y - position.y] == ENTITY_TYPES.AIR):
-					grid[x + position.x][y - position.y] = ENTITY_TYPES.BOTTOM
+			if rotate % 2 == 0:
+				var new_allowed = [Vector2i(0, 1), Vector2i(sign_x * 1, 1), Vector2i(sign_x * 2, 1), 
+				Vector2i(sign_x * 3, 1)]
+				var new_forbidden = [Vector2i(sign_x * 4, 1), Vector2i(sign_x * 5, 1), 
+				Vector2i(sign_x * 5, 0), Vector2i(sign_x * 5, -1), Vector2i(sign_x * 4, -1)]
+				var new_side = [Vector2i(sign_x * -1, 0)]
+				var new_bottom = [Vector2i(0, -1), Vector2i(sign_x * 1, -1), Vector2i(sign_x * 2, -1), 
+				Vector2i(sign_x * 3, -1)]
+				for delta in range(5):
+					grid[x + sign_x * delta][y] = ENTITY_TYPES.ANIMAL
+					if rotate == 0:
+						set_cell(ACTIVE_LAYER_ID, Vector2i(x + sign_x * delta, y), 
+						SNAKE_TILE_ID, Vector2i(delta, 0))
+					else:
+						set_cell(ACTIVE_LAYER_ID, Vector2i(x + sign_x * delta, y), 
+						SNAKE_TILE_ID, Vector2i(delta, 0), 1)
+				for posn in new_allowed:
+					if(grid[x + posn.x][y - posn.y] == ENTITY_TYPES.AIR):
+						grid[x + posn.x][y - posn.y] = ENTITY_TYPES.ALLOWED
+				for posn in new_forbidden:
+					if(grid[x + posn.x][y - posn.y] == ENTITY_TYPES.AIR):
+						grid[x + posn.x][y - posn.y] = ENTITY_TYPES.FORBIDDEN
+				for posn in new_side:
+					if(grid[x + posn.x][y - posn.y] == ENTITY_TYPES.AIR):
+						grid[x + posn.x][y - posn.y] = ENTITY_TYPES.SIDE
+				for posn in new_bottom:
+					if(grid[x + posn.x][y - posn.y] == ENTITY_TYPES.AIR):
+						grid[x + posn.x][y - posn.y] = ENTITY_TYPES.BOTTOM
+			else:
+				var new_allowed = [Vector2i(sign_x * 1, 0), Vector2i(sign_x * 1, sign_y * -1), 
+				Vector2i(sign_x * 1, sign_y * -2), Vector2i(sign_x * 1, sign_y * -3)]
+				var new_forbidden = [Vector2i(sign_x * 1, sign_y * 4), 
+				Vector2i(sign_x * 1, sign_y * -5), Vector2i(0, sign_y * -5), 
+				Vector2i(sign_x * -1, sign_y * -5), Vector2i(sign_x * -1, sign_y * -4)]
+				var new_side = [Vector2i(0, sign_y * 1)]
+				var new_bottom = [Vector2i(sign_x * -1, 0), Vector2i(sign_x * -1, sign_y * -1), 
+				Vector2i(-1, sign_y * 2), Vector2i(-1, sign_y * 3)]
+				for delta in range(5):
+					grid[x][y + sign_y * delta] = ENTITY_TYPES.ANIMAL
+					if rotate == 0:
+						set_cell(ACTIVE_LAYER_ID, Vector2i(x, y + sign_y * delta), 
+						SNAKE_TILE_ID, Vector2i(delta, 0), 4)
+						print("Tile")
+						print(Vector2i(delta, 0))
+						print("Position")
+						print(Vector2i(x, y + sign_y * delta))
+					else:
+						set_cell(ACTIVE_LAYER_ID, Vector2i(x, y + sign_y * delta), 
+						SNAKE_TILE_ID, Vector2i(delta, 0), 5)
+						print("Tile")
+						print(Vector2i(delta, 0))
+						print("Position")
+						print(Vector2i(x, y + sign_y * delta))
+				for posn in new_allowed:
+					if(grid[x + posn.x][y - posn.y] == ENTITY_TYPES.AIR):
+						grid[x + posn.x][y - posn.y] = ENTITY_TYPES.ALLOWED
+				for posn in new_forbidden:
+					if(grid[x + posn.x][y - posn.y] == ENTITY_TYPES.AIR):
+						grid[x + posn.x][y - posn.y] = ENTITY_TYPES.FORBIDDEN
+				for posn in new_side:
+					if(grid[x + posn.x][y - posn.y] == ENTITY_TYPES.AIR):
+						grid[x + posn.x][y - posn.y] = ENTITY_TYPES.SIDE
+				for posn in new_bottom:
+					if(grid[x + posn.x][y - posn.y] == ENTITY_TYPES.AIR):
+						grid[x + posn.x][y - posn.y] = ENTITY_TYPES.BOTTOM
 		"SPIDER":
 			#Spider is the easiest, nothing much happens here
 			var new_allowed = [Vector2i(0, 1), Vector2i(1, 0), Vector2i(0, -1), Vector2i(-1, 0)]
