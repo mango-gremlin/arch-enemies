@@ -3,6 +3,7 @@ extends Node
 var drag_mode := true
 var something_is_being_dragged := false
 var currently_dragging
+var rotate = 0
 
 
 # round to nearest multiple of grid_size
