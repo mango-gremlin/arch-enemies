@@ -155,7 +155,8 @@ func spawn_hazard_collisions(hazard_squares):
 	var hazard_area = preload("res://bridges/scenes/hazard_detection.tscn")
 	for square in hazard_squares:
 		var hazard_instance = hazard_area.instantiate()
-		hazard_instance.global_position = Vector2(square.x * 10, square.y * 10)
+		self.add_child(hazard_instance)
+		hazard_instance.global_position = Vector2(square.x * 10 + 5, square.y * 10 + 5)
 		
 
 # instantiate collisions on water and shallows
@@ -163,7 +164,8 @@ func spawn_water_collisions(water_squares):
 	var water_area = preload("res://bridges/scenes/water_detection.tscn")
 	for square in water_squares:
 		var water_instance = water_area.instantiate()
-		water_instance.global_position = Vector2(square.x * 10, square.y * 10)
+		self.add_child(water_instance)
+		water_instance.global_position = Vector2(square.x * 10 + 5, square.y * 10 + 5)
 
 func color_grid():
 	#This function colors the grid cells that are not predefined, i.e. the background
