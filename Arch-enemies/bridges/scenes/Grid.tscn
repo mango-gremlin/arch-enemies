@@ -10,7 +10,6 @@
 [ext_resource type="Texture2D" uid="uid://ckghjw6ynsyxv" path="res://bridges/assets/yellow.png" id="6_ue1m2"]
 [ext_resource type="Texture2D" uid="uid://cw66eehxwh20w" path="res://assets/art/objects/bridge_snake.png" id="7_jp1m1"]
 [ext_resource type="Texture2D" uid="uid://bax18833oqune" path="res://bridges/assets/red.png" id="8_6e2b2"]
-[ext_resource type="Texture2D" uid="uid://bqovbkq2ld608" path="res://assets/art/tilesets/bridge_tileset/bridge_bramble_tiles.png" id="8_f83gl"]
 [ext_resource type="Texture2D" uid="uid://desp8tcpswyl4" path="res://assets/art/objects/bridge_spider.png" id="8_rtjqf"]
 [ext_resource type="Texture2D" uid="uid://diwvqonlr6748" path="res://assets/art/objects/bridge_squirrel.png" id="11_a366g"]
 [ext_resource type="Script" path="res://bridges/scenes/toggle_build_fox_mode.gd" id="12_o1ngo"]
@@ -574,8 +573,11 @@ texture_region_size = Vector2i(10, 10)
 0:1/0/physics_layer_0/angular_velocity = 0.0
 0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-5, -5, 5, -5, 5, 5, -5, 5)
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_wr7ud"]
+load_path = "res://.godot/imported/bridge_bramble_tiles.png-3a1c7564604ec343f17c430309b60ede.ctex"
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_meq0p"]
-texture = ExtResource("8_f83gl")
+texture = SubResource("CompressedTexture2D_wr7ud")
 texture_region_size = Vector2i(10, 10)
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
