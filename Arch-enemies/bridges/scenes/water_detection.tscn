@@ -7,5 +7,3 @@ size = Vector2(11, 11)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_2c38o")
-
-[connection signal="area_entered" from="." to="." method="_on_water_detection_body_entered"]
