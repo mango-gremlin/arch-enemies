@@ -60,13 +60,17 @@ signal current_grid(current_grid)
 enum ENTITY_TYPES {GROUND, WATER, AIR, ANIMAL, FORBIDDEN, ALLOWED, SIDE, BOTTOM, SHALLOW}
 
 func _ready():
+	
+	SingletonPlayer.add_to_animal_inventory(Animal.AnimalType.DEER, 2)
+	SingletonPlayer.add_to_animal_inventory(Animal.AnimalType.SNAKE, 2)
+	
+	start_animals = SingletonPlayer.get_animal_inventory().duplicate(true)
 	#update the ui
 	update_inventory()
 	
 	#We save the previous states of the grid in an array, this array is initalized here
 	for i in range(save_states):
 		last_states.append([[]])
-		placed_animals.append(Animal.AnimalType.NONE)
 	#Here we iterated over the grid and fill it
 	for x in range(grid_size.x):
 		grid.append([])
@@ -230,7 +234,7 @@ func update_grid(pos, data):
 					grid[x + position.x][y - position.y] = ENTITY_TYPES.BOTTOM
 					
 			#this seems to be the only way to keep track of the placed animals
-			placed_animals[state % save_states] = Animal.AnimalType.DEER
+			placed_animals.append(Animal.AnimalType.DEER)
 			SingletonPlayer.add_to_animal_inventory(Animal.AnimalType.DEER, -1)
 		"SNAKE":
 			#Snake works just like Deer
@@ -258,7 +262,7 @@ func update_grid(pos, data):
 					grid[x + position.x][y - position.y] = ENTITY_TYPES.BOTTOM
 			
 			#this seems to be the only way to keep track of the placed animals
-			placed_animals[state % save_states] = Animal.AnimalType.SNAKE
+			placed_animals.append(Animal.AnimalType.SNAKE)
 			SingletonPlayer.add_to_animal_inventory(Animal.AnimalType.SNAKE, -1)
 		"SPIDER":
 			#Spider is the easiest, nothing much happens here
@@ -270,7 +274,7 @@ func update_grid(pos, data):
 					grid[x + position.x][y - position.y] = ENTITY_TYPES.ALLOWED
 					
 			#this seems to be the only way to keep track of the placed animals
-			placed_animals[state % save_states] = Animal.AnimalType.SPIDER
+			placed_animals.append(Animal.AnimalType.SPIDER)
 			SingletonPlayer.add_to_animal_inventory(Animal.AnimalType.SPIDER, -1)
 		"SQUIRREL":
 			#Squirrel like the other animals
@@ -291,7 +295,7 @@ func update_grid(pos, data):
 					grid[x + position.x][y - position.y] = ENTITY_TYPES.BOTTOM
 			
 			#this seems to be the only way to keep track of the placed animals
-			placed_animals[state % save_states] = Animal.AnimalType.SQUIRREL
+			placed_animals.append(Animal.AnimalType.SQUIRREL)
 			SingletonPlayer.add_to_animal_inventory(Animal.AnimalType.SQUIRREL, -1)
 			
 	#This allows us to track the previous states and return to them
@@ -329,7 +333,6 @@ func make_invisible():
 	Global.something_is_being_dragged = false
 
 func reset_grid():
-	print("reset")
 	#To reset the grid we simple return it to the state we saved in the beginning
 	if Global.drag_mode:
 		#reset the inventory to the original amount of animals
@@ -343,10 +346,11 @@ func reset_grid():
 		last_states = []
 		for i in range(save_states):
 			last_states.append([[]])
+			
+		placed_animals.clear()
 		state = 0
 
 func last_state():
-	print("last_state")
 	#To return to the previous state of the grid we have to make sure that such a state exists
 	#Here we check if somebody tried to reset the start, this is not allowed
 	if Global.drag_mode:
@@ -367,8 +371,7 @@ func last_state():
 			last_states[(state + 1) % save_states] = [[]]
 			color_grid()
 			
-			SingletonPlayer.add_to_animal_inventory(placed_animals[state % save_states])
-			placed_animals[state % save_states] = Animal.AnimalType.NONE
+			SingletonPlayer.add_to_animal_inventory(placed_animals.pop_back())
 			update_inventory()
 			
 # Called every frame. 'delta' is the elapsed time since the previous frame.
