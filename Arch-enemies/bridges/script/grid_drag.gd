@@ -140,17 +140,16 @@ func is_deer_allowed(pos):
 	var ignore = [Vector2i(0, 3), Vector2i(3, 0), Vector2i(3, 1), Vector2i(3, 2)]
 	for delta in range(4):
 		for epsilon in range(4):
-			#These slots need to be ignored
-			if(Vector2i(delta,epsilon) in ignore):
-				break
-			var pos_Type = grid[pos.x+delta][pos.y-epsilon]
-			#Is there something to attach the animal to?
-			if(pos_Type == ENTITY_TYPES.ALLOWED):
-				is_allowed = true
-			#Is there space for the animal?	
-			if(pos_Type == ENTITY_TYPES.FORBIDDEN or pos_Type == ENTITY_TYPES.GROUND or 
-			pos_Type == ENTITY_TYPES.WATER or pos_Type == ENTITY_TYPES.ANIMAL):
-				is_free = false
+			#Some slots need to be ignored
+			if(Vector2i(delta,epsilon) not in ignore):
+				var pos_Type = grid[pos.x+delta][pos.y-epsilon]
+				#Is there something to attach the animal to?
+				if(pos_Type == ENTITY_TYPES.ALLOWED):
+					is_allowed = true
+				#Is there space for the animal?	
+				if(pos_Type == ENTITY_TYPES.FORBIDDEN or pos_Type == ENTITY_TYPES.GROUND or 
+				pos_Type == ENTITY_TYPES.WATER or pos_Type == ENTITY_TYPES.ANIMAL):
+					is_free = false
 	return is_allowed and is_free
 
 func is_squirrel_allowed(pos):

@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://bridges/script/grid.gd" id="1_xtvvi"]
 [ext_resource type="Script" path="res://bridges/script/grid_visualizer.gd" id="2_d8ovy"]
 [ext_resource type="Texture2D" uid="uid://bbktakyncn7nc" path="res://assets/art/objects/bridge_deer.png" id="3_x44oq"]
-[ext_resource type="Texture2D" uid="uid://p31almd67lu3" path="res://assets/art/tilesets/bridge_tileset/bridge_tileset.png" id="4_m4vsq"]
+[ext_resource type="Texture2D" path="res://assets/art/tilesets/bridge_tileset/bridge_tileset.png" id="4_m4vsq"]
 [ext_resource type="Texture2D" uid="uid://ckghjw6ynsyxv" path="res://bridges/assets/yellow.png" id="6_ue1m2"]
 [ext_resource type="Texture2D" uid="uid://cw66eehxwh20w" path="res://assets/art/objects/bridge_snake.png" id="7_jp1m1"]
 [ext_resource type="Texture2D" uid="uid://bax18833oqune" path="res://bridges/assets/red.png" id="8_6e2b2"]
