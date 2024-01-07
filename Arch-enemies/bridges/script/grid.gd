@@ -60,11 +60,6 @@ signal current_grid(current_grid)
 enum ENTITY_TYPES {GROUND, WATER, AIR, ANIMAL, FORBIDDEN, ALLOWED, SIDE, BOTTOM, SHALLOW}
 
 func _ready():
-	
-	SingletonPlayer.add_to_animal_inventory(Animal.AnimalType.DEER, 2)
-	SingletonPlayer.add_to_animal_inventory(Animal.AnimalType.SNAKE, 2)
-	
-	start_animals = SingletonPlayer.get_animal_inventory().duplicate(true)
 	#update the ui
 	update_inventory()
 	
