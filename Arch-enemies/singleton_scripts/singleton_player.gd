@@ -90,10 +90,11 @@ func use_item(requested_item:Item.ItemType):
 # --- / 
 # -- / animal inventory
 
-func add_to_animal_inventory(new_animal:Animal.AnimalType): 
+func add_to_animal_inventory(new_animal:Animal.AnimalType, quantity:int = 1): 
+	print(quantity)
 	if new_animal != Animal.AnimalType.NONE:
 		# valid entry given 
-		animal_inventory[new_animal] += 1
+		animal_inventory[new_animal] += quantity
 		#selected_animal.increase_amount
 		updated_animal_inventory.emit(animal_inventory)
 

@@ -39,7 +39,6 @@ func _get_drag_data(at_position):
 		var sprite = texture
 		#2) And the Tooltip, which identifies the animal
 		var animal = tooltip_text 
-
 		#due to we use the tooltip we need to check if the string is valid... this is not secure for typos!
 		if animal != "" and SingletonPlayer.get_animal_inventory()[Animal.string_to_type(animal)] <= 0:
 			return
@@ -48,7 +47,7 @@ func _get_drag_data(at_position):
 		var c = Control.new()
 		c.add_child(preview)
 		
-		if(sprite != null):
+		if(sprite != null):			
 			#If we are not trying to drag the TRect that represent the grid we create the preview
 			preview.expand = true
 			preview.texture = sprite

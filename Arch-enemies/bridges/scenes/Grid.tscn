@@ -775,7 +775,7 @@ sources/6 = SubResource("TileSetAtlasSource_meq0p")
 position = Vector2(192, 108)
 zoom = Vector2(3, 3)
 
-[node name="Grid" type="TileMap" parent="."]
+[node name="Grid" type="TileMap" parent="." node_paths=PackedStringArray("inventory_deer", "inventory_snake", "inventory_spider", "inventory_squirrel")]
 tile_set = SubResource("TileSet_ne4ig")
 format = 2
 layer_0/name = "level"
@@ -783,6 +783,10 @@ layer_0/tile_data = PackedInt32Array(851968, 196610, 0, 851969, 65538, 0, 851970
 layer_1/name = "guidance"
 layer_1/tile_data = PackedInt32Array()
 script = ExtResource("1_xtvvi")
+inventory_deer = NodePath("animal_inventory_counter/deer")
+inventory_snake = NodePath("animal_inventory_counter/snake")
+inventory_spider = NodePath("animal_inventory_counter/spider")
+inventory_squirrel = NodePath("animal_inventory_counter/squirrel")
 
 [node name="Grid_Visualizer" type="Node2D" parent="Grid"]
 script = ExtResource("2_d8ovy")
@@ -885,6 +889,27 @@ size_flags_vertical = 4
 
 [node name="goal" parent="Grid" instance=ExtResource("16_f3lv2")]
 position = Vector2(340, 95)
+
+[node name="animal_inventory_counter" type="HBoxContainer" parent="Grid"]
+offset_top = 38.0
+offset_right = 52.0
+offset_bottom = 61.0
+
+[node name="deer" type="Label" parent="Grid/animal_inventory_counter"]
+layout_mode = 2
+text = "0"
+
+[node name="snake" type="Label" parent="Grid/animal_inventory_counter"]
+layout_mode = 2
+text = "0"
+
+[node name="spider" type="Label" parent="Grid/animal_inventory_counter"]
+layout_mode = 2
+text = "0"
+
+[node name="squirrel" type="Label" parent="Grid/animal_inventory_counter"]
+layout_mode = 2
+text = "0"
 
 [node name="parallax_background" parent="." instance=ExtResource("18_uekha")]
 
