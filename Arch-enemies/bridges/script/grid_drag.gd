@@ -108,7 +108,7 @@ func _on_grid_current_grid(current_grid):
 	grid = current_grid
 	
 func is_snake_allowed(pos):
-	if(out_of_bound(pos, 5, 1)):
+	if(in_bound(pos, 5, 1)):
 		return false
 	var is_allowed = false
 	var is_free = true
@@ -131,7 +131,7 @@ func is_snake_allowed(pos):
 	return is_allowed and is_free and head_free
 
 func is_spider_allowed(pos):
-	if(out_of_bound(pos, 1, 1)):
+	if(in_bound(pos, 1, 1)):
 		return false
 	if(pos.x > grid.size() or pos.y > grid[0].size()):
 		return false
@@ -141,7 +141,7 @@ func is_spider_allowed(pos):
 	return is_allowed_and_free
 	
 func is_deer_allowed(pos):
-	if(out_of_bound(pos, 4, 4)):
+	if(in_bound(pos, 4, 4)):
 		return false
 	var is_allowed = false 
 	var is_free = true 
@@ -162,7 +162,7 @@ func is_deer_allowed(pos):
 	return is_allowed and is_free
 
 func is_squirrel_allowed(pos):
-	if(out_of_bound(pos, 1, 2)):
+	if(in_bound(pos, 1, 2)):
 		return false
 	var is_allowed = false
 	var is_free = true
@@ -177,15 +177,14 @@ func is_squirrel_allowed(pos):
 			is_free = false
 	return is_allowed and is_free
 	
-func out_of_bound(pos, off_x, off_y):
+func in_bound(pos, off_x, off_y):
 	var max_x = grid.size() - 1
 	var max_y = grid[0].size() - 1
-	var bound = false
-	#First we make sure the cursor is not on the edge of the grid
-	bound = bound or pos.x > 0 or pos.y > 0
-	bound = bound or pos.x < max_x or pos.y < max_y
-	#Then Countin from the bottom sqaure we use the dimensions to make sure it
-	#is not out of bound
-	bound = bound or pos.x + off_x < max_x 
-	bound = bound or pos.y - off_y < max_y
-	return bound
+	#First we check if it is not above or to the left of the screen
+	var bound = pos.x > 0 and pos.y > 0 
+	#Second we do the same for below or right of the screen
+	bound = bound and pos.x < max_x and pos.y < max_y 
+	#Finally we check if the sprite stretches out of the screen
+	bound = bound and pos.x + off_x <= max_x 
+	bound = bound and pos.y - off_y >= 0
+	return not bound
