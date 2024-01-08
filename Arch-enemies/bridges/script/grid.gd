@@ -347,15 +347,17 @@ func last_state():
 			color_grid()
 
 func tile_update(pos, current, next):
-	if grid[pos.x][pos.y] == ENTITY_TYPES.AIR:
+	#We check what the current square is, based on what we want to put there next we either do it
+	#Or do not do it. Hierarch is currently FORBIDDEN > SHALLOW > ALLOWED > SIDE > BOTTOM > AIR
+	if current == ENTITY_TYPES.AIR:
 		grid[pos.x][pos.y] = next
-	elif grid[pos.x][pos.y] == ENTITY_TYPES.SHALLOW and next == ENTITY_TYPES.FORBIDDEN:
+	elif current == ENTITY_TYPES.SHALLOW and next == ENTITY_TYPES.FORBIDDEN:
 		grid[pos.x][pos.y] = next
-	elif grid[pos.x][pos.y] == ENTITY_TYPES.BOTTOM and not next == ENTITY_TYPES.SHALLOW:
+	elif current == ENTITY_TYPES.BOTTOM and not next == ENTITY_TYPES.SHALLOW:
 		grid[pos.x][pos.y] = next
-	elif grid[pos.x][pos.y] == ENTITY_TYPES.SIDE and not next == ENTITY_TYPES.SHALLOW and not next == ENTITY_TYPES.BOTTOM:
+	elif current == ENTITY_TYPES.SIDE and not next == ENTITY_TYPES.SHALLOW and not next == ENTITY_TYPES.BOTTOM:
 		grid[pos.x][pos.y] = next
-	elif grid[pos.x][pos.y] == ENTITY_TYPES.ALLOWED and next == ENTITY_TYPES.FORBIDDEN:
+	elif current == ENTITY_TYPES.ALLOWED and next == ENTITY_TYPES.FORBIDDEN:
 		grid[pos.x][pos.y] = next
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
