@@ -222,14 +222,14 @@ func update_grid(pos, data):
 						grid[x + delta][y - epsilon] = ENTITY_TYPES.ANIMAL
 						set_cell(ACTIVE_LAYER_ID, Vector2i(x + delta, y - epsilon), DEER_TILE_ID, Vector2i(delta, 3 - epsilon))
 			for position in new_allowed:
-				if(grid[x + position.x][y - position.y] == ENTITY_TYPES.AIR):
-					grid[x + position.x][y - position.y] = ENTITY_TYPES.ALLOWED	
+				var current = grid[x + position.x][y - position.y]
+				tile_update(Vector2i(x + position.x, y - position.y), current, ENTITY_TYPES.ALLOWED)
 			for position in new_side:
-				if(grid[x + position.x][y - position.y] == ENTITY_TYPES.AIR):
-					grid[x + position.x][y - position.y] = ENTITY_TYPES.SIDE
+				var current = grid[x + position.x][y - position.y]
+				tile_update(Vector2i(x + position.x, y - position.y), current, ENTITY_TYPES.SIDE)
 			for position in new_bottom:
-				if(grid[x + position.x][y - position.y] == ENTITY_TYPES.AIR):
-					grid[x + position.x][y - position.y] = ENTITY_TYPES.BOTTOM
+				var current = grid[x + position.x][y - position.y]
+				tile_update(Vector2i(x + position.x, y - position.y), current, ENTITY_TYPES.BOTTOM)
 		"SNAKE":
 			#Snake works just like Deer
 			var new_allowed = [Vector2i(0, 1), Vector2i(1, 1), Vector2i(2, 1), Vector2i(3, 1)]
@@ -243,25 +243,25 @@ func update_grid(pos, data):
 				grid[x + delta][y] = ENTITY_TYPES.ANIMAL
 				set_cell(ACTIVE_LAYER_ID, Vector2i(x + delta, y), SNAKE_TILE_ID, Vector2i(delta, 0))
 			for position in new_allowed:
-				if(grid[x + position.x][y - position.y] == ENTITY_TYPES.AIR):
-					grid[x + position.x][y - position.y] = ENTITY_TYPES.ALLOWED
+				var current = grid[x + position.x][y - position.y]
+				tile_update(Vector2i(x + position.x, y - position.y), current, ENTITY_TYPES.ALLOWED)
 			for position in new_forbidden:
-				if(grid[x + position.x][y - position.y] == ENTITY_TYPES.AIR):
-					grid[x + position.x][y - position.y] = ENTITY_TYPES.FORBIDDEN
+				var current = grid[x + position.x][y - position.y]
+				tile_update(Vector2i(x + position.x, y - position.y), current, ENTITY_TYPES.FORBIDDEN)
 			for position in new_side:
-				if(grid[x + position.x][y - position.y] == ENTITY_TYPES.AIR):
-					grid[x + position.x][y - position.y] = ENTITY_TYPES.SIDE
+				var current = grid[x + position.x][y - position.y]
+				tile_update(Vector2i(x + position.x, y - position.y), current, ENTITY_TYPES.SIDE)
 			for position in new_bottom:
-				if(grid[x + position.x][y - position.y] == ENTITY_TYPES.AIR):
-					grid[x + position.x][y - position.y] = ENTITY_TYPES.BOTTOM
+				var current = grid[x + position.x][y - position.y]
+				tile_update(Vector2i(x + position.x, y - position.y), current, ENTITY_TYPES.BOTTOM)
 		"SPIDER":
 			#Spider is the easiest, nothing much happens here
 			var new_allowed = [Vector2i(0, 1), Vector2i(1, 0), Vector2i(0, -1), Vector2i(-1, 0)]
 			grid[x][y] = ENTITY_TYPES.ANIMAL
 			set_cell(ACTIVE_LAYER_ID, Vector2i(x, y), SPIDER_TILE_ID, Vector2i(0, 0))
 			for position in new_allowed:
-				if(grid[x + position.x][y - position.y] == ENTITY_TYPES.AIR):
-					grid[x + position.x][y - position.y] = ENTITY_TYPES.ALLOWED
+				var current = grid[x + position.x][y - position.y]
+				tile_update(Vector2i(x + position.x, y - position.y), current, ENTITY_TYPES.ALLOWED)
 		"SQUIRREL":
 			#Squirrel like the other animals
 			var new_allowed = [Vector2i(0, 2)]
@@ -271,14 +271,14 @@ func update_grid(pos, data):
 				grid[x][y - epsilon] = ENTITY_TYPES.ANIMAL
 				set_cell(ACTIVE_LAYER_ID, Vector2i(x, y - epsilon), SQUIRREL_TILE_ID, Vector2i(0, 1 - epsilon))
 			for position in new_allowed:
-				if(grid[x + position.x][y - position.y] == ENTITY_TYPES.AIR):
-					grid[x + position.x][y - position.y] = ENTITY_TYPES.ALLOWED
+				var current = grid[x + position.x][y - position.y]
+				tile_update(Vector2i(x + position.x, y - position.y), current, ENTITY_TYPES.ALLOWED)
 			for position in new_side:
-				if(grid[x + position.x][y - position.y] == ENTITY_TYPES.AIR):
-					grid[x + position.x][y - position.y] = ENTITY_TYPES.SIDE
+				var current = grid[x + position.x][y - position.y]
+				tile_update(Vector2i(x + position.x, y - position.y), current, ENTITY_TYPES.SIDE)
 			for position in new_bottom:
-				if(grid[x + position.x][y - position.y] == ENTITY_TYPES.AIR):
-					grid[x + position.x][y - position.y] = ENTITY_TYPES.BOTTOM
+				var current = grid[x + position.x][y - position.y]
+				tile_update(Vector2i(x + position.x, y - position.y), current, ENTITY_TYPES.BOTTOM)
 			
 	#Whenever we change the grid, i.e. update it, we have to track that here
 	state += 1
@@ -345,6 +345,20 @@ func last_state():
 			grid = last_states[state % save_states].duplicate(true)
 			last_states[(state + 1) % save_states] = [[]]
 			color_grid()
+
+func tile_update(pos, current, next):
+	#We check what the current square is, based on what we want to put there next we either do it
+	#Or do not do it. Hierarch is currently FORBIDDEN > SHALLOW > ALLOWED > SIDE > BOTTOM > AIR
+	if current == ENTITY_TYPES.AIR:
+		grid[pos.x][pos.y] = next
+	elif current == ENTITY_TYPES.SHALLOW and next == ENTITY_TYPES.FORBIDDEN:
+		grid[pos.x][pos.y] = next
+	elif current == ENTITY_TYPES.BOTTOM and not next == ENTITY_TYPES.SHALLOW:
+		grid[pos.x][pos.y] = next
+	elif current == ENTITY_TYPES.SIDE and not next == ENTITY_TYPES.SHALLOW and not next == ENTITY_TYPES.BOTTOM:
+		grid[pos.x][pos.y] = next
+	elif current == ENTITY_TYPES.ALLOWED and next == ENTITY_TYPES.FORBIDDEN:
+		grid[pos.x][pos.y] = next
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
