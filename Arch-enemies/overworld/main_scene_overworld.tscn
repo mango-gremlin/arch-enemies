@@ -22,7 +22,7 @@ script = ExtResource("1_pwtu4")
 
 [node name="bridge_interaction" parent="." instance=ExtResource("6_iairi")]
 position = Vector2(314, 79)
-dest_island_id = 1
+start_island_id = 1
 bridge_description = "connects from 0 to 1 "
 
 [node name="bridge_parts" type="Node2D" parent="bridge_interaction"]
@@ -42,6 +42,7 @@ shape = SubResource("RectangleShape2D_25akq")
 
 [node name="bridge_interaction2" parent="." instance=ExtResource("6_iairi")]
 position = Vector2(211, 81)
+dest_island_id = 1
 bridge_description = "connects from 0 to 0"
 
 [node name="bridge_parts" type="Node2D" parent="bridge_interaction2"]
@@ -89,7 +90,7 @@ reward_item = 1
 
 [node name="bridge_interaction3" parent="." instance=ExtResource("6_iairi")]
 position = Vector2(119, 13)
-start_island_id = 2
+dest_island_id = 2
 bridge_description = "this connects 2 and 0 "
 
 [node name="bridge_parts" type="Node2D" parent="bridge_interaction3"]
@@ -115,6 +116,13 @@ npc_animal_type = 1
 quest_type = 0
 required_item = 2
 quest_reward = 1
+
+[node name="Label" type="Label" parent="bridge_interaction3"]
+offset_left = -34.0
+offset_top = -50.0
+offset_right = 43.0
+offset_bottom = -27.0
+text = "0->2 play!"
 
 [node name="NpcInteraction3" parent="." instance=ExtResource("7_33ud0")]
 position = Vector2(409, 335)
