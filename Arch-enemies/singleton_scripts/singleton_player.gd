@@ -9,6 +9,7 @@ extends Node
 # -- Signals 
 signal updated_item_inventory(new_inventory)
 signal updated_animal_inventory(new_animal_inventory)
+signal updated_quest_list(new_quest_list)
 
 # --- / 
 # -- / Player management
@@ -127,11 +128,38 @@ var islands_reachable:Array[bool]
 # --- / 
 # -- / NPC interaction management
 
+# denotes quests that are actively tracked ( unresolved so far ) 
+# gets filled with the string-representation of a quest!
+var quest_string_dict:Dictionary = {}
+
+# takes id of npc and adds its quest to the list
+# emits signal to update ui afterwards
+# if npc does not have a quest, nothing changes
+func add_quest_string(npc_id:int):
+	var npc_object:NPC_interaction = obtain_npc_object(npc_id)
+	var quest_id = npc_object.obtain_quest_id()
+	if quest_string_dict.has(quest_id):
+		return
+		# quest not found in dict yet
+		# adding quest if it was not found already in dictionary
+	if npc_object.has_quest():
+		var stringified_quest:String = npc_object.stringify_quest()
+		quest_string_dict[quest_id] = stringified_quest
+		updated_quest_list.emit(quest_string_dict)
+
+# takes id of npc and removes its entry in the list of quests
+# only does so, if quest was resolved, changes nothing otherwise
+func remove_quest_string(npc_id:int):
+	var npc_object:NPC_interaction = obtain_npc_object(npc_id)
+	var quest_id = npc_object.obtain_quest_id()
+	if npc_object.check_quest_condition():
+		# removing entry as it was resolved
+		quest_string_dict.erase(quest_id)
+		updated_quest_list.emit(quest_string_dict)
+
 # denotes all NPCs available in current overworld 
 # key ==> value ; npcid ==> NPC Object
-var dictionary_npc:Dictionary = {
-	
-} 
+var dictionary_npc:Dictionary = {} 
 
 # adds npc object corresponding to its npc id 
 func add_npc_instance(npc_id:int,npc_object:NPC_interaction):
@@ -160,11 +188,16 @@ func check_npc_state(npc_id:int) -> bool:
 
 # takes npc Id and adds it to array of npcs talked to 
 # does not change if it was contained already
+# adds / removes quest of npc as well 
+# FIXME maybe refactor 
 func add_npc_talked_to(npc_id:int):
 	if npc_talked_to.has(npc_id):
+		remove_quest_string(npc_id)
 		return 
 	# adding to array
 	npc_talked_to.append(npc_id)
+	# also contains logic for adding quest ! 
+	add_quest_string(npc_id)
 	
 
 # --- / 

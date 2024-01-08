@@ -13,21 +13,27 @@ func _ready():
 	# connecting signal to singleton
 	SingletonPlayer.connect("updated_item_inventory",_on_player_updated_inventory) 
 	SingletonPlayer.connect("updated_animal_inventory",_on_animal_inventory_updated)
+	SingletonPlayer.connect("updated_quest_list",_on_quest_list_updated)
 	# initialize ui
 	_update_item_inventory_label()
 	_update_animal_inventory_label()
 
 
 var player_item_inventory:Dictionary = {}:
-	set(newDict):
+	set(new_dict):
 		# if a new array was given, we update its value, also the label
-		player_item_inventory = newDict
+		player_item_inventory = new_dict
 		_update_item_inventory_label()
 
 var player_animal_inventory:Dictionary = {}:
-	set(newDict):
-		player_animal_inventory = newDict
+	set(new_dict):
+		player_animal_inventory = new_dict
 		_update_animal_inventory_label()
+
+var player_quest_dictionary:Dictionary = {}:
+	set(new_dict):
+		player_quest_dictionary = new_dict
+		_update_quest_list()
 
 func _update_item_inventory_label():
 	# iterate over item
@@ -46,9 +52,16 @@ func _update_animal_inventory_label():
 		var animal_name:String = Animal.type_to_string(animal)
 		label_string += str(animal_amount) + "x " + str(animal_name) + "\n"
 	animal_list_label.text = label_string
+
+# iterates over received list of quests
+# displays them formatted in newline 
+func _update_quest_list():
+	var label_string:String = ""
+	for quest_id:int in player_quest_dictionary:
+		var quest_string:String = player_quest_dictionary[quest_id]
 		
-		
-	
+		label_string += quest_string + "\n"
+	quest_list_label.text = label_string
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -61,3 +74,6 @@ func _on_player_updated_inventory(inventory):
 
 func _on_animal_inventory_updated(new_animal_inventory):
 	player_animal_inventory = new_animal_inventory
+
+func _on_quest_list_updated(new_quests):
+	player_quest_dictionary = new_quests
