@@ -10,6 +10,7 @@ func _ready():
 func _process(delta):
 	#The normal drag does not work with zoom so we do our own
 	var global = get_global_mouse_position()
+	Global.currently_dragging = true
 	match tooltip_text:
 		#We have to adjust the offset based on the animal
 		"DEER":
@@ -21,4 +22,5 @@ func _process(delta):
 		"SQUIRREL":
 			position = Vector2(global.x-112, global.y-20)
 	if Input.is_action_just_released("click"):
+		Global.currently_dragging = false
 		queue_free()
