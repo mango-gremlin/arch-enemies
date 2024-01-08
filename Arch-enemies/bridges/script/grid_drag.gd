@@ -19,7 +19,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass	
+	pass
 
 func _get_drag_data(at_position):
 	if Global.drag_mode:

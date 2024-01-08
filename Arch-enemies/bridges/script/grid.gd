@@ -43,6 +43,7 @@ var shore_side = []
 var shore_bottom = []
 var shallow_squares = []
 var hazard_squares = []
+var water_squares = []
 
 #This is the signal we use to transfer the current grid to child nodes
 signal current_grid(current_grid)
@@ -89,6 +90,7 @@ func _ready():
 			# if that tileset is water, assign to that type
 			elif(tile_id == WATER_TILE_ID):
 				grid[x].append(ENTITY_TYPES.WATER)
+				water_squares.append(square)
 				
 				# check if square is a shallow
 				# a shallow has air or decoration above, and ground below
@@ -121,6 +123,10 @@ func _ready():
 	
 	# assign forbidden zones around the fox' starting position
 	grid = assign_fox_forbidden_zones(grid)
+	
+	var danger_area = preload("res://bridges/scenes/danger_detection.tscn")
+	var danger_squares = water_squares + hazard_squares
+	spawn_danger_area2D(danger_area, danger_squares)
 	
 	color_grid()
 	#Now we save the inital state of the grid for reset and previous state
@@ -160,6 +166,19 @@ func assign_fox_forbidden_zones(grid:Array) -> Array:
 			# assign each square as forbidden
 			grid[crt_square.x][crt_square.y] = ENTITY_TYPES.FORBIDDEN
 	return grid
+
+# instantiate area2D with their respective collision shapes
+# as they are dangers, add a signal that is emitted when fox touches them
+func spawn_danger_area2D(area, squares):
+	for square in squares:
+		var instance = area.instantiate()
+		self.add_child(instance)
+		instance.global_position = Vector2(square.x * 10 + 5, square.y * 10 + 5)
+		instance.body_entered.connect(on_contact_danger)
+
+# when contacting a danger, reset the position of fox
+func on_contact_danger(body):
+	$Player.reset_player()
 
 func color_grid():
 	#This function colors the grid cells that are not predefined, i.e. the background
