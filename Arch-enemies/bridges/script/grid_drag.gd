@@ -1,7 +1,7 @@
 extends TextureRect
 
 #Here we define the elements we need to operate on the grid
-var grid = []
+var grid = [[]]
 @export var square_size = 10
 enum ENTITY_TYPES {GROUND, WATER, AIR, ANIMAL, FORBIDDEN, ALLOWED, SIDE, BOTTOM, SHALLOW}
 #We have to use our own preview scene because otherwise things are terrible
@@ -108,6 +108,8 @@ func _on_grid_current_grid(current_grid):
 	grid = current_grid
 	
 func is_snake_allowed(pos):
+	if(out_of_bound(pos, 5, 1)):
+		return false
 	var is_allowed = false
 	var is_free = true
 	var head_free = true
@@ -129,12 +131,18 @@ func is_snake_allowed(pos):
 	return is_allowed and is_free and head_free
 
 func is_spider_allowed(pos):
+	if(out_of_bound(pos, 1, 1)):
+		return false
+	if(pos.x > grid.size() or pos.y > grid[0].size()):
+		return false
 	var pos_Type = grid[pos.x][pos.y]
 	var is_allowed_and_free = pos_Type == ENTITY_TYPES.ALLOWED \
 		or pos_Type == ENTITY_TYPES.SIDE or pos_Type == ENTITY_TYPES.BOTTOM
 	return is_allowed_and_free
 	
 func is_deer_allowed(pos):
+	if(out_of_bound(pos, 4, 4)):
+		return false
 	var is_allowed = false 
 	var is_free = true 
 	#The empty slots in the deer sprite
@@ -154,6 +162,8 @@ func is_deer_allowed(pos):
 	return is_allowed and is_free
 
 func is_squirrel_allowed(pos):
+	if(out_of_bound(pos, 1, 2)):
+		return false
 	var is_allowed = false
 	var is_free = true
 	for epsilon in range(2):
@@ -166,3 +176,16 @@ func is_squirrel_allowed(pos):
 			pos_Type == ENTITY_TYPES.WATER or pos_Type == ENTITY_TYPES.ANIMAL):
 			is_free = false
 	return is_allowed and is_free
+	
+func out_of_bound(pos, off_x, off_y):
+	var max_x = grid.size() - 1
+	var max_y = grid[0].size() - 1
+	var bound = false
+	#First we make sure the cursor is not on the edge of the grid
+	bound = bound or pos.x > 0 or pos.y > 0
+	bound = bound or pos.x < max_x or pos.y < max_y
+	#Then Countin from the bottom sqaure we use the dimensions to make sure it
+	#is not out of bound
+	bound = bound or pos.x + off_x < max_x 
+	bound = bound or pos.y - off_y < max_y
+	return bound
