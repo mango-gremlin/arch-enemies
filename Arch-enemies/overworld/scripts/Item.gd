@@ -69,14 +69,15 @@ func obtain_amount() -> int:
 func increase_amount():
 	item_amount += 1
 
+func decrease_amount():
+	item_amount -= 1
 
 func set_amount(newamount:int):
 	item_amount = newamount
 
 
 # returns string representation of obtained item 
-# TODO Where is it used?
-func set_item_name(type:ItemType):
+static func set_item_name(type:ItemType) -> String:
 	match type:
 		ItemType.HONEY:
 			return "Honey"
@@ -96,7 +97,7 @@ func set_item_name(type:ItemType):
 			return "Error"
 			
 
-func item_type_to_string(itemType: ItemType) -> String:
+static func item_type_to_string(item_type: ItemType) -> String:
 	match item_type:
 		ItemType.HONEY:
 			return "HONEY"
@@ -115,17 +116,6 @@ func item_type_to_string(itemType: ItemType) -> String:
 		_:
 			return "NONE"
 		
-
-# converts itemtype to json representation 
-# returns json-string representing item
-func to_json():
-	var data = {
-		"type" : item_type_to_string(item_type),
-		# "item_description" : item_description
-	}
-	
-	return data
-	
 
 # converts string to enum of type item
 # returns obtained type
@@ -149,17 +139,14 @@ static func string_to_item_type(str):
 			# usually not the case 
 			print("Invalid string representation received")
 			return ItemType.NONE
-		
 
-
-# initalizes inventory with the corrosponding Item instances
-static func init_items():
-	var inventory:Dictionary = {}
-	
+# initializes dictionary containing quantity for each item available
+# structure: Key=ItemType, Value=Int -> denotes Amount of item
+static func init_item_inventory() -> Dictionary:
+	var item_inventory: Dictionary = {}
 	for item_type:ItemType in ItemType.values():
-		if item_type == ItemType.NONE:
-			continue
-		inventory[item_type] = Item.new(item_type)
-	
-	return inventory
-	
+		# iterate over every ItemType available
+		if item_type != ItemType.NONE:
+			item_inventory[item_type] = 0
+	return item_inventory
+

@@ -1,10 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://cgfkelxiskcux"]
+[gd_scene load_steps=9 format=3 uid="uid://cgfkelxiskcux"]
 
 [ext_resource type="Script" path="res://overworld/overworld.gd" id="1_pwtu4"]
 [ext_resource type="PackedScene" uid="uid://dndu4pg1i3tlf" path="res://overworld/scenes/player.tscn" id="2_mpe4y"]
 [ext_resource type="PackedScene" uid="uid://p30p3o0e473c" path="res://overworld/scenes/world.tscn" id="3_xuy1h"]
 [ext_resource type="PackedScene" uid="uid://cgvraulefjyn8" path="res://overworld/ui/overworld_ui/overworld_ui.tscn" id="4_4hawq"]
-[ext_resource type="PackedScene" uid="uid://dbffmmmqyknux" path="res://overworld/dialogue/DialogueUI.tscn" id="5_epx82"]
 [ext_resource type="PackedScene" uid="uid://bj3a1sw80l6wj" path="res://overworld/entities/interaction_overworld/item_interaction.tscn" id="6_66i44"]
 [ext_resource type="PackedScene" uid="uid://5llfgi2ysvie" path="res://overworld/entities/interaction_overworld/bridge_interaction.tscn" id="6_iairi"]
 [ext_resource type="PackedScene" uid="uid://drn1loe1wknbq" path="res://overworld/entities/interaction_overworld/npc_interaction.tscn" id="7_33ud0"]
@@ -21,10 +20,8 @@ script = ExtResource("1_pwtu4")
 
 [node name="overworld_ui" parent="." instance=ExtResource("4_4hawq")]
 
-[node name="DialogueGui" parent="." instance=ExtResource("5_epx82")]
-
 [node name="bridge_interaction" parent="." instance=ExtResource("6_iairi")]
-position = Vector2(190, 28)
+position = Vector2(314, 79)
 dest_island_id = 1
 bridge_description = "connects from 0 to 1 "
 
@@ -40,11 +37,11 @@ offset_bottom = 13.0
 [node name="bridge_collision_shape" type="StaticBody2D" parent="bridge_interaction"]
 
 [node name="bridge_collision" type="CollisionShape2D" parent="bridge_interaction/bridge_collision_shape"]
-position = Vector2(25, 1)
+position = Vector2(-27, 2)
 shape = SubResource("RectangleShape2D_25akq")
 
 [node name="bridge_interaction2" parent="." instance=ExtResource("6_iairi")]
-position = Vector2(176, 80)
+position = Vector2(211, 81)
 bridge_description = "connects from 0 to 0"
 
 [node name="bridge_parts" type="Node2D" parent="bridge_interaction2"]
@@ -59,39 +56,39 @@ offset_bottom = 13.0
 [node name="bridge_collision_shape" type="StaticBody2D" parent="bridge_interaction2"]
 
 [node name="bridge_collision" type="CollisionShape2D" parent="bridge_interaction2/bridge_collision_shape"]
-position = Vector2(25, 1)
+position = Vector2(27, 0)
 shape = SubResource("RectangleShape2D_25akq")
 
 [node name="item_interaction" parent="." instance=ExtResource("6_66i44")]
-position = Vector2(378, 113)
-item_type = 2
+position = Vector2(289, 191)
+item_type = 0
 item_dialogue_success = "you got an item!"
 item_dialogue_failure = "no item found"
 
 [node name="item_interaction2" parent="." instance=ExtResource("6_66i44")]
-position = Vector2(169, 8)
+position = Vector2(201, 24)
 item_type = 3
 item_dialogue_success = "item? "
 item_dialogue_failure = "item :("
 
 [node name="NpcInteraction" parent="." instance=ExtResource("7_33ud0")]
-position = Vector2(69, 24)
+position = Vector2(185, 51)
 npc_name = "Rubert"
-npc_type = 1
-has_quest = 3
-dialogue_quest_done = "does not have a quest on default!"
+quest_type = 1
+quest_reward = 1
 
 [node name="NpcInteraction2" parent="." instance=ExtResource("7_33ud0")]
-position = Vector2(35, 59)
+position = Vector2(235, 143)
+npc_name = "Evillyn"
 npc_id = 1
-npc_name = "Evelyn?"
-npc_type = 2
-quest_reward = 1
-dialogue_quest_undone = "missing the item :("
-dialogue_quest_done = "thanks for the item!"
+npc_animal_type = 3
+quest_type = 2
+required_npc_id = 3
+quest_reward = 0
+reward_item = 1
 
 [node name="bridge_interaction3" parent="." instance=ExtResource("6_iairi")]
-position = Vector2(107, 20)
+position = Vector2(119, 13)
 start_island_id = 2
 bridge_description = "this connects 2 and 0 "
 
@@ -107,7 +104,22 @@ offset_bottom = 13.0
 [node name="bridge_collision_shape" type="StaticBody2D" parent="bridge_interaction3"]
 
 [node name="bridge_collision" type="CollisionShape2D" parent="bridge_interaction3/bridge_collision_shape"]
-position = Vector2(25, 1)
+position = Vector2(4, -16)
 shape = SubResource("RectangleShape2D_25akq")
+
+[node name="NpcInteraction" parent="bridge_interaction3" instance=ExtResource("7_33ud0")]
+position = Vector2(38, 194)
+npc_name = "glnnn"
+npc_id = 2
+npc_animal_type = 1
+quest_type = 0
+required_item = 2
+quest_reward = 1
+
+[node name="NpcInteraction3" parent="." instance=ExtResource("7_33ud0")]
+position = Vector2(409, 335)
+npc_name = "esther"
+npc_id = 3
+npc_animal_type = 3
 
 [connection signal="saved_player" from="Player" to="." method="_on_player_saved_player"]

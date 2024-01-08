@@ -1,0 +1,172 @@
+[gd_scene load_steps=9 format=3 uid="uid://dtvq143m5ddef"]
+
+[ext_resource type="Script" path="res://overworld/overworld.gd" id="1_ui4aw"]
+[ext_resource type="PackedScene" uid="uid://dndu4pg1i3tlf" path="res://overworld/scenes/player.tscn" id="2_4d4x5"]
+[ext_resource type="PackedScene" uid="uid://p30p3o0e473c" path="res://overworld/scenes/world.tscn" id="3_4d472"]
+[ext_resource type="PackedScene" uid="uid://cgvraulefjyn8" path="res://overworld/ui/overworld_ui/overworld_ui.tscn" id="4_p4p2t"]
+[ext_resource type="PackedScene" uid="uid://5llfgi2ysvie" path="res://overworld/entities/interaction_overworld/bridge_interaction.tscn" id="5_f6jxn"]
+[ext_resource type="PackedScene" uid="uid://bj3a1sw80l6wj" path="res://overworld/entities/interaction_overworld/item_interaction.tscn" id="6_ij5ah"]
+[ext_resource type="PackedScene" uid="uid://drn1loe1wknbq" path="res://overworld/entities/interaction_overworld/npc_interaction.tscn" id="7_06f0y"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_25akq"]
+size = Vector2(36, 20)
+
+[node name="maingame" type="Node"]
+script = ExtResource("1_ui4aw")
+
+[node name="Player" parent="." instance=ExtResource("2_4d4x5")]
+
+[node name="world" parent="." instance=ExtResource("3_4d472")]
+
+[node name="overworld_ui" parent="." instance=ExtResource("4_p4p2t")]
+
+[node name="bridge_interaction" parent="." instance=ExtResource("5_f6jxn")]
+position = Vector2(206, 23)
+dest_island_id = 1
+bridge_description = "connects from 0 to 1 "
+
+[node name="bridge_parts" type="Node2D" parent="bridge_interaction"]
+visible = false
+
+[node name="bridge_part" type="ColorRect" parent="bridge_interaction/bridge_parts"]
+offset_left = 12.0
+offset_top = -7.0
+offset_right = 37.0
+offset_bottom = 13.0
+
+[node name="bridge_collision_shape" type="StaticBody2D" parent="bridge_interaction"]
+
+[node name="bridge_collision" type="CollisionShape2D" parent="bridge_interaction/bridge_collision_shape"]
+position = Vector2(25, 1)
+shape = SubResource("RectangleShape2D_25akq")
+
+[node name="bridge_interaction3" parent="." instance=ExtResource("5_f6jxn")]
+position = Vector2(109, -32)
+start_island_id = 2
+bridge_description = "this connects 2 and 0 "
+
+[node name="bridge_parts" type="Node2D" parent="bridge_interaction3"]
+visible = false
+
+[node name="bridge_part" type="ColorRect" parent="bridge_interaction3/bridge_parts"]
+offset_left = 12.0
+offset_top = -7.0
+offset_right = 37.0
+offset_bottom = 13.0
+
+[node name="bridge_collision_shape" type="StaticBody2D" parent="bridge_interaction3"]
+
+[node name="bridge_collision" type="CollisionShape2D" parent="bridge_interaction3/bridge_collision_shape"]
+position = Vector2(25, 1)
+shape = SubResource("RectangleShape2D_25akq")
+
+[node name="bridge_interaction2" parent="." instance=ExtResource("5_f6jxn")]
+position = Vector2(204, 88)
+bridge_description = "connects from 0 to 0"
+
+[node name="bridge_parts" type="Node2D" parent="bridge_interaction2"]
+visible = false
+
+[node name="bridge_part" type="ColorRect" parent="bridge_interaction2/bridge_parts"]
+offset_left = 12.0
+offset_top = -7.0
+offset_right = 37.0
+offset_bottom = 13.0
+
+[node name="bridge_collision_shape" type="StaticBody2D" parent="bridge_interaction2"]
+
+[node name="bridge_collision" type="CollisionShape2D" parent="bridge_interaction2/bridge_collision_shape"]
+position = Vector2(25, 1)
+shape = SubResource("RectangleShape2D_25akq")
+
+[node name="item_interaction" parent="." instance=ExtResource("6_ij5ah")]
+position = Vector2(378, 113)
+item_type = 2
+item_dialogue_success = "you got an item!"
+item_dialogue_failure = "no item found"
+
+[node name="item_interaction2" parent="." instance=ExtResource("6_ij5ah")]
+position = Vector2(130, 17)
+item_type = 3
+item_dialogue_success = "item? "
+item_dialogue_failure = "item :("
+
+[node name="NpcInteraction" parent="." instance=ExtResource("7_06f0y")]
+position = Vector2(560, 40)
+npc_name = "Rubert"
+npc_id = 1
+quest_type = 1
+required_item = 6
+quest_reward = 0
+reward_item = 1
+
+[node name="NpcInteraction2" parent="." instance=ExtResource("7_06f0y")]
+position = Vector2(560, 69)
+npc_name = "Eve"
+npc_id = 2
+quest_type = 0
+quest_reward = 0
+reward_item = 2
+
+[node name="Label7" type="Label" parent="."]
+offset_left = 413.0
+offset_top = 89.0
+offset_right = 564.0
+offset_bottom = 112.0
+text = "NPC  Q, unsolved ->"
+
+[node name="Label6" type="Label" parent="."]
+offset_left = 407.0
+offset_top = 55.0
+offset_right = 558.0
+offset_bottom = 78.0
+text = "Item  Q, unsolved ->"
+
+[node name="Label5" type="Label" parent="."]
+offset_left = 398.0
+offset_top = 28.0
+offset_right = 549.0
+offset_bottom = 51.0
+text = "Bridge Q, solved ->"
+
+[node name="Label4" type="Label" parent="."]
+offset_left = 414.0
+offset_top = 1.0
+offset_right = 565.0
+offset_bottom = 24.0
+text = "NPC INTERACTIONS"
+
+[node name="Label3" type="Label" parent="."]
+offset_left = 197.0
+offset_top = 99.0
+offset_right = 331.0
+offset_bottom = 174.0
+text = "0 -> 0
+should be solved "
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 202.0
+offset_top = -64.0
+offset_right = 336.0
+offset_bottom = 11.0
+text = "bridge from 
+0 -> 1
+should be solved "
+
+[node name="Label" type="Label" parent="."]
+offset_left = 101.0
+offset_top = -91.0
+offset_right = 193.0
+offset_bottom = -42.0
+text = "bridge from 
+2 -> 0
+"
+
+[node name="NpcInteraction3" parent="." instance=ExtResource("7_06f0y")]
+position = Vector2(560, 101)
+npc_name = "\\\\//"
+npc_id = 3
+quest_type = 2
+required_item = 1
+required_npc_id = 1
+quest_reward = 1

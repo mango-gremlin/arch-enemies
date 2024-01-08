@@ -46,11 +46,7 @@ func _ready():
 # returns true, if possible
 # returns false, otherwise
 func is_obtainable_by_player() -> bool:
-	#FIXME should check on given criteria for player object
-	# could be get_criteria_threshold(criteria:enum)
-	var player_threshold_criteria:int = 10
-	# check whether player meets set criteria
-	if obtain_threshold < player_threshold_criteria and item_amount != 0:
+	if item_amount != 0:
 		return true
 	return false
 

@@ -8,7 +8,7 @@ extends Node
 
 # -- Signals 
 signal updated_item_inventory(new_inventory)
-
+signal updated_animal_inventory(new_animal_inventory)
 
 # --- / 
 # -- / Player management
@@ -29,16 +29,16 @@ func get_player_zoom() -> Vector2:
 # --- / 
 # -- / Item / Inventory management 
 
-@onready var item_inventory:Dictionary = Item.init_items()
+@onready var item_inventory:Dictionary = Item.init_item_inventory()
+@onready var animal_inventory:Dictionary = Animal.init_animal_inventory()
 
-# FIXME should be automatically instantiated like the items above
-@onready var animal_inventory:Dictionary = {
-	AnimalType.SNAKE: 0 ,
-	AnimalType.DEER: 0,
-	AnimalType.SQUIRREL :0 ,
-	AnimalType.SPIDER : 0,
-	}
+# retrieve inventory of items from singleton instance
+func get_item_inventory() -> Dictionary:
+	return item_inventory
 
+# retrieve inventory of animals from singleton instance
+func get_animal_inventory() -> Dictionary:
+	return animal_inventory
 
 # takes new item and updates amount stored in inventory 
 # if ItemType is "None" nothing will be changed 
@@ -46,34 +46,56 @@ func add_to_inventory(new_item:Item.ItemType):
 	if new_item != Item.ItemType.NONE:
 		# we can verify that every item is constantly available!
 		var selected_item = item_inventory[new_item]
-		selected_item.increase_amount()
+		item_inventory[new_item] = selected_item + 1 
+		#selected_item.increase_amount()
 		# emit signal to update Ui
 		updated_item_inventory.emit(item_inventory)
 
+# takes new item inventory and replaces the internal item_inventory 
+# may be used to load a saved inventory to the singleton ( save management )
 func set_item_inventory(new_inventory:Dictionary):
 	item_inventory = new_inventory
 	print("setting loaded inventory")
 	updated_item_inventory.emit(item_inventory)
-	
+
+# takes new animal inventory and replaces the internal animal_inventory
+func set_animal_inventory(new_inventory:Dictionary):
+	animal_inventory = new_inventory
+	print("loaded animal inventory")
+	updated_animal_inventory.emit(animal_inventory)
+
 
 # checks whether requested item is contained 
-# returns true if it was and decreases amount by one
+# returns true if it is
 # returns false otherwise
 func request_item(requested_item:Item.ItemType) -> bool: 
 	if item_inventory.has(requested_item):
-		var item_instance:Item = item_inventory[requested_item]
+		var item_instance:int = item_inventory[requested_item]
 		
-		if item_instance.obtain_amount() >= 1:
-			item_instance.set_amount(item_instance.obtain_amount() - 1)
+		if item_instance >= 1:
 			return true
 		
 	return false
 
-func add_to_animal_inventory(new_animal:AnimalType): 
-	if new_animal != AnimalType.NONE:
+# reduce amount of item by one 
+# ought to be preceeded by request_item()
+# FIXME combine with request_item again
+# this introduces calling request_item twice
+# but makes sure to prevent wrong allocations or negative values 
+func use_item(requested_item:Item.ItemType): 
+	if request_item(requested_item):
+		var queried_item = item_inventory[requested_item]
+		item_inventory[requested_item] = queried_item -1
+
+# --- / 
+# -- / animal inventory
+
+func add_to_animal_inventory(new_animal:Animal.AnimalType): 
+	if new_animal != Animal.AnimalType.NONE:
 		# valid entry given 
 		animal_inventory[new_animal] += 1
 		#selected_animal.increase_amount
+		updated_animal_inventory.emit(animal_inventory)
 
 
 # --- / 
@@ -105,17 +127,45 @@ var islands_reachable:Array[bool]
 # --- / 
 # -- / NPC interaction management
 
-enum AnimalType{
-	SNAKE,
-	DEER,
-	SQUIRREL,
-	SPIDER,
-	NONE
-	#FOX.
-	# possibly more 
-}
+# denotes all NPCs available in current overworld 
+# key ==> value ; npcid ==> NPC Object
+var dictionary_npc:Dictionary = {
+	
+} 
 
-var dialogue = Dialogue.new()
+# adds npc object corresponding to its npc id 
+func add_npc_instance(npc_id:int,npc_object:NPC_interaction):
+	dictionary_npc[npc_id] = npc_object
+
+func obtain_npc_object(npc_id) -> NPC_interaction:
+	return dictionary_npc[npc_id]
+
+
+var is_in_dialogue:bool = false 
+# may be improved 
+var active_dialogue:int = 0
+var test:Array
+
+# Dictionary of NPC's that have been talked to
+# -> key: integer : denoting npc_id
+# -> value: bool : denoting whether interaction was done or not 
+# FIXME might lead to wrong interpretation ? 
+var npc_talked_to: Array = [0]
+
+# checks whether player already interacted with npc 
+func check_npc_state(npc_id:int) -> bool: 
+	if npc_talked_to.has(npc_id):
+		return true 
+	return false 
+
+# takes npc Id and adds it to array of npcs talked to 
+# does not change if it was contained already
+func add_npc_talked_to(npc_id:int):
+	if npc_talked_to.has(npc_id):
+		return 
+	# adding to array
+	npc_talked_to.append(npc_id)
+	
 
 # --- / 
 # -- / Bridge management 
@@ -190,10 +240,17 @@ func save_profile_configuration():
 
 # takes npc_id, sets is_in_dialogue to true, 
 # queries dialogue to display from given id
-func enter_dialogue(dialogue_data:Dialogue_Data):
-	dialogue.enter_dialogue(dialogue_data)
+# TODO handle dialogue and query dialogue from given npc_id
+func enter_dialogue(npc_id:int):
+	
+
+	is_in_dialogue = true 
+	active_dialogue = npc_id
+
+	pass
 
 # ends dialogue -> sets is_in_dialogue to false 
 func exit_dialogue():
-	dialogue.exit_dialogue()
+	is_in_dialogue = false 
+	active_dialogue = 0
 	

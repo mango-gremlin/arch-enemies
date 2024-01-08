@@ -32,15 +32,8 @@ func _physics_process(delta):
 
 func player_movement(delta):
 	# disallow movement when in dialogue
-	if SingletonPlayer.dialogue.in_dialogue():
-		if Input.is_action_just_pressed("move_left"): # work around for not working button pressed listeners
-			SingletonPlayer.dialogue.btn_action(0)
-		elif Input.is_action_just_pressed("move_down"):
-			SingletonPlayer.dialogue.btn_action(1)
-		elif Input.is_action_just_pressed("move_right"):
-			SingletonPlayer.dialogue.btn_action(2)
-		
-		return	
+	if SingletonPlayer.is_in_dialogue:
+		return
 	velocity = Vector2.ZERO
 	if Input.is_action_pressed("move_up"):
 		velocity.y -= SPEED
@@ -108,25 +101,20 @@ func execute_interaction():
 			Interactable.InteractionType.ITEM: 
 				print("obtained item")
 				set_interactionLabel(interaction_data["text"])
-				var received_item = interaction_data["item"]
+				var received_item:Item.ItemType = interaction_data["item"]
 				# adding to inventory 
 				SingletonPlayer.add_to_inventory(received_item)
 				# updating ui 
 				# adding to inventory! 
 			Interactable.InteractionType.NPC:
 				print("interacting with npc")
-				
 				# entering dialogue, disable movement
-				if Dialogue_Registry.npc_dialogues.has(interaction_data["npc_id"]):
-					var dialogue_data = Dialogue_Registry.npc_dialogues[interaction_data["npc_id"]]
-					
-					if not dialogue_data.finished:
-						SingletonPlayer.enter_dialogue(dialogue_data)
+				SingletonPlayer.enter_dialogue(interaction_data["npc_id"])
+				SingletonPlayer.add_npc_talked_to(interaction_data["npc_id"])
+				# debug --> visualize visited npcs
+				print(SingletonPlayer.npc_talked_to)
 				
-				print("setting interaction label " + interaction_data["dialogue"])
 				set_interactionLabel(interaction_data["dialogue"])
-				# EVELYN, is this my fault that the interaction labels don't update anymore? 
-				
 				# FIXME should be easier when done with separate **dialogue system**
 				var reward_type:NPC_interaction.QuestReward = interaction_data["reward_type"]
 				var received_reward = interaction_data["reward"]
@@ -203,18 +191,17 @@ func save_player():
 func save_state():
 	var json_inventory = []
 	var item_inventory = SingletonPlayer.item_inventory
-	for item in item_inventory:
-		var selected_item = item_inventory[item]
-		var item_dictionary = selected_item.to_json()
-		
-		var item_amount = selected_item.obtain_amount()
-		item_dictionary["amount"] = item_amount
+	for item:Item.ItemType in item_inventory:
+		var item_amount = item_inventory[item]
+		var item_string:String = Item.item_type_to_string(item)
+		var item_dictionary:Dictionary = {
+			"type": item_string,
+			"amount": item_amount
+		}
 		# store amount
-		
-		
-		
+		item_dictionary["amount"] = item_amount
 		json_inventory.append(item_dictionary)
-	
+
 	var state = {
 		"name" : name,
 		"parent" : get_parent().get_path(),
@@ -232,3 +219,5 @@ func save_state():
 
 func set_interactionLabel(label:String):
 	interactionLabel.text = label
+	
+
