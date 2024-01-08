@@ -11,7 +11,6 @@ const DRAGPREVIEW = preload("res://bridges/scenes/dragpreview.tscn")
 signal need_grid
 signal update_grid(pos, data)
 signal is_dragging
-signal dragging_done
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -101,7 +100,6 @@ func _drop_data(at_position, data):
 	#We just return the position to the grid and update it
 	var position = Vector2(int(get_global_mouse_position().x /square_size), 
 	int(get_global_mouse_position().y /square_size))
-	dragging_done.emit()
 	update_grid.emit(position, data)
 
 func _on_grid_current_grid(current_grid):

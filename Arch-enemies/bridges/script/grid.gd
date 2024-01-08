@@ -348,7 +348,8 @@ func last_state():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	if(Global.currently_dragging and Input.is_action_just_released("click")):
+		make_invisible()
 
 #Down here we handle all the signal. There will be many, but most of them don't do much.
 func _on_drag_grid_need_grid():
@@ -381,32 +382,17 @@ func _on_spider_item_update_grid(pos, data):
 func _on_squirrel_item_update_grid(pos, data):
 	update_grid(pos, data)
 
-func _on_drag_grid_dragging_done():
-	make_invisible()
-
 func _on_drag_grid_is_dragging():
 	make_visible()
-
-func _on_deer_item_dragging_done():
-	make_invisible()
 
 func _on_deer_item_is_dragging():
 	make_visible()
 
-func _on_snake_item_dragging_done():
-	make_invisible()
-
 func _on_snake_item_is_dragging():
 	make_visible()
 
-func _on_spider_item_dragging_done():
-	make_invisible()
-
 func _on_spider_item_is_dragging():
 	make_visible()
-
-func _on_squirrel_item_dragging_done():
-	make_invisible()
 
 func _on_squirrel_item_is_dragging():
 	make_visible()
