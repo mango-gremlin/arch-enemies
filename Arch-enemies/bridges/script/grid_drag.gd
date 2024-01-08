@@ -106,65 +106,62 @@ func _drop_data(at_position, data):
 
 func _on_grid_current_grid(current_grid):
 	grid = current_grid
-
+	
 func is_snake_allowed(pos):
 	var is_allowed = false
-	var snake_head = [Vector2i(4, 1), Vector2i(5, 1), Vector2i(5, 0), Vector2i(5, -1), Vector2i(4, -1)]
-	#For a cell to be legal we work from the bottom left corner of the animal
-	#And check each square of the grid cell that would in the sprite
-	if(grid[pos.x][pos.y] == ENTITY_TYPES.ALLOWED):
-		var is_free = true
-		for delta in range(1, 5):
-			#If it is AIR (i.e. empty) or ALLOWED we are good
-			if(not (grid[pos.x + delta][pos.y] == ENTITY_TYPES.AIR or 
-			grid[pos.x + delta][pos.y] == ENTITY_TYPES.ALLOWED)):
-				#Otherwise we are not
-				is_free = false
-				break
-		if(is_free):
+	var is_free = true
+	var head_free = true
+	for delta in range(5):
+		var pos_Type = grid[pos.x+delta][pos.y]
+		#Is there something to attach the animal to?
+		if(pos_Type == ENTITY_TYPES.ALLOWED):
 			is_allowed = true
-	for position in snake_head:
-		if(grid[pos.x + position.x][pos.y + position.y] == ENTITY_TYPES.ANIMAL):
-			is_allowed = false
-	return is_allowed
+		#Is there space for the animal?	
+		if(pos_Type == ENTITY_TYPES.FORBIDDEN or pos_Type == ENTITY_TYPES.GROUND
+		or pos_Type == ENTITY_TYPES.WATER or pos_Type == ENTITY_TYPES.ANIMAL):
+			is_free = false
+	var snake_head = [Vector2i(4, 1), Vector2i(5, 1), Vector2i(5, 0), Vector2i(5, -1), Vector2i(4, -1)]
+	for tile in snake_head:
+		var pos_Type = grid[pos.x+tile.x][pos.y-tile.y]
+		#Are there animals around the head of the snake?
+		if(pos_Type == ENTITY_TYPES.ANIMAL):
+			head_free = false
+	return is_allowed and is_free and head_free
 
 func is_spider_allowed(pos):
-	#This works just like Snake
-	var is_allowed = false
-	if(grid[pos.x][pos.y] == ENTITY_TYPES.ALLOWED 
-	or grid[pos.x][pos.y] == ENTITY_TYPES.SIDE or grid[pos.x][pos.y] == ENTITY_TYPES.BOTTOM):
-		is_allowed = true
-	return is_allowed
-
+	var pos_Type = grid[pos.x][pos.y]
+	var is_allowed_and_free = pos_Type == ENTITY_TYPES.ALLOWED \
+		or pos_Type == ENTITY_TYPES.SIDE or pos_Type == ENTITY_TYPES.BOTTOM
+	return is_allowed_and_free
+	
 func is_deer_allowed(pos):
-	var is_allowed = false
-	#The Deer has empty slots in it sprite, it is allowed for them to have something in them
-	var allowed = [Vector2i(0, 3), Vector2i(3, 0), Vector2i(3, 1), Vector2i(3, 2)]
-	if(grid[pos.x][pos.y] == ENTITY_TYPES.ALLOWED or grid[pos.x][pos.y] == ENTITY_TYPES.SHALLOW):
-		var is_free = true
-		for delta in range(4):
-			for epsilon in range(4):
-				if(not (grid[pos.x + delta][pos.y - epsilon] == ENTITY_TYPES.AIR 
-					or grid[pos.x + delta][pos.y - epsilon] == ENTITY_TYPES.ALLOWED
-					or grid[pos.x + delta][pos.y - epsilon] == ENTITY_TYPES.SHALLOW
-					or grid[pos.x + delta][pos.y - epsilon] == ENTITY_TYPES.SIDE
-					or grid[pos.x + delta][pos.y - epsilon] == ENTITY_TYPES.BOTTOM)):
-					#Therefore we only flag the squares which are not in allowed
-					if(Vector2i(delta, epsilon) not in allowed):
-						is_free = false
-						break
-		if(is_free):
-			is_allowed = true
-	return is_allowed
+	var is_allowed = false 
+	var is_free = true 
+	#The empty slots in the deer sprite
+	var ignore = [Vector2i(0, 3), Vector2i(3, 0), Vector2i(3, 1), Vector2i(3, 2)]
+	for delta in range(4):
+		for epsilon in range(4):
+			#Some slots need to be ignored
+			if(Vector2i(delta,epsilon) not in ignore):
+				var pos_Type = grid[pos.x+delta][pos.y-epsilon]
+				#Is there something to attach the animal to?
+				if(pos_Type == ENTITY_TYPES.ALLOWED):
+					is_allowed = true
+				#Is there space for the animal?	
+				if(pos_Type == ENTITY_TYPES.FORBIDDEN or pos_Type == ENTITY_TYPES.GROUND or 
+				pos_Type == ENTITY_TYPES.WATER or pos_Type == ENTITY_TYPES.ANIMAL):
+					is_free = false
+	return is_allowed and is_free
 
 func is_squirrel_allowed(pos):
-	#Check if one tile is in necessary ALLOWED or SIDE and if all other tiles are free
 	var is_allowed = false
 	var is_free = true
 	for epsilon in range(2):
 		var pos_Type = grid[pos.x][pos.y-epsilon]
+		#Is there something to attach the animal to?
 		if(pos_Type == ENTITY_TYPES.ALLOWED or pos_Type == ENTITY_TYPES.SIDE):
 			is_allowed = true
+		#Is there space for the animal?	
 		if(pos_Type == ENTITY_TYPES.FORBIDDEN or pos_Type == ENTITY_TYPES.GROUND or
 			pos_Type == ENTITY_TYPES.WATER or pos_Type == ENTITY_TYPES.ANIMAL):
 			is_free = false
