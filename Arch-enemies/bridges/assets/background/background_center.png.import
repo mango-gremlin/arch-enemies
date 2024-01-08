@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://p31almd67lu3"
-path="res://.godot/imported/bridge_tileset.png-4fbd5ca38408530fbb70bffdeed8d11b.ctex"
+uid="uid://jrpjk66rpxgu"
+path="res://.godot/imported/background_center.png-04ca4cf6d17604529180a30daf08b852.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/tilesets/bridge_tileset/bridge_tileset.png"
-dest_files=["res://.godot/imported/bridge_tileset.png-4fbd5ca38408530fbb70bffdeed8d11b.ctex"]
+source_file="res://bridges/assets/background/background_center.png"
+dest_files=["res://.godot/imported/background_center.png-04ca4cf6d17604529180a30daf08b852.ctex"]
 
 [params]
 

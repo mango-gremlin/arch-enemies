@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://dfnsuounqjr4c"]
+
+[ext_resource type="Script" path="res://bridges/script/goal.gd" id="1_3hb7h"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sf3ny"]
+size = Vector2(38, 37.6385)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="GoalArea2D" type="Area2D" parent="."]
+script = ExtResource("1_3hb7h")
+
+[node name="GoalCollisionShape2D" type="CollisionShape2D" parent="GoalArea2D"]
+position = Vector2(19, 19)
+shape = SubResource("RectangleShape2D_sf3ny")
+debug_color = Color(0.521569, 0.560784, 0.341176, 0.419608)
+
+[connection signal="body_entered" from="GoalArea2D" to="GoalArea2D" method="_on_goal_area_2d_body_entered"]
