@@ -1,7 +1,7 @@
 extends TextureRect
 
 #Here we define the elements we need to operate on the grid
-var grid = []
+var grid = [[]]
 @export var square_size = 10
 enum ENTITY_TYPES {GROUND, WATER, AIR, ANIMAL, FORBIDDEN, ALLOWED, SIDE, BOTTOM, SHALLOW}
 #We have to use our own preview scene because otherwise things are terrible
@@ -106,6 +106,8 @@ func _on_grid_current_grid(current_grid):
 	grid = current_grid
 	
 func is_snake_allowed(pos):
+	if(in_bound(pos, 5, 1)):
+		return false
 	var is_allowed = false
 	var is_free = true
 	var head_free = true
@@ -127,12 +129,18 @@ func is_snake_allowed(pos):
 	return is_allowed and is_free and head_free
 
 func is_spider_allowed(pos):
+	if(in_bound(pos, 1, 1)):
+		return false
+	if(pos.x > grid.size() or pos.y > grid[0].size()):
+		return false
 	var pos_Type = grid[pos.x][pos.y]
 	var is_allowed_and_free = pos_Type == ENTITY_TYPES.ALLOWED \
 		or pos_Type == ENTITY_TYPES.SIDE or pos_Type == ENTITY_TYPES.BOTTOM
 	return is_allowed_and_free
 	
 func is_deer_allowed(pos):
+	if(in_bound(pos, 4, 4)):
+		return false
 	var is_allowed = false 
 	var is_free = true 
 	#The empty slots in the deer sprite
@@ -143,7 +151,7 @@ func is_deer_allowed(pos):
 			if(Vector2i(delta,epsilon) not in ignore):
 				var pos_Type = grid[pos.x+delta][pos.y-epsilon]
 				#Is there something to attach the animal to?
-				if(pos_Type == ENTITY_TYPES.ALLOWED):
+				if(pos_Type == ENTITY_TYPES.ALLOWED or pos_Type == ENTITY_TYPES.SHALLOW):
 					is_allowed = true
 				#Is there space for the animal?	
 				if(pos_Type == ENTITY_TYPES.FORBIDDEN or pos_Type == ENTITY_TYPES.GROUND or 
@@ -152,6 +160,8 @@ func is_deer_allowed(pos):
 	return is_allowed and is_free
 
 func is_squirrel_allowed(pos):
+	if(in_bound(pos, 1, 2)):
+		return false
 	var is_allowed = false
 	var is_free = true
 	for epsilon in range(2):
@@ -164,3 +174,15 @@ func is_squirrel_allowed(pos):
 			pos_Type == ENTITY_TYPES.WATER or pos_Type == ENTITY_TYPES.ANIMAL):
 			is_free = false
 	return is_allowed and is_free
+	
+func in_bound(pos, off_x, off_y):
+	var max_x = grid.size() - 1
+	var max_y = grid[0].size() - 1
+	#First we check if it is not above or to the left of the screen
+	var bound = pos.x > 0 and pos.y > 0 
+	#Second we do the same for below or right of the screen
+	bound = bound and pos.x < max_x and pos.y < max_y 
+	#Finally we check if the sprite stretches out of the screen
+	bound = bound and pos.x + off_x <= max_x 
+	bound = bound and pos.y - off_y >= 0
+	return not bound
