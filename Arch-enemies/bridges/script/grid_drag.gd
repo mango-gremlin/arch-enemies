@@ -153,7 +153,7 @@ func is_deer_allowed(pos):
 			if(Vector2i(delta,epsilon) not in ignore):
 				var pos_Type = grid[pos.x+delta][pos.y-epsilon]
 				#Is there something to attach the animal to?
-				if(pos_Type == ENTITY_TYPES.ALLOWED):
+				if(pos_Type == ENTITY_TYPES.ALLOWED or pos_Type == ENTITY_TYPES.SHALLOW):
 					is_allowed = true
 				#Is there space for the animal?	
 				if(pos_Type == ENTITY_TYPES.FORBIDDEN or pos_Type == ENTITY_TYPES.GROUND or 
