@@ -98,6 +98,12 @@ func obtain_reward_type() -> NPC_interaction.QuestReward:
 func obtain_required_item() -> Item.ItemType:
 	return required_item
 
+# returns whether this npc holds a quest (!= NONE) 
+# or not 
+func has_quest() -> bool:
+	if quest_type != Quest.NONE:
+		return true
+	return false
 
 # --- / 
 # -- / quest behavior / interaction 
@@ -143,7 +149,9 @@ func set_quest_resolved():
 	quest_resolved = true 
 
 # checks whether conditions for completing quest were acquired 
-# updates "quest_resolved" accordingly
+# returns this state as boolean 
+# true if condition met
+# false otherwise
 func check_quest_condition() -> bool:
 	# FIXME IMPROVE WRITING / CONDITIONS 
 	if not quest_resolved : 
@@ -221,9 +229,8 @@ func stringify_quest() -> String:
 			var target_npc_name = target_npc.obtain_name()
 			requirement_string = " wants you to talk to " + target_npc_name 
 	
-	# done querying information based on type!
-	# WITH NAME BEFORE var combined_message = source_npc_name + requirement_string 
-	var combined_message = requirement_string 
+	# combine name of npc with its quest
+	var combined_message = source_npc_name + requirement_string 
 	return combined_message
 
 # --- / 

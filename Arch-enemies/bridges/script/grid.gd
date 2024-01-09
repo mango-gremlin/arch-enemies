@@ -43,6 +43,7 @@ var shore_side = []
 var shore_bottom = []
 var shallow_squares = []
 var hazard_squares = []
+var water_squares = []
 
 #This is the signal we use to transfer the current grid to child nodes
 signal current_grid(current_grid)
@@ -89,6 +90,7 @@ func _ready():
 			# if that tileset is water, assign to that type
 			elif(tile_id == WATER_TILE_ID):
 				grid[x].append(ENTITY_TYPES.WATER)
+				water_squares.append(square)
 				
 				# check if square is a shallow
 				# a shallow has air or decoration above, and ground below
@@ -121,6 +123,10 @@ func _ready():
 	
 	# assign forbidden zones around the fox' starting position
 	grid = assign_fox_forbidden_zones(grid)
+	
+	var danger_area = preload("res://bridges/scenes/danger_detection.tscn")
+	var danger_squares = water_squares + hazard_squares
+	spawn_danger_area2D(danger_area, danger_squares)
 	
 	color_grid()
 	#Now we save the inital state of the grid for reset and previous state
@@ -160,6 +166,19 @@ func assign_fox_forbidden_zones(grid:Array) -> Array:
 			# assign each square as forbidden
 			grid[crt_square.x][crt_square.y] = ENTITY_TYPES.FORBIDDEN
 	return grid
+
+# instantiate area2D with their respective collision shapes
+# as they are dangers, add a signal that is emitted when fox touches them
+func spawn_danger_area2D(area, squares):
+	for square in squares:
+		var instance = area.instantiate()
+		self.add_child(instance)
+		instance.global_position = Vector2(square.x * 10 + 5, square.y * 10 + 5)
+		instance.body_entered.connect(on_contact_danger)
+
+# when contacting a danger, reset the position of fox
+func on_contact_danger(body):
+	$Player.reset_player()
 
 func color_grid():
 	#This function colors the grid cells that are not predefined, i.e. the background
@@ -203,14 +222,14 @@ func update_grid(pos, data):
 						grid[x + delta][y - epsilon] = ENTITY_TYPES.ANIMAL
 						set_cell(ACTIVE_LAYER_ID, Vector2i(x + delta, y - epsilon), DEER_TILE_ID, Vector2i(delta, 3 - epsilon))
 			for position in new_allowed:
-				if(grid[x + position.x][y - position.y] == ENTITY_TYPES.AIR):
-					grid[x + position.x][y - position.y] = ENTITY_TYPES.ALLOWED	
+				var current = grid[x + position.x][y - position.y]
+				tile_update(Vector2i(x + position.x, y - position.y), current, ENTITY_TYPES.ALLOWED)
 			for position in new_side:
-				if(grid[x + position.x][y - position.y] == ENTITY_TYPES.AIR):
-					grid[x + position.x][y - position.y] = ENTITY_TYPES.SIDE
+				var current = grid[x + position.x][y - position.y]
+				tile_update(Vector2i(x + position.x, y - position.y), current, ENTITY_TYPES.SIDE)
 			for position in new_bottom:
-				if(grid[x + position.x][y - position.y] == ENTITY_TYPES.AIR):
-					grid[x + position.x][y - position.y] = ENTITY_TYPES.BOTTOM
+				var current = grid[x + position.x][y - position.y]
+				tile_update(Vector2i(x + position.x, y - position.y), current, ENTITY_TYPES.BOTTOM)
 		"SNAKE":
 			#Snake works just like Deer
 			var new_allowed = [Vector2i(0, 1), Vector2i(1, 1), Vector2i(2, 1), Vector2i(3, 1)]
@@ -224,25 +243,25 @@ func update_grid(pos, data):
 				grid[x + delta][y] = ENTITY_TYPES.ANIMAL
 				set_cell(ACTIVE_LAYER_ID, Vector2i(x + delta, y), SNAKE_TILE_ID, Vector2i(delta, 0))
 			for position in new_allowed:
-				if(grid[x + position.x][y - position.y] == ENTITY_TYPES.AIR):
-					grid[x + position.x][y - position.y] = ENTITY_TYPES.ALLOWED
+				var current = grid[x + position.x][y - position.y]
+				tile_update(Vector2i(x + position.x, y - position.y), current, ENTITY_TYPES.ALLOWED)
 			for position in new_forbidden:
-				if(grid[x + position.x][y - position.y] == ENTITY_TYPES.AIR):
-					grid[x + position.x][y - position.y] = ENTITY_TYPES.FORBIDDEN
+				var current = grid[x + position.x][y - position.y]
+				tile_update(Vector2i(x + position.x, y - position.y), current, ENTITY_TYPES.FORBIDDEN)
 			for position in new_side:
-				if(grid[x + position.x][y - position.y] == ENTITY_TYPES.AIR):
-					grid[x + position.x][y - position.y] = ENTITY_TYPES.SIDE
+				var current = grid[x + position.x][y - position.y]
+				tile_update(Vector2i(x + position.x, y - position.y), current, ENTITY_TYPES.SIDE)
 			for position in new_bottom:
-				if(grid[x + position.x][y - position.y] == ENTITY_TYPES.AIR):
-					grid[x + position.x][y - position.y] = ENTITY_TYPES.BOTTOM
+				var current = grid[x + position.x][y - position.y]
+				tile_update(Vector2i(x + position.x, y - position.y), current, ENTITY_TYPES.BOTTOM)
 		"SPIDER":
 			#Spider is the easiest, nothing much happens here
 			var new_allowed = [Vector2i(0, 1), Vector2i(1, 0), Vector2i(0, -1), Vector2i(-1, 0)]
 			grid[x][y] = ENTITY_TYPES.ANIMAL
 			set_cell(ACTIVE_LAYER_ID, Vector2i(x, y), SPIDER_TILE_ID, Vector2i(0, 0))
 			for position in new_allowed:
-				if(grid[x + position.x][y - position.y] == ENTITY_TYPES.AIR):
-					grid[x + position.x][y - position.y] = ENTITY_TYPES.ALLOWED
+				var current = grid[x + position.x][y - position.y]
+				tile_update(Vector2i(x + position.x, y - position.y), current, ENTITY_TYPES.ALLOWED)
 		"SQUIRREL":
 			#Squirrel like the other animals
 			var new_allowed = [Vector2i(0, 2)]
@@ -252,14 +271,14 @@ func update_grid(pos, data):
 				grid[x][y - epsilon] = ENTITY_TYPES.ANIMAL
 				set_cell(ACTIVE_LAYER_ID, Vector2i(x, y - epsilon), SQUIRREL_TILE_ID, Vector2i(0, 1 - epsilon))
 			for position in new_allowed:
-				if(grid[x + position.x][y - position.y] == ENTITY_TYPES.AIR):
-					grid[x + position.x][y - position.y] = ENTITY_TYPES.ALLOWED
+				var current = grid[x + position.x][y - position.y]
+				tile_update(Vector2i(x + position.x, y - position.y), current, ENTITY_TYPES.ALLOWED)
 			for position in new_side:
-				if(grid[x + position.x][y - position.y] == ENTITY_TYPES.AIR):
-					grid[x + position.x][y - position.y] = ENTITY_TYPES.SIDE
+				var current = grid[x + position.x][y - position.y]
+				tile_update(Vector2i(x + position.x, y - position.y), current, ENTITY_TYPES.SIDE)
 			for position in new_bottom:
-				if(grid[x + position.x][y - position.y] == ENTITY_TYPES.AIR):
-					grid[x + position.x][y - position.y] = ENTITY_TYPES.BOTTOM
+				var current = grid[x + position.x][y - position.y]
+				tile_update(Vector2i(x + position.x, y - position.y), current, ENTITY_TYPES.BOTTOM)
 			
 	#Whenever we change the grid, i.e. update it, we have to track that here
 	state += 1
@@ -327,9 +346,24 @@ func last_state():
 			last_states[(state + 1) % save_states] = [[]]
 			color_grid()
 
+func tile_update(pos, current, next):
+	#We check what the current square is, based on what we want to put there next we either do it
+	#Or do not do it. Hierarch is currently FORBIDDEN > SHALLOW > ALLOWED > SIDE > BOTTOM > AIR
+	if current == ENTITY_TYPES.AIR:
+		grid[pos.x][pos.y] = next
+	elif current == ENTITY_TYPES.SHALLOW and next == ENTITY_TYPES.FORBIDDEN:
+		grid[pos.x][pos.y] = next
+	elif current == ENTITY_TYPES.BOTTOM and not next == ENTITY_TYPES.SHALLOW:
+		grid[pos.x][pos.y] = next
+	elif current == ENTITY_TYPES.SIDE and not next == ENTITY_TYPES.SHALLOW and not next == ENTITY_TYPES.BOTTOM:
+		grid[pos.x][pos.y] = next
+	elif current == ENTITY_TYPES.ALLOWED and next == ENTITY_TYPES.FORBIDDEN:
+		grid[pos.x][pos.y] = next
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	if(Global.currently_dragging and Input.is_action_just_released("click")):
+		make_invisible()
 
 #Down here we handle all the signal. There will be many, but most of them don't do much.
 func _on_drag_grid_need_grid():
@@ -362,32 +396,17 @@ func _on_spider_item_update_grid(pos, data):
 func _on_squirrel_item_update_grid(pos, data):
 	update_grid(pos, data)
 
-func _on_drag_grid_dragging_done():
-	make_invisible()
-
 func _on_drag_grid_is_dragging():
 	make_visible()
-
-func _on_deer_item_dragging_done():
-	make_invisible()
 
 func _on_deer_item_is_dragging():
 	make_visible()
 
-func _on_snake_item_dragging_done():
-	make_invisible()
-
 func _on_snake_item_is_dragging():
 	make_visible()
 
-func _on_spider_item_dragging_done():
-	make_invisible()
-
 func _on_spider_item_is_dragging():
 	make_visible()
-
-func _on_squirrel_item_dragging_done():
-	make_invisible()
 
 func _on_squirrel_item_is_dragging():
 	make_visible()

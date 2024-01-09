@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cgfkelxiskcux"]
+[gd_scene load_steps=10 format=3 uid="uid://cgfkelxiskcux"]
 
 [ext_resource type="Script" path="res://overworld/overworld.gd" id="1_pwtu4"]
 [ext_resource type="PackedScene" uid="uid://dndu4pg1i3tlf" path="res://overworld/scenes/player.tscn" id="2_mpe4y"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bj3a1sw80l6wj" path="res://overworld/entities/interaction_overworld/item_interaction.tscn" id="6_66i44"]
 [ext_resource type="PackedScene" uid="uid://5llfgi2ysvie" path="res://overworld/entities/interaction_overworld/bridge_interaction.tscn" id="6_iairi"]
 [ext_resource type="PackedScene" uid="uid://drn1loe1wknbq" path="res://overworld/entities/interaction_overworld/npc_interaction.tscn" id="7_33ud0"]
+[ext_resource type="Texture2D" uid="uid://08plwlb60wib" path="res://assets/art/bridge_dummy_failure.png" id="8_g5nw6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_25akq"]
 size = Vector2(36, 20)
@@ -129,5 +130,6 @@ position = Vector2(409, 335)
 npc_name = "esther"
 npc_id = 3
 npc_animal_type = 3
+npc_special_sprite = ExtResource("8_g5nw6")
 
 [connection signal="saved_player" from="Player" to="." method="_on_player_saved_player"]
