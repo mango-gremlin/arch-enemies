@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dtvq143m5ddef"]
+[gd_scene load_steps=10 format=3 uid="uid://dtvq143m5ddef"]
 
 [ext_resource type="Script" path="res://overworld/overworld.gd" id="1_ui4aw"]
 [ext_resource type="PackedScene" uid="uid://dndu4pg1i3tlf" path="res://overworld/scenes/player.tscn" id="2_4d4x5"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bj3a1sw80l6wj" path="res://overworld/entities/interaction_overworld/item_interaction.tscn" id="6_ij5ah"]
 [ext_resource type="PackedScene" uid="uid://drn1loe1wknbq" path="res://overworld/entities/interaction_overworld/npc_interaction.tscn" id="7_06f0y"]
 [ext_resource type="PackedScene" uid="uid://bettv6p5clh6t" path="res://overworld/entities/interaction_overworld/template/bridge_template.tscn" id="8_khye4"]
+[ext_resource type="Texture2D" uid="uid://cer2bbvjgwtay" path="res://assets/art/objects/overworld_bridges/overworld_bridge_connecting_part.png" id="9_w1njh"]
 
 [node name="maingame" type="Node"]
 script = ExtResource("1_ui4aw")
@@ -131,41 +132,45 @@ required_npc_id = 1
 quest_reward = 1
 
 [node name="BridgeTemplate" parent="." instance=ExtResource("8_khye4")]
-visible = false
-position = Vector2(248, 78)
+position = Vector2(465, 279)
 
-[node name="bridge_interaction" parent="BridgeTemplate/left_bridge_start" index="0"]
-dest_island_id = 1
+[node name="bridge_start_sprite" parent="BridgeTemplate/left_bridge_start/bridge_interaction" index="0"]
+metadata/_edit_use_anchors_ = true
+
+[node name="bridge_parts" parent="BridgeTemplate/left_bridge_start/bridge_interaction" index="2"]
+visible = true
+
+[node name="TextureRect" parent="BridgeTemplate/left_bridge_start/bridge_interaction/bridge_parts" index="0"]
+visible = true
 
 [node name="TextureRect" parent="BridgeTemplate/left_bridge_start" index="1"]
-offset_left = -51.0
-offset_right = -11.0
 metadata/_edit_use_anchors_ = true
 
 [node name="bridge_interaction2" parent="BridgeTemplate/right_bridge_start" index="0"]
-start_island_id = 1
+dest_island_id = 0
 
-[node name="interactionspot" parent="BridgeTemplate/right_bridge_start/bridge_interaction2" index="1"]
-position = Vector2(-27, 1)
-rotation = 0.785397
-
-[node name="TextureRect" parent="BridgeTemplate/right_bridge_start/bridge_interaction2/bridge_parts" index="0"]
-offset_left = -90.0
-offset_top = -22.0
-offset_right = -50.0
-offset_bottom = 18.0
-
-[node name="bridge_collision" parent="BridgeTemplate/right_bridge_start/bridge_interaction2/bridge_collision_shape" index="0"]
-position = Vector2(-52, 0)
-rotation = 1.57079
-
-[node name="TextureRect" parent="BridgeTemplate/right_bridge_start" index="1"]
-offset_left = 36.0
-offset_right = 76.0
+[node name="bridge_start_sprite" parent="BridgeTemplate/right_bridge_start/bridge_interaction2" index="0"]
 metadata/_edit_use_anchors_ = true
 
+[node name="bridge_parts" parent="BridgeTemplate/right_bridge_start/bridge_interaction2" index="2"]
+visible = true
+
+[node name="TextureRect" parent="BridgeTemplate/right_bridge_start/bridge_interaction2/bridge_parts" index="0"]
+visible = true
+
+[node name="TextureRect" parent="BridgeTemplate/right_bridge_start" index="1"]
+metadata/_edit_use_anchors_ = true
+
+[node name="OverworldBridgeConnectingPart" type="Sprite2D" parent="."]
+position = Vector2(-142, 239)
+texture = ExtResource("9_w1njh")
+
 [editable path="bridge_interaction"]
+[editable path="bridge_interaction/interactionspot"]
 [editable path="bridge_interaction3"]
+[editable path="bridge_interaction3/interactionspot"]
 [editable path="BridgeTemplate"]
 [editable path="BridgeTemplate/left_bridge_start/bridge_interaction"]
+[editable path="BridgeTemplate/left_bridge_start/bridge_interaction/interactionspot"]
 [editable path="BridgeTemplate/right_bridge_start/bridge_interaction2"]
+[editable path="BridgeTemplate/right_bridge_start/bridge_interaction2/interactionspot"]

@@ -11,9 +11,9 @@
 [node name="maingame" type="Node"]
 script = ExtResource("1_pwtu4")
 
-[node name="Player" parent="." instance=ExtResource("2_mpe4y")]
-
 [node name="world" parent="." instance=ExtResource("3_xuy1h")]
+
+[node name="Player" parent="world" instance=ExtResource("2_mpe4y")]
 
 [node name="overworld_ui" parent="." instance=ExtResource("4_4hawq")]
 
@@ -87,7 +87,9 @@ npc_name = "esther"
 npc_id = 3
 npc_animal_type = 3
 
-[connection signal="saved_player" from="Player" to="." method="_on_player_saved_player"]
+[connection signal="saved_player" from="world/Player" to="." method="_on_player_saved_player"]
 
 [editable path="bridge_interaction"]
+[editable path="bridge_interaction/interactionspot"]
 [editable path="bridge_interaction3"]
+[editable path="bridge_interaction3/interactionspot"]
