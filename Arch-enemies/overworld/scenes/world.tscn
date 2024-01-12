@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://p30p3o0e473c"]
+[gd_scene load_steps=11 format=3 uid="uid://p30p3o0e473c"]
 
 [ext_resource type="Texture2D" uid="uid://cmyh0321x42dd" path="res://assets/art/tilesets/overworld_water_edges.png" id="4_itohn"]
+[ext_resource type="PackedScene" uid="uid://dndu4pg1i3tlf" path="res://overworld/scenes/player.tscn" id="5_bmga7"]
 [ext_resource type="Texture2D" uid="uid://5fxwrsdtkovq" path="res://assets/art/tilesets/overworld_ground_textures.png" id="7_0s13p"]
 [ext_resource type="Texture2D" uid="uid://cn8u6mbhw7e5v" path="res://assets/art/objects/overworld_animal_homes.png" id="7_le2yv"]
 [ext_resource type="Texture2D" uid="uid://b26sjntfpftsd" path="res://assets/art/objects/overworld_natural_environment_objects.png" id="8_gmsns"]
@@ -352,7 +353,7 @@ texture = ExtResource("7_0s13p")
 texture = ExtResource("8_gmsns")
 0:0/size_in_atlas = Vector2i(3, 4)
 0:0/0 = 0
-0:0/0/y_sort_origin = -28
+0:0/0/y_sort_origin = 26
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/0/physics_layer_0/angular_velocity = 0.0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-9.19239, 15.2028, -10.253, 18.0312, -11.6673, 20.5061, -9.54594, 22.981, -5.3033, 22.981, -2.82843, 21.5668, 0.353554, 25.1023, 3.18198, 25.1023, 5.65686, 22.6274, 8.83884, 24.3952, 12.7279, 24.7487, 12.3744, 21.5668, 11.3137, 17.3241, 13.435, 16.9706, 13.0815, 13.435, 11.3137, 8.83883, -8, 8)
@@ -448,3 +449,6 @@ layer_1/tile_data = PackedInt32Array(655393, 393224, 2, 1310734, 8, 0, 1179653, 
 layer_2/name = "interaction_areas"
 layer_2/y_sort_enabled = true
 layer_2/tile_data = PackedInt32Array(458760, 6, 0, 6, 131080, 4, 9, 131080, 4, -4, 65542, 0, 262147, 6, 3, 720901, 458758, 0, 720910, 196614, 268435459, 327693, 8, 7, 327695, 393224, 7, 327697, 393224, 7, 327699, 262152, 7)
+
+[node name="Player" parent="TileMap" instance=ExtResource("5_bmga7")]
+position = Vector2(2, 1)
