@@ -27,28 +27,8 @@ var state = 0
 #for the inventory
 #@onready var start_animals : Dictionary = SingletonPlayer.get_animal_inventory().duplicate(true)
 var start_animals : Dictionary = set_animal_inventory()	
+var placed_animals: Array = []
 
-# FIXME debugging purpose! 
-func set_animal_inventory() -> Dictionary:
-	var inventory:Dictionary = Animal.init_animal_inventory()
-	inventory[Animal.AnimalType.DEER] = 4
-	inventory[Animal.AnimalType.SNAKE] = 4
-	inventory[Animal.AnimalType.SQUIRREL] = 4
-	return inventory 
-
-# updates animal amount with given value ( could either be pos / neg )
-func add_to_animal_inventory(animal:Animal.AnimalType, additional_value:int):
-	start_animals[animal] = start_animals[animal] + additional_value
-var placed_animals: Dictionary = Animal.init_animal_inventory()
-#var placed_animals : Array = []
-
-# takes Dictionary containing the used animals. 
-# will add those animals ( their int representation) back to the local animal inventory
-# restoring the initial state
-func restore_animal_from_placed_animals(placed_animals:Dictionary):
-	for animal in placed_animals:
-		# adding the "removed" amount of animals back to the original position
-		start_animals[animal] += placed_animals[animal]
 
 # ids of all tilemap layers
 const BACKGROUND_LAYER_ID = 0
@@ -83,13 +63,11 @@ signal current_grid(current_grid)
 enum ENTITY_TYPES {GROUND, WATER, AIR, ANIMAL, FORBIDDEN, ALLOWED, SIDE, BOTTOM, SHALLOW}
 
 func _ready():
-	# setting inventory accordingly
-	
 	#update the ui
 	update_inventory()
-	#drag_grid_reference.animal_inventory_reference = start_animals.duplicate(true)
+	
+	# FIXME Debugging
 	#print(start_animals)
-	#print(drag_grid_reference.animal_inventory_reference)
 	
 	#We save the previous states of the grid in an array, this array is initalized here
 	for i in range(save_states):
@@ -257,7 +235,7 @@ func update_grid(pos, data):
 					grid[x + position.x][y - position.y] = ENTITY_TYPES.BOTTOM
 					
 			#this seems to be the only way to keep track of the placed animals
-			placed_animals[Animal.AnimalType.DEER] +=1
+			placed_animals.append(Animal.AnimalType.DEER)
 			#SingletonPlayer.add_to_animal_inventory(Animal.AnimalType.DEER, -1)
 			add_to_animal_inventory(Animal.AnimalType.DEER,-1)
 		"SNAKE":
@@ -286,7 +264,7 @@ func update_grid(pos, data):
 					grid[x + position.x][y - position.y] = ENTITY_TYPES.BOTTOM
 			
 			#this seems to be the only way to keep track of the placed animals
-			placed_animals[Animal.AnimalType.SNAKE] +=1
+			placed_animals.append(Animal.AnimalType.SNAKE)
 			#SingletonPlayer.add_to_animal_inventory(Animal.AnimalType.SNAKE, -1)
 			add_to_animal_inventory(Animal.AnimalType.SNAKE,-1)
 		"SPIDER":
@@ -299,7 +277,7 @@ func update_grid(pos, data):
 					grid[x + position.x][y - position.y] = ENTITY_TYPES.ALLOWED
 					
 			#this seems to be the only way to keep track of the placed animals
-			placed_animals[Animal.AnimalType.SPIDER] +=1
+			placed_animals.append(Animal.AnimalType.SPIDER)
 			#SingletonPlayer.add_to_animal_inventory(Animal.AnimalType.SPIDER, -1)
 			add_to_animal_inventory(Animal.AnimalType.SPIDER,-1)
 		"SQUIRREL":
@@ -321,7 +299,7 @@ func update_grid(pos, data):
 					grid[x + position.x][y - position.y] = ENTITY_TYPES.BOTTOM
 			
 			#this seems to be the only way to keep track of the placed animals
-			placed_animals[Animal.AnimalType.SQUIRREL] +=1
+			placed_animals.append(Animal.AnimalType.SQUIRREL)
 			#SingletonPlayer.add_to_animal_inventory(Animal.AnimalType.SQUIRREL, -1)
 			add_to_animal_inventory(Animal.AnimalType.SQUIRREL,-1)
 			
@@ -377,7 +355,7 @@ func reset_grid():
 		for i in range(save_states):
 			last_states.append([[]])
 			
-		placed_animals = Animal.init_animal_inventory()
+		placed_animals = []
 		state = 0
 
 func last_state():
@@ -402,12 +380,43 @@ func last_state():
 			color_grid()
 			
 			#SingletonPlayer.add_to_animal_inventory(placed_animals.pop_back())
-			restore_animal_from_placed_animals(placed_animals)
-			update_inventory()
+			var last_animal = placed_animals.pop_back()
+			start_animals[last_animal] += 1
 			
+			update_inventory()
+
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
+
+# --- / 
+# -- / inventory management
+
+# FIXME debugging purpose! 
+func set_animal_inventory() -> Dictionary:
+	var inventory:Dictionary = Animal.init_animal_inventory()
+	inventory[Animal.AnimalType.DEER] = 1
+	inventory[Animal.AnimalType.SNAKE] = 1
+	inventory[Animal.AnimalType.SQUIRREL] = 1
+	return inventory 
+
+# updates animal amount with given value ( could either be pos / neg )
+func add_to_animal_inventory(animal:Animal.AnimalType, additional_value:int):
+	start_animals[animal] = start_animals[animal] + additional_value
+
+# takes Dictionary containing the used animals. 
+# will add those animals ( their int representation) back to the local animal inventory
+# restoring the initial state
+func restore_animal_from_placed_animals(placed_animals:Dictionary):
+	for animal in placed_animals:
+		# adding the "removed" amount of animals back to the original position
+		start_animals[animal] += 1
+
+# takes local inventory, duplicates it and replace 
+# singleton animal_inventory with it
+func set_global_animal_inventory(animal_inventory:Dictionary):
+	SingletonPlayer.set_item_inventory(animal_inventory.duplicate(true))
 
 #updates the ui-counters for the inventory
 func update_inventory():

@@ -17,26 +17,24 @@ signal dragging_done
 # this acts as reference to the animal inventory stored in "GRID"
 @onready var animal_inventory_reference:Dictionary
 @export var Grid_node_reference:TileMap
-#var parent_node
-#var test_value:String = "hallooo"
 
-func set_inventory(new_inventory:Dictionary):
-	animal_inventory_reference = new_inventory
-	#print(animal_inventory_reference)
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	# take animal inventory from parent-Grid tilemap
 	animal_inventory_reference = Grid_node_reference.start_animals
+	# FIXME Debugging purpose 
+	#print(animal_inventory_reference)
+	#print(Grid_node_reference)
+	
 	print("inv in grid drag")
-	print(animal_inventory_reference)
-	print(Grid_node_reference)
-	# gathering inventory from parent node
-	#animal_inventory_reference = parent_node.start_animals	
-	pass # Replace with function body.
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	print(animal_inventory_reference)
-	print(self)
+	# FIXME only for debugging references
+	#print(animal_inventory_reference)
+	#print(self)
 	pass
 
 func _get_drag_data(at_position):
@@ -59,7 +57,7 @@ func _get_drag_data(at_position):
 		var animal = tooltip_text 
 		#due to we use the tooltip we need to check if the string is valid... this is not secure for typos!
 		var animal_type:Animal.AnimalType = Animal.string_to_type(animal)
-		if animal != "" and animal_inventory_reference[animal_type] <= 0:
+		if animal != "" and Grid_node_reference.start_animals[animal_type] <= 0:
 			return
 		
 		#This adds a control node that allows us to fix the position of the preview
