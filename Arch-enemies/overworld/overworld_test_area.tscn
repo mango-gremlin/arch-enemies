@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dtvq143m5ddef"]
+[gd_scene load_steps=11 format=3 uid="uid://dtvq143m5ddef"]
 
 [ext_resource type="Script" path="res://overworld/overworld.gd" id="1_ui4aw"]
 [ext_resource type="PackedScene" uid="uid://dndu4pg1i3tlf" path="res://overworld/scenes/player.tscn" id="2_4d4x5"]
@@ -7,8 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://5llfgi2ysvie" path="res://overworld/entities/interaction_overworld/bridge_interaction.tscn" id="5_f6jxn"]
 [ext_resource type="PackedScene" uid="uid://bj3a1sw80l6wj" path="res://overworld/entities/interaction_overworld/item_interaction.tscn" id="6_ij5ah"]
 [ext_resource type="PackedScene" uid="uid://drn1loe1wknbq" path="res://overworld/entities/interaction_overworld/npc_interaction.tscn" id="7_06f0y"]
-[ext_resource type="PackedScene" uid="uid://bettv6p5clh6t" path="res://overworld/entities/interaction_overworld/template/bridge_template.tscn" id="8_khye4"]
+[ext_resource type="PackedScene" uid="uid://bettv6p5clh6t" path="res://overworld/entities/interaction_overworld/template/horizontal_bridge_template.tscn" id="8_khye4"]
 [ext_resource type="Texture2D" uid="uid://cer2bbvjgwtay" path="res://assets/art/objects/overworld_bridges/overworld_bridge_connecting_part.png" id="9_w1njh"]
+[ext_resource type="PackedScene" uid="uid://bypchr8htkr4e" path="res://overworld/entities/interaction_overworld/template/vertical_bridge_template.tscn" id="10_fo2xw"]
 
 [node name="maingame" type="Node"]
 script = ExtResource("1_ui4aw")
@@ -131,6 +132,17 @@ required_item = 1
 required_npc_id = 1
 quest_reward = 1
 
+[node name="BridgeTemplate2" parent="." instance=ExtResource("8_khye4")]
+position = Vector2(467, 331)
+
+[node name="bridge_interaction" parent="BridgeTemplate2/left_bridge_start" index="0"]
+start_island_id = 1
+dest_island_id = 2
+
+[node name="bridge_interaction2" parent="BridgeTemplate2/right_bridge_start" index="0"]
+start_island_id = 2
+dest_island_id = 1
+
 [node name="BridgeTemplate" parent="." instance=ExtResource("8_khye4")]
 position = Vector2(465, 279)
 
@@ -139,12 +151,6 @@ metadata/_edit_use_anchors_ = true
 
 [node name="bridge_parts" parent="BridgeTemplate/left_bridge_start/bridge_interaction" index="2"]
 visible = true
-
-[node name="TextureRect" parent="BridgeTemplate/left_bridge_start/bridge_interaction/bridge_parts" index="0"]
-visible = true
-
-[node name="TextureRect" parent="BridgeTemplate/left_bridge_start" index="1"]
-metadata/_edit_use_anchors_ = true
 
 [node name="bridge_interaction2" parent="BridgeTemplate/right_bridge_start" index="0"]
 dest_island_id = 0
@@ -155,20 +161,22 @@ metadata/_edit_use_anchors_ = true
 [node name="bridge_parts" parent="BridgeTemplate/right_bridge_start/bridge_interaction2" index="2"]
 visible = true
 
-[node name="TextureRect" parent="BridgeTemplate/right_bridge_start/bridge_interaction2/bridge_parts" index="0"]
-visible = true
-
-[node name="TextureRect" parent="BridgeTemplate/right_bridge_start" index="1"]
-metadata/_edit_use_anchors_ = true
-
 [node name="OverworldBridgeConnectingPart" type="Sprite2D" parent="."]
 position = Vector2(-142, 239)
 texture = ExtResource("9_w1njh")
+
+[node name="VerticalBridgeTemplate" parent="." instance=ExtResource("10_fo2xw")]
+position = Vector2(327, 376)
 
 [editable path="bridge_interaction"]
 [editable path="bridge_interaction/interactionspot"]
 [editable path="bridge_interaction3"]
 [editable path="bridge_interaction3/interactionspot"]
+[editable path="BridgeTemplate2"]
+[editable path="BridgeTemplate2/left_bridge_start/bridge_interaction"]
+[editable path="BridgeTemplate2/left_bridge_start/bridge_interaction/interactionspot"]
+[editable path="BridgeTemplate2/right_bridge_start/bridge_interaction2"]
+[editable path="BridgeTemplate2/right_bridge_start/bridge_interaction2/interactionspot"]
 [editable path="BridgeTemplate"]
 [editable path="BridgeTemplate/left_bridge_start/bridge_interaction"]
 [editable path="BridgeTemplate/left_bridge_start/bridge_interaction/interactionspot"]

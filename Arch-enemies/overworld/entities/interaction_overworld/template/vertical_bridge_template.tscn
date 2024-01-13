@@ -1,0 +1,59 @@
+[gd_scene load_steps=3 format=3 uid="uid://bypchr8htkr4e"]
+
+[ext_resource type="PackedScene" uid="uid://5llfgi2ysvie" path="res://overworld/entities/interaction_overworld/bridge_interaction.tscn" id="1_mj4sp"]
+[ext_resource type="Texture2D" uid="uid://kigfdxbjt8nd" path="res://assets/art/objects/overworld_bridges/overworld_bridge_start_unbuilt.png" id="2_cywqy"]
+
+[node name="VerticalBridgeTemplate" type="Node2D"]
+position = Vector2(0, 31)
+
+[node name="bridge_bottom" type="Node2D" parent="."]
+
+[node name="bridge_interaction" parent="bridge_bottom" instance=ExtResource("1_mj4sp")]
+
+[node name="TextureRect2" type="TextureRect" parent="bridge_bottom/bridge_interaction"]
+offset_left = -35.0
+offset_top = -126.0
+offset_right = 38.0
+offset_bottom = -86.0
+texture = ExtResource("2_cywqy")
+
+[node name="bridge_start_sprite" parent="bridge_bottom/bridge_interaction" index="1"]
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect" parent="bridge_bottom/bridge_interaction/bridge_parts" index="0"]
+offset_left = -20.0
+offset_top = -53.0
+offset_right = 20.0
+offset_bottom = -13.0
+
+[node name="bridge_collision" parent="bridge_bottom/bridge_interaction/bridge_collision_shape" index="0"]
+position = Vector2(0, -15)
+
+[node name="bridge_top" type="Node2D" parent="."]
+
+[node name="bridge_interaction2" parent="bridge_top" instance=ExtResource("1_mj4sp")]
+position = Vector2(0, -105)
+
+[node name="TextureRect" type="TextureRect" parent="bridge_top/bridge_interaction2"]
+offset_left = -34.0
+offset_top = 80.0
+offset_right = 39.0
+offset_bottom = 120.0
+texture = ExtResource("2_cywqy")
+
+[node name="bridge_start_sprite" parent="bridge_top/bridge_interaction2" index="1"]
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect" parent="bridge_top/bridge_interaction2/bridge_parts" index="0"]
+offset_left = -20.0
+offset_top = 12.0
+offset_right = 20.0
+offset_bottom = 52.0
+
+[node name="bridge_collision" parent="bridge_top/bridge_interaction2/bridge_collision_shape" index="0"]
+position = Vector2(0, 13)
+
+[editable path="bridge_bottom/bridge_interaction"]
+[editable path="bridge_bottom/bridge_interaction/interactionspot"]
+[editable path="bridge_top/bridge_interaction2"]
+[editable path="bridge_top/bridge_interaction2/interactionspot"]
