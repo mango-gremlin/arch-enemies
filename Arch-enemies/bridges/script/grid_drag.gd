@@ -13,8 +13,15 @@ signal update_grid(pos, data)
 signal is_dragging
 signal dragging_done
 
+# required to load and interact with scene-specific inventory
+# this acts as reference to the animal inventory stored in "GRID"
+@onready var animal_inventory_reference:Dictionary
+var parent_node
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	# gathering inventory from parent node
+	#animal_inventory_reference = parent_node.start_animals	
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -40,7 +47,8 @@ func _get_drag_data(at_position):
 		#2) And the Tooltip, which identifies the animal
 		var animal = tooltip_text 
 		#due to we use the tooltip we need to check if the string is valid... this is not secure for typos!
-		if animal != "" and SingletonPlayer.get_animal_inventory()[Animal.string_to_type(animal)] <= 0:
+		var animal_type:Animal.AnimalType = Animal.string_to_type(animal)
+		if animal != "" and animal_inventory_reference[animal_type] <= 0:
 			return
 		
 		#This adds a control node that allows us to fix the position of the preview
