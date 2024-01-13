@@ -117,12 +117,13 @@ func execute_interaction():
 				print(interaction_data["issolved"])
 				if interaction_data["issolved"]: 
 					set_interactionLabel("Was solved already") 
+					return
 				else: 
 					set_interactionLabel(interaction_data["text"])
 					
 				var bridge_edge:SingletonPlayer.BridgeEdge = interaction_data["bridge_edge"]
-				# FIXME map BridgeEdge data to given level accordingly
-				#enter_bridge_scene(bridge_id)
+				enter_bridge_scene(bridge_edge)
+				
 			Interactable.InteractionType.ITEM: 
 				print("obtained item")
 				set_interactionLabel(interaction_data["text"])
@@ -169,9 +170,6 @@ func check_input():
 		pass
 	if Input.is_action_just_pressed("open_menu"):
 		enter_pause_menu()
-		
-	
-
 
 # ---- 
 # scene change management
@@ -183,18 +181,21 @@ func enter_pause_menu():
 	# TODO 
 	get_tree().change_scene_to_file("res://overworld/ui/menu/menu/pause_menu.tscn")
 
-# TODO Outdated --> we dont have bridge_ids anymore 
+# takes received bridgeEdge and enters its path
+# loads message to inform if no level was found
 func enter_bridge_scene(bridgeEdge:SingletonPlayer.BridgeEdge):
-	var bridge_start:int = bridgeEdge.start_id
-	var bridge_dest:int = bridgeEdge.dest_id
-	
-	print("entering bridge game from ", bridge_start, " to ", bridge_dest )
-	exit_overworld()
-	# TODO search for bridgeGame with correct id! 
-	# load it afterwards
-	# enter_pause_menu() # default until we merged
-	get_tree().change_scene_to_file("res://bridges/scenes/bridge_1.tscn")
-	
+	var updated_bridge_edge:SingletonPlayer.BridgeEdge = SingletonPlayer.obtain_bridge_scene(bridgeEdge)
+	# either the bridgeEdge.path is set -> found scene 
+	# or not 
+	match updated_bridge_edge.path_state:
+		SingletonPlayer.BridgeLevelPathState.NONE:
+			# should not happen in normal operation
+			set_interactionLabel("no scene available :(")
+		SingletonPlayer.BridgeLevelPathState.AVAILABLE:
+			# found matching path 
+			var path_to_scene:String = updated_bridge_edge.path
+			#exit_overworld()
+			get_tree().change_scene_to_file(path_to_scene)
 
 # prepare player to leave overworld, store its state 
 func exit_overworld():
