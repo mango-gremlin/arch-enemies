@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://dynxnwixd1bke"]
+[gd_scene load_steps=5 format=3 uid="uid://dynxnwixd1bke"]
 
-[ext_resource type="Texture2D" uid="uid://jrpjk66rpxgu" path="res://bridges/assets/background/background_center.png" id="1_b5mb5"]
+[ext_resource type="Texture2D" uid="uid://c5o1tmg3hdwxg" path="res://bridges/assets/background/background_center_v3.png" id="1_nchep"]
+[ext_resource type="Texture2D" uid="uid://d3s1iupr6ox8" path="res://bridges/assets/background/background_darkness.png" id="2_1d16b"]
 [ext_resource type="Texture2D" uid="uid://pp2iklxt3y8a" path="res://bridges/assets/background/background_left.png" id="2_7d0kf"]
 [ext_resource type="Texture2D" uid="uid://bqgilfwt6nexk" path="res://bridges/assets/background/background_right.png" id="3_ob517"]
 
@@ -10,11 +11,15 @@
 
 [node name="sprite_1" type="Sprite2D" parent="center_layer"]
 position = Vector2(100, 100)
-texture = ExtResource("1_b5mb5")
+texture = ExtResource("1_nchep")
 
 [node name="sprite_2" type="Sprite2D" parent="center_layer"]
 position = Vector2(300, 100)
-texture = ExtResource("1_b5mb5")
+texture = ExtResource("1_nchep")
+
+[node name="BackgroundDarkness" type="Sprite2D" parent="center_layer"]
+position = Vector2(200, 100)
+texture = ExtResource("2_1d16b")
 
 [node name="static_sides" type="ParallaxLayer" parent="."]
 
