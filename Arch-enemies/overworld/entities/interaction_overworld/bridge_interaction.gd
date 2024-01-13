@@ -104,6 +104,10 @@ func visualize_status():
 		referenced_rect.texture = new_texture
 		var referenced_bridge_parts = $bridge_parts
 		referenced_bridge_parts.visible = true 
+	else:
+		# unsolved, hiding bridge_parts
+		var referenced_bridge_parts = $bridge_parts
+		referenced_bridge_parts.visible = false 
 
 # sets collision of static_body attached 
 func set_passability():
