@@ -132,53 +132,71 @@ required_item = 1
 required_npc_id = 1
 quest_reward = 1
 
-[node name="BridgeTemplate2" parent="." instance=ExtResource("8_khye4")]
+[node name="horizontal_01" parent="." instance=ExtResource("8_khye4")]
 position = Vector2(467, 331)
 
-[node name="bridge_interaction" parent="BridgeTemplate2/left_bridge_start" index="0"]
+[node name="bridge_interaction" parent="horizontal_01/left_bridge_start" index="0"]
 start_island_id = 1
 dest_island_id = 2
 
-[node name="bridge_interaction2" parent="BridgeTemplate2/right_bridge_start" index="0"]
+[node name="bridge_interaction2" parent="horizontal_01/right_bridge_start" index="0"]
 start_island_id = 2
 dest_island_id = 1
 
-[node name="BridgeTemplate" parent="." instance=ExtResource("8_khye4")]
+[node name="horizontal_02" parent="." instance=ExtResource("8_khye4")]
 position = Vector2(465, 279)
 
-[node name="bridge_start_sprite" parent="BridgeTemplate/left_bridge_start/bridge_interaction" index="0"]
+[node name="bridge_start_sprite" parent="horizontal_02/left_bridge_start/bridge_interaction" index="0"]
 metadata/_edit_use_anchors_ = true
 
-[node name="bridge_parts" parent="BridgeTemplate/left_bridge_start/bridge_interaction" index="2"]
+[node name="bridge_parts" parent="horizontal_02/left_bridge_start/bridge_interaction" index="2"]
 visible = true
 
-[node name="bridge_interaction2" parent="BridgeTemplate/right_bridge_start" index="0"]
-dest_island_id = 0
-
-[node name="bridge_start_sprite" parent="BridgeTemplate/right_bridge_start/bridge_interaction2" index="0"]
+[node name="bridge_start_sprite" parent="horizontal_02/right_bridge_start/bridge_interaction2" index="0"]
 metadata/_edit_use_anchors_ = true
 
-[node name="bridge_parts" parent="BridgeTemplate/right_bridge_start/bridge_interaction2" index="2"]
+[node name="bridge_parts" parent="horizontal_02/right_bridge_start/bridge_interaction2" index="2"]
 visible = true
 
 [node name="OverworldBridgeConnectingPart" type="Sprite2D" parent="."]
 position = Vector2(-142, 239)
 texture = ExtResource("9_w1njh")
 
-[node name="VerticalBridgeTemplate" parent="." instance=ExtResource("10_fo2xw")]
+[node name="vertical_bridge_01" parent="." instance=ExtResource("10_fo2xw")]
 position = Vector2(327, 376)
+
+[node name="bridge_interaction" parent="vertical_bridge_01/bridge_bottom" index="0"]
+start_island_id = 1
+dest_island_id = 1
+
+[node name="bridge_interaction2" parent="vertical_bridge_01/bridge_top" index="0"]
+start_island_id = 1
+dest_island_id = 1
+
+[node name="vertical_bridge_02" parent="." instance=ExtResource("10_fo2xw")]
+position = Vector2(210, 352)
 
 [editable path="bridge_interaction"]
 [editable path="bridge_interaction/interactionspot"]
 [editable path="bridge_interaction3"]
 [editable path="bridge_interaction3/interactionspot"]
-[editable path="BridgeTemplate2"]
-[editable path="BridgeTemplate2/left_bridge_start/bridge_interaction"]
-[editable path="BridgeTemplate2/left_bridge_start/bridge_interaction/interactionspot"]
-[editable path="BridgeTemplate2/right_bridge_start/bridge_interaction2"]
-[editable path="BridgeTemplate2/right_bridge_start/bridge_interaction2/interactionspot"]
-[editable path="BridgeTemplate"]
-[editable path="BridgeTemplate/left_bridge_start/bridge_interaction"]
-[editable path="BridgeTemplate/left_bridge_start/bridge_interaction/interactionspot"]
-[editable path="BridgeTemplate/right_bridge_start/bridge_interaction2"]
-[editable path="BridgeTemplate/right_bridge_start/bridge_interaction2/interactionspot"]
+[editable path="horizontal_01"]
+[editable path="horizontal_01/left_bridge_start/bridge_interaction"]
+[editable path="horizontal_01/left_bridge_start/bridge_interaction/interactionspot"]
+[editable path="horizontal_01/right_bridge_start/bridge_interaction2"]
+[editable path="horizontal_01/right_bridge_start/bridge_interaction2/interactionspot"]
+[editable path="horizontal_02"]
+[editable path="horizontal_02/left_bridge_start/bridge_interaction"]
+[editable path="horizontal_02/left_bridge_start/bridge_interaction/interactionspot"]
+[editable path="horizontal_02/right_bridge_start/bridge_interaction2"]
+[editable path="horizontal_02/right_bridge_start/bridge_interaction2/interactionspot"]
+[editable path="vertical_bridge_01"]
+[editable path="vertical_bridge_01/bridge_bottom/bridge_interaction"]
+[editable path="vertical_bridge_01/bridge_bottom/bridge_interaction/interactionspot"]
+[editable path="vertical_bridge_01/bridge_top/bridge_interaction2"]
+[editable path="vertical_bridge_01/bridge_top/bridge_interaction2/interactionspot"]
+[editable path="vertical_bridge_02"]
+[editable path="vertical_bridge_02/bridge_bottom/bridge_interaction"]
+[editable path="vertical_bridge_02/bridge_bottom/bridge_interaction/interactionspot"]
+[editable path="vertical_bridge_02/bridge_top/bridge_interaction2"]
+[editable path="vertical_bridge_02/bridge_top/bridge_interaction2/interactionspot"]

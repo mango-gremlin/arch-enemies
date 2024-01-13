@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://bypchr8htkr4e"]
+[gd_scene load_steps=5 format=3 uid="uid://bypchr8htkr4e"]
 
 [ext_resource type="PackedScene" uid="uid://5llfgi2ysvie" path="res://overworld/entities/interaction_overworld/bridge_interaction.tscn" id="1_mj4sp"]
 [ext_resource type="Texture2D" uid="uid://kigfdxbjt8nd" path="res://assets/art/objects/overworld_bridges/overworld_bridge_start_unbuilt.png" id="2_cywqy"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_2s4wq"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_hbgav"]
 
 [node name="VerticalBridgeTemplate" type="Node2D"]
 position = Vector2(0, 31)
@@ -10,21 +14,29 @@ position = Vector2(0, 31)
 
 [node name="bridge_interaction" parent="bridge_bottom" instance=ExtResource("1_mj4sp")]
 
-[node name="TextureRect2" type="TextureRect" parent="bridge_bottom/bridge_interaction"]
+[node name="bridge_start_sprite" parent="bridge_bottom/bridge_interaction" index="0"]
+metadata/_edit_use_anchors_ = true
+
+[node name="REPLACE_WITH_BUILT_START" type="TextureRect" parent="bridge_bottom/bridge_interaction/bridge_parts" index="0"]
 offset_left = -35.0
 offset_top = -126.0
 offset_right = 38.0
 offset_bottom = -86.0
 texture = ExtResource("2_cywqy")
 
-[node name="bridge_start_sprite" parent="bridge_bottom/bridge_interaction" index="1"]
-metadata/_edit_use_anchors_ = true
+[node name="TextureRect" parent="bridge_bottom/bridge_interaction/bridge_parts" index="1"]
+visible = false
+offset_left = -19.0
+offset_top = -102.0
+offset_right = 21.0
+offset_bottom = -62.0
 
-[node name="TextureRect" parent="bridge_bottom/bridge_interaction/bridge_parts" index="0"]
+[node name="REPLACE_WITH_BUILT_CONNECTION_PART" type="TextureRect" parent="bridge_bottom/bridge_interaction/bridge_parts" index="2"]
 offset_left = -20.0
-offset_top = -53.0
+offset_top = -98.0
 offset_right = 20.0
-offset_bottom = -13.0
+offset_bottom = -58.0
+texture = SubResource("PlaceholderTexture2D_2s4wq")
 
 [node name="bridge_collision" parent="bridge_bottom/bridge_interaction/bridge_collision_shape" index="0"]
 position = Vector2(0, -15)
@@ -34,21 +46,29 @@ position = Vector2(0, -15)
 [node name="bridge_interaction2" parent="bridge_top" instance=ExtResource("1_mj4sp")]
 position = Vector2(0, -105)
 
-[node name="TextureRect" type="TextureRect" parent="bridge_top/bridge_interaction2"]
+[node name="bridge_start_sprite" parent="bridge_top/bridge_interaction2" index="0"]
+metadata/_edit_use_anchors_ = true
+
+[node name="REPLACE_WITH_BUILT_START" type="TextureRect" parent="bridge_top/bridge_interaction2/bridge_parts" index="0"]
 offset_left = -34.0
 offset_top = 80.0
 offset_right = 39.0
 offset_bottom = 120.0
 texture = ExtResource("2_cywqy")
 
-[node name="bridge_start_sprite" parent="bridge_top/bridge_interaction2" index="1"]
-metadata/_edit_use_anchors_ = true
-
-[node name="TextureRect" parent="bridge_top/bridge_interaction2/bridge_parts" index="0"]
+[node name="TextureRect" parent="bridge_top/bridge_interaction2/bridge_parts" index="1"]
+visible = false
 offset_left = -20.0
 offset_top = 12.0
 offset_right = 20.0
 offset_bottom = 52.0
+
+[node name="REPLACE_WITH_BUILT_CONNECTION_PART" type="TextureRect" parent="bridge_top/bridge_interaction2/bridge_parts" index="2"]
+offset_left = -20.0
+offset_top = 47.0
+offset_right = 20.0
+offset_bottom = 87.0
+texture = SubResource("PlaceholderTexture2D_hbgav")
 
 [node name="bridge_collision" parent="bridge_top/bridge_interaction2/bridge_collision_shape" index="0"]
 position = Vector2(0, 13)

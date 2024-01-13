@@ -30,7 +30,6 @@ position = Vector2(20, 0)
 
 [node name="bridge_interaction2" parent="right_bridge_start" instance=ExtResource("1_wq2tl")]
 position = Vector2(98, 2)
-dest_island_id = 2
 bridge_sprite_direction = 2
 
 [node name="TextureRect2" type="TextureRect" parent="right_bridge_start/bridge_interaction2/bridge_parts" index="0"]
