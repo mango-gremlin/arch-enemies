@@ -10,8 +10,8 @@ var tile_size = tile_set.tile_size
 #Base asumption is no zoom, but it essentially does not matter for our purposes
 var x_zoom = 1
 var y_zoom = 1
-@export var x_size = int(DisplayServer.window_get_size().x / int(10 * x_zoom))
-@export var y_size = int(DisplayServer.window_get_size().y / int(10 * y_zoom))
+@export var x_size = int(DisplayServer.window_get_size().x / int(10 * x_zoom)) + 1
+@export var y_size = int(DisplayServer.window_get_size().y / int(10 * y_zoom)) + 1
 @export var square_size = 10
 
 
@@ -428,6 +428,7 @@ func _on_last_state_pressed():
 func _on_camera_2d_send_zoom(zoom):
 	#We adjust and recalculate the zoom if necessary
 	x_zoom = zoom.x
-	y_zoom  = zoom.y
-	x_size = int(DisplayServer.window_get_size().x / int(10 * x_zoom))
-	y_size = int(DisplayServer.window_get_size().y / int(10 * y_zoom))
+	y_zoom = zoom.y
+	x_size = int(DisplayServer.window_get_size().x / int(10 * x_zoom)) + 1
+	y_size = int(DisplayServer.window_get_size().y / int(10 * y_zoom)) + 1
+	grid_size = Vector2(x_size, y_size)
