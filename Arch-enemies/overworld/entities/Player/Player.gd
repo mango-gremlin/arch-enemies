@@ -11,6 +11,10 @@ signal saved_player()
 @onready var zoomlevel:Vector2 = SingletonPlayer.get_player_zoom()
 @onready var anim:AnimatedSprite2D = $AnimatedSprite2D
 
+# for correct animation: save last direction walked in, and if sprite was flipped
+@onready var current_direction = "side"
+@onready var h_flipped = false
+
 # --- / 
 # -- / player states
 # collects all interactions that we currently have 
@@ -34,27 +38,48 @@ func player_movement(delta):
 	# disallow movement when in dialogue
 	if SingletonPlayer.is_in_dialogue:
 		return
+		
 	velocity = Vector2.ZERO
+	
 	if Input.is_action_pressed("move_up"):
 		velocity.y -= SPEED
 		anim.play("back_walk")
+		current_direction = "back"
 	elif Input.is_action_pressed("move_down"):
 		velocity.y += SPEED
 		anim.play("front_walk")
+		current_direction = "front"
 	elif Input.is_action_pressed("move_left"):
 		velocity.x -= SPEED
+		h_flipped = true
 		anim.play("side_walk")
-		anim.flip_h = true
+		anim.flip_h = h_flipped
+		current_direction = "side"
 	elif Input.is_action_pressed("move_right"):
 		velocity.x += SPEED
+		h_flipped = false
 		anim.play("side_walk")
-		anim.flip_h = false
+		anim.flip_h = h_flipped
+		current_direction = "side"
 		
 	elif velocity == Vector2.ZERO:
-		anim.flip_h = false
-		anim.play("front_idle")
+		player_idle_animation(delta)
+		#anim.flip_h = false
+		#anim.play("front_idle")
 	
 	move_and_collide(velocity * delta)
+
+func player_idle_animation(delta):
+	match current_direction:
+		"side":
+			anim.flip_h = h_flipped
+			anim.play("front_idle")
+		"front":
+			anim.play("front_walk")
+		"back":
+			anim.play("back_walk")
+		_:
+			anim.play("front_idle")
 
 # ----- 
 # --- structure interaction areas
