@@ -1,6 +1,7 @@
-[gd_scene load_steps=33 format=3 uid="uid://bl1jporj7hosu"]
+[gd_scene load_steps=34 format=3 uid="uid://bl1jporj7hosu"]
 
 [ext_resource type="Texture2D" uid="uid://d0o2q6fijmd1" path="res://assets/art/tilesets/bridge_tileset/bridge_background_color.png" id="1_uowbf"]
+[ext_resource type="Script" path="res://bridges/script/Camera.gd" id="1_vkapa"]
 [ext_resource type="Script" path="res://bridges/script/grid.gd" id="1_xtvvi"]
 [ext_resource type="Texture2D" uid="uid://dgoo8sdw24hp0" path="res://assets/art/tilesets/bridge_tileset/bridge_air_tiles.png" id="2_4xri4"]
 [ext_resource type="Script" path="res://bridges/script/grid_visualizer.gd" id="2_d8ovy"]
@@ -774,6 +775,7 @@ sources/6 = SubResource("TileSetAtlasSource_meq0p")
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(192, 108)
 zoom = Vector2(3, 3)
+script = ExtResource("1_vkapa")
 
 [node name="Grid" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_ne4ig")
@@ -884,11 +886,13 @@ position = Vector2(340, 95)
 
 [node name="parallax_background" parent="." instance=ExtResource("18_uekha")]
 
+[connection signal="send_zoom" from="Camera2D" to="Grid" method="_on_camera_2d_send_zoom"]
 [connection signal="current_grid" from="Grid" to="Grid/Control/Drag_Grid" method="_on_grid_current_grid"]
 [connection signal="current_grid" from="Grid" to="Grid/Control/Animal_Inventory/Deer_Item" method="_on_grid_current_grid"]
 [connection signal="current_grid" from="Grid" to="Grid/Control/Animal_Inventory/Snake_Item" method="_on_grid_current_grid"]
 [connection signal="current_grid" from="Grid" to="Grid/Control/Animal_Inventory/Spider_Item" method="_on_grid_current_grid"]
 [connection signal="current_grid" from="Grid" to="Grid/Control/Animal_Inventory/Squirrel_Item" method="_on_grid_current_grid"]
+[connection signal="get_zoom" from="Grid" to="Camera2D" method="_on_grid_get_zoom"]
 [connection signal="is_dragging" from="Grid/Control/Drag_Grid" to="Grid" method="_on_drag_grid_is_dragging"]
 [connection signal="need_grid" from="Grid/Control/Drag_Grid" to="Grid" method="_on_drag_grid_need_grid"]
 [connection signal="update_grid" from="Grid/Control/Drag_Grid" to="Grid" method="_on_drag_grid_update_grid"]
