@@ -54,6 +54,10 @@ func reset_player():
 	velocity = Vector2.ZERO
 	global_position = start_position
 
+# if fox comes in contact with goal zone
+func _on_goal_area_2d_body_entered(_body):
+	var goal_menu = get_parent().find_child("goal_menu")
+	goal_menu.visible = true
 
 # flip the sprite to the direction the player should be facing
 func update_facing_direction():
@@ -86,11 +90,3 @@ func _on_animated_sprite_2d_animation_finished():
 		animation_locked = false
 	elif animated_sprite.animation == "jump_up":
 		animated_sprite.play("jump_fly")
-
-
-func _on_water_detection_body_entered(body):
-	reset_player()
-
-
-func _on_hazard_detection_body_entered(body):
-	reset_player()

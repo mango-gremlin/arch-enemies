@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bj3a1sw80l6wj" path="res://overworld/entities/interaction_overworld/item_interaction.tscn" id="6_66i44"]
 [ext_resource type="PackedScene" uid="uid://5llfgi2ysvie" path="res://overworld/entities/interaction_overworld/bridge_interaction.tscn" id="6_iairi"]
 [ext_resource type="PackedScene" uid="uid://drn1loe1wknbq" path="res://overworld/entities/interaction_overworld/npc_interaction.tscn" id="7_33ud0"]
+[ext_resource type="Texture2D" uid="uid://08plwlb60wib" path="res://assets/art/bridge_dummy_failure.png" id="8_g5nw6"]
 
 [node name="maingame" type="Node"]
 script = ExtResource("1_pwtu4")
@@ -78,6 +79,7 @@ position = Vector2(409, 335)
 npc_name = "esther"
 npc_id = 3
 npc_animal_type = 3
+npc_special_sprite = ExtResource("8_g5nw6")
 
 [node name="Player" parent="." instance=ExtResource("2_mpe4y")]
 
