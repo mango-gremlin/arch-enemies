@@ -797,12 +797,13 @@ anchors_preset = 0
 offset_right = 390.0
 offset_bottom = 220.0
 
-[node name="Drag_Grid" type="TextureRect" parent="Grid/Control"]
+[node name="Drag_Grid" type="TextureRect" parent="Grid/Control" node_paths=PackedStringArray("Grid_node_reference")]
 custom_minimum_size = Vector2(390, 220)
 layout_mode = 1
 offset_right = 390.0
 offset_bottom = 220.0
 script = ExtResource("12_re1q8")
+Grid_node_reference = NodePath("../..")
 metadata/_edit_use_anchors_ = true
 
 [node name="Animal_Inventory" type="HBoxContainer" parent="Grid/Control"]
@@ -810,33 +811,37 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Deer_Item" type="TextureRect" parent="Grid/Control/Animal_Inventory"]
+[node name="Deer_Item" type="TextureRect" parent="Grid/Control/Animal_Inventory" node_paths=PackedStringArray("Grid_node_reference")]
 layout_mode = 2
 tooltip_text = "DEER"
 texture = ExtResource("3_x44oq")
 stretch_mode = 3
 script = ExtResource("12_re1q8")
+Grid_node_reference = NodePath("../../..")
 
-[node name="Snake_Item" type="TextureRect" parent="Grid/Control/Animal_Inventory"]
+[node name="Snake_Item" type="TextureRect" parent="Grid/Control/Animal_Inventory" node_paths=PackedStringArray("Grid_node_reference")]
 layout_mode = 2
 tooltip_text = "SNAKE"
 texture = ExtResource("7_jp1m1")
 stretch_mode = 3
 script = ExtResource("12_re1q8")
+Grid_node_reference = NodePath("../../..")
 
-[node name="Spider_Item" type="TextureRect" parent="Grid/Control/Animal_Inventory"]
+[node name="Spider_Item" type="TextureRect" parent="Grid/Control/Animal_Inventory" node_paths=PackedStringArray("Grid_node_reference")]
 layout_mode = 2
 tooltip_text = "SPIDER"
 texture = ExtResource("8_rtjqf")
 stretch_mode = 3
 script = ExtResource("12_re1q8")
+Grid_node_reference = NodePath("../../..")
 
-[node name="Squirrel_Item" type="TextureRect" parent="Grid/Control/Animal_Inventory"]
+[node name="Squirrel_Item" type="TextureRect" parent="Grid/Control/Animal_Inventory" node_paths=PackedStringArray("Grid_node_reference")]
 layout_mode = 2
 tooltip_text = "SQUIRREL"
 texture = ExtResource("11_a366g")
 stretch_mode = 3
 script = ExtResource("12_re1q8")
+Grid_node_reference = NodePath("../../..")
 
 [node name="Drag_or_Fox" type="CheckButton" parent="Grid/Control"]
 layout_mode = 0

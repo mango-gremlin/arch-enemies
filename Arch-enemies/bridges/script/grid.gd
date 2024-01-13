@@ -15,6 +15,7 @@ var tile_size = tile_set.tile_size
 @export var inventory_spider : Label
 @export var inventory_squirrel : Label
 
+#@export var drag_grid_reference:TextureRect
 #And finally some values we need later
 var grid_size = Vector2(x_size, y_size)
 var grid = []
@@ -86,14 +87,9 @@ func _ready():
 	
 	#update the ui
 	update_inventory()
-	# binding Drag_Grid instance to share the inventory accordingly
-	# FIXME hardcoded, could introduce errors //
-	var grid_drag_object = get_node("Control/Drag_Grid") 
-	print(grid_drag_object)
-	grid_drag_object.parent_node = self
-	grid_drag_object.animal_inventory_reference = start_animals
-	print(start_animals)
-	print(grid_drag_object.animal_inventory_reference)
+	#drag_grid_reference.animal_inventory_reference = start_animals.duplicate(true)
+	#print(start_animals)
+	#print(drag_grid_reference.animal_inventory_reference)
 	
 	#We save the previous states of the grid in an array, this array is initalized here
 	for i in range(save_states):

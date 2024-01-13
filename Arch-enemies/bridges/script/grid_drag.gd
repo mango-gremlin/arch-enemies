@@ -16,17 +16,28 @@ signal dragging_done
 # required to load and interact with scene-specific inventory
 # this acts as reference to the animal inventory stored in "GRID"
 @onready var animal_inventory_reference:Dictionary
-var parent_node
+@export var Grid_node_reference:TileMap
+#var parent_node
+#var test_value:String = "hallooo"
 
+func set_inventory(new_inventory:Dictionary):
+	animal_inventory_reference = new_inventory
+	#print(animal_inventory_reference)
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	animal_inventory_reference = Grid_node_reference.start_animals
+	print("inv in grid drag")
+	print(animal_inventory_reference)
+	print(Grid_node_reference)
 	# gathering inventory from parent node
 	#animal_inventory_reference = parent_node.start_animals	
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass	
+	print(animal_inventory_reference)
+	print(self)
+	pass
 
 func _get_drag_data(at_position):
 	if Global.drag_mode:
