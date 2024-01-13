@@ -61,12 +61,6 @@ start_island_id = 2
 bridge_description = "this connects 2 and 0 "
 bridge_sprite_direction = 2
 
-[node name="TextureRect" parent="bridge_interaction3/bridge_parts" index="0"]
-offset_left = -17.0
-offset_top = -52.0
-offset_right = 23.0
-offset_bottom = -12.0
-
 [node name="bridge_collision" parent="bridge_interaction3/bridge_collision_shape" index="0"]
 position = Vector2(3, -12)
 
