@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c5o1tmg3hdwxg"
-path="res://.godot/imported/background_center_v3.png-10ce300ab117c5369577e2fa0ed2fb90.ctex"
+uid="uid://leqswdio6xwd"
+path="res://.godot/imported/background_center_v4.png-899fc4acedec4c2150f74202b217b2a3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://bridges/assets/background/background_center_v3.png"
-dest_files=["res://.godot/imported/background_center_v3.png-10ce300ab117c5369577e2fa0ed2fb90.ctex"]
+source_file="res://bridges/assets/background/background_center_v4.png"
+dest_files=["res://.godot/imported/background_center_v4.png-899fc4acedec4c2150f74202b217b2a3.ctex"]
 
 [params]
 
