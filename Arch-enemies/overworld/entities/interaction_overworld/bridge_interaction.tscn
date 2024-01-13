@@ -1,12 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://5llfgi2ysvie"]
+[gd_scene load_steps=5 format=3 uid="uid://5llfgi2ysvie"]
 
 [ext_resource type="Script" path="res://overworld/entities/interaction_overworld/bridge_interaction.gd" id="1_0fxgx"]
 [ext_resource type="PackedScene" uid="uid://cegpqm0j2vvbh" path="res://overworld/entities/interaction_overworld/interactionspot.tscn" id="2_l2pv7"]
 [ext_resource type="Texture2D" uid="uid://08plwlb60wib" path="res://assets/art/bridge_dummy_failure.png" id="2_njg8x"]
-[ext_resource type="Texture2D" uid="uid://cer2bbvjgwtay" path="res://assets/art/objects/overworld_bridges/overworld_bridge_connecting_part.png" id="4_daxxh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nkgcs"]
-size = Vector2(29, 31)
+size = Vector2(39, 19.75)
 
 [node name="bridge_interaction" type="Node2D"]
 script = ExtResource("1_0fxgx")
@@ -23,13 +22,6 @@ texture = ExtResource("2_njg8x")
 
 [node name="bridge_parts" type="Node2D" parent="."]
 visible = false
-
-[node name="TextureRect" type="TextureRect" parent="bridge_parts"]
-offset_left = 12.0
-offset_top = -19.0
-offset_right = 52.0
-offset_bottom = 21.0
-texture = ExtResource("4_daxxh")
 
 [node name="bridge_collision_shape" type="StaticBody2D" parent="."]
 

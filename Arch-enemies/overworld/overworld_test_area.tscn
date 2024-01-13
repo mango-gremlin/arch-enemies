@@ -30,13 +30,6 @@ position = Vector2(119, 14)
 start_island_id = 2
 bridge_description = "this connects 2 and 0 "
 
-[node name="TextureRect" parent="bridge_interaction3/bridge_parts" index="0"]
-offset_left = -14.0
-offset_top = -29.0
-offset_right = 26.0
-offset_bottom = 11.0
-rotation = -1.57966
-
 [node name="bridge_collision" parent="bridge_interaction3/bridge_collision_shape" index="0"]
 position = Vector2(4, -23)
 
@@ -149,14 +142,8 @@ position = Vector2(465, 279)
 [node name="bridge_start_sprite" parent="horizontal_02/left_bridge_start/bridge_interaction" index="0"]
 metadata/_edit_use_anchors_ = true
 
-[node name="bridge_parts" parent="horizontal_02/left_bridge_start/bridge_interaction" index="2"]
-visible = true
-
 [node name="bridge_start_sprite" parent="horizontal_02/right_bridge_start/bridge_interaction2" index="0"]
 metadata/_edit_use_anchors_ = true
-
-[node name="bridge_parts" parent="horizontal_02/right_bridge_start/bridge_interaction2" index="2"]
-visible = true
 
 [node name="OverworldBridgeConnectingPart" type="Sprite2D" parent="."]
 position = Vector2(-142, 239)

@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://0isb2xg4n684"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_wnhja"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g7pdj"]
+size = Vector2(40, 4)
+
+[node name="VerticalBridgePartWithCollision" type="Node2D"]
+
+[node name="bridge_part_with_collision" type="Node2D" parent="."]
+
+[node name="REPLACE_WITH_BUILT_CONNECTION_PART" type="TextureRect" parent="bridge_part_with_collision"]
+offset_left = -20.125
+offset_top = -23.0
+offset_right = 19.875
+offset_bottom = 17.0
+texture = SubResource("PlaceholderTexture2D_wnhja")
+metadata/_edit_use_anchors_ = true
+
+[node name="lower_collision" type="StaticBody2D" parent="bridge_part_with_collision"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bridge_part_with_collision/lower_collision"]
+position = Vector2(0, -25)
+shape = SubResource("RectangleShape2D_g7pdj")
+
+[node name="upper_collision" type="StaticBody2D" parent="bridge_part_with_collision"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bridge_part_with_collision/upper_collision"]
+position = Vector2(0, 19)
+shape = SubResource("RectangleShape2D_g7pdj")
