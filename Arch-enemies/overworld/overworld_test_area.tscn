@@ -20,76 +20,134 @@ script = ExtResource("1_ui4aw")
 
 [node name="overworld_ui" parent="." instance=ExtResource("4_p4p2t")]
 
-[node name="bridge_interaction" parent="." instance=ExtResource("5_f6jxn")]
-position = Vector2(206, 23)
-dest_island_id = 1
+[node name="bridge_10" parent="." instance=ExtResource("5_f6jxn")]
+position = Vector2(308, 81)
+start_island_id = 1
 bridge_description = "connects from 0 to 1 "
 
-[node name="bridge_parts" type="Node2D" parent="bridge_interaction"]
+[node name="bridge_parts" type="Node2D" parent="bridge_10"]
+
+[node name="bridge_part" type="ColorRect" parent="bridge_10/bridge_parts"]
+offset_left = -36.0
+offset_top = -10.0
+offset_right = -11.0
+offset_bottom = 10.0
+
+[node name="bridge_collision_shape" type="StaticBody2D" parent="bridge_10"]
+
+[node name="bridge_collision" type="CollisionShape2D" parent="bridge_10/bridge_collision_shape"]
+position = Vector2(-28, -1)
+shape = SubResource("RectangleShape2D_25akq")
+
+[node name="bridge_01" parent="." instance=ExtResource("5_f6jxn")]
+position = Vector2(205, 79)
+dest_island_id = 1
+bridge_description = "connects from 0 to 0"
+
+[node name="bridge_parts" type="Node2D" parent="bridge_01"]
 visible = false
 
-[node name="bridge_part" type="ColorRect" parent="bridge_interaction/bridge_parts"]
+[node name="bridge_part" type="ColorRect" parent="bridge_01/bridge_parts"]
 offset_left = 12.0
 offset_top = -7.0
 offset_right = 37.0
 offset_bottom = 13.0
 
-[node name="bridge_collision_shape" type="StaticBody2D" parent="bridge_interaction"]
+[node name="bridge_collision_shape" type="StaticBody2D" parent="bridge_01"]
 
-[node name="bridge_collision" type="CollisionShape2D" parent="bridge_interaction/bridge_collision_shape"]
+[node name="bridge_collision" type="CollisionShape2D" parent="bridge_01/bridge_collision_shape"]
 position = Vector2(25, 1)
 shape = SubResource("RectangleShape2D_25akq")
 
-[node name="bridge_interaction3" parent="." instance=ExtResource("5_f6jxn")]
-position = Vector2(109, -32)
+[node name="bridge_02" parent="." instance=ExtResource("5_f6jxn")]
+position = Vector2(124, 14)
+dest_island_id = 2
+bridge_description = "this connects 2 and 0 "
+
+[node name="bridge_parts" type="Node2D" parent="bridge_02"]
+visible = false
+
+[node name="bridge_part" type="ColorRect" parent="bridge_02/bridge_parts"]
+offset_left = -13.0
+offset_top = -26.0
+offset_right = 12.0
+offset_bottom = -6.0
+
+[node name="bridge_collision_shape" type="StaticBody2D" parent="bridge_02"]
+
+[node name="bridge_collision" type="CollisionShape2D" parent="bridge_02/bridge_collision_shape"]
+position = Vector2(-1, -16)
+shape = SubResource("RectangleShape2D_25akq")
+
+[node name="Label" type="Label" parent="bridge_02"]
+offset_left = -22.0
+offset_top = -47.0
+offset_right = 26.0
+offset_bottom = -24.0
+text = "0 -> 2
+"
+
+[node name="bridge_20" parent="." instance=ExtResource("5_f6jxn")]
+position = Vector2(69, 15)
 start_island_id = 2
 bridge_description = "this connects 2 and 0 "
 
-[node name="bridge_parts" type="Node2D" parent="bridge_interaction3"]
+[node name="bridge_parts" type="Node2D" parent="bridge_20"]
 visible = false
 
-[node name="bridge_part" type="ColorRect" parent="bridge_interaction3/bridge_parts"]
-offset_left = 12.0
-offset_top = -7.0
-offset_right = 37.0
-offset_bottom = 13.0
+[node name="bridge_part" type="ColorRect" parent="bridge_20/bridge_parts"]
+offset_left = -10.0
+offset_top = -27.0
+offset_right = 15.0
+offset_bottom = -7.0
 
-[node name="bridge_collision_shape" type="StaticBody2D" parent="bridge_interaction3"]
+[node name="bridge_collision_shape" type="StaticBody2D" parent="bridge_20"]
 
-[node name="bridge_collision" type="CollisionShape2D" parent="bridge_interaction3/bridge_collision_shape"]
-position = Vector2(25, 1)
+[node name="bridge_collision" type="CollisionShape2D" parent="bridge_20/bridge_collision_shape"]
+position = Vector2(-1, -16)
 shape = SubResource("RectangleShape2D_25akq")
 
-[node name="bridge_interaction2" parent="." instance=ExtResource("5_f6jxn")]
-position = Vector2(204, 88)
-bridge_description = "connects from 0 to 0"
+[node name="Label" type="Label" parent="bridge_20"]
+offset_left = -22.0
+offset_top = -47.0
+offset_right = 26.0
+offset_bottom = -24.0
+text = "2  -> 0
+"
 
-[node name="bridge_parts" type="Node2D" parent="bridge_interaction2"]
+[node name="bridge_21" parent="." instance=ExtResource("5_f6jxn")]
+position = Vector2(-10, -32)
+dest_island_id = 3
+bridge_description = "this connects 2 and 0 "
+
+[node name="bridge_parts" type="Node2D" parent="bridge_21"]
 visible = false
 
-[node name="bridge_part" type="ColorRect" parent="bridge_interaction2/bridge_parts"]
-offset_left = 12.0
-offset_top = -7.0
-offset_right = 37.0
-offset_bottom = 13.0
+[node name="bridge_part" type="ColorRect" parent="bridge_21/bridge_parts"]
+offset_left = -10.0
+offset_top = -27.0
+offset_right = 15.0
+offset_bottom = -7.0
 
-[node name="bridge_collision_shape" type="StaticBody2D" parent="bridge_interaction2"]
+[node name="bridge_collision_shape" type="StaticBody2D" parent="bridge_21"]
 
-[node name="bridge_collision" type="CollisionShape2D" parent="bridge_interaction2/bridge_collision_shape"]
-position = Vector2(25, 1)
+[node name="bridge_collision" type="CollisionShape2D" parent="bridge_21/bridge_collision_shape"]
+position = Vector2(-1, -16)
 shape = SubResource("RectangleShape2D_25akq")
+
+[node name="Label" type="Label" parent="bridge_21"]
+offset_left = -22.0
+offset_top = -47.0
+offset_right = 26.0
+offset_bottom = -24.0
+text = "0 -> 3
+"
 
 [node name="item_interaction" parent="." instance=ExtResource("6_ij5ah")]
 position = Vector2(378, 113)
 item_type = 2
 item_dialogue_success = "you got an item!"
 item_dialogue_failure = "no item found"
-
-[node name="item_interaction2" parent="." instance=ExtResource("6_ij5ah")]
-position = Vector2(130, 17)
-item_type = 3
-item_dialogue_success = "item? "
-item_dialogue_failure = "item :("
 
 [node name="NpcInteraction" parent="." instance=ExtResource("7_06f0y")]
 position = Vector2(560, 40)
@@ -152,15 +210,6 @@ offset_bottom = 11.0
 text = "bridge from 
 0 -> 1
 should be solved "
-
-[node name="Label" type="Label" parent="."]
-offset_left = 101.0
-offset_top = -91.0
-offset_right = 193.0
-offset_bottom = -42.0
-text = "bridge from 
-2 -> 0
-"
 
 [node name="NpcInteraction3" parent="." instance=ExtResource("7_06f0y")]
 position = Vector2(560, 101)

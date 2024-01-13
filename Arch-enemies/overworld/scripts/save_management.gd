@@ -16,6 +16,7 @@ var state_path = "user://arch-enemies.json"
 # TODO #89
 func _init(playerObject):
 	# set player object accordingly 
+	
 	player_object = playerObject
 	camera_object = player_object.find_child("Camera2D")
 	

@@ -1,6 +1,7 @@
 extends Node
 
-@onready var player_object = $Player
+# for ysort to work, player needs to be child of tilemap, so Player has a different position
+@onready var player_object = $world/TileMap/Player
 @onready var Savemanager = Savemanagement.new(player_object)
 
 
