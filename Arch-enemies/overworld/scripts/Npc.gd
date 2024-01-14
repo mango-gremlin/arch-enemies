@@ -167,7 +167,7 @@ func check_quest_condition() -> bool:
 					return true 
 				return false 
 			NPC_interaction.Quest.NPC:
-				if SingletonPlayer.check_npc_state(required_npc_id): 
+				if SingletonPlayer.check_dialogue_finished(npc_id):
 					# visited npc already 
 					return true 
 				return false 
@@ -243,6 +243,9 @@ func obtain_dialogue() -> String:
 		return dialogue_quest_done
 	else:
 		return stringify_quest()
+		
+func interaction_label() ->String:
+	return dialogue_quest_done
 
 # returns formatted dialogue
 # FIXME placehold for dialogue-system
