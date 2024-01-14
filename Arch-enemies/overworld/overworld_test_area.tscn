@@ -1,7 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://dtvq143m5ddef"]
+[gd_scene load_steps=10 format=3 uid="uid://dtvq143m5ddef"]
 
 [ext_resource type="Script" path="res://overworld/overworld.gd" id="1_ui4aw"]
-[ext_resource type="PackedScene" uid="uid://dndu4pg1i3tlf" path="res://overworld/scenes/player.tscn" id="2_4d4x5"]
 [ext_resource type="PackedScene" uid="uid://p30p3o0e473c" path="res://overworld/scenes/world.tscn" id="3_4d472"]
 [ext_resource type="PackedScene" uid="uid://cgvraulefjyn8" path="res://overworld/ui/overworld_ui/overworld_ui.tscn" id="4_p4p2t"]
 [ext_resource type="PackedScene" uid="uid://5llfgi2ysvie" path="res://overworld/entities/interaction_overworld/bridge_interaction.tscn" id="5_f6jxn"]
@@ -14,15 +13,13 @@
 [node name="maingame" type="Node"]
 script = ExtResource("1_ui4aw")
 
-[node name="Player" parent="." instance=ExtResource("2_4d4x5")]
-
 [node name="world" parent="." instance=ExtResource("3_4d472")]
 
 [node name="overworld_ui" parent="." instance=ExtResource("4_p4p2t")]
 
-[node name="bridge_interaction" parent="." instance=ExtResource("5_f6jxn")]
-position = Vector2(206, 23)
-dest_island_id = 1
+[node name="bridge_10" parent="." instance=ExtResource("5_f6jxn")]
+position = Vector2(308, 81)
+start_island_id = 1
 bridge_description = "connects from 0 to 1 "
 
 [node name="bridge_interaction3" parent="." instance=ExtResource("5_f6jxn")]
@@ -32,6 +29,13 @@ bridge_description = "this connects 2 and 0 "
 
 [node name="bridge_collision" parent="bridge_interaction3/bridge_collision_shape" index="0"]
 position = Vector2(4, -23)
+
+[node name="bridge_21#Label" type="Label" parent="."]
+offset_left = -22.0
+offset_top = -47.0
+offset_right = 26.0
+offset_bottom = -24.0
+text = "0 -> 3"
 
 [node name="item_interaction" parent="." instance=ExtResource("6_ij5ah")]
 position = Vector2(356, 105)
@@ -107,15 +111,6 @@ text = "bridge from
 0 -> 1
 should be solved "
 
-[node name="Label" type="Label" parent="."]
-offset_left = 101.0
-offset_top = -91.0
-offset_right = 193.0
-offset_bottom = -42.0
-text = "bridge from 
-2 -> 0
-"
-
 [node name="NpcInteraction3" parent="." instance=ExtResource("7_06f0y")]
 position = Vector2(560, 101)
 npc_name = "\\\\//"
@@ -163,8 +158,6 @@ dest_island_id = 1
 [node name="vertical_bridge_02" parent="." instance=ExtResource("10_fo2xw")]
 position = Vector2(210, 352)
 
-[editable path="bridge_interaction"]
-[editable path="bridge_interaction/interactionspot"]
 [editable path="bridge_interaction3"]
 [editable path="bridge_interaction3/interactionspot"]
 [editable path="horizontal_01"]

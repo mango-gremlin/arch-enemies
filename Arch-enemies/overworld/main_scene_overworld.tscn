@@ -1,7 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://cgfkelxiskcux"]
+[gd_scene load_steps=9 format=3 uid="uid://cgfkelxiskcux"]
 
 [ext_resource type="Script" path="res://overworld/overworld.gd" id="1_pwtu4"]
-[ext_resource type="PackedScene" uid="uid://dndu4pg1i3tlf" path="res://overworld/scenes/player.tscn" id="2_mpe4y"]
 [ext_resource type="PackedScene" uid="uid://p30p3o0e473c" path="res://overworld/scenes/world.tscn" id="3_xuy1h"]
 [ext_resource type="PackedScene" uid="uid://cgvraulefjyn8" path="res://overworld/ui/overworld_ui/overworld_ui.tscn" id="4_4hawq"]
 [ext_resource type="PackedScene" uid="uid://bj3a1sw80l6wj" path="res://overworld/entities/interaction_overworld/item_interaction.tscn" id="6_66i44"]
@@ -47,7 +46,7 @@ reward_item = 1
 
 [node name="bridge_interaction3" parent="." instance=ExtResource("6_iairi")]
 position = Vector2(119, 13)
-start_island_id = 2
+dest_island_id = 2
 bridge_description = "this connects 2 and 0 "
 bridge_sprite_direction = 2
 
@@ -63,6 +62,13 @@ quest_type = 0
 required_item = 2
 quest_reward = 1
 
+[node name="Label" type="Label" parent="bridge_interaction3"]
+offset_left = -34.0
+offset_top = -50.0
+offset_right = 43.0
+offset_bottom = -27.0
+text = "0->2 play!"
+
 [node name="NpcInteraction3" parent="." instance=ExtResource("7_33ud0")]
 position = Vector2(409, 335)
 npc_name = "esther"
@@ -70,15 +76,11 @@ npc_id = 3
 npc_animal_type = 3
 npc_special_sprite = ExtResource("8_g5nw6")
 
-[node name="Player" parent="." instance=ExtResource("2_mpe4y")]
-
 [node name="BridgeTemplate" parent="." instance=ExtResource("9_jpn0u")]
 position = Vector2(251, 72)
 
 [node name="right_bridge_start" parent="BridgeTemplate" index="1"]
 position = Vector2(-37, 0)
-
-[connection signal="saved_player" from="Player" to="." method="_on_player_saved_player"]
 
 [editable path="bridge_interaction3"]
 [editable path="bridge_interaction3/interactionspot"]

@@ -6,9 +6,14 @@ extends TileMap
 var tile_size = tile_set.tile_size
 
 #The Dimensions of the Grid
-@export var x_size = 39
-@export var y_size = 22
+#We add some variables to adjust to the zoom
+#Base asumption is no zoom, but it essentially does not matter for our purposes
+var x_zoom = 1
+var y_zoom = 1
+@export var x_size = int(DisplayServer.window_get_size().x / int(10 * x_zoom)) + 1
+@export var y_size = int(DisplayServer.window_get_size().y / int(10 * y_zoom)) + 1
 @export var square_size = 10
+
 
 #And finally some values we need later
 var grid_size = Vector2(x_size, y_size)
@@ -47,6 +52,7 @@ var water_squares = []
 
 #This is the signal we use to transfer the current grid to child nodes
 signal current_grid(current_grid)
+signal get_zoom()
 
 #These are the different kind of object we can have in grid cells
 enum ENTITY_TYPES {GROUND, WATER, AIR, ANIMAL, FORBIDDEN, ALLOWED, SIDE, BOTTOM, SHALLOW}
@@ -55,6 +61,8 @@ func _ready():
 	#We save the previous states of the grid in an array, this array is initalized here
 	for i in range(save_states):
 		last_states.append([[]])
+	#We have to adjust the window size if zoomed in
+	get_zoom.emit()
 	#Here we iterated over the grid and fill it
 	for x in range(grid_size.x):
 		grid.append([])
@@ -416,3 +424,11 @@ func _on_reset_pressed():
 
 func _on_last_state_pressed():
 	last_state()
+
+func _on_camera_2d_send_zoom(zoom):
+	#We adjust and recalculate the zoom if necessary
+	x_zoom = zoom.x
+	y_zoom = zoom.y
+	x_size = int(DisplayServer.window_get_size().x / int(10 * x_zoom)) + 1
+	y_size = int(DisplayServer.window_get_size().y / int(10 * y_zoom)) + 1
+	grid_size = Vector2(x_size, y_size)

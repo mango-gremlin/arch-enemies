@@ -11,6 +11,10 @@ signal saved_player()
 @onready var zoomlevel:Vector2 = SingletonPlayer.get_player_zoom()
 @onready var anim:AnimatedSprite2D = $AnimatedSprite2D
 
+# for correct animation: save last direction walked in, and if sprite was flipped
+@onready var current_direction = "side"
+@onready var h_flipped = false
+
 # --- / 
 # -- / player states
 # collects all interactions that we currently have 
@@ -34,27 +38,48 @@ func player_movement(delta):
 	# disallow movement when in dialogue
 	if SingletonPlayer.is_in_dialogue:
 		return
+		
 	velocity = Vector2.ZERO
+	
 	if Input.is_action_pressed("move_up"):
 		velocity.y -= SPEED
 		anim.play("back_walk")
+		current_direction = "back"
 	elif Input.is_action_pressed("move_down"):
 		velocity.y += SPEED
 		anim.play("front_walk")
+		current_direction = "front"
 	elif Input.is_action_pressed("move_left"):
 		velocity.x -= SPEED
+		h_flipped = true
 		anim.play("side_walk")
-		anim.flip_h = true
+		anim.flip_h = h_flipped
+		current_direction = "side"
 	elif Input.is_action_pressed("move_right"):
 		velocity.x += SPEED
+		h_flipped = false
 		anim.play("side_walk")
-		anim.flip_h = false
+		anim.flip_h = h_flipped
+		current_direction = "side"
 		
 	elif velocity == Vector2.ZERO:
-		anim.flip_h = false
-		anim.play("front_idle")
+		player_idle_animation(delta)
+		#anim.flip_h = false
+		#anim.play("front_idle")
 	
 	move_and_collide(velocity * delta)
+
+func player_idle_animation(delta):
+	match current_direction:
+		"side":
+			anim.flip_h = h_flipped
+			anim.play("front_idle")
+		"front":
+			anim.play("front_walk")
+		"back":
+			anim.play("back_walk")
+		_:
+			anim.play("front_idle")
 
 # ----- 
 # --- structure interaction areas
@@ -92,12 +117,13 @@ func execute_interaction():
 				print(interaction_data["issolved"])
 				if interaction_data["issolved"]: 
 					set_interactionLabel("Was solved already") 
+					return
 				else: 
 					set_interactionLabel(interaction_data["text"])
 					
 				var bridge_edge:SingletonPlayer.BridgeEdge = interaction_data["bridge_edge"]
-				# FIXME map BridgeEdge data to given level accordingly
-				#enter_bridge_scene(bridge_id)
+				enter_bridge_scene(bridge_edge)
+				
 			Interactable.InteractionType.ITEM: 
 				print("obtained item")
 				set_interactionLabel(interaction_data["text"])
@@ -144,9 +170,6 @@ func check_input():
 		pass
 	if Input.is_action_just_pressed("open_menu"):
 		enter_pause_menu()
-		
-	
-
 
 # ---- 
 # scene change management
@@ -158,18 +181,21 @@ func enter_pause_menu():
 	# TODO 
 	get_tree().change_scene_to_file("res://overworld/ui/menu/menu/pause_menu.tscn")
 
-# TODO Outdated --> we dont have bridge_ids anymore 
+# takes received bridgeEdge and enters its path
+# loads message to inform if no level was found
 func enter_bridge_scene(bridgeEdge:SingletonPlayer.BridgeEdge):
-	var bridge_start:int = bridgeEdge.start_id
-	var bridge_dest:int = bridgeEdge.dest_id
-	
-	print("entering bridge game from ", bridge_start, " to ", bridge_dest )
-	exit_overworld()
-	# TODO search for bridgeGame with correct id! 
-	# load it afterwards
-	# enter_pause_menu() # default until we merged
-	get_tree().change_scene_to_file("res://bridges/scenes/bridge_1.tscn")
-	
+	var updated_bridge_edge:SingletonPlayer.BridgeEdge = SingletonPlayer.obtain_bridge_scene(bridgeEdge)
+	# either the bridgeEdge.path is set -> found scene 
+	# or not 
+	match updated_bridge_edge.path_state:
+		SingletonPlayer.BridgeLevelPathState.NONE:
+			# should not happen in normal operation
+			set_interactionLabel("no scene available :(")
+		SingletonPlayer.BridgeLevelPathState.AVAILABLE:
+			# found matching path 
+			var path_to_scene:String = updated_bridge_edge.path
+			#exit_overworld()
+			get_tree().change_scene_to_file(path_to_scene)
 
 # prepare player to leave overworld, store its state 
 func exit_overworld():
