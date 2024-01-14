@@ -1,34 +1,30 @@
-[gd_scene load_steps=4 format=3 uid="uid://b0v6vdudnx0vh"]
+[gd_scene load_steps=3 format=3 uid="uid://0isb2xg4n684"]
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_s2jxi"]
+[ext_resource type="Texture2D" uid="uid://cer2bbvjgwtay" path="res://assets/art/objects/overworld_bridges/overworld_bridge_connecting_part_h.png" id="1_ip8lc"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7josl"]
-size = Vector2(4, 40)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g7pdj"]
+size = Vector2(40, 4)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_jsaga"]
-size = Vector2(4, 40)
-
-[node name="BridgePartWithCollision" type="Node2D"]
-position = Vector2(0, 5)
+[node name="VerticalBridgePartWithCollision" type="Node2D"]
 
 [node name="bridge_part_with_collision" type="Node2D" parent="."]
 
-[node name="REPLACE_WITH_BUILT_CONNECTION_PART" type="TextureRect" parent="bridge_part_with_collision"]
+[node name="horizontal_bridge_part" type="TextureRect" parent="bridge_part_with_collision"]
 offset_left = -20.125
 offset_top = -23.0
 offset_right = 19.875
 offset_bottom = 17.0
-texture = SubResource("PlaceholderTexture2D_s2jxi")
+texture = ExtResource("1_ip8lc")
 metadata/_edit_use_anchors_ = true
 
-[node name="right_collision" type="StaticBody2D" parent="bridge_part_with_collision"]
+[node name="lower_collision" type="StaticBody2D" parent="bridge_part_with_collision"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="bridge_part_with_collision/right_collision"]
-position = Vector2(22, -3)
-shape = SubResource("RectangleShape2D_7josl")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bridge_part_with_collision/lower_collision"]
+position = Vector2(0, -25)
+shape = SubResource("RectangleShape2D_g7pdj")
 
-[node name="left_collision" type="StaticBody2D" parent="bridge_part_with_collision"]
+[node name="upper_collision" type="StaticBody2D" parent="bridge_part_with_collision"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="bridge_part_with_collision/left_collision"]
-position = Vector2(-22, -3)
-shape = SubResource("RectangleShape2D_jsaga")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bridge_part_with_collision/upper_collision"]
+position = Vector2(0, 19)
+shape = SubResource("RectangleShape2D_g7pdj")

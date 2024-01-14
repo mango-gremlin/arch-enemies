@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bj3a1sw80l6wj" path="res://overworld/entities/interaction_overworld/item_interaction.tscn" id="6_ij5ah"]
 [ext_resource type="PackedScene" uid="uid://drn1loe1wknbq" path="res://overworld/entities/interaction_overworld/npc_interaction.tscn" id="7_06f0y"]
 [ext_resource type="PackedScene" uid="uid://bettv6p5clh6t" path="res://overworld/entities/interaction_overworld/template/horizontal_bridge_template.tscn" id="8_khye4"]
-[ext_resource type="Texture2D" uid="uid://cer2bbvjgwtay" path="res://assets/art/objects/overworld_bridges/overworld_bridge_connecting_part.png" id="9_w1njh"]
+[ext_resource type="Texture2D" uid="uid://cer2bbvjgwtay" path="res://assets/art/objects/overworld_bridges/overworld_bridge_connecting_part_h.png" id="9_w1njh"]
 [ext_resource type="PackedScene" uid="uid://bypchr8htkr4e" path="res://overworld/entities/interaction_overworld/template/vertical_bridge_template.tscn" id="10_fo2xw"]
 
 [node name="maingame" type="Node"]

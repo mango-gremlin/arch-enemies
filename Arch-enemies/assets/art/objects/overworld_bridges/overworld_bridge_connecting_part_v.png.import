@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cer2bbvjgwtay"
-path="res://.godot/imported/overworld_bridge_connecting_part.png-4ca41989faf55cb4a23a48546a454063.ctex"
+uid="uid://c365nqfy2ahcv"
+path="res://.godot/imported/overworld_bridge_connecting_part_v.png-5c414dc6cc0cc3dd11ba916b19770854.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/objects/overworld_bridges/overworld_bridge_connecting_part.png"
-dest_files=["res://.godot/imported/overworld_bridge_connecting_part.png-4ca41989faf55cb4a23a48546a454063.ctex"]
+source_file="res://assets/art/objects/overworld_bridges/overworld_bridge_connecting_part_v.png"
+dest_files=["res://.godot/imported/overworld_bridge_connecting_part_v.png-5c414dc6cc0cc3dd11ba916b19770854.ctex"]
 
 [params]
 
