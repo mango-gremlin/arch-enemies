@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dbffmmmqyknux"]
 
 [ext_resource type="Script" path="res://overworld/dialogue/DialogueUI.gd" id="1_dxgyc"]
-[ext_resource type="Texture2D" uid="uid://cmjk4lbdecmpw" path="res://assets/art/dialogue/green.png" id="2_jkmg4"]
+[ext_resource type="Texture2D" uid="uid://b5jpk1txthbqr" path="res://overworld/dialogues/test_dialogue/green.png" id="2_jkmg4"]
 
 [node name="DialogueGui" type="CanvasLayer"]
 
