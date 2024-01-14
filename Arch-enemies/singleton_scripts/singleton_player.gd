@@ -285,7 +285,10 @@ func save_profile_configuration():
 # --- / 
 # -- / Methods for NPC interaction 
 # register here your dialogue, key is npc id 
-@onready var npc_dialogues: Dictionary = {1: ExampleData.new()}
+@onready var npc_dialogues: Dictionary = {
+	1: ExampleData.new()
+}
+
 @onready var dialogue: Dialogue = Dialogue.new()
 
 # checks whether a npc has a dialogue linked to it
