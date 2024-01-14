@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://b0v6vdudnx0vh"]
+[gd_scene load_steps=5 format=3 uid="uid://b0v6vdudnx0vh"]
 
-[ext_resource type="Texture2D" uid="uid://c365nqfy2ahcv" path="res://assets/art/objects/overworld_bridges/overworld_bridge_connecting_part_v.png" id="1_fqcht"]
+[ext_resource type="Texture2D" uid="uid://dllhwtr4hmfqk" path="res://assets/art/objects/overworld_bridges/overworld_bridge_connecting_part_v2.png" id="1_oj8iw"]
+[ext_resource type="Texture2D" uid="uid://6d6404mjovru" path="res://assets/art/objects/overworld_bridges/overworld_bridge_connecting_part_FLOOR.png" id="2_n2aev"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7josl"]
 size = Vector2(4, 40)
@@ -13,12 +14,21 @@ position = Vector2(0, 5)
 
 [node name="bridge_part_with_collision" type="Node2D" parent="."]
 
-[node name="REPLACE_WITH_BUILT_CONNECTION_PART" type="TextureRect" parent="bridge_part_with_collision"]
-offset_left = -23.0
+[node name="snake_wal" type="TextureRect" parent="bridge_part_with_collision"]
+offset_left = -39.0
 offset_top = -23.0
-offset_right = 24.0
-offset_bottom = 17.0
-texture = ExtResource("1_fqcht")
+offset_right = 39.0
+offset_bottom = 23.0
+texture = ExtResource("1_oj8iw")
+metadata/_edit_use_anchors_ = true
+
+[node name="bridge_floor" type="TextureRect" parent="bridge_part_with_collision"]
+z_index = -1
+offset_left = -39.0
+offset_top = -23.0
+offset_right = 39.0
+offset_bottom = 23.0
+texture = ExtResource("2_n2aev")
 metadata/_edit_use_anchors_ = true
 
 [node name="right_collision" type="StaticBody2D" parent="bridge_part_with_collision"]

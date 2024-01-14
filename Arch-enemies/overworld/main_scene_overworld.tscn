@@ -77,10 +77,10 @@ npc_animal_type = 3
 npc_special_sprite = ExtResource("8_g5nw6")
 
 [node name="BridgeTemplate" parent="." instance=ExtResource("9_jpn0u")]
-position = Vector2(251, 72)
+position = Vector2(250, 78)
 
 [node name="right_bridge_start" parent="BridgeTemplate" index="1"]
-position = Vector2(-37, 0)
+position = Vector2(-33, 0)
 
 [editable path="bridge_interaction3"]
 [editable path="bridge_interaction3/interactionspot"]
