@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=3 uid="uid://0isb2xg4n684"]
+
+[ext_resource type="Texture2D" uid="uid://dcsc6hgwgotn4" path="res://assets/art/objects/overworld_bridges/overworld_bridge_connecting_part_h2.png" id="1_y7cdq"]
+[ext_resource type="Texture2D" uid="uid://ckff3e1mcrpcr" path="res://assets/art/objects/overworld_bridges/overworld_bridge_connecting_part_h_FLOOR.png" id="2_p1kb2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g7pdj"]
+size = Vector2(40, 4)
+
+[node name="VerticalBridgePartWithCollision" type="Node2D"]
+
+[node name="bridge_part_with_collision" type="Node2D" parent="."]
+
+[node name="horizontal_bridge_part" type="TextureRect" parent="bridge_part_with_collision"]
+offset_left = -38.0
+offset_top = -26.0
+offset_right = 40.0
+offset_bottom = 20.0
+texture = ExtResource("1_y7cdq")
+metadata/_edit_use_anchors_ = true
+
+[node name="horizontal_bridge_part2" type="TextureRect" parent="bridge_part_with_collision"]
+z_index = -1
+offset_left = -38.0
+offset_top = -26.0
+offset_right = 40.0
+offset_bottom = 20.0
+texture = ExtResource("2_p1kb2")
+metadata/_edit_use_anchors_ = true
+
+[node name="lower_collision" type="StaticBody2D" parent="bridge_part_with_collision"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bridge_part_with_collision/lower_collision"]
+position = Vector2(0, -18)
+shape = SubResource("RectangleShape2D_g7pdj")
+
+[node name="upper_collision" type="StaticBody2D" parent="bridge_part_with_collision"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bridge_part_with_collision/upper_collision"]
+position = Vector2(0, 12)
+shape = SubResource("RectangleShape2D_g7pdj")

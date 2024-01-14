@@ -7,9 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://5llfgi2ysvie" path="res://overworld/entities/interaction_overworld/bridge_interaction.tscn" id="6_iairi"]
 [ext_resource type="PackedScene" uid="uid://drn1loe1wknbq" path="res://overworld/entities/interaction_overworld/npc_interaction.tscn" id="7_33ud0"]
 [ext_resource type="Texture2D" uid="uid://08plwlb60wib" path="res://assets/art/bridge_dummy_failure.png" id="8_g5nw6"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_25akq"]
-size = Vector2(36, 20)
+[ext_resource type="PackedScene" uid="uid://bettv6p5clh6t" path="res://overworld/entities/interaction_overworld/template/horizontal_bridge_template.tscn" id="9_jpn0u"]
 
 [node name="maingame" type="Node"]
 script = ExtResource("1_pwtu4")
@@ -17,46 +15,6 @@ script = ExtResource("1_pwtu4")
 [node name="world" parent="." instance=ExtResource("3_xuy1h")]
 
 [node name="overworld_ui" parent="." instance=ExtResource("4_4hawq")]
-
-[node name="bridge_interaction" parent="." instance=ExtResource("6_iairi")]
-position = Vector2(314, 79)
-start_island_id = 1
-bridge_description = "connects from 0 to 1 "
-
-[node name="bridge_parts" type="Node2D" parent="bridge_interaction"]
-visible = false
-
-[node name="bridge_part" type="ColorRect" parent="bridge_interaction/bridge_parts"]
-offset_left = 12.0
-offset_top = -7.0
-offset_right = 37.0
-offset_bottom = 13.0
-
-[node name="bridge_collision_shape" type="StaticBody2D" parent="bridge_interaction"]
-
-[node name="bridge_collision" type="CollisionShape2D" parent="bridge_interaction/bridge_collision_shape"]
-position = Vector2(-27, 2)
-shape = SubResource("RectangleShape2D_25akq")
-
-[node name="bridge_interaction2" parent="." instance=ExtResource("6_iairi")]
-position = Vector2(211, 81)
-dest_island_id = 1
-bridge_description = "connects from 0 to 0"
-
-[node name="bridge_parts" type="Node2D" parent="bridge_interaction2"]
-visible = false
-
-[node name="bridge_part" type="ColorRect" parent="bridge_interaction2/bridge_parts"]
-offset_left = 12.0
-offset_top = -7.0
-offset_right = 37.0
-offset_bottom = 13.0
-
-[node name="bridge_collision_shape" type="StaticBody2D" parent="bridge_interaction2"]
-
-[node name="bridge_collision" type="CollisionShape2D" parent="bridge_interaction2/bridge_collision_shape"]
-position = Vector2(27, 0)
-shape = SubResource("RectangleShape2D_25akq")
 
 [node name="item_interaction" parent="." instance=ExtResource("6_66i44")]
 position = Vector2(289, 191)
@@ -90,21 +48,10 @@ reward_item = 1
 position = Vector2(119, 13)
 dest_island_id = 2
 bridge_description = "this connects 2 and 0 "
+bridge_sprite_direction = 2
 
-[node name="bridge_parts" type="Node2D" parent="bridge_interaction3"]
-visible = false
-
-[node name="bridge_part" type="ColorRect" parent="bridge_interaction3/bridge_parts"]
-offset_left = 12.0
-offset_top = -7.0
-offset_right = 37.0
-offset_bottom = 13.0
-
-[node name="bridge_collision_shape" type="StaticBody2D" parent="bridge_interaction3"]
-
-[node name="bridge_collision" type="CollisionShape2D" parent="bridge_interaction3/bridge_collision_shape"]
-position = Vector2(4, -16)
-shape = SubResource("RectangleShape2D_25akq")
+[node name="bridge_collision" parent="bridge_interaction3/bridge_collision_shape" index="0"]
+position = Vector2(3, -12)
 
 [node name="NpcInteraction" parent="bridge_interaction3" instance=ExtResource("7_33ud0")]
 position = Vector2(38, 194)
@@ -128,3 +75,17 @@ npc_name = "esther"
 npc_id = 3
 npc_animal_type = 3
 npc_special_sprite = ExtResource("8_g5nw6")
+
+[node name="BridgeTemplate" parent="." instance=ExtResource("9_jpn0u")]
+position = Vector2(250, 78)
+
+[node name="right_bridge_start" parent="BridgeTemplate" index="1"]
+position = Vector2(-33, 0)
+
+[editable path="bridge_interaction3"]
+[editable path="bridge_interaction3/interactionspot"]
+[editable path="BridgeTemplate"]
+[editable path="BridgeTemplate/left_bridge_start/bridge_interaction"]
+[editable path="BridgeTemplate/left_bridge_start/bridge_interaction/interactionspot"]
+[editable path="BridgeTemplate/right_bridge_start/bridge_interaction2"]
+[editable path="BridgeTemplate/right_bridge_start/bridge_interaction2/interactionspot"]

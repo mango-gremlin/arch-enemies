@@ -19,6 +19,38 @@ var bridge_edge:SingletonPlayer.BridgeEdge
 # could be a small preview of the level or whatever
 @export var bridge_image:Image
 
+# --- /
+# -- / VISUALIZATION
+
+# this enum denotes in which direction this bridge-Start is pointing. 
+# this is necessary to take the corresponding sprite for visual representation! 
+# left and right will use a vertical starting_sprite
+# up and down will use a horizontal starting_sprite
+enum bridgeSpriteDirection{
+	LEFT,
+	RIGHT,
+	UP,
+	DOWN,
+}
+@export var bridge_sprite_direction:bridgeSpriteDirection = bridgeSpriteDirection.LEFT
+
+# takes bridge_sprite_direction and loads the corresponding sprite into this bridge-start
+func load_bridge_direction_sprite(): 
+	var referenced_sprite:TextureRect =  $bridge_start_sprite
+	var path_to_texture:String
+	match bridge_sprite_direction:
+		bridgeSpriteDirection.LEFT: 
+			path_to_texture = "res://assets/art/objects/overworld_bridges/overworld_bridge_start_vertical_unbuilt.png"
+		bridgeSpriteDirection.RIGHT:
+			path_to_texture = "res://assets/art/objects/overworld_bridges/overworld_bridge_start_vertical_unbuilt.png"
+		bridgeSpriteDirection.UP:
+			path_to_texture = "res://assets/art/objects/overworld_bridges/overworld_bridge_start_horizontal_unbuilt.png"
+		bridgeSpriteDirection.DOWN:
+			path_to_texture = "res://assets/art/objects/overworld_bridges/overworld_bridge_start_horizontal_unbuilt.png"
+	# loading texture into rect
+	var bridge_start_sprite = load(path_to_texture)
+	referenced_sprite.texture = bridge_start_sprite
+
 # --- / 
 # -- / further properties could be 
 # - reward after completion 
@@ -33,6 +65,8 @@ func _ready():
 	# constructing bridge edge 
 	bridge_edge = SingletonPlayer.BridgeEdge.new(start_island_id,dest_island_id)
 	
+	# FIXME only use once / if approved 
+	#load_bridge_direction_sprite()
 	set_passability()
 	visualize_status()
 
@@ -66,10 +100,14 @@ func visualize_status():
 		var path_to_texture = "res://assets/art/bridge_dummy_success.png"
 		var new_texture = load(path_to_texture)
 		
-		var referenced_rect:TextureRect = $TextureRect
+		var referenced_rect:TextureRect = $bridge_start_sprite
 		referenced_rect.texture = new_texture
 		var referenced_bridge_parts = $bridge_parts
 		referenced_bridge_parts.visible = true 
+	else:
+		# unsolved, hiding bridge_parts
+		var referenced_bridge_parts = $bridge_parts
+		referenced_bridge_parts.visible = false 
 
 # sets collision of static_body attached 
 func set_passability():
