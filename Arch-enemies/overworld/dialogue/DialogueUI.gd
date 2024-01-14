@@ -13,7 +13,9 @@ func _ready():
 # keep window on the buttom, does not working using canvas layers
 func _process(delta):
 	var window_size = window.size
-	position.y = window_size.y/2 + 107
+	position.y = 0.0083102 * window_size.y + 426
+	
+	# print("WINDOW SIZE ", window_size.x, " ", window_size.y, " and y", position.y)
 
 func set_text(body: String):
 	$main_box/content_box/content/label_box/Label.text = body
