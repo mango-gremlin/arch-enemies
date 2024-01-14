@@ -20,11 +20,11 @@ metadata/_edit_use_anchors_ = true
 [node name="lower_collision" type="StaticBody2D" parent="bridge_part_with_collision"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="bridge_part_with_collision/lower_collision"]
-position = Vector2(0, -25)
+position = Vector2(0, -18)
 shape = SubResource("RectangleShape2D_g7pdj")
 
 [node name="upper_collision" type="StaticBody2D" parent="bridge_part_with_collision"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="bridge_part_with_collision/upper_collision"]
-position = Vector2(0, 19)
+position = Vector2(0, 12)
 shape = SubResource("RectangleShape2D_g7pdj")

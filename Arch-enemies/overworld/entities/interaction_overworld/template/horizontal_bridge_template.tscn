@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://0isb2xg4n684" path="res://overworld/entities/interaction_overworld/template/horizontal_bridge_part_with_collision.tscn" id="3_jhfcy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pouaw"]
+radius = 8.0
 
 [node name="BridgeTemplate" type="Node2D"]
 z_index = -1

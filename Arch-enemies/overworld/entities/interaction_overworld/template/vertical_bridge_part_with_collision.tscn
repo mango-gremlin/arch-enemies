@@ -25,11 +25,11 @@ metadata/_edit_use_anchors_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="bridge_part_with_collision/right_collision"]
 z_index = -1
-position = Vector2(22, -3)
+position = Vector2(15, -3)
 shape = SubResource("RectangleShape2D_7josl")
 
 [node name="left_collision" type="StaticBody2D" parent="bridge_part_with_collision"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="bridge_part_with_collision/left_collision"]
-position = Vector2(-22, -3)
+position = Vector2(-15, -3)
 shape = SubResource("RectangleShape2D_jsaga")
