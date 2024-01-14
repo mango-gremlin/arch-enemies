@@ -8,7 +8,6 @@ signal saved_player()
 # -- / default values for visualization
 
 @export var SPEED = 100
-@onready var zoomlevel:Vector2 = SingletonPlayer.get_player_zoom()
 @onready var anim:AnimatedSprite2D = $AnimatedSprite2D
 
 # for correct animation: save last direction walked in, and if sprite was flipped
@@ -25,9 +24,11 @@ signal saved_player()
 @onready var interactionLabel = $interactioncomponents/InteractLabel
 
 func _ready():
-	#debug 
-	$Camera2D.player_object = self
-	#update_interactionLabel()
+	# setting camera zoom
+	var camera_reference = $Camera2D
+	camera_reference.player_object = self
+	camera_reference._set_current_zoom(SingletonPlayer.zoomlevel)
+	position = SingletonPlayer.player_coordinate
 
 func _physics_process(delta):
 	player_movement(delta)
@@ -126,6 +127,7 @@ func execute_interaction():
 					set_interactionLabel(interaction_data["text"])
 					
 				var bridge_edge:SingletonPlayer.BridgeEdge = interaction_data["bridge_edge"]
+				save_player()
 				enter_bridge_scene(bridge_edge)
 				
 			Interactable.InteractionType.ITEM: 
@@ -182,7 +184,7 @@ func check_input():
 
 func enter_pause_menu():
 	print("pause menu")
-	exit_overworld()
+	save_player()
 	# TODO 
 	get_tree().change_scene_to_file("res://overworld/ui/menu/menu/pause_menu.tscn")
 
@@ -202,13 +204,6 @@ func enter_bridge_scene(bridgeEdge:SingletonPlayer.BridgeEdge):
 			#exit_overworld()
 			get_tree().change_scene_to_file(path_to_scene)
 
-# prepare player to leave overworld, store its state 
-func exit_overworld():
-	# FIXME with SINGLETON conversion
-	# -> only requires saving position of player for the given time 
-	print("save user position")
-	save_player()
-	
 # ---- 
 #  saving player state
 # ---- 
@@ -218,32 +213,7 @@ func save_player():
 	SingletonPlayer.set_player_coord(position)
 	saved_player.emit()
 	
-# TODO --> Singleton conversion!
-func save_state():
-	var json_inventory = []
-	var item_inventory = SingletonPlayer.item_inventory
-	for item:Item.ItemType in item_inventory:
-		var item_amount = item_inventory[item]
-		var item_string:String = Item.item_type_to_string(item)
-		var item_dictionary:Dictionary = {
-			"type": item_string,
-			"amount": item_amount
-		}
-		# store amount
-		item_dictionary["amount"] = item_amount
-		json_inventory.append(item_dictionary)
 
-	var state = {
-		"name" : name,
-		"parent" : get_parent().get_path(),
-		# FIXME --> Singleton Conversion
-		"pos_x" : position.x, # Vector2 is not supported by JSON
-		"pos_y" : position.y,
-		"inventory": json_inventory,
-		"zoom": $Camera2D.current_zoom
-	}
-	return state
-	
 # ----- 
 # debugging
 # ----- 

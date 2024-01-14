@@ -12,7 +12,8 @@ var current_zoom = 1
 func _set_current_zoom(value: float, store: bool = false):
 	var tween = create_tween()
 	current_zoom = clamp(value, MIN_ZOOM, MAX_ZOOM)
-	
+	# save updated zoom in singleton
+	SingletonPlayer.set_player_zoom(current_zoom)
 	if store:
 		if player_object != null:
 			player_object.savePlayer()
