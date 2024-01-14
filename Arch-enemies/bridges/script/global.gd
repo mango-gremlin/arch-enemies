@@ -4,8 +4,6 @@ var drag_mode := true
 var something_is_being_dragged := false
 var currently_dragging
 
-var animal_inventory:Dictionary
-
 # round to nearest multiple of grid_size
 func round_to_nearest(position:float, grid_size:float):
 	var offset = fmod(position, grid_size)

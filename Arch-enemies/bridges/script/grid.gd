@@ -28,8 +28,8 @@ var save_states = 10
 var state = 0
 
 #for the inventory
-#@onready var start_animals : Dictionary = SingletonPlayer.get_animal_inventory().duplicate(true)
-var start_animals : Dictionary = set_animal_inventory()	
+@onready var start_animals : Dictionary = SingletonPlayer.get_animal_inventory().duplicate(true)
+#var start_animals : Dictionary = set_animal_inventory()	
 var placed_animals: Array = []
 
 
@@ -70,9 +70,6 @@ enum ENTITY_TYPES {GROUND, WATER, AIR, ANIMAL, FORBIDDEN, ALLOWED, SIDE, BOTTOM,
 func _ready():
 	#update the ui
 	update_inventory()
-	
-	# FIXME Debugging
-	#print(start_animals)
 	
 	#We save the previous states of the grid in an array, this array is initalized here
 	for i in range(save_states):
@@ -367,9 +364,10 @@ func reset_grid():
 	if Global.drag_mode:
 		#reset the inventory to the original amount of animals
 		# FIXME Is good like that, nice! 
+		start_animals = SingletonPlayer.get_animal_inventory().duplicate(true)
 		#SingletonPlayer.set_animal_inventory(start_animals.duplicate(true))
 		# FIXME DEBUGGING
-		start_animals = set_animal_inventory()
+		#start_animals = set_animal_inventory()
 		update_inventory()
 		
 		grid = start_grid.duplicate(true)
@@ -432,14 +430,6 @@ func _process(delta):
 
 # --- / 
 # -- / inventory management
-
-# FIXME debugging purpose! 
-func set_animal_inventory() -> Dictionary:
-	var inventory:Dictionary = Animal.init_animal_inventory()
-	inventory[Animal.AnimalType.DEER] = 1
-	inventory[Animal.AnimalType.SNAKE] = 1
-	inventory[Animal.AnimalType.SQUIRREL] = 1
-	return inventory 
 
 # updates animal amount with given value ( could either be pos / neg )
 func add_to_animal_inventory(animal:Animal.AnimalType, additional_value:int):

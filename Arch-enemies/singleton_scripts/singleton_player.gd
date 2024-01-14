@@ -31,7 +31,9 @@ func get_player_zoom() -> Vector2:
 # -- / Item / Inventory management 
 
 @onready var item_inventory:Dictionary = Item.init_item_inventory()
-@onready var animal_inventory:Dictionary = Animal.init_animal_inventory()
+#@onready var animal_inventory:Dictionary = Animal.init_animal_inventory()
+@onready var animal_inventory:Dictionary = set_test_animal_inventory()
+
 
 # retrieve inventory of items from singleton instance
 func get_item_inventory() -> Dictionary:
@@ -97,6 +99,14 @@ func add_to_animal_inventory(new_animal:Animal.AnimalType, quantity:int = 1):
 		animal_inventory[new_animal] += quantity
 		#selected_animal.increase_amount
 		updated_animal_inventory.emit(animal_inventory)
+
+# FIXME debugging purpose! 
+func set_test_animal_inventory() -> Dictionary:
+	var inventory:Dictionary = Animal.init_animal_inventory()
+	inventory[Animal.AnimalType.DEER] = 1
+	inventory[Animal.AnimalType.SNAKE] = 1
+	inventory[Animal.AnimalType.SQUIRREL] = 1
+	return inventory 
 
 
 # --- / 
