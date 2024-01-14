@@ -52,11 +52,7 @@ var quest_resolved:bool = false
 # --- / 
 # -- / Dialoque options
 #FIXME placeholder for dialogue system
-@export var dialogue_quest_undone: String = "quest undone so far"
-@export var dialogue_quest_done :String = "quest is done"
-# denotes in which state of the dialogue the npc is currently
-# example: we just started talking to them and they now await an item from us 
-var dialogue_state:int 
+@export var quest_done :String = "quest is done"
 
 # --- / 
 # -- / UI / Design 
@@ -159,8 +155,8 @@ func check_quest_condition() -> bool:
 					return true 
 				return false 
 			NPC_interaction.Quest.NPC:
-				if SingletonPlayer.check_npc_state(required_npc_id): 
-					# visited npc already 
+				if SingletonPlayer.check_dialogue_finished(required_npc_id): 
+					# finished npc dialogue already 
 					return true 
 				return false 
 			_:
@@ -177,7 +173,6 @@ func check_item_condition() -> bool:
 # returns either Animal/Item if quest was complete before 
 # if quest is not done, returns Item of Type "ItemType.NONE"
 func request_reward(): 
-	# 
 	if not quest_resolved: 
 		# check whether we satisfy the conditions
 		if check_quest_condition(): 
@@ -231,19 +226,19 @@ func stringify_quest() -> String:
 # FIXME only temporary until dialogue system was implemented
 
 # return the dialogue based on conditio ( quest done / undone ) 
-func obtain_dialogue() -> String:
+func obtain_quest_information() -> String:
 	if quest_resolved:
-		return dialogue_quest_done
+		return quest_done
 	else:
 		return stringify_quest()
 
-# returns formatted dialogue
-# FIXME placehold for dialogue-system
-func obtain_formatted_dialogue() ->String:
+# returns formatted quest information for the future npc listing all quests and its status
+func obtain_formatted_quest_information() ->String:
 	var dialogue_string:String = "%s :: %s!"
 	var received_name = obtain_name()
-	var received_dialogue = obtain_dialogue()
+	var received_dialogue = obtain_quest_information()
 	var combined_message:String = dialogue_string % [received_name, received_dialogue]
 	return combined_message
+
 
 

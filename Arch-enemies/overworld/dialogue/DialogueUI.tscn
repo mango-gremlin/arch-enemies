@@ -1,0 +1,82 @@
+[gd_scene load_steps=3 format=3 uid="uid://dbffmmmqyknux"]
+
+[ext_resource type="Script" path="res://overworld/dialogue/DialogueUI.gd" id="1_dxgyc"]
+[ext_resource type="Texture2D" uid="uid://cmjk4lbdecmpw" path="res://assets/art/dialogue/green.png" id="2_jkmg4"]
+
+[node name="DialogueGui" type="CanvasLayer"]
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = -1
+anchor_left = 0.504
+anchor_top = 0.5
+anchor_right = 0.504
+anchor_bottom = 0.5
+offset_left = -322.608
+offset_top = 106.0
+offset_right = 327.392
+offset_bottom = 306.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dxgyc")
+
+[node name="main_box" type="HBoxContainer" parent="Panel"]
+custom_minimum_size = Vector2(650, 200)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="image_box" type="BoxContainer" parent="Panel/main_box"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Panel/main_box/image_box"]
+position = Vector2(100, 100)
+texture = ExtResource("2_jkmg4")
+
+[node name="content_box" type="VBoxContainer" parent="Panel/main_box"]
+custom_minimum_size = Vector2(450, 200)
+layout_mode = 2
+
+[node name="some_space" type="BoxContainer" parent="Panel/main_box/content_box"]
+custom_minimum_size = Vector2(0, 21)
+layout_mode = 2
+
+[node name="content" type="HBoxContainer" parent="Panel/main_box/content_box"]
+custom_minimum_size = Vector2(0, 93)
+layout_mode = 2
+
+[node name="label_box" type="BoxContainer" parent="Panel/main_box/content_box/content"]
+custom_minimum_size = Vector2(420, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/main_box/content_box/content/label_box"]
+custom_minimum_size = Vector2(420, 93)
+layout_mode = 2
+text = "The dialogue system allows the creation of custom dialogues, with buttons and an icon. "
+autowrap_mode = 1
+clip_text = true
+
+[node name="some_space" type="BoxContainer" parent="Panel/main_box/content_box/content"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+metadata/_edit_lock_ = true
+
+[node name="buttons" type="HBoxContainer" parent="Panel/main_box/content_box"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="Btn1" type="Button" parent="Panel/main_box/content_box/buttons"]
+layout_mode = 2
+text = "Button 1"
+
+[node name="Btn2" type="Button" parent="Panel/main_box/content_box/buttons"]
+layout_mode = 2
+text = "Button 2"
+
+[node name="Btn3" type="Button" parent="Panel/main_box/content_box/buttons"]
+layout_mode = 2
+text = "Button 3"
+
+[connection signal="pressed" from="Panel/main_box/content_box/buttons/Btn1" to="Panel" method="_on_btn_1_pressed"]
+[connection signal="pressed" from="Panel/main_box/content_box/buttons/Btn2" to="Panel" method="_on_btn_2_pressed"]
+[connection signal="pressed" from="Panel/main_box/content_box/buttons/Btn3" to="Panel" method="_on_btn_3_pressed"]

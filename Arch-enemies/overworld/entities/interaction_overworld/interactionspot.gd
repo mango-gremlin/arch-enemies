@@ -88,7 +88,7 @@ func interact_npc() -> InteractionValue:
 	# FIXME  requires state management to check where the dialogue is based and structured in
 	# TODO might be a separate scene that is called to run player through the interaction?	
 	var received_id = parent_node.obtain_id()
-	var dialogue_string = parent_node.obtain_formatted_dialogue()
+	var dialogue_string = parent_node.quest_done()
 	var required_item = parent_node.obtain_required_item()
 	
 	# only useful when we have an item-reward!

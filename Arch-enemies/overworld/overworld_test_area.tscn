@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://dtvq143m5ddef"]
+[gd_scene load_steps=10 format=3 uid="uid://dtvq143m5ddef"]
 
 [ext_resource type="Script" path="res://overworld/overworld.gd" id="1_ui4aw"]
 [ext_resource type="PackedScene" uid="uid://dndu4pg1i3tlf" path="res://overworld/scenes/player.tscn" id="2_4d4x5"]
 [ext_resource type="PackedScene" uid="uid://p30p3o0e473c" path="res://overworld/scenes/world.tscn" id="3_4d472"]
 [ext_resource type="PackedScene" uid="uid://cgvraulefjyn8" path="res://overworld/ui/overworld_ui/overworld_ui.tscn" id="4_p4p2t"]
+[ext_resource type="PackedScene" uid="uid://dbffmmmqyknux" path="res://overworld/dialogue/DialogueUI.tscn" id="4_twv21"]
 [ext_resource type="PackedScene" uid="uid://5llfgi2ysvie" path="res://overworld/entities/interaction_overworld/bridge_interaction.tscn" id="5_f6jxn"]
 [ext_resource type="PackedScene" uid="uid://bj3a1sw80l6wj" path="res://overworld/entities/interaction_overworld/item_interaction.tscn" id="6_ij5ah"]
 [ext_resource type="PackedScene" uid="uid://drn1loe1wknbq" path="res://overworld/entities/interaction_overworld/npc_interaction.tscn" id="7_06f0y"]
@@ -19,6 +20,8 @@ script = ExtResource("1_ui4aw")
 [node name="world" parent="." instance=ExtResource("3_4d472")]
 
 [node name="overworld_ui" parent="." instance=ExtResource("4_p4p2t")]
+
+[node name="DialogueGui" parent="." instance=ExtResource("4_twv21")]
 
 [node name="bridge_interaction" parent="." instance=ExtResource("5_f6jxn")]
 position = Vector2(206, 23)
