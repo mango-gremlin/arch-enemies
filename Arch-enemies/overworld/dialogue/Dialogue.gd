@@ -19,7 +19,7 @@ func enter_dialogue(dialogue:Dialogue_Data, npc_id: int):
 	current_npc_id = npc_id
 	is_in_dialogue = true 
 	active_dialogue = dialogue
-	
+	SingletonPlayer.add_quest_string(npc_id)
 	active_dialogue.select_page(0)
 
 func in_dialogue() -> bool:
