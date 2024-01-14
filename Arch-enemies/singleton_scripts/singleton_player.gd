@@ -6,6 +6,15 @@ extends Node
 # - track progress of game 
 # - user profiles 
 
+@onready var Savemanager = Savemanagement.new()
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass
+	Savemanager.load_config()
+	# TODO add input to set 
+	Savemanager.select_profile("default")
+
+
 # -- Signals 
 signal updated_item_inventory(new_inventory)
 signal updated_animal_inventory(new_animal_inventory)
@@ -15,7 +24,7 @@ signal updated_quest_list(new_quest_list)
 # -- / Player management
 
 @onready var player_coordinate:Vector2 = Vector2.ZERO
-@onready var zoomlevel:Vector2 = Vector2(1,1)
+@onready var zoomlevel:int = 1
 
 func get_player_coord() -> Vector2: 
 	return player_coordinate
@@ -24,8 +33,11 @@ func set_player_coord(new_coordinate:Vector2):
 	player_coordinate = new_coordinate
 
 
-func get_player_zoom() -> Vector2: 
+func get_player_zoom() -> int: 
 	return zoomlevel
+
+func set_player_zoom(new_zoom:int):
+	zoomlevel = new_zoom
 
 # --- / 
 # -- / Item / Inventory management 
@@ -65,6 +77,14 @@ func set_animal_inventory(new_inventory:Dictionary):
 	print("loaded animal inventory")
 	updated_animal_inventory.emit(animal_inventory)
 
+# emits a signal to update the ui with the stored inventories and quests
+# may be used when entering the overworld and displaying available items
+# helps to set the inventory in the ui
+func signal_inventory_update_ui():
+	updated_item_inventory.emit(item_inventory)
+	updated_animal_inventory.emit(animal_inventory)
+	updated_quest_list.emit(quest_string_dict)
+	
 
 # checks whether requested item is contained 
 # returns true if it is
@@ -321,3 +341,39 @@ func navigation_in_dialogue() -> bool:
 # ends dialogue
 func exit_dialogue():
 	dialogue.exit_dialogue()
+
+
+
+# --- / / 
+# -- / Save management 
+# - / / #FIXME requires several updates to store everything accordingly
+
+# takes current state of player and returns it as dictionary
+func save_player_state() -> Dictionary:
+	var json_inventory = []
+	var item_inventory = SingletonPlayer.item_inventory
+	for item:Item.ItemType in item_inventory:
+		var item_amount = item_inventory[item]
+		var item_string:String = Item.item_type_to_string(item)
+		var item_dictionary:Dictionary = {
+			"type": item_string,
+			"amount": item_amount
+		}
+		# store amount
+		item_dictionary["amount"] = item_amount
+		json_inventory.append(item_dictionary)
+
+	var state = {
+		"name" : "Player",
+		"pos_x" : player_coordinate.x,
+		"pos_y" : player_coordinate.y,
+		"inventory": json_inventory,
+		"zoom": SingletonPlayer.get_player_zoom()
+	}
+	return state
+
+# wrapper for save config save-method
+# FIXME
+func save_game():
+	Savemanager.save_config()
+	
