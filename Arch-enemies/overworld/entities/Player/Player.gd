@@ -36,7 +36,7 @@ func _physics_process(delta):
 
 func player_movement(delta):
 	# disallow movement when in dialogue
-	if SingletonPlayer.is_in_dialogue:
+	if SingletonPlayer.navigation_in_dialogue():
 		return
 		
 	velocity = Vector2.ZERO
@@ -135,13 +135,11 @@ func execute_interaction():
 			Interactable.InteractionType.NPC:
 				print("interacting with npc")
 				# entering dialogue, disable movement
-				SingletonPlayer.enter_dialogue(interaction_data["npc_id"])
-				SingletonPlayer.add_npc_talked_to(interaction_data["npc_id"])
-				# debug --> visualize visited npcs
-				print(SingletonPlayer.npc_talked_to)
+				if not SingletonPlayer.check_dialogue_finished(interaction_data["npc_id"]):
+					SingletonPlayer.enter_dialogue(interaction_data["npc_id"])
+				else:
+					set_interactionLabel(interaction_data["dialogue"])
 				
-				set_interactionLabel(interaction_data["dialogue"])
-				# FIXME should be easier when done with separate **dialogue system**
 				var reward_type:NPC_interaction.QuestReward = interaction_data["reward_type"]
 				var received_reward = interaction_data["reward"]
 				match reward_type:

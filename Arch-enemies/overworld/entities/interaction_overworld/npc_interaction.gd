@@ -80,10 +80,12 @@ func request_reward():
 	return npc_object.request_reward()
 
 # returns formatted dialogue
-# TODO should maybe contain the active state of the conversation 
 func obtain_formatted_dialogue() ->String:
 	# FIXME might not query from this interface but within player directly?
 	return npc_object.obtain_formatted_dialogue()
+	
+func interaction_label() ->String:
+	return npc_object.interaction_label()
 
 # returns itemType, if itemtype is specified
 # FIXME should be more abstract and matched against in "Player.gd"

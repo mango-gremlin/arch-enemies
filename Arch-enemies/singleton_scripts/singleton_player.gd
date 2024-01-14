@@ -186,37 +186,6 @@ func add_npc_instance(npc_id:int,npc_object:NPC_interaction):
 
 func obtain_npc_object(npc_id) -> NPC_interaction:
 	return dictionary_npc[npc_id]
-
-
-var is_in_dialogue:bool = false 
-# may be improved 
-var active_dialogue:int = 0
-var test:Array
-
-# Dictionary of NPC's that have been talked to
-# -> key: integer : denoting npc_id
-# -> value: bool : denoting whether interaction was done or not 
-# FIXME might lead to wrong interpretation ? 
-var npc_talked_to: Array = [0]
-
-# checks whether player already interacted with npc 
-func check_npc_state(npc_id:int) -> bool: 
-	if npc_talked_to.has(npc_id):
-		return true 
-	return false 
-
-# takes npc Id and adds it to array of npcs talked to 
-# does not change if it was contained already
-# adds / removes quest of npc as well 
-# FIXME maybe refactor 
-func add_npc_talked_to(npc_id:int):
-	if npc_talked_to.has(npc_id):
-		remove_quest_string(npc_id)
-		return 
-	# adding to array
-	npc_talked_to.append(npc_id)
-	# also contains logic for adding quest ! 
-	add_quest_string(npc_id)
 	
 
 # --- / 
@@ -315,20 +284,37 @@ func save_profile_configuration():
 
 # --- / 
 # -- / Methods for NPC interaction 
+# register here your dialogue, key is npc id 
+@onready var npc_dialogues: Dictionary = {1: ExampleData.new()}
+@onready var dialogue: Dialogue = Dialogue.new()
 
-# takes npc_id, sets is_in_dialogue to true, 
-# queries dialogue to display from given id
-# TODO handle dialogue and query dialogue from given npc_id
+# checks whether a npc has a dialogue linked to it
+func has_dialogue(npc_id:int) -> bool:
+	return npc_dialogues.has(npc_id)
+	
+# takes npc_id, enters the dialogue if one is linked to the current npc_id
 func enter_dialogue(npc_id:int):
+	if not has_dialogue(npc_id):
+		print("WARNING: TRIED TO FIND AN NON EXISTING DIALOGUE FOR NPC", npc_id)
+		return
 	
+	var data : Dialogue_Data = npc_dialogues[npc_id]
+	dialogue.enter_dialogue(data, npc_id)
 
-	is_in_dialogue = true 
-	active_dialogue = npc_id
+# returns whether the dialogue has been finished.
+# finished is not just given by closing the dialogue window.
+# a dialogue is finished, when the dialogue creator marks the dialogue 
+# as finished in his code and on the page of his choose.
+func check_dialogue_finished(npc_id:int) -> bool:
+	if not has_dialogue(npc_id):
+		return false
+		
+	return npc_dialogues[npc_id].finished
 
-	pass
+# returns true when the player is currently in dialogue
+func navigation_in_dialogue() -> bool:
+	return dialogue.in_dialogue()
 
-# ends dialogue -> sets is_in_dialogue to false 
+# ends dialogue
 func exit_dialogue():
-	is_in_dialogue = false 
-	active_dialogue = 0
-	
+	dialogue.exit_dialogue()
