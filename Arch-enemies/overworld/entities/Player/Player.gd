@@ -144,6 +144,9 @@ func execute_interaction():
 				else:
 					set_interactionLabel(interaction_data["dialogue"])
 				
+				if not SingletonPlayer.has_dialogue(interaction_data["npc_id"]):
+					set_interactionLabel("NO DIALOGUE")
+				
 				var reward_type:NPC_interaction.QuestReward = interaction_data["reward_type"]
 				var received_reward = interaction_data["reward"]
 				match reward_type:
