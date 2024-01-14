@@ -32,6 +32,10 @@ func _ready():
 func _physics_process(delta):
 	player_movement(delta)
 	# checking for interaction in world
+	
+	if SingletonPlayer.navigation_in_dialogue():
+		return
+	
 	check_input()
 
 func player_movement(delta):
