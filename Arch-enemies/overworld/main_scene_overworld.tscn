@@ -47,6 +47,8 @@ position = Vector2(185, 51)
 npc_name = "Rubert"
 npc_id = 1
 quest_type = 1
+required_edge_start = 4
+required_edge_dest = 3
 quest_reward = 1
 
 [node name="NpcInteraction2" parent="." instance=ExtResource("7_33ud0")]

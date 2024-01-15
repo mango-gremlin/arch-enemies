@@ -19,6 +19,7 @@ func enter_dialogue(dialogue:Dialogue_Data, npc_id: int):
 	current_npc_id = npc_id
 	is_in_dialogue = true 
 	active_dialogue = dialogue
+	# adding quest to players UI
 	SingletonPlayer.add_quest_string(npc_id)
 	active_dialogue.select_page(0)
 
@@ -28,6 +29,8 @@ func in_dialogue() -> bool:
 func exit_dialogue():
 	is_in_dialogue = false 
 	active_dialogue = null
+	if SingletonPlayer.check_dialogue_finished(current_npc_id):
+		SingletonPlayer.remove_quest_string(current_npc_id)
 	
 	# hide panel
 	npc_control_instance.hide()

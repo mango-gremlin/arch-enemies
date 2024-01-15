@@ -138,19 +138,31 @@ func execute_interaction():
 			# updating ui 
 			# adding to inventory! 
 		Interactable.InteractionType.NPC:
+			var npc_id:int = interaction_data["npc_id"]
 			print("interacting with npc")
 			# entering dialogue, disable movement
-			if not SingletonPlayer.check_dialogue_finished(interaction_data["npc_id"]):
-				SingletonPlayer.enter_dialogue(interaction_data["npc_id"])
-			else:
-				set_interactionLabel(interaction_data["dialogue"])
+			var npc_quest_state:bool = SingletonPlayer.obtain_npc_quest_state(npc_id)
+			var dialogue_state:bool = SingletonPlayer.check_dialogue_finished(npc_id)
 			
-			if not SingletonPlayer.has_dialogue(interaction_data["npc_id"]):
+			# allow dialogue as long as 
+			# quest is undonde
+			# dialogue has not been finished yet! 
+			if not (dialogue_state and  npc_quest_state):
+				SingletonPlayer.enter_dialogue(npc_id)
+				return
+		
+			# dialogue was finished already
+			#SingletonPlayer.remove_quest_string(npc_id)
+			set_interactionLabel(interaction_data["dialogue"])
+			
+			if not SingletonPlayer.has_dialogue(npc_id):
 				set_interactionLabel("NO DIALOGUE")
 			
+			# --- / 
+			# -- / Reward management 
+			# only necessary if NPC holds a quest
 			var reward_type:NPC_interaction.QuestReward = interaction_data["reward_type"]
 			var received_reward = interaction_data["reward"]
-			print("taking reward")
 			match reward_type:
 				NPC_interaction.QuestReward.ANIMAL: 
 					# adding animal to inventory of player 

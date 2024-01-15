@@ -195,6 +195,11 @@ func add_npc_instance(npc_id:int,npc_object:NPC_interaction):
 func obtain_npc_object(npc_id) -> NPC_interaction:
 	return dictionary_npc[npc_id]
 
+func obtain_npc_quest_state(npc_id) -> bool:
+	var npc_object:NPC_interaction = obtain_npc_object(npc_id)
+	var quest_state:bool = npc_object.check_quest_condition()
+	return quest_state
+
 # queries all quests and their state
 # returns dictionary with following structure
 # key: quest-string -> value: state:Boolean
@@ -312,6 +317,7 @@ func save_profile_configuration():
 
 # --- / 
 # -- / Methods for NPC interaction 
+
 # register here your dialogue, key is npc id 
 @onready var npc_dialogues: Dictionary = {
 	0 : QuestTrackNPC.new(),

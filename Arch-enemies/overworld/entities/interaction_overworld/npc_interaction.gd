@@ -49,7 +49,7 @@ func _ready():
 			required_item,
 			required_npc_id,
 			required_edge_start,
-			required_edge_start)
+			required_edge_dest)
 		# setting reward_parameters
 		npc_object.set_quest_reward(quest_reward,reward_item,npc_animal_type,reward_bridge)
 		

@@ -17,7 +17,7 @@ enum Quest{
 	ITEM,
 	BRIDGE,
 	NPC,
-	MANY,
+	ALL,
 	NONE,
 }
 
@@ -178,7 +178,7 @@ func check_quest_condition() -> bool:
 					# visited npc already 
 					return true 
 				return false 
-			NPC_interaction.Quest.MANY:
+			NPC_interaction.Quest.ALL:
 				var quest_states:Dictionary = SingletonPlayer.obtain_all_quest_states()
 				var all_quests_solved:bool = quest_dict_is_solved(quest_states)
 				print(all_quests_solved)
@@ -249,7 +249,7 @@ func stringify_quest() -> String:
 			var target_npc:NPC_interaction  = SingletonPlayer.obtain_npc_object(required_npc_id)
 			var target_npc_name = target_npc.obtain_name()
 			requirement_string = " wants you to talk to " + target_npc_name 
-		Quest.MANY:
+		Quest.ALL:
 			#gather all  quests available right now
 			# FIXME
 			var quest_states:Dictionary = SingletonPlayer.obtain_all_quest_states()
