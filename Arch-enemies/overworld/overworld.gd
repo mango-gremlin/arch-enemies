@@ -5,7 +5,6 @@ extends Node
 #@onready var Savemanager = Savemanagement.new()
 
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	SingletonPlayer.signal_inventory_update_ui()

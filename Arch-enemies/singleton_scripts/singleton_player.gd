@@ -14,7 +14,6 @@ func _ready():
 	# TODO add input to set 
 	Savemanager.select_profile("default")
 
-
 # -- Signals 
 signal updated_item_inventory(new_inventory)
 signal updated_animal_inventory(new_animal_inventory)

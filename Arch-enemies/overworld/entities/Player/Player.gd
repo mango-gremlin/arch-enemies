@@ -23,6 +23,14 @@ signal saved_player()
 # TODO might be removed, for debugging only
 @onready var interactionLabel = $interactioncomponents/InteractLabel
 
+# saving when closed via Request of OS
+func _notification(what):
+	if what == NOTIFICATION_WM_CLOSE_REQUEST:
+		print("quitting game suddenly")
+		save_player()
+		SingletonPlayer.save_game()
+		get_tree().quit() # default behavior
+
 func _ready():
 	# setting camera zoom
 	var camera_reference = $Camera2D
@@ -211,6 +219,7 @@ func enter_bridge_scene(bridgeEdge:SingletonPlayer.BridgeEdge):
 func save_player():
 	print("save user position")
 	SingletonPlayer.set_player_coord(position)
+	SingletonPlayer.save_game()
 	saved_player.emit()
 	
 
