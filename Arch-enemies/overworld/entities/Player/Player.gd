@@ -99,76 +99,75 @@ func _on_interactionarea_area_exited(area):
 # function denoting how to interact with a given interaction in stack
 # FIXME refactor!
 func execute_interaction():
-	if not all_interactions.is_empty(): # interaction not empty
-		
-		# taking first element from interaction
-		var active_interaction = all_interactions[0]
-		
-		# query result from obtained interation 
-		var obtained_interaction: Interactable.InteractionValue = active_interaction.interact_with_area()
-		var interaction_data:Dictionary = obtained_interaction.valueDictionary
-		match obtained_interaction.type:
-			Interactable.InteractionType.BRIDGE: 
-				# upon interaction with a bridge: 
-				# check the following: 
-				# solved already? 
-				#	true  -> dont do anything 
-				# 	false -> display information and allow to play game too 
-				print("entering bridge game")
-				# FIXME debugging until interaction works accordingly
-				print("value from interaction") 
-				print(interaction_data["text"])
-				print(interaction_data["issolved"])
-				if interaction_data["issolved"]: 
-					set_interactionLabel("Was solved already") 
-					return
-				else: 
-					set_interactionLabel(interaction_data["text"])
-					
-				var bridge_edge:SingletonPlayer.BridgeEdge = interaction_data["bridge_edge"]
-				enter_bridge_scene(bridge_edge)
-				
-			Interactable.InteractionType.ITEM: 
-				print("obtained item")
+	if all_interactions.is_empty(): # interaction empty
+		return 
+	
+	# taking first element from interaction
+	var active_interaction = all_interactions[0]
+	
+	# query result from obtained interation 
+	var obtained_interaction: Interactable.InteractionValue = active_interaction.interact_with_area()
+	var interaction_data:Dictionary = obtained_interaction.valueDictionary
+	match obtained_interaction.type:
+		Interactable.InteractionType.BRIDGE: 
+			# upon interaction with a bridge: 
+			# check the following: 
+			# solved already? 
+			#	true  -> dont do anything 
+			# 	false -> display information and allow to play game too 
+			print("entering bridge game")
+			# FIXME debugging until interaction works accordingly
+			print("value from interaction") 
+			print(interaction_data["text"])
+			print(interaction_data["issolved"])
+			if interaction_data["issolved"]: 
+				set_interactionLabel("Was solved already") 
+				return
+			else: 
 				set_interactionLabel(interaction_data["text"])
-				var received_item:Item.ItemType = interaction_data["item"]
-				# adding to inventory 
-				SingletonPlayer.add_to_inventory(received_item)
-				# updating ui 
-				# adding to inventory! 
-			Interactable.InteractionType.NPC:
-				print("interacting with npc")
-				# entering dialogue, disable movement
-				if not SingletonPlayer.check_dialogue_finished(interaction_data["npc_id"]):
-					SingletonPlayer.enter_dialogue(interaction_data["npc_id"])
-				else:
-					set_interactionLabel(interaction_data["dialogue"])
 				
-				if not SingletonPlayer.has_dialogue(interaction_data["npc_id"]):
-					set_interactionLabel("NO DIALOGUE")
-				
-				var reward_type:NPC_interaction.QuestReward = interaction_data["reward_type"]
-				var received_reward = interaction_data["reward"]
-				print("taking reward")
-				match reward_type:
-					NPC_interaction.QuestReward.ANIMAL: 
-						# adding animal to inventory of player 
-						SingletonPlayer.add_to_animal_inventory(received_reward)
-					NPC_interaction.QuestReward.ITEM: 
-						SingletonPlayer.add_to_inventory(received_reward)
-					NPC_interaction.QuestReward.BRIDGE:
-						print("received bridge reward")
-						# received a bridge, adding it to connected bridges
-						var received_bridge:SingletonPlayer.BridgeEdge = received_reward
-						var invalid_bridge_state = SingletonPlayer.BridgeLevelPathState.NONE
-						if not (received_bridge.get_path_state() == invalid_bridge_state):
-							print("adding path to connected ones")
-							SingletonPlayer.add_bridge_connection(received_bridge)
+			var bridge_edge:SingletonPlayer.BridgeEdge = interaction_data["bridge_edge"]
+			enter_bridge_scene(bridge_edge)
+			
+		Interactable.InteractionType.ITEM: 
+			print("obtained item")
+			set_interactionLabel(interaction_data["text"])
+			var received_item:Item.ItemType = interaction_data["item"]
+			# adding to inventory 
+			SingletonPlayer.add_to_inventory(received_item)
+			# updating ui 
+			# adding to inventory! 
+		Interactable.InteractionType.NPC:
+			print("interacting with npc")
+			# entering dialogue, disable movement
+			if not SingletonPlayer.check_dialogue_finished(interaction_data["npc_id"]):
+				SingletonPlayer.enter_dialogue(interaction_data["npc_id"])
+			else:
+				set_interactionLabel(interaction_data["dialogue"])
+			
+			if not SingletonPlayer.has_dialogue(interaction_data["npc_id"]):
+				set_interactionLabel("NO DIALOGUE")
+			
+			var reward_type:NPC_interaction.QuestReward = interaction_data["reward_type"]
+			var received_reward = interaction_data["reward"]
+			print("taking reward")
+			match reward_type:
+				NPC_interaction.QuestReward.ANIMAL: 
+					# adding animal to inventory of player 
+					SingletonPlayer.add_to_animal_inventory(received_reward)
+				NPC_interaction.QuestReward.ITEM: 
+					SingletonPlayer.add_to_inventory(received_reward)
+				NPC_interaction.QuestReward.BRIDGE:
+					# received a bridge, adding it to connected bridges
+					var received_bridge:SingletonPlayer.BridgeEdge = received_reward
+					var invalid_bridge_state = SingletonPlayer.BridgeLevelPathState.NONE
+					if not (received_bridge.get_path_state() == invalid_bridge_state):
+						SingletonPlayer.add_bridge_connection(received_bridge)
 
-			Interactable.InteractionType.DEBUG:
-				print("debug")
-			_: 
-				return 
+		Interactable.InteractionType.DEBUG:
+			print("debug")
+		_: 
+			return 
 
 
 # checks against definde inputs, takes action if action was registered

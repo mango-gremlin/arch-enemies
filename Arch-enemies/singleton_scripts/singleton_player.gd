@@ -156,6 +156,9 @@ var quest_string_dict:Dictionary = {}
 # emits signal to update ui afterwards
 # if npc does not have a quest, nothing changes
 func add_quest_string(npc_id:int):
+	# prevent collection of all quests to be listed 
+	if npc_id == QUEST_TRACK_NPC_ID:
+		return 
 	var npc_object:NPC_interaction = obtain_npc_object(npc_id)
 	var quest_id = npc_object.obtain_quest_id()
 	if quest_string_dict.has(quest_id):
@@ -181,6 +184,10 @@ func remove_quest_string(npc_id:int):
 # key ==> value ; npcid ==> NPC Object
 var dictionary_npc:Dictionary = {} 
 
+# we do have a special NPC that will  track all Quests available
+# it ought to be denoted with a special id
+var QUEST_TRACK_NPC_ID:int = 0
+
 # adds npc object corresponding to its npc id 
 func add_npc_instance(npc_id:int,npc_object:NPC_interaction):
 	dictionary_npc[npc_id] = npc_object
@@ -195,7 +202,9 @@ func obtain_npc_object(npc_id) -> NPC_interaction:
 func obtain_all_quest_states() -> Dictionary:
 	var quest_states:Dictionary = {}
 	for npc in dictionary_npc:
-		if not npc == 0:
+		# avoiding calling npc that calls this function
+		# resolves possible recursion
+		if not npc == QUEST_TRACK_NPC_ID:
 			var npc_object:NPC_interaction = dictionary_npc[npc]
 			var quest_string:String = npc_object.stringify_quest()
 			var quest_state:bool = npc_object.check_quest_condition()

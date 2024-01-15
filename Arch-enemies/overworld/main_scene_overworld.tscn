@@ -16,7 +16,7 @@ script = ExtResource("1_pwtu4")
 
 [node name="npc_track_quests" parent="." instance=ExtResource("7_33ud0")]
 position = Vector2(-14, -27)
-npc_name = "thoust remembereth"
+npc_name = "blub"
 npc_animal_type = 1
 quest_type = 3
 required_item = 6
@@ -37,7 +37,7 @@ item_dialogue_success = "you got an item!"
 item_dialogue_failure = "no item found"
 
 [node name="item_interaction2" parent="." instance=ExtResource("6_66i44")]
-position = Vector2(201, 24)
+position = Vector2(132, 46)
 item_type = 3
 item_dialogue_success = "item? "
 item_dialogue_failure = "item :("

@@ -179,8 +179,10 @@ func check_quest_condition() -> bool:
 					return true 
 				return false 
 			NPC_interaction.Quest.MANY:
-				# FIXME
-				return true
+				var quest_states:Dictionary = SingletonPlayer.obtain_all_quest_states()
+				var all_quests_solved:bool = quest_dict_is_solved(quest_states)
+				print(all_quests_solved)
+				return all_quests_solved
 			_:
 				return false 
 	return true
@@ -253,6 +255,7 @@ func stringify_quest() -> String:
 			var quest_states:Dictionary = SingletonPlayer.obtain_all_quest_states()
 			var quest_list:String = transform_quest_dict_to_string(quest_states)
 			requirement_string = " wants you to solve: \n" +quest_list
+			return requirement_string
 		_:
 			# no quest given for the npc
 			return ""
@@ -271,6 +274,17 @@ func transform_quest_dict_to_string(quests:Dictionary) -> String:
 			# adding to list, as its unsolved
 			resulting_list += "\n" + quest
 	return resulting_list
+
+# FIXME could not be a primitve datatype, same as transform_quest_dict_to_string
+# takes dictionary of quests ( key:quest-string, value:issolved --> boolean) 
+# if one condition was not solved, return false
+func quest_dict_is_solved(quests:Dictionary) -> bool:
+	for quest in quests:
+		# iterate over all booleans received for quests
+		var quest_solved:bool = quests[quest]
+		if not quest_solved: 
+			return false
+	return true
 
 # --- / 
 # -- / Dialogue interaction 
