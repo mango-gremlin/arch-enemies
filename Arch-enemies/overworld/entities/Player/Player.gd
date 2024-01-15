@@ -2,7 +2,6 @@ extends CharacterBody2D
 
 # --- / 
 # -- / defining usage of signals 
-signal saved_player()
 
 # --- / 
 # -- / default values for visualization
@@ -193,7 +192,7 @@ func check_input():
 func enter_pause_menu():
 	print("pause menu")
 	save_player()
-	# TODO 
+	# FIXME improve menu 
 	get_tree().change_scene_to_file("res://overworld/ui/menu/menu/pause_menu.tscn")
 
 # takes received bridgeEdge and enters its path
@@ -219,9 +218,6 @@ func enter_bridge_scene(bridgeEdge:SingletonPlayer.BridgeEdge):
 func save_player():
 	print("save user position")
 	SingletonPlayer.set_player_coord(position)
-	SingletonPlayer.save_game()
-	saved_player.emit()
-	
 
 # ----- 
 # debugging
