@@ -47,8 +47,7 @@ position = Vector2(185, 51)
 npc_name = "Rubert"
 npc_id = 1
 quest_type = 1
-required_edge_start = 4
-required_edge_dest = 3
+required_edge_dest = 1
 quest_reward = 1
 
 [node name="NpcInteraction2" parent="." instance=ExtResource("7_33ud0")]
@@ -96,8 +95,14 @@ npc_special_sprite = ExtResource("8_g5nw6")
 [node name="BridgeTemplate" parent="." instance=ExtResource("9_jpn0u")]
 position = Vector2(250, 78)
 
+[node name="bridge_interaction" parent="BridgeTemplate/left_bridge_start" index="0"]
+dest_island_id = 1
+
 [node name="right_bridge_start" parent="BridgeTemplate" index="1"]
 position = Vector2(-33, 0)
+
+[node name="bridge_interaction2" parent="BridgeTemplate/right_bridge_start" index="0"]
+start_island_id = 1
 
 [node name="solved_with_all_quests" parent="." instance=ExtResource("10_5ad47")]
 position = Vector2(200, -2)
