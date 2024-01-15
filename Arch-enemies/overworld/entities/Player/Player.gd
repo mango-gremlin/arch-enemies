@@ -141,13 +141,13 @@ func execute_interaction():
 			var npc_id:int = interaction_data["npc_id"]
 			print("interacting with npc")
 			# entering dialogue, disable movement
-			var npc_quest_state:bool = SingletonPlayer.obtain_npc_quest_state(npc_id)
-			var dialogue_state:bool = SingletonPlayer.check_dialogue_finished(npc_id)
+			var quest_done:bool = SingletonPlayer.obtain_npc_quest_state(npc_id)
+			var dialogue_done:bool = SingletonPlayer.check_dialogue_finished(npc_id)
 			
 			# allow dialogue as long as 
-			# quest is undonde
-			# dialogue has not been finished yet! 
-			if not (dialogue_state and  npc_quest_state):
+			# -> quest is undone
+			# -> dialogue has not been finished yet! 
+			if not (dialogue_done and  quest_done):
 				SingletonPlayer.enter_dialogue(npc_id)
 				return
 		

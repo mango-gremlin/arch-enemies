@@ -192,9 +192,13 @@ var QUEST_TRACK_NPC_ID:int = 0
 func add_npc_instance(npc_id:int,npc_object:NPC_interaction):
 	dictionary_npc[npc_id] = npc_object
 
+# returns object of NPC_interaction linked to given id
 func obtain_npc_object(npc_id) -> NPC_interaction:
 	return dictionary_npc[npc_id]
 
+# takes npc id, queries corresponding object 
+# returns true if requirements for quest were met
+# false otherwise
 func obtain_npc_quest_state(npc_id) -> bool:
 	var npc_object:NPC_interaction = obtain_npc_object(npc_id)
 	var quest_state:bool = npc_object.check_quest_condition()
