@@ -180,7 +180,7 @@ func check_quest_condition() -> bool:
 				return false 
 			NPC_interaction.Quest.MANY:
 				# FIXME
-				return false
+				return true
 			_:
 				return false 
 	return true
@@ -253,6 +253,9 @@ func stringify_quest() -> String:
 			var quest_states:Dictionary = SingletonPlayer.obtain_all_quest_states()
 			var quest_list:String = transform_quest_dict_to_string(quest_states)
 			requirement_string = " wants you to solve: \n" +quest_list
+		_:
+			# no quest given for the npc
+			return ""
 			
 	
 	# combine name of npc with its quest

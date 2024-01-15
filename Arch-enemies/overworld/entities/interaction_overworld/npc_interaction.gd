@@ -39,6 +39,8 @@ func _ready():
 	if quest_reward == NPC_interaction.QuestReward.BRIDGE:
 		# creating bridge_edge that is contained within the NPC
 		reward_bridge = SingletonPlayer.BridgeEdge.new(reward_edge_start,reward_edge_dest)
+		var available_state:SingletonPlayer.BridgeLevelPathState = SingletonPlayer.BridgeLevelPathState.AVAILABLE
+		reward_bridge.set_availability(available_state)
 	
 	if quest_type != NPC_interaction.Quest.NONE :
 		# updating conditions for quest behavior

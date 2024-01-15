@@ -149,6 +149,7 @@ func execute_interaction():
 				
 				var reward_type:NPC_interaction.QuestReward = interaction_data["reward_type"]
 				var received_reward = interaction_data["reward"]
+				print("taking reward")
 				match reward_type:
 					NPC_interaction.QuestReward.ANIMAL: 
 						# adding animal to inventory of player 
@@ -156,10 +157,12 @@ func execute_interaction():
 					NPC_interaction.QuestReward.ITEM: 
 						SingletonPlayer.add_to_inventory(received_reward)
 					NPC_interaction.QuestReward.BRIDGE:
+						print("received bridge reward")
 						# received a bridge, adding it to connected bridges
 						var received_bridge:SingletonPlayer.BridgeEdge = received_reward
 						var invalid_bridge_state = SingletonPlayer.BridgeLevelPathState.NONE
-						if not  (received_bridge.get_path_state() == invalid_bridge_state):
+						if not (received_bridge.get_path_state() == invalid_bridge_state):
+							print("adding path to connected ones")
 							SingletonPlayer.add_bridge_connection(received_bridge)
 
 			Interactable.InteractionType.DEBUG:

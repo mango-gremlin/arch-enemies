@@ -246,12 +246,8 @@ class BridgeEdge:
 	func set_availability(new_availability:BridgeLevelPathState):
 		path_state = new_availability
 	
-	func get_path_state() -> bool:
-		match path_state:
-			BridgeLevelPathState.AVAILABLE:
-				return true  
-			_: 
-				return false
+	func get_path_state() -> BridgeLevelPathState:
+		return path_state
 # checks whether connection between two given values is possible or not
 func check_bridge_connection(bridge_edge:BridgeEdge) -> bool: 
 	var edge_start = bridge_edge.start_id 
