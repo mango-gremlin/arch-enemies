@@ -122,7 +122,8 @@ var islands_reachable:Array[bool]
 	0 : [0,1],	
 	1 : [1,0],
 	2 : [2],
-	3 : [3]
+	3 : [3],
+	4 : [4]
 }
 
 # denotes the level to choose for each interaction!
@@ -186,7 +187,20 @@ func add_npc_instance(npc_id:int,npc_object:NPC_interaction):
 
 func obtain_npc_object(npc_id) -> NPC_interaction:
 	return dictionary_npc[npc_id]
-	
+
+# queries all quests and their state
+# returns dictionary with following structure
+# key: quest-string -> value: state:Boolean
+# FIXME could be its own datastructure!
+func obtain_all_quest_states() -> Dictionary:
+	var quest_states:Dictionary = {}
+	for npc in dictionary_npc:
+		if not npc == 0:
+			var npc_object:NPC_interaction = dictionary_npc[npc]
+			var quest_string:String = npc_object.stringify_quest()
+			var quest_state:bool = npc_object.check_quest_condition()
+			quest_states[quest_string] = quest_state
+	return quest_states
 
 # --- / 
 # -- / Bridge management 
@@ -228,7 +242,16 @@ class BridgeEdge:
 	func set_path(new_path:String):
 		path = new_path
 		path_state = BridgeLevelPathState.AVAILABLE
-
+	
+	func set_availability(new_availability:BridgeLevelPathState):
+		path_state = new_availability
+	
+	func get_path_state() -> bool:
+		match path_state:
+			BridgeLevelPathState.AVAILABLE:
+				return true  
+			_: 
+				return false
 # checks whether connection between two given values is possible or not
 func check_bridge_connection(bridge_edge:BridgeEdge) -> bool: 
 	var edge_start = bridge_edge.start_id 
@@ -286,7 +309,8 @@ func save_profile_configuration():
 # -- / Methods for NPC interaction 
 # register here your dialogue, key is npc id 
 @onready var npc_dialogues: Dictionary = {
-	1: ExampleData.new()
+	0 : QuestTrackNPC.new(),
+	1 : ExampleData.new()
 }
 
 @onready var dialogue: Dialogue = Dialogue.new()

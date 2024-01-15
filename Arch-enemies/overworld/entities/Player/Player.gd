@@ -155,6 +155,12 @@ func execute_interaction():
 						SingletonPlayer.add_to_animal_inventory(received_reward)
 					NPC_interaction.QuestReward.ITEM: 
 						SingletonPlayer.add_to_inventory(received_reward)
+					NPC_interaction.QuestReward.BRIDGE:
+						# received a bridge, adding it to connected bridges
+						var received_bridge:SingletonPlayer.BridgeEdge = received_reward
+						var invalid_bridge_state = SingletonPlayer.BridgeLevelPathState.NONE
+						if not  (received_bridge.get_path_state() == invalid_bridge_state):
+							SingletonPlayer.add_bridge_connection(received_bridge)
 
 			Interactable.InteractionType.DEBUG:
 				print("debug")

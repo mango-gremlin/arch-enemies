@@ -17,6 +17,7 @@ enum Quest{
 	ITEM,
 	BRIDGE,
 	NPC,
+	MANY,
 	NONE,
 }
 
@@ -25,6 +26,7 @@ enum Quest{
 enum QuestReward{
 	ITEM,
 	ANIMAL,
+	BRIDGE,
 	NONE
 }
 
@@ -38,6 +40,7 @@ var npc_animal_type:Animal.AnimalType
 # should not be set in case reward is of type NPC
 var quest_reward:QuestReward = QuestReward.NONE
 var reward_item:Item.ItemType = Item.ItemType.NONE
+var reward_bridge:SingletonPlayer.BridgeEdge
 var reward_animal:Animal.AnimalType = npc_animal_type
 
 # --- / 
@@ -135,6 +138,7 @@ func set_quest_reward(
 	received_quest_reward:QuestReward,
 	received_reward_item:Item.ItemType,
 	received_reward_animal:Animal.AnimalType,
+	received_reward_bridge:SingletonPlayer.BridgeEdge
 	):
 	quest_reward = received_quest_reward
 	match quest_reward: 
@@ -142,6 +146,9 @@ func set_quest_reward(
 			reward_item = received_reward_item
 		QuestReward.ANIMAL:
 			reward_animal = received_reward_animal 
+		QuestReward.BRIDGE:
+			# adding bridgeEdge that will be connected 
+			reward_bridge = received_reward_bridge
 
 
 # sets quest_resolved() to true 
@@ -171,6 +178,9 @@ func check_quest_condition() -> bool:
 					# visited npc already 
 					return true 
 				return false 
+			NPC_interaction.Quest.MANY:
+				# FIXME
+				return false
 			_:
 				return false 
 	return true
@@ -182,8 +192,11 @@ func check_item_condition() -> bool:
 		return true 
 	return false 
 
-# returns either Animal/Item if quest was complete before 
-# if quest is not done, returns Item of Type "ItemType.NONE"
+# returns either Animal/Item or BridgeEdge if quest was complete before 
+# if quest is not done, returns 
+# Item of Type "ItemType.NONE" 
+# Animal of Type "Animal.AnimalType.NONE"
+# BridgeEdge of Type "BridgeEdge(0,0) with BridgeLevelPathState.NONE
 func request_reward(): 
 	# 
 	if not quest_resolved: 
@@ -199,15 +212,21 @@ func request_reward():
 					return reward_item
 				NPC_interaction.QuestReward.ANIMAL:
 					return npc_animal_type
+				NPC_interaction.QuestReward.BRIDGE:
+					return reward_bridge
 						
 	# FIXME improve readability 
 	# FIXME reduce complexity of this simple statement
 	print("requirements not met!")
 	match quest_reward:
 		NPC_interaction.QuestReward.ITEM:
-				return Item.ItemType.NONE
+			return Item.ItemType.NONE
 		NPC_interaction.QuestReward.ANIMAL:
-				return Animal.AnimalType.NONE
+			return Animal.AnimalType.NONE
+		NPC_interaction.QuestReward.BRIDGE:
+			var unsolved_edge:SingletonPlayer.BridgeEdge= SingletonPlayer.BridgeEdge.new(0,0)
+			unsolved_edge.set_availability(SingletonPlayer.BridgeLevelPathState.NONE)
+			return unsolved_edge
 
 # constructs string representation of current quest 
 # returns this String
@@ -228,16 +247,33 @@ func stringify_quest() -> String:
 			var target_npc:NPC_interaction  = SingletonPlayer.obtain_npc_object(required_npc_id)
 			var target_npc_name = target_npc.obtain_name()
 			requirement_string = " wants you to talk to " + target_npc_name 
+		Quest.MANY:
+			#gather all  quests available right now
+			# FIXME
+			var quest_states:Dictionary = SingletonPlayer.obtain_all_quest_states()
+			var quest_list:String = transform_quest_dict_to_string(quest_states)
+			requirement_string = " wants you to solve: \n" +quest_list
+			
 	
 	# combine name of npc with its quest
 	var combined_message = source_npc_name + requirement_string 
 	return combined_message
 
+# FIXME could not be a primitve datatype!
+func transform_quest_dict_to_string(quests:Dictionary) -> String:
+	var resulting_list:String = ""
+	for quest in quests: 
+		var quest_solved:bool = quests[quest]
+		if not quest_solved:
+			# adding to list, as its unsolved
+			resulting_list += "\n" + quest
+	return resulting_list
+
 # --- / 
 # -- / Dialogue interaction 
 # FIXME only temporary until dialogue system was implemented
 
-# return the dialogue based on conditio ( quest done / undone ) 
+# return the dialogue based on condition ( quest done / undone ) 
 func obtain_dialogue() -> String:
 	if quest_resolved:
 		return dialogue_quest_done
