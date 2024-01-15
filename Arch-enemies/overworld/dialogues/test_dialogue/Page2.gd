@@ -4,6 +4,7 @@ extends Dialogue_Entry
 class_name Page2
 
 
+
 # --- /
 # -- / class constructor 
 func _init():
