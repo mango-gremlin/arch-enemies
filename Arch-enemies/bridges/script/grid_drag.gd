@@ -22,18 +22,11 @@ signal is_dragging
 func _ready():
 	# take animal inventory from parent-Grid tilemap
 	animal_inventory_reference = Grid_node_reference.start_animals
-	# FIXME Debugging purpose 
-	#print(animal_inventory_reference)
-	#print(Grid_node_reference)
-	
 	print("inv in grid drag")
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	# FIXME only for debugging references
-	#print(animal_inventory_reference)
-	#print(self)
 	pass
 
 func _get_drag_data(at_position):
