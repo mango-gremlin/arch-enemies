@@ -31,32 +31,32 @@ func _process(delta):
 
 func _get_drag_data(at_position):
 	if Global.drag_mode:
-		#When we try to drag something we first need to know what the grid looks like
+		# First we need to check if we have some animals of the requested type left in the inventory
+		var animal = tooltip_text 
+		# Due to we use the tooltip we need to check if the string is valid... this is not secure for typos!
+		var animal_type:Animal.AnimalType = Animal.string_to_type(animal)
+		if animal != "" and Grid_node_reference.start_animals[animal_type] <= 0:
+			return
+		
+		# When we try to drag something we first need to know what the grid looks like
 		need_grid.emit()
 		#Then we tell the grid that we are currently dragging something
 		#This allows us to see FORBIDDEN and ALLOWED zones
 		is_dragging.emit()
 		
-		#We create the data we want to transmit
+		# We create the data we want to transmit
 		var data = {}
-		#And the preview that is shown as we move the cursor
+		# And the preview that is shown as we move the cursor
 		var preview = DRAGPREVIEW.instantiate()
 		
-		#These are the two things we save in the data:
-		#1) The texture of the TRect
+		# The texture of the TRect
 		var sprite = texture
-		#2) And the Tooltip, which identifies the animal
-		var animal = tooltip_text 
-		#due to we use the tooltip we need to check if the string is valid... this is not secure for typos!
-		var animal_type:Animal.AnimalType = Animal.string_to_type(animal)
-		if animal != "" and Grid_node_reference.start_animals[animal_type] <= 0:
-			return
 		
 		#This adds a control node that allows us to fix the position of the preview
 		var c = Control.new()
 		c.add_child(preview)
 		
-		if(sprite != null):			
+		if(sprite != null):
 			#If we are not trying to drag the TRect that represent the grid we create the preview
 			preview.expand = true
 			preview.texture = sprite
