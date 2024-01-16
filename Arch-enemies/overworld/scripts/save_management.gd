@@ -7,18 +7,19 @@ var current_profile = "default"
 var profiles:Array = ["default"]
 
 # denotes reference to player object
-var player_object
-var camera_object
+#var player_object
+#var camera_object
 
 var state_path = "user://arch-enemies.json"
 
 # default constructor
 # TODO #89
-func _init(playerObject):
+func _init():
+	pass
 	# set player object accordingly 
 	
-	player_object = playerObject
-	camera_object = player_object.find_child("Camera2D")
+	#player_object = playerObject
+	#camera_object = player_object.find_child("Camera2D")
 	
 
 # See https://docs.godotengine.org/en/stable/tutorials/io/saving_games.html
@@ -50,17 +51,22 @@ func load_config():
 			var position_x = node_data["pos_x"]
 			var position_y = node_data["pos_y"]
 			
-			player_object.position = Vector2(position_x, position_y)
+			#player_object.position = Vector2(position_x, position_y)
+			SingletonPlayer.player_coordinate = Vector2(position_x, position_y)
 			
 			var new_inventory: Dictionary = generate_inventory(node_data["inventory"])
 			SingletonPlayer.set_item_inventory(new_inventory)
-			var animal_inventory:Dictionary = Animal.init_animal_inventory()
-			SingletonPlayer.set_animal_inventory(animal_inventory)
+			
+			# FIXME only uncomment once we have implemented saving the animal inventory too
+			#var animal_inventory:Dictionary = Animal.init_animal_inventory()
+			#SingletonPlayer.set_animal_inventory(animal_inventory)
 			#player_object.set_inventory(new_inventory)
 			
 			
 			
-			camera_object._set_current_zoom(node_data["zoom"])
+			#camera_object._set_current_zoom(node_data["zoom"])
+			var zoom:int = node_data["zoom"]
+			SingletonPlayer.zoomlevel = zoom
 			
 		if node_data["name"] == "Profiles":
 			profiles = node_data["profiles"]
@@ -111,7 +117,7 @@ func save_config():
 	var save = FileAccess.open(state_path, FileAccess.WRITE)
 
 	# Storing THE CURRENT player data
-	var player_state = player_object.save_state()
+	var player_state = SingletonPlayer.save_player_state()
 	player_state["profile"] = current_profile
 	
 	print("Storing player state \"", player_state, " ...") 

@@ -6,6 +6,14 @@ extends Node
 # - track progress of game 
 # - user profiles 
 
+@onready var Savemanager = Savemanagement.new()
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass
+	Savemanager.load_config()
+	# TODO add input to set 
+	Savemanager.select_profile("default")
+
 # -- Signals 
 signal updated_item_inventory(new_inventory)
 signal updated_animal_inventory(new_animal_inventory)
@@ -15,7 +23,7 @@ signal updated_quest_list(new_quest_list)
 # -- / Player management
 
 @onready var player_coordinate:Vector2 = Vector2.ZERO
-@onready var zoomlevel:Vector2 = Vector2(1,1)
+@onready var zoomlevel:int = 1
 
 func get_player_coord() -> Vector2: 
 	return player_coordinate
@@ -24,14 +32,20 @@ func set_player_coord(new_coordinate:Vector2):
 	player_coordinate = new_coordinate
 
 
-func get_player_zoom() -> Vector2: 
+func get_player_zoom() -> int: 
 	return zoomlevel
+
+func set_player_zoom(new_zoom:int):
+	zoomlevel = new_zoom
 
 # --- / 
 # -- / Item / Inventory management 
 
 @onready var item_inventory:Dictionary = Item.init_item_inventory()
 @onready var animal_inventory:Dictionary = Animal.init_animal_inventory()
+# use belows definition whenever debugging states that require a specific animal inventory
+#@onready var animal_inventory:Dictionary = set_test_animal_inventory()
+
 
 # retrieve inventory of items from singleton instance
 func get_item_inventory() -> Dictionary:
@@ -65,6 +79,14 @@ func set_animal_inventory(new_inventory:Dictionary):
 	print("loaded animal inventory")
 	updated_animal_inventory.emit(animal_inventory)
 
+# emits a signal to update the ui with the stored inventories and quests
+# may be used when entering the overworld and displaying available items
+# helps to set the inventory in the ui
+func signal_inventory_update_ui():
+	updated_item_inventory.emit(item_inventory)
+	updated_animal_inventory.emit(animal_inventory)
+	updated_quest_list.emit(active_tracked_quests)
+	
 
 # checks whether requested item is contained 
 # returns true if it is
@@ -91,12 +113,23 @@ func use_item(requested_item:Item.ItemType):
 # --- / 
 # -- / animal inventory
 
-func add_to_animal_inventory(new_animal:Animal.AnimalType, quantity:int=1): 
+
+func add_to_animal_inventory(new_animal:Animal.AnimalType, quantity:int = 1): 
 	if new_animal != Animal.AnimalType.NONE:
 		# valid entry given 
 		animal_inventory[new_animal] += quantity
 		#selected_animal.increase_amount
 		updated_animal_inventory.emit(animal_inventory)
+
+# this method can be used to generate an animal inventory
+# with custom amount of animals available. 
+# used for debugging only
+func set_test_animal_inventory() -> Dictionary:
+	var inventory:Dictionary = Animal.init_animal_inventory()
+	inventory[Animal.AnimalType.DEER] = 1
+	inventory[Animal.AnimalType.SNAKE] = 1
+	inventory[Animal.AnimalType.SQUIRREL] = 1
+	return inventory 
 
 
 # --- / 
@@ -376,3 +409,39 @@ func navigation_in_dialogue() -> bool:
 # ends dialogue
 func exit_dialogue():
 	dialogue.exit_dialogue()
+
+
+
+# --- / / 
+# -- / Save management 
+# - / / #FIXME requires several updates to store everything accordingly
+
+# takes current state of player and returns it as dictionary
+func save_player_state() -> Dictionary:
+	var json_inventory = []
+	var item_inventory = SingletonPlayer.item_inventory
+	for item:Item.ItemType in item_inventory:
+		var item_amount = item_inventory[item]
+		var item_string:String = Item.item_type_to_string(item)
+		var item_dictionary:Dictionary = {
+			"type": item_string,
+			"amount": item_amount
+		}
+		# store amount
+		item_dictionary["amount"] = item_amount
+		json_inventory.append(item_dictionary)
+
+	var state = {
+		"name" : "Player",
+		"pos_x" : player_coordinate.x,
+		"pos_y" : player_coordinate.y,
+		"inventory": json_inventory,
+		"zoom": SingletonPlayer.get_player_zoom()
+	}
+	return state
+
+# wrapper for save config save-method
+# FIXME
+func save_game():
+	Savemanager.save_config()
+	

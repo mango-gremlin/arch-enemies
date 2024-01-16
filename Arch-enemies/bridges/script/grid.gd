@@ -14,6 +14,10 @@ var y_zoom = 1
 @export var y_size = int(DisplayServer.window_get_size().y / int(10 * y_zoom)) + 1
 @export var square_size = 10
 
+@export var inventory_deer : Label
+@export var inventory_snake : Label
+@export var inventory_spider : Label
+@export var inventory_squirrel : Label
 
 #And finally some values we need later
 var grid_size = Vector2(x_size, y_size)
@@ -22,6 +26,12 @@ var start_grid = [[[]]]
 var last_states = []
 var save_states = 10
 var state = 0
+
+#for the inventory
+@onready var start_animals : Dictionary = SingletonPlayer.get_animal_inventory().duplicate(true)
+#var start_animals : Dictionary = set_animal_inventory()	
+var placed_animals: Array = []
+
 
 # ids of all tilemap layers
 const BACKGROUND_LAYER_ID = 0
@@ -58,6 +68,9 @@ signal get_zoom()
 enum ENTITY_TYPES {GROUND, WATER, AIR, ANIMAL, FORBIDDEN, ALLOWED, SIDE, BOTTOM, SHALLOW}
 
 func _ready():
+	#update the ui
+	update_inventory()
+	
 	#We save the previous states of the grid in an array, this array is initalized here
 	for i in range(save_states):
 		last_states.append([[]])
@@ -210,6 +223,10 @@ func update_grid(pos, data):
 	var animal = data["animal"]
 	var x = pos.x
 	var y = pos.y
+	
+	#Whenever we change the grid, i.e. update it, we have to track that here
+	state += 1
+	
 	#Based on the animal we use the apprioate filling
 	match animal:
 		"DEER":
@@ -238,6 +255,9 @@ func update_grid(pos, data):
 			for position in new_bottom:
 				var current = grid[x + position.x][y - position.y]
 				tile_update(Vector2i(x + position.x, y - position.y), current, ENTITY_TYPES.BOTTOM)
+
+			placed_animals.append(Animal.AnimalType.DEER)
+			add_to_animal_inventory(Animal.AnimalType.DEER,-1)
 		"SNAKE":
 			#Snake works just like Deer
 			var new_allowed = [Vector2i(0, 1), Vector2i(1, 1), Vector2i(2, 1), Vector2i(3, 1)]
@@ -262,6 +282,9 @@ func update_grid(pos, data):
 			for position in new_bottom:
 				var current = grid[x + position.x][y - position.y]
 				tile_update(Vector2i(x + position.x, y - position.y), current, ENTITY_TYPES.BOTTOM)
+
+			placed_animals.append(Animal.AnimalType.SNAKE)
+			add_to_animal_inventory(Animal.AnimalType.SNAKE,-1)
 		"SPIDER":
 			#Spider is the easiest, nothing much happens here
 			var new_allowed = [Vector2i(0, 1), Vector2i(1, 0), Vector2i(0, -1), Vector2i(-1, 0)]
@@ -270,6 +293,9 @@ func update_grid(pos, data):
 			for position in new_allowed:
 				var current = grid[x + position.x][y - position.y]
 				tile_update(Vector2i(x + position.x, y - position.y), current, ENTITY_TYPES.ALLOWED)
+
+			placed_animals.append(Animal.AnimalType.SPIDER)
+			add_to_animal_inventory(Animal.AnimalType.SPIDER,-1)
 		"SQUIRREL":
 			#Squirrel like the other animals
 			var new_allowed = [Vector2i(0, 2)]
@@ -288,10 +314,14 @@ func update_grid(pos, data):
 				var current = grid[x + position.x][y - position.y]
 				tile_update(Vector2i(x + position.x, y - position.y), current, ENTITY_TYPES.BOTTOM)
 			
-	#Whenever we change the grid, i.e. update it, we have to track that here
-	state += 1
+			placed_animals.append(Animal.AnimalType.SQUIRREL)
+			add_to_animal_inventory(Animal.AnimalType.SQUIRREL,-1)
+			
 	#This allows us to track the previous states and return to them
 	last_states[state % save_states] = grid.duplicate(true)
+	
+	#update the global inventory
+	update_inventory()
 
 func make_visible():
 	#We do not color the FORBIDDEN or ALLOWED cells on ready
@@ -324,6 +354,10 @@ func make_invisible():
 func reset_grid():
 	#To reset the grid we simple return it to the state we saved in the beginning
 	if Global.drag_mode:
+		#reset the inventory to the original amount of animals
+		start_animals = SingletonPlayer.get_animal_inventory().duplicate(true)
+		update_inventory()
+		
 		grid = start_grid.duplicate(true)
 		#Then we recolor it
 		color_grid()
@@ -331,6 +365,8 @@ func reset_grid():
 		last_states = []
 		for i in range(save_states):
 			last_states.append([[]])
+			
+		placed_animals = []
 		state = 0
 
 func last_state():
@@ -353,6 +389,12 @@ func last_state():
 			grid = last_states[state % save_states].duplicate(true)
 			last_states[(state + 1) % save_states] = [[]]
 			color_grid()
+			
+			var last_animal = placed_animals.pop_back()
+			start_animals[last_animal] += 1
+			
+			update_inventory()
+
 
 func tile_update(pos, current, next):
 	#We check what the current square is, based on what we want to put there next we either do it
@@ -372,6 +414,38 @@ func tile_update(pos, current, next):
 func _process(delta):
 	if(Global.currently_dragging and Input.is_action_just_released("click")):
 		make_invisible()
+		
+	# pressing "esc" opens the pause-menu
+	if Input.is_action_just_pressed("open_menu"):
+		var pause_menu = get_parent().find_child("pause_menu")
+		pause_menu.visible = not pause_menu.visible
+
+# --- / 
+# -- / inventory management
+
+# updates animal amount with given value ( could either be pos / neg )
+func add_to_animal_inventory(animal:Animal.AnimalType, additional_value:int):
+	start_animals[animal] = start_animals[animal] + additional_value
+
+# takes Dictionary containing the used animals. 
+# will add those animals ( their int representation) back to the local animal inventory
+# restoring the initial state
+func restore_animal_from_placed_animals(placed_animals:Dictionary):
+	for animal in placed_animals:
+		# adding the "removed" amount of animals back to the original position
+		start_animals[animal] += 1
+
+# takes local inventory, duplicates it and replace 
+# singleton animal_inventory with it
+func set_global_animal_inventory(animal_inventory:Dictionary):
+	SingletonPlayer.set_item_inventory(animal_inventory.duplicate(true))
+
+#updates the ui-counters for the inventory
+func update_inventory():
+	inventory_deer.text = str(start_animals[Animal.AnimalType.DEER])
+	inventory_snake.text = str(start_animals[Animal.AnimalType.SNAKE])
+	inventory_spider.text = str(start_animals[Animal.AnimalType.SPIDER])
+	inventory_squirrel.text = str(start_animals[Animal.AnimalType.SQUIRREL])
 
 #Down here we handle all the signal. There will be many, but most of them don't do much.
 func _on_drag_grid_need_grid():

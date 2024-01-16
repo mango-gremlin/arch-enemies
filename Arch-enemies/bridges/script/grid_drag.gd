@@ -12,9 +12,18 @@ signal need_grid
 signal update_grid(pos, data)
 signal is_dragging
 
+# required to load and interact with scene-specific inventory
+# this acts as reference to the animal inventory stored in "GRID"
+@onready var animal_inventory_reference:Dictionary
+@export var Grid_node_reference:TileMap
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	# take animal inventory from parent-Grid tilemap
+	animal_inventory_reference = Grid_node_reference.start_animals
+	print("inv in grid drag")
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -22,22 +31,26 @@ func _process(delta):
 
 func _get_drag_data(at_position):
 	if Global.drag_mode:
-		#When we try to drag something we first need to know what the grid looks like
+		# First we need to check if we have some animals of the requested type left in the inventory
+		var animal = tooltip_text 
+		# Due to we use the tooltip we need to check if the string is valid... this is not secure for typos!
+		var animal_type:Animal.AnimalType = Animal.string_to_type(animal)
+		if animal != "" and Grid_node_reference.start_animals[animal_type] <= 0:
+			return
+		
+		# When we try to drag something we first need to know what the grid looks like
 		need_grid.emit()
 		#Then we tell the grid that we are currently dragging something
 		#This allows us to see FORBIDDEN and ALLOWED zones
 		is_dragging.emit()
 		
-		#We create the data we want to transmit
+		# We create the data we want to transmit
 		var data = {}
-		#And the preview that is shown as we move the cursor
+		# And the preview that is shown as we move the cursor
 		var preview = DRAGPREVIEW.instantiate()
 		
-		#These are the two things we save in the data:
-		#1) The texture of the TRect
+		# The texture of the TRect
 		var sprite = texture
-		#2) And the Tooltip, which identifies the animal
-		var animal = tooltip_text 
 		
 		#This adds a control node that allows us to fix the position of the preview
 		var c = Control.new()
@@ -63,10 +76,10 @@ func _get_drag_data(at_position):
 					preview.set_size(Vector2(10, 20))
 					preview.tooltip_text = "SQUIRREL"
 		
-		c.set_global_position(Vector2i(0, 0))
-		
-		add_child(c)
-		
+			c.set_global_position(Vector2i(0, 0))
+			#this must be in the if case, otherwise we instantiate the drag_grid
+			add_child(c)
+
 		data["sprite"] = sprite
 		data["animal"] = animal
 		return data
@@ -169,9 +182,12 @@ func is_squirrel_allowed(pos):
 		#Is there something to attach the animal to?
 		if(pos_Type == ENTITY_TYPES.ALLOWED or pos_Type == ENTITY_TYPES.SIDE):
 			is_allowed = true
-		#Is there space for the animal?	
-		if(pos_Type == ENTITY_TYPES.FORBIDDEN or pos_Type == ENTITY_TYPES.GROUND or
-			pos_Type == ENTITY_TYPES.WATER or pos_Type == ENTITY_TYPES.ANIMAL):
+		#Is there space for the animal?
+		if(pos_Type == ENTITY_TYPES.FORBIDDEN 
+			or pos_Type == ENTITY_TYPES.GROUND 
+			or pos_Type == ENTITY_TYPES.WATER 
+			or pos_Type == ENTITY_TYPES.ANIMAL 
+			or pos_Type == ENTITY_TYPES.SHALLOW):
 			is_free = false
 	return is_allowed and is_free
 	
