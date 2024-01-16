@@ -12,9 +12,18 @@ signal need_grid
 signal update_grid(pos, data)
 signal is_dragging
 
+# required to load and interact with scene-specific inventory
+# this acts as reference to the animal inventory stored in "GRID"
+@onready var animal_inventory_reference:Dictionary
+@export var Grid_node_reference:TileMap
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	# take animal inventory from parent-Grid tilemap
+	animal_inventory_reference = Grid_node_reference.start_animals
+	print("inv in grid drag")
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -38,12 +47,16 @@ func _get_drag_data(at_position):
 		var sprite = texture
 		#2) And the Tooltip, which identifies the animal
 		var animal = tooltip_text 
+		#due to we use the tooltip we need to check if the string is valid... this is not secure for typos!
+		var animal_type:Animal.AnimalType = Animal.string_to_type(animal)
+		if animal != "" and Grid_node_reference.start_animals[animal_type] <= 0:
+			return
 		
 		#This adds a control node that allows us to fix the position of the preview
 		var c = Control.new()
 		c.add_child(preview)
 		
-		if(sprite != null):
+		if(sprite != null):			
 			#If we are not trying to drag the TRect that represent the grid we create the preview
 			preview.expand = true
 			preview.texture = sprite
@@ -63,10 +76,10 @@ func _get_drag_data(at_position):
 					preview.set_size(Vector2(10, 20))
 					preview.tooltip_text = "SQUIRREL"
 		
-		c.set_global_position(Vector2i(0, 0))
-		
-		add_child(c)
-		
+			c.set_global_position(Vector2i(0, 0))
+			#this must be in the if case, otherwise we instantiate the drag_grid
+			add_child(c)
+
 		data["sprite"] = sprite
 		data["animal"] = animal
 		return data

@@ -777,7 +777,7 @@ position = Vector2(192, 108)
 zoom = Vector2(3, 3)
 script = ExtResource("1_vkapa")
 
-[node name="Grid" type="TileMap" parent="."]
+[node name="Grid" type="TileMap" parent="." node_paths=PackedStringArray("inventory_deer", "inventory_snake", "inventory_spider", "inventory_squirrel")]
 tile_set = SubResource("TileSet_ne4ig")
 format = 2
 layer_0/name = "level"
@@ -785,6 +785,10 @@ layer_0/tile_data = PackedInt32Array(851968, 196610, 0, 851969, 65538, 0, 851970
 layer_1/name = "guidance"
 layer_1/tile_data = PackedInt32Array()
 script = ExtResource("1_xtvvi")
+inventory_deer = NodePath("animal_inventory_counter/deer")
+inventory_snake = NodePath("animal_inventory_counter/snake")
+inventory_spider = NodePath("animal_inventory_counter/spider")
+inventory_squirrel = NodePath("animal_inventory_counter/squirrel")
 
 [node name="Grid_Visualizer" type="Node2D" parent="Grid"]
 script = ExtResource("2_d8ovy")
@@ -795,12 +799,13 @@ anchors_preset = 0
 offset_right = 390.0
 offset_bottom = 220.0
 
-[node name="Drag_Grid" type="TextureRect" parent="Grid/Control"]
+[node name="Drag_Grid" type="TextureRect" parent="Grid/Control" node_paths=PackedStringArray("Grid_node_reference")]
 custom_minimum_size = Vector2(390, 220)
 layout_mode = 1
 offset_right = 390.0
 offset_bottom = 220.0
 script = ExtResource("12_re1q8")
+Grid_node_reference = NodePath("../..")
 metadata/_edit_use_anchors_ = true
 
 [node name="Animal_Inventory" type="HBoxContainer" parent="Grid/Control"]
@@ -808,33 +813,37 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Deer_Item" type="TextureRect" parent="Grid/Control/Animal_Inventory"]
+[node name="Deer_Item" type="TextureRect" parent="Grid/Control/Animal_Inventory" node_paths=PackedStringArray("Grid_node_reference")]
 layout_mode = 2
 tooltip_text = "DEER"
 texture = ExtResource("3_x44oq")
 stretch_mode = 3
 script = ExtResource("12_re1q8")
+Grid_node_reference = NodePath("../../..")
 
-[node name="Snake_Item" type="TextureRect" parent="Grid/Control/Animal_Inventory"]
+[node name="Snake_Item" type="TextureRect" parent="Grid/Control/Animal_Inventory" node_paths=PackedStringArray("Grid_node_reference")]
 layout_mode = 2
 tooltip_text = "SNAKE"
 texture = ExtResource("7_jp1m1")
 stretch_mode = 3
 script = ExtResource("12_re1q8")
+Grid_node_reference = NodePath("../../..")
 
-[node name="Spider_Item" type="TextureRect" parent="Grid/Control/Animal_Inventory"]
+[node name="Spider_Item" type="TextureRect" parent="Grid/Control/Animal_Inventory" node_paths=PackedStringArray("Grid_node_reference")]
 layout_mode = 2
 tooltip_text = "SPIDER"
 texture = ExtResource("8_rtjqf")
 stretch_mode = 3
 script = ExtResource("12_re1q8")
+Grid_node_reference = NodePath("../../..")
 
-[node name="Squirrel_Item" type="TextureRect" parent="Grid/Control/Animal_Inventory"]
+[node name="Squirrel_Item" type="TextureRect" parent="Grid/Control/Animal_Inventory" node_paths=PackedStringArray("Grid_node_reference")]
 layout_mode = 2
 tooltip_text = "SQUIRREL"
 texture = ExtResource("11_a366g")
 stretch_mode = 3
 script = ExtResource("12_re1q8")
+Grid_node_reference = NodePath("../../..")
 
 [node name="Drag_or_Fox" type="CheckButton" parent="Grid/Control"]
 layout_mode = 0
@@ -883,6 +892,27 @@ size_flags_vertical = 4
 
 [node name="goal" parent="Grid" instance=ExtResource("16_f3lv2")]
 position = Vector2(340, 95)
+
+[node name="animal_inventory_counter" type="HBoxContainer" parent="Grid"]
+offset_top = 38.0
+offset_right = 52.0
+offset_bottom = 61.0
+
+[node name="deer" type="Label" parent="Grid/animal_inventory_counter"]
+layout_mode = 2
+text = "0"
+
+[node name="snake" type="Label" parent="Grid/animal_inventory_counter"]
+layout_mode = 2
+text = "0"
+
+[node name="spider" type="Label" parent="Grid/animal_inventory_counter"]
+layout_mode = 2
+text = "0"
+
+[node name="squirrel" type="Label" parent="Grid/animal_inventory_counter"]
+layout_mode = 2
+text = "0"
 
 [node name="parallax_background" parent="." instance=ExtResource("18_uekha")]
 
