@@ -13,11 +13,10 @@ func _on_continue_button_pressed():
 	# Update global inventory
 	level_solved.emit()
 	# Add bridge edge to Singleton, I used the values from Singleton.bridge_level_scenes
-	print("Build bridges for finish: ", SingletonPlayer.bridges_built)
+	#print("Build bridges for finish: ", SingletonPlayer.bridges_built)
 	SingletonPlayer.add_bridge_connection(get_bridge_edge())
-	print("Build bridges after finish: ", SingletonPlayer.bridges_built)
+	#print("Build bridges after finish: ", SingletonPlayer.bridges_built)
 	get_tree().change_scene_to_file("res://overworld/main_scene_overworld.tscn")
-	print("lets go to the overworld now")
 
 func get_bridge_edge():
 	var levels = SingletonPlayer.bridge_level_scenes
