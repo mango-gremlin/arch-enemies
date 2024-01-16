@@ -204,7 +204,7 @@ func check_item_condition() -> bool:
 # Item of Type "ItemType.NONE" 
 # Animal of Type "Animal.AnimalType.NONE"
 # BridgeEdge of Type "BridgeEdge(0,0) with BridgeLevelPathState.NONE
-func request_reward(): 
+func request_reward() -> Dictionary: 
 	# 
 	if not quest_resolved: 
 		# check whether we satisfy the conditions
@@ -229,7 +229,10 @@ func request_reward():
 					}
 					return animal_reward
 				NPC_interaction.QuestReward.BRIDGE:
-					return reward_bridge
+					var bridge_reward: Dictionary = {
+						"bridge_object":  reward_bridge
+					}
+					return bridge_reward
 						
 	# FIXME improve readability 
 	# FIXME reduce complexity of this simple statement
@@ -250,7 +253,13 @@ func request_reward():
 		NPC_interaction.QuestReward.BRIDGE:
 			var unsolved_edge:SingletonPlayer.BridgeEdge= SingletonPlayer.BridgeEdge.new(0,0)
 			unsolved_edge.set_availability(SingletonPlayer.BridgeLevelPathState.NONE)
-			return unsolved_edge
+			var unsolved_bridge: Dictionary = {
+				"bridge_object":  unsolved_edge
+				}
+			return unsolved_bridge
+			#return unsolved_edge
+	#FIXME never reached
+	return {}
 
 # constructs string representation of current quest 
 # returns this String
