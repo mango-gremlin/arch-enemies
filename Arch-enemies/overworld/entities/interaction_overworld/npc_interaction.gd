@@ -15,6 +15,7 @@ extends Node2D
 # quest-reward 
 @export var quest_reward:NPC_interaction.QuestReward = NPC_interaction.QuestReward.NONE
 @export var reward_item:Item.ItemType = Item.ItemType.NONE
+@export var reward_amount:int = 1
 
 # for creating bridge-edge that will be solved if quest done
 @export var reward_edge_start:int
@@ -51,7 +52,7 @@ func _ready():
 			required_edge_start,
 			required_edge_dest)
 		# setting reward_parameters
-		npc_object.set_quest_reward(quest_reward,reward_item,npc_animal_type,reward_bridge)
+		npc_object.set_quest_reward(quest_reward,reward_item,npc_animal_type,reward_amount,reward_bridge)
 		
 	# adding npc_object to list of globally known npcs 
 	SingletonPlayer.add_npc_instance(npc_id,npc_object)

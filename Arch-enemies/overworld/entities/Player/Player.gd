@@ -149,11 +149,10 @@ func execute_interaction():
 			# -> dialogue has not been finished yet! 
 			if not (dialogue_done and  quest_done):
 				SingletonPlayer.enter_dialogue(npc_id)
-				return
 		
 			# dialogue was finished already
 			#SingletonPlayer.remove_quest_string(npc_id)
-			set_interactionLabel(interaction_data["dialogue"])
+			#set_interactionLabel(interaction_data["dialogue"])
 			
 			if not SingletonPlayer.has_dialogue(npc_id):
 				set_interactionLabel("NO DIALOGUE")
@@ -163,12 +162,23 @@ func execute_interaction():
 			# only necessary if NPC holds a quest
 			var reward_type:NPC_interaction.QuestReward = interaction_data["reward_type"]
 			var received_reward = interaction_data["reward"]
+			# FIXME this can be a dictionary for QUESTREWARD == ANIMAL or ITEM
+			print("taking reward from animal")
 			match reward_type:
 				NPC_interaction.QuestReward.ANIMAL: 
 					# adding animal to inventory of player 
-					SingletonPlayer.add_to_animal_inventory(received_reward)
+					# extracting information from Dictionary received
+					print("adding animal to inventory ")
+					var extracted_type:Animal.AnimalType = received_reward["type"]
+					var received_amount:int = received_reward["amount"]
+					print("amount" + str(received_amount) + "type " + Animal.type_to_string(extracted_type))
+					SingletonPlayer.add_to_animal_inventory(extracted_type,received_amount)
 				NPC_interaction.QuestReward.ITEM: 
-					SingletonPlayer.add_to_inventory(received_reward)
+					print("adding item to inventory ")
+					var extracted_type:Item.ItemType = received_reward["type"]
+					var received_amount:int = received_reward["amount"]
+					SingletonPlayer.add_to_inventory(extracted_type,received_amount)
+					#SingletonPlayer.add_to_inventory(received_reward)
 				NPC_interaction.QuestReward.BRIDGE:
 					# received a bridge, adding it to connected bridges
 					var received_bridge:SingletonPlayer.BridgeEdge = received_reward

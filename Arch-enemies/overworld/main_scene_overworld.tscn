@@ -49,6 +49,8 @@ npc_id = 1
 quest_type = 1
 required_edge_dest = 1
 quest_reward = 1
+reward_item = 2
+reward_amount = 4
 
 [node name="NpcInteraction2" parent="." instance=ExtResource("7_33ud0")]
 position = Vector2(235, 143)

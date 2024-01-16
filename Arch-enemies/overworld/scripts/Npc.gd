@@ -42,6 +42,8 @@ var quest_reward:QuestReward = QuestReward.NONE
 var reward_item:Item.ItemType = Item.ItemType.NONE
 var reward_bridge:SingletonPlayer.BridgeEdge
 var reward_animal:Animal.AnimalType = npc_animal_type
+# amount of rewards for either Animals or Items
+var reward_amount:int = 1
 
 # --- / 
 # -- / Quest specific properties
@@ -138,14 +140,17 @@ func set_quest_reward(
 	received_quest_reward:QuestReward,
 	received_reward_item:Item.ItemType,
 	received_reward_animal:Animal.AnimalType,
+	received_reward_amount:int,
 	received_reward_bridge:SingletonPlayer.BridgeEdge
 	):
 	quest_reward = received_quest_reward
 	match quest_reward: 
 		QuestReward.ITEM:
 			reward_item = received_reward_item
+			reward_amount = received_reward_amount
 		QuestReward.ANIMAL:
 			reward_animal = received_reward_animal 
+			reward_amount = received_reward_amount
 		QuestReward.BRIDGE:
 			# adding bridgeEdge that will be connected 
 			reward_bridge = received_reward_bridge
@@ -211,9 +216,18 @@ func request_reward():
 			quest_resolved = true 
 			match quest_reward:
 				NPC_interaction.QuestReward.ITEM:
-					return reward_item
+					var item_reward: Dictionary = {
+						"type": reward_item,
+						"amount": reward_amount
+					}
+					return item_reward
 				NPC_interaction.QuestReward.ANIMAL:
-					return npc_animal_type
+					# FIXME creates an invariant for received interactions!
+					var animal_reward: Dictionary = {
+						"type": npc_animal_type,
+						"amount": reward_amount
+					}
+					return animal_reward
 				NPC_interaction.QuestReward.BRIDGE:
 					return reward_bridge
 						
@@ -222,9 +236,17 @@ func request_reward():
 	print("requirements not met!")
 	match quest_reward:
 		NPC_interaction.QuestReward.ITEM:
-			return Item.ItemType.NONE
+			var item_reward: Dictionary = {
+						"type": Item.ItemType.NONE,
+						"amount": 0
+					}
+			return item_reward
 		NPC_interaction.QuestReward.ANIMAL:
-			return Animal.AnimalType.NONE
+			var animal_reward: Dictionary = {
+						"type": Animal.AnimalType.NONE,
+						"amount": 0
+					}
+			return animal_reward
 		NPC_interaction.QuestReward.BRIDGE:
 			var unsolved_edge:SingletonPlayer.BridgeEdge= SingletonPlayer.BridgeEdge.new(0,0)
 			unsolved_edge.set_availability(SingletonPlayer.BridgeLevelPathState.NONE)
