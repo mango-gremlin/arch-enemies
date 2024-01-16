@@ -56,8 +56,10 @@ func load_config():
 			
 			var new_inventory: Dictionary = generate_inventory(node_data["inventory"])
 			SingletonPlayer.set_item_inventory(new_inventory)
-			var animal_inventory:Dictionary = Animal.init_animal_inventory()
-			SingletonPlayer.set_animal_inventory(animal_inventory)
+			
+			# FIXME only uncomment once we have implemented saving the animal inventory too
+			#var animal_inventory:Dictionary = Animal.init_animal_inventory()
+			#SingletonPlayer.set_animal_inventory(animal_inventory)
 			#player_object.set_inventory(new_inventory)
 			
 			
