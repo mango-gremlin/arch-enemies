@@ -10,7 +10,7 @@ func _init():
 	pass
 
 func content() -> String:
-	return "No quest found"
+	return "I will not join you >:("
 
 func image_src() -> String:
 	return "res://overworld/dialogues/test_dialogue/red.png"

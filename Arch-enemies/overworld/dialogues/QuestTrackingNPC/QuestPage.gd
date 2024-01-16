@@ -12,6 +12,8 @@ var max_page: int
 # -- / class constructor 
 func _init(_quest:String, _current_page:int, _max_page:int):
 	quest = _quest
+	#if _quest_solved:
+		#quest = quest + "- solved"
 	current_page = _current_page
 	max_page = _max_page
 
