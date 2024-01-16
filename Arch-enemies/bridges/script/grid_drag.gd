@@ -182,9 +182,12 @@ func is_squirrel_allowed(pos):
 		#Is there something to attach the animal to?
 		if(pos_Type == ENTITY_TYPES.ALLOWED or pos_Type == ENTITY_TYPES.SIDE):
 			is_allowed = true
-		#Is there space for the animal?	
-		if(pos_Type == ENTITY_TYPES.FORBIDDEN or pos_Type == ENTITY_TYPES.GROUND or
-			pos_Type == ENTITY_TYPES.WATER or pos_Type == ENTITY_TYPES.ANIMAL):
+		#Is there space for the animal?
+		if(pos_Type == ENTITY_TYPES.FORBIDDEN 
+		or pos_Type == ENTITY_TYPES.GROUND 
+		or pos_Type == ENTITY_TYPES.WATER 
+		or pos_Type == ENTITY_TYPES.ANIMAL 
+		or pos_Type == ENTITY_TYPES.SHALLOW):
 			is_free = false
 	return is_allowed and is_free
 	
