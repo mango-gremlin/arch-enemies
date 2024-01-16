@@ -419,6 +419,8 @@ func _process(delta):
 	if Input.is_action_just_pressed("open_menu"):
 		var pause_menu = get_parent().find_child("pause_menu")
 		pause_menu.visible = not pause_menu.visible
+		# menu_mode is active when pause_menu is visible
+		Global.menu_mode = pause_menu.visible
 
 # --- / 
 # -- / inventory management
