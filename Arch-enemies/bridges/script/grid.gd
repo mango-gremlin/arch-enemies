@@ -372,6 +372,11 @@ func tile_update(pos, current, next):
 func _process(delta):
 	if(Global.currently_dragging and Input.is_action_just_released("click")):
 		make_invisible()
+		
+	# pressing "esc" opens the pause-menu
+	if Input.is_action_just_pressed("open_menu"):
+		var pause_menu = get_parent().find_child("pause_menu")
+		pause_menu.visible = not pause_menu.visible
 
 #Down here we handle all the signal. There will be many, but most of them don't do much.
 func _on_drag_grid_need_grid():
