@@ -150,7 +150,8 @@ func obtain_bridge_scene(requested_edge:BridgeEdge) -> BridgeEdge:
 
 # denotes quests that are actively tracked ( unresolved so far ) 
 # gets filled with the string-representation of a quest!
-var quest_string_dict:Dictionary = {}
+# key -> npc_id | value -> String
+var active_tracked_quests:Dictionary = {}
 
 # takes id of npc and adds its quest to the list
 # emits signal to update ui afterwards
@@ -161,14 +162,14 @@ func add_quest_string(npc_id:int):
 		return 
 	var npc_object:NPC_interaction = obtain_npc_object(npc_id)
 	var quest_id = npc_object.obtain_quest_id()
-	if quest_string_dict.has(quest_id):
+	if active_tracked_quests.has(quest_id):
 		return
 		# quest not found in dict yet
 		# adding quest if it was not found already in dictionary
 	if npc_object.has_quest():
 		var stringified_quest:String = npc_object.stringify_quest()
-		quest_string_dict[quest_id] = stringified_quest
-		updated_quest_list.emit(quest_string_dict)
+		active_tracked_quests[quest_id] = stringified_quest
+		updated_quest_list.emit(active_tracked_quests)
 
 # takes id of npc and removes its entry in the list of quests
 # only does so, if quest was resolved, changes nothing otherwise
@@ -177,8 +178,8 @@ func remove_quest_string(npc_id:int):
 	var quest_id = npc_object.obtain_quest_id()
 	if npc_object.check_quest_condition():
 		# removing entry as it was resolved
-		quest_string_dict.erase(quest_id)
-		updated_quest_list.emit(quest_string_dict)
+		active_tracked_quests.erase(quest_id)
+		updated_quest_list.emit(active_tracked_quests)
 
 # denotes all NPCs available in current overworld 
 # key ==> value ; npcid ==> NPC Object
@@ -213,8 +214,10 @@ func obtain_all_quest_states() -> Dictionary:
 	for npc in dictionary_npc:
 		# avoiding calling npc that calls this function
 		# resolves possible recursion
-		if not npc == QUEST_TRACK_NPC_ID:
-			var npc_object:NPC_interaction = dictionary_npc[npc]
+		if npc == QUEST_TRACK_NPC_ID:
+			continue
+		var npc_object:NPC_interaction = dictionary_npc[npc]
+		if npc_object.has_quest():
 			var quest_string:String = npc_object.stringify_quest()
 			var quest_state:bool = npc_object.check_quest_condition()
 			quest_states[quest_string] = quest_state
@@ -335,11 +338,17 @@ func has_dialogue(npc_id:int) -> bool:
 	return npc_dialogues.has(npc_id)
 	
 # takes npc_id, enters the dialogue if one is linked to the current npc_id
-func enter_dialogue(npc_id:int):
+func prepare_dialogue(npc_id:int):
+	# FIXME this might be improved, as this is only useful for a single entity right now 
 	if not has_dialogue(npc_id):
 		print("WARNING: TRIED TO FIND AN NON EXISTING DIALOGUE FOR NPC", npc_id)
 		return
-	
+	# updates dialogue for quest-tracking npc
+	if npc_id == QUEST_TRACK_NPC_ID:
+					## updating its state!
+					var dialogue_object = obtain_dialogue(npc_id)
+					var active_quests:Dictionary = active_tracked_quests
+					dialogue_object.update_dialogue(active_quests)
 	var data : Dialogue_Data = npc_dialogues[npc_id]
 	dialogue.enter_dialogue(data, npc_id)
 

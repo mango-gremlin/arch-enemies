@@ -148,7 +148,7 @@ func execute_interaction():
 			# -> quest is undone
 			# -> dialogue has not been finished yet! 
 			if not (dialogue_done and  quest_done):
-				SingletonPlayer.enter_dialogue(npc_id)
+				SingletonPlayer.prepare_dialogue(npc_id)
 		
 			# dialogue was finished already
 			#SingletonPlayer.remove_quest_string(npc_id)
