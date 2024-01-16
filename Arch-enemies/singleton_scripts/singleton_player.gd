@@ -43,11 +43,11 @@ func get_animal_inventory() -> Dictionary:
 
 # takes new item and updates amount stored in inventory 
 # if ItemType is "None" nothing will be changed 
-func add_to_inventory(new_item:Item.ItemType):
+func add_to_inventory(new_item:Item.ItemType,quantity:int=1):
 	if new_item != Item.ItemType.NONE:
 		# we can verify that every item is constantly available!
 		var selected_item = item_inventory[new_item]
-		item_inventory[new_item] = selected_item + 1 
+		item_inventory[new_item] = selected_item + quantity
 		#selected_item.increase_amount()
 		# emit signal to update Ui
 		updated_item_inventory.emit(item_inventory)
@@ -91,10 +91,10 @@ func use_item(requested_item:Item.ItemType):
 # --- / 
 # -- / animal inventory
 
-func add_to_animal_inventory(new_animal:Animal.AnimalType): 
+func add_to_animal_inventory(new_animal:Animal.AnimalType, quantity:int=1): 
 	if new_animal != Animal.AnimalType.NONE:
 		# valid entry given 
-		animal_inventory[new_animal] += 1
+		animal_inventory[new_animal] += quantity
 		#selected_animal.increase_amount
 		updated_animal_inventory.emit(animal_inventory)
 
