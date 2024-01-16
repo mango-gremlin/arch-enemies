@@ -30,7 +30,7 @@ func _process(delta):
 	pass
 
 func _get_drag_data(at_position):
-	if Global.drag_mode:
+	if Global.drag_mode and not Global.menu_mode:
 		#When we try to drag something we first need to know what the grid looks like
 		need_grid.emit()
 		#Then we tell the grid that we are currently dragging something

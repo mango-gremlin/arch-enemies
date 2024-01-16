@@ -25,3 +25,12 @@ func get_animal_type(body:StaticBody2D):
 	elif body.is_in_group("spider"):
 		return "spider"
 	return ""
+
+# change the visibility of all ui elements in bridge scene
+func change_ui_visibility(visibility:bool, grid:Node):
+	grid.find_child("Drag_or_Fox").visible = visibility
+	grid.find_child("Reset").visible = visibility
+	grid.find_child("Last_State").visible = visibility
+	grid.find_child("Animal_Inventory").visible = visibility
+	grid.find_child("animal_inventory_counter").visible = visibility
+	grid.find_child("Player").visible = visibility

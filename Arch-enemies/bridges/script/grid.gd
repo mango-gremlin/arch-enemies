@@ -418,10 +418,14 @@ func _process(delta):
 	# pressing "esc" opens the pause-menu
 	if Input.is_action_just_pressed("open_menu"):
 		var pause_menu = get_parent().find_child("pause_menu")
-		pause_menu.visible = not pause_menu.visible
+		var new_visibility = not pause_menu.visible
+		pause_menu.visible = new_visibility
 		# menu_mode is active when pause_menu is visible
-		Global.menu_mode = pause_menu.visible
+		Global.menu_mode = new_visibility
+		Global.change_ui_visibility(not new_visibility, self)
 
+
+	
 # --- / 
 # -- / inventory management
 
