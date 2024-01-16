@@ -416,7 +416,7 @@ func _process(delta):
 		make_invisible()
 		
 	# pressing "esc" opens the pause-menu
-	if Input.is_action_just_pressed("open_menu"):
+	if Input.is_action_just_pressed("open_menu") and not Global.goal_reached:
 		var pause_menu = get_parent().find_child("pause_menu")
 		var new_visibility = not pause_menu.visible
 		pause_menu.visible = new_visibility
