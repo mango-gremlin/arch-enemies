@@ -328,7 +328,11 @@ func save_profile_configuration():
 # register here your dialogue, key is npc id 
 @onready var npc_dialogues: Dictionary = {
 	0 : QuestTrackNPC.new(),
-	1 : ExampleData.new()
+	# FIXME Dummy until dialogues were iplemented 
+	1 : ExampleData.new(),
+	2 : ExampleData.new(),
+	3 : ExampleData.new(),
+	4 : ExampleData.new()
 }
 
 @onready var dialogue: Dialogue = Dialogue.new()
@@ -361,6 +365,9 @@ func check_dialogue_finished(npc_id:int) -> bool:
 		return false
 		
 	return npc_dialogues[npc_id].finished
+
+func obtain_dialogue(npc_id:int):
+	return npc_dialogues[npc_id]
 
 # returns true when the player is currently in dialogue
 func navigation_in_dialogue() -> bool:
