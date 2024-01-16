@@ -1,9 +1,10 @@
-[gd_scene load_steps=42 format=3 uid="uid://dndu4pg1i3tlf"]
+[gd_scene load_steps=46 format=3 uid="uid://dndu4pg1i3tlf"]
 
 [ext_resource type="Script" path="res://overworld/entities/Player/Player.gd" id="1_lcx6v"]
 [ext_resource type="Texture2D" uid="uid://802nqkliaru4" path="res://assets/art/characters/fox.png" id="2_tenk7"]
 [ext_resource type="Texture2D" uid="uid://d0ottbauyg4ts" path="res://assets/art/characters/fox_idle_sheet_front.png" id="3_korwh"]
 [ext_resource type="Script" path="res://overworld/entities/Player/ZoomCamera.gd" id="3_y8j37"]
+[ext_resource type="Texture2D" uid="uid://bedc8xm3vu2st" path="res://assets/art/characters/fox_walking_sheet_front.png" id="4_02vkq"]
 [ext_resource type="Texture2D" uid="uid://dx3f23bd68cju" path="res://assets/art/characters/fox_idle_sheet.png" id="4_n50mi"]
 [ext_resource type="Texture2D" uid="uid://boo3otjifsbgu" path="res://assets/art/characters/fox_walking_sheet.png" id="5_j40oe"]
 
@@ -50,9 +51,21 @@ region = Rect2(112, 0, 16, 34)
 atlas = ExtResource("3_korwh")
 region = Rect2(128, 0, 16, 34)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_o2ebo"]
-atlas = ExtResource("2_tenk7")
-region = Rect2(0, 0, 40, 40)
+[sub_resource type="AtlasTexture" id="AtlasTexture_1xs10"]
+atlas = ExtResource("4_02vkq")
+region = Rect2(0, 0, 16, 39)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jfgaf"]
+atlas = ExtResource("4_02vkq")
+region = Rect2(16, 0, 16, 39)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k07yy"]
+atlas = ExtResource("4_02vkq")
+region = Rect2(32, 0, 16, 39)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xfl38"]
+atlas = ExtResource("4_02vkq")
+region = Rect2(48, 0, 16, 39)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jiuu2"]
 atlas = ExtResource("4_n50mi")
@@ -182,7 +195,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_o2ebo")
+"texture": SubResource("AtlasTexture_1xs10")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jfgaf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k07yy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xfl38")
 }],
 "loop": true,
 "name": &"front_walk",
@@ -279,9 +301,9 @@ y_sort_enabled = true
 position = Vector2(-5.04871e-29, -3)
 scale = Vector2(0.8, 0.8)
 sprite_frames = SubResource("SpriteFrames_q5uuj")
-animation = &"front_idle"
-frame = 3
-frame_progress = 0.588704
+animation = &"front_walk"
+frame = 1
+frame_progress = 0.563688
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(-1, -3)
