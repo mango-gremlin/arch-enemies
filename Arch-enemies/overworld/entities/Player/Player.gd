@@ -10,7 +10,10 @@ extends CharacterBody2D
 @onready var anim:AnimatedSprite2D = $AnimatedSprite2D
 
 # for correct animation: save last direction walked in, and if sprite was flipped
-@onready var current_direction = "side"
+# enum for animation types
+enum DIRECTION {SIDE, FRONT, BACK}
+
+@onready var current_direction = DIRECTION.SIDE
 @onready var h_flipped = false
 
 # --- / 
@@ -56,23 +59,23 @@ func player_movement(delta):
 	if Input.is_action_pressed("move_up"):
 		velocity.y -= SPEED
 		anim.play("back_walk")
-		current_direction = "back"
+		current_direction = DIRECTION.BACK
 	elif Input.is_action_pressed("move_down"):
 		velocity.y += SPEED
 		anim.play("front_walk")
-		current_direction = "front"
+		current_direction = DIRECTION.FRONT
 	elif Input.is_action_pressed("move_left"):
 		velocity.x -= SPEED
 		h_flipped = true
 		anim.play("side_walk")
 		anim.flip_h = h_flipped
-		current_direction = "side"
+		current_direction = DIRECTION.SIDE
 	elif Input.is_action_pressed("move_right"):
 		velocity.x += SPEED
 		h_flipped = false
 		anim.play("side_walk")
 		anim.flip_h = h_flipped
-		current_direction = "side"
+		current_direction = DIRECTION.SIDE
 		
 	elif velocity == Vector2.ZERO:
 		player_idle_animation(delta)
@@ -83,15 +86,15 @@ func player_movement(delta):
 
 func player_idle_animation(delta):
 	match current_direction:
-		"side":
+		DIRECTION.SIDE:
 			anim.flip_h = h_flipped
+			anim.play("side_idle")
+		DIRECTION.FRONT:
 			anim.play("front_idle")
-		"front":
-			anim.play("front_walk")
-		"back":
+		DIRECTION.BACK:
 			anim.play("back_walk")
 		_:
-			anim.play("front_idle")
+			anim.play("side_idle")
 
 # ----- 
 # --- structure interaction areas
