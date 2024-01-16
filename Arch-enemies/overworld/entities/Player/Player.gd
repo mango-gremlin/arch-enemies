@@ -79,8 +79,6 @@ func player_movement(delta):
 		
 	elif velocity == Vector2.ZERO:
 		player_idle_animation(delta)
-		#anim.flip_h = false
-		#anim.play("front_idle")
 	
 	move_and_collide(velocity * delta)
 
@@ -92,7 +90,7 @@ func player_idle_animation(delta):
 		DIRECTION.FRONT:
 			anim.play("front_idle")
 		DIRECTION.BACK:
-			anim.play("back_walk")
+			anim.play("back_idle")
 		_:
 			anim.play("side_idle")
 
