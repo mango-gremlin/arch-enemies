@@ -164,7 +164,7 @@ var islands_reachable:Array[bool]
 }
 
 # used for the (possibly) active bridge level to find out its own bridge egde
-@onready var current_bridge_edge
+@onready var current_bridge_edge:BridgeEdge
 
 # sets the current bridge edge while the player is entering a bridge level
 func set_current_bridge_edge(new_edge:BridgeEdge):
