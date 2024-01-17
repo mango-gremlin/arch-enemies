@@ -209,6 +209,7 @@ func enter_bridge_scene(bridgeEdge:SingletonPlayer.BridgeEdge):
 			# found matching path 
 			var path_to_scene:String = updated_bridge_edge.path
 			#exit_overworld()
+			SingletonPlayer.set_current_bridge_edge(bridgeEdge)
 			get_tree().change_scene_to_file(path_to_scene)
 
 # ---- 

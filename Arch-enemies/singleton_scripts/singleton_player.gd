@@ -163,6 +163,17 @@ var islands_reachable:Array[bool]
 	BridgeEdge.new(0,2): "res://bridges/scenes/Grid.tscn",
 }
 
+# used for the (possibly) active bridge level to find out its own bridge egde
+@onready var current_bridge_edge
+
+# sets the current bridge edge while the player is entering a bridge level
+func set_current_bridge_edge(new_edge:BridgeEdge):
+	current_bridge_edge = new_edge
+
+# retrieve the bridge edge of the currently active bridge level
+func get_current_bridge_edge() -> BridgeEdge:
+	return current_bridge_edge
+
 # queries dictionary of available bridge-level for requested level
 # returns modified bridge-edge with path set if found 
 # returns unchanged bridge-edge otherwise
