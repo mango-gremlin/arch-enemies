@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://cxj1q08s3i7i8"]
+[gd_scene load_steps=11 format=3 uid="uid://cxj1q08s3i7i8"]
 
 [ext_resource type="Script" path="res://bridges/script/goal_menu.gd" id="1_e6stn"]
 [ext_resource type="Texture2D" uid="uid://igj8k0askwfw" path="res://assets/art/ui_elements/button_normal.png" id="2_hkbr5"]
 [ext_resource type="Texture2D" uid="uid://ba3leqm154y12" path="res://assets/art/ui_elements/menu_container.png" id="2_i1o17"]
 [ext_resource type="Texture2D" uid="uid://dwu3b8hug0u0v" path="res://assets/art/ui_elements/button_hover.png" id="3_c848g"]
+[ext_resource type="FontFile" uid="uid://h728dpw3bhca" path="res://assets/art/ui_elements/yoster.ttf" id="4_n4o45"]
 [ext_resource type="Texture2D" uid="uid://leqswdio6xwd" path="res://bridges/assets/background/background_center_v4.png" id="5_upwcu"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_u44dl"]
@@ -55,10 +56,14 @@ offset_left = 166.0
 offset_top = 79.0
 offset_right = 231.0
 offset_bottom = 144.0
+alignment = 1
 
 [node name="Label" type="Label" parent="VBoxContainer"]
 z_index = 2
 layout_mode = 2
+theme_override_colors/font_color = Color(0.341176, 0.12549, 0.184314, 1)
+theme_override_fonts/font = ExtResource("4_n4o45")
+theme_override_font_sizes/font_size = 12
 text = "Success!"
 horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
@@ -66,7 +71,8 @@ metadata/_edit_use_anchors_ = true
 [node name="ContinueButton" type="Button" parent="VBoxContainer"]
 z_index = 2
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(0.341176, 0.12549, 0.184314, 1)
+theme_override_fonts/font = ExtResource("4_n4o45")
 theme_override_font_sizes/font_size = 12
 theme_override_styles/normal = SubResource("StyleBoxTexture_u44dl")
 theme_override_styles/hover = SubResource("StyleBoxTexture_3am42")
@@ -76,6 +82,8 @@ metadata/_edit_use_anchors_ = true
 [node name="RetryButton" type="Button" parent="VBoxContainer"]
 z_index = 2
 layout_mode = 2
+theme_override_colors/font_color = Color(0.341176, 0.12549, 0.184314, 1)
+theme_override_fonts/font = ExtResource("4_n4o45")
 theme_override_font_sizes/font_size = 12
 theme_override_styles/normal = SubResource("StyleBoxTexture_gcxwl")
 theme_override_styles/hover = SubResource("StyleBoxTexture_qvlci")
