@@ -235,7 +235,9 @@ func obtain_npc_object(npc_id) -> NPC_interaction:
 # false otherwise
 func obtain_npc_quest_state(npc_id) -> bool:
 	var npc_object:NPC_interaction = obtain_npc_object(npc_id)
-	var quest_state:bool = npc_object.check_quest_condition()
+	#var quest_state:bool = npc_object.check_quest_condition()
+	var quest_state:bool = npc_object.obtain_quest_state()
+	#print("current state of quest" + str(quest_state))
 	return quest_state
 
 # queries all quests and their state
@@ -365,7 +367,7 @@ func save_profile_configuration():
 	1 : ExampleData.new(),
 	2 : ExampleData.new(),
 	3 : ExampleData.new(),
-	4 : ExampleData.new()
+	4 : ExampleData.new(),
 }
 
 @onready var dialogue: Dialogue = Dialogue.new()

@@ -52,6 +52,7 @@ var required_item:Item.ItemType = Item.ItemType.NONE
 var required_bridge_edge:SingletonPlayer.BridgeEdge 
 var required_npc_id:int 
 
+# denotes whether its quest was solved or not
 var quest_resolved:bool = false 
 
 # --- / 
@@ -109,6 +110,9 @@ func has_quest() -> bool:
 	if quest_type != Quest.NONE:
 		return true
 	return false
+
+func obtain_quest_state() -> bool:
+	return quest_resolved
 
 # --- / 
 # -- / quest behavior / interaction 
@@ -179,7 +183,7 @@ func check_quest_condition() -> bool:
 					return true 
 				return false 
 			NPC_interaction.Quest.NPC:
-				if SingletonPlayer.check_dialogue_finished(npc_id):
+				if SingletonPlayer.check_dialogue_finished(required_npc_id):
 					# visited npc already 
 					return true 
 				return false 
