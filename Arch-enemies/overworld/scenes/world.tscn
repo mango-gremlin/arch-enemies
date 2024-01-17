@@ -473,3 +473,4 @@ layer_2/tile_data = PackedInt32Array(458760, 6, 0, -4, 65542, 0, 262147, 6, 3, 7
 
 [node name="Player" parent="TileMap" instance=ExtResource("5_bmga7")]
 position = Vector2(2, 1)
+SPEED = 100
