@@ -1,7 +1,7 @@
 extends Dialogue_Entry
 
 
-class_name Page3
+class_name NPC_TRACKER_PageQuestDone1
 
 
 
@@ -11,7 +11,7 @@ func _init():
 	pass
 
 func content() -> String:
-	return "And finally, the last page!"
+	return "Alt text for solved quest"
 
 func image_src() -> String:
 	return "res://overworld/dialogues/test_dialogue/green.png"
@@ -19,13 +19,12 @@ func image_src() -> String:
 	
 # "" element in array means here disable button X
 func btn_text() -> Array[String]:
-	return ["Previous", "Exit", ""]
+	return ["exit", "", ""]
 
 # btn button in from left to right, starting with 0
 func btn_action(btn: int):
-	if btn == 0:
-		SingletonPlayer.dialogue.select_page(1)
 			
-	if btn == 1:
+	if btn == 0:
+		print("executing button action")
 		SingletonPlayer.dialogue.finish_dialogue()
 		SingletonPlayer.exit_dialogue()

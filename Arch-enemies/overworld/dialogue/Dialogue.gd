@@ -19,7 +19,15 @@ func enter_dialogue(dialogue:Dialogue_Data, npc_id: int):
 	current_npc_id = npc_id
 	is_in_dialogue = true 
 	active_dialogue = dialogue
+	# adding quest to players UI
 	SingletonPlayer.add_quest_string(npc_id)
+	# WARNING
+	# Page 0 is reserved for DONE  QUEST DIALOGUE
+	if SingletonPlayer.obtain_npc_quest_state(npc_id):
+		# was done, showing alt text 
+		active_dialogue.select_quest_done_page(0)
+		return
+	
 	active_dialogue.select_page(0)
 
 func in_dialogue() -> bool:
@@ -28,6 +36,8 @@ func in_dialogue() -> bool:
 func exit_dialogue():
 	is_in_dialogue = false 
 	active_dialogue = null
+	if SingletonPlayer.check_dialogue_finished(current_npc_id):
+		SingletonPlayer.remove_quest_string(current_npc_id)
 	
 	# hide panel
 	npc_control_instance.hide()
@@ -40,10 +50,13 @@ func select_page(page: int):
 	active_dialogue.select_page(page)
 	
 func btn_action(btn: int):
+	print("calling button action in dialogue")
+	var quest_state = SingletonPlayer.obtain_npc_quest_state(current_npc_id)
 	if active_dialogue == null:
 		return
-	
-	active_dialogue.btn_action(btn)
+	print("activating dialogue")
+	print(btn)
+	active_dialogue.btn_action(btn,quest_state)
 	
 
 # THIS METHOD CHANGES THE DIALOGUE_DATA, SETS IT TO FINISHED, AS A CONSEQUENCE, IN THE NPC ITSELF, THE OBJECT IS GONNA CHANGE,

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cgfkelxiskcux"]
+[gd_scene load_steps=11 format=3 uid="uid://cgfkelxiskcux"]
 
 [ext_resource type="Script" path="res://overworld/overworld.gd" id="1_pwtu4"]
 [ext_resource type="PackedScene" uid="uid://p30p3o0e473c" path="res://overworld/scenes/world.tscn" id="3_xuy1h"]
@@ -9,9 +9,20 @@
 [ext_resource type="PackedScene" uid="uid://drn1loe1wknbq" path="res://overworld/entities/interaction_overworld/npc_interaction.tscn" id="7_33ud0"]
 [ext_resource type="Texture2D" uid="uid://08plwlb60wib" path="res://assets/art/bridge_dummy_failure.png" id="8_g5nw6"]
 [ext_resource type="PackedScene" uid="uid://bettv6p5clh6t" path="res://overworld/entities/interaction_overworld/template/horizontal_bridge_template.tscn" id="9_jpn0u"]
+[ext_resource type="PackedScene" uid="uid://bypchr8htkr4e" path="res://overworld/entities/interaction_overworld/template/vertical_bridge_template.tscn" id="10_5ad47"]
 
 [node name="maingame" type="Node"]
 script = ExtResource("1_pwtu4")
+
+[node name="npc_track_quests" parent="." instance=ExtResource("7_33ud0")]
+position = Vector2(-14, -27)
+npc_name = "blub"
+npc_animal_type = 1
+quest_type = 3
+required_item = 6
+quest_reward = 2
+reward_edge_start = 4
+reward_edge_dest = 1
 
 [node name="world" parent="." instance=ExtResource("3_xuy1h")]
 
@@ -26,7 +37,7 @@ item_dialogue_success = "you got an item!"
 item_dialogue_failure = "no item found"
 
 [node name="item_interaction2" parent="." instance=ExtResource("6_66i44")]
-position = Vector2(201, 24)
+position = Vector2(132, 46)
 item_type = 3
 item_dialogue_success = "item? "
 item_dialogue_failure = "item :("
@@ -34,16 +45,20 @@ item_dialogue_failure = "item :("
 [node name="NpcInteraction" parent="." instance=ExtResource("7_33ud0")]
 position = Vector2(185, 51)
 npc_name = "Rubert"
+npc_id = 1
 quest_type = 1
+required_edge_dest = 1
 quest_reward = 1
+reward_item = 2
+reward_amount = 4
 
 [node name="NpcInteraction2" parent="." instance=ExtResource("7_33ud0")]
 position = Vector2(235, 143)
 npc_name = "Evillyn"
-npc_id = 1
+npc_id = 2
 npc_animal_type = 3
 quest_type = 2
-required_npc_id = 3
+required_npc_id = 4
 quest_reward = 0
 reward_item = 1
 
@@ -59,7 +74,7 @@ position = Vector2(3, -12)
 [node name="NpcInteraction" parent="bridge_interaction3" instance=ExtResource("7_33ud0")]
 position = Vector2(38, 194)
 npc_name = "glnnn"
-npc_id = 2
+npc_id = 3
 npc_animal_type = 1
 quest_type = 0
 required_item = 2
@@ -75,15 +90,32 @@ text = "0->2 play!"
 [node name="NpcInteraction3" parent="." instance=ExtResource("7_33ud0")]
 position = Vector2(409, 335)
 npc_name = "esther"
-npc_id = 3
+npc_id = 4
 npc_animal_type = 3
 npc_special_sprite = ExtResource("8_g5nw6")
 
 [node name="BridgeTemplate" parent="." instance=ExtResource("9_jpn0u")]
 position = Vector2(250, 78)
 
+[node name="bridge_interaction" parent="BridgeTemplate/left_bridge_start" index="0"]
+dest_island_id = 1
+
 [node name="right_bridge_start" parent="BridgeTemplate" index="1"]
 position = Vector2(-33, 0)
+
+[node name="bridge_interaction2" parent="BridgeTemplate/right_bridge_start" index="0"]
+start_island_id = 1
+
+[node name="solved_with_all_quests" parent="." instance=ExtResource("10_5ad47")]
+position = Vector2(200, -2)
+
+[node name="bridge_interaction" parent="solved_with_all_quests/bridge_bottom" index="0"]
+start_island_id = 4
+dest_island_id = 1
+
+[node name="bridge_interaction2" parent="solved_with_all_quests/bridge_top" index="0"]
+start_island_id = 1
+dest_island_id = 4
 
 [editable path="bridge_interaction3"]
 [editable path="bridge_interaction3/interactionspot"]
@@ -92,3 +124,8 @@ position = Vector2(-33, 0)
 [editable path="BridgeTemplate/left_bridge_start/bridge_interaction/interactionspot"]
 [editable path="BridgeTemplate/right_bridge_start/bridge_interaction2"]
 [editable path="BridgeTemplate/right_bridge_start/bridge_interaction2/interactionspot"]
+[editable path="solved_with_all_quests"]
+[editable path="solved_with_all_quests/bridge_bottom/bridge_interaction"]
+[editable path="solved_with_all_quests/bridge_bottom/bridge_interaction/interactionspot"]
+[editable path="solved_with_all_quests/bridge_top/bridge_interaction2"]
+[editable path="solved_with_all_quests/bridge_top/bridge_interaction2/interactionspot"]
