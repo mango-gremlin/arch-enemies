@@ -7,7 +7,13 @@ class_name QuestTrackNPC
 # -- / class constructor 
 func _init():
 	print("initialize quest tracker")
-	entries = [NoQuestFoundPage.new()]
+	entries = [
+		NoQuestFoundPage.new()
+		]
+	# contains all entries that are displayed when the objective was solved 
+	quest_done_entries = [
+		NPC_TRACKER_PageQuestDone1.new()
+	]
 	
 	# test case
 	# querying the current state of quests 

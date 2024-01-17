@@ -11,3 +11,6 @@ func _init():
 		Page2.new(),
 		Page3.new(),
 	]
+	quest_done_entries = [
+		PageQuestDone.new()
+	]
