@@ -29,9 +29,10 @@ reward_edge_dest = 1
 [node name="overworld_ui" parent="." instance=ExtResource("4_4hawq")]
 
 [node name="DialogueGui" parent="." instance=ExtResource("4_fdft7")]
+visible = false
 
 [node name="item_interaction" parent="." instance=ExtResource("6_66i44")]
-position = Vector2(289, 191)
+position = Vector2(264, 246)
 item_type = 0
 item_dialogue_success = "you got an item!"
 item_dialogue_failure = "no item found"
@@ -95,7 +96,7 @@ npc_animal_type = 3
 npc_special_sprite = ExtResource("8_g5nw6")
 
 [node name="BridgeTemplate" parent="." instance=ExtResource("9_jpn0u")]
-position = Vector2(250, 78)
+position = Vector2(154, 494)
 
 [node name="bridge_interaction" parent="BridgeTemplate/left_bridge_start" index="0"]
 dest_island_id = 1
@@ -107,15 +108,22 @@ position = Vector2(-33, 0)
 start_island_id = 1
 
 [node name="solved_with_all_quests" parent="." instance=ExtResource("10_5ad47")]
-position = Vector2(200, -2)
+position = Vector2(305, 198)
 
 [node name="bridge_interaction" parent="solved_with_all_quests/bridge_bottom" index="0"]
 start_island_id = 4
 dest_island_id = 1
 
 [node name="bridge_interaction2" parent="solved_with_all_quests/bridge_top" index="0"]
+position = Vector2(0, -89)
 start_island_id = 1
 dest_island_id = 4
+
+[node name="vertical_bridge_start" parent="solved_with_all_quests/bridge_top/bridge_interaction2/bridge_parts" index="0"]
+metadata/_edit_use_anchors_ = true
+
+[node name="vertical_bridge_start2" parent="solved_with_all_quests/bridge_top/bridge_interaction2/bridge_parts" index="1"]
+metadata/_edit_use_anchors_ = true
 
 [editable path="bridge_interaction3"]
 [editable path="bridge_interaction3/interactionspot"]
