@@ -42,9 +42,9 @@ func set_player_zoom(new_zoom:int):
 # -- / Item / Inventory management 
 
 @onready var item_inventory:Dictionary = Item.init_item_inventory()
-@onready var animal_inventory:Dictionary = Animal.init_animal_inventory()
+#@onready var animal_inventory:Dictionary = Animal.init_animal_inventory()
 # use belows definition whenever debugging states that require a specific animal inventory
-#@onready var animal_inventory:Dictionary = set_test_animal_inventory()
+@onready var animal_inventory:Dictionary = set_test_animal_inventory()
 
 
 # retrieve inventory of items from singleton instance
@@ -125,9 +125,10 @@ func add_to_animal_inventory(new_animal:Animal.AnimalType, quantity:int = 1):
 # used for debugging only
 func set_test_animal_inventory() -> Dictionary:
 	var inventory:Dictionary = Animal.init_animal_inventory()
-	inventory[Animal.AnimalType.DEER] = 1
-	inventory[Animal.AnimalType.SNAKE] = 1
-	inventory[Animal.AnimalType.SQUIRREL] = 1
+	inventory[Animal.AnimalType.DEER] = 2
+	inventory[Animal.AnimalType.SNAKE] = 3
+	inventory[Animal.AnimalType.SQUIRREL] = 3
+	inventory[Animal.AnimalType.SPIDER] = 3
 	return inventory 
 
 
