@@ -1,54 +1,106 @@
-[gd_scene load_steps=2 format=3 uid="uid://cxj1q08s3i7i8"]
+[gd_scene load_steps=10 format=3 uid="uid://cxj1q08s3i7i8"]
 
 [ext_resource type="Script" path="res://bridges/script/goal_menu.gd" id="1_e6stn"]
+[ext_resource type="Texture2D" uid="uid://igj8k0askwfw" path="res://assets/art/ui_elements/button_normal.png" id="2_hkbr5"]
+[ext_resource type="Texture2D" uid="uid://ba3leqm154y12" path="res://assets/art/ui_elements/menu_container.png" id="2_i1o17"]
+[ext_resource type="Texture2D" uid="uid://dwu3b8hug0u0v" path="res://assets/art/ui_elements/button_hover.png" id="3_c848g"]
+[ext_resource type="Texture2D" uid="uid://leqswdio6xwd" path="res://bridges/assets/background/background_center_v4.png" id="5_upwcu"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_u44dl"]
+texture = ExtResource("2_hkbr5")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3am42"]
+texture = ExtResource("3_c848g")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gcxwl"]
+texture = ExtResource("2_hkbr5")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qvlci"]
+texture = ExtResource("3_c848g")
 
 [node name="goal_menu" type="Control"]
 layout_mode = 3
 anchor_right = 0.359
 anchor_bottom = 0.377
-offset_right = 0.431976
-offset_bottom = -0.296005
+offset_right = 90.432
+offset_bottom = 44.704
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.76, 0.76)
 script = ExtResource("1_e6stn")
 
-[node name="Panel" type="Panel" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-grow_horizontal = 2
-grow_vertical = 2
+[node name="MenuContainer" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(254.711, 141.289)
+scale = Vector2(3, 3)
+texture = ExtResource("2_i1o17")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+[node name="Label" type="Label" parent="."]
+z_index = 2
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -93.5
-offset_top = -51.0
-offset_right = 93.5
-offset_bottom = 51.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Label" type="Label" parent="Panel/VBoxContainer"]
-layout_mode = 2
+anchors_preset = -1
+anchor_left = 0.0772242
+anchor_top = -0.0301403
+anchor_right = 0.0772242
+anchor_bottom = -0.0301403
+offset_left = 165.553
+offset_top = 85.0263
+offset_right = 264.553
+offset_bottom = 121.026
 text = "Success!"
 horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
 
-[node name="ContinueButton" type="Button" parent="Panel/VBoxContainer"]
-layout_mode = 2
+[node name="ContinueButton" type="Button" parent="."]
+z_index = 2
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0772242
+anchor_top = -0.0301403
+anchor_right = 0.0772242
+anchor_bottom = -0.0301403
+offset_left = 165.553
+offset_top = 115.026
+offset_right = 264.553
+offset_bottom = 151.026
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = SubResource("StyleBoxTexture_u44dl")
+theme_override_styles/hover = SubResource("StyleBoxTexture_3am42")
 text = "Continue"
+metadata/_edit_use_anchors_ = true
 
-[node name="RetryButton" type="Button" parent="Panel/VBoxContainer"]
-layout_mode = 2
+[node name="RetryButton" type="Button" parent="."]
+z_index = 2
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0772242
+anchor_top = -0.0301403
+anchor_right = 0.0772242
+anchor_bottom = -0.0301403
+offset_left = 165.553
+offset_top = 157.026
+offset_right = 264.553
+offset_bottom = 193.026
+theme_override_styles/normal = SubResource("StyleBoxTexture_gcxwl")
+theme_override_styles/hover = SubResource("StyleBoxTexture_qvlci")
 text = "Retry"
+metadata/_edit_use_anchors_ = true
 
-[connection signal="pressed" from="Panel/VBoxContainer/ContinueButton" to="." method="_on_continue_button_pressed"]
-[connection signal="pressed" from="Panel/VBoxContainer/RetryButton" to="." method="_on_retry_button_pressed"]
+[node name="BackgroundCenterV4" type="Sprite2D" parent="."]
+modulate = Color(0.498039, 0.498039, 0.498039, 1)
+z_index = 1
+position = Vector2(-2.63158, -2.63158)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("5_upwcu")
+centered = false
+
+[node name="BackgroundCenterV5" type="Sprite2D" parent="."]
+modulate = Color(0.498039, 0.498039, 0.498039, 1)
+z_index = 1
+position = Vector2(297.368, -2.63158)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("5_upwcu")
+centered = false
+
+[connection signal="pressed" from="ContinueButton" to="." method="_on_continue_button_pressed"]
+[connection signal="pressed" from="RetryButton" to="." method="_on_retry_button_pressed"]
