@@ -3,7 +3,7 @@ class_name BrigdeAnimal
 var source_id : int = 0
 var atlas_pos : Vector2i = Vector2i.ZERO
 var body_cells : Array[Vector2i]
-var attach_cells : Array[AnimalAttach]
+var attach_cells : Array[BridgeCell]
 
 func is_valid_tile_type(tile_type : TileType.Variants) -> bool:
 	return true

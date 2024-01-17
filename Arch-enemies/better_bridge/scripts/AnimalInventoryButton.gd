@@ -1,11 +1,16 @@
 extends Button
 
 @export var animal_type : Animal.AnimalType = Animal.AnimalType.NONE
-
-signal choose_animal_type(type : Animal.AnimalType)
+@export var builder : BridgeBuilder
+@export var inventory_count : Label
 
 func _ready():
 	button_down.connect(_choose)
+	builder.update_ui.connect(_update_label)
 
 func _choose():
-	choose_animal_type.emit(animal_type)
+	builder._set_preview_animal(animal_type)
+
+func _update_label(type  : Animal.AnimalType, amount : int):
+	if type == animal_type:
+		inventory_count.text = str(amount)

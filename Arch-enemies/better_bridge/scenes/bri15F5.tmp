@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://drtw20gdyg55k"]
+[gd_scene load_steps=30 format=3 uid="uid://drtw20gdyg55k"]
 
 [ext_resource type="Script" path="res://better_bridge/scripts/BridgeBuilder.gd" id="1_1cq0f"]
 [ext_resource type="Texture2D" uid="uid://caftaoj1e3wtb" path="res://better_bridge/assets/animals/bridge_deer.png" id="1_4ayuu"]
@@ -15,8 +15,6 @@
 [ext_resource type="Texture2D" uid="uid://dhspbhl80l2gt" path="res://better_bridge/assets/tiles/bridge_water_tiles.png" id="10_w28ex"]
 [ext_resource type="Texture2D" uid="uid://bd5d1nll50u5q" path="res://better_bridge/assets/tiles/animal_body.png" id="11_h2kuu"]
 [ext_resource type="Script" path="res://better_bridge/BridgeMap.gd" id="12_e6m0s"]
-[ext_resource type="Texture2D" uid="uid://cs1g2ytm2qw3u" path="res://better_bridge/assets/undo_icon.png" id="16_em1dr"]
-[ext_resource type="PackedScene" uid="uid://dynxnwixd1bke" path="res://bridges/scenes/parallax_background.tscn" id="17_xkvd7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gefmh"]
 resource_name = "Deer"
@@ -644,7 +642,7 @@ layer_1/tile_data = PackedInt32Array(720909, 7, 0, 720910, 7, 0, 720911, 7, 0, 7
 script = ExtResource("12_e6m0s")
 
 [node name="Inventory" type="Sprite2D" parent="BridgeBuilder"]
-position = Vector2(254, 289)
+position = Vector2(294, 286)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("5_ug6xe")
 
@@ -728,18 +726,3 @@ horizontal_alignment = 1
 [node name="Camera2D" type="Camera2D" parent="BridgeBuilder"]
 anchor_mode = 0
 zoom = Vector2(2, 2)
-
-[node name="Button" type="Button" parent="BridgeBuilder"]
-offset_left = 507.0
-offset_top = 259.0
-offset_right = 557.0
-offset_bottom = 309.0
-icon = ExtResource("16_em1dr")
-flat = true
-expand_icon = true
-
-[node name="parallax_background" parent="." instance=ExtResource("17_xkvd7")]
-scale = Vector2(1.5, 1.5)
-transform = Transform2D(1.5, 0, 0, 1.5, 0, 0)
-
-[connection signal="pressed" from="BridgeBuilder/Button" to="BridgeBuilder" method="_undo_step"]
