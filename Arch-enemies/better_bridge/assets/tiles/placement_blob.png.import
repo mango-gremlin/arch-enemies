@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://mggtfvitqj2x"
-path="res://.godot/imported/placement_blob.png-0deb06ee638df368ab5850845c18021d.ctex"
+path="res://.godot/imported/placement_blob.png-e8f9e85988e0b5b5fc3cacfb216cf02a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://better_bridge/assets/placement_blob.png"
-dest_files=["res://.godot/imported/placement_blob.png-0deb06ee638df368ab5850845c18021d.ctex"]
+source_file="res://better_bridge/assets/tiles/placement_blob.png"
+dest_files=["res://.godot/imported/placement_blob.png-e8f9e85988e0b5b5fc3cacfb216cf02a.ctex"]
 
 [params]
 

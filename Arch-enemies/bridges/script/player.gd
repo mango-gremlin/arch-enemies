@@ -28,9 +28,6 @@ func _physics_process(delta):
 		land()
 
 	# if drag mode is entered, return fox to original position
-	if Global.drag_mode:
-		reset_player()
-		return
 
 	# Handle Jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
