@@ -22,7 +22,6 @@ signal is_dragging
 func _ready():
 	# take animal inventory from parent-Grid tilemap
 	animal_inventory_reference = Grid_node_reference.start_animals
-	print("inv in grid drag")
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

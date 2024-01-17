@@ -506,3 +506,7 @@ func _on_camera_2d_send_zoom(zoom):
 	x_size = int(DisplayServer.window_get_size().x / int(10 * x_zoom)) + 1
 	y_size = int(DisplayServer.window_get_size().y / int(10 * y_zoom)) + 1
 	grid_size = Vector2(x_size, y_size)
+
+
+func _on_goal_menu_level_solved():
+	set_global_animal_inventory(start_animals)
