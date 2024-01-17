@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://caftaoj1e3wtb"
-path="res://.godot/imported/bridge_deer.png-5a53bdf9cc2975b7324c330e7c67a2cd.ctex"
+uid="uid://dbpyyjn4v3fs5"
+path="res://.godot/imported/bridge_background_color.png-71660174fb4a79340ce8c469c5e8d268.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://better_bridge/assets/bridge_deer.png"
-dest_files=["res://.godot/imported/bridge_deer.png-5a53bdf9cc2975b7324c330e7c67a2cd.ctex"]
+source_file="res://better_bridge/assets/tiles/bridge_background_color.png"
+dest_files=["res://.godot/imported/bridge_background_color.png-71660174fb4a79340ce8c469c5e8d268.ctex"]
 
 [params]
 

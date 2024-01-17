@@ -49,9 +49,7 @@ func _get_drag_data(at_position):
 		var animal = tooltip_text 
 		#due to we use the tooltip we need to check if the string is valid... this is not secure for typos!
 		var animal_type:Animal.AnimalType = Animal.string_to_type(animal)
-		if animal != "" and Grid_node_reference.start_animals[animal_type] <= 0:
-			return
-		
+
 		#This adds a control node that allows us to fix the position of the preview
 		var c = Control.new()
 		c.add_child(preview)

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bdc8hebgjo47i"
-path="res://.godot/imported/some_tiles.png-aa06ca72ab453552d5590868a4708cf5.ctex"
+uid="uid://bmlh6ffo2amku"
+path="res://.godot/imported/bridge_spider.png-89bfc4fa0a03b7e8b2bdcd2e4b6f4fb0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://better_bridge/assets/some_tiles.png"
-dest_files=["res://.godot/imported/some_tiles.png-aa06ca72ab453552d5590868a4708cf5.ctex"]
+source_file="res://better_bridge/assets/animals/bridge_spider.png"
+dest_files=["res://.godot/imported/bridge_spider.png-89bfc4fa0a03b7e8b2bdcd2e4b6f4fb0.ctex"]
 
 [params]
 

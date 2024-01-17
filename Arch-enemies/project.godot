@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Arch-Enemies"
-run/main_scene="res://overworld/ui/main_menu/main_menu.tscn"
+run/main_scene="res://better_bridge/scenes/bridge_template.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 
 [autoload]
