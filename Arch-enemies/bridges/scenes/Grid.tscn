@@ -889,6 +889,7 @@ position = Vector2(-10, 40)
 scale = Vector2(1, 10)
 
 [node name="goal_menu" parent="Grid" instance=ExtResource("15_sf441")]
+visible = false
 top_level = true
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -898,16 +899,11 @@ position = Vector2(340, 95)
 
 [node name="pause_menu" parent="Grid" instance=ExtResource("20_cqwsn")]
 visible = false
-anchors_preset = -1
-anchor_left = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 200.0
-offset_top = 100.0
-offset_right = 200.0
-offset_bottom = 100.0
-scale = Vector2(0.5, 0.5)
-size_flags_horizontal = 4
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="animal_inventory_counter" type="HBoxContainer" parent="Grid"]

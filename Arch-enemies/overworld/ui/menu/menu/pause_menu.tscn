@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://cv4r3ql0yg1la"]
+[gd_scene load_steps=4 format=3 uid="uid://cv4r3ql0yg1la"]
 
 [ext_resource type="Script" path="res://overworld/ui/menu/menu/pause_menu.gd" id="1_vyga1"]
+[ext_resource type="Theme" uid="uid://d2ijyc316xeom" path="res://assets/art/ui_elements/ui_theme.tres" id="2_ugltm"]
+[ext_resource type="Texture2D" uid="uid://ba3leqm154y12" path="res://assets/art/ui_elements/menu_container.png" id="3_kvu7j"]
 
 [node name="pause_menu" type="Control"]
 layout_mode = 3
@@ -12,61 +14,50 @@ grow_vertical = 2
 script = ExtResource("1_vyga1")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.145098, 0.0352941, 0.270588, 1)
+layout_mode = 0
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 389.0
+offset_bottom = 219.0
+color = Color(0.505882, 0.972549, 1, 0.74902)
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
 layout_mode = 2
+offset_left = 160.0
+offset_top = 73.0
+offset_right = 225.0
+offset_bottom = 143.0
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="VBoxContainer2"]
+z_index = 1
 layout_mode = 2
+theme = ExtResource("2_ugltm")
 text = "PAUSED
 "
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="overworld" type="Button" parent="VBoxContainer2"]
+z_index = 1
 layout_mode = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-
-[node name="overworld" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/outline_size = 0
-theme_override_font_sizes/font_size = 56
+theme = ExtResource("2_ugltm")
 text = "Overworld"
 
-[node name="Options" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="Options" type="Button" parent="VBoxContainer2"]
+z_index = 1
 layout_mode = 2
-theme_override_constants/outline_size = 0
-theme_override_font_sizes/font_size = 56
+theme = ExtResource("2_ugltm")
 text = "Options"
 
-[node name="Exit" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="Exit" type="Button" parent="VBoxContainer2"]
+z_index = 1
 layout_mode = 2
-theme_override_constants/outline_size = 0
-theme_override_font_sizes/font_size = 56
+theme = ExtResource("2_ugltm")
 text = "Exit"
 
-[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/overworld" to="." method="_on_overworld_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
+[node name="MenuContainer" type="Sprite2D" parent="."]
+position = Vector2(192.5, 108.5)
+scale = Vector2(2, 2)
+texture = ExtResource("3_kvu7j")
+
+[connection signal="pressed" from="VBoxContainer2/overworld" to="." method="_on_overworld_pressed"]
+[connection signal="pressed" from="VBoxContainer2/Exit" to="." method="_on_exit_pressed"]
