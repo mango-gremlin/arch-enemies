@@ -20,7 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://cxj1q08s3i7i8" path="res://bridges/scenes/goal_menu.tscn" id="15_sf441"]
 [ext_resource type="PackedScene" uid="uid://dfnsuounqjr4c" path="res://bridges/scenes/goal.tscn" id="16_f3lv2"]
 [ext_resource type="PackedScene" uid="uid://dynxnwixd1bke" path="res://bridges/scenes/parallax_background.tscn" id="18_uekha"]
-[ext_resource type="PackedScene" uid="uid://cv4r3ql0yg1la" path="res://overworld/ui/menu/menu/pause_menu.tscn" id="20_cqwsn"]
+[ext_resource type="PackedScene" uid="uid://cern51r1p8lkb" path="res://bridges/scenes/bridges_pause_menu.tscn" id="20_nac6o"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gxf1m"]
 texture = ExtResource("1_uowbf")
@@ -891,20 +891,14 @@ scale = Vector2(1, 10)
 [node name="goal_menu" parent="Grid" instance=ExtResource("15_sf441")]
 visible = false
 top_level = true
+z_index = 1
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
 [node name="goal" parent="Grid" instance=ExtResource("16_f3lv2")]
 position = Vector2(340, 95)
 
-[node name="pause_menu" parent="Grid" instance=ExtResource("20_cqwsn")]
-visible = false
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-grow_horizontal = 1
-grow_vertical = 1
-metadata/_edit_use_anchors_ = true
+[node name="bridges_pause_menu" parent="Grid" instance=ExtResource("20_nac6o")]
 
 [node name="animal_inventory_counter" type="HBoxContainer" parent="Grid"]
 offset_top = 38.0
