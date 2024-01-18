@@ -56,6 +56,8 @@ func player_movement(delta):
 		
 	velocity = Vector2.ZERO
 	
+	Global.walking = true
+	
 	if Input.is_action_pressed("move_up"):
 		velocity.y -= SPEED
 		anim.play("back_walk")
@@ -79,6 +81,7 @@ func player_movement(delta):
 		
 	elif velocity == Vector2.ZERO:
 		player_idle_animation(delta)
+		Global.walking = false
 	
 	move_and_collide(velocity * delta)
 
