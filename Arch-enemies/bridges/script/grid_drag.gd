@@ -11,6 +11,7 @@ const DRAGPREVIEW = preload("res://bridges/scenes/dragpreview.tscn")
 signal need_grid
 signal update_grid(pos, data)
 signal is_dragging
+signal play_sound(sound)
 
 # required to load and interact with scene-specific inventory
 # this acts as reference to the animal inventory stored in "GRID"
@@ -59,6 +60,7 @@ func _get_drag_data(at_position):
 			#If we are not trying to drag the TRect that represent the grid we create the preview
 			preview.expand = true
 			preview.texture = sprite
+			play_sound.emit(animal)
 			#The actualy size of the sprite depends on the animal, this is what the "animal" var is used
 			#for, to identify the animal.
 			match animal:

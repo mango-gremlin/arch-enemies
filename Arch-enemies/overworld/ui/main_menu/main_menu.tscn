@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bm4bdq6ka013n"]
+[gd_scene load_steps=4 format=3 uid="uid://bm4bdq6ka013n"]
 
 [ext_resource type="Script" path="res://overworld/scripts/main_menu.gd" id="1_w25qy"]
 [ext_resource type="Texture2D" uid="uid://cm1xjw1g442ht" path="res://assets/main_menu_background.png" id="2_jxyfb"]
+[ext_resource type="AudioStream" uid="uid://n71rssah4ej4" path="res://assets/sound/Main_Menu.wav" id="3_j2ahf"]
 
 [node name="main_menu" type="Control"]
 layout_mode = 3
@@ -62,6 +63,10 @@ offset_bottom = 621.0
 theme_override_constants/outline_size = 0
 theme_override_font_sizes/font_size = 56
 text = "About"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_j2ahf")
+autoplay = true
 
 [connection signal="pressed" from="overworld" to="." method="_on_overworld_pressed"]
 [connection signal="pressed" from="Options" to="." method="_on_options_pressed"]
