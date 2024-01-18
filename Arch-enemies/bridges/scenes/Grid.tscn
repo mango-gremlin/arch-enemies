@@ -889,7 +889,6 @@ position = Vector2(-10, 40)
 scale = Vector2(1, 10)
 
 [node name="goal_menu" parent="Grid" instance=ExtResource("15_sf441")]
-visible = false
 top_level = true
 size_flags_horizontal = 4
 size_flags_vertical = 4
