@@ -29,16 +29,16 @@ centered = false
 
 [node name="MenuContainer" type="Sprite2D" parent="."]
 z_index = 1
-position = Vector2(192.5, 108.5)
+position = Vector2(195, 112.5)
 scale = Vector2(2.25, 2.25)
 texture = ExtResource("3_x8j61")
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="."]
 layout_mode = 2
-offset_left = 157.0
-offset_top = 75.0
-offset_right = 227.0
-offset_bottom = 145.0
+offset_left = 159.0
+offset_top = 79.0
+offset_right = 231.0
+offset_bottom = 151.0
 
 [node name="Label" type="Label" parent="VBoxContainer2"]
 z_index = 1

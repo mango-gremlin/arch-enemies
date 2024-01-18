@@ -30,10 +30,10 @@ color = Color(0.313726, 0.882353, 0.890196, 1)
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="."]
 layout_mode = 2
-offset_left = 475.0
-offset_top = 220.0
-offset_right = 540.0
-offset_bottom = 290.0
+offset_left = 465.0
+offset_top = 210.0
+offset_right = 537.0
+offset_bottom = 282.0
 scale = Vector2(3, 3)
 
 [node name="Label" type="Label" parent="VBoxContainer2"]
@@ -64,7 +64,7 @@ text = "Exit"
 
 [node name="MenuContainer" type="Sprite2D" parent="."]
 position = Vector2(573, 318)
-scale = Vector2(6, 6)
+scale = Vector2(6.5, 6.5)
 texture = ExtResource("3_kvu7j")
 
 [node name="Cloud1" type="Sprite2D" parent="."]
@@ -93,7 +93,7 @@ scale = Vector2(8, 8)
 texture = ExtResource("8_frufy")
 
 [node name="Cloud6" type="Sprite2D" parent="."]
-position = Vector2(363, 73)
+position = Vector2(348, 54)
 scale = Vector2(8, 8)
 texture = ExtResource("9_hdjwq")
 
