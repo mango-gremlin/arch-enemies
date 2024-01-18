@@ -1,12 +1,12 @@
 extends AudioStreamPlayer2D
 var squirrel = preload("res://assets/sound/Squirrel.wav")
 var death = preload("res://assets/sound/Death.wav")
+var drop = preload("res://assets/sound/Drop.wav")
 var deer = preload("res://assets/sound/Deer.wav")
-var jump = preload("res://assets/sound/jump.wav")
+var jump = preload("res://assets/sound/Jump.wav")
 var spider = preload("res://assets/sound/Spider.wav")
 var step = preload("res://assets/sound/Step.wav")
 var snake = preload("res://assets/sound/Snake.wav")
-var victory = preload("res://assets/sound/Victory.wav")
 
 func play_sound(sound):
 	match sound:
@@ -15,6 +15,9 @@ func play_sound(sound):
 			playing = true
 		"DEER":
 			stream = deer
+			playing = true
+		"DROP":
+			stream = drop
 			playing = true
 		"JUMP":
 			stream = jump
@@ -30,9 +33,6 @@ func play_sound(sound):
 			playing = true
 		"SQUIRREL":
 			stream = squirrel
-			playing = true
-		"VICTORY":
-			stream = victory
 			playing = true
 
 # Called when the node enters the scene tree for the first time.

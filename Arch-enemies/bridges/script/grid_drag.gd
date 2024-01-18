@@ -115,6 +115,7 @@ func _drop_data(at_position, data):
 	var position = Vector2(int(get_global_mouse_position().x /square_size), 
 	int(get_global_mouse_position().y /square_size))
 	update_grid.emit(position, data)
+	play_sound.emit("DROP")
 
 func _on_grid_current_grid(current_grid):
 	grid = current_grid

@@ -47,6 +47,11 @@ func _physics_process(delta):
 		velocity.x = direction.x * speed
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
+		
+	if velocity.x != 0 and is_on_floor():
+		Global.walking = true
+	else:
+		Global.walking = false
 	
 	move_and_slide()
 	update_animation()

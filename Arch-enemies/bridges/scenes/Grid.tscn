@@ -1,15 +1,18 @@
-[gd_scene load_steps=37 format=3 uid="uid://cjsjvpeuuqot"]
+[gd_scene load_steps=40 format=3 uid="uid://cjsjvpeuuqot"]
 
 [ext_resource type="Texture2D" uid="uid://d0o2q6fijmd1" path="res://assets/art/tilesets/bridge_tileset/bridge_background_color.png" id="1_uowbf"]
 [ext_resource type="Script" path="res://bridges/script/Camera.gd" id="1_vkapa"]
 [ext_resource type="Script" path="res://bridges/script/grid.gd" id="1_xtvvi"]
+[ext_resource type="AudioStream" uid="uid://n71rssah4ej4" path="res://assets/sound/Main_Menu.wav" id="2_3o2us"]
 [ext_resource type="Texture2D" uid="uid://dgoo8sdw24hp0" path="res://assets/art/tilesets/bridge_tileset/bridge_air_tiles.png" id="2_4xri4"]
 [ext_resource type="Script" path="res://bridges/script/grid_visualizer.gd" id="2_d8ovy"]
-[ext_resource type="AudioStream" uid="uid://c6fxsbqk6xl0w" path="res://assets/sound/Squirrel.wav" id="2_fu2h4"]
 [ext_resource type="Script" path="res://bridges/script/bridge_sound.gd" id="3_dujuj"]
+[ext_resource type="AudioStream" uid="uid://b1diue16pa0ld" path="res://assets/sound/Victory.wav" id="3_kilw0"]
 [ext_resource type="Texture2D" uid="uid://bbktakyncn7nc" path="res://assets/art/objects/bridge_deer.png" id="3_x44oq"]
 [ext_resource type="Texture2D" uid="uid://gyfjmxefsxu0" path="res://assets/art/tilesets/bridge_tileset/bridge_ground_tiles.png" id="4_jv8nt"]
+[ext_resource type="AudioStream" uid="uid://bgeiod4gbwy8j" path="res://assets/sound/Step.wav" id="5_a6sim"]
 [ext_resource type="Texture2D" uid="uid://2dqqm3b306my" path="res://assets/art/tilesets/bridge_tileset/bridge_water_tiles.png" id="5_satv3"]
+[ext_resource type="Script" path="res://bridges/script/walking_sound.gd" id="6_2sdlx"]
 [ext_resource type="Texture2D" uid="uid://ckghjw6ynsyxv" path="res://bridges/assets/yellow.png" id="6_ue1m2"]
 [ext_resource type="Texture2D" uid="uid://cw66eehxwh20w" path="res://assets/art/objects/bridge_snake.png" id="7_jp1m1"]
 [ext_resource type="Texture2D" uid="uid://bax18833oqune" path="res://bridges/assets/red.png" id="8_6e2b2"]
@@ -783,10 +786,21 @@ position = Vector2(192, 108)
 zoom = Vector2(3, 3)
 script = ExtResource("1_vkapa")
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("2_fu2h4")
+[node name="Background Music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_3o2us")
+autoplay = true
+
+[node name="Sound Effects" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_kilw0")
 max_polyphony = 3
 script = ExtResource("3_dujuj")
+
+[node name="Walking Sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_a6sim")
+script = ExtResource("6_2sdlx")
+
+[node name="Walking_Timer" type="Timer" parent="."]
+one_shot = true
 
 [node name="Grid" type="TileMap" parent="." node_paths=PackedStringArray("inventory_deer", "inventory_snake", "inventory_spider", "inventory_squirrel")]
 tile_set = SubResource("TileSet_ne4ig")
@@ -948,29 +962,29 @@ text = "0"
 [connection signal="current_grid" from="Grid" to="Grid/Control/Animal_Inventory/Spider_Item" method="_on_grid_current_grid"]
 [connection signal="current_grid" from="Grid" to="Grid/Control/Animal_Inventory/Squirrel_Item" method="_on_grid_current_grid"]
 [connection signal="get_zoom" from="Grid" to="Camera2D" method="_on_grid_get_zoom"]
-[connection signal="play_sound" from="Grid" to="AudioStreamPlayer2D" method="_on_grid_play_sound"]
+[connection signal="play_sound" from="Grid" to="Sound Effects" method="_on_grid_play_sound"]
 [connection signal="is_dragging" from="Grid/Control/Drag_Grid" to="Grid" method="_on_drag_grid_is_dragging"]
 [connection signal="need_grid" from="Grid/Control/Drag_Grid" to="Grid" method="_on_drag_grid_need_grid"]
-[connection signal="play_sound" from="Grid/Control/Drag_Grid" to="AudioStreamPlayer2D" method="_on_drag_grid_play_sound"]
+[connection signal="play_sound" from="Grid/Control/Drag_Grid" to="Sound Effects" method="_on_drag_grid_play_sound"]
 [connection signal="update_grid" from="Grid/Control/Drag_Grid" to="Grid" method="_on_drag_grid_update_grid"]
 [connection signal="is_dragging" from="Grid/Control/Animal_Inventory/Deer_Item" to="Grid" method="_on_deer_item_is_dragging"]
 [connection signal="need_grid" from="Grid/Control/Animal_Inventory/Deer_Item" to="Grid" method="_on_deer_item_need_grid"]
-[connection signal="play_sound" from="Grid/Control/Animal_Inventory/Deer_Item" to="AudioStreamPlayer2D" method="_on_deer_item_play_sound"]
+[connection signal="play_sound" from="Grid/Control/Animal_Inventory/Deer_Item" to="Sound Effects" method="_on_deer_item_play_sound"]
 [connection signal="update_grid" from="Grid/Control/Animal_Inventory/Deer_Item" to="Grid" method="_on_deer_item_update_grid"]
 [connection signal="is_dragging" from="Grid/Control/Animal_Inventory/Snake_Item" to="Grid" method="_on_snake_item_is_dragging"]
 [connection signal="need_grid" from="Grid/Control/Animal_Inventory/Snake_Item" to="Grid" method="_on_snake_item_need_grid"]
-[connection signal="play_sound" from="Grid/Control/Animal_Inventory/Snake_Item" to="AudioStreamPlayer2D" method="_on_snake_item_play_sound"]
+[connection signal="play_sound" from="Grid/Control/Animal_Inventory/Snake_Item" to="Sound Effects" method="_on_snake_item_play_sound"]
 [connection signal="update_grid" from="Grid/Control/Animal_Inventory/Snake_Item" to="Grid" method="_on_snake_item_update_grid"]
 [connection signal="is_dragging" from="Grid/Control/Animal_Inventory/Spider_Item" to="Grid" method="_on_spider_item_is_dragging"]
 [connection signal="need_grid" from="Grid/Control/Animal_Inventory/Spider_Item" to="Grid" method="_on_spider_item_need_grid"]
-[connection signal="play_sound" from="Grid/Control/Animal_Inventory/Spider_Item" to="AudioStreamPlayer2D" method="_on_spider_item_play_sound"]
+[connection signal="play_sound" from="Grid/Control/Animal_Inventory/Spider_Item" to="Sound Effects" method="_on_spider_item_play_sound"]
 [connection signal="update_grid" from="Grid/Control/Animal_Inventory/Spider_Item" to="Grid" method="_on_spider_item_update_grid"]
 [connection signal="is_dragging" from="Grid/Control/Animal_Inventory/Squirrel_Item" to="Grid" method="_on_squirrel_item_is_dragging"]
 [connection signal="need_grid" from="Grid/Control/Animal_Inventory/Squirrel_Item" to="Grid" method="_on_squirrel_item_need_grid"]
-[connection signal="play_sound" from="Grid/Control/Animal_Inventory/Squirrel_Item" to="AudioStreamPlayer2D" method="_on_squirrel_item_play_sound"]
+[connection signal="play_sound" from="Grid/Control/Animal_Inventory/Squirrel_Item" to="Sound Effects" method="_on_squirrel_item_play_sound"]
 [connection signal="update_grid" from="Grid/Control/Animal_Inventory/Squirrel_Item" to="Grid" method="_on_squirrel_item_update_grid"]
 [connection signal="toggled" from="Grid/Control/Drag_or_Fox" to="Grid/Control/Drag_or_Fox" method="_on_toggled"]
 [connection signal="pressed" from="Grid/Control/Reset" to="Grid" method="_on_reset_pressed"]
 [connection signal="pressed" from="Grid/Control/Last_State" to="Grid" method="_on_last_state_pressed"]
-[connection signal="play_sound" from="Grid/Player" to="AudioStreamPlayer2D" method="_on_player_play_sound"]
+[connection signal="play_sound" from="Grid/Player" to="Sound Effects" method="_on_player_play_sound"]
 [connection signal="level_solved" from="Grid/goal_menu" to="Grid" method="_on_goal_menu_level_solved"]
