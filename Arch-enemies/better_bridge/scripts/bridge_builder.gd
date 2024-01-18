@@ -9,7 +9,15 @@ class_name BridgeBuilder
 @export var terrain_layer_index : int = 0
 @export var legal_placement_layer_index : int = 1
 
-@export var preview_color : Color =  Color.WHITE
+@export var preview_color : Color = Color.WHITE
+
+@export var player : BridgePlayer 
+
+#goal we want to reach
+@export var goals : Array[BridgeGoal]
+
+const menu_source = preload("res://better_bridge/scenes/menu.tscn")
+@onready var menu : BridgeMenu = menu_source.instantiate()
 
 #gets set in the _ready, for keeping track of the layer indecies
 var placed_layer : int = -1
@@ -17,6 +25,9 @@ var preview_layer : int = -1
 
 #for drag/preview
 var is_dragging : bool = false
+var is_blocked : bool = false
+var is_paused : bool = false
+
 var current_preview_type : Animal.AnimalType = Animal.AnimalType.NONE
 var last_preview_position : Vector2i = Vector2i.ZERO
 var cam : Camera2D
@@ -38,6 +49,7 @@ var bridge_animals : Dictionary = {
 
 #store the tileset id here! 
 var tile_type_to_tile : Dictionary = {
+	TileType.Variants.SHALLOW_WATER : 7,
 	TileType.Variants.BODY : 9,
 	TileType.Variants.HORIZONTAL : 5,
 	TileType.Variants.VERTICAL : 6,
@@ -49,8 +61,18 @@ func _ready():
 	#needed for zoom while dragging
 	cam = get_viewport().get_camera_2d()
 	
-	animal_count[Animal.AnimalType.DEER] = 3
-	animal_count[Animal.AnimalType.SNAKE] = 3
+	#set the menu
+	menu.hide()
+	add_child(menu)
+	
+	animal_count[Animal.AnimalType.DEER] = 5
+	animal_count[Animal.AnimalType.SNAKE] = 5
+	animal_count[Animal.AnimalType.SPIDER] = 5
+	animal_count[Animal.AnimalType.SQUIRREL] = 5
+	
+	#connect the goal
+	for goal in goals:
+		goal.reached.connect(on_level_complete)
 	
 	#create needed layers
 	map.add_layer(-1) #Placed Animals
@@ -73,10 +95,19 @@ func _ready():
 		
 		
 func _input(event):
-	if not is_dragging:
+	if is_blocked:
 		return
-		
-		
+	
+	if event is InputEventKey:
+		if event.is_action_pressed("open_menu"):
+			if is_paused:
+				on_resume()
+			else:
+				on_pause()
+	
+	if not is_dragging or is_paused:
+		return
+	
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			is_dragging = false
@@ -155,10 +186,9 @@ func _place_animal(type : Animal.AnimalType, pos : Vector2i):
 		var _pos = pos + attch_cell.pos
 		saved_cells.append(BridgeCell.new(_pos, map.get_tile_type(legal_placement_layer_index, _pos)))
 	
-	print(saved_cells)
 	undo_steps.append(BridgeStep.new(type, pos, saved_cells))
 	
-func _undo_step():
+func undo_step():
 	#check if something to undo
 	if len(undo_steps) == 0:
 		return
@@ -167,6 +197,7 @@ func _undo_step():
 	
 	#add back to inventory
 	animal_count[step.animal_type] += 1
+	update_ui.emit(step.animal_type, animal_count[step.animal_type])
 	
 	map.erase_cell(placed_layer, step.pos)
 
@@ -176,6 +207,10 @@ func _undo_step():
 		else:
 			map.erase_cell(legal_placement_layer_index, cell.pos) #just erase if not
 
+func undo_all():
+	for i in len(undo_steps):
+		undo_step()
+		
 func _preview_animal(type: Animal.AnimalType, pos : Vector2i):
 	#erase at last pos, set at new pos
 	map.erase_cell(preview_layer, last_preview_position)
@@ -195,3 +230,55 @@ func _set_preview_animal(type : Animal.AnimalType):
 	map.set_layer_enabled(legal_placement_layer_index, true)
 	map.clear_layer(preview_layer)
 	current_preview_type = type
+
+func block(state : bool):
+	is_blocked = state
+
+func on_level_complete():
+	block(true) # disable building
+	
+	#sprites get rendered after blur :/
+	player.hide()
+	
+	#show the ui
+	menu.set_caption("Sucsess!")
+	
+	var _continue = func():
+						SingletonPlayer.set_animal_inventory(animal_count)
+						get_tree().change_scene_to_file("res://overworld/main_scene_overworld.tscn")
+	var _retry = func(): 
+					player.show() #show player
+					player.reset() #reset player
+					animal_count = SingletonPlayer.get_animal_inventory().duplicate(true) # reset animals
+					menu.hide()
+					block(false)
+					undo_all()
+		
+	menu.set_button_1("Continue", _continue)
+	menu.set_button_2("Retry", _retry)
+	
+	#finally show
+	menu.show()
+	
+
+func on_pause():
+	block(true)
+	is_paused = true
+	menu.set_caption("Paused!")
+	
+	#sprites get rendered after blur :/
+	player.hide()
+					
+	var _exit = func(): get_tree().change_scene_to_file("res://overworld/main_scene_overworld.tscn")
+		
+	menu.set_button_1("Resume", on_resume)
+	menu.set_button_2("Exit", _exit)
+	
+	#finally show
+	menu.show()
+	
+func on_resume():
+	player.show() 
+	menu.hide()
+	block(false)
+	is_paused = false

@@ -1,0 +1,135 @@
+[gd_scene load_steps=9 format=3 uid="uid://dne5lfodvke12"]
+
+[ext_resource type="Texture2D" uid="uid://bsjli6qphmm7q" path="res://better_bridge/assets/ui/background.png" id="1_1a12w"]
+[ext_resource type="Script" path="res://better_bridge/scripts/bridge_menu.gd" id="1_32cfn"]
+[ext_resource type="Shader" path="res://better_bridge/assets/menu.gdshader" id="1_r47t3"]
+[ext_resource type="Texture2D" uid="uid://bjdsowrod2436" path="res://better_bridge/assets/ui/button.png" id="2_wwlfh"]
+[ext_resource type="Texture2D" uid="uid://c0a2h8yiqaf8o" path="res://better_bridge/assets/ui/button_pressed.png" id="3_iujat"]
+
+[sub_resource type="Shader" id="Shader_ut670"]
+code = "shader_type canvas_item;
+
+uniform float lod: hint_range(0.0, 5) = 0.0;
+uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear_mipmap;
+
+void fragment(){
+	vec4 color = texture(SCREEN_TEXTURE, SCREEN_UV, lod);
+	COLOR = color;
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6kl57"]
+resource_local_to_scene = true
+shader = SubResource("Shader_ut670")
+shader_parameter/lod = 1.655
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fshpy"]
+shader = ExtResource("1_r47t3")
+shader_parameter/strength = 2.32
+
+[node name="Menu" type="Control"]
+material = SubResource("ShaderMaterial_6kl57")
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -576.0
+offset_top = -324.0
+offset_right = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_32cfn")
+
+[node name="BackgroundBlur" type="Panel" parent="."]
+material = SubResource("ShaderMaterial_fshpy")
+layout_mode = 0
+offset_right = 588.0
+offset_bottom = 327.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -288.0
+offset_top = -108.0
+offset_right = 288.0
+offset_bottom = 108.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("1_1a12w")
+expand_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/TextureRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -51.6943
+offset_top = -66.0
+offset_right = 52.3057
+offset_bottom = 69.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Caption" type="Label" parent="HBoxContainer/TextureRect/VBoxContainer"]
+layout_mode = 2
+text = "Success!"
+horizontal_alignment = 1
+
+[node name="Button1" type="TextureButton" parent="HBoxContainer/TextureRect/VBoxContainer"]
+custom_minimum_size = Vector2(5, 37.5)
+layout_mode = 2
+texture_normal = ExtResource("2_wwlfh")
+texture_pressed = ExtResource("3_iujat")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="HBoxContainer/TextureRect/VBoxContainer/Button1"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 16
+text = "Button1"
+
+[node name="Button2" type="TextureButton" parent="HBoxContainer/TextureRect/VBoxContainer"]
+custom_minimum_size = Vector2(5, 37.5)
+layout_mode = 2
+texture_normal = ExtResource("2_wwlfh")
+texture_pressed = ExtResource("3_iujat")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="HBoxContainer/TextureRect/VBoxContainer/Button2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 16
+text = "Button1"
