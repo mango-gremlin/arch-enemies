@@ -1,8 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://cv4r3ql0yg1la"]
+[gd_scene load_steps=11 format=3 uid="uid://cv4r3ql0yg1la"]
 
 [ext_resource type="Script" path="res://overworld/ui/menu/menu/pause_menu.gd" id="1_vyga1"]
 [ext_resource type="Theme" uid="uid://d2ijyc316xeom" path="res://assets/art/ui_elements/ui_theme.tres" id="2_ugltm"]
 [ext_resource type="Texture2D" uid="uid://ba3leqm154y12" path="res://assets/art/ui_elements/menu_container.png" id="3_kvu7j"]
+[ext_resource type="Texture2D" uid="uid://y0rbyb8ymrue" path="res://assets/art/ui_elements/clouds/cloud_1.png" id="4_s2fjd"]
+[ext_resource type="Texture2D" uid="uid://tkvu5brhxdg2" path="res://assets/art/ui_elements/clouds/cloud_2.png" id="5_2wpt6"]
+[ext_resource type="Texture2D" uid="uid://hfchs1d4pd74" path="res://assets/art/ui_elements/clouds/cloud_3.png" id="6_rkvmq"]
+[ext_resource type="Texture2D" uid="uid://bq8h21mq3lqon" path="res://assets/art/ui_elements/clouds/cloud_4.png" id="7_3035v"]
+[ext_resource type="Texture2D" uid="uid://bor1f6u6tjguy" path="res://assets/art/ui_elements/clouds/cloud_5.png" id="8_frufy"]
+[ext_resource type="Texture2D" uid="uid://bqtk5n8foclwk" path="res://assets/art/ui_elements/clouds/cloud_6.png" id="9_hdjwq"]
+[ext_resource type="Texture2D" uid="uid://bt3l6nwayw6ai" path="res://assets/art/ui_elements/clouds/cloud_7.png" id="10_4l0q1"]
 
 [node name="pause_menu" type="Control"]
 layout_mode = 3
@@ -19,7 +26,7 @@ offset_left = -1.0
 offset_top = -1.0
 offset_right = 1151.0
 offset_bottom = 647.0
-color = Color(0.505882, 0.972549, 1, 0.74902)
+color = Color(0.313726, 0.882353, 0.890196, 1)
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="."]
 layout_mode = 2
@@ -59,6 +66,41 @@ text = "Exit"
 position = Vector2(573, 318)
 scale = Vector2(6, 6)
 texture = ExtResource("3_kvu7j")
+
+[node name="Cloud1" type="Sprite2D" parent="."]
+position = Vector2(193, 132)
+scale = Vector2(8, 8)
+texture = ExtResource("4_s2fjd")
+
+[node name="Cloud2" type="Sprite2D" parent="."]
+position = Vector2(837, 80)
+scale = Vector2(8, 8)
+texture = ExtResource("5_2wpt6")
+
+[node name="Cloud3" type="Sprite2D" parent="."]
+position = Vector2(903, 211)
+scale = Vector2(8, 8)
+texture = ExtResource("6_rkvmq")
+
+[node name="Cloud4" type="Sprite2D" parent="."]
+position = Vector2(341, 319)
+scale = Vector2(8, 8)
+texture = ExtResource("7_3035v")
+
+[node name="Cloud5" type="Sprite2D" parent="."]
+position = Vector2(1041, 138)
+scale = Vector2(8, 8)
+texture = ExtResource("8_frufy")
+
+[node name="Cloud6" type="Sprite2D" parent="."]
+position = Vector2(363, 73)
+scale = Vector2(8, 8)
+texture = ExtResource("9_hdjwq")
+
+[node name="Cloud7" type="Sprite2D" parent="."]
+position = Vector2(139, 255)
+scale = Vector2(8, 8)
+texture = ExtResource("10_4l0q1")
 
 [connection signal="pressed" from="VBoxContainer2/overworld" to="." method="_on_overworld_pressed"]
 [connection signal="pressed" from="VBoxContainer2/Exit" to="." method="_on_exit_pressed"]

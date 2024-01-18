@@ -899,6 +899,7 @@ size_flags_vertical = 4
 position = Vector2(340, 95)
 
 [node name="bridges_pause_menu" parent="Grid" instance=ExtResource("20_nac6o")]
+visible = false
 
 [node name="animal_inventory_counter" type="HBoxContainer" parent="Grid"]
 offset_top = 38.0

@@ -16,26 +16,7 @@ corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 corner_detail = 5
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qljua"]
-content_margin_left = 4.0
-content_margin_top = 4.0
-content_margin_right = 4.0
-content_margin_bottom = 4.0
-bg_color = Color(1, 1, 1, 0.75)
-draw_center = false
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-corner_detail = 5
-expand_margin_left = 2.0
-expand_margin_top = 2.0
-expand_margin_right = 2.0
-expand_margin_bottom = 2.0
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2l0bi"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_x0won"]
 texture = ExtResource("1_nvwyd")
@@ -43,40 +24,25 @@ texture = ExtResource("1_nvwyd")
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_yjr2s"]
 texture = ExtResource("2_6n8m2")
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qxxpn"]
-content_margin_left = 4.0
-content_margin_top = 4.0
-content_margin_right = 4.0
-content_margin_bottom = 4.0
-bg_color = Color(0, 0, 0, 0.6)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-corner_detail = 5
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rjba8"]
+texture = ExtResource("1_nvwyd")
 
 [resource]
 default_font = ExtResource("3_aqlgn")
 default_font_size = 12
 Button/colors/font_color = Color(0.341176, 0.12549, 0.184314, 1)
 Button/colors/font_disabled_color = Color(0.875, 0.875, 0.875, 0.5)
-Button/colors/font_focus_color = Color(0.568627, 0.235294, 0.32549, 1)
+Button/colors/font_focus_color = Color(0.341176, 0.12549, 0.184314, 1)
 Button/colors/font_hover_color = Color(0.568627, 0.235294, 0.32549, 1)
 Button/colors/font_hover_pressed_color = Color(0.568627, 0.235294, 0.32549, 1)
-Button/colors/font_outline_color = Color(1, 1, 1, 1)
-Button/colors/font_pressed_color = Color(0.568627, 0.235294, 0.32549, 1)
+Button/colors/font_pressed_color = Color(0.243137, 0.0784314, 0.12549, 1)
 Button/colors/icon_disabled_color = Color(1, 1, 1, 0.4)
-Button/colors/icon_focus_color = Color(1, 1, 1, 1)
-Button/colors/icon_hover_color = Color(1, 1, 1, 1)
-Button/colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
-Button/colors/icon_normal_color = Color(1, 1, 1, 1)
-Button/colors/icon_pressed_color = Color(1, 1, 1, 1)
 Button/constants/h_separation = 4
 Button/constants/icon_max_width = 0
 Button/constants/outline_size = 0
 Button/styles/disabled = SubResource("StyleBoxFlat_sqyvb")
-Button/styles/focus = SubResource("StyleBoxFlat_qljua")
+Button/styles/focus = SubResource("StyleBoxEmpty_2l0bi")
 Button/styles/hover = SubResource("StyleBoxTexture_x0won")
 Button/styles/normal = SubResource("StyleBoxTexture_yjr2s")
-Button/styles/pressed = SubResource("StyleBoxFlat_qxxpn")
+Button/styles/pressed = SubResource("StyleBoxTexture_rjba8")
 Label/colors/font_color = Color(0.341176, 0.12549, 0.184314, 1)
