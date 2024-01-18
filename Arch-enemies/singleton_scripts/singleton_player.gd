@@ -22,7 +22,7 @@ signal updated_quest_list(new_quest_list)
 # --- / 
 # -- / Player management
 
-@onready var player_coordinate:Vector2 = Vector2.ZERO
+@onready var player_coordinate:Vector2 = Vector2(74,497)
 @onready var zoomlevel:int = 1
 
 func get_player_coord() -> Vector2: 
