@@ -8,32 +8,25 @@ var spider = preload("res://assets/sound/Spider.wav")
 var step = preload("res://assets/sound/Step.wav")
 var snake = preload("res://assets/sound/Snake.wav")
 
-func play_sound(sound):
+func play_sound(sound:String) -> void:
 	match sound:
 		"DEATH":
 			stream = death
-			playing = true
 		"DEER":
 			stream = deer
-			playing = true
 		"DROP":
 			stream = drop
-			playing = true
 		"JUMP":
 			stream = jump
-			playing = true
 		"SNAKE":
 			stream = snake
-			playing = true
 		"SPIDER":
 			stream = spider
-			playing = true
 		"STEP":
 			stream = step
-			playing = true
 		"SQUIRREL":
 			stream = squirrel
-			playing = true
+	playing = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

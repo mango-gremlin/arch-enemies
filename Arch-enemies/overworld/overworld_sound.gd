@@ -11,7 +11,7 @@ var quest_done = preload("res://assets/sound/Quest_Done.wav")
 func _ready():
 	SingletonPlayer.play_sound.connect(play_sound)
 
-func play_sound(sound):
+func play_sound(sound:String) -> void:
 	print("entered play sound ", sound, " for overworld")
 	match sound:
 		"DEER":

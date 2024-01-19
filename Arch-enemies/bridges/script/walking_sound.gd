@@ -5,12 +5,12 @@ func _ready():
 	pass # Replace with function body.
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+# check if the fox is walking as defined in the global script, play run sounds accordingly
 func _process(delta):
-	if $"../Walking_Timer".is_stopped():
+	var timer:Timer = $"../Walking_Timer"
+	if timer.is_stopped():
 		if Global.walking:
 			playing = true
-			$"../Walking_Timer".start(0.18)
 		else:
 			playing = false
-			$"../Walking_Timer".start(0.18)
+		timer.start(0.18)
