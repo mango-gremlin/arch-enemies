@@ -19,7 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://cbremi6mc4sua" path="res://bridges/scenes/world_edge.tscn" id="17_6tnqx"]
 [ext_resource type="PackedScene" uid="uid://cxj1q08s3i7i8" path="res://bridges/scenes/goal_menu.tscn" id="18_co2ox"]
 [ext_resource type="PackedScene" uid="uid://dfnsuounqjr4c" path="res://bridges/scenes/goal.tscn" id="19_1q1ud"]
-[ext_resource type="PackedScene" uid="uid://cv4r3ql0yg1la" path="res://overworld/ui/menu/menu/pause_menu.tscn" id="20_tcvdo"]
+[ext_resource type="PackedScene" uid="uid://cern51r1p8lkb" path="res://bridges/scenes/bridges_pause_menu.tscn" id="20_20jtq"]
 [ext_resource type="PackedScene" uid="uid://dynxnwixd1bke" path="res://bridges/scenes/parallax_background.tscn" id="21_sinqj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gxf1m"]
@@ -901,19 +901,8 @@ size_flags_vertical = 4
 [node name="goal" parent="Grid" instance=ExtResource("19_1q1ud")]
 position = Vector2(340, 95)
 
-[node name="pause_menu" parent="Grid" instance=ExtResource("20_tcvdo")]
+[node name="bridges_pause_menu" parent="Grid" instance=ExtResource("20_20jtq")]
 visible = false
-anchors_preset = -1
-anchor_left = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 200.0
-offset_top = 100.0
-offset_right = 200.0
-offset_bottom = 100.0
-scale = Vector2(0.5, 0.5)
-size_flags_horizontal = 4
-metadata/_edit_use_anchors_ = true
 
 [node name="animal_inventory_counter" type="HBoxContainer" parent="Grid"]
 offset_top = 38.0

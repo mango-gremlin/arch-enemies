@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://dbffmmmqyknux"]
+[gd_scene load_steps=4 format=3 uid="uid://dbffmmmqyknux"]
 
 [ext_resource type="Script" path="res://overworld/dialogue/DialogueUI.gd" id="1_dxgyc"]
+[ext_resource type="Theme" uid="uid://d2ijyc316xeom" path="res://assets/art/ui_elements/ui_theme.tres" id="1_j0egf"]
 [ext_resource type="Texture2D" uid="uid://b5jpk1txthbqr" path="res://overworld/dialogues/test_dialogue/green.png" id="2_jkmg4"]
 
 [node name="DialogueGui" type="CanvasLayer"]
@@ -17,6 +18,7 @@ offset_right = 327.392
 offset_bottom = 306.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_j0egf")
 script = ExtResource("1_dxgyc")
 
 [node name="main_box" type="HBoxContainer" parent="Panel"]
