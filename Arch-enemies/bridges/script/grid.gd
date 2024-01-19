@@ -438,7 +438,7 @@ func restore_animal_from_placed_animals(placed_animals:Dictionary):
 # takes local inventory, duplicates it and replace 
 # singleton animal_inventory with it
 func set_global_animal_inventory(animal_inventory:Dictionary):
-	SingletonPlayer.set_item_inventory(animal_inventory.duplicate(true))
+	SingletonPlayer.set_animal_inventory(animal_inventory.duplicate(true))
 
 #updates the ui-counters for the inventory
 func update_inventory():
@@ -506,3 +506,8 @@ func _on_camera_2d_send_zoom(zoom):
 	x_size = int(DisplayServer.window_get_size().x / int(10 * x_zoom)) + 1
 	y_size = int(DisplayServer.window_get_size().y / int(10 * y_zoom)) + 1
 	grid_size = Vector2(x_size, y_size)
+
+
+func _on_goal_menu_level_solved():
+	print("updating inventory of overworld")
+	set_global_animal_inventory(start_animals)

@@ -126,10 +126,12 @@ func add_to_animal_inventory(new_animal:Animal.AnimalType, quantity:int = 1):
 # used for debugging only
 func set_test_animal_inventory() -> Dictionary:
 	var inventory:Dictionary = Animal.init_animal_inventory()
-	inventory[Animal.AnimalType.DEER] = 2
-	inventory[Animal.AnimalType.SNAKE] = 3
-	inventory[Animal.AnimalType.SQUIRREL] = 5
-	inventory[Animal.AnimalType.SPIDER] = 3
+
+	inventory[Animal.AnimalType.DEER] = 99
+	inventory[Animal.AnimalType.SPIDER] = 99
+	inventory[Animal.AnimalType.SNAKE] = 99
+	inventory[Animal.AnimalType.SQUIRREL] = 99
+
 	return inventory 
 
 
@@ -165,6 +167,17 @@ var islands_reachable:Array[bool]
 	BridgeEdge.new(0,1): "res://bridges/scenes/0_Tutorial.tscn",
 	BridgeEdge.new(1,2): "res://bridges/scenes/1_FrogHazardLevel.tscn"
 }
+
+# used for the (possibly) active bridge level to find out its own bridge egde
+@onready var current_bridge_edge:BridgeEdge
+
+# sets the current bridge edge while the player is entering a bridge level
+func set_current_bridge_edge(new_edge:BridgeEdge):
+	current_bridge_edge = new_edge
+
+# retrieve the bridge edge of the currently active bridge level
+func get_current_bridge_edge() -> BridgeEdge:
+	return current_bridge_edge
 
 # queries dictionary of available bridge-level for requested level
 # returns modified bridge-edge with path set if found 
