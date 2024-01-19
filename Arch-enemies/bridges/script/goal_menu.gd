@@ -10,6 +10,8 @@ func _on_retry_button_pressed():
 
 
 func _on_continue_button_pressed():
+	# Set drag mode to true for other levels (should really be refactored)
+	Global.drag_mode = true
 	# Update global inventory
 	level_solved.emit()
 	# Add bridge edge to Singleton
