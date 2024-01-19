@@ -77,8 +77,7 @@ func obtain_dialogue() -> String:
 # -- / VISUALIZATION
 # this section is for visualization within the overworld 
 
-# deriving sprite to load from animal type
-# OR a set special_sprite 
+# deriving sprite to load from item type, stolen from npc_interaction 
 func set_item_sprite():
 	# initialize reference
 	var referenced_sprite:Sprite2D = $Sprite2D

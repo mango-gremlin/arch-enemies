@@ -2,10 +2,12 @@ extends CanvasLayer
 
 class_name OverWorldUI
 
+@onready var quest_list_label = $Control/Quests/VBoxContainer/quest_list
+
 #@onready var playername_label = $Control/MarginContainer/VBoxContainer/HBoxContainer2/PlayerName
+# these two are technically redundant
 @onready var item_list_label = $Control/Items/VBoxContainer/HBoxContainer3/VBoxContainer/item_list
 @onready var animal_list_label = $Control/Animals2/VBoxContainer/HBoxContainer4/VBoxContainer/animal_list
-@onready var quest_list_label = $Control/Quests/VBoxContainer/quest_list
 
 # unfortunately the fastest way here is just to save the path to each label
 
@@ -48,6 +50,7 @@ var player_quest_dictionary:Dictionary = {}:
 		player_quest_dictionary = new_dict
 		_update_quest_list()
 
+# iterates over each item type and displays how many of each
 func _update_item_inventory_label():
 	# iterate over item
 	for item in player_item_inventory:
@@ -71,7 +74,7 @@ func _update_item_inventory_label():
 		
 		item_label.text = item_string
 
-# iteratesover each animaltyp and display their properties
+# iterates over each animal type and displays how many of each
 func _update_animal_inventory_label():
 	
 	for animal:Animal.AnimalType in player_animal_inventory:
