@@ -898,8 +898,10 @@ scale = Vector2(1, 10)
 [node name="goal_menu" parent="Grid" instance=ExtResource("18_ihjef")]
 visible = false
 top_level = true
-offset_right = 0.432007
-scale = Vector2(1.2, 1.2)
+offset_left = 250.0
+offset_top = 108.0
+offset_right = 250.432
+offset_bottom = -136.296
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
