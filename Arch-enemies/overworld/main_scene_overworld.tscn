@@ -17,7 +17,7 @@ script = ExtResource("1_pwtu4")
 
 [node name="npc_track_quests" parent="." instance=ExtResource("7_33ud0")]
 position = Vector2(271, 427)
-npc_name = "blub"
+npc_name = "Deerington von Antler"
 npc_animal_type = 1
 quest_type = 3
 required_item = 6
@@ -74,7 +74,7 @@ npc_special_sprite = ExtResource("8_g5nw6")
 position = Vector2(154, 494)
 
 [node name="bridge_interaction" parent="BridgeTutorial->Main/left_bridge_start" index="0"]
-bridge_reward = 3
+bridge_reward = 2
 dest_island_id = 1
 
 [node name="right_bridge_start" parent="BridgeTutorial->Main" index="1"]
