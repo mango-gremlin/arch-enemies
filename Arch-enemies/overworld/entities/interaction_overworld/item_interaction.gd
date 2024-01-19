@@ -36,6 +36,7 @@ var interaction_type: Interactable.InteractionType = Interactable.InteractionTyp
 
 # run upon instantiating this node in scene
 func _ready():
+	set_item_sprite()
 	# gathering child node
 	var interactionspot_object = get_node("interactionspot")
 	# set interaction type for child node
@@ -70,3 +71,28 @@ func obtain_dialogue() -> String:
 		return item_dialogue_success
 	else:
 		return item_dialogue_failure
+		
+
+# --- / 
+# -- / VISUALIZATION
+# this section is for visualization within the overworld 
+
+# deriving sprite to load from animal type
+# OR a set special_sprite 
+func set_item_sprite():
+	# initialize reference
+	var referenced_sprite:Sprite2D = $Sprite2D
+	
+	var path_to_sprite:String 
+	match item_type:
+		Item.ItemType.EGG: 
+			path_to_sprite = "res://assets/art/objects/overworld_items/item_egg.png"
+		Item.ItemType.EVIDENCE:
+			path_to_sprite = "res://assets/art/objects/overworld_items/item_evidence.png"
+		Item.ItemType.HAZELNUT: 
+			path_to_sprite = "res://assets/art/objects/overworld_items/item_hazelnut.png"
+		Item.ItemType.FLIES:
+			path_to_sprite = "res://assets/art/objects/overworld_items/item_fly.png"
+	# loading texture 
+	var item_sprite:Texture2D = load(path_to_sprite)
+	referenced_sprite.texture = item_sprite

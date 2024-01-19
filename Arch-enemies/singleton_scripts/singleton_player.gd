@@ -153,17 +153,17 @@ var islands_reachable:Array[bool]
 # --> forgetting to add to both 0 : [...,1] and 1 : [...,m0]
 @onready var bridges_built: Dictionary = {
 # bridge_id : Array of connected island --> denotes edges of nodes
-	0 : [0,1],	
-	1 : [1,0],
+	0 : [0],	
+	1 : [1],
 	2 : [2],
-	3 : [3],
-	4 : [4]
+	3 : [3]
 }
 
 # denotes the level to choose for each interaction!
 
 @onready var bridge_level_scenes: Dictionary = {
-	BridgeEdge.new(0,2): "res://bridges/scenes/Grid.tscn",
+	BridgeEdge.new(0,1): "res://bridges/scenes/0_Tutorial.tscn",
+	BridgeEdge.new(1,2): "res://bridges/scenes/1_FrogHazardLevel.tscn"
 }
 
 # queries dictionary of available bridge-level for requested level

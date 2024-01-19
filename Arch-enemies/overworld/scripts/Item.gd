@@ -10,12 +10,10 @@ class_name Item
 
 # denotes available items to represent those internally
 enum ItemType {
-	HONEY,
-	FLUTE,
+	EVIDENCE,
+	EGG,
 	HAZELNUT,
-	TASTY_LEAVES,
-	SILK_SPOOL,
-	STONE,
+	FLIES,
 	NONE
 }
 
@@ -41,18 +39,14 @@ func _init(new_item_type:ItemType):
 # set description according to given itemType:
 func obtain_item_description(type:ItemType) -> String:
 	match type:
-		ItemType.HONEY:
-			return "Sweet honey"
-		ItemType.FLUTE:
-			return "Feeling like playing with me?"
+		ItemType.EVIDENCE:
+			return "THEY ARE ALL IN ON IT"
+		ItemType.EGG:
+			return "Very noticeably not a hazlenut"
 		ItemType.HAZELNUT:
 			return "A tasteful hazelnut"
-		ItemType.TASTY_LEAVES:
-			return "Tasty leaves of unspecified tree origin"
-		ItemType.SILK_SPOOL:
-			return "Silk spool"
-		ItemType.STONE:
-			return "Just a stone :("
+		ItemType.FLIES:
+			return "A bunch of flies from the river"
 		_: # NONE
 			return ""
 
@@ -79,18 +73,14 @@ func set_amount(newamount:int):
 # returns string representation of obtained item 
 static func set_item_name(type:ItemType) -> String:
 	match type:
-		ItemType.HONEY:
-			return "Honey"
-		ItemType.FLUTE:
-			return "Flute"
+		ItemType.EVIDENCE:
+			return "Evidence"
+		ItemType.EGG:
+			return "Egg"
 		ItemType.HAZELNUT:
 			return "Hazelnut"
-		ItemType.TASTY_LEAVES:
-			return "Tasty leaves"
-		ItemType.SILK_SPOOL:
-			return "Silk spool"
-		ItemType.STONE:
-			return "Stone"
+		ItemType.FLIES:
+			return "Flies"
 		ItemType.NONE:
 			return "None"
 		_: # NONE
@@ -99,18 +89,14 @@ static func set_item_name(type:ItemType) -> String:
 
 static func item_type_to_string(item_type: ItemType) -> String:
 	match item_type:
-		ItemType.HONEY:
-			return "HONEY"
-		ItemType.FLUTE:
-			return "FLUTE"
+		ItemType.EVIDENCE:
+			return "EVIDENCE"
+		ItemType.EGG:
+			return "EGG"
 		ItemType.HAZELNUT:
 			return "HAZELNUT"
-		ItemType.TASTY_LEAVES:
-			return "TASTY_LEAVES"
-		ItemType.SILK_SPOOL:
-			return "SILK_SPOOL"
-		ItemType.STONE:
-			return "STONE"
+		ItemType.FLIES:
+			return "FLIES"
 		ItemType.NONE:
 			return "NONE"
 		_:
@@ -121,18 +107,14 @@ static func item_type_to_string(item_type: ItemType) -> String:
 # returns obtained type
 static func string_to_item_type(str):
 	match str:
-		"HONEY": 
-			return ItemType.HONEY
-		"FLUTE": 
-			return ItemType.FLUTE
+		"EVIDENCE": 
+			return ItemType.EVIDENCE
+		"EGG": 
+			return ItemType.EGG
 		"HAZELNUT": 
 			return ItemType.HAZELNUT
-		"TASTY_LEAVES": 
-			return ItemType.TASTY_LEAVES
-		"SILK_SPOOL": 
-			return ItemType.SILK_SPOOL
-		"STONE": 
-			return ItemType.STONE
+		"FLIES": 
+			return ItemType.FLIES
 		"NONE": 
 			return ItemType.NONE
 		_:

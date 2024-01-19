@@ -5,10 +5,10 @@
 [ext_resource type="PackedScene" uid="uid://cgvraulefjyn8" path="res://overworld/ui/overworld_ui/overworld_ui.tscn" id="4_4hawq"]
 [ext_resource type="PackedScene" uid="uid://dbffmmmqyknux" path="res://overworld/dialogue/DialogueUI.tscn" id="4_fdft7"]
 [ext_resource type="PackedScene" uid="uid://bj3a1sw80l6wj" path="res://overworld/entities/interaction_overworld/item_interaction.tscn" id="6_66i44"]
-[ext_resource type="PackedScene" uid="uid://5llfgi2ysvie" path="res://overworld/entities/interaction_overworld/bridge_interaction.tscn" id="6_iairi"]
 [ext_resource type="PackedScene" uid="uid://drn1loe1wknbq" path="res://overworld/entities/interaction_overworld/npc_interaction.tscn" id="7_33ud0"]
 [ext_resource type="Texture2D" uid="uid://08plwlb60wib" path="res://assets/art/bridge_dummy_failure.png" id="8_g5nw6"]
 [ext_resource type="PackedScene" uid="uid://bettv6p5clh6t" path="res://overworld/entities/interaction_overworld/template/horizontal_bridge_template.tscn" id="9_jpn0u"]
+[ext_resource type="PackedScene" uid="uid://0isb2xg4n684" path="res://overworld/entities/interaction_overworld/template/horizontal_bridge_part_with_collision.tscn" id="9_ux7la"]
 [ext_resource type="PackedScene" uid="uid://bypchr8htkr4e" path="res://overworld/entities/interaction_overworld/template/vertical_bridge_template.tscn" id="10_5ad47"]
 [ext_resource type="PackedScene" uid="uid://b0v6vdudnx0vh" path="res://overworld/entities/interaction_overworld/template/vertical_bridge_part_with_collision.tscn" id="11_byiqb"]
 
@@ -32,13 +32,12 @@ reward_edge_dest = 1
 [node name="DialogueGui" parent="." instance=ExtResource("4_fdft7")]
 visible = false
 
-[node name="item_interaction" parent="." instance=ExtResource("6_66i44")]
+[node name="Egg" parent="." instance=ExtResource("6_66i44")]
 position = Vector2(312, 402)
-item_type = 0
 item_dialogue_success = "you got an item!"
 item_dialogue_failure = "no item found"
 
-[node name="item_interaction2" parent="." instance=ExtResource("6_66i44")]
+[node name="Flies" parent="." instance=ExtResource("6_66i44")]
 position = Vector2(348, 255)
 item_type = 3
 item_dialogue_success = "item? "
@@ -64,31 +63,6 @@ required_npc_id = 4
 quest_reward = 0
 reward_item = 1
 
-[node name="bridge_interaction3" parent="." instance=ExtResource("6_iairi")]
-position = Vector2(316, 222)
-dest_island_id = 2
-bridge_description = "this connects 2 and 0 "
-bridge_sprite_direction = 2
-
-[node name="bridge_collision" parent="bridge_interaction3/bridge_collision_shape" index="0"]
-position = Vector2(3, -12)
-
-[node name="NpcInteraction" parent="bridge_interaction3" instance=ExtResource("7_33ud0")]
-position = Vector2(-81, 209)
-npc_name = "glnnn"
-npc_id = 3
-npc_animal_type = 1
-quest_type = 0
-required_item = 2
-quest_reward = 1
-
-[node name="Label" type="Label" parent="bridge_interaction3"]
-offset_left = -34.0
-offset_top = -50.0
-offset_right = 43.0
-offset_bottom = -27.0
-text = "0->2 play!"
-
 [node name="NpcInteraction3" parent="." instance=ExtResource("7_33ud0")]
 position = Vector2(481, 420)
 npc_name = "esther"
@@ -96,51 +70,78 @@ npc_id = 4
 npc_animal_type = 3
 npc_special_sprite = ExtResource("8_g5nw6")
 
-[node name="BridgeTemplate" parent="." instance=ExtResource("9_jpn0u")]
+[node name="BridgeTutorial->Main" parent="." instance=ExtResource("9_jpn0u")]
 position = Vector2(154, 494)
 
-[node name="bridge_interaction" parent="BridgeTemplate/left_bridge_start" index="0"]
+[node name="bridge_interaction" parent="BridgeTutorial->Main/left_bridge_start" index="0"]
+bridge_reward = 3
 dest_island_id = 1
 
-[node name="right_bridge_start" parent="BridgeTemplate" index="1"]
+[node name="right_bridge_start" parent="BridgeTutorial->Main" index="1"]
 position = Vector2(-33, 0)
 
-[node name="bridge_interaction2" parent="BridgeTemplate/right_bridge_start" index="0"]
+[node name="bridge_interaction2" parent="BridgeTutorial->Main/right_bridge_start" index="0"]
+bridge_reward = 3
 start_island_id = 1
 
-[node name="solved_with_all_quests" parent="." instance=ExtResource("10_5ad47")]
-position = Vector2(315, 206)
+[node name="BridgeMain->Frogs" parent="." instance=ExtResource("9_jpn0u")]
+position = Vector2(458, 270)
 
-[node name="bridge_interaction" parent="solved_with_all_quests/bridge_bottom" index="0"]
-start_island_id = 4
+[node name="bridge_interaction" parent="BridgeMain->Frogs/left_bridge_start" index="0"]
+start_island_id = 1
+dest_island_id = 2
+
+[node name="bridge_interaction2" parent="BridgeMain->Frogs/right_bridge_start" index="0"]
+position = Vector2(111, 2)
+start_island_id = 2
 dest_island_id = 1
 
-[node name="BridgePartWithCollision2" parent="solved_with_all_quests/bridge_bottom/bridge_interaction/bridge_parts" index="3" instance=ExtResource("11_byiqb")]
-position = Vector2(-1, -72)
+[node name="horizontal_bridge_start" parent="BridgeMain->Frogs/right_bridge_start/bridge_interaction2/bridge_parts" index="0"]
+metadata/_edit_use_anchors_ = true
 
-[node name="bridge_top" parent="solved_with_all_quests" index="1"]
-position = Vector2(0, -27)
+[node name="horizontal_bridge_start2" parent="BridgeMain->Frogs/right_bridge_start/bridge_interaction2/bridge_parts" index="1"]
+metadata/_edit_use_anchors_ = true
 
-[node name="bridge_interaction2" parent="solved_with_all_quests/bridge_top" index="0"]
-position = Vector2(0, -89)
+[node name="VerticalBridgePartWithCollision2" parent="BridgeMain->Frogs/right_bridge_start/bridge_interaction2/bridge_parts" index="3" instance=ExtResource("9_ux7la")]
+position = Vector2(-68, 1)
+
+[node name="VerticalBridgePartWithCollision3" parent="BridgeMain->Frogs/right_bridge_start/bridge_interaction2/bridge_parts" index="4" instance=ExtResource("9_ux7la")]
+position = Vector2(-100, 1)
+
+[node name="BridgeMain->Final" parent="." instance=ExtResource("10_5ad47")]
+position = Vector2(316, 206)
+
+[node name="bridge_interaction" parent="BridgeMain->Final/bridge_bottom" index="0"]
 start_island_id = 1
-dest_island_id = 4
+dest_island_id = 3
 
-[node name="vertical_bridge_start" parent="solved_with_all_quests/bridge_top/bridge_interaction2/bridge_parts" index="0"]
+[node name="BridgePartWithCollision2" parent="BridgeMain->Final/bridge_bottom/bridge_interaction/bridge_parts" index="3" instance=ExtResource("11_byiqb")]
+position = Vector2(-2, -72)
+
+[node name="bridge_interaction2" parent="BridgeMain->Final/bridge_top" index="0"]
+position = Vector2(-1, -116)
+bridge_reward = 3
+start_island_id = 3
+dest_island_id = 1
+
+[node name="vertical_bridge_start" parent="BridgeMain->Final/bridge_top/bridge_interaction2/bridge_parts" index="0"]
 metadata/_edit_use_anchors_ = true
 
-[node name="vertical_bridge_start2" parent="solved_with_all_quests/bridge_top/bridge_interaction2/bridge_parts" index="1"]
+[node name="vertical_bridge_start2" parent="BridgeMain->Final/bridge_top/bridge_interaction2/bridge_parts" index="1"]
 metadata/_edit_use_anchors_ = true
 
-[editable path="bridge_interaction3"]
-[editable path="bridge_interaction3/interactionspot"]
-[editable path="BridgeTemplate"]
-[editable path="BridgeTemplate/left_bridge_start/bridge_interaction"]
-[editable path="BridgeTemplate/left_bridge_start/bridge_interaction/interactionspot"]
-[editable path="BridgeTemplate/right_bridge_start/bridge_interaction2"]
-[editable path="BridgeTemplate/right_bridge_start/bridge_interaction2/interactionspot"]
-[editable path="solved_with_all_quests"]
-[editable path="solved_with_all_quests/bridge_bottom/bridge_interaction"]
-[editable path="solved_with_all_quests/bridge_bottom/bridge_interaction/interactionspot"]
-[editable path="solved_with_all_quests/bridge_top/bridge_interaction2"]
-[editable path="solved_with_all_quests/bridge_top/bridge_interaction2/interactionspot"]
+[editable path="BridgeTutorial->Main"]
+[editable path="BridgeTutorial->Main/left_bridge_start/bridge_interaction"]
+[editable path="BridgeTutorial->Main/left_bridge_start/bridge_interaction/interactionspot"]
+[editable path="BridgeTutorial->Main/right_bridge_start/bridge_interaction2"]
+[editable path="BridgeTutorial->Main/right_bridge_start/bridge_interaction2/interactionspot"]
+[editable path="BridgeMain->Frogs"]
+[editable path="BridgeMain->Frogs/left_bridge_start/bridge_interaction"]
+[editable path="BridgeMain->Frogs/left_bridge_start/bridge_interaction/interactionspot"]
+[editable path="BridgeMain->Frogs/right_bridge_start/bridge_interaction2"]
+[editable path="BridgeMain->Frogs/right_bridge_start/bridge_interaction2/interactionspot"]
+[editable path="BridgeMain->Final"]
+[editable path="BridgeMain->Final/bridge_bottom/bridge_interaction"]
+[editable path="BridgeMain->Final/bridge_bottom/bridge_interaction/interactionspot"]
+[editable path="BridgeMain->Final/bridge_top/bridge_interaction2"]
+[editable path="BridgeMain->Final/bridge_top/bridge_interaction2/interactionspot"]
