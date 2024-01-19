@@ -858,11 +858,11 @@ script = ExtResource("12_re1q8")
 Grid_node_reference = NodePath("../../..")
 
 [node name="Drag_or_Fox" type="CheckButton" parent="Grid/Control"]
-layout_mode = 0
-offset_left = 155.0
-offset_top = 5.0
-offset_right = 287.0
-offset_bottom = 36.0
+layout_mode = 1
+offset_left = 154.0
+offset_top = 3.0
+offset_right = 286.0
+offset_bottom = 34.0
 scale = Vector2(0.5, 0.5)
 theme = ExtResource("16_htx1q")
 text = "drag mode"
