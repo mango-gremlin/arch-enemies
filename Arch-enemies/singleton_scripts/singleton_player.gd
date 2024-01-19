@@ -127,10 +127,10 @@ func add_to_animal_inventory(new_animal:Animal.AnimalType, quantity:int = 1):
 # used for debugging only
 func set_test_animal_inventory() -> Dictionary:
 	var inventory:Dictionary = Animal.init_animal_inventory()
-	inventory[Animal.AnimalType.DEER] = 4
-	inventory[Animal.AnimalType.SNAKE] = 4
-	inventory[Animal.AnimalType.SPIDER] = 4
-	inventory[Animal.AnimalType.SQUIRREL] = 4
+	inventory[Animal.AnimalType.DEER] = 99
+	inventory[Animal.AnimalType.SPIDER] = 99
+	inventory[Animal.AnimalType.SNAKE] = 99
+	inventory[Animal.AnimalType.SQUIRREL] = 99
 	return inventory 
 
 

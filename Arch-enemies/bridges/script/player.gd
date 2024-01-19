@@ -62,6 +62,7 @@ func _physics_process(delta):
 func reset_player():
 	velocity = Vector2.ZERO
 	global_position = start_position
+	animated_sprite.play("idle")
 
 # if fox comes in contact with goal zone
 func _on_goal_area_2d_body_entered(_body):

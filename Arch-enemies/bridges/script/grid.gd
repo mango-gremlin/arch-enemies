@@ -423,7 +423,7 @@ func _process(delta):
 		
 	# pressing "esc" opens the pause-menu
 	if Input.is_action_just_pressed("open_menu"):
-		var pause_menu = get_parent().find_child("pause_menu")
+		var pause_menu = get_parent().find_child("bridges_pause_menu")
 		pause_menu.visible = not pause_menu.visible
 
 # --- / 
@@ -444,7 +444,7 @@ func restore_animal_from_placed_animals(placed_animals:Dictionary):
 # takes local inventory, duplicates it and replace 
 # singleton animal_inventory with it
 func set_global_animal_inventory(animal_inventory:Dictionary):
-	SingletonPlayer.set_item_inventory(animal_inventory.duplicate(true))
+	SingletonPlayer.set_animal_inventory(animal_inventory.duplicate(true))
 
 #updates the ui-counters for the inventory
 func update_inventory():
@@ -516,4 +516,5 @@ func _on_camera_2d_send_zoom(zoom):
 
 func _on_goal_menu_level_solved():
 	play_sound.emit("VICTORY")
+	print("updating inventory of overworld")
 	set_global_animal_inventory(start_animals)
