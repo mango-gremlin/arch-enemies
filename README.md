@@ -42,6 +42,9 @@ We are using an MIT License for this game. For more information, see [here](http
 - Mara Cockburn
 - to be expanded later
 
+### Font
+yoster island - by [codeman38](http://www.zone38.net/ )
+
 ### Libraries
 
 ### Game Engine
