@@ -22,7 +22,7 @@ script = ExtResource("1_pwtu4")
 stream = ExtResource("11_vdqf6")
 autoplay = true
 
-[node name="Dialogue Sounds" type="AudioStreamPlayer2D" parent="."]
+[node name="Dialogue_Sounds" type="AudioStreamPlayer2D" parent="."]
 script = ExtResource("3_h67g3")
 
 [node name="Walking Sounds" type="AudioStreamPlayer2D" parent="."]
