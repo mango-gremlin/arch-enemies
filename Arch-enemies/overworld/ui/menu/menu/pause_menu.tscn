@@ -1,6 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://cv4r3ql0yg1la"]
+[gd_scene load_steps=11 format=3 uid="uid://cv4r3ql0yg1la"]
 
 [ext_resource type="Script" path="res://overworld/ui/menu/menu/pause_menu.gd" id="1_vyga1"]
+[ext_resource type="Theme" uid="uid://d2ijyc316xeom" path="res://assets/art/ui_elements/ui_theme.tres" id="2_ugltm"]
+[ext_resource type="Texture2D" uid="uid://ba3leqm154y12" path="res://assets/art/ui_elements/menu_container.png" id="3_kvu7j"]
+[ext_resource type="Texture2D" uid="uid://y0rbyb8ymrue" path="res://assets/art/ui_elements/clouds/cloud_1.png" id="4_s2fjd"]
+[ext_resource type="Texture2D" uid="uid://tkvu5brhxdg2" path="res://assets/art/ui_elements/clouds/cloud_2.png" id="5_2wpt6"]
+[ext_resource type="Texture2D" uid="uid://hfchs1d4pd74" path="res://assets/art/ui_elements/clouds/cloud_3.png" id="6_rkvmq"]
+[ext_resource type="Texture2D" uid="uid://bq8h21mq3lqon" path="res://assets/art/ui_elements/clouds/cloud_4.png" id="7_3035v"]
+[ext_resource type="Texture2D" uid="uid://bor1f6u6tjguy" path="res://assets/art/ui_elements/clouds/cloud_5.png" id="8_frufy"]
+[ext_resource type="Texture2D" uid="uid://bqtk5n8foclwk" path="res://assets/art/ui_elements/clouds/cloud_6.png" id="9_hdjwq"]
+[ext_resource type="Texture2D" uid="uid://bt3l6nwayw6ai" path="res://assets/art/ui_elements/clouds/cloud_7.png" id="10_4l0q1"]
 
 [node name="pause_menu" type="Control"]
 layout_mode = 3
@@ -12,61 +21,86 @@ grow_vertical = 2
 script = ExtResource("1_vyga1")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.145098, 0.0352941, 0.270588, 1)
+layout_mode = 0
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 1151.0
+offset_bottom = 647.0
+color = Color(0.313726, 0.882353, 0.890196, 1)
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
 layout_mode = 2
+offset_left = 465.0
+offset_top = 210.0
+offset_right = 537.0
+offset_bottom = 282.0
+scale = Vector2(3, 3)
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="VBoxContainer2"]
+z_index = 1
 layout_mode = 2
+theme = ExtResource("2_ugltm")
 text = "PAUSED
 "
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="overworld" type="Button" parent="VBoxContainer2"]
+z_index = 1
 layout_mode = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-
-[node name="overworld" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/outline_size = 0
-theme_override_font_sizes/font_size = 56
+theme = ExtResource("2_ugltm")
 text = "Overworld"
 
-[node name="Options" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="Options" type="Button" parent="VBoxContainer2"]
+z_index = 1
 layout_mode = 2
-theme_override_constants/outline_size = 0
-theme_override_font_sizes/font_size = 56
+theme = ExtResource("2_ugltm")
 text = "Options"
 
-[node name="Exit" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="Exit" type="Button" parent="VBoxContainer2"]
+z_index = 1
 layout_mode = 2
-theme_override_constants/outline_size = 0
-theme_override_font_sizes/font_size = 56
+theme = ExtResource("2_ugltm")
 text = "Exit"
 
-[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/overworld" to="." method="_on_overworld_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
+[node name="MenuContainer" type="Sprite2D" parent="."]
+position = Vector2(573, 318)
+scale = Vector2(6.5, 6.5)
+texture = ExtResource("3_kvu7j")
+
+[node name="Cloud1" type="Sprite2D" parent="."]
+position = Vector2(193, 132)
+scale = Vector2(8, 8)
+texture = ExtResource("4_s2fjd")
+
+[node name="Cloud2" type="Sprite2D" parent="."]
+position = Vector2(837, 80)
+scale = Vector2(8, 8)
+texture = ExtResource("5_2wpt6")
+
+[node name="Cloud3" type="Sprite2D" parent="."]
+position = Vector2(903, 211)
+scale = Vector2(8, 8)
+texture = ExtResource("6_rkvmq")
+
+[node name="Cloud4" type="Sprite2D" parent="."]
+position = Vector2(341, 319)
+scale = Vector2(8, 8)
+texture = ExtResource("7_3035v")
+
+[node name="Cloud5" type="Sprite2D" parent="."]
+position = Vector2(1041, 138)
+scale = Vector2(8, 8)
+texture = ExtResource("8_frufy")
+
+[node name="Cloud6" type="Sprite2D" parent="."]
+position = Vector2(348, 54)
+scale = Vector2(8, 8)
+texture = ExtResource("9_hdjwq")
+
+[node name="Cloud7" type="Sprite2D" parent="."]
+position = Vector2(139, 255)
+scale = Vector2(8, 8)
+texture = ExtResource("10_4l0q1")
+
+[connection signal="pressed" from="VBoxContainer2/overworld" to="." method="_on_overworld_pressed"]
+[connection signal="pressed" from="VBoxContainer2/Exit" to="." method="_on_exit_pressed"]
