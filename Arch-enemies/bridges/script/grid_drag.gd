@@ -60,6 +60,7 @@ func _get_drag_data(at_position):
 			#If we are not trying to drag the TRect that represent the grid we create the preview
 			preview.expand = true
 			preview.texture = sprite
+			#We also emit the appropiate sound
 			play_sound.emit(animal)
 			#The actualy size of the sprite depends on the animal, this is what the "animal" var is used
 			#for, to identify the animal.
@@ -115,6 +116,7 @@ func _drop_data(at_position, data):
 	var position = Vector2(int(get_global_mouse_position().x /square_size), 
 	int(get_global_mouse_position().y /square_size))
 	update_grid.emit(position, data)
+	#Also play the appropiate sound
 	play_sound.emit("DROP")
 
 func _on_grid_current_grid(current_grid):

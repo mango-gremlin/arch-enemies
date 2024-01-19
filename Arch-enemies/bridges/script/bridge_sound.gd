@@ -1,14 +1,15 @@
 extends AudioStreamPlayer2D
+#First we need to load all the sounds we intend to use
 var squirrel = preload("res://assets/sound/Squirrel.wav")
 var death = preload("res://assets/sound/Death.wav")
 var drop = preload("res://assets/sound/Drop.wav")
 var deer = preload("res://assets/sound/Deer.wav")
 var jump = preload("res://assets/sound/Jump.wav")
 var spider = preload("res://assets/sound/Spider.wav")
-var step = preload("res://assets/sound/Step.wav")
 var snake = preload("res://assets/sound/Snake.wav")
 
 func play_sound(sound:String) -> void:
+	#Here we match the sound we are supposed to be playing
 	match sound:
 		"DEATH":
 			stream = death
@@ -22,10 +23,9 @@ func play_sound(sound:String) -> void:
 			stream = snake
 		"SPIDER":
 			stream = spider
-		"STEP":
-			stream = step
 		"SQUIRREL":
 			stream = squirrel
+	#Then we play it
 	playing = true
 
 # Called when the node enters the scene tree for the first time.
