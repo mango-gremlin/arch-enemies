@@ -902,6 +902,10 @@ position = Vector2(320, 86)
 
 [node name="bridges_pause_menu" parent="Grid" instance=ExtResource("20_1ny00")]
 visible = false
+offset_left = 193.0
+offset_top = 108.0
+offset_right = 193.0
+offset_bottom = 108.0
 
 [node name="animal_inventory_counter" type="HBoxContainer" parent="Grid"]
 offset_top = 38.0

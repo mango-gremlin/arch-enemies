@@ -903,6 +903,11 @@ position = Vector2(340, 95)
 
 [node name="bridges_pause_menu" parent="Grid" instance=ExtResource("20_20jtq")]
 visible = false
+offset_left = 288.0
+offset_top = 161.0
+offset_right = 288.0
+offset_bottom = 161.0
+scale = Vector2(1.5, 1.5)
 
 [node name="animal_inventory_counter" type="HBoxContainer" parent="Grid"]
 offset_top = 38.0
