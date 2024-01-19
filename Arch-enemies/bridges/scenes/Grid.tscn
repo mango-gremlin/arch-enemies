@@ -788,6 +788,7 @@ script = ExtResource("1_vkapa")
 
 [node name="Background Music" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_3o2us")
+volume_db = -10.0
 autoplay = true
 
 [node name="Sound Effects" type="AudioStreamPlayer2D" parent="."]
