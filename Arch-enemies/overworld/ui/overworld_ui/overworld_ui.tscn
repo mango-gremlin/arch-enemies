@@ -1,26 +1,165 @@
-[gd_scene load_steps=3 format=3 uid="uid://cgvraulefjyn8"]
+[gd_scene load_steps=16 format=3 uid="uid://cgvraulefjyn8"]
 
 [ext_resource type="Script" path="res://overworld/ui/overworld_ui/overworld_ui.gd" id="1_8rwqf"]
 [ext_resource type="Theme" uid="uid://d2ijyc316xeom" path="res://assets/art/ui_elements/ui_theme.tres" id="2_bn686"]
+[ext_resource type="Texture2D" uid="uid://6mcb7hf0rp0k" path="res://assets/art/ui_elements/Box_border_side.png" id="3_wm8bd"]
+[ext_resource type="Texture2D" uid="uid://b00ykicd4nlw1" path="res://assets/art/ui_elements/DialogueBox_outline.png" id="4_7h676"]
+[ext_resource type="Texture2D" uid="uid://dwu3b8hug0u0v" path="res://assets/art/ui_elements/button_hover.png" id="5_eoylr"]
+[ext_resource type="Texture2D" uid="uid://dh8jq38uahlv8" path="res://assets/art/objects/overworld_items/item_egg.png" id="6_fpsi7"]
+[ext_resource type="Texture2D" uid="uid://dgqdvwfwxc7bf" path="res://assets/art/objects/overworld_items/item_hazelnut.png" id="7_l70tl"]
+[ext_resource type="Texture2D" uid="uid://c113ngm1rnuj0" path="res://assets/art/characters/deer.png" id="7_lchfn"]
+[ext_resource type="Texture2D" uid="uid://cvd7iwhystlw6" path="res://assets/art/objects/overworld_items/item_fly.png" id="8_p1k30"]
+[ext_resource type="Texture2D" uid="uid://de7iwnvbsu4tp" path="res://assets/art/objects/overworld_items/item_evidence.png" id="9_qbalm"]
+[ext_resource type="Texture2D" uid="uid://0j6i0mpsh8hq" path="res://assets/art/characters/snek.png" id="11_m4nek"]
+[ext_resource type="Texture2D" uid="uid://xd2wfewwwcqc" path="res://assets/art/characters/squirrel.png" id="12_yo77q"]
+[ext_resource type="Texture2D" uid="uid://bxrt2ulp85yuy" path="res://assets/art/characters/spider.png" id="13_0ukdi"]
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qfba4"]
+texture = ExtResource("4_7h676")
+texture_margin_top = 1.0
+texture_margin_bottom = 1.0
+expand_margin_left = 10.0
+expand_margin_right = 10.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6awh2"]
+texture = ExtResource("5_eoylr")
+texture_margin_left = 5.0
+texture_margin_top = 2.0
+texture_margin_right = 5.0
+texture_margin_bottom = 2.0
 
 [node name="overworld_ui" type="CanvasLayer"]
 script = ExtResource("1_8rwqf")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
-anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_bn686")
 
-[node name="MarginContainer" type="MarginContainer" parent="Control"]
+[node name="Itembox" type="Panel" parent="Control"]
+layout_mode = 2
+offset_left = 50.0
+offset_top = 50.0
+offset_right = 176.0
+offset_bottom = 240.0
+theme = ExtResource("2_bn686")
+theme_override_styles/panel = SubResource("StyleBoxTexture_qfba4")
+
+[node name="TextureRect3" type="TextureRect" parent="Control/Itembox"]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 189.0
+offset_right = 54.0
+offset_bottom = 194.0
+scale = Vector2(4, 4)
+texture = ExtResource("3_wm8bd")
+flip_h = true
+
+[node name="TextureRect2" type="TextureRect" parent="Control/Itembox"]
+layout_mode = 0
+offset_left = -27.0
+offset_top = 189.0
+offset_right = 6.0
+offset_bottom = 194.0
+scale = Vector2(4, 4)
+texture = ExtResource("3_wm8bd")
+
+[node name="TextureRect" type="TextureRect" parent="Control/Itembox"]
+layout_mode = 0
+offset_left = -27.0
+offset_top = -19.0
+offset_right = 6.0
+offset_bottom = -14.0
+scale = Vector2(4, 4)
+texture = ExtResource("3_wm8bd")
+
+[node name="TextureRect4" type="TextureRect" parent="Control/Itembox"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = -19.0
+offset_right = 53.0
+offset_bottom = -14.0
+scale = Vector2(4, 4)
+texture = ExtResource("3_wm8bd")
+flip_h = true
+
+[node name="Animalbox" type="Panel" parent="Control"]
+layout_mode = 2
+offset_left = 1003.0
+offset_top = 269.0
+offset_right = 1112.0
+offset_bottom = 566.0
+theme = ExtResource("2_bn686")
+theme_override_styles/panel = SubResource("StyleBoxTexture_qfba4")
+
+[node name="TextureRect3" type="TextureRect" parent="Control/Animalbox"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 297.0
+offset_right = 38.0
+offset_bottom = 302.0
+scale = Vector2(4, 4)
+texture = ExtResource("3_wm8bd")
+flip_h = true
+
+[node name="TextureRect2" type="TextureRect" parent="Control/Animalbox"]
+layout_mode = 0
+offset_left = -27.0
+offset_top = 297.0
+offset_right = 6.0
+offset_bottom = 302.0
+scale = Vector2(4, 4)
+texture = ExtResource("3_wm8bd")
+
+[node name="TextureRect" type="TextureRect" parent="Control/Animalbox"]
+layout_mode = 0
+offset_left = -27.0
+offset_top = -19.0
+offset_right = 6.0
+offset_bottom = -14.0
+scale = Vector2(4, 4)
+texture = ExtResource("3_wm8bd")
+
+[node name="TextureRect4" type="TextureRect" parent="Control/Animalbox"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = -19.0
+offset_right = 38.0
+offset_bottom = -14.0
+scale = Vector2(4, 4)
+texture = ExtResource("3_wm8bd")
+flip_h = true
+
+[node name="Quests" type="HBoxContainer" parent="Control"]
+layout_mode = 2
+offset_left = 814.0
+offset_top = 12.0
+offset_right = 1013.0
+offset_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Quests"]
+layout_mode = 2
+
+[node name="quest_descriptor" type="Label" parent="Control/Quests/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_bn686")
+theme_override_styles/normal = SubResource("StyleBoxTexture_6awh2")
+text = "Quests :"
+
+[node name="quest_list" type="Label" parent="Control/Quests/VBoxContainer"]
+layout_mode = 2
+
+[node name="Items" type="MarginContainer" parent="Control"]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = -1
+anchor_right = 0.26
+anchor_bottom = 0.67
+offset_left = 16.0
+offset_right = -86.52
+offset_bottom = -112.16
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 50
@@ -28,56 +167,182 @@ theme_override_constants/margin_top = 50
 theme_override_constants/margin_right = 50
 theme_override_constants/margin_bottom = 50
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Items"]
+custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 size_flags_vertical = 0
+theme = ExtResource("2_bn686")
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="Control/MarginContainer/VBoxContainer"]
+[node name="BoxContainer" type="BoxContainer" parent="Control/Items/VBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 
-[node name="PlayerName_Descriptor" type="Label" parent="Control/MarginContainer/VBoxContainer/HBoxContainer2"]
+[node name="item_descriptor" type="Label" parent="Control/Items/VBoxContainer"]
+visible = false
 layout_mode = 2
-text = "PlayerName:"
+theme_override_font_sizes/font_size = 24
+text = "Inventory: "
 
-[node name="PlayerName" type="Label" parent="Control/MarginContainer/VBoxContainer/HBoxContainer2"]
-unique_name_in_owner = true
+[node name="GridContainer" type="GridContainer" parent="Control/Items/VBoxContainer"]
+layout_mode = 2
+columns = 2
+
+[node name="egg" type="TextureRect" parent="Control/Items/VBoxContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("6_fpsi7")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="egg_number" type="Label" parent="Control/Items/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "x20"
+
+[node name="evidence" type="TextureRect" parent="Control/Items/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+texture = ExtResource("9_qbalm")
+stretch_mode = 5
+
+[node name="evidence_number" type="Label" parent="Control/Items/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "x20"
+
+[node name="fly" type="TextureRect" parent="Control/Items/VBoxContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("8_p1k30")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="fly_number" type="Label" parent="Control/Items/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "x20"
+
+[node name="hazelnut" type="TextureRect" parent="Control/Items/VBoxContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("7_l70tl")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="hazelnut_number" type="Label" parent="Control/Items/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "x20"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Control/Items/VBoxContainer"]
+visible = false
 layout_mode = 2
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="Control/MarginContainer/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Items/VBoxContainer/HBoxContainer3"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer/VBoxContainer/HBoxContainer3"]
+[node name="item_list" type="Label" parent="Control/Items/VBoxContainer/HBoxContainer3/VBoxContainer"]
 layout_mode = 2
 
-[node name="item_descriptor" type="Label" parent="Control/MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer"]
-layout_mode = 2
-text = "avail Items: "
+[node name="Animals2" type="MarginContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.26
+anchor_bottom = 0.67
+offset_left = 950.0
+offset_top = 231.0
+offset_right = 865.48
+offset_bottom = 215.84
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
 
-[node name="item_list" type="Label" parent="Control/MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer"]
+[node name="Animals" type="GridContainer" parent="Control/Animals2"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+columns = 2
+
+[node name="deer" type="TextureRect" parent="Control/Animals2/Animals"]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+texture = ExtResource("7_lchfn")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="deer_number" type="Label" parent="Control/Animals2/Animals"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "x20"
+
+[node name="snek" type="TextureRect" parent="Control/Animals2/Animals"]
+layout_mode = 2
+texture = ExtResource("11_m4nek")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="snek_number" type="Label" parent="Control/Animals2/Animals"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "x20"
+
+[node name="BoxContainer" type="BoxContainer" parent="Control/Animals2/Animals"]
+custom_minimum_size = Vector2(0, 7)
 layout_mode = 2
 
-[node name="HBoxContainer4" type="HBoxContainer" parent="Control/MarginContainer/VBoxContainer"]
+[node name="BoxContainer2" type="BoxContainer" parent="Control/Animals2/Animals"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer/VBoxContainer/HBoxContainer4"]
+[node name="squirrel" type="TextureRect" parent="Control/Animals2/Animals"]
+custom_minimum_size = Vector2(40, 50)
+layout_mode = 2
+texture = ExtResource("12_yo77q")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="squirrel_number" type="Label" parent="Control/Animals2/Animals"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "x20"
+
+[node name="BoxContainer3" type="BoxContainer" parent="Control/Animals2/Animals"]
+custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
-[node name="animal_descriptor" type="Label" parent="Control/MarginContainer/VBoxContainer/HBoxContainer4/VBoxContainer"]
-layout_mode = 2
-text = "avail Animals:"
-
-[node name="animal_list" type="Label" parent="Control/MarginContainer/VBoxContainer/HBoxContainer4/VBoxContainer"]
+[node name="BoxContainer4" type="BoxContainer" parent="Control/Animals2/Animals"]
 layout_mode = 2
 
-[node name="HBoxContainer5" type="HBoxContainer" parent="Control/MarginContainer/VBoxContainer"]
+[node name="spider" type="TextureRect" parent="Control/Animals2/Animals"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+texture = ExtResource("13_0ukdi")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="spider_number" type="Label" parent="Control/Animals2/Animals"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "x20"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Animals2"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 0
+theme = ExtResource("2_bn686")
+
+[node name="BoxContainer" type="BoxContainer" parent="Control/Animals2/VBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer/VBoxContainer/HBoxContainer5"]
+[node name="HBoxContainer4" type="HBoxContainer" parent="Control/Animals2/VBoxContainer"]
 layout_mode = 2
 
-[node name="quest_descriptor" type="Label" parent="Control/MarginContainer/VBoxContainer/HBoxContainer5/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Animals2/VBoxContainer/HBoxContainer4"]
 layout_mode = 2
-text = "Quests :"
 
-[node name="quest_list" type="Label" parent="Control/MarginContainer/VBoxContainer/HBoxContainer5/VBoxContainer"]
+[node name="animal_descriptor" type="Label" parent="Control/Animals2/VBoxContainer/HBoxContainer4/VBoxContainer"]
+visible = false
+layout_mode = 2
+text = "available Animals:"
+
+[node name="animal_list" type="Label" parent="Control/Animals2/VBoxContainer/HBoxContainer4/VBoxContainer"]
 layout_mode = 2

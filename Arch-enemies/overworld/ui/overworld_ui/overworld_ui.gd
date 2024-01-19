@@ -2,10 +2,10 @@ extends CanvasLayer
 
 class_name OverWorldUI
 
-@onready var playername_label = $Control/MarginContainer/VBoxContainer/HBoxContainer2/PlayerName
-@onready var item_list_label = $Control/MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer/item_list
-@onready var animal_list_label = $Control/MarginContainer/VBoxContainer/HBoxContainer4/VBoxContainer/animal_list
-@onready var quest_list_label = $Control/MarginContainer/VBoxContainer/HBoxContainer5/VBoxContainer/quest_list
+#@onready var playername_label = $Control/MarginContainer/VBoxContainer/HBoxContainer2/PlayerName
+@onready var item_list_label = $Control/Items/VBoxContainer/HBoxContainer3/VBoxContainer/item_list
+@onready var animal_list_label = $Control/Animals2/VBoxContainer/HBoxContainer4/VBoxContainer/animal_list
+@onready var quest_list_label = $Control/Quests/VBoxContainer/quest_list
 
 
 # Called when the node enters the scene tree for the first time.
