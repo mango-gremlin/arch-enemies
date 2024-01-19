@@ -12,9 +12,26 @@ anchors_preset = 0
 script = ExtResource("1_ym7wh")
 metadata/_edit_use_anchors_ = true
 
+[node name="BackgroundCenterV7" type="Sprite2D" parent="."]
+modulate = Color(0.498039, 0.498039, 0.498039, 1)
+z_index = 1
+position = Vector2(235, -118)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("2_0a5ka")
+centered = false
+
 [node name="BackgroundCenterV4" type="Sprite2D" parent="."]
 modulate = Color(0.498039, 0.498039, 0.498039, 1)
 z_index = 1
+position = Vector2(-238, -118)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("2_0a5ka")
+centered = false
+
+[node name="BackgroundCenterV6" type="Sprite2D" parent="."]
+modulate = Color(0.498039, 0.498039, 0.498039, 1)
+z_index = 1
+position = Vector2(-473, -118)
 scale = Vector2(1.2, 1.2)
 texture = ExtResource("2_0a5ka")
 centered = false
@@ -22,23 +39,22 @@ centered = false
 [node name="BackgroundCenterV5" type="Sprite2D" parent="."]
 modulate = Color(0.498039, 0.498039, 0.498039, 1)
 z_index = 1
-position = Vector2(236, 0)
+position = Vector2(-2, -118)
 scale = Vector2(1.2, 1.2)
 texture = ExtResource("2_0a5ka")
 centered = false
 
 [node name="MenuContainer" type="Sprite2D" parent="."]
 z_index = 1
-position = Vector2(195, 112.5)
 scale = Vector2(2.25, 2.25)
 texture = ExtResource("3_x8j61")
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="."]
 layout_mode = 2
-offset_left = 159.0
-offset_top = 79.0
-offset_right = 231.0
-offset_bottom = 151.0
+offset_left = -36.0
+offset_top = -33.0
+offset_right = 36.0
+offset_bottom = 39.0
 
 [node name="Label" type="Label" parent="VBoxContainer2"]
 z_index = 1
@@ -52,6 +68,7 @@ horizontal_alignment = 1
 z_index = 1
 layout_mode = 2
 theme = ExtResource("2_xkekq")
+theme_override_font_sizes/font_size = 12
 text = "Overworld"
 
 [node name="Options" type="Button" parent="VBoxContainer2"]

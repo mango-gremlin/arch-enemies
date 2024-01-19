@@ -900,7 +900,11 @@ scale = Vector2(1, 15)
 [node name="goal_menu" parent="Grid" instance=ExtResource("18_co2ox")]
 visible = false
 top_level = true
-scale = Vector2(1.40943, 1.33196)
+offset_left = 288.0
+offset_top = 161.0
+offset_right = -125.568
+offset_bottom = -83.296
+scale = Vector2(1.5, 1.5)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
@@ -918,16 +922,11 @@ position = Vector2(619, 73)
 
 [node name="bridges_pause_menu" parent="Grid" instance=ExtResource("20_20jtq")]
 visible = false
-scale = Vector2(1.38664, 1.28842)
-
-[node name="MenuContainer" parent="Grid/bridges_pause_menu" index="2"]
-position = Vector2(233.888, 107.973)
-
-[node name="VBoxContainer2" parent="Grid/bridges_pause_menu" index="3"]
-offset_left = 197.888
-offset_top = 74.4731
-offset_right = 269.888
-offset_bottom = 146.473
+offset_left = 288.0
+offset_top = 161.0
+offset_right = 288.0
+offset_bottom = 161.0
+scale = Vector2(1.5, 1.5)
 
 [node name="animal_inventory_counter" type="HBoxContainer" parent="Grid"]
 offset_top = 38.0
