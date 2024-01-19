@@ -25,6 +25,9 @@ enum DIRECTION {SIDE, FRONT, BACK}
 # TODO might be removed, for debugging only
 @onready var interactionLabel = $interactioncomponents/InteractLabel
 
+# signal for audio
+signal play_sound(sound)
+
 # saving when closed via Request of OS
 func _notification(what):
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
@@ -156,6 +159,10 @@ func execute_interaction():
 			# entering dialogue, disable movement
 			var quest_done:bool = SingletonPlayer.obtain_npc_quest_state(npc_id)
 			var dialogue_done:bool = SingletonPlayer.check_dialogue_finished(npc_id)
+			
+			# SOUND STUFF
+			# play interaction sound here, depending on animal
+			play_sound.emit("SQUIRREL") # not animal specific yet
 			
 			# allow dialogue as long as 
 			# -> quest is undone

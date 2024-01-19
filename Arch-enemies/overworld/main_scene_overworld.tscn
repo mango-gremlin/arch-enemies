@@ -135,6 +135,8 @@ dest_island_id = 1
 start_island_id = 1
 dest_island_id = 4
 
+[connection signal="play_sound" from="world" to="Dialogue_Sounds" method="play_sound"]
+
 [editable path="bridge_interaction3"]
 [editable path="bridge_interaction3/interactionspot"]
 [editable path="BridgeTemplate"]
