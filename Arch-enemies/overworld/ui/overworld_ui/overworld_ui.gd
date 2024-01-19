@@ -7,6 +7,19 @@ class_name OverWorldUI
 @onready var animal_list_label = $Control/Animals2/VBoxContainer/HBoxContainer4/VBoxContainer/animal_list
 @onready var quest_list_label = $Control/Quests/VBoxContainer/quest_list
 
+# unfortunately the fastest way here is just to save the path to each label
+
+# item labels
+@onready var egg_number = $Control/Items/VBoxContainer/GridContainer/egg_number
+@onready var evidence_number = $Control/Items/VBoxContainer/GridContainer/evidence_number
+@onready var fly_number = $Control/Items/VBoxContainer/GridContainer/fly_number
+@onready var hazelnut_number = $Control/Items/VBoxContainer/GridContainer/hazelnut_number
+
+# animal labels
+@onready var deer_number = $Control/Animals2/Animals/deer_number
+@onready var snake_number = $Control/Animals2/Animals/snek_number
+@onready var squirrel_number = $Control/Animals2/Animals/squirrel_number
+@onready var spider_number = $Control/Animals2/Animals/spider_number
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -37,21 +50,50 @@ var player_quest_dictionary:Dictionary = {}:
 
 func _update_item_inventory_label():
 	# iterate over item
-	var item_string:String  = ""
 	for item in player_item_inventory:
+		var item_string:String  = ""
 		var item_amount:int = player_item_inventory[item]
-		var item_name:String = Item.item_type_to_string(item)
-		item_string += str(item_amount) + "x " + str(item_name) + "\n"
-	item_list_label.text = item_string
+		var item_label
+		
+		item_string += str(item_amount) + "x "
+		
+		match item:
+			Item.ItemType.EVIDENCE:
+				item_label = evidence_number
+			Item.ItemType.EGG:
+				item_label = egg_number
+			Item.ItemType.HAZELNUT:
+				item_label = hazelnut_number
+			Item.ItemType.FLIES:
+				item_label = fly_number
+			_:
+				item_label = evidence_number
+		
+		item_label.text = item_string
 
 # iteratesover each animaltyp and display their properties
 func _update_animal_inventory_label():
-	var label_string:String = ""
+	
 	for animal:Animal.AnimalType in player_animal_inventory:
+		var label_string:String = ""
 		var animal_amount:int = player_animal_inventory[animal]
-		var animal_name:String = Animal.type_to_string(animal)
-		label_string += str(animal_amount) + "x " + str(animal_name) + "\n"
-	animal_list_label.text = label_string
+		var label
+		
+		label_string += str(animal_amount) + "x "
+		
+		match animal:
+			Animal.AnimalType.DEER:
+				label = deer_number
+			Animal.AnimalType.SNAKE:
+				label = snake_number
+			Animal.AnimalType.SQUIRREL:
+				label = squirrel_number
+			Animal.AnimalType.SPIDER:
+				label = spider_number
+			Animal.AnimalType.NONE:
+				label = animal_list_label
+		
+		label.text = label_string
 
 # iterates over received list of quests
 # displays them formatted in newline 
