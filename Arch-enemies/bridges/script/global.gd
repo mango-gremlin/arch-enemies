@@ -35,3 +35,9 @@ func change_ui_visibility(visibility:bool, grid:Node):
 	grid.find_child("Animal_Inventory").visible = visibility
 	grid.find_child("animal_inventory_counter").visible = visibility
 	grid.find_child("Player").visible = visibility
+
+# reset menu,drag and goal variables
+func reset_modes():
+	drag_mode = true
+	menu_mode = false
+	goal_reached = false
