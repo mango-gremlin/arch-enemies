@@ -2,7 +2,7 @@ extends CanvasLayer
 
 class_name OverWorldUI
 
-@onready var quest_list_label = $Control/Quests/VBoxContainer/quest_list
+@onready var quest_list_label = $Control/QuestsAndQuestBox/quest_list
 
 #@onready var playername_label = $Control/MarginContainer/VBoxContainer/HBoxContainer2/PlayerName
 # these two are technically redundant

@@ -126,15 +126,17 @@ position = Vector2(-100, 1)
 position = Vector2(316, 206)
 
 [node name="bridge_interaction" parent="BridgeMain->Final/bridge_bottom" index="0"]
+bridge_reward = 2
 start_island_id = 1
 dest_island_id = 3
+bridge_sprite_direction = 2
 
 [node name="BridgePartWithCollision2" parent="BridgeMain->Final/bridge_bottom/bridge_interaction/bridge_parts" index="3" instance=ExtResource("11_byiqb")]
 position = Vector2(-2, -72)
 
 [node name="bridge_interaction2" parent="BridgeMain->Final/bridge_top" index="0"]
 position = Vector2(-1, -116)
-bridge_reward = 3
+bridge_reward = 2
 start_island_id = 3
 dest_island_id = 1
 

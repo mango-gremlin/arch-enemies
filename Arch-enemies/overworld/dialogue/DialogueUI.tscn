@@ -63,7 +63,7 @@ custom_minimum_size = Vector2(420, 93)
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
 text = "The dialogue system allows the creation of custom dialogues, with buttons and an icon. "
-autowrap_mode = 1
+autowrap_mode = 3
 clip_text = true
 
 [node name="some_space" type="BoxContainer" parent="Panel/main_box/content_box/content"]
