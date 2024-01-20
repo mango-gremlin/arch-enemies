@@ -1,12 +1,33 @@
-[gd_scene load_steps=8 format=3 uid="uid://bm4bdq6ka013n"]
+[gd_scene load_steps=13 format=3 uid="uid://bm4bdq6ka013n"]
 
 [ext_resource type="Script" path="res://overworld/scripts/main_menu.gd" id="1_w25qy"]
 [ext_resource type="Theme" uid="uid://d2ijyc316xeom" path="res://assets/art/ui_elements/ui_theme.tres" id="1_y2jls"]
 [ext_resource type="Texture2D" uid="uid://cm1xjw1g442ht" path="res://assets/main_menu_background.png" id="2_jxyfb"]
 [ext_resource type="Texture2D" uid="uid://6mcb7hf0rp0k" path="res://assets/art/ui_elements/Box_border_side.png" id="4_dh2lh"]
 [ext_resource type="Texture2D" uid="uid://co3jrch10y3mb" path="res://assets/art/ui_elements/menu_container_top.png" id="5_3tcp8"]
+[ext_resource type="Texture2D" uid="uid://igj8k0askwfw" path="res://assets/art/ui_elements/button_normal.png" id="5_nsoik"]
+[ext_resource type="Texture2D" uid="uid://dwu3b8hug0u0v" path="res://assets/art/ui_elements/button_hover.png" id="6_a1ij4"]
 [ext_resource type="Texture2D" uid="uid://dida36t6h2yy" path="res://assets/art/ui_elements/menu_container_middle.png" id="6_y8um2"]
 [ext_resource type="Texture2D" uid="uid://s2at4kbvef23" path="res://assets/art/ui_elements/menu_container_bottom.png" id="7_i5sbm"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_eyrcg"]
+texture = ExtResource("5_nsoik")
+texture_margin_bottom = 1.0
+expand_margin_left = 10.0
+expand_margin_right = 10.0
+expand_margin_bottom = 1.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_e4hpy"]
+texture = ExtResource("6_a1ij4")
+texture_margin_bottom = 1.0
+expand_margin_left = 10.0
+expand_margin_right = 10.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rkypq"]
+texture = ExtResource("6_a1ij4")
+texture_margin_bottom = 1.0
+expand_margin_left = 10.0
+expand_margin_right = 10.0
 
 [node name="main_menu" type="Control"]
 layout_mode = 3
@@ -98,17 +119,20 @@ theme_override_font_sizes/font_size = 56
 text = "Exit"
 
 [node name="BoxContainer" type="BoxContainer" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 26)
+custom_minimum_size = Vector2(0, 33)
 layout_mode = 2
 
-[node name="About" type="Button" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
-offset_left = 495.0
-offset_top = 564.0
-offset_right = 615.0
-offset_bottom = 589.0
+alignment = 1
+
+[node name="About" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
 theme_override_constants/outline_size = 0
 theme_override_font_sizes/font_size = 22
+theme_override_styles/normal = SubResource("StyleBoxTexture_eyrcg")
+theme_override_styles/hover = SubResource("StyleBoxTexture_e4hpy")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_rkypq")
 text = "About"
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="."]
@@ -141,4 +165,4 @@ stretch_mode = 4
 [connection signal="pressed" from="VBoxContainer/overworld" to="." method="_on_overworld_pressed"]
 [connection signal="pressed" from="VBoxContainer/Options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="VBoxContainer/Exit" to="." method="_on_exit_pressed"]
-[connection signal="pressed" from="About" to="." method="_on_about_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/About" to="." method="_on_about_pressed"]

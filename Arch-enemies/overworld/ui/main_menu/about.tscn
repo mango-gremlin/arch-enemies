@@ -1,0 +1,183 @@
+[gd_scene load_steps=9 format=3 uid="uid://kiso0os3bn2l"]
+
+[ext_resource type="Texture2D" uid="uid://leqswdio6xwd" path="res://bridges/assets/background/background_center_v4.png" id="1_eux8p"]
+[ext_resource type="Script" path="res://overworld/ui/main_menu/about.gd" id="1_vo3wm"]
+[ext_resource type="Texture2D" uid="uid://b00ykicd4nlw1" path="res://assets/art/ui_elements/DialogueBox_outline.png" id="3_12cib"]
+[ext_resource type="Theme" uid="uid://d2ijyc316xeom" path="res://assets/art/ui_elements/ui_theme.tres" id="3_41oba"]
+[ext_resource type="Texture2D" uid="uid://clicedycroinp" path="res://assets/art/characters/Frog_Sprite_Shaded.png" id="4_acgr2"]
+[ext_resource type="Texture2D" uid="uid://6mcb7hf0rp0k" path="res://assets/art/ui_elements/Box_border_side.png" id="4_tcqcl"]
+[ext_resource type="Texture2D" uid="uid://cl1ln5i2pymm1" path="res://assets/art/ui_elements/Box_border_middle.png" id="5_rufum"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4r6aj"]
+texture = ExtResource("3_12cib")
+texture_margin_top = 1.0
+texture_margin_bottom = 1.0
+
+[node name="About" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vo3wm")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 648.0
+offset_bottom = 648.0
+texture = ExtResource("1_eux8p")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 647.0
+offset_right = 1295.0
+offset_bottom = 648.0
+texture = ExtResource("1_eux8p")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_right = 1154.0
+offset_bottom = 648.0
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 100
+
+[node name="Panel" type="Panel" parent="MarginContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_4r6aj")
+
+[node name="Frög" type="TextureRect" parent="MarginContainer/Panel"]
+layout_mode = 0
+offset_left = 207.0
+offset_top = 118.0
+offset_right = 562.0
+offset_bottom = 534.0
+texture = ExtResource("4_acgr2")
+expand_mode = 5
+stretch_mode = 4
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/Panel"]
+layout_mode = 0
+offset_left = -43.0
+offset_top = -37.0
+offset_right = 221.0
+offset_bottom = 3.0
+texture = ExtResource("4_tcqcl")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="TextureRect2" type="TextureRect" parent="MarginContainer/Panel"]
+layout_mode = 0
+offset_left = -43.0
+offset_top = 448.0
+offset_right = 221.0
+offset_bottom = 488.0
+texture = ExtResource("4_tcqcl")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="TextureRect3" type="TextureRect" parent="MarginContainer/Panel"]
+layout_mode = 0
+offset_left = 730.0
+offset_top = -37.0
+offset_right = 994.0
+offset_bottom = 3.0
+texture = ExtResource("4_tcqcl")
+expand_mode = 3
+stretch_mode = 4
+flip_h = true
+
+[node name="TextureRect4" type="TextureRect" parent="MarginContainer/Panel"]
+layout_mode = 0
+offset_left = 730.0
+offset_top = 448.0
+offset_right = 994.0
+offset_bottom = 488.0
+texture = ExtResource("4_tcqcl")
+expand_mode = 3
+stretch_mode = 4
+flip_h = true
+
+[node name="TextureRect5" type="TextureRect" parent="MarginContainer/Panel"]
+layout_mode = 0
+offset_left = 215.0
+offset_top = -37.0
+offset_right = 479.0
+offset_bottom = 3.0
+texture = ExtResource("5_rufum")
+expand_mode = 3
+stretch_mode = 4
+flip_h = true
+
+[node name="TextureRect6" type="TextureRect" parent="MarginContainer/Panel"]
+layout_mode = 0
+offset_left = 215.0
+offset_top = 448.0
+offset_right = 479.0
+offset_bottom = 488.0
+texture = ExtResource("5_rufum")
+expand_mode = 3
+stretch_mode = 4
+flip_h = true
+
+[node name="TextureRect7" type="TextureRect" parent="MarginContainer/Panel"]
+layout_mode = 0
+offset_left = 446.0
+offset_top = -37.0
+offset_right = 710.0
+offset_bottom = 3.0
+texture = ExtResource("5_rufum")
+expand_mode = 3
+stretch_mode = 4
+flip_h = true
+
+[node name="TextureRect8" type="TextureRect" parent="MarginContainer/Panel"]
+layout_mode = 0
+offset_left = 446.0
+offset_top = 448.0
+offset_right = 710.0
+offset_bottom = 488.0
+texture = ExtResource("5_rufum")
+expand_mode = 3
+stretch_mode = 4
+flip_h = true
+
+[node name="TextureRect9" type="TextureRect" parent="MarginContainer/Panel"]
+layout_mode = 0
+offset_left = 547.0
+offset_top = -37.0
+offset_right = 811.0
+offset_bottom = 3.0
+texture = ExtResource("5_rufum")
+expand_mode = 3
+stretch_mode = 4
+flip_h = true
+
+[node name="TextureRect10" type="TextureRect" parent="MarginContainer/Panel"]
+layout_mode = 0
+offset_left = 547.0
+offset_top = 448.0
+offset_right = 811.0
+offset_bottom = 488.0
+texture = ExtResource("5_rufum")
+expand_mode = 3
+stretch_mode = 4
+flip_h = true
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 528.0
+offset_top = 552.0
+offset_right = 608.0
+offset_bottom = 582.0
+theme = ExtResource("3_41oba")
+theme_override_font_sizes/font_size = 30
+text = "back"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

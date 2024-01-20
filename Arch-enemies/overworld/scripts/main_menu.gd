@@ -15,7 +15,7 @@ func _on_exit_pressed(): #quit
 
 
 func _on_about_pressed(): #about
-	pass
+	get_tree().change_scene_to_file("res://overworld/ui/main_menu/about.tscn")
 
 
 func _on_overworld_pressed():
