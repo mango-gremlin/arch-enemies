@@ -8,6 +8,7 @@ extends CharacterBody2D
 
 @export var SPEED = 100
 @onready var anim:AnimatedSprite2D = $AnimatedSprite2D
+@onready var player_hitbox = $CollisionShape2D
 
 # for correct animation: save last direction walked in, and if sprite was flipped
 # enum for animation types
@@ -80,6 +81,8 @@ func player_movement(delta):
 	elif velocity == Vector2.ZERO:
 		player_idle_animation(delta)
 	
+	player_rotate_hitbox(delta)
+	
 	move_and_collide(velocity * delta)
 
 func player_idle_animation(delta):
@@ -93,6 +96,15 @@ func player_idle_animation(delta):
 			anim.play("back_idle")
 		_:
 			anim.play("side_idle")
+
+func player_rotate_hitbox(delta):
+	match current_direction:
+		DIRECTION.SIDE:
+			player_hitbox.set_rotation_degrees(0)
+		DIRECTION.FRONT:
+			player_hitbox.set_rotation_degrees(90)
+		DIRECTION.BACK:
+			player_hitbox.set_rotation_degrees(90)
 
 # ----- 
 # --- structure interaction areas

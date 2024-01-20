@@ -384,9 +384,7 @@ y_sort_enabled = true
 position = Vector2(-5.04871e-29, -3)
 scale = Vector2(0.8, 0.8)
 sprite_frames = SubResource("SpriteFrames_q5uuj")
-animation = &"back_idle"
-frame = 4
-frame_progress = 0.457286
+animation = &"side_idle"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(-1, -3)
