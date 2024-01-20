@@ -778,10 +778,6 @@ sources/6 = SubResource("TileSetAtlasSource_meq0p")
 
 [node name="Node2D" type="Node2D"]
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_2vqh6")
-centered = false
-
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(192, 108)
 zoom = Vector2(3, 3)
@@ -824,6 +820,11 @@ offset_left = 2.0
 offset_top = 1.0
 offset_right = 124.0
 offset_bottom = 41.0
+
+[node name="Inventory_Background" type="Sprite2D" parent="Grid/Control/Animal_Inventory"]
+position = Vector2(-2, -1)
+texture = ExtResource("1_2vqh6")
+centered = false
 
 [node name="Deer_Item" type="TextureRect" parent="Grid/Control/Animal_Inventory" node_paths=PackedStringArray("Grid_node_reference")]
 layout_mode = 2
