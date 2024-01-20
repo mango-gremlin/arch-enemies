@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://cjsjvpeuuqot"]
+[gd_scene load_steps=42 format=3 uid="uid://cjsjvpeuuqot"]
 
 [ext_resource type="Texture2D" uid="uid://dnrklob5nf7ci" path="res://assets/art/ui_elements/animal_inventory_scroll8.png" id="1_2vqh6"]
 [ext_resource type="Texture2D" uid="uid://d0o2q6fijmd1" path="res://assets/art/tilesets/bridge_tileset/bridge_background_color.png" id="1_uowbf"]

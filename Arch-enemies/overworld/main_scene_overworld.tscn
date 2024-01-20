@@ -169,6 +169,8 @@ metadata/_edit_use_anchors_ = true
 [node name="vertical_bridge_start2" parent="BridgeMain->Final/bridge_top/bridge_interaction2/bridge_parts" index="1"]
 metadata/_edit_use_anchors_ = true
 
+[connection signal="play_sound" from="world" to="Dialogue_Sounds" method="play_sound"]
+
 [editable path="BridgeTutorial->Main"]
 [editable path="BridgeTutorial->Main/left_bridge_start/bridge_interaction"]
 [editable path="BridgeTutorial->Main/left_bridge_start/bridge_interaction/interactionspot"]
@@ -184,5 +186,3 @@ metadata/_edit_use_anchors_ = true
 [editable path="BridgeMain->Final/bridge_bottom/bridge_interaction/interactionspot"]
 [editable path="BridgeMain->Final/bridge_top/bridge_interaction2"]
 [editable path="BridgeMain->Final/bridge_top/bridge_interaction2/interactionspot"]
-
-[connection signal="play_sound" from="world" to="Dialogue_Sounds" method="play_sound"]

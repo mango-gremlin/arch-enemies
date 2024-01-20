@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://dwu3b8hug0u0v" path="res://assets/art/ui_elements/button_hover.png" id="6_a1ij4"]
 [ext_resource type="Texture2D" uid="uid://dida36t6h2yy" path="res://assets/art/ui_elements/menu_container_middle.png" id="6_y8um2"]
 [ext_resource type="Texture2D" uid="uid://s2at4kbvef23" path="res://assets/art/ui_elements/menu_container_bottom.png" id="7_i5sbm"]
+[ext_resource type="AudioStream" uid="uid://n71rssah4ej4" path="res://assets/sound/Main_Menu.wav" id="3_j2ahf"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_eyrcg"]
 texture = ExtResource("5_nsoik")
@@ -29,7 +30,6 @@ texture_margin_bottom = 1.0
 expand_margin_left = 10.0
 expand_margin_right = 10.0
 
-[ext_resource type="AudioStream" uid="uid://n71rssah4ej4" path="res://assets/sound/Main_Menu.wav" id="3_j2ahf"]
 
 [node name="main_menu" type="Control"]
 layout_mode = 3
