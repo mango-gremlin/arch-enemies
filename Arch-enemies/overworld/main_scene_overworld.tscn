@@ -21,6 +21,12 @@ script = ExtResource("1_pwtu4")
 [node name="DeeringtonVonAntler" parent="." instance=ExtResource("7_33ud0")]
 position = Vector2(271, 427)
 npc_name = "Deerington von Antler"
+npc_animal_type = 1
+quest_type = 3
+required_item = 6
+quest_reward = 2
+reward_edge_start = 4
+reward_edge_dest = 1
 
 [node name="Background Music" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("11_vdqf6")
@@ -36,16 +42,6 @@ script = ExtResource("4_f85yo")
 
 [node name="Walking_Timer" type="Timer" parent="."]
 one_shot = true
-
-[node name="npc_track_quests" parent="." instance=ExtResource("7_33ud0")]
-position = Vector2(-14, -27)
-npc_name = "blub"
-npc_animal_type = 1
-quest_type = 3
-required_item = 6
-quest_reward = 2
-reward_edge_start = 4
-reward_edge_dest = 1
 
 [node name="world" parent="." instance=ExtResource("3_xuy1h")]
 
