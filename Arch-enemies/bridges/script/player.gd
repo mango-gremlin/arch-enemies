@@ -18,7 +18,7 @@ func _ready():
 	start_position = self.global_position
 
 func _physics_process(delta):
-	if Global.menu_mode:
+	if get_parent().menu_mode:
 		return
 	# Add the gravity.
 	if not is_on_floor():

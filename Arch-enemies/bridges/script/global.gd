@@ -3,8 +3,7 @@ extends Node
 var drag_mode := true
 var something_is_being_dragged := false
 var currently_dragging
-var menu_mode := false
-var goal_reached := false
+
 
 # round to nearest multiple of grid_size
 func round_to_nearest(position:float, grid_size:float):
@@ -27,17 +26,3 @@ func get_animal_type(body:StaticBody2D):
 		return "spider"
 	return ""
 
-# change the visibility of all ui elements in bridge scene
-func change_ui_visibility(visibility:bool, grid:Node):
-	grid.find_child("Drag_or_Fox").visible = visibility
-	grid.find_child("Reset").visible = visibility
-	grid.find_child("Last_State").visible = visibility
-	grid.find_child("Animal_Inventory").visible = visibility
-	grid.find_child("animal_inventory_counter").visible = visibility
-	grid.find_child("Player").visible = visibility
-
-# reset menu,drag and goal variables
-func reset_modes():
-	drag_mode = true
-	menu_mode = false
-	goal_reached = false

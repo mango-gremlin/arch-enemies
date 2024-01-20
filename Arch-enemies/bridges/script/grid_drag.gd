@@ -30,7 +30,7 @@ func _process(delta):
 	pass
 
 func _get_drag_data(at_position):
-	if Global.drag_mode and not Global.menu_mode:
+	if Global.drag_mode:
 		# First we need to check if we have some animals of the requested type left in the inventory
 		var animal = tooltip_text 
 		# Due to we use the tooltip we need to check if the string is valid... this is not secure for typos!

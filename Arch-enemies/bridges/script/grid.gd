@@ -2,6 +2,10 @@ extends TileMap
 
 #We define the basic variables here
 
+# 
+var menu_mode := false
+var goal_reached := false
+
 #Like the Tile Size
 var tile_size = tile_set.tile_size
 
@@ -410,19 +414,34 @@ func tile_update(pos, current, next):
 	elif current == ENTITY_TYPES.ALLOWED and next == ENTITY_TYPES.FORBIDDEN:
 		grid[pos.x][pos.y] = next
 
+# change the visibility of all ui elements in bridge scene
+func change_ui_visibility(visibility:bool):
+	find_child("Drag_or_Fox").visible = visibility
+	find_child("Reset").visible = visibility
+	find_child("Last_State").visible = visibility
+	find_child("Animal_Inventory").visible = visibility
+	find_child("animal_inventory_counter").visible = visibility
+	find_child("Player").visible = visibility
+
+# reset menu,drag and goal variables
+func reset_modes():
+	Global.drag_mode = true
+	menu_mode = false
+	goal_reached = false
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if(Global.currently_dragging and Input.is_action_just_released("click")):
 		make_invisible()
 		
 	# pressing "esc" opens the pause-menu
-	if Input.is_action_just_pressed("open_menu") and not Global.goal_reached:
+	if Input.is_action_just_pressed("open_menu") and not goal_reached:
 		var pause_menu = get_parent().find_child("pause_menu")
 		var new_visibility = not pause_menu.visible
 		pause_menu.visible = new_visibility
 		# menu_mode is active when pause_menu is visible
-		Global.menu_mode = new_visibility
-		Global.change_ui_visibility(not new_visibility, self)
+		menu_mode = new_visibility
+		change_ui_visibility(not new_visibility)
 
 
 	
