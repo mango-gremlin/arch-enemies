@@ -8,6 +8,7 @@ extends CharacterBody2D
 var start_position : Vector2
 var direction : Vector2 = Vector2.ZERO
 var was_in_air : bool = false
+var parent
 
 # Saves if an animation is currently playing
 var animation_locked : bool = false
@@ -19,9 +20,10 @@ signal play_sound(sound)
 
 func _ready():
 	start_position = self.global_position
+	parent = get_parent()
 
 func _physics_process(delta):
-	if get_parent().menu_mode:
+	if parent.menu_mode:
 		return
 	# Add the gravity.
 	if not is_on_floor():
