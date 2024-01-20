@@ -18,6 +18,7 @@ func _ready():
 signal updated_item_inventory(new_inventory)
 signal updated_animal_inventory(new_animal_inventory)
 signal updated_quest_list(new_quest_list)
+signal play_sound(sound)
 
 # --- / 
 # -- / Player management
@@ -57,11 +58,11 @@ func get_animal_inventory() -> Dictionary:
 
 # takes new item and updates amount stored in inventory 
 # if ItemType is "None" nothing will be changed 
-func add_to_inventory(new_item:Item.ItemType):
+func add_to_inventory(new_item:Item.ItemType,quantity:int=1):
 	if new_item != Item.ItemType.NONE:
 		# we can verify that every item is constantly available!
 		var selected_item = item_inventory[new_item]
-		item_inventory[new_item] = selected_item + 1 
+		item_inventory[new_item] = selected_item + quantity
 		#selected_item.increase_amount()
 		# emit signal to update Ui
 		updated_item_inventory.emit(item_inventory)
@@ -85,7 +86,7 @@ func set_animal_inventory(new_inventory:Dictionary):
 func signal_inventory_update_ui():
 	updated_item_inventory.emit(item_inventory)
 	updated_animal_inventory.emit(animal_inventory)
-	updated_quest_list.emit(quest_string_dict)
+	updated_quest_list.emit(active_tracked_quests)
 	
 
 # checks whether requested item is contained 
@@ -113,6 +114,7 @@ func use_item(requested_item:Item.ItemType):
 # --- / 
 # -- / animal inventory
 
+
 func add_to_animal_inventory(new_animal:Animal.AnimalType, quantity:int = 1): 
 	if new_animal != Animal.AnimalType.NONE:
 		# valid entry given 
@@ -125,9 +127,10 @@ func add_to_animal_inventory(new_animal:Animal.AnimalType, quantity:int = 1):
 # used for debugging only
 func set_test_animal_inventory() -> Dictionary:
 	var inventory:Dictionary = Animal.init_animal_inventory()
-	inventory[Animal.AnimalType.DEER] = 5
-	inventory[Animal.AnimalType.SNAKE] = 5
-	inventory[Animal.AnimalType.SQUIRREL] = 3
+	inventory[Animal.AnimalType.DEER] = 99
+	inventory[Animal.AnimalType.SPIDER] = 99
+	inventory[Animal.AnimalType.SNAKE] = 99
+	inventory[Animal.AnimalType.SQUIRREL] = 99
 	return inventory 
 
 
@@ -154,7 +157,8 @@ var islands_reachable:Array[bool]
 	0 : [0,1],	
 	1 : [1,0],
 	2 : [2],
-	3 : [3]
+	3 : [3],
+	4 : [4]
 }
 
 # denotes the level to choose for each interaction!
@@ -162,6 +166,17 @@ var islands_reachable:Array[bool]
 @onready var bridge_level_scenes: Dictionary = {
 	BridgeEdge.new(0,2): "res://bridges/scenes/Grid.tscn",
 }
+
+# used for the (possibly) active bridge level to find out its own bridge egde
+@onready var current_bridge_edge:BridgeEdge
+
+# sets the current bridge edge while the player is entering a bridge level
+func set_current_bridge_edge(new_edge:BridgeEdge):
+	current_bridge_edge = new_edge
+
+# retrieve the bridge edge of the currently active bridge level
+func get_current_bridge_edge() -> BridgeEdge:
+	return current_bridge_edge
 
 # queries dictionary of available bridge-level for requested level
 # returns modified bridge-edge with path set if found 
@@ -181,22 +196,27 @@ func obtain_bridge_scene(requested_edge:BridgeEdge) -> BridgeEdge:
 
 # denotes quests that are actively tracked ( unresolved so far ) 
 # gets filled with the string-representation of a quest!
-var quest_string_dict:Dictionary = {}
+# key -> npc_id | value -> String
+var active_tracked_quests:Dictionary = {}
 
 # takes id of npc and adds its quest to the list
 # emits signal to update ui afterwards
 # if npc does not have a quest, nothing changes
 func add_quest_string(npc_id:int):
+	# prevent collection of all quests to be listed 
+	if npc_id == QUEST_TRACK_NPC_ID:
+		return 
 	var npc_object:NPC_interaction = obtain_npc_object(npc_id)
 	var quest_id = npc_object.obtain_quest_id()
-	if quest_string_dict.has(quest_id):
+	if active_tracked_quests.has(quest_id):
 		return
 		# quest not found in dict yet
 		# adding quest if it was not found already in dictionary
 	if npc_object.has_quest():
 		var stringified_quest:String = npc_object.stringify_quest()
-		quest_string_dict[quest_id] = stringified_quest
-		updated_quest_list.emit(quest_string_dict)
+		active_tracked_quests[quest_id] = stringified_quest
+		updated_quest_list.emit(active_tracked_quests)
+		play_sound.emit("QUEST_ACCEPTED")
 
 # takes id of npc and removes its entry in the list of quests
 # only does so, if quest was resolved, changes nothing otherwise
@@ -205,20 +225,54 @@ func remove_quest_string(npc_id:int):
 	var quest_id = npc_object.obtain_quest_id()
 	if npc_object.check_quest_condition():
 		# removing entry as it was resolved
-		quest_string_dict.erase(quest_id)
-		updated_quest_list.emit(quest_string_dict)
+		active_tracked_quests.erase(quest_id)
+		updated_quest_list.emit(active_tracked_quests)
+	play_sound.emit("QUEST_DONE")
+	
 
 # denotes all NPCs available in current overworld 
 # key ==> value ; npcid ==> NPC Object
 var dictionary_npc:Dictionary = {} 
 
+# we do have a special NPC that will  track all Quests available
+# it ought to be denoted with a special id
+var QUEST_TRACK_NPC_ID:int = 0
+
 # adds npc object corresponding to its npc id 
 func add_npc_instance(npc_id:int,npc_object:NPC_interaction):
 	dictionary_npc[npc_id] = npc_object
 
+# returns object of NPC_interaction linked to given id
 func obtain_npc_object(npc_id) -> NPC_interaction:
 	return dictionary_npc[npc_id]
-	
+
+# takes npc id, queries corresponding object 
+# returns true if requirements for quest were met
+# false otherwise
+func obtain_npc_quest_state(npc_id) -> bool:
+	var npc_object:NPC_interaction = obtain_npc_object(npc_id)
+	#var quest_state:bool = npc_object.check_quest_condition()
+	var quest_state:bool = npc_object.obtain_quest_state()
+	#print("current state of quest" + str(quest_state))
+	return quest_state
+
+# queries all quests and their state
+# returns dictionary with following structure
+# key: quest-string -> value: state:Boolean
+# FIXME could be its own datastructure!
+func obtain_all_quest_states() -> Dictionary:
+	var quest_states:Dictionary = {}
+	for npc in dictionary_npc:
+		# avoiding calling npc that calls this function
+		# resolves possible recursion
+		if npc == QUEST_TRACK_NPC_ID:
+			continue
+		var npc_object:NPC_interaction = dictionary_npc[npc]
+		if npc_object.has_quest():
+			var quest_string:String = npc_object.stringify_quest()
+			var quest_state:bool = npc_object.check_quest_condition()
+			quest_states[quest_string] = quest_state
+	return quest_states
 
 # --- / 
 # -- / Bridge management 
@@ -260,7 +314,12 @@ class BridgeEdge:
 	func set_path(new_path:String):
 		path = new_path
 		path_state = BridgeLevelPathState.AVAILABLE
-
+	
+	func set_availability(new_availability:BridgeLevelPathState):
+		path_state = new_availability
+	
+	func get_path_state() -> BridgeLevelPathState:
+		return path_state
 # checks whether connection between two given values is possible or not
 func check_bridge_connection(bridge_edge:BridgeEdge) -> bool: 
 	var edge_start = bridge_edge.start_id 
@@ -316,9 +375,15 @@ func save_profile_configuration():
 
 # --- / 
 # -- / Methods for NPC interaction 
+
 # register here your dialogue, key is npc id 
 @onready var npc_dialogues: Dictionary = {
-	1: ExampleData.new()
+	0 : QuestTrackNPC.new(),
+	# FIXME Dummy until dialogues were iplemented 
+	1 : ExampleData.new(),
+	2 : ExampleData.new(),
+	3 : ExampleData.new(),
+	4 : ExampleData.new(),
 }
 
 @onready var dialogue: Dialogue = Dialogue.new()
@@ -328,11 +393,17 @@ func has_dialogue(npc_id:int) -> bool:
 	return npc_dialogues.has(npc_id)
 	
 # takes npc_id, enters the dialogue if one is linked to the current npc_id
-func enter_dialogue(npc_id:int):
+func prepare_dialogue(npc_id:int):
+	# FIXME this might be improved, as this is only useful for a single entity right now 
 	if not has_dialogue(npc_id):
 		print("WARNING: TRIED TO FIND AN NON EXISTING DIALOGUE FOR NPC", npc_id)
 		return
-	
+	# updates dialogue for quest-tracking npc
+	if npc_id == QUEST_TRACK_NPC_ID:
+					## updating its state!
+					var dialogue_object = obtain_dialogue(npc_id)
+					var active_quests:Dictionary = active_tracked_quests
+					dialogue_object.update_dialogue(active_quests)
 	var data : Dialogue_Data = npc_dialogues[npc_id]
 	dialogue.enter_dialogue(data, npc_id)
 
@@ -345,6 +416,9 @@ func check_dialogue_finished(npc_id:int) -> bool:
 		return false
 		
 	return npc_dialogues[npc_id].finished
+
+func obtain_dialogue(npc_id:int):
+	return npc_dialogues[npc_id]
 
 # returns true when the player is currently in dialogue
 func navigation_in_dialogue() -> bool:

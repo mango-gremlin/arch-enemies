@@ -1,0 +1,70 @@
+[gd_scene load_steps=5 format=3 uid="uid://cern51r1p8lkb"]
+
+[ext_resource type="Script" path="res://overworld/ui/menu/menu/pause_menu.gd" id="1_ym7wh"]
+[ext_resource type="Texture2D" uid="uid://leqswdio6xwd" path="res://bridges/assets/background/background_center_v4.png" id="2_0a5ka"]
+[ext_resource type="Theme" uid="uid://d2ijyc316xeom" path="res://assets/art/ui_elements/ui_theme.tres" id="2_xkekq"]
+[ext_resource type="Texture2D" uid="uid://ba3leqm154y12" path="res://assets/art/ui_elements/menu_container.png" id="3_x8j61"]
+
+[node name="bridges_pause_menu" type="Control"]
+z_index = 3
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_ym7wh")
+metadata/_edit_use_anchors_ = true
+
+[node name="BackgroundCenterV4" type="Sprite2D" parent="."]
+modulate = Color(0.498039, 0.498039, 0.498039, 1)
+z_index = 1
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("2_0a5ka")
+centered = false
+
+[node name="BackgroundCenterV5" type="Sprite2D" parent="."]
+modulate = Color(0.498039, 0.498039, 0.498039, 1)
+z_index = 1
+position = Vector2(236, 0)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("2_0a5ka")
+centered = false
+
+[node name="MenuContainer" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(195, 112.5)
+scale = Vector2(2.25, 2.25)
+texture = ExtResource("3_x8j61")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+layout_mode = 2
+offset_left = 159.0
+offset_top = 79.0
+offset_right = 231.0
+offset_bottom = 151.0
+
+[node name="Label" type="Label" parent="VBoxContainer2"]
+z_index = 1
+layout_mode = 2
+theme = ExtResource("2_xkekq")
+text = "PAUSED
+"
+horizontal_alignment = 1
+
+[node name="overworld" type="Button" parent="VBoxContainer2"]
+z_index = 1
+layout_mode = 2
+theme = ExtResource("2_xkekq")
+text = "Overworld"
+
+[node name="Options" type="Button" parent="VBoxContainer2"]
+z_index = 1
+layout_mode = 2
+theme = ExtResource("2_xkekq")
+text = "Options"
+
+[node name="Exit" type="Button" parent="VBoxContainer2"]
+z_index = 1
+layout_mode = 2
+theme = ExtResource("2_xkekq")
+text = "Exit"
+
+[connection signal="pressed" from="VBoxContainer2/overworld" to="." method="_on_overworld_pressed"]
+[connection signal="pressed" from="VBoxContainer2/Exit" to="." method="_on_exit_pressed"]

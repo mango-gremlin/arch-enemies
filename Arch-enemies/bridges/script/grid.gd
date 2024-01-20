@@ -32,7 +32,7 @@ var save_states = 10
 var state = 0
 
 #for the inventory
-@onready var start_animals : Dictionary = SingletonPlayer.get_animal_inventory().duplicate(true)
+@onready var start_animals : Dictionary = SingletonPlayer.set_test_animal_inventory().duplicate(true)
 #var start_animals : Dictionary = set_animal_inventory()	
 var placed_animals: Array = []
 
@@ -67,6 +67,7 @@ var water_squares = []
 #This is the signal we use to transfer the current grid to child nodes
 signal current_grid(current_grid)
 signal get_zoom()
+signal play_sound(sound)
 
 #These are the different kind of object we can have in grid cells
 enum ENTITY_TYPES {GROUND, WATER, AIR, ANIMAL, FORBIDDEN, ALLOWED, SIDE, BOTTOM, SHALLOW}
@@ -74,6 +75,9 @@ enum ENTITY_TYPES {GROUND, WATER, AIR, ANIMAL, FORBIDDEN, ALLOWED, SIDE, BOTTOM,
 func _ready():
 	#update the ui
 	update_inventory()
+	
+	# reset walking
+	Global.walking = false
 	
 	#We save the previous states of the grid in an array, this array is initalized here
 	for i in range(save_states):
@@ -203,7 +207,9 @@ func spawn_danger_area2D(area, squares):
 
 # when contacting a danger, reset the position of fox
 func on_contact_danger(body):
-	$Player.reset_player()
+	if not Global.drag_mode:
+		play_sound.emit("DEATH")
+		$Player.reset_player()
 
 func color_grid():
 	#This function colors the grid cells that are not predefined, i.e. the background
@@ -436,12 +442,14 @@ func _process(delta):
 		
 	# pressing "esc" opens the pause-menu
 	if Input.is_action_just_pressed("open_menu") and not goal_reached:
-		var pause_menu = get_parent().find_child("pause_menu")
+		var pause_menu = get_parent().find_child("bridges_pause_menu")		
 		var new_visibility = not pause_menu.visible
 		pause_menu.visible = new_visibility
 		# menu_mode is active when pause_menu is visible
 		menu_mode = new_visibility
 		change_ui_visibility(not new_visibility)
+		
+
 
 
 	
@@ -463,7 +471,7 @@ func restore_animal_from_placed_animals(placed_animals:Dictionary):
 # takes local inventory, duplicates it and replace 
 # singleton animal_inventory with it
 func set_global_animal_inventory(animal_inventory:Dictionary):
-	SingletonPlayer.set_item_inventory(animal_inventory.duplicate(true))
+	SingletonPlayer.set_animal_inventory(animal_inventory.duplicate(true))
 
 #updates the ui-counters for the inventory
 func update_inventory():
@@ -531,3 +539,9 @@ func _on_camera_2d_send_zoom(zoom):
 	x_size = int(DisplayServer.window_get_size().x / int(10 * x_zoom)) + 1
 	y_size = int(DisplayServer.window_get_size().y / int(10 * y_zoom)) + 1
 	grid_size = Vector2(x_size, y_size)
+
+
+func _on_goal_menu_level_solved():
+	play_sound.emit("VICTORY")
+	print("updating inventory of overworld")
+	set_global_animal_inventory(start_animals)

@@ -8,11 +8,14 @@ extends CharacterBody2D
 var start_position : Vector2
 var direction : Vector2 = Vector2.ZERO
 var was_in_air : bool = false
+
 # Saves if an animation is currently playing
 var animation_locked : bool = false
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+
+signal play_sound(sound)
 
 func _ready():
 	start_position = self.global_position
@@ -36,6 +39,7 @@ func _physics_process(delta):
 
 	# Handle Jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
+		play_sound.emit("JUMP")
 		jump()
 
 	# Get the input direction and handle the movement/deceleration.
@@ -45,6 +49,11 @@ func _physics_process(delta):
 		velocity.x = direction.x * speed
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
+		
+	if velocity.x != 0 and is_on_floor():
+		Global.walking = true
+	else:
+		Global.walking = false
 	
 	
 	move_and_slide()
@@ -56,6 +65,7 @@ func _physics_process(delta):
 func reset_player():
 	velocity = Vector2.ZERO
 	global_position = start_position
+	animated_sprite.play("idle")
 
 # FIXME code doesn't seem to be necessary? same as in goal.gd
 ## if fox comes in contact with goal zone
@@ -87,7 +97,6 @@ func land():
 	animated_sprite.play("jump_down")
 	animation_locked = true
 	was_in_air = false
-
 
 func _on_animated_sprite_2d_animation_finished():
 	if animated_sprite.animation == "jump_down":

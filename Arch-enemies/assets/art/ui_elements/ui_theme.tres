@@ -1,0 +1,48 @@
+[gd_resource type="Theme" load_steps=9 format=3 uid="uid://d2ijyc316xeom"]
+
+[ext_resource type="Texture2D" uid="uid://dwu3b8hug0u0v" path="res://assets/art/ui_elements/button_hover.png" id="1_nvwyd"]
+[ext_resource type="Texture2D" uid="uid://igj8k0askwfw" path="res://assets/art/ui_elements/button_normal.png" id="2_6n8m2"]
+[ext_resource type="FontFile" uid="uid://h728dpw3bhca" path="res://assets/art/ui_elements/yoster.ttf" id="3_aqlgn"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sqyvb"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0.3)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2l0bi"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_x0won"]
+texture = ExtResource("1_nvwyd")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_yjr2s"]
+texture = ExtResource("2_6n8m2")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rjba8"]
+texture = ExtResource("1_nvwyd")
+
+[resource]
+default_font = ExtResource("3_aqlgn")
+default_font_size = 12
+Button/colors/font_color = Color(0.341176, 0.12549, 0.184314, 1)
+Button/colors/font_disabled_color = Color(0.875, 0.875, 0.875, 0.5)
+Button/colors/font_focus_color = Color(0.341176, 0.12549, 0.184314, 1)
+Button/colors/font_hover_color = Color(0.568627, 0.235294, 0.32549, 1)
+Button/colors/font_hover_pressed_color = Color(0.568627, 0.235294, 0.32549, 1)
+Button/colors/font_pressed_color = Color(0.243137, 0.0784314, 0.12549, 1)
+Button/colors/icon_disabled_color = Color(1, 1, 1, 0.4)
+Button/constants/h_separation = 4
+Button/constants/icon_max_width = 0
+Button/constants/outline_size = 0
+Button/styles/disabled = SubResource("StyleBoxFlat_sqyvb")
+Button/styles/focus = SubResource("StyleBoxEmpty_2l0bi")
+Button/styles/hover = SubResource("StyleBoxTexture_x0won")
+Button/styles/normal = SubResource("StyleBoxTexture_yjr2s")
+Button/styles/pressed = SubResource("StyleBoxTexture_rjba8")
+Label/colors/font_color = Color(0.341176, 0.12549, 0.184314, 1)

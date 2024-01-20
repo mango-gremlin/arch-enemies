@@ -93,14 +93,15 @@ func interact_npc() -> InteractionValue:
 	
 	# only useful when we have an item-reward!
 	# contains value retrieved from querying status 
-	var received_reward = parent_node.request_reward()
+	var received_reward:Dictionary = parent_node.request_reward()
+	# remember this can contain an invariant!
 	var reward_type = parent_node.obtain_reward_type()
 	
 	var interaction_dict:Dictionary = {
 		"npc_id":received_id,
 		"dialogue":dialogue_string,
 		"reward":received_reward,
-		"reward_type": reward_type
+		"reward_type": reward_type,
 		
 		}
 	var interaction:InteractionValue = InteractionValue.new(InteractionType.NPC, interaction_dict)

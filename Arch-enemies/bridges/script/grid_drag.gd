@@ -11,6 +11,7 @@ const DRAGPREVIEW = preload("res://bridges/scenes/dragpreview.tscn")
 signal need_grid
 signal update_grid(pos, data)
 signal is_dragging
+signal play_sound(sound)
 
 # required to load and interact with scene-specific inventory
 # this acts as reference to the animal inventory stored in "GRID"
@@ -22,7 +23,6 @@ signal is_dragging
 func _ready():
 	# take animal inventory from parent-Grid tilemap
 	animal_inventory_reference = Grid_node_reference.start_animals
-	print("inv in grid drag")
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -60,6 +60,8 @@ func _get_drag_data(at_position):
 			#If we are not trying to drag the TRect that represent the grid we create the preview
 			preview.expand = true
 			preview.texture = sprite
+			#We also emit the appropiate sound
+			play_sound.emit(animal)
 			#The actualy size of the sprite depends on the animal, this is what the "animal" var is used
 			#for, to identify the animal.
 			match animal:
@@ -114,6 +116,8 @@ func _drop_data(at_position, data):
 	var position = Vector2(int(get_global_mouse_position().x /square_size), 
 	int(get_global_mouse_position().y /square_size))
 	update_grid.emit(position, data)
+	#Also play the appropiate sound
+	play_sound.emit("DROP")
 
 func _on_grid_current_grid(current_grid):
 	grid = current_grid

@@ -15,6 +15,11 @@ extends Node2D
 # quest-reward 
 @export var quest_reward:NPC_interaction.QuestReward = NPC_interaction.QuestReward.NONE
 @export var reward_item:Item.ItemType = Item.ItemType.NONE
+@export var reward_amount:int = 1
+
+# for creating bridge-edge that will be solved if quest done
+@export var reward_edge_start:int
+@export var reward_edge_dest:int
 
 # VISUALIZATION 
 # only set whenever a special sprite is required for this npc!
@@ -29,6 +34,14 @@ func _ready():
 	set_npc_sprite()
 	# constructing NPC accordingly
 	npc_object = NPC_interaction.new(npc_name,npc_id,npc_animal_type)
+	# FIXME CREATES SENTINEL VALUE
+	# denotes the default value if NO bridgeEdge was defined as reward
+	var reward_bridge = SingletonPlayer.BridgeEdge.new(-1,-1)
+	if quest_reward == NPC_interaction.QuestReward.BRIDGE:
+		# creating bridge_edge that is contained within the NPC
+		reward_bridge = SingletonPlayer.BridgeEdge.new(reward_edge_start,reward_edge_dest)
+		var available_state:SingletonPlayer.BridgeLevelPathState = SingletonPlayer.BridgeLevelPathState.AVAILABLE
+		reward_bridge.set_availability(available_state)
 	
 	if quest_type != NPC_interaction.Quest.NONE :
 		# updating conditions for quest behavior
@@ -37,9 +50,9 @@ func _ready():
 			required_item,
 			required_npc_id,
 			required_edge_start,
-			required_edge_start)
+			required_edge_dest)
 		# setting reward_parameters
-		npc_object.set_quest_reward(quest_reward,reward_item,npc_animal_type)
+		npc_object.set_quest_reward(quest_reward,reward_item,npc_animal_type,reward_amount,reward_bridge)
 		
 	# adding npc_object to list of globally known npcs 
 	SingletonPlayer.add_npc_instance(npc_id,npc_object)
