@@ -18,37 +18,38 @@ func _ready():
 	start_position = self.global_position
 
 func _physics_process(delta):
-	if not Global.menu_mode:
-		# Add the gravity.
-		if not is_on_floor():
-			velocity.y += gravity * delta
-			if velocity.y > 250:
-				animated_sprite.play("jump_fall")
-			was_in_air = true
-		elif was_in_air == true:
-			land()
+	if Global.menu_mode:
+		return
+	# Add the gravity.
+	if not is_on_floor():
+		velocity.y += gravity * delta
+		if velocity.y > 250:
+			animated_sprite.play("jump_fall")
+		was_in_air = true
+	elif was_in_air == true:
+		land()
 
-		# if drag mode is entered, return fox to original position
-		if Global.drag_mode:
-			reset_player()
-			return
+	# if drag mode is entered, return fox to original position
+	if Global.drag_mode:
+		reset_player()
+		return
 
-		# Handle Jump.
-		if Input.is_action_just_pressed("jump") and is_on_floor():
-			jump()
+	# Handle Jump.
+	if Input.is_action_just_pressed("jump") and is_on_floor():
+		jump()
 
-		# Get the input direction and handle the movement/deceleration.
-		# As good practice, you should replace UI actions with custom gameplay actions.
-		direction = Input.get_vector("left", "right", "ui_up", "ui_down")
-		if direction:
-			velocity.x = direction.x * speed
-		else:
-			velocity.x = move_toward(velocity.x, 0, speed)
-		
-		
-		move_and_slide()
-		update_animation()
-		update_facing_direction()
+	# Get the input direction and handle the movement/deceleration.
+	# As good practice, you should replace UI actions with custom gameplay actions.
+	direction = Input.get_vector("left", "right", "ui_up", "ui_down")
+	if direction:
+		velocity.x = direction.x * speed
+	else:
+		velocity.x = move_toward(velocity.x, 0, speed)
+	
+	
+	move_and_slide()
+	update_animation()
+	update_facing_direction()
 
 
 # reset fox to start position, and remove velocity
