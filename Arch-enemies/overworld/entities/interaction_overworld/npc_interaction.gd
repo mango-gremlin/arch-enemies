@@ -29,14 +29,16 @@ extends Node2D
 var interaction_type: Interactable.InteractionType = Interactable.InteractionType.NPC
 @onready var npc_object:NPC_interaction 
 
-func _ready():
-	# load visualization 
-	set_npc_sprite()
-	# constructing NPC accordingly
-	npc_object = NPC_interaction.new(npc_name,npc_id,npc_animal_type)
-	# FIXME CREATES SENTINEL VALUE
-	# denotes the default value if NO bridgeEdge was defined as reward
-	var reward_bridge = SingletonPlayer.BridgeEdge.new(-1,-1)
+func create_npc() -> NPC_interaction:
+	var new_npc:NPC_interaction = NPC_interaction.new(npc_name,npc_id,npc_animal_type)
+	if SingletonPlayer.dictionary_npc.has(npc_id):
+		# setting known npc for this interaction
+		new_npc = SingletonPlayer.obtain_npc_object(npc_id)
+		return new_npc
+	
+	# creating new npc
+	# setting parameters for quests
+	var reward_bridge = SingletonPlayer.BridgeEdge.new(-1,-1) # dummy value, no reward
 	if quest_reward == NPC_interaction.QuestReward.BRIDGE:
 		# creating bridge_edge that is contained within the NPC
 		reward_bridge = SingletonPlayer.BridgeEdge.new(reward_edge_start,reward_edge_dest)
@@ -45,24 +47,33 @@ func _ready():
 	
 	if quest_type != NPC_interaction.Quest.NONE :
 		# updating conditions for quest behavior
-		npc_object.set_quest_parameter(
+		new_npc.set_quest_parameter(
 			quest_type,
 			required_item,
 			required_npc_id,
 			required_edge_start,
 			required_edge_dest)
 		# setting reward_parameters
-		npc_object.set_quest_reward(quest_reward,reward_item,npc_animal_type,reward_amount,reward_bridge)
-		
+		new_npc.set_quest_reward(quest_reward,reward_item,npc_animal_type,reward_amount,reward_bridge)
 	# adding npc_object to list of globally known npcs 
-	SingletonPlayer.add_npc_instance(npc_id,npc_object)
-	# debug to display the npc quest
-	#print(npc_object.stringify_quest())
+	SingletonPlayer.add_npc_instance(npc_id,new_npc)
+	return new_npc
+	
+	
+	
+
+func _ready():
+	# load visualization 
+	set_npc_sprite()
 	# linking to interaction spot accordingly
 	# helps to interact with interactionspot afterwards
 	var interactionspot_object = get_node("interactionspot")
 	interactionspot_object.parent_node = self
 	interactionspot_object.interact_type = interaction_type
+	
+	# constructing NPC accordingly
+	npc_object = create_npc()
+	#print(npc_object.stringify_quest())
 
 # --- / 
 # -- / interaction with player 

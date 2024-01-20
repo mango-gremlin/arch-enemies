@@ -158,7 +158,8 @@ var islands_reachable:Array[bool]
 	0 : [0],	
 	1 : [1],
 	2 : [2],
-	3 : [3]
+	3 : [3],
+	4 : [4],
 }
 
 # denotes the level to choose for each interaction!
@@ -210,10 +211,12 @@ func add_quest_string(npc_id:int):
 		return 
 	var npc_object:NPC_interaction = obtain_npc_object(npc_id)
 	var quest_id = npc_object.obtain_quest_id()
-	if active_tracked_quests.has(quest_id):
+	var quest_solved: bool = npc_object.obtain_quest_state()
+	# either quest was solved or is listed already
+	if active_tracked_quests.has(quest_id) or quest_solved:
 		return
-		# quest not found in dict yet
-		# adding quest if it was not found already in dictionary
+	
+	# case: quest not found in dict 
 	if npc_object.has_quest():
 		var stringified_quest:String = npc_object.stringify_quest()
 		active_tracked_quests[quest_id] = stringified_quest
@@ -269,7 +272,7 @@ func obtain_all_quest_states() -> Dictionary:
 		var npc_object:NPC_interaction = dictionary_npc[npc]
 		if npc_object.has_quest():
 			var quest_string:String = npc_object.stringify_quest()
-			var quest_state:bool = npc_object.check_quest_condition()
+			var quest_state:bool = npc_object.obtain_quest_state()
 			quest_states[quest_string] = quest_state
 	return quest_states
 
