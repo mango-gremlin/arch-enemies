@@ -509,5 +509,4 @@ func _on_camera_2d_send_zoom(zoom):
 
 
 func _on_goal_menu_level_solved():
-	print("updating inventory of overworld")
 	set_global_animal_inventory(start_animals)

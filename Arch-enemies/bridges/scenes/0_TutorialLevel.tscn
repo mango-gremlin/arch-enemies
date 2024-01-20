@@ -963,5 +963,6 @@ position = Vector2(147, 86)
 [connection signal="toggled" from="Grid/Control/Drag_or_Fox" to="Grid/Control/Drag_or_Fox" method="_on_toggled"]
 [connection signal="pressed" from="Grid/Control/Reset" to="Grid" method="_on_reset_pressed"]
 [connection signal="pressed" from="Grid/Control/Last_State" to="Grid" method="_on_last_state_pressed"]
+[connection signal="level_solved" from="Grid/goal_menu" to="Grid" method="_on_goal_menu_level_solved"]
 
 [editable path="parallax_background"]
