@@ -1,8 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://cgfkelxiskcux"]
+[gd_scene load_steps=15 format=3 uid="uid://cgfkelxiskcux"]
 
 [ext_resource type="Script" path="res://overworld/overworld.gd" id="1_pwtu4"]
+[ext_resource type="Script" path="res://overworld/overworld_sound.gd" id="3_h67g3"]
+[ext_resource type="AudioStream" uid="uid://bgeiod4gbwy8j" path="res://assets/sound/Step.wav" id="3_lhjvv"]
 [ext_resource type="PackedScene" uid="uid://p30p3o0e473c" path="res://overworld/scenes/world.tscn" id="3_xuy1h"]
 [ext_resource type="PackedScene" uid="uid://cgvraulefjyn8" path="res://overworld/ui/overworld_ui/overworld_ui.tscn" id="4_4hawq"]
+[ext_resource type="Script" path="res://bridges/script/walking_sound.gd" id="4_f85yo"]
 [ext_resource type="PackedScene" uid="uid://dbffmmmqyknux" path="res://overworld/dialogue/DialogueUI.tscn" id="4_fdft7"]
 [ext_resource type="PackedScene" uid="uid://bj3a1sw80l6wj" path="res://overworld/entities/interaction_overworld/item_interaction.tscn" id="6_66i44"]
 [ext_resource type="PackedScene" uid="uid://5llfgi2ysvie" path="res://overworld/entities/interaction_overworld/bridge_interaction.tscn" id="6_iairi"]
@@ -10,9 +13,25 @@
 [ext_resource type="Texture2D" uid="uid://08plwlb60wib" path="res://assets/art/bridge_dummy_failure.png" id="8_g5nw6"]
 [ext_resource type="PackedScene" uid="uid://bettv6p5clh6t" path="res://overworld/entities/interaction_overworld/template/horizontal_bridge_template.tscn" id="9_jpn0u"]
 [ext_resource type="PackedScene" uid="uid://bypchr8htkr4e" path="res://overworld/entities/interaction_overworld/template/vertical_bridge_template.tscn" id="10_5ad47"]
+[ext_resource type="AudioStream" uid="uid://n71rssah4ej4" path="res://assets/sound/Main_Menu.wav" id="11_vdqf6"]
 
 [node name="maingame" type="Node"]
 script = ExtResource("1_pwtu4")
+
+[node name="Background Music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_vdqf6")
+volume_db = -10.0
+autoplay = true
+
+[node name="Dialogue_Sounds" type="AudioStreamPlayer2D" parent="."]
+script = ExtResource("3_h67g3")
+
+[node name="Walking Sounds" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_lhjvv")
+script = ExtResource("4_f85yo")
+
+[node name="Walking_Timer" type="Timer" parent="."]
+one_shot = true
 
 [node name="npc_track_quests" parent="." instance=ExtResource("7_33ud0")]
 position = Vector2(-14, -27)
@@ -116,6 +135,8 @@ dest_island_id = 1
 [node name="bridge_interaction2" parent="solved_with_all_quests/bridge_top" index="0"]
 start_island_id = 1
 dest_island_id = 4
+
+[connection signal="play_sound" from="world" to="Dialogue_Sounds" method="play_sound"]
 
 [editable path="bridge_interaction3"]
 [editable path="bridge_interaction3/interactionspot"]
