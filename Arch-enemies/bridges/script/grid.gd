@@ -79,6 +79,9 @@ func _ready():
 	# reset walking
 	Global.walking = false
 	
+	# reset the menu_mode,drag_mode and goal_reached
+	reset_modes()
+	
 	#We save the previous states of the grid in an array, this array is initalized here
 	for i in range(save_states):
 		last_states.append([[]])

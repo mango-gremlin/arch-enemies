@@ -14,7 +14,7 @@ func _on_retry_button_pressed():
 
 func _on_continue_button_pressed():
 	# reset global variables
-	get_parent().reset_modes()
+	#get_parent().reset_modes()
 	# return to overworld scene
 	# Update global inventory
 	level_solved.emit()
