@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://kckgnp56pvqf"]
+[gd_scene load_steps=3 format=3 uid="uid://bsiv4b8ihdf34"]
 
-[ext_resource type="Texture2D" uid="uid://b7drmw23l1wqd" path="res://assets/tutorial_screenshots/deer_tutorial.png" id="1_humsf"]
-[ext_resource type="Texture2D" uid="uid://c113ngm1rnuj0" path="res://assets/art/characters/deer.png" id="2_mo0v2"]
+[ext_resource type="Texture2D" uid="uid://bjwiponyutixg" path="res://assets/tutorial_screenshots/archenemies_squirrel tutorial.png" id="1_jhtcx"]
+[ext_resource type="Texture2D" uid="uid://xd2wfewwwcqc" path="res://assets/art/characters/squirrel.png" id="2_2f3yo"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -30,9 +30,7 @@ theme_override_constants/separation = 40
 [node name="TextureRect" type="TextureRect" parent="PanelContainer2/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
-texture = ExtResource("1_humsf")
-expand_mode = 3
-stretch_mode = 5
+texture = ExtResource("1_jhtcx")
 
 [node name="PanelContainer" type="PanelContainer" parent="PanelContainer2/MarginContainer/HBoxContainer"]
 layout_mode = 2
@@ -50,7 +48,7 @@ theme_override_constants/separation = 10
 
 [node name="Label" type="Label" parent="PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "How to place deer:"
+text = "How to place snakes:"
 horizontal_alignment = 1
 uppercase = true
 
@@ -63,12 +61,11 @@ any problems, because I'm just so tall
 and handsome."
 
 [node name="TextureRect" type="TextureRect" parent="PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(200, 200)
+custom_minimum_size = Vector2(150, 150)
 layout_mode = 2
 size_flags_horizontal = 10
-texture = ExtResource("2_mo0v2")
-stretch_mode = 4
-flip_h = true
+texture = ExtResource("2_2f3yo")
+stretch_mode = 5
 
 [node name="Button" type="Button" parent="PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2

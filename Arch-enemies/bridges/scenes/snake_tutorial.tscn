@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://kckgnp56pvqf"]
+[gd_scene load_steps=3 format=3 uid="uid://bp286phfoqyt1"]
 
-[ext_resource type="Texture2D" uid="uid://b7drmw23l1wqd" path="res://assets/tutorial_screenshots/deer_tutorial.png" id="1_humsf"]
-[ext_resource type="Texture2D" uid="uid://c113ngm1rnuj0" path="res://assets/art/characters/deer.png" id="2_mo0v2"]
+[ext_resource type="Texture2D" uid="uid://37iifgc8h671" path="res://assets/tutorial_screenshots/archenemies_snake_tutorial.png" id="1_52o8j"]
+[ext_resource type="Texture2D" uid="uid://0j6i0mpsh8hq" path="res://assets/art/characters/snek.png" id="2_bm6y4"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -30,7 +30,7 @@ theme_override_constants/separation = 40
 [node name="TextureRect" type="TextureRect" parent="PanelContainer2/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
-texture = ExtResource("1_humsf")
+texture = ExtResource("1_52o8j")
 expand_mode = 3
 stretch_mode = 5
 
@@ -50,23 +50,19 @@ theme_override_constants/separation = 10
 
 [node name="Label" type="Label" parent="PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "How to place deer:"
+text = "How to place snakes:"
 horizontal_alignment = 1
 uppercase = true
 
 [node name="Label2" type="Label" parent="PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "The water tried to drown me,
-but my legs were too long!
-I can stand in shallow water withouth
-any problems, because I'm just so tall 
-and handsome."
+text = "Hello zzere"
 
 [node name="TextureRect" type="TextureRect" parent="PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
 size_flags_horizontal = 10
-texture = ExtResource("2_mo0v2")
+texture = ExtResource("2_bm6y4")
 stretch_mode = 4
 flip_h = true
 
