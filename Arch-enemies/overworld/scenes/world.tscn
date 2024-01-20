@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=3 uid="uid://p30p3o0e473c"]
-
 [ext_resource type="Texture2D" uid="uid://c3k4vrbl35eqt" path="res://assets/art/tilesets/bridge_tileset/bridge_bramble_tiles.png" id="1_kejqx"]
+[ext_resource type="Script" path="res://overworld/scenes/world.gd" id="1_m27wc"]
 [ext_resource type="Texture2D" uid="uid://cmyh0321x42dd" path="res://assets/art/tilesets/overworld_water_edges.png" id="4_itohn"]
 [ext_resource type="PackedScene" uid="uid://dndu4pg1i3tlf" path="res://overworld/scenes/player.tscn" id="5_bmga7"]
 [ext_resource type="Texture2D" uid="uid://5fxwrsdtkovq" path="res://assets/art/tilesets/overworld_ground_textures.png" id="7_0s13p"]
@@ -510,6 +510,7 @@ pattern_1 = SubResource("TileMapPattern_a6pdr")
 
 [node name="world" type="Node2D"]
 y_sort_enabled = true
+script = ExtResource("1_m27wc")
 
 [node name="TileMap" type="TileMap" parent="."]
 y_sort_enabled = true
@@ -532,3 +533,4 @@ layer_3/tile_data = PackedInt32Array()
 
 [node name="Player" parent="TileMap" instance=ExtResource("5_bmga7")]
 position = Vector2(73, 497)
+[connection signal="play_sound" from="TileMap/Player" to="." method="transfer_sound"]

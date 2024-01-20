@@ -29,6 +29,8 @@ texture_margin_bottom = 1.0
 expand_margin_left = 10.0
 expand_margin_right = 10.0
 
+[ext_resource type="AudioStream" uid="uid://n71rssah4ej4" path="res://assets/sound/Main_Menu.wav" id="3_j2ahf"]
+
 [node name="main_menu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -166,3 +168,7 @@ stretch_mode = 4
 [connection signal="pressed" from="VBoxContainer/Options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="VBoxContainer/Exit" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/About" to="." method="_on_about_pressed"]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_j2ahf")
+autoplay = true

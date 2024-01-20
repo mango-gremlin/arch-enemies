@@ -18,6 +18,7 @@ func _ready():
 signal updated_item_inventory(new_inventory)
 signal updated_animal_inventory(new_animal_inventory)
 signal updated_quest_list(new_quest_list)
+signal play_sound(sound)
 
 # --- / 
 # -- / Player management
@@ -221,6 +222,7 @@ func add_quest_string(npc_id:int):
 		var stringified_quest:String = npc_object.stringify_quest()
 		active_tracked_quests[quest_id] = stringified_quest
 		updated_quest_list.emit(active_tracked_quests)
+		play_sound.emit("QUEST_ACCEPTED")
 
 # takes id of npc and removes its entry in the list of quests
 # only does so, if quest was resolved, changes nothing otherwise
@@ -231,6 +233,8 @@ func remove_quest_string(npc_id:int):
 		# removing entry as it was resolved
 		active_tracked_quests.erase(quest_id)
 		updated_quest_list.emit(active_tracked_quests)
+	play_sound.emit("QUEST_DONE")
+	
 
 # denotes all NPCs available in current overworld 
 # key ==> value ; npcid ==> NPC Object

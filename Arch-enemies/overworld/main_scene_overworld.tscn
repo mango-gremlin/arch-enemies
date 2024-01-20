@@ -1,8 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://cgfkelxiskcux"]
+[gd_scene load_steps=15 format=3 uid="uid://cgfkelxiskcux"]
 
 [ext_resource type="Script" path="res://overworld/overworld.gd" id="1_pwtu4"]
+[ext_resource type="Script" path="res://overworld/overworld_sound.gd" id="3_h67g3"]
+[ext_resource type="AudioStream" uid="uid://bgeiod4gbwy8j" path="res://assets/sound/Step.wav" id="3_lhjvv"]
 [ext_resource type="PackedScene" uid="uid://p30p3o0e473c" path="res://overworld/scenes/world.tscn" id="3_xuy1h"]
 [ext_resource type="PackedScene" uid="uid://cgvraulefjyn8" path="res://overworld/ui/overworld_ui/overworld_ui.tscn" id="4_4hawq"]
+[ext_resource type="Script" path="res://bridges/script/walking_sound.gd" id="4_f85yo"]
 [ext_resource type="PackedScene" uid="uid://dbffmmmqyknux" path="res://overworld/dialogue/DialogueUI.tscn" id="4_fdft7"]
 [ext_resource type="PackedScene" uid="uid://bj3a1sw80l6wj" path="res://overworld/entities/interaction_overworld/item_interaction.tscn" id="6_66i44"]
 [ext_resource type="PackedScene" uid="uid://drn1loe1wknbq" path="res://overworld/entities/interaction_overworld/npc_interaction.tscn" id="7_33ud0"]
@@ -10,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://0isb2xg4n684" path="res://overworld/entities/interaction_overworld/template/horizontal_bridge_part_with_collision.tscn" id="9_ux7la"]
 [ext_resource type="PackedScene" uid="uid://bypchr8htkr4e" path="res://overworld/entities/interaction_overworld/template/vertical_bridge_template.tscn" id="10_5ad47"]
 [ext_resource type="PackedScene" uid="uid://b0v6vdudnx0vh" path="res://overworld/entities/interaction_overworld/template/vertical_bridge_part_with_collision.tscn" id="11_byiqb"]
+[ext_resource type="AudioStream" uid="uid://n71rssah4ej4" path="res://assets/sound/Main_Menu.wav" id="11_vdqf6"]
 
 [node name="maingame" type="Node"]
 script = ExtResource("1_pwtu4")
@@ -17,6 +21,25 @@ script = ExtResource("1_pwtu4")
 [node name="DeeringtonVonAntler" parent="." instance=ExtResource("7_33ud0")]
 position = Vector2(271, 427)
 npc_name = "Deerington von Antler"
+
+[node name="Background Music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_vdqf6")
+volume_db = -10.0
+autoplay = true
+
+[node name="Dialogue_Sounds" type="AudioStreamPlayer2D" parent="."]
+script = ExtResource("3_h67g3")
+
+[node name="Walking Sounds" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_lhjvv")
+script = ExtResource("4_f85yo")
+
+[node name="Walking_Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="npc_track_quests" parent="." instance=ExtResource("7_33ud0")]
+position = Vector2(-14, -27)
+npc_name = "blub"
 npc_animal_type = 1
 quest_type = 3
 required_item = 6
@@ -161,3 +184,5 @@ metadata/_edit_use_anchors_ = true
 [editable path="BridgeMain->Final/bridge_bottom/bridge_interaction/interactionspot"]
 [editable path="BridgeMain->Final/bridge_top/bridge_interaction2"]
 [editable path="BridgeMain->Final/bridge_top/bridge_interaction2/interactionspot"]
+
+[connection signal="play_sound" from="world" to="Dialogue_Sounds" method="play_sound"]
