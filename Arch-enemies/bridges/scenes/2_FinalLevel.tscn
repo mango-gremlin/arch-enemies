@@ -778,8 +778,9 @@ sources/6 = SubResource("TileSetAtlasSource_meq0p")
 [node name="Node2D" type="Node2D"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -23)
 anchor_mode = 0
-zoom = Vector2(1.75, 2.2)
+zoom = Vector2(1.75, 1.75)
 script = ExtResource("1_e57tb")
 
 [node name="Grid" type="TileMap" parent="." node_paths=PackedStringArray("inventory_deer", "inventory_snake", "inventory_spider", "inventory_squirrel")]
@@ -918,7 +919,7 @@ offset_right = 56.6667
 offset_bottom = 17.1667
 
 [node name="goal" parent="Grid" instance=ExtResource("19_1q1ud")]
-position = Vector2(619, 73)
+position = Vector2(571, 72)
 
 [node name="bridges_pause_menu" parent="Grid" instance=ExtResource("20_20jtq")]
 visible = false
@@ -974,7 +975,7 @@ position = Vector2(452, 148)
 scale = Vector2(1.5, 1.5)
 
 [node name="BackgroundDarkness" parent="parallax_background/center_layer" index="2"]
-position = Vector2(322, 154.5)
+position = Vector2(320, 164)
 scale = Vector2(1.685, 1.655)
 
 [node name="sprite_left_side" parent="parallax_background/static_sides" index="0"]
@@ -982,7 +983,7 @@ position = Vector2(108, 145.75)
 scale = Vector2(1.18, 1.4625)
 
 [node name="sprite_right_side" parent="parallax_background/static_sides" index="1"]
-position = Vector2(484, 82)
+position = Vector2(570, 83)
 scale = Vector2(1, 0.84)
 
 [connection signal="send_zoom" from="Camera2D" to="Grid" method="_on_camera_2d_send_zoom"]

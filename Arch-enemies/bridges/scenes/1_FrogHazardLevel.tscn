@@ -780,7 +780,7 @@ sources/6 = SubResource("TileSetAtlasSource_meq0p")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(250, 108)
-zoom = Vector2(2.3, 3)
+zoom = Vector2(2.3, 2.3)
 script = ExtResource("1_0pfwb")
 
 [node name="Grid" type="TileMap" parent="." node_paths=PackedStringArray("inventory_deer", "inventory_snake", "inventory_spider", "inventory_squirrel")]
