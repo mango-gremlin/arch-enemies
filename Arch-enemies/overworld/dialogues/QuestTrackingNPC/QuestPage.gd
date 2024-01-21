@@ -40,10 +40,10 @@ func btn_text() -> Array[String]:
 # btn button in from left to right, starting with 0
 func btn_action(btn: int):
 	if btn == 0 and current_page > 0:
-		SingletonPlayer.dialogue.select_page(current_page - 1)
+		SingletonPlayer.active_dialogue.select_page(current_page - 1)
 	
 	if btn == 1 and current_page < max_page:
-		SingletonPlayer.dialogue.select_page(current_page + 1)
+		SingletonPlayer.active_dialogue.select_page(current_page + 1)
 	
 	if btn == 2:
 		SingletonPlayer.exit_dialogue()
