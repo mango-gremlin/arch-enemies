@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cv4r3ql0yg1la"]
+[gd_scene load_steps=12 format=3 uid="uid://cv4r3ql0yg1la"]
 
 [ext_resource type="Script" path="res://overworld/ui/menu/menu/pause_menu.gd" id="1_vyga1"]
 [ext_resource type="Theme" uid="uid://d2ijyc316xeom" path="res://assets/art/ui_elements/ui_theme.tres" id="2_ugltm"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://bor1f6u6tjguy" path="res://assets/art/ui_elements/clouds/cloud_5.png" id="8_frufy"]
 [ext_resource type="Texture2D" uid="uid://bqtk5n8foclwk" path="res://assets/art/ui_elements/clouds/cloud_6.png" id="9_hdjwq"]
 [ext_resource type="Texture2D" uid="uid://bt3l6nwayw6ai" path="res://assets/art/ui_elements/clouds/cloud_7.png" id="10_4l0q1"]
+[ext_resource type="AudioStream" uid="uid://n71rssah4ej4" path="res://assets/sound/Main_Menu.wav" id="11_d7i52"]
 
 [node name="pause_menu" type="Control"]
 layout_mode = 3
@@ -101,6 +102,11 @@ texture = ExtResource("9_hdjwq")
 position = Vector2(139, 255)
 scale = Vector2(8, 8)
 texture = ExtResource("10_4l0q1")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_d7i52")
+volume_db = -10.0
+autoplay = true
 
 [connection signal="pressed" from="VBoxContainer2/overworld" to="." method="_on_overworld_pressed"]
 [connection signal="pressed" from="VBoxContainer2/Exit" to="." method="_on_exit_pressed"]
