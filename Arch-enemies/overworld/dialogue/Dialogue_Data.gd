@@ -62,8 +62,8 @@ func select_page(page: int):
 	# show panel
 	control_instance.show()
 
-func btn_action(btn: int,quest_done:bool):
-	if quest_done:
+func btn_action(btn: int,done_state:bool):
+	if done_state:
 		print("used entry for active quest")
 		print(currentEntry)
 		# should always close
