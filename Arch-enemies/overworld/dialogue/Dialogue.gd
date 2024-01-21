@@ -22,6 +22,7 @@ func enter_dialogue(dialogue:Dialogue_Data, npc_id: int):
 	active_dialogue = dialogue
 	# adding quest to players UI
 	SingletonPlayer.add_quest_string(npc_id)
+	print("current npc id:" + str(npc_id))
 	if SingletonPlayer.obtain_npc_quest_state(npc_id):
 		# was done, showing alt text 
 		active_dialogue.select_quest_done_page(0)
@@ -35,6 +36,7 @@ func in_dialogue() -> bool:
 func exit_dialogue():
 	is_in_dialogue = false 
 	active_dialogue = null
+	print("exiting dialogue")
 	if SingletonPlayer.check_dialogue_finished(current_npc_id):
 		SingletonPlayer.remove_quest_string(current_npc_id)
 	
