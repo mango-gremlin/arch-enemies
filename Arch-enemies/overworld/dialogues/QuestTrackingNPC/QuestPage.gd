@@ -21,7 +21,7 @@ func content() -> String:
 	return quest
 
 func image_src() -> String:
-	return "res://overworld/dialogues/test_dialogue/red.png"
+	return "res://assets/art/characters/portraits/Portrait_Deer.png"
 	
 # null ement in array means here disable button X
 func btn_text() -> Array[String]:
