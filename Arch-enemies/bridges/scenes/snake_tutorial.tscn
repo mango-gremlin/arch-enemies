@@ -1,91 +1,22 @@
-[gd_scene load_steps=8 format=3 uid="uid://bp286phfoqyt1"]
+[gd_scene load_steps=4 format=3 uid="uid://bp286phfoqyt1"]
 
 [ext_resource type="Texture2D" uid="uid://37iifgc8h671" path="res://assets/tutorial_screenshots/archenemies_snake_tutorial.png" id="1_52o8j"]
-[ext_resource type="Theme" uid="uid://d2ijyc316xeom" path="res://assets/art/ui_elements/ui_theme.tres" id="1_v238b"]
+[ext_resource type="PackedScene" uid="uid://vvo04yl1cy8p" path="res://bridges/scenes/tutorial_template.tscn" id="1_na8om"]
 [ext_resource type="Texture2D" uid="uid://0j6i0mpsh8hq" path="res://assets/art/characters/snek.png" id="2_bm6y4"]
-[ext_resource type="Texture2D" uid="uid://b00ykicd4nlw1" path="res://assets/art/ui_elements/DialogueBox_outline.png" id="2_ga581"]
-[ext_resource type="Texture2D" uid="uid://dida36t6h2yy" path="res://assets/art/ui_elements/menu_container_middle.png" id="4_8einh"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_q15hy"]
-texture = ExtResource("2_ga581")
-texture_margin_top = 1.0
-texture_margin_bottom = 1.0
+[node name="Control" instance=ExtResource("1_na8om")]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rrrs3"]
-texture = ExtResource("4_8einh")
-texture_margin_left = 5.0
-texture_margin_right = 5.0
-
-[node name="Control" type="Control"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="PanelContainer2" type="PanelContainer" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-theme = ExtResource("1_v238b")
-theme_override_styles/panel = SubResource("StyleBoxTexture_q15hy")
-
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer2"]
-layout_mode = 2
-theme_override_constants/margin_left = 40
-theme_override_constants/margin_top = 40
-theme_override_constants/margin_right = 40
-theme_override_constants/margin_bottom = 40
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer2/MarginContainer"]
-layout_mode = 2
-theme_override_constants/separation = 40
-
-[node name="Example_Picture" type="TextureRect" parent="PanelContainer2/MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(200, 200)
-layout_mode = 2
+[node name="Example_Picture" parent="PanelContainer2/MarginContainer/HBoxContainer" index="0"]
 texture = ExtResource("1_52o8j")
-expand_mode = 3
-stretch_mode = 5
 
-[node name="PanelContainer" type="PanelContainer" parent="PanelContainer2/MarginContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_rrrs3")
-
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer2/MarginContainer/HBoxContainer/PanelContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer"]
-layout_mode = 2
-theme_override_constants/separation = 10
-
-[node name="Header" type="Label" parent="PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
+[node name="Header" parent="PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer" index="0"]
 text = "How to place snakes:"
-horizontal_alignment = 1
-uppercase = true
 
-[node name="Explanation" type="Label" parent="PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Zzats a taszzty looking szzquirrel.
-You better not placzze it anywhere
-near my head or I might just
-take a bite szzz."
+[node name="Example" parent="PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer" index="1"]
+text = "Zzats a taszzty looking szzquirrel. 
+You better not placzze it anywhere near my head or I might just take a bite szzz."
+autowrap_mode = 3
 
-[node name="Animal_Picture" type="TextureRect" parent="PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(200, 200)
-layout_mode = 2
-size_flags_horizontal = 10
+[node name="Animal_Picture" parent="PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer" index="2"]
+custom_minimum_size = Vector2(300, 200)
 texture = ExtResource("2_bm6y4")
-stretch_mode = 4
-flip_h = true
-
-[node name="Next_Button" type="Button" parent="PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 10
-text = "Next"

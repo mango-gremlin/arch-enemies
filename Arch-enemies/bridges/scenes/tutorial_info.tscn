@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://bridges/scenes/tutorial_info.gd" id="1_8xlim"]
 [ext_resource type="Theme" uid="uid://d2ijyc316xeom" path="res://assets/art/ui_elements/ui_theme.tres" id="1_jrff0"]
-[ext_resource type="PackedScene" uid="uid://6di2l5yn01qd" path="res://bridges/scenes/spiderl_tutorial.tscn" id="1_o8wju"]
 [ext_resource type="PackedScene" uid="uid://bsiv4b8ihdf34" path="res://bridges/scenes/squirrel_tutorial.tscn" id="2_aadnx"]
 [ext_resource type="PackedScene" uid="uid://bp286phfoqyt1" path="res://bridges/scenes/snake_tutorial.tscn" id="3_2lfgv"]
+[ext_resource type="PackedScene" uid="uid://ca34jrmpbslis" path="res://bridges/scenes/spider_tutorial.tscn" id="3_bhkkr"]
 [ext_resource type="PackedScene" uid="uid://kckgnp56pvqf" path="res://bridges/scenes/deer_tutorial.tscn" id="4_i4jwe"]
 
 [node name="Control" type="Control"]
@@ -13,33 +13,46 @@ anchors_preset = 0
 theme = ExtResource("1_jrff0")
 script = ExtResource("1_8xlim")
 
-[node name="Spider_Tutorial" parent="." instance=ExtResource("1_o8wju")]
-visible = false
+[node name="Spider_Tutorial" parent="." instance=ExtResource("3_bhkkr")]
 layout_mode = 1
-
-[node name="PanelContainer2" parent="Spider_Tutorial" index="0"]
-theme = ExtResource("1_jrff0")
 
 [node name="Squirrel_Tutorial" parent="." instance=ExtResource("2_aadnx")]
-visible = false
 layout_mode = 1
 
+[node name="Example" parent="Squirrel_Tutorial/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer" index="1"]
+text = "The water tried to drown me,
+but my legs were too long!
+I can stand in shallow water withouth
+any problems, because I'm just so tall 
+and handsome."
+
 [node name="Snake_Tutorial" parent="." instance=ExtResource("3_2lfgv")]
-visible = false
 layout_mode = 1
 
 [node name="Deer_Tutorial" parent="." instance=ExtResource("4_i4jwe")]
 layout_mode = 0
-offset_left = 0.0
-offset_top = 0.0
-offset_right = 0.0
-offset_bottom = 0.0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="Header" parent="Deer_Tutorial/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer" index="0"]
+text = "How to place spiders:"
+
+[node name="Example" parent="Deer_Tutorial/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer" index="1"]
+text = "The water tried to drown me,
+but my legs were too long!
+I can stand in shallow water withouth
+any problems, because I'm just so tall 
+and handsome."
 
 [node name="Button" type="Button" parent="."]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 0
 offset_right = 8.0
 offset_bottom = 8.0
+theme_override_font_sizes/font_size = 28
 text = "x"
 
 [connection signal="pressed" from="Spider_Tutorial/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/Next_Button" to="." method="_on_spider_button_pressed"]
