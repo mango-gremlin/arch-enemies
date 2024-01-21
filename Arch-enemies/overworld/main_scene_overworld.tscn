@@ -25,7 +25,7 @@ npc_name = "Deerington von Antler"
 npc_animal_type = 1
 quest_type = 3
 required_item = 6
-quest_reward = 2
+quest_reward = 1
 reward_edge_start = 4
 reward_edge_dest = 1
 
@@ -106,7 +106,9 @@ reward_amount = 7
 position = Vector2(271, 486)
 npc_name = "Toadally Anonymous"
 npc_id = 5
-npc_animal_type = 4
+quest_type = 1
+required_edge_start = 1
+required_edge_dest = 3
 required_item = 4
 npc_special_sprite = ExtResource("11_p1rod")
 

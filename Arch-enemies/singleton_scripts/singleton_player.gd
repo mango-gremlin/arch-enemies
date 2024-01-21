@@ -477,12 +477,24 @@ func dialogue_squirrel_ol_nutter():
 	return dynamic_dialogue
 
 # ID 5: Toadally Anonymous
-func dialogue_frog_toadallyanonymous():
+func dialogue_starting_conflict():
 	var dynamic_dialogue = DynamicDialogue.new(frog_portrait, "no page here",
 	frog_portrait, "quest done")
 	
 	var pages:Array[DynamicPage] = [
-		DynamicPage.new("Hallo Welt!", frog_portrait),
+		DynamicPage.new("< You hear a loud discussion amongst different animals... >", fox_portrait),
+		DynamicPage.new("< You and your friends decide to investigate >", fox_portrait),
+		DynamicPage.new("My precious webs are broken! The travesty! Watch your step, youngins!", spider_portrait),
+		DynamicPage.new("... if only there was somebody here with really large hooves ...", frog_portrait),
+		DynamicPage.new("I'm telling you, it must be the frogs! They have trampled your nets and want your children to starve!", squirrel_nutter_portrait),
+		DynamicPage.new("... thats hard to believe, frogs are way too small to reach your webs ...", frog_portrait),
+		DynamicPage.new("Someone do something about this flood!! Stop being so useless, you rabble!!! My glorious antlers must remain dry!", deer_portrait),
+		DynamicPage.new("... I would be careful, I heard the spiders want to build their new webs between your antlers ...", frog_portrait),
+		DynamicPage.new("Behold!! My new nut will solve this issue!! - ... wait. What's that noise?", squirrel_portrait),
+		DynamicPage.new("< a snake comes out of the bushes > ... I'm sssszzzo hungryyy, I need zzzsomezzing I can sssszink my teezz into...", snake_portrait),
+		DynamicPage.new("... Save yourselves! The snake will devour us all! It's devious and evil ...", frog_portrait),
+		DynamicPage.new("< The squirrels flee in terror, and the discussion dies down. The other animals disperse...>", fox_portrait),
+		DynamicPage.new("... hehehehehehehehehehehehehehe ...", frog_portrait),
 	]
 	
 	dynamic_dialogue.insert_pages(pages)
@@ -497,7 +509,7 @@ func dialogue_frog_toadallyanonymous():
 	2 : dialogue_spider_grandpa(),
 	3 : dialogue_squirrel_egg(),
 	4 : dialogue_squirrel_ol_nutter(),
-	5 : dialogue_frog_toadallyanonymous()
+	5 : dialogue_starting_conflict()
 }
 
 func set_dialogue_npc_name(npc_id:int):

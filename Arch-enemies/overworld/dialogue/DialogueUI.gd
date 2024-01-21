@@ -32,7 +32,7 @@ func set_image_texture(src_path: String):
 		# set default image to display
 		npc_sprite.texture = load("res://assets/art/dialogue/green.png")
 		return
-	npc_sprite.scale = Vector2(2.2, 2.2)	
+	npc_sprite.scale = Vector2(2.3, 2.3)
 	npc_sprite.texture = load(src_path)
 	
 # null means disabled button, no fixme here xD
