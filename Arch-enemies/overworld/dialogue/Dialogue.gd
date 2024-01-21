@@ -8,6 +8,7 @@ var active_dialogue:Dialogue_Data = null
 var current_npc_id : int = 0
 
 # no type here, on startup, this will be configured
+# FIXME declare type
 var npc_control_instance = null
 
 # --- /
@@ -21,8 +22,6 @@ func enter_dialogue(dialogue:Dialogue_Data, npc_id: int):
 	active_dialogue = dialogue
 	# adding quest to players UI
 	SingletonPlayer.add_quest_string(npc_id)
-	# WARNING
-	# Page 0 is reserved for DONE  QUEST DIALOGUE
 	if SingletonPlayer.obtain_npc_quest_state(npc_id):
 		# was done, showing alt text 
 		active_dialogue.select_quest_done_page(0)

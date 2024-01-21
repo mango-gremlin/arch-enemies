@@ -139,6 +139,12 @@ func set_test_animal_inventory() -> Dictionary:
 # --- / 
 # -- / Overworld management 
 
+# tracking items and their state placed in overworld
+# key -> iteminteraction ID, value -> amount of items available
+@onready var itemspot_state:Dictionary = {}
+
+
+
 # denotes amount of islands available
 var TOTAL_ISLANDS:int = 2
 
@@ -261,6 +267,11 @@ func obtain_npc_quest_state(npc_id) -> bool:
 	var quest_state:bool = npc_object.obtain_quest_state()
 	#print("current state of quest" + str(quest_state))
 	return quest_state
+
+func obtain_npc_name(npc_id) -> String:
+	var npc_object:NPC_interaction = obtain_npc_object(npc_id)
+	var npc_name:String = npc_object.obtain_name()
+	return npc_name
 
 # queries all quests and their state
 # returns dictionary with following structure
@@ -406,7 +417,15 @@ func generate_dynamic_example():
 	4 : ExampleData.new(),
 }
 
-@onready var dialogue: Dialogue = Dialogue.new()
+func set_dialogue_npc_name(npc_id:int):
+	if not npc_dialogues.has(npc_id):
+		return 
+	var npc_name:String = obtain_npc_name(npc_id)
+	var npc_dialogue = npc_dialogues[npc_id]
+	npc_dialogue.npc_name = npc_name
+	
+
+@onready var active_dialogue: Dialogue = Dialogue.new()
 
 # checks whether a npc has a dialogue linked to it
 func has_dialogue(npc_id:int) -> bool:
@@ -425,7 +444,8 @@ func prepare_dialogue(npc_id:int):
 					var active_quests:Dictionary = active_tracked_quests
 					dialogue_object.update_dialogue(active_quests)
 	var data : Dialogue_Data = npc_dialogues[npc_id]
-	dialogue.enter_dialogue(data, npc_id)
+	active_dialogue.enter_dialogue(data, npc_id)
+
 
 # returns whether the dialogue has been finished.
 # finished is not just given by closing the dialogue window.
@@ -442,11 +462,11 @@ func obtain_dialogue(npc_id:int):
 
 # returns true when the player is currently in dialogue
 func navigation_in_dialogue() -> bool:
-	return dialogue.in_dialogue()
+	return active_dialogue.in_dialogue()
 
 # ends dialogue
 func exit_dialogue():
-	dialogue.exit_dialogue()
+	active_dialogue.exit_dialogue()
 
 
 

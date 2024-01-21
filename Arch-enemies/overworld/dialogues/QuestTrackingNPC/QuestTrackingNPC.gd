@@ -17,14 +17,6 @@ func _init():
 	
 	# test case
 	# querying the current state of quests 
-	
-	# FIXME no reason to initialize if overworld was not loaded -> no npc object available
-	# key: quest-string -> value: state:Boolean
-	#var quest_list:Dictionary = SingletonPlayer.obtain_all_quest_states()
-	#var unsolved_quests:Array[String] = extract_unsolved_quests(quest_list)
-	#
-	#print(unsolved_quests)
-	#insert_quests(unsolved_quests)
 
 # takes dictionary of quests and converts it to array of their strings 
 #

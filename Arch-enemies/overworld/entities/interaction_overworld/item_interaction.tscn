@@ -8,22 +8,7 @@
 script = ExtResource("1_ektp2")
 item_type = 1
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="item_sprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_gjeoh")
 
 [node name="interactionspot" parent="." instance=ExtResource("2_agwop")]
-
-[node name="ColorRect" type="ColorRect" parent="."]
-visible = false
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -8.0
-offset_top = -8.0
-offset_right = 8.0
-offset_bottom = 8.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(1, 0, 0, 1)
