@@ -28,15 +28,15 @@ quest_reward = 2
 reward_edge_start = 4
 reward_edge_dest = 1
 
-[node name="Background Music" type="AudioStreamPlayer2D" parent="."]
+[node name="Background Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_vdqf6")
 volume_db = -10.0
 autoplay = true
 
-[node name="Dialogue_Sounds" type="AudioStreamPlayer2D" parent="."]
+[node name="Dialogue_Sounds" type="AudioStreamPlayer" parent="."]
 script = ExtResource("3_h67g3")
 
-[node name="Walking Sounds" type="AudioStreamPlayer2D" parent="."]
+[node name="Walking Sounds" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_lhjvv")
 script = ExtResource("4_f85yo")
 

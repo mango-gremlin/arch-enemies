@@ -1,4 +1,4 @@
-extends AudioStreamPlayer2D
+extends AudioStreamPlayer
 #First we need to load all the sounds we intend to use
 var squirrel = preload("res://assets/sound/Squirrel.wav")
 var death = preload("res://assets/sound/Death.wav")

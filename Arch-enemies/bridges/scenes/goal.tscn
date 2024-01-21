@@ -9,7 +9,7 @@ size = Vector2(38, 37.6385)
 
 [node name="Node2D" type="Node2D"]
 
-[node name="Victory" type="AudioStreamPlayer2D" parent="."]
+[node name="Victory" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("1_fh6hj")
 script = ExtResource("2_svc7o")
 

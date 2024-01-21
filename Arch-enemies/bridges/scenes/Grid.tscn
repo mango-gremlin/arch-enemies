@@ -788,17 +788,17 @@ position = Vector2(192, 108)
 zoom = Vector2(3, 3)
 script = ExtResource("1_vkapa")
 
-[node name="Background Music" type="AudioStreamPlayer2D" parent="."]
+[node name="Background Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_3o2us")
 volume_db = -10.0
 autoplay = true
 
-[node name="Sound Effects" type="AudioStreamPlayer2D" parent="."]
+[node name="Sound Effects" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_kilw0")
 max_polyphony = 3
 script = ExtResource("3_dujuj")
 
-[node name="Walking Sound" type="AudioStreamPlayer2D" parent="."]
+[node name="Walking Sound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_a6sim")
 script = ExtResource("6_2sdlx")
 

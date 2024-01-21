@@ -783,17 +783,17 @@ sources/6 = SubResource("TileSetAtlasSource_meq0p")
 
 [node name="Node2D" type="Node2D"]
 
-[node name="Background Music" type="AudioStreamPlayer2D" parent="."]
+[node name="Background Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("24_aqvpa")
 volume_db = -10.0
 autoplay = true
 
-[node name="Sound Effects" type="AudioStreamPlayer2D" parent="."]
+[node name="Sound Effects" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("25_i56b2")
 max_polyphony = 3
 script = ExtResource("26_t4rtc")
 
-[node name="Walking Sound" type="AudioStreamPlayer2D" parent="."]
+[node name="Walking Sound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("27_0ph6e")
 script = ExtResource("28_bfcvy")
 
