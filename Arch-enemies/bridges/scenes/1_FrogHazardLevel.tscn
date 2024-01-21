@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://upaiprbcdv15"]
+[gd_scene load_steps=44 format=3 uid="uid://upaiprbcdv15"]
 
 [ext_resource type="Script" path="res://bridges/script/Camera.gd" id="1_0pfwb"]
 [ext_resource type="Texture2D" uid="uid://d0o2q6fijmd1" path="res://assets/art/tilesets/bridge_tileset/bridge_background_color.png" id="2_g3m8w"]
@@ -18,9 +18,11 @@
 [ext_resource type="PackedScene" uid="uid://dvgr170gyuhpq" path="res://bridges/scenes/player.tscn" id="16_ltm5p"]
 [ext_resource type="PackedScene" uid="uid://cbremi6mc4sua" path="res://bridges/scenes/world_edge.tscn" id="17_3k0i6"]
 [ext_resource type="PackedScene" uid="uid://cxj1q08s3i7i8" path="res://bridges/scenes/goal_menu.tscn" id="18_ihjef"]
+[ext_resource type="Texture2D" uid="uid://b1yknecfgw4fs" path="res://assets/art/ui_elements/animal_inventory_scroll9.png" id="19_7lff1"]
 [ext_resource type="PackedScene" uid="uid://dfnsuounqjr4c" path="res://bridges/scenes/goal.tscn" id="19_pfriv"]
 [ext_resource type="PackedScene" uid="uid://cern51r1p8lkb" path="res://bridges/scenes/bridges_pause_menu.tscn" id="20_t104i"]
 [ext_resource type="PackedScene" uid="uid://dynxnwixd1bke" path="res://bridges/scenes/parallax_background.tscn" id="21_8ltw0"]
+[ext_resource type="Theme" uid="uid://d2ijyc316xeom" path="res://assets/art/ui_elements/ui_theme.tres" id="21_dcmnv"]
 [ext_resource type="Texture2D" uid="uid://leqswdio6xwd" path="res://bridges/assets/background/background_center_v4.png" id="22_f205j"]
 [ext_resource type="Texture2D" uid="uid://d3s1iupr6ox8" path="res://bridges/assets/background/background_darkness.png" id="23_f4q6k"]
 [ext_resource type="AudioStream" uid="uid://n71rssah4ej4" path="res://assets/sound/Main_Menu.wav" id="24_aqvpa"]
@@ -830,6 +832,10 @@ anchors_preset = 0
 offset_right = 390.0
 offset_bottom = 220.0
 
+[node name="Inventory_Background" type="Sprite2D" parent="Grid/Control"]
+texture = ExtResource("19_7lff1")
+centered = false
+
 [node name="Drag_Grid" type="TextureRect" parent="Grid/Control" node_paths=PackedStringArray("Grid_node_reference")]
 custom_minimum_size = Vector2(390, 220)
 layout_mode = 1
@@ -843,8 +849,10 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Animal_Inventory" type="HBoxContainer" parent="Grid/Control"]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 2.0
+offset_top = 1.0
+offset_right = 124.0
+offset_bottom = 41.0
 
 [node name="Deer_Item" type="TextureRect" parent="Grid/Control/Animal_Inventory" node_paths=PackedStringArray("Grid_node_reference")]
 layout_mode = 2
@@ -885,7 +893,9 @@ offset_top = 5.0
 offset_right = 287.0
 offset_bottom = 36.0
 scale = Vector2(0.5, 0.5)
+theme = ExtResource("21_dcmnv")
 text = "drag mode"
+alignment = 1
 script = ExtResource("15_tnxv3")
 
 [node name="Reset" type="Button" parent="Grid/Control"]
@@ -895,6 +905,7 @@ offset_top = 3.0
 offset_right = 520.0
 offset_bottom = 34.0
 scale = Vector2(0.5, 0.5)
+theme = ExtResource("21_dcmnv")
 text = "Reset"
 
 [node name="Last_State" type="Button" parent="Grid/Control"]
@@ -904,6 +915,7 @@ offset_top = 21.0
 offset_right = 554.0
 offset_bottom = 52.0
 scale = Vector2(0.5, 0.5)
+theme = ExtResource("21_dcmnv")
 text = "One Step Back"
 
 [node name="Player" parent="Grid" groups=["player"] instance=ExtResource("16_ltm5p")]
@@ -938,25 +950,34 @@ offset_right = 250.0
 offset_bottom = 109.0
 
 [node name="animal_inventory_counter" type="HBoxContainer" parent="Grid"]
-offset_top = 38.0
+offset_top = 36.0
 offset_right = 52.0
-offset_bottom = 61.0
+offset_bottom = 59.0
+theme = ExtResource("21_dcmnv")
 
 [node name="deer" type="Label" parent="Grid/animal_inventory_counter"]
+custom_minimum_size = Vector2(25, 0)
 layout_mode = 2
 text = "0"
+horizontal_alignment = 2
 
 [node name="snake" type="Label" parent="Grid/animal_inventory_counter"]
+custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 text = "0"
+horizontal_alignment = 2
 
 [node name="spider" type="Label" parent="Grid/animal_inventory_counter"]
+custom_minimum_size = Vector2(25, 0)
 layout_mode = 2
 text = "0"
+horizontal_alignment = 2
 
 [node name="squirrel" type="Label" parent="Grid/animal_inventory_counter"]
+custom_minimum_size = Vector2(12, 0)
 layout_mode = 2
 text = "0"
+horizontal_alignment = 2
 
 [node name="parallax_background" parent="." instance=ExtResource("21_8ltw0")]
 
