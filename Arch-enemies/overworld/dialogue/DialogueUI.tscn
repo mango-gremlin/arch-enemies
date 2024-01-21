@@ -50,8 +50,12 @@ layout_mode = 2
 custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
 
+[node name="npc_name" type="Label" parent="Panel/main_box/content_box"]
+layout_mode = 2
+text = "NAME"
+
 [node name="content" type="HBoxContainer" parent="Panel/main_box/content_box"]
-custom_minimum_size = Vector2(0, 93)
+custom_minimum_size = Vector2(0, 75)
 layout_mode = 2
 
 [node name="label_box" type="BoxContainer" parent="Panel/main_box/content_box/content"]
@@ -59,7 +63,7 @@ custom_minimum_size = Vector2(420, 0)
 layout_mode = 2
 
 [node name="Label" type="Label" parent="Panel/main_box/content_box/content/label_box"]
-custom_minimum_size = Vector2(420, 93)
+custom_minimum_size = Vector2(420, 60)
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
 text = "The dialogue system allows the creation of custom dialogues, with buttons and an icon. "

@@ -73,6 +73,10 @@ func _ready():
 	
 	# constructing NPC accordingly
 	npc_object = create_npc()
+	# update name for dialogue associated with NPC! 
+	# FIXME not a good solution because we leave the scope of where this should be done
+	# WARNING npc_interaction should not take care, even know about a npc_dialogue!
+	SingletonPlayer.set_dialogue_npc_name(npc_id)
 	#print(npc_object.stringify_quest())
 
 # --- / 
