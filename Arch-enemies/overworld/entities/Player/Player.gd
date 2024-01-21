@@ -9,6 +9,7 @@ extends CharacterBody2D
 @export var SPEED = 100
 @onready var anim:AnimatedSprite2D = $AnimatedSprite2D
 @onready var player_hitbox = $CollisionShape2D
+@onready var indicator_how_to_walk = $IndicatorWASDWalking
 
 # for correct animation: save last direction walked in, and if sprite was flipped
 # enum for animation types
@@ -89,6 +90,10 @@ func player_movement(delta):
 	
 	player_rotate_hitbox(delta)
 	
+	# to prevent the following function from being called every delta
+	if Global.walking and indicator_how_to_walk.visible:
+		toggle_indicator_visibility(delta)
+	
 	move_and_collide(velocity * delta)
 
 func player_idle_animation(delta):
@@ -111,6 +116,11 @@ func player_rotate_hitbox(delta):
 			player_hitbox.set_rotation_degrees(90)
 		DIRECTION.BACK:
 			player_hitbox.set_rotation_degrees(90)
+
+func toggle_indicator_visibility(delta):
+	# indicator displayed until first movement, then its set to invisible
+	indicator_how_to_walk.visible = false
+	
 
 # ----- 
 # --- structure interaction areas
