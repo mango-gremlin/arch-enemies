@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://bm4bdq6ka013n"]
+[gd_scene load_steps=14 format=3 uid="uid://bm4bdq6ka013n"]
 
 [ext_resource type="Script" path="res://overworld/scripts/main_menu.gd" id="1_w25qy"]
 [ext_resource type="Theme" uid="uid://d2ijyc316xeom" path="res://assets/art/ui_elements/ui_theme.tres" id="1_y2jls"]
 [ext_resource type="Texture2D" uid="uid://cm1xjw1g442ht" path="res://assets/main_menu_background.png" id="2_jxyfb"]
+[ext_resource type="AudioStream" uid="uid://n71rssah4ej4" path="res://assets/sound/Main_Menu.wav" id="3_j2ahf"]
 [ext_resource type="Texture2D" uid="uid://6mcb7hf0rp0k" path="res://assets/art/ui_elements/Box_border_side.png" id="4_dh2lh"]
 [ext_resource type="Texture2D" uid="uid://co3jrch10y3mb" path="res://assets/art/ui_elements/menu_container_top.png" id="5_3tcp8"]
 [ext_resource type="Texture2D" uid="uid://igj8k0askwfw" path="res://assets/art/ui_elements/button_normal.png" id="5_nsoik"]
@@ -38,6 +39,11 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_y2jls")
 script = ExtResource("1_w25qy")
+
+[node name="Background Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_j2ahf")
+volume_db = -10.0
+autoplay = true
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1

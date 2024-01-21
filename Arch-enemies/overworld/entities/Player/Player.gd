@@ -8,6 +8,7 @@ extends CharacterBody2D
 
 @export var SPEED = 100
 @onready var anim:AnimatedSprite2D = $AnimatedSprite2D
+@onready var player_hitbox = $CollisionShape2D
 
 # for correct animation: save last direction walked in, and if sprite was flipped
 # enum for animation types
@@ -24,6 +25,9 @@ enum DIRECTION {SIDE, FRONT, BACK}
 
 # TODO might be removed, for debugging only
 @onready var interactionLabel = $interactioncomponents/InteractLabel
+
+# signal for audio
+signal play_sound(sound)
 
 # saving when closed via Request of OS
 func _notification(what):
@@ -56,6 +60,8 @@ func player_movement(delta):
 		
 	velocity = Vector2.ZERO
 	
+	Global.walking = true
+	
 	if Input.is_action_pressed("move_up"):
 		velocity.y -= SPEED
 		anim.play("back_walk")
@@ -79,6 +85,9 @@ func player_movement(delta):
 		
 	elif velocity == Vector2.ZERO:
 		player_idle_animation(delta)
+		Global.walking = false
+	
+	player_rotate_hitbox(delta)
 	
 	move_and_collide(velocity * delta)
 
@@ -93,6 +102,15 @@ func player_idle_animation(delta):
 			anim.play("back_idle")
 		_:
 			anim.play("side_idle")
+
+func player_rotate_hitbox(delta):
+	match current_direction:
+		DIRECTION.SIDE:
+			player_hitbox.set_rotation_degrees(0)
+		DIRECTION.FRONT:
+			player_hitbox.set_rotation_degrees(90)
+		DIRECTION.BACK:
+			player_hitbox.set_rotation_degrees(90)
 
 # ----- 
 # --- structure interaction areas
@@ -153,6 +171,10 @@ func execute_interaction():
 			# entering dialogue, disable movement
 			var quest_done:bool = SingletonPlayer.obtain_npc_quest_state(npc_id)
 			var dialogue_done:bool = SingletonPlayer.check_dialogue_finished(npc_id)
+			
+			# SOUND STUFF
+			# play interaction sound here, depending on animal
+			play_sound.emit("SQUIRREL") # not animal specific yet
 			
 			# allow dialogue as long as 
 			# -> quest is undone
