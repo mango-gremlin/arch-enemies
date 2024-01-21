@@ -25,9 +25,7 @@
 [ext_resource type="PackedScene" uid="uid://cbremi6mc4sua" path="res://bridges/scenes/world_edge.tscn" id="17_6tnqx"]
 [ext_resource type="PackedScene" uid="uid://cxj1q08s3i7i8" path="res://bridges/scenes/goal_menu.tscn" id="18_co2ox"]
 [ext_resource type="PackedScene" uid="uid://dfnsuounqjr4c" path="res://bridges/scenes/goal.tscn" id="19_1q1ud"]
-[ext_resource type="Texture2D" uid="uid://b1yknecfgw4fs" path="res://assets/art/ui_elements/animal_inventory_scroll9.png" id="19_ee47t"]
 [ext_resource type="PackedScene" uid="uid://cern51r1p8lkb" path="res://bridges/scenes/bridges_pause_menu.tscn" id="20_20jtq"]
-[ext_resource type="Theme" uid="uid://d2ijyc316xeom" path="res://assets/art/ui_elements/ui_theme.tres" id="21_5yhij"]
 [ext_resource type="PackedScene" uid="uid://dynxnwixd1bke" path="res://bridges/scenes/parallax_background.tscn" id="21_sinqj"]
 [ext_resource type="Theme" uid="uid://d2ijyc316xeom" path="res://assets/art/ui_elements/ui_theme.tres" id="21_tsd45"]
 [ext_resource type="Texture2D" uid="uid://leqswdio6xwd" path="res://bridges/assets/background/background_center_v4.png" id="22_sx6wq"]
@@ -841,10 +839,6 @@ offset_right = 683.0
 offset_bottom = 336.0
 metadata/_edit_use_anchors_ = true
 
-[node name="Inventory_Background" type="Sprite2D" parent="Grid/Control"]
-texture = ExtResource("19_ee47t")
-centered = false
-
 [node name="Drag_Grid" type="TextureRect" parent="Grid/Control" node_paths=PackedStringArray("Grid_node_reference")]
 custom_minimum_size = Vector2(390, 220)
 layout_mode = 1
@@ -860,10 +854,8 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Animal_Inventory" type="HBoxContainer" parent="Grid/Control"]
 layout_mode = 0
-offset_left = 2.0
-offset_top = 1.0
-offset_right = 124.0
-offset_bottom = 41.0
+offset_right = 40.0
+offset_bottom = 40.0
 
 [node name="Deer_Item" type="TextureRect" parent="Grid/Control/Animal_Inventory" node_paths=PackedStringArray("Grid_node_reference")]
 layout_mode = 2
@@ -912,9 +904,7 @@ offset_top = 5.0
 offset_right = 440.0
 offset_bottom = 36.0
 scale = Vector2(0.5, 0.5)
-theme = ExtResource("21_5yhij")
 text = "drag mode"
-alignment = 1
 script = ExtResource("15_pd5uj")
 
 [node name="Reset" type="Button" parent="Grid/Control"]
@@ -924,7 +914,6 @@ offset_top = 11.0
 offset_right = 679.0
 offset_bottom = 42.0
 scale = Vector2(0.5, 0.5)
-theme = ExtResource("21_5yhij")
 text = "Reset"
 
 [node name="Last_State" type="Button" parent="Grid/Control"]
@@ -934,7 +923,6 @@ offset_top = 29.0
 offset_right = 713.0
 offset_bottom = 60.0
 scale = Vector2(0.5, 0.5)
-theme = ExtResource("21_5yhij")
 text = "One Step Back"
 
 [node name="Player" parent="Grid" groups=["player"] instance=ExtResource("16_t16j0")]
@@ -989,34 +977,25 @@ offset_right = 60.2083
 offset_bottom = 26.375
 
 [node name="animal_inventory_counter" type="HBoxContainer" parent="Grid"]
-offset_top = 36.0
+offset_top = 38.0
 offset_right = 52.0
-offset_bottom = 59.0
-theme = ExtResource("21_5yhij")
+offset_bottom = 61.0
 
 [node name="deer" type="Label" parent="Grid/animal_inventory_counter"]
-custom_minimum_size = Vector2(25, 0)
 layout_mode = 2
 text = "0"
-horizontal_alignment = 2
 
 [node name="snake" type="Label" parent="Grid/animal_inventory_counter"]
-custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 text = "0"
-horizontal_alignment = 2
 
 [node name="spider" type="Label" parent="Grid/animal_inventory_counter"]
-custom_minimum_size = Vector2(25, 0)
 layout_mode = 2
 text = "0"
-horizontal_alignment = 2
 
 [node name="squirrel" type="Label" parent="Grid/animal_inventory_counter"]
-custom_minimum_size = Vector2(12, 0)
 layout_mode = 2
 text = "0"
-horizontal_alignment = 2
 
 [node name="parallax_background" parent="." instance=ExtResource("21_sinqj")]
 
