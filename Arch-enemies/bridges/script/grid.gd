@@ -518,3 +518,8 @@ func _on_goal_menu_level_solved():
 	play_sound.emit("VICTORY")
 	print("updating inventory of overworld")
 	set_global_animal_inventory(start_animals)
+
+
+func _on_tutorial_button_pressed():
+	get_parent().get_node("Tutorial").visible = true
+	self.visible = false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://cxi6j8p1hopjh"]
+[gd_scene load_steps=43 format=3 uid="uid://cxi6j8p1hopjh"]
 
 [ext_resource type="Script" path="res://bridges/script/Camera.gd" id="1_e57tb"]
 [ext_resource type="AudioStream" uid="uid://n71rssah4ej4" path="res://assets/sound/Main_Menu.wav" id="1_uw4o4"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://bridges/script/walking_sound.gd" id="5_bo2kp"]
 [ext_resource type="Texture2D" uid="uid://gyfjmxefsxu0" path="res://assets/art/tilesets/bridge_tileset/bridge_ground_tiles.png" id="5_lrvsb"]
 [ext_resource type="Texture2D" uid="uid://2dqqm3b306my" path="res://assets/art/tilesets/bridge_tileset/bridge_water_tiles.png" id="6_0fptx"]
+[ext_resource type="PackedScene" uid="uid://mq3lgncyb3cu" path="res://bridges/scenes/tutorial_info.tscn" id="7_h06eb"]
 [ext_resource type="Texture2D" uid="uid://ckghjw6ynsyxv" path="res://bridges/assets/yellow.png" id="7_ndhew"]
 [ext_resource type="Texture2D" uid="uid://diwvqonlr6748" path="res://assets/art/objects/bridge_squirrel.png" id="8_a8m7c"]
 [ext_resource type="Texture2D" uid="uid://bax18833oqune" path="res://bridges/assets/red.png" id="9_pvau1"]
@@ -26,6 +27,7 @@
 [ext_resource type="PackedScene" uid="uid://dfnsuounqjr4c" path="res://bridges/scenes/goal.tscn" id="19_1q1ud"]
 [ext_resource type="PackedScene" uid="uid://cern51r1p8lkb" path="res://bridges/scenes/bridges_pause_menu.tscn" id="20_20jtq"]
 [ext_resource type="PackedScene" uid="uid://dynxnwixd1bke" path="res://bridges/scenes/parallax_background.tscn" id="21_sinqj"]
+[ext_resource type="Theme" uid="uid://d2ijyc316xeom" path="res://assets/art/ui_elements/ui_theme.tres" id="21_tsd45"]
 [ext_resource type="Texture2D" uid="uid://leqswdio6xwd" path="res://bridges/assets/background/background_center_v4.png" id="22_sx6wq"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gxf1m"]
@@ -780,7 +782,7 @@ sources/3 = SubResource("TileSetAtlasSource_1v7j0")
 sources/5 = SubResource("TileSetAtlasSource_xun2x")
 sources/6 = SubResource("TileSetAtlasSource_meq0p")
 
-[node name="Node2D" type="Node2D"]
+[node name="FinalLevel" type="Node2D"]
 
 [node name="Background Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("1_uw4o4")
@@ -804,6 +806,12 @@ position = Vector2(0, -23)
 anchor_mode = 0
 zoom = Vector2(1.75, 1.75)
 script = ExtResource("1_e57tb")
+
+[node name="Tutorial" parent="." instance=ExtResource("7_h06eb")]
+visible = false
+offset_top = -23.0
+offset_bottom = -23.0
+scale = Vector2(0.571551, 0.571476)
 
 [node name="Grid" type="TileMap" parent="." node_paths=PackedStringArray("inventory_deer", "inventory_snake", "inventory_spider", "inventory_squirrel")]
 tile_set = SubResource("TileSet_ne4ig")
@@ -880,6 +888,14 @@ texture = ExtResource("8_a8m7c")
 stretch_mode = 3
 script = ExtResource("14_d4vvk")
 Grid_node_reference = NodePath("../../..")
+
+[node name="tutorial_button" type="Button" parent="Grid/Control/Animal_Inventory"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("21_tsd45")
+theme_override_font_sizes/font_size = 10
+text = "?"
 
 [node name="Drag_or_Fox" type="CheckButton" parent="Grid/Control"]
 layout_mode = 0
@@ -1036,6 +1052,7 @@ scale = Vector2(1, 0.84)
 [connection signal="need_grid" from="Grid/Control/Animal_Inventory/Squirrel_Item" to="Grid" method="_on_squirrel_item_need_grid"]
 [connection signal="play_sound" from="Grid/Control/Animal_Inventory/Squirrel_Item" to="Sound Effects" method="_on_squirrel_item_play_sound"]
 [connection signal="update_grid" from="Grid/Control/Animal_Inventory/Squirrel_Item" to="Grid" method="_on_squirrel_item_update_grid"]
+[connection signal="pressed" from="Grid/Control/Animal_Inventory/tutorial_button" to="Grid" method="_on_tutorial_button_pressed"]
 [connection signal="toggled" from="Grid/Control/Drag_or_Fox" to="Grid/Control/Drag_or_Fox" method="_on_toggled"]
 [connection signal="pressed" from="Grid/Control/Reset" to="Grid" method="_on_reset_pressed"]
 [connection signal="pressed" from="Grid/Control/Last_State" to="Grid" method="_on_last_state_pressed"]

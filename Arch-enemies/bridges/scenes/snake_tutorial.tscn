@@ -13,6 +13,7 @@ texture = ExtResource("1_52o8j")
 text = "How to place snakes:"
 
 [node name="Example" parent="PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer" index="1"]
+size_flags_vertical = 8
 text = "Zzats a taszzty looking szzquirrel. 
 You better not placzze it anywhere near my head or I might just take a bite szzz."
 autowrap_mode = 3

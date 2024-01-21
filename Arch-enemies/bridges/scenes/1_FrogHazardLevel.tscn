@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://upaiprbcdv15"]
+[gd_scene load_steps=44 format=3 uid="uid://upaiprbcdv15"]
 
 [ext_resource type="Script" path="res://bridges/script/Camera.gd" id="1_0pfwb"]
 [ext_resource type="Texture2D" uid="uid://d0o2q6fijmd1" path="res://assets/art/tilesets/bridge_tileset/bridge_background_color.png" id="2_g3m8w"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bbktakyncn7nc" path="res://assets/art/objects/bridge_deer.png" id="4_5aqv8"]
 [ext_resource type="Texture2D" uid="uid://gyfjmxefsxu0" path="res://assets/art/tilesets/bridge_tileset/bridge_ground_tiles.png" id="5_t3tft"]
 [ext_resource type="Texture2D" uid="uid://2dqqm3b306my" path="res://assets/art/tilesets/bridge_tileset/bridge_water_tiles.png" id="6_tw2le"]
+[ext_resource type="PackedScene" uid="uid://mq3lgncyb3cu" path="res://bridges/scenes/tutorial_info.tscn" id="7_8o7q8"]
 [ext_resource type="Texture2D" uid="uid://ckghjw6ynsyxv" path="res://bridges/assets/yellow.png" id="7_eord1"]
 [ext_resource type="Texture2D" uid="uid://diwvqonlr6748" path="res://assets/art/objects/bridge_squirrel.png" id="8_mn6qn"]
 [ext_resource type="Texture2D" uid="uid://bax18833oqune" path="res://bridges/assets/red.png" id="9_jxxeb"]
@@ -21,6 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://dfnsuounqjr4c" path="res://bridges/scenes/goal.tscn" id="19_pfriv"]
 [ext_resource type="PackedScene" uid="uid://cern51r1p8lkb" path="res://bridges/scenes/bridges_pause_menu.tscn" id="20_t104i"]
 [ext_resource type="PackedScene" uid="uid://dynxnwixd1bke" path="res://bridges/scenes/parallax_background.tscn" id="21_8ltw0"]
+[ext_resource type="Theme" uid="uid://d2ijyc316xeom" path="res://assets/art/ui_elements/ui_theme.tres" id="21_kdj0f"]
 [ext_resource type="Texture2D" uid="uid://leqswdio6xwd" path="res://bridges/assets/background/background_center_v4.png" id="22_f205j"]
 [ext_resource type="Texture2D" uid="uid://d3s1iupr6ox8" path="res://bridges/assets/background/background_darkness.png" id="23_f4q6k"]
 [ext_resource type="AudioStream" uid="uid://n71rssah4ej4" path="res://assets/sound/Main_Menu.wav" id="24_aqvpa"]
@@ -781,7 +783,7 @@ sources/3 = SubResource("TileSetAtlasSource_1v7j0")
 sources/5 = SubResource("TileSetAtlasSource_xun2x")
 sources/6 = SubResource("TileSetAtlasSource_meq0p")
 
-[node name="Node2D" type="Node2D"]
+[node name="FrogHazardLevel" type="Node2D"]
 
 [node name="Background Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("24_aqvpa")
@@ -805,7 +807,13 @@ position = Vector2(250, 108)
 zoom = Vector2(2.3, 2.3)
 script = ExtResource("1_0pfwb")
 
+[node name="Tutorial" parent="." instance=ExtResource("7_8o7q8")]
+offset_top = -33.0
+offset_bottom = -33.0
+scale = Vector2(0.434577, 0.435044)
+
 [node name="Grid" type="TileMap" parent="." node_paths=PackedStringArray("inventory_deer", "inventory_snake", "inventory_spider", "inventory_squirrel")]
+visible = false
 tile_set = SubResource("TileSet_ne4ig")
 format = 2
 layer_0/name = "level"
@@ -877,6 +885,14 @@ texture = ExtResource("8_mn6qn")
 stretch_mode = 3
 script = ExtResource("14_4xmqt")
 Grid_node_reference = NodePath("../../..")
+
+[node name="tutorial_button" type="Button" parent="Grid/Control/Animal_Inventory"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("21_kdj0f")
+theme_override_font_sizes/font_size = 10
+text = "?"
 
 [node name="Drag_or_Fox" type="CheckButton" parent="Grid/Control"]
 layout_mode = 0
@@ -999,8 +1015,14 @@ position = Vector2(400, 100)
 [connection signal="need_grid" from="Grid/Control/Animal_Inventory/Squirrel_Item" to="Grid" method="_on_squirrel_item_need_grid"]
 [connection signal="play_sound" from="Grid/Control/Animal_Inventory/Squirrel_Item" to="Sound Effects" method="_on_squirrel_item_play_sound"]
 [connection signal="update_grid" from="Grid/Control/Animal_Inventory/Squirrel_Item" to="Grid" method="_on_squirrel_item_update_grid"]
+[connection signal="pressed" from="Grid/Control/Animal_Inventory/tutorial_button" to="Grid" method="_on_tutorial_button_pressed"]
 [connection signal="toggled" from="Grid/Control/Drag_or_Fox" to="Grid/Control/Drag_or_Fox" method="_on_toggled"]
 [connection signal="pressed" from="Grid/Control/Reset" to="Grid" method="_on_reset_pressed"]
 [connection signal="pressed" from="Grid/Control/Last_State" to="Grid" method="_on_last_state_pressed"]
 
+[editable path="Tutorial"]
+[editable path="Tutorial/Spider_Tutorial"]
+[editable path="Tutorial/Squirrel_Tutorial"]
+[editable path="Tutorial/Snake_Tutorial"]
+[editable path="Tutorial/Deer_Tutorial"]
 [editable path="parallax_background"]
