@@ -1,7 +1,20 @@
-[gd_scene load_steps=3 format=3 uid="uid://bsiv4b8ihdf34"]
+[gd_scene load_steps=8 format=3 uid="uid://bsiv4b8ihdf34"]
 
+[ext_resource type="Texture2D" uid="uid://b00ykicd4nlw1" path="res://assets/art/ui_elements/DialogueBox_outline.png" id="1_8ytkm"]
+[ext_resource type="Theme" uid="uid://d2ijyc316xeom" path="res://assets/art/ui_elements/ui_theme.tres" id="1_u1tlq"]
 [ext_resource type="Texture2D" uid="uid://bfqnciyr7bhn3" path="res://assets/tutorial_screenshots/archenemies_squirrel_tutorial.png" id="1_v31ag"]
 [ext_resource type="Texture2D" uid="uid://xd2wfewwwcqc" path="res://assets/art/characters/squirrel.png" id="2_2f3yo"]
+[ext_resource type="Texture2D" uid="uid://dida36t6h2yy" path="res://assets/art/ui_elements/menu_container_middle.png" id="3_atb8x"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_08edf"]
+texture = ExtResource("1_8ytkm")
+texture_margin_top = 1.0
+texture_margin_bottom = 1.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_asw41"]
+texture = ExtResource("3_atb8x")
+texture_margin_left = 5.0
+texture_margin_right = 5.0
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -10,11 +23,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_u1tlq")
 
 [node name="PanelContainer2" type="PanelContainer" parent="."]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_08edf")
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer2"]
 layout_mode = 2
@@ -34,6 +49,7 @@ texture = ExtResource("1_v31ag")
 
 [node name="PanelContainer" type="PanelContainer" parent="PanelContainer2/MarginContainer/HBoxContainer"]
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_asw41")
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer2/MarginContainer/HBoxContainer/PanelContainer"]
 layout_mode = 2

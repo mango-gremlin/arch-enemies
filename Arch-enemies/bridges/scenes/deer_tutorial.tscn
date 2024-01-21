@@ -1,16 +1,39 @@
-[gd_scene load_steps=3 format=3 uid="uid://kckgnp56pvqf"]
+[gd_scene load_steps=8 format=3 uid="uid://kckgnp56pvqf"]
 
 [ext_resource type="Texture2D" uid="uid://b7drmw23l1wqd" path="res://assets/tutorial_screenshots/deer_tutorial.png" id="1_humsf"]
+[ext_resource type="Theme" uid="uid://d2ijyc316xeom" path="res://assets/art/ui_elements/ui_theme.tres" id="1_vlya4"]
 [ext_resource type="Texture2D" uid="uid://c113ngm1rnuj0" path="res://assets/art/characters/deer.png" id="2_mo0v2"]
+[ext_resource type="Texture2D" uid="uid://b00ykicd4nlw1" path="res://assets/art/ui_elements/DialogueBox_outline.png" id="2_wp5ve"]
+[ext_resource type="Texture2D" uid="uid://dida36t6h2yy" path="res://assets/art/ui_elements/menu_container_middle.png" id="4_f4713"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4tchl"]
+texture = ExtResource("2_wp5ve")
+texture_margin_top = 1.0
+texture_margin_bottom = 1.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5cpj6"]
+texture = ExtResource("4_f4713")
+texture_margin_left = 5.0
+texture_margin_right = 5.0
 
 [node name="Control" type="Control"]
 layout_mode = 3
 anchors_preset = 0
+offset_left = 222.0
+offset_top = 115.0
+offset_right = 222.0
+offset_bottom = 115.0
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme = ExtResource("1_vlya4")
 
 [node name="PanelContainer2" type="PanelContainer" parent="."]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
+theme = ExtResource("1_vlya4")
+theme_type_variation = &"Tutorial"
+theme_override_styles/panel = SubResource("StyleBoxTexture_4tchl")
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer2"]
 layout_mode = 2
@@ -32,6 +55,8 @@ stretch_mode = 5
 
 [node name="PanelContainer" type="PanelContainer" parent="PanelContainer2/MarginContainer/HBoxContainer"]
 layout_mode = 2
+theme = ExtResource("1_vlya4")
+theme_override_styles/panel = SubResource("StyleBoxTexture_5cpj6")
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer2/MarginContainer/HBoxContainer/PanelContainer"]
 layout_mode = 2

@@ -1,7 +1,20 @@
-[gd_scene load_steps=3 format=3 uid="uid://bp286phfoqyt1"]
+[gd_scene load_steps=8 format=3 uid="uid://bp286phfoqyt1"]
 
 [ext_resource type="Texture2D" uid="uid://37iifgc8h671" path="res://assets/tutorial_screenshots/archenemies_snake_tutorial.png" id="1_52o8j"]
+[ext_resource type="Theme" uid="uid://d2ijyc316xeom" path="res://assets/art/ui_elements/ui_theme.tres" id="1_v238b"]
 [ext_resource type="Texture2D" uid="uid://0j6i0mpsh8hq" path="res://assets/art/characters/snek.png" id="2_bm6y4"]
+[ext_resource type="Texture2D" uid="uid://b00ykicd4nlw1" path="res://assets/art/ui_elements/DialogueBox_outline.png" id="2_ga581"]
+[ext_resource type="Texture2D" uid="uid://dida36t6h2yy" path="res://assets/art/ui_elements/menu_container_middle.png" id="4_8einh"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_q15hy"]
+texture = ExtResource("2_ga581")
+texture_margin_top = 1.0
+texture_margin_bottom = 1.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rrrs3"]
+texture = ExtResource("4_8einh")
+texture_margin_left = 5.0
+texture_margin_right = 5.0
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -15,6 +28,8 @@ grow_vertical = 2
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
+theme = ExtResource("1_v238b")
+theme_override_styles/panel = SubResource("StyleBoxTexture_q15hy")
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer2"]
 layout_mode = 2
@@ -36,6 +51,7 @@ stretch_mode = 5
 
 [node name="PanelContainer" type="PanelContainer" parent="PanelContainer2/MarginContainer/HBoxContainer"]
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_rrrs3")
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer2/MarginContainer/HBoxContainer/PanelContainer"]
 layout_mode = 2

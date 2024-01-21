@@ -1,7 +1,20 @@
-[gd_scene load_steps=3 format=3 uid="uid://6di2l5yn01qd"]
+[gd_scene load_steps=8 format=3 uid="uid://6di2l5yn01qd"]
 
 [ext_resource type="Texture2D" uid="uid://bjwiponyutixg" path="res://assets/tutorial_screenshots/archenemies_spider_tutorial.png" id="1_7hp6a"]
+[ext_resource type="Theme" uid="uid://d2ijyc316xeom" path="res://assets/art/ui_elements/ui_theme.tres" id="1_x3p4r"]
 [ext_resource type="Texture2D" uid="uid://bxrt2ulp85yuy" path="res://assets/art/characters/spider.png" id="2_8xpec"]
+[ext_resource type="Texture2D" uid="uid://b00ykicd4nlw1" path="res://assets/art/ui_elements/DialogueBox_outline.png" id="2_db1t0"]
+[ext_resource type="Texture2D" uid="uid://dida36t6h2yy" path="res://assets/art/ui_elements/menu_container_middle.png" id="4_ftdqq"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kwaor"]
+texture = ExtResource("2_db1t0")
+texture_margin_top = 1.0
+texture_margin_bottom = 1.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5dldx"]
+texture = ExtResource("4_ftdqq")
+texture_margin_left = 5.0
+texture_margin_right = 5.0
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -10,11 +23,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_x3p4r")
 
 [node name="PanelContainer2" type="PanelContainer" parent="."]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_kwaor")
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer2"]
 layout_mode = 2
@@ -34,6 +49,7 @@ texture = ExtResource("1_7hp6a")
 
 [node name="PanelContainer" type="PanelContainer" parent="PanelContainer2/MarginContainer/HBoxContainer"]
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_5dldx")
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer2/MarginContainer/HBoxContainer/PanelContainer"]
 layout_mode = 2
