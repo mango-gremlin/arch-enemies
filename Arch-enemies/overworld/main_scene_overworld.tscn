@@ -52,18 +52,16 @@ one_shot = true
 [node name="Hazelnut" parent="." instance=ExtResource("6_66i44")]
 position = Vector2(312, 402)
 item_type = 2
-item_dialogue_success = "you got an item!"
-item_dialogue_failure = "no item found"
 
 [node name="Flies" parent="." instance=ExtResource("6_66i44")]
 position = Vector2(348, 255)
 item_type = 3
-item_dialogue_success = "item? "
-item_dialogue_failure = "item :("
+itemspot_id = 1
 
 [node name="Evidence" parent="." instance=ExtResource("6_66i44")]
 position = Vector2(635, 269)
 item_type = 0
+itemspot_id = 2
 
 [node name="Sssstefan" parent="." instance=ExtResource("7_33ud0")]
 position = Vector2(528, 438)

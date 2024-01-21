@@ -43,14 +43,10 @@ text = "0 -> 3"
 [node name="item_interaction" parent="." instance=ExtResource("6_ij5ah")]
 position = Vector2(356, 105)
 item_type = 2
-item_dialogue_success = "you got an item!"
-item_dialogue_failure = "no item found"
 
 [node name="item_interaction2" parent="." instance=ExtResource("6_ij5ah")]
 position = Vector2(158, 52)
 item_type = 3
-item_dialogue_success = "item? "
-item_dialogue_failure = "item :("
 
 [node name="NpcInteraction" parent="." instance=ExtResource("7_06f0y")]
 position = Vector2(560, 40)

@@ -158,13 +158,9 @@ func execute_interaction():
 			enter_bridge_scene(bridge_edge)
 			
 		Interactable.InteractionType.ITEM: 
-			print("obtained item")
-			set_interactionLabel(interaction_data["text"])
 			var received_item:Item.ItemType = interaction_data["item"]
 			# adding to inventory 
 			SingletonPlayer.add_to_inventory(received_item)
-			# updating ui 
-			# adding to inventory! 
 		Interactable.InteractionType.NPC:
 			var npc_id:int = interaction_data["npc_id"]
 			print("interacting with npc")

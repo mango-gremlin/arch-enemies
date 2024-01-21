@@ -139,6 +139,12 @@ func set_test_animal_inventory() -> Dictionary:
 # --- / 
 # -- / Overworld management 
 
+# tracking items and their state placed in overworld
+# key -> iteminteraction ID, value -> amount of items available
+@onready var itemspot_state:Dictionary = {}
+
+
+
 # denotes amount of islands available
 var TOTAL_ISLANDS:int = 2
 
