@@ -383,7 +383,8 @@ func save_profile_configuration():
 # -- / Methods for NPC interaction
 
 func generate_dynamic_example():
-	var dynamic_dialogue = DynamicDialogue.new("res://overworld/dialogues/test_dialogue/blue.png", "no page here")
+	var dynamic_dialogue = DynamicDialogue.new("res://overworld/dialogues/test_dialogue/blue.png", "no page here",
+	"res://overworld/dialogues/test_dialogue/red.png", "quest done")
 	
 	var pages:Array[DynamicPage] = [
 		DynamicPage.new("Hallo Welt!", "res://overworld/dialogues/test_dialogue/red.png"),

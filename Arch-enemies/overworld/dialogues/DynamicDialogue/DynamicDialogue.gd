@@ -7,13 +7,17 @@ var src_image: String
 var empty_msg: String
 # --- /
 # -- / class constructor 
-func _init(_empty_image: String, _empty_msg: String):
+func _init(_empty_image: String, _empty_msg: String, _quest_done_image: String, _quest_done_msg: String):
 	src_image = _empty_image
 	empty_msg = _empty_msg
 	
 	entries = [
 		EmptyDynamicDialoguePage.new(_empty_image, _empty_msg)
 		]
+		
+	quest_done_entries = [
+		DynamicQuestResolved.new(_quest_done_image, _quest_done_msg)
+	]
 
 func insert_pages(pages:Array[DynamicPage]):
 	if len(pages) == 0:
