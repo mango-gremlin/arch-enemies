@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://dndu4pg1i3tlf"]
+[gd_scene load_steps=58 format=3 uid="uid://dndu4pg1i3tlf"]
 
 [ext_resource type="Script" path="res://overworld/entities/Player/Player.gd" id="1_lcx6v"]
 [ext_resource type="Texture2D" uid="uid://dl0h0c64eujm5" path="res://assets/art/characters/fox_idle_sheet_back.png" id="2_txxqg"]
@@ -8,7 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://bedc8xm3vu2st" path="res://assets/art/characters/fox_walking_sheet_front.png" id="4_02vkq"]
 [ext_resource type="Texture2D" uid="uid://dx3f23bd68cju" path="res://assets/art/characters/fox_idle_sheet.png" id="4_n50mi"]
 [ext_resource type="Texture2D" uid="uid://boo3otjifsbgu" path="res://assets/art/characters/fox_walking_sheet.png" id="5_j40oe"]
-[ext_resource type="Texture2D" uid="uid://li1cya16xyyq" path="res://assets/art/ui_elements/InteractionIndicator_WASD.png" id="9_wmtmh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8xcpl"]
 size = Vector2(23, 9)
@@ -414,11 +413,6 @@ offset_right = 94.0
 offset_bottom = -36.0
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="IndicatorWASDWalking" type="Sprite2D" parent="."]
-z_index = 2
-position = Vector2(0, -23)
-texture = ExtResource("9_wmtmh")
 
 [connection signal="area_entered" from="interactioncomponents/interactionarea" to="." method="_on_interactionarea_area_entered"]
 [connection signal="area_exited" from="interactioncomponents/interactionarea" to="." method="_on_interactionarea_area_exited"]
