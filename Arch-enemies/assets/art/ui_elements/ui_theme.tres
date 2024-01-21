@@ -8,9 +8,7 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sqyvb"]
 content_margin_left = 4.0
-content_margin_top = 4.0
 content_margin_right = 4.0
-content_margin_bottom = 4.0
 bg_color = Color(0.1, 0.1, 0.1, 0.3)
 corner_radius_top_left = 3
 corner_radius_top_right = 3
@@ -19,14 +17,22 @@ corner_radius_bottom_left = 3
 corner_detail = 5
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2l0bi"]
+content_margin_left = 4.0
+content_margin_right = 4.0
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_x0won"]
+content_margin_left = 4.0
+content_margin_right = 4.0
 texture = ExtResource("1_nvwyd")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_yjr2s"]
+content_margin_left = 4.0
+content_margin_right = 4.0
 texture = ExtResource("2_6n8m2")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rjba8"]
+content_margin_left = 4.0
+content_margin_right = 4.0
 texture = ExtResource("1_nvwyd")
 
 [resource]
