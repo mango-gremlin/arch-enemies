@@ -27,7 +27,7 @@ theme_override_constants/margin_bottom = 40
 layout_mode = 2
 theme_override_constants/separation = 40
 
-[node name="TextureRect" type="TextureRect" parent="PanelContainer2/MarginContainer/HBoxContainer"]
+[node name="Example_Picture" type="TextureRect" parent="PanelContainer2/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
 texture = ExtResource("1_52o8j")
@@ -48,17 +48,20 @@ theme_override_constants/margin_bottom = 10
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="Label" type="Label" parent="PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Header" type="Label" parent="PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "How to place snakes:"
 horizontal_alignment = 1
 uppercase = true
 
-[node name="Label2" type="Label" parent="PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Explanation" type="Label" parent="PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Hello zzere"
+text = "Zzats a taszzty looking szzquirrel.
+You better not placzze it anywhere
+near my head or I might just
+take a bite szzz."
 
-[node name="TextureRect" type="TextureRect" parent="PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Animal_Picture" type="TextureRect" parent="PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
 size_flags_horizontal = 10
@@ -66,6 +69,7 @@ texture = ExtResource("2_bm6y4")
 stretch_mode = 4
 flip_h = true
 
-[node name="Button" type="Button" parent="PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Next_Button" type="Button" parent="PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 10
 text = "Next"

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bjwiponyutixg"
-path="res://.godot/imported/archenemies_squirrel tutorial.png-ebdcf7870d7015e914ef3924b1dc1ab6.ctex"
+uid="uid://bfqnciyr7bhn3"
+path="res://.godot/imported/archenemies_squirrel_tutorial.png-23650f8ee075019df414e51d92897cc6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/tutorial_screenshots/archenemies_squirrel tutorial.png"
-dest_files=["res://.godot/imported/archenemies_squirrel tutorial.png-ebdcf7870d7015e914ef3924b1dc1ab6.ctex"]
+source_file="res://assets/tutorial_screenshots/archenemies_squirrel_tutorial.png"
+dest_files=["res://.godot/imported/archenemies_squirrel_tutorial.png-23650f8ee075019df414e51d92897cc6.ctex"]
 
 [params]
 
