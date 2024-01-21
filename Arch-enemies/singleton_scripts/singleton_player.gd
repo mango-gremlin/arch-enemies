@@ -380,13 +380,26 @@ func save_profile_configuration():
 
 
 # --- / 
-# -- / Methods for NPC interaction 
+# -- / Methods for NPC interaction
+
+func generate_dynamic_example():
+	var dynamic_dialogue = DynamicDialogue.new("res://overworld/dialogues/test_dialogue/blue.png", "no page here")
+	
+	var pages:Array[DynamicPage] = [
+		DynamicPage.new("Hallo Welt!", "res://overworld/dialogues/test_dialogue/red.png"),
+		DynamicPage.new("das so cool", "res://overworld/dialogues/test_dialogue/blue.png"),
+		DynamicPage.new("ja genau na", "res://overworld/dialogues/test_dialogue/green.png"),
+	]
+	
+	dynamic_dialogue.insert_pages(pages)
+	
+	return dynamic_dialogue
 
 # register here your dialogue, key is npc id 
 @onready var npc_dialogues: Dictionary = {
 	0 : QuestTrackNPC.new(),
 	# FIXME Dummy until dialogues were iplemented 
-	1 : ExampleData.new(),
+	1 : generate_dynamic_example(),
 	2 : ExampleData.new(),
 	3 : ExampleData.new(),
 	4 : ExampleData.new(),
