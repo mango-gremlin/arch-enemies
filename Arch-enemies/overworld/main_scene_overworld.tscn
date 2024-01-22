@@ -45,15 +45,17 @@ one_shot = true
 [node name="world" parent="." instance=ExtResource("3_xuy1h")]
 
 [node name="overworld_ui" parent="." instance=ExtResource("4_4hawq")]
+visible = false
 
 [node name="DialogueGui" parent="." instance=ExtResource("4_fdft7")]
+visible = false
 
 [node name="Hazelnut" parent="." instance=ExtResource("6_66i44")]
-position = Vector2(312, 402)
+position = Vector2(488, 556)
 item_type = 2
 
 [node name="Flies" parent="." instance=ExtResource("6_66i44")]
-position = Vector2(348, 255)
+position = Vector2(178, 287)
 item_type = 3
 itemspot_id = 1
 
