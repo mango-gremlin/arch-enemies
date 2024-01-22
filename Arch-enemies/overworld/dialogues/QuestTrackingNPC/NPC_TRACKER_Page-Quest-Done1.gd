@@ -11,10 +11,10 @@ func _init():
 	pass
 
 func content() -> String:
-	return "Finally, someone other than me does anything around here... I guess I can join."
+	return "Alt text for solved quest"
 
 func image_src() -> String:
-	return "res://assets/art/characters/portraits/Portrait_Deer.png"
+	return "res://overworld/dialogues/test_dialogue/green.png"
 		
 	
 # "" element in array means here disable button X
@@ -26,5 +26,5 @@ func btn_action(btn: int):
 			
 	if btn == 0:
 		print("executing button action")
-		SingletonPlayer.active_dialogue.finish_dialogue()
+		SingletonPlayer.dialogue.finish_dialogue()
 		SingletonPlayer.exit_dialogue()

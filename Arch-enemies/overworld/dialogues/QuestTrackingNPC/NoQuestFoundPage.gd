@@ -10,10 +10,10 @@ func _init():
 	pass
 
 func content() -> String:
-	return "I will not join you >:( The others need to do something for once. Then maybe I will help."
+	return "I will not join you >:("
 
 func image_src() -> String:
-	return "res://assets/art/characters/portraits/Portrait_Deer.png"
+	return "res://overworld/dialogues/test_dialogue/red.png"
 	
 # null ement in array means here disable button X
 func btn_text() -> Array[String]:

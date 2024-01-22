@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cgfkelxiskcux"]
+[gd_scene load_steps=15 format=3 uid="uid://cgfkelxiskcux"]
 
 [ext_resource type="Script" path="res://overworld/overworld.gd" id="1_pwtu4"]
 [ext_resource type="Script" path="res://overworld/overworld_sound.gd" id="3_h67g3"]
@@ -13,7 +13,6 @@
 [ext_resource type="PackedScene" uid="uid://0isb2xg4n684" path="res://overworld/entities/interaction_overworld/template/horizontal_bridge_part_with_collision.tscn" id="9_ux7la"]
 [ext_resource type="PackedScene" uid="uid://bypchr8htkr4e" path="res://overworld/entities/interaction_overworld/template/vertical_bridge_template.tscn" id="10_5ad47"]
 [ext_resource type="PackedScene" uid="uid://b0v6vdudnx0vh" path="res://overworld/entities/interaction_overworld/template/vertical_bridge_part_with_collision.tscn" id="11_byiqb"]
-[ext_resource type="Texture2D" uid="uid://8t13pl5w360y" path="res://assets/art/characters/frog.png" id="11_p1rod"]
 [ext_resource type="AudioStream" uid="uid://n71rssah4ej4" path="res://assets/sound/Main_Menu.wav" id="11_vdqf6"]
 
 [node name="maingame" type="Node"]
@@ -25,7 +24,9 @@ npc_name = "Deerington von Antler"
 npc_animal_type = 1
 quest_type = 3
 required_item = 6
-quest_reward = 1
+quest_reward = 2
+reward_edge_start = 4
+reward_edge_dest = 1
 
 [node name="Background Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_vdqf6")
@@ -69,7 +70,7 @@ npc_id = 1
 quest_type = 0
 required_item = 1
 quest_reward = 1
-reward_amount = 4
+reward_amount = 6
 
 [node name="GrandfatherLongleggs" parent="." instance=ExtResource("7_33ud0")]
 position = Vector2(433, 416)
@@ -79,7 +80,7 @@ npc_animal_type = 3
 quest_type = 0
 required_item = 3
 quest_reward = 1
-reward_amount = 4
+reward_amount = 8
 
 [node name="EstherEggSquirrel" parent="." instance=ExtResource("7_33ud0")]
 position = Vector2(389, 335)
@@ -92,32 +93,13 @@ quest_reward = 0
 reward_item = 1
 
 [node name="OlNutter" parent="." instance=ExtResource("7_33ud0")]
-position = Vector2(330, 496)
+position = Vector2(317, 492)
 npc_name = "Ol' Nutter"
 npc_id = 4
 npc_animal_type = 2
 quest_type = 0
 quest_reward = 1
-reward_amount = 4
-
-[node name="ToadallyAnonymous" parent="." instance=ExtResource("7_33ud0")]
-position = Vector2(271, 486)
-npc_name = "Toadally Anonymous"
-npc_id = 5
-npc_animal_type = 2
-quest_type = 2
-required_item = 4
-required_npc_id = 5
-reward_amount = 0
-npc_special_sprite = ExtResource("11_p1rod")
-
-[node name="FINALWORDS" parent="." instance=ExtResource("7_33ud0")]
-position = Vector2(295, 40)
-npc_name = "Thanks For Playing!"
-npc_id = 6
-quest_type = 2
-required_npc_id = 6
-npc_special_sprite = ExtResource("11_p1rod")
+reward_amount = 7
 
 [node name="BridgeTutorial->Main" parent="." instance=ExtResource("9_jpn0u")]
 position = Vector2(154, 494)
