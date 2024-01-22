@@ -1,4 +1,4 @@
-extends AudioStreamPlayer2D
+extends AudioStreamPlayer
 #We need to use a timer to handle when to play the sound
 @onready var timer:Timer = $"../Walking_Timer"
 

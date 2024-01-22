@@ -1,6 +1,6 @@
-[gd_scene load_steps=40 format=3 uid="uid://cjsjvpeuuqot"]
+[gd_scene load_steps=42 format=3 uid="uid://cjsjvpeuuqot"]
 
-[ext_resource type="Texture2D" uid="uid://dnrklob5nf7ci" path="res://assets/art/ui_elements/animal_inventory_scroll8.png" id="1_2vqh6"]
+[ext_resource type="Texture2D" uid="uid://b1yknecfgw4fs" path="res://assets/art/ui_elements/animal_inventory_scroll9.png" id="1_2vqh6"]
 [ext_resource type="Texture2D" uid="uid://d0o2q6fijmd1" path="res://assets/art/tilesets/bridge_tileset/bridge_background_color.png" id="1_uowbf"]
 [ext_resource type="Script" path="res://bridges/script/Camera.gd" id="1_vkapa"]
 [ext_resource type="Script" path="res://bridges/script/grid.gd" id="1_xtvvi"]
@@ -788,17 +788,17 @@ position = Vector2(192, 108)
 zoom = Vector2(3, 3)
 script = ExtResource("1_vkapa")
 
-[node name="Background Music" type="AudioStreamPlayer2D" parent="."]
+[node name="Background Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_3o2us")
 volume_db = -10.0
 autoplay = true
 
-[node name="Sound Effects" type="AudioStreamPlayer2D" parent="."]
+[node name="Sound Effects" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_kilw0")
 max_polyphony = 3
 script = ExtResource("3_dujuj")
 
-[node name="Walking Sound" type="AudioStreamPlayer2D" parent="."]
+[node name="Walking Sound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_a6sim")
 script = ExtResource("6_2sdlx")
 

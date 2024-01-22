@@ -1,4 +1,4 @@
-extends AudioStreamPlayer2D
+extends AudioStreamPlayer
 var squirrel = preload("res://assets/sound/Squirrel.wav")
 var deer = preload("res://assets/sound/Deer.wav")
 var spider = preload("res://assets/sound/Spider.wav")

@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://bsiv4b8ihdf34"]
+
+[ext_resource type="PackedScene" uid="uid://vvo04yl1cy8p" path="res://bridges/scenes/tutorial_template.tscn" id="1_4vw4h"]
+[ext_resource type="Texture2D" uid="uid://bfqnciyr7bhn3" path="res://assets/tutorial_screenshots/archenemies_squirrel_tutorial.png" id="1_v31ag"]
+[ext_resource type="Texture2D" uid="uid://xd2wfewwwcqc" path="res://assets/art/characters/squirrel.png" id="2_2f3yo"]
+
+[node name="Control" instance=ExtResource("1_4vw4h")]
+
+[node name="Example_Picture" parent="PanelContainer2/MarginContainer/HBoxContainer" index="0"]
+texture = ExtResource("1_v31ag")
+
+[node name="Header" parent="PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer" index="0"]
+text = "How to place squirrels:"
+
+[node name="Example" parent="PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer" index="1"]
+text = "I can grab onto the sides of any object, as long as it's not too spiky."
+autowrap_mode = 3
+
+[node name="Animal_Picture" parent="PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer" index="2"]
+custom_minimum_size = Vector2(100, 200)
+texture = ExtResource("2_2f3yo")
+flip_h = false

@@ -24,8 +24,8 @@ func btn_text() -> Array[String]:
 # btn button in from left to right, starting with 0
 func btn_action(btn: int):
 	if btn == 0:
-		SingletonPlayer.dialogue.select_page(1)
+		SingletonPlayer.active_dialogue.select_page(1)
 			
 	if btn == 1:
-		SingletonPlayer.dialogue.finish_dialogue()
+		SingletonPlayer.active_dialogue.finish_dialogue()
 		SingletonPlayer.exit_dialogue()

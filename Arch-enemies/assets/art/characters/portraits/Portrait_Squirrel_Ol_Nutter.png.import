@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dnrklob5nf7ci"
-path="res://.godot/imported/animal_inventory_scroll8.png-99475682009628964a8ab00ba7f94cac.ctex"
+uid="uid://5418avh884yl"
+path="res://.godot/imported/Portrait_Squirrel_Ol_Nutter.png-0253e589a49236f952e2cab42aedda1e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/ui_elements/animal_inventory_scroll8.png"
-dest_files=["res://.godot/imported/animal_inventory_scroll8.png-99475682009628964a8ab00ba7f94cac.ctex"]
+source_file="res://assets/art/characters/portraits/Portrait_Squirrel_Ol_Nutter.png"
+dest_files=["res://.godot/imported/Portrait_Squirrel_Ol_Nutter.png-0253e589a49236f952e2cab42aedda1e.ctex"]
 
 [params]
 

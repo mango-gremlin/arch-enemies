@@ -8,6 +8,8 @@ extends CharacterBody2D
 
 @export var SPEED = 100
 @onready var anim:AnimatedSprite2D = $AnimatedSprite2D
+@onready var player_hitbox = $CollisionShape2D
+@onready var indicator_how_to_walk = $IndicatorWASDWalking
 
 # for correct animation: save last direction walked in, and if sprite was flipped
 # enum for animation types
@@ -86,6 +88,12 @@ func player_movement(delta):
 		player_idle_animation(delta)
 		Global.walking = false
 	
+	player_rotate_hitbox(delta)
+	
+	# to prevent the following function from being called every delta
+	if Global.walking and indicator_how_to_walk.visible:
+		toggle_indicator_visibility(delta)
+	
 	move_and_collide(velocity * delta)
 
 func player_idle_animation(delta):
@@ -99,6 +107,20 @@ func player_idle_animation(delta):
 			anim.play("back_idle")
 		_:
 			anim.play("side_idle")
+
+func player_rotate_hitbox(delta):
+	match current_direction:
+		DIRECTION.SIDE:
+			player_hitbox.set_rotation_degrees(0)
+		DIRECTION.FRONT:
+			player_hitbox.set_rotation_degrees(90)
+		DIRECTION.BACK:
+			player_hitbox.set_rotation_degrees(90)
+
+func toggle_indicator_visibility(delta):
+	# indicator displayed until first movement, then its set to invisible
+	indicator_how_to_walk.visible = false
+	
 
 # ----- 
 # --- structure interaction areas
@@ -146,13 +168,9 @@ func execute_interaction():
 			enter_bridge_scene(bridge_edge)
 			
 		Interactable.InteractionType.ITEM: 
-			print("obtained item")
-			set_interactionLabel(interaction_data["text"])
 			var received_item:Item.ItemType = interaction_data["item"]
 			# adding to inventory 
 			SingletonPlayer.add_to_inventory(received_item)
-			# updating ui 
-			# adding to inventory! 
 		Interactable.InteractionType.NPC:
 			var npc_id:int = interaction_data["npc_id"]
 			print("interacting with npc")
