@@ -1,19 +1,26 @@
 extends Dialogue_Entry
 
 
-class_name NoQuestFoundPage
+class_name EmptyDynamicDialoguePage
 
 
+var src_image: String
+var empty_msg: String
 # --- /
 # -- / class constructor 
-func _init():
-	pass
+func _init(_src_image: String, _empty_msg: String):
+	src_image = _src_image
+	empty_msg = _empty_msg
+	
+	if src_image == null: # default pic
+		src_image = "res://overworld/dialogues/test_dialogue/red.png"
+	
 
 func content() -> String:
-	return "I will not join you >:( The others need to do something for once. Then maybe I will help."
+	return empty_msg
 
 func image_src() -> String:
-	return "res://assets/art/characters/portraits/Portrait_Deer.png"
+	return src_image
 	
 # null ement in array means here disable button X
 func btn_text() -> Array[String]:

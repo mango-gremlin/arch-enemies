@@ -28,7 +28,7 @@ var save_states = 10
 var state = 0
 
 #for the inventory
-@onready var start_animals : Dictionary = SingletonPlayer.set_test_animal_inventory().duplicate(true)
+@onready var start_animals : Dictionary = SingletonPlayer.get_animal_inventory().duplicate(true)
 #var start_animals : Dictionary = set_animal_inventory()	
 var placed_animals: Array = []
 

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://overworld/dialogue/DialogueUI.gd" id="1_dxgyc"]
 [ext_resource type="Theme" uid="uid://d2ijyc316xeom" path="res://assets/art/ui_elements/ui_theme.tres" id="1_j0egf"]
-[ext_resource type="Texture2D" uid="uid://b5jpk1txthbqr" path="res://overworld/dialogues/test_dialogue/green.png" id="2_jkmg4"]
+[ext_resource type="Texture2D" uid="uid://c1rjhlxyswrcu" path="res://assets/art/characters/portraits/Placeholder.png" id="4_bpxmf"]
 [ext_resource type="Texture2D" uid="uid://egew2jxradol" path="res://assets/art/ui_elements/DialogueBox.png" id="4_bs8de"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3n0yu"]
@@ -37,10 +37,11 @@ offset_bottom = 40.0
 [node name="image_box" type="BoxContainer" parent="Panel/main_box"]
 custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
+theme = ExtResource("1_j0egf")
 
 [node name="Sprite2D" type="Sprite2D" parent="Panel/main_box/image_box"]
 position = Vector2(100, 100)
-texture = ExtResource("2_jkmg4")
+texture = ExtResource("4_bpxmf")
 
 [node name="content_box" type="VBoxContainer" parent="Panel/main_box"]
 custom_minimum_size = Vector2(450, 200)
