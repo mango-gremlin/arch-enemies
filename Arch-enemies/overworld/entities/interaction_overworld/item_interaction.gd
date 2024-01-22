@@ -19,11 +19,15 @@ var interaction_type: Interactable.InteractionType = Interactable.InteractionTyp
 @export var itemspot_id:int = 0
 # static references to child nodes
 @onready var linked_sprite:Sprite2D = $item_sprite
+@onready var linked_indicator:AnimatedSprite2D = $InteractionIndicator
 @onready var interactionspot_child:Interactable = $interactionspot
 
 # run upon instantiating this node in scene
 func _ready():
 	set_item_sprite()
+	# plays animation of floating indicator (tells u to press E)
+	$InteractionIndicator.play("indication")
+	
 	# update available amount 
 	if SingletonPlayer.itemspot_state.has(itemspot_id):
 		print("found saved state, restoring")
@@ -81,5 +85,6 @@ func set_item_sprite():
 # hides sprite of item if resource depleted
 func update_visibility():
 		linked_sprite.visible = is_obtainable_by_player()
+		linked_indicator.visible = is_obtainable_by_player()
 		
 	
