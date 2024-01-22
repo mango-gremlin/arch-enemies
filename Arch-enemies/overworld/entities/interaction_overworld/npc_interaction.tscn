@@ -66,6 +66,7 @@ grow_vertical = 2
 color = Color(0.835294, 0.564706, 0.27451, 1)
 
 [node name="InteractionIndicator" type="AnimatedSprite2D" parent="."]
+z_index = 1
 position = Vector2(0, -20)
 sprite_frames = SubResource("SpriteFrames_dm71c")
 animation = &"indication"

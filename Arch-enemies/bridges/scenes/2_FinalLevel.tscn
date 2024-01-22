@@ -1076,6 +1076,7 @@ scale = Vector2(1, 0.84)
 [connection signal="toggled" from="Grid/Control/Drag_or_Fox" to="Grid/Control/Drag_or_Fox" method="_on_toggled"]
 [connection signal="pressed" from="Grid/Control/Reset" to="Grid" method="_on_reset_pressed"]
 [connection signal="pressed" from="Grid/Control/Last_State" to="Grid" method="_on_last_state_pressed"]
+[connection signal="play_sound" from="Grid/Player" to="Sound Effects" method="_on_player_play_sound"]
 
 [editable path="Grid/goal_menu"]
 [editable path="Grid/bridges_pause_menu"]
