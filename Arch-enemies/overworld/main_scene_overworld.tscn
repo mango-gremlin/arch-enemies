@@ -26,8 +26,6 @@ npc_animal_type = 1
 quest_type = 3
 required_item = 6
 quest_reward = 1
-reward_edge_start = 4
-reward_edge_dest = 1
 
 [node name="Background Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_vdqf6")
@@ -71,7 +69,7 @@ npc_id = 1
 quest_type = 0
 required_item = 1
 quest_reward = 1
-reward_amount = 6
+reward_amount = 4
 
 [node name="GrandfatherLongleggs" parent="." instance=ExtResource("7_33ud0")]
 position = Vector2(433, 416)
@@ -81,7 +79,7 @@ npc_animal_type = 3
 quest_type = 0
 required_item = 3
 quest_reward = 1
-reward_amount = 8
+reward_amount = 4
 
 [node name="EstherEggSquirrel" parent="." instance=ExtResource("7_33ud0")]
 position = Vector2(389, 335)
@@ -100,16 +98,17 @@ npc_id = 4
 npc_animal_type = 2
 quest_type = 0
 quest_reward = 1
-reward_amount = 7
+reward_amount = 4
 
 [node name="ToadallyAnonymous" parent="." instance=ExtResource("7_33ud0")]
 position = Vector2(271, 486)
 npc_name = "Toadally Anonymous"
 npc_id = 5
-quest_type = 1
-required_edge_start = 1
-required_edge_dest = 3
+npc_animal_type = 2
+quest_type = 2
 required_item = 4
+required_npc_id = 5
+reward_amount = 0
 npc_special_sprite = ExtResource("11_p1rod")
 
 [node name="BridgeTutorial->Main" parent="." instance=ExtResource("9_jpn0u")]

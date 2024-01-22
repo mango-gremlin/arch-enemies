@@ -130,7 +130,7 @@ func set_start_animal_inventory() -> Dictionary:
 	inventory[Animal.AnimalType.DEER] = 1
 	inventory[Animal.AnimalType.SPIDER] = 0
 	inventory[Animal.AnimalType.SNAKE] = 1
-	inventory[Animal.AnimalType.SQUIRREL] = 1
+	inventory[Animal.AnimalType.SQUIRREL] = 2
 
 	return inventory 
 
@@ -404,7 +404,7 @@ var fox_portrait = "res://assets/art/characters/portraits/Portrait_Fox.png"
 # ID 1: Stefan
 func dialogue_snake_stefan():
 	var dynamic_dialogue = DynamicDialogue.new(spider_portrait, "no page here",
-	snake_portrait, "I'm szoo hungryy :(")
+	snake_portrait, "Is zzat an eegg?? Oh zzat's szzoo niczze of youu! I will help you, but don't get too closzze to me or I might take a bite. I can't help it, it'szz a reflexzz.")
 	
 	var pages:Array[DynamicPage] = [
 		DynamicPage.new("Hello zzere little foxzz, why are you bozzering mee?", snake_portrait),
@@ -455,7 +455,7 @@ func dialogue_squirrel_egg():
 # ID 4: Ol'Nutter
 func dialogue_squirrel_ol_nutter():
 	var dynamic_dialogue = DynamicDialogue.new(squirrel_nutter_portrait, "no page here",
-	squirrel_nutter_portrait, "Perfect! Just what we were looking for! Now everyone will believe in the NUT! We shall gladly join your cause!")
+	squirrel_nutter_portrait, "<Excited Squeaking>...this is incredible! Now everyone will believe in the NUT! We can rise up against Big Frog! We'll join your noble cause!")
 	
 	var pages:Array[DynamicPage] = [
 		DynamicPage.new("Did you see that nut-damned frog at the meeting back there?! I tell you, that creature is behind everything! ", squirrel_nutter_portrait),
@@ -479,7 +479,7 @@ func dialogue_squirrel_ol_nutter():
 # ID 5: Toadally Anonymous
 func dialogue_starting_conflict():
 	var dynamic_dialogue = DynamicDialogue.new(frog_portrait, "no page here",
-	frog_portrait, "quest done")
+	frog_portrait, "... seems like no one wants to help you, hehehehehehehe ... they're playing right into my webbed hands ...")
 	
 	var pages:Array[DynamicPage] = [
 		DynamicPage.new("< You hear a loud discussion amongst different animals... >", fox_portrait),
@@ -495,6 +495,7 @@ func dialogue_starting_conflict():
 		DynamicPage.new("... Save yourselves! The snake will devour us all! It's devious and evil ...", frog_portrait),
 		DynamicPage.new("< The squirrels flee in terror, and the discussion dies down. The other animals disperse...>", fox_portrait),
 		DynamicPage.new("... hehehehehehehehehehehehehehe ...", frog_portrait),
+		DynamicPage.new("<<< due to a series of unfortunate events, the fox must interact with the toadally anonymous individual again after finishing this dialogue. Thank you! >>>", frog_portrait),
 	]
 	
 	dynamic_dialogue.insert_pages(pages)
