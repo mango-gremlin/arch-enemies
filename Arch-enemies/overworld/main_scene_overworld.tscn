@@ -111,6 +111,14 @@ required_npc_id = 5
 reward_amount = 0
 npc_special_sprite = ExtResource("11_p1rod")
 
+[node name="FINALWORDS" parent="." instance=ExtResource("7_33ud0")]
+position = Vector2(295, 40)
+npc_name = "Thanks For Playing!"
+npc_id = 6
+quest_type = 2
+required_npc_id = 6
+npc_special_sprite = ExtResource("11_p1rod")
+
 [node name="BridgeTutorial->Main" parent="." instance=ExtResource("9_jpn0u")]
 position = Vector2(154, 494)
 

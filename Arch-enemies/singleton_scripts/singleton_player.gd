@@ -501,6 +501,22 @@ func dialogue_starting_conflict():
 	dynamic_dialogue.insert_pages(pages)
 	
 	return dynamic_dialogue
+	
+# ID 6: Final Thank you
+func dialogue_final():
+	var dynamic_dialogue = DynamicDialogue.new(squirrel_portrait, "no page here",
+	squirrel_portrait, "This is way better than the purple one! Ill take this one and you get the purple one.")
+	
+	var pages:Array[DynamicPage] = [
+		DynamicPage.new("If you ran into any problems while playing, please do not hesitate to tell us.", frog_portrait),
+		DynamicPage.new("We also would like to know what you thought of the game in general:", frog_portrait),
+		DynamicPage.new("- understandability - difficulty (esp: how many animals did you use? Did you have too many?) - fun/boring - suggestions -", frog_portrait),
+		DynamicPage.new("Thanks for playing our game! We really appreciate it!", frog_portrait),
+	]
+	
+	dynamic_dialogue.insert_pages(pages)
+	
+	return dynamic_dialogue
 
 # register here your dialogue, key is npc id 
 @onready var npc_dialogues: Dictionary = {
@@ -510,7 +526,8 @@ func dialogue_starting_conflict():
 	2 : dialogue_spider_grandpa(),
 	3 : dialogue_squirrel_egg(),
 	4 : dialogue_squirrel_ol_nutter(),
-	5 : dialogue_starting_conflict()
+	5 : dialogue_starting_conflict(),
+	6 : dialogue_final()
 }
 
 func set_dialogue_npc_name(npc_id:int):
