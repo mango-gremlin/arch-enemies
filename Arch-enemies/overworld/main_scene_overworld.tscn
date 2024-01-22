@@ -58,7 +58,7 @@ item_type = 3
 itemspot_id = 1
 
 [node name="Evidence" parent="." instance=ExtResource("6_66i44")]
-position = Vector2(635, 269)
+position = Vector2(620, 266)
 item_type = 0
 itemspot_id = 2
 
@@ -105,18 +105,14 @@ position = Vector2(271, 486)
 npc_name = "Toadally Anonymous"
 npc_id = 5
 npc_animal_type = 2
-quest_type = 2
 required_item = 4
-required_npc_id = 5
 reward_amount = 0
 npc_special_sprite = ExtResource("11_p1rod")
 
 [node name="FINALWORDS" parent="." instance=ExtResource("7_33ud0")]
-position = Vector2(295, 40)
+position = Vector2(299, 49)
 npc_name = "Thanks For Playing!"
 npc_id = 6
-quest_type = 2
-required_npc_id = 6
 npc_special_sprite = ExtResource("11_p1rod")
 
 [node name="BridgeTutorial->Main" parent="." instance=ExtResource("9_jpn0u")]

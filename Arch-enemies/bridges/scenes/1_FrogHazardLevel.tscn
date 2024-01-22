@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://upaiprbcdv15"]
+[gd_scene load_steps=45 format=3 uid="uid://upaiprbcdv15"]
 
 [ext_resource type="Script" path="res://bridges/script/Camera.gd" id="1_0pfwb"]
 [ext_resource type="Texture2D" uid="uid://d0o2q6fijmd1" path="res://assets/art/tilesets/bridge_tileset/bridge_background_color.png" id="2_g3m8w"]
@@ -897,7 +897,7 @@ Grid_node_reference = NodePath("../../..")
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme = ExtResource("21_kdj0f")
+theme = ExtResource("21_dcmnv")
 theme_override_font_sizes/font_size = 10
 text = "?"
 

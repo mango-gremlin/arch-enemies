@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://cqhrnwqvy3sgh"]
+[gd_scene load_steps=43 format=3 uid="uid://cqhrnwqvy3sgh"]
 
 [ext_resource type="Script" path="res://bridges/script/Camera.gd" id="1_2mayf"]
 [ext_resource type="AudioStream" uid="uid://n71rssah4ej4" path="res://assets/sound/Main_Menu.wav" id="1_he7ej"]
@@ -891,7 +891,7 @@ Grid_node_reference = NodePath("../../..")
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme = ExtResource("21_vyk6w")
+theme = ExtResource("21_ltn3j")
 theme_override_font_sizes/font_size = 10
 text = "?"
 

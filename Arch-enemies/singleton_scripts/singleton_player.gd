@@ -495,7 +495,7 @@ func dialogue_starting_conflict():
 		DynamicPage.new("... Save yourselves! The snake will devour us all! It's devious and evil ...", frog_portrait),
 		DynamicPage.new("< The squirrels flee in terror, and the discussion dies down. The other animals disperse...>", fox_portrait),
 		DynamicPage.new("... hehehehehehehehehehehehehehe ...", frog_portrait),
-		DynamicPage.new("<<< due to a series of unfortunate events, the fox must interact with the toadally anonymous individual again after finishing this dialogue. Thank you! >>>", frog_portrait),
+		#DynamicPage.new("<<< due to a series of unfortunate events, the fox must interact with the toadally anonymous individual again after finishing this dialogue. Thank you! >>>", frog_portrait),
 	]
 	
 	dynamic_dialogue.insert_pages(pages)
@@ -505,7 +505,7 @@ func dialogue_starting_conflict():
 # ID 6: Final Thank you
 func dialogue_final():
 	var dynamic_dialogue = DynamicDialogue.new(squirrel_portrait, "no page here",
-	squirrel_portrait, "This is way better than the purple one! Ill take this one and you get the purple one.")
+	frog_portrait, "Thanks for playing!")
 	
 	var pages:Array[DynamicPage] = [
 		DynamicPage.new("If you ran into any problems while playing, please do not hesitate to tell us.", frog_portrait),
