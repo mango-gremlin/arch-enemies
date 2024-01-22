@@ -1,15 +1,54 @@
-[gd_scene load_steps=7 format=3 uid="uid://bettv6p5clh6t"]
+[gd_scene load_steps=14 format=3 uid="uid://bettv6p5clh6t"]
 
+[ext_resource type="Script" path="res://overworld/entities/interaction_overworld/bridge_interaction_animation.gd" id="1_ebscj"]
 [ext_resource type="PackedScene" uid="uid://5llfgi2ysvie" path="res://overworld/entities/interaction_overworld/bridge_interaction.tscn" id="1_wq2tl"]
 [ext_resource type="Texture2D" uid="uid://dyduk2jw74qb5" path="res://assets/art/objects/overworld_bridges/overworld_bridge_start_left2.png" id="2_yt1o3"]
 [ext_resource type="Texture2D" uid="uid://e7ny67gyyft6" path="res://assets/art/objects/overworld_bridges/overworld_bridge_start_left_FLOOR.png" id="3_grin0"]
 [ext_resource type="PackedScene" uid="uid://0isb2xg4n684" path="res://overworld/entities/interaction_overworld/template/horizontal_bridge_part_with_collision.tscn" id="3_jhfcy"]
 [ext_resource type="Texture2D" uid="uid://0ciya4gtx75w" path="res://assets/art/objects/overworld_bridges/overworld_bridge_start_right2.png" id="5_d2yki"]
 [ext_resource type="Texture2D" uid="uid://dykx02bmgorob" path="res://assets/art/objects/overworld_bridges/overworld_bridge_start_rightFLOOR.png" id="6_xw8c1"]
+[ext_resource type="Texture2D" uid="uid://bblggn3rh8xh7" path="res://assets/art/ui_elements/InteractionIndicator_E_animation.png" id="7_saivf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ciyj"]
+atlas = ExtResource("7_saivf")
+region = Rect2(0, 0, 10, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_suv2i"]
+atlas = ExtResource("7_saivf")
+region = Rect2(12, 0, 10, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_32j4s"]
+atlas = ExtResource("7_saivf")
+region = Rect2(24, 0, 10, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nrms4"]
+atlas = ExtResource("7_saivf")
+region = Rect2(36, 0, 10, 15)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5dksq"]
+animations = [{
+"frames": [{
+"duration": 4.0,
+"texture": SubResource("AtlasTexture_0ciyj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_suv2i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_32j4s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nrms4")
+}],
+"loop": true,
+"name": &"indication",
+"speed": 5.0
+}]
 
 [node name="BridgeTemplate" type="Node2D"]
 y_sort_enabled = true
 position = Vector2(4, 7)
+script = ExtResource("1_ebscj")
 
 [node name="left_bridge_start" type="Node2D" parent="."]
 
@@ -77,6 +116,12 @@ position = Vector2(-38, 1)
 [node name="bridge_collision" parent="right_bridge_start/bridge_interaction2/bridge_collision_shape" index="0"]
 position = Vector2(-17, 1)
 rotation = 1.57079
+
+[node name="InteractionIndicator" type="AnimatedSprite2D" parent="."]
+z_index = 1
+position = Vector2(-40, -2)
+sprite_frames = SubResource("SpriteFrames_5dksq")
+animation = &"indication"
 
 [editable path="left_bridge_start/bridge_interaction"]
 [editable path="left_bridge_start/bridge_interaction/interactionspot"]
