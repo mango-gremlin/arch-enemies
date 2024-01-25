@@ -614,5 +614,7 @@ func save_player_state() -> Dictionary:
 # wrapper for save config save-method
 # FIXME
 func save_game():
-	Savemanager.save_config()
+	print("saving game")
+	#Savemanager.save_config()
+	
 	
