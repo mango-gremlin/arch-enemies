@@ -404,8 +404,9 @@ var fox_portrait = "res://assets/art/characters/portraits/Portrait_Fox.png"
 
 # ID 1: Stefan
 func dialogue_snake_stefan():
+	# FIXME remove initialization that will be overwritten anyway!
 	var dynamic_dialogue = DynamicDialogue.new(spider_portrait, "no page here",
-	snake_portrait, "Is zzat an eegg?? Oh zzat's szzoo niczze of youu! I will help you, but don't get too closzze to me or I might take a bite. I can't help it, it'szz a reflexzz.")
+	snake_portrait, "")
 	
 	var unsolved_pages:Array[DynamicPage] = [
 		DynamicPage.new("Hello zzere little foxzz, why are you bozzering mee?", snake_portrait),
@@ -417,7 +418,7 @@ func dialogue_snake_stefan():
 		DynamicPage.new("Ohh zzat would be very kind! Of courszze I would help you... aszz long as I have szzomething to szzwallow and digeszzt.", snake_portrait),
 	]
 	var solved_pages:Array[DynamicPage] = [
-		DynamicPage.new("this si done ...",snake_portrait)
+		DynamicPage.new("Is zzat an eegg?? Oh zzat's szzoo niczze of youu! I will help you, but don't get too closzze to me or I might take a bite. I can't help it, it'szz a reflexzz.",snake_portrait)
 	]
 	
 	dynamic_dialogue.insert_pages(unsolved_pages,solved_pages)
@@ -426,8 +427,9 @@ func dialogue_snake_stefan():
 
 # ID 2: Grandfather Longlegs
 func dialogue_spider_grandpa():
+	# FIXME remove initialization that will be overwritten anyway!
 	var dynamic_dialogue = DynamicDialogue.new(spider_portrait, "no page here",
-	spider_portrait, "Many thanks, young lad. Now that my family is cared for I will aid you on your quest.")
+	spider_portrait, "")
 	
 	var unsolved_pages:Array[DynamicPage] = [
 		DynamicPage.new("Can you help solve the flooding issue?", fox_portrait),
@@ -437,7 +439,7 @@ func dialogue_spider_grandpa():
 	]
 	
 	var solved_pages:Array[DynamicPage] = [
-		DynamicPage.new("this si done ...",spider_portrait)
+		DynamicPage.new("Many thanks, young lad. Now that my family is cared for I will aid you on your quest.",spider_portrait)
 	]
 	
 	dynamic_dialogue.insert_pages(unsolved_pages,solved_pages)
@@ -447,8 +449,9 @@ func dialogue_spider_grandpa():
 
 # ID 3: Esther Egg Squirrel
 func dialogue_squirrel_egg():
+	# FIXME remove initialization that will be overwritten anyway!
 	var dynamic_dialogue = DynamicDialogue.new(squirrel_portrait, "no page here",
-	squirrel_portrait, "This is way better than the purple one! Ill take this one and you get the purple one.")
+	squirrel_portrait, "")
 	
 	var unsolved_pages:Array[DynamicPage] = [
 		DynamicPage.new("Behold!", squirrel_portrait),
@@ -458,7 +461,7 @@ func dialogue_squirrel_egg():
 	]
 	
 	var solved_pages:Array[DynamicPage] = [
-		DynamicPage.new("this si done ...",squirrel_portrait)
+		DynamicPage.new("This is way better than the purple one! Ill take this one and you get the purple one.",squirrel_portrait)
 	]
 	
 	dynamic_dialogue.insert_pages(unsolved_pages,solved_pages)
@@ -468,8 +471,9 @@ func dialogue_squirrel_egg():
 
 # ID 4: Ol'Nutter
 func dialogue_squirrel_ol_nutter():
+	# FIXME remove initialization that will be overwritten anyway!
 	var dynamic_dialogue = DynamicDialogue.new(squirrel_nutter_portrait, "no page here",
-	squirrel_nutter_portrait, "<Excited Squeaking>...this is incredible! Now everyone will believe in the NUT! We can rise up against Big Frog! We'll join your noble cause!")
+	squirrel_nutter_portrait, "")
 	
 	var unsolved_pages:Array[DynamicPage] = [
 		DynamicPage.new("Did you see that nut-damned frog at the meeting back there?! I tell you, that creature is behind everything! ", squirrel_nutter_portrait),
@@ -487,7 +491,7 @@ func dialogue_squirrel_ol_nutter():
 	]
 	
 	var solved_pages:Array[DynamicPage] = [
-		DynamicPage.new("this si done ...",squirrel_nutter_portrait)
+		DynamicPage.new("<Excited Squeaking>...this is incredible! Now everyone will believe in the NUT! We can rise up against Big Frog! We'll join your noble cause!",squirrel_nutter_portrait)
 	]
 	
 	dynamic_dialogue.insert_pages(unsolved_pages,solved_pages)
@@ -497,8 +501,9 @@ func dialogue_squirrel_ol_nutter():
 
 # ID 5: Toadally Anonymous
 func dialogue_starting_conflict():
+	# FIXME remove initialization that will be overwritten anyway!
 	var dynamic_dialogue = DynamicDialogue.new(frog_portrait, "no page here",
-	frog_portrait, "... seems like no one wants to help you, hehehehehehehe ... they're playing right into my webbed hands ...")
+	frog_portrait, "")
 	
 	var unsolved_pages:Array[DynamicPage] = [
 		DynamicPage.new("< You hear a loud discussion amongst different animals... >", fox_portrait),
@@ -517,7 +522,7 @@ func dialogue_starting_conflict():
 		#DynamicPage.new("<<< due to a series of unfortunate events, the fox must interact with the toadally anonymous individual again after finishing this dialogue. Thank you! >>>", frog_portrait),
 	]
 	var solved_pages:Array[DynamicPage] = [
-		DynamicPage.new("go away please!",frog_portrait)
+		DynamicPage.new("... seems like no one wants to help you, hehehehehehehe ... they're playing right into my webbed hands ...",frog_portrait)
 	]
 	
 	dynamic_dialogue.insert_pages(unsolved_pages,solved_pages)
@@ -528,7 +533,7 @@ func dialogue_starting_conflict():
 # ID 6: Final Thank you
 func dialogue_final():
 	var dynamic_dialogue = DynamicDialogue.new(squirrel_portrait, "no page here",
-	frog_portrait, "Thanks for playing!")
+	frog_portrait, "")
 	
 	var unsolved_pages:Array[DynamicPage] = [
 		DynamicPage.new("If you ran into any problems while playing, please do not hesitate to tell us.", frog_portrait),
@@ -538,7 +543,7 @@ func dialogue_final():
 	]
 	
 	var solved_pages:Array[DynamicPage] = [
-		DynamicPage.new("this si done ...",snake_portrait)
+		DynamicPage.new("Thanks for playing!",snake_portrait)
 	]
 	
 	dynamic_dialogue.insert_pages(unsolved_pages,solved_pages)
