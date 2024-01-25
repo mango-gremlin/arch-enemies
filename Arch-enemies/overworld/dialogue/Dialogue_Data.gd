@@ -11,6 +11,9 @@ var currentEntry: int = 0
 var finished: bool = false
 var npc_name:String = ""
 
+# used to disable two dialogue options and only use the dialogue_done entries
+func deactivate_undone_pages():
+	finished = true
 
 # if called it sets the active dialogue to be the quest_done dialogue
 func set_quest_dialogue_done():
