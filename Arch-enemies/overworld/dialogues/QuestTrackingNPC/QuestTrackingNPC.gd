@@ -2,12 +2,12 @@ extends Dialogue_Data
 
 
 class_name QuestTrackNPC
-
+var default_undone_text:String
 # --- /
 # -- / class constructor 
 func _init():
 	print("initialize quest tracker")
-	var default_undone_text: String = "I will not join you >:( The others need to do something for once. Then maybe I will help."
+	default_undone_text = "I will not join you >:( The others need to do something for once. Then maybe I will help."
 	quest_undone_entries = [
 		QuestPage.new(default_undone_text,0,0)
 		]
@@ -17,7 +17,7 @@ func _init():
 	]
 	active_pages = quest_undone_entries
 	# setting dialogue finish to true
-	finished = true
+	deactivate_undone_pages()
 	
 	# test case
 	# querying the current state of quests 
@@ -41,17 +41,12 @@ func update_dialogue(quest_dict:Dictionary):
 	insert_quests(unsolved_quests)
 
 func insert_quests(quests:Array[String]):
-	#if len(quests) == 0:
-		#quest_undone_entries = [NoQuestFoundPage.new()]
-		#return
-	# extracting initial dialogue for undone quest 
-	# to reconstruct it with updated length
-	var dialogue_undone:String = quest_undone_entries[0].quest
 	var max_page = len(quests) 
 	
 	quest_undone_entries = []
 	var index = 1
-	quest_undone_entries.append(QuestPage.new(dialogue_undone,0,max_page))
+	# adding base entry
+	quest_undone_entries.append(QuestPage.new(default_undone_text,0,max_page))
 	for quest in quests:
 		print("adding quest to entry")
 		quest_undone_entries.append(QuestPage.new(quest, index, max_page))
