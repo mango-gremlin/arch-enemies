@@ -7,13 +7,16 @@ class_name QuestTrackNPC
 # -- / class constructor 
 func _init():
 	print("initialize quest tracker")
-	entries = [
+	quest_undone_entries = [
 		NoQuestFoundPage.new()
 		]
 	# contains all entries that are displayed when the objective was solved 
 	quest_done_entries = [
 		NPC_TRACKER_PageQuestDone1.new()
 	]
+	active_pages = quest_undone_entries
+	# setting dialogue finish to true
+	finished = true
 	
 	# test case
 	# querying the current state of quests 
@@ -38,14 +41,17 @@ func update_dialogue(quest_dict:Dictionary):
 
 func insert_quests(quests:Array[String]):
 	if len(quests) == 0:
-		entries = [NoQuestFoundPage.new()]
+		quest_undone_entries = [NoQuestFoundPage.new()]
 		return
 		
-	var max_page = len(quests) - 1
-		
-	entries = []
-	var index = 0
+	var max_page = len(quests)
+	
+	quest_undone_entries = []
+	var index = 1
 	
 	for quest in quests:
-		entries.append(QuestPage.new(quest, index, max_page))
+		print("adding quest to entry")
+		quest_undone_entries.append(QuestPage.new(quest, index, max_page))
 		index += 1
+	# updating active dialogue entry
+	active_pages = quest_undone_entries
