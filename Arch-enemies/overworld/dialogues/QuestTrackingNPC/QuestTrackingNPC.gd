@@ -44,10 +44,10 @@ func insert_quests(quests:Array[String]):
 		quest_undone_entries = [NoQuestFoundPage.new()]
 		return
 		
-	var max_page = len(quests)
+	var max_page = len(quests) -1
 	
 	quest_undone_entries = []
-	var index = 1
+	var index = 0
 	
 	for quest in quests:
 		print("adding quest to entry")
