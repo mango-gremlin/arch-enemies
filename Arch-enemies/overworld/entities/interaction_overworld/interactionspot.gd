@@ -72,11 +72,9 @@ func interact_bridge() -> InteractionValue:
 func interact_item() -> InteractionValue: 
 # querying item to receive 
 	var received_item = parent_node.obtain_item()
-	var received_dialogue = parent_node.obtain_dialogue()
 	# construction interactionValue
 	var queried_values:Dictionary = {
 		"item": received_item, 
-		"text": received_dialogue,
 	}
 	var interaction_result:InteractionValue = InteractionValue.new(InteractionType.ITEM,queried_values)
 	return interaction_result

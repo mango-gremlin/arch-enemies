@@ -14,8 +14,7 @@ func _on_retry_button_pressed():
 
 func _on_continue_button_pressed():
 	# reset global variables
-	#get_parent().reset_modes()
-	# return to overworld scene
+	get_parent().reset_modes()
 	# Update global inventory
 	level_solved.emit()
 	# Add bridge edge to Singleton

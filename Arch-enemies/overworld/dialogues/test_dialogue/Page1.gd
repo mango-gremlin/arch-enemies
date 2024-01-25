@@ -4,11 +4,6 @@ extends Dialogue_Entry
 class_name Page1
 
 
-# --- /
-# -- / class constructor 
-func _init():
-	pass
-
 func content() -> String:
 	return "This is the first page of the example dialogue. Navigate to the next page, by pressing the button"
 
@@ -25,4 +20,4 @@ func btn_action(btn: int):
 		SingletonPlayer.exit_dialogue()
 		
 	if btn == 1:
-		SingletonPlayer.dialogue.select_page(1)
+		SingletonPlayer.active_dialogue.select_page(1)

@@ -32,7 +32,7 @@ var save_states = 10
 var state = 0
 
 #for the inventory
-@onready var start_animals : Dictionary = SingletonPlayer.set_test_animal_inventory().duplicate(true)
+@onready var start_animals : Dictionary = SingletonPlayer.get_animal_inventory().duplicate(true)
 #var start_animals : Dictionary = set_animal_inventory()	
 var placed_animals: Array = []
 
@@ -548,3 +548,8 @@ func _on_goal_menu_level_solved():
 	play_sound.emit("VICTORY")
 	print("updating inventory of overworld")
 	set_global_animal_inventory(start_animals)
+
+
+func _on_tutorial_button_pressed():
+	get_parent().get_node("Tutorial").visible = true
+	self.visible = false
