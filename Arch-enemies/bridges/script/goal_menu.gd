@@ -3,15 +3,18 @@ extends Control
 signal level_solved
 
 func _on_retry_button_pressed():
-	get_parent().get_node("Player").reset_player()
-	Global.drag_mode = true
+	# reset everything
+	var grid = get_parent()
+	grid.get_node("Player").reset_player()
+	grid.change_ui_visibility(true)
+	grid.reset_modes()
 	get_parent().reset_grid()
 	visible = false
 
 
 func _on_continue_button_pressed():
-	# Set drag mode to true for other levels (should really be refactored)
-	Global.drag_mode = true
+	# reset global variables
+	get_parent().reset_modes()
 	# Update global inventory
 	level_solved.emit()
 	# Add bridge edge to Singleton
