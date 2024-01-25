@@ -10,9 +10,9 @@ extends Node
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
-	Savemanager.load_config()
+	#Savemanager.load_config()
 	# TODO add input to set 
-	Savemanager.select_profile("default")
+	#Savemanager.select_profile("default")
 
 # -- Signals 
 signal updated_item_inventory(new_inventory)
