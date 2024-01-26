@@ -152,17 +152,7 @@ func execute_interaction():
 			# solved already? 
 			#	true  -> dont do anything 
 			# 	false -> display information and allow to play game too 
-			print("entering bridge game")
 			# FIXME debugging until interaction works accordingly
-			print("value from interaction") 
-			print(interaction_data["text"])
-			print(interaction_data["issolved"])
-			if interaction_data["issolved"]: 
-				set_interactionLabel("Was solved already") 
-				return
-			else: 
-				set_interactionLabel(interaction_data["text"])
-				
 			var bridge_edge:SingletonPlayer.BridgeEdge = interaction_data["bridge_edge"]
 			save_player()
 			enter_bridge_scene(bridge_edge)
