@@ -57,6 +57,8 @@ func _physics_process(delta):
 func player_movement(delta):
 	# disallow movement when in dialogue
 	if SingletonPlayer.navigation_in_dialogue():
+		player_idle_animation(delta)
+		Global.walking = false
 		return
 		
 	velocity = Vector2.ZERO
@@ -164,6 +166,7 @@ func execute_npc_interaction(interaction_data: Dictionary):
 	# -> quest is undone
 	# -> dialogue has not been finished yet! 
 	#if not (dialogue_done and  quest_done):
+	
 	SingletonPlayer.prepare_dialogue(npc_id)
 
 	# dialogue was finished already
