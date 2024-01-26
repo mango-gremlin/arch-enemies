@@ -34,6 +34,8 @@ func select_page(page: int):
 	control_instance.set_text(entry.content())
 	# set button text
 	control_instance.set_buttons(entry.btn_text())
+	# set button states
+	control_instance.set_buttons_state(entry.btn_states())
 	# set name of npc 
 	control_instance.set_npc_name(npc_name)
 	# set image resource
