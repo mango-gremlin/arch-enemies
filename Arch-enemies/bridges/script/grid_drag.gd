@@ -123,6 +123,7 @@ func _on_grid_current_grid(current_grid):
 	grid = current_grid
 	
 func is_snake_allowed(pos):
+	pos.x -= 2 # middle offset
 	if(in_bound(pos, 5, 1)):
 		return false
 	var is_allowed = false
@@ -156,6 +157,9 @@ func is_spider_allowed(pos):
 	return is_allowed_and_free
 	
 func is_deer_allowed(pos):
+	# middle offset
+	pos.x -= 1
+	pos.y += 1
 	if(in_bound(pos, 4, 4)):
 		return false
 	var is_allowed = false 

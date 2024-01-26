@@ -245,6 +245,9 @@ func update_grid(pos, data):
 			Vector2i(-1, 0), Vector2i(-1, 1)]
 			#Same for BOTTOM tiles
 			var new_bottom = [Vector2i(0, -1), Vector2i(1, -1), Vector2i(2, -1)]
+			# middle offset
+			x -= 1
+			y += 1
 			#These two loops just iterate over the grid cells we want to fill
 			for delta in range(4):
 				for epsilon in range(4):
@@ -273,6 +276,7 @@ func update_grid(pos, data):
 			var new_side = [Vector2i(-1, 0)]
 			#Same for BOTTOM tiles
 			var new_bottom = [Vector2i(0, -1), Vector2i(1, -1), Vector2i(2, -1), Vector2i(3, -1)]
+			x -= 2 # middle offset
 			for delta in range(5):
 				grid[x + delta][y] = ENTITY_TYPES.ANIMAL
 				set_cell(ACTIVE_LAYER_ID, Vector2i(x + delta, y), SNAKE_TILE_ID, Vector2i(delta, 0))
