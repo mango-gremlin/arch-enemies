@@ -13,6 +13,8 @@ func _process(delta):
 
 
 func _on_overworld_pressed():
+	# Set drag mode to true for other levels (should really be refactored)
+	Global.drag_mode = true
 	# TODO improve  by constantly saving the previous scene in a variable!
 	get_tree().change_scene_to_file("res://overworld/main_scene_overworld.tscn")
 

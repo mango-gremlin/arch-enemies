@@ -26,5 +26,5 @@ func btn_action(btn: int):
 			
 	if btn == 0:
 		print("executing button action")
-		SingletonPlayer.dialogue.finish_dialogue()
+		SingletonPlayer.active_dialogue.finish_dialogue()
 		SingletonPlayer.exit_dialogue()

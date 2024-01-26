@@ -3,6 +3,8 @@ extends Node
 var drag_mode := true
 var something_is_being_dragged := false
 var currently_dragging
+var walking := false
+
 
 # round to nearest multiple of grid_size
 func round_to_nearest(position:float, grid_size:float):
@@ -24,3 +26,4 @@ func get_animal_type(body:StaticBody2D):
 	elif body.is_in_group("spider"):
 		return "spider"
 	return ""
+

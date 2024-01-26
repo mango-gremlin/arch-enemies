@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://ca34jrmpbslis"]
+
+[ext_resource type="PackedScene" uid="uid://vvo04yl1cy8p" path="res://bridges/scenes/tutorial_template.tscn" id="1_ubb0s"]
+[ext_resource type="Texture2D" uid="uid://bjwiponyutixg" path="res://assets/tutorial_screenshots/archenemies_spider_tutorial.png" id="2_alvrc"]
+[ext_resource type="Texture2D" uid="uid://bxrt2ulp85yuy" path="res://assets/art/characters/spider.png" id="3_iygln"]
+
+[node name="Control" instance=ExtResource("1_ubb0s")]
+
+[node name="Example_Picture" parent="PanelContainer2/MarginContainer/HBoxContainer" index="0"]
+texture = ExtResource("2_alvrc")
+
+[node name="Header" parent="PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer" index="0"]
+text = "How to place spiders:"
+
+[node name="Example" parent="PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer" index="1"]
+text = "I can stick to the sides and bottom of any Objects. Other animals also stick to me!"
+autowrap_mode = 3
+
+[node name="Animal_Picture" parent="PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer" index="2"]
+texture = ExtResource("3_iygln")

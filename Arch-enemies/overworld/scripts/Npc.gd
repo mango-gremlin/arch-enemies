@@ -53,7 +53,7 @@ var required_bridge_edge:SingletonPlayer.BridgeEdge
 var required_npc_id:int 
 
 # denotes whether its quest was solved or not
-var quest_resolved:bool = false 
+var quest_resolved:bool = true 
 
 # --- / 
 # -- / Dialoque options
