@@ -28,9 +28,7 @@ func enter_dialogue(dialogue:Dialogue_Data, npc_id: int):
 	print(dialogue_state)
 	if (quest_state and dialogue_state):
 		# was done, showing alt text 
-		print("quest resolved now")
-		active_dialogue.select_quest_done_page(0)
-		return
+		active_dialogue.set_quest_dialogue_done()
 	
 	active_dialogue.select_page(0)
 

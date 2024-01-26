@@ -3,46 +3,25 @@
 # representation of the complete dialog
 class_name Dialogue_Data
 
-var entries: Array[Dialogue_Entry] = []
+var quest_undone_entries: Array[Dialogue_Entry] = []
 var quest_done_entries: Array[Dialogue_Entry] = []
+# denotes the actively selected set of pages
+var active_pages:Array[Dialogue_Entry] = []
 var currentEntry: int = 0
 var finished: bool = false
 var npc_name:String = ""
 
-# --- /
-# -- / class constructor 
-func _init():
-	pass
+# used to disable two dialogue options and only use the dialogue_done entries
+func deactivate_undone_pages():
+	finished = true
 
-# works as "select_page()" but displays all entries from 
-# FIXME same as select_page 
-# FIXME both could be merged and dynamiccaly take either quest_done_entries / entries 
-func select_quest_done_page(page:int):
-	if page >= len(quest_done_entries):
-		print("ERROR, INVALID PAGE NUMBER SUPPLIED")
-		return
-	currentEntry = page
-	# of course, no data type here, idk how to work with signals
-	var control_instance = SingletonPlayer.active_dialogue.npc_control_instance
+# if called it sets the active dialogue to be the quest_done dialogue
+func set_quest_dialogue_done():
+	active_pages = quest_done_entries
 	
-	# will always start from start of it 
-	var entry: Dialogue_Entry = quest_done_entries[0]
-	
-	# set title and content
-	control_instance.set_text(entry.content())
-	# set name of npc 
-	control_instance.set_npc_name(npc_name)
-	# set button text
-	control_instance.set_buttons(entry.btn_text())
-	
-	# set image resource
-	control_instance.set_image_texture(entry.image_src())
-	
-	# show panel
-	control_instance.show()
 
 func select_page(page: int):
-	if page >= len(entries):
+	if page >= len(active_pages):
 		print("ERROR, INVALID PAGE NUMBER SUPPLIED")
 		return
 	
@@ -50,7 +29,7 @@ func select_page(page: int):
 	
 	# of course, no data type here, idk how to work with signals
 	var control_instance = SingletonPlayer.active_dialogue.npc_control_instance
-	var entry: Dialogue_Entry = entries[currentEntry]
+	var entry: Dialogue_Entry = active_pages[currentEntry]
 	# set title and content
 	control_instance.set_text(entry.content())
 	# set button text
@@ -71,4 +50,4 @@ func btn_action(btn: int,done_state:bool):
 		quest_done_entries[currentEntry].btn_action(btn)
 		return
 	print("non finished condition")
-	entries[currentEntry].btn_action(btn)
+	active_pages[currentEntry].btn_action(btn)

@@ -109,6 +109,7 @@ func use_item(requested_item:Item.ItemType):
 	if request_item(requested_item):
 		var queried_item = item_inventory[requested_item]
 		item_inventory[requested_item] = queried_item -1
+	updated_item_inventory.emit(item_inventory)
 
 # --- / 
 # -- / animal inventory
@@ -403,10 +404,11 @@ var fox_portrait = "res://assets/art/characters/portraits/Portrait_Fox.png"
 
 # ID 1: Stefan
 func dialogue_snake_stefan():
+	# FIXME remove initialization that will be overwritten anyway!
 	var dynamic_dialogue = DynamicDialogue.new(spider_portrait, "no page here",
-	snake_portrait, "Is zzat an eegg?? Oh zzat's szzoo niczze of youu! I will help you, but don't get too closzze to me or I might take a bite. I can't help it, it'szz a reflexzz.")
+	snake_portrait, "")
 	
-	var pages:Array[DynamicPage] = [
+	var unsolved_pages:Array[DynamicPage] = [
 		DynamicPage.new("Hello zzere little foxzz, why are you bozzering mee?", snake_portrait),
 		DynamicPage.new("Hi, we want your help for fixing the dam to prevent more floods!", fox_portrait),
 		DynamicPage.new("Szzoo you want my help, but what do I get from zzat? I can szzwim you know, szoo I don't really caree about zze water.", snake_portrait),
@@ -415,49 +417,65 @@ func dialogue_snake_stefan():
 		DynamicPage.new("Maybe I can find something else you could eat. Would you help us then?", fox_portrait),
 		DynamicPage.new("Ohh zzat would be very kind! Of courszze I would help you... aszz long as I have szzomething to szzwallow and digeszzt.", snake_portrait),
 	]
+	var solved_pages:Array[DynamicPage] = [
+		DynamicPage.new("Is zzat an eegg?? Oh zzat's szzoo niczze of youu! I will help you, but don't get too closzze to me or I might take a bite. I can't help it, it'szz a reflexzz.",snake_portrait)
+	]
 	
-	dynamic_dialogue.insert_pages(pages)
+	dynamic_dialogue.insert_pages(unsolved_pages,solved_pages)
 	
 	return dynamic_dialogue
 
 # ID 2: Grandfather Longlegs
 func dialogue_spider_grandpa():
+	# FIXME remove initialization that will be overwritten anyway!
 	var dynamic_dialogue = DynamicDialogue.new(spider_portrait, "no page here",
-	spider_portrait, "Many thanks, young lad. Now that my family is cared for I will aid you on your quest.")
+	spider_portrait, "")
 	
-	var pages:Array[DynamicPage] = [
+	var unsolved_pages:Array[DynamicPage] = [
 		DynamicPage.new("Can you help solve the flooding issue?", fox_portrait),
 		DynamicPage.new("You young whipper-snapper, get off my net!", spider_portrait), 
 		DynamicPage.new("The last round of rowdy blaggards already scattered my flies and I need to gather new ones to feed my 6582 grandchildren!", spider_portrait),
 		DynamicPage.new("Once they are cared for I will consider helping you.", spider_portrait),
 	]
 	
-	dynamic_dialogue.insert_pages(pages)
+	var solved_pages:Array[DynamicPage] = [
+		DynamicPage.new("Many thanks, young lad. Now that my family is cared for I will aid you on your quest.",spider_portrait)
+	]
+	
+	dynamic_dialogue.insert_pages(unsolved_pages,solved_pages)
+	
 	
 	return dynamic_dialogue
 
 # ID 3: Esther Egg Squirrel
 func dialogue_squirrel_egg():
+	# FIXME remove initialization that will be overwritten anyway!
 	var dynamic_dialogue = DynamicDialogue.new(squirrel_portrait, "no page here",
-	squirrel_portrait, "This is way better than the purple one! Ill take this one and you get the purple one.")
+	squirrel_portrait, "")
 	
-	var pages:Array[DynamicPage] = [
+	var unsolved_pages:Array[DynamicPage] = [
 		DynamicPage.new("Behold!", squirrel_portrait),
 		DynamicPage.new("I have found something very special: a purple striped walnut of impressive size! A magnificent specimen.", squirrel_portrait),
 		DynamicPage.new("... Thats an egg.", fox_portrait),
 		DynamicPage.new("What! Impossible! I wanted a nut! Bring me one so I can check.", squirrel_portrait),
 	]
 	
-	dynamic_dialogue.insert_pages(pages)
+	var solved_pages:Array[DynamicPage] = [
+		DynamicPage.new("This is way better than the purple one! Ill take this one and you get the purple one.",squirrel_portrait)
+	]
+	
+	dynamic_dialogue.insert_pages(unsolved_pages,solved_pages)
+	
 	
 	return dynamic_dialogue
 
 # ID 4: Ol'Nutter
 func dialogue_squirrel_ol_nutter():
+	# FIXME remove initialization that will be overwritten anyway!
 	var dynamic_dialogue = DynamicDialogue.new(squirrel_nutter_portrait, "no page here",
-	squirrel_nutter_portrait, "<Excited Squeaking>...this is incredible! Now everyone will believe in the NUT! We can rise up against Big Frog! We'll join your noble cause!")
+	squirrel_nutter_portrait, "")
 	
-	var pages:Array[DynamicPage] = [
+	var unsolved_pages:Array[DynamicPage] = [
 		DynamicPage.new("Did you see that nut-damned frog at the meeting back there?! I tell you, that creature is behind everything! ", squirrel_nutter_portrait),
 		DynamicPage.new("Well it seems like it wanted everyone to argue, instead of helping me.", fox_portrait),
 		DynamicPage.new("HA! Just like I told them! But does anyone believe me? NO! ", squirrel_nutter_portrait),
@@ -472,16 +490,22 @@ func dialogue_squirrel_ol_nutter():
 		DynamicPage.new("Can you travel to the frog-invested island to the east, and bring some evidence to me? I'm sure the entirety of NUT will see your noble cause!", squirrel_nutter_portrait)
 	]
 	
-	dynamic_dialogue.insert_pages(pages)
+	var solved_pages:Array[DynamicPage] = [
+		DynamicPage.new("<Excited Squeaking>...this is incredible! Now everyone will believe in the NUT! We can rise up against Big Frog! We'll join your noble cause!",squirrel_nutter_portrait)
+	]
+	
+	dynamic_dialogue.insert_pages(unsolved_pages,solved_pages)
+	
 	
 	return dynamic_dialogue
 
 # ID 5: Toadally Anonymous
 func dialogue_starting_conflict():
+	# FIXME remove initialization that will be overwritten anyway!
 	var dynamic_dialogue = DynamicDialogue.new(frog_portrait, "no page here",
-	frog_portrait, "... seems like no one wants to help you, hehehehehehehe ... they're playing right into my webbed hands ...")
+	frog_portrait, "")
 	
-	var pages:Array[DynamicPage] = [
+	var unsolved_pages:Array[DynamicPage] = [
 		DynamicPage.new("< You hear a loud discussion amongst different animals... >", fox_portrait),
 		DynamicPage.new("< You and your friends decide to investigate >", fox_portrait),
 		DynamicPage.new("My precious webs are broken! The travesty! Watch your step, youngins!", spider_portrait),
@@ -497,24 +521,33 @@ func dialogue_starting_conflict():
 		DynamicPage.new("... hehehehehehehehehehehehehehe ...", frog_portrait),
 		#DynamicPage.new("<<< due to a series of unfortunate events, the fox must interact with the toadally anonymous individual again after finishing this dialogue. Thank you! >>>", frog_portrait),
 	]
+	var solved_pages:Array[DynamicPage] = [
+		DynamicPage.new("... seems like no one wants to help you, hehehehehehehe ... they're playing right into my webbed hands ...",frog_portrait)
+	]
 	
-	dynamic_dialogue.insert_pages(pages)
+	dynamic_dialogue.insert_pages(unsolved_pages,solved_pages)
+	
 	
 	return dynamic_dialogue
 	
 # ID 6: Final Thank you
 func dialogue_final():
 	var dynamic_dialogue = DynamicDialogue.new(squirrel_portrait, "no page here",
-	frog_portrait, "Thanks for playing!")
+	frog_portrait, "")
 	
-	var pages:Array[DynamicPage] = [
+	var unsolved_pages:Array[DynamicPage] = [
 		DynamicPage.new("If you ran into any problems while playing, please do not hesitate to tell us.", frog_portrait),
 		DynamicPage.new("We also would like to know what you thought of the game in general:", frog_portrait),
 		DynamicPage.new("- understandability - difficulty (esp: how many animals did you use? Did you have too many?) - fun/boring - suggestions -", frog_portrait),
 		DynamicPage.new("Thanks for playing our game! We really appreciate it!", frog_portrait),
 	]
 	
-	dynamic_dialogue.insert_pages(pages)
+	var solved_pages:Array[DynamicPage] = [
+		DynamicPage.new("Thanks for playing!",snake_portrait)
+	]
+	
+	dynamic_dialogue.insert_pages(unsolved_pages,solved_pages)
+	
 	
 	return dynamic_dialogue
 
@@ -556,6 +589,7 @@ func prepare_dialogue(npc_id:int):
 					var dialogue_object = obtain_dialogue(npc_id)
 					var active_quests:Dictionary = active_tracked_quests
 					dialogue_object.update_dialogue(active_quests)
+					print("updated npc")
 	var data : Dialogue_Data = npc_dialogues[npc_id]
 	active_dialogue.enter_dialogue(data, npc_id)
 
