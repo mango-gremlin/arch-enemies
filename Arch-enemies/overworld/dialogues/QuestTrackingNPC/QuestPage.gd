@@ -3,7 +3,6 @@ extends Dialogue_Entry
 
 class_name QuestPage
 
-
 var quest: String
 var current_page: int
 var max_page: int
@@ -24,18 +23,11 @@ func image_src() -> String:
 	return "res://assets/art/characters/portraits/Portrait_Deer.png"
 	
 # null ement in array means here disable button X
-func btn_text() -> Array[String]:
-	var previous_str = ""
+func btn_text() -> Array[String]:			
+	return ["Previous", "Next", "Exit"]
 	
-	if current_page > 0:
-		previous_str = "Previous"
-		
-	var next_str = ""
-	
-	if current_page < max_page:
-		next_str = "Next"
-	
-	return [previous_str, next_str, "Exit"]
+func btn_states() -> Array[bool]:
+	return [current_page <= 0, current_page >= max_page, false]
 
 # btn button in from left to right, starting with 0
 func btn_action(btn: int):
