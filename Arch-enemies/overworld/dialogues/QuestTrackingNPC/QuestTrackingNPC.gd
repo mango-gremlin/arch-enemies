@@ -13,7 +13,7 @@ func _init():
 		]
 	# contains all entries that are displayed when the objective was solved 
 	quest_done_entries = [
-		NPC_TRACKER_PageQuestDone1.new()
+		QuestDonePage.new()
 	]
 	active_pages = quest_undone_entries
 	# setting dialogue finish to true

@@ -1,7 +1,7 @@
 extends Dialogue_Entry
 
 
-class_name NPC_TRACKER_PageQuestDone1
+class_name QuestDonePage
 
 
 
@@ -19,7 +19,10 @@ func image_src() -> String:
 	
 # "" element in array means here disable button X
 func btn_text() -> Array[String]:
-	return ["exit", "", ""]
+	return ["Exit", "", ""]
+	
+func btn_states() -> Array[bool]:
+	return [false, false, false]
 
 # btn button in from left to right, starting with 0
 func btn_action(btn: int):
