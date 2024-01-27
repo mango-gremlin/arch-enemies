@@ -334,14 +334,15 @@ func make_visible():
 	#Instead we only color them when we are dragging, this function does that
 	for x in range(grid_size.x):
 		for y in range(grid_size.y):
-			if(grid[x][y] == ENTITY_TYPES.FORBIDDEN):
+			if grid[x][y] == ENTITY_TYPES.FORBIDDEN:
 				set_cell(ACTIVE_LAYER_ID, Vector2i(x, y), RED_TILE_ID, Vector2i(1, 1))
-			elif(grid[x][y] == ENTITY_TYPES.ALLOWED):
+			elif grid[x][y] == ENTITY_TYPES.ALLOWED:
 				set_cell(ACTIVE_LAYER_ID, Vector2i(x, y), GREEN_TILE_ID, Vector2i(1, 1))
-			#SIDE, BOTTOM and SHALLOW have the same color but this can be changed
-			elif((grid[x][y] == ENTITY_TYPES.SIDE) 
-				or grid[x][y] == ENTITY_TYPES.BOTTOM
-				or grid[x][y] == ENTITY_TYPES.SHALLOW):
+			elif grid[x][y] == ENTITY_TYPES.SIDE:
+				set_cell(ACTIVE_LAYER_ID, Vector2i(x, y), YELLOW_TILE_ID, Vector2i(1, 1))
+			elif grid[x][y] == ENTITY_TYPES.BOTTOM:
+				set_cell(ACTIVE_LAYER_ID, Vector2i(x, y), YELLOW_TILE_ID, Vector2i(1, 1))
+			elif grid[x][y] == ENTITY_TYPES.SHALLOW:
 				set_cell(ACTIVE_LAYER_ID, Vector2i(x, y), YELLOW_TILE_ID, Vector2i(1, 1))
 	Global.something_is_being_dragged = true
 
