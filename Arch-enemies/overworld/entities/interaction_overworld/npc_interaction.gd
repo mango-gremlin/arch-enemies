@@ -66,7 +66,7 @@ func _ready():
 	# load visualization 
 	set_npc_sprite()
 	# plays animation of floating indicator (tells u to press E)
-	$InteractionIndicator.play("indication")
+	$InteractionIndicator.play("npc_indication")
 	# linking to interaction spot accordingly
 	# helps to interact with interactionspot afterwards
 	var interactionspot_object = get_node("interactionspot")
