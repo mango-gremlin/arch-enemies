@@ -17,8 +17,8 @@ func _init(_content:String, _src_image, _current_page:int, _max_page:int, last_p
 	src_image = _src_image
 	is_last_page = last_page
 	
-	if src_image == null:
-		src_image = "res://overworld/dialogues/test_dialogue/red.png"
+	if src_image == null: # case already handled in DialogueUI
+		src_image = ""
 	
 	current_page = _current_page
 	max_page = _max_page
