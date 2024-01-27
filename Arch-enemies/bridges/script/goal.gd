@@ -19,6 +19,7 @@ func _on_goal_area_2d_body_entered(_body):
 		var goal_menu = grid.find_child("goal_menu")
 		play_sound.emit()
 		goal_menu.visible = true
+		Global.walking = false
 		grid.goal_reached = true
 		# menu_mode is active when goal is reached		
 		grid.menu_mode = true
