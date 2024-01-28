@@ -1,10 +1,10 @@
-[gd_resource type="Theme" load_steps=17 format=3 uid="uid://d2ijyc316xeom"]
+[gd_resource type="Theme" load_steps=18 format=3 uid="uid://d2ijyc316xeom"]
 
 [ext_resource type="Texture2D" uid="uid://dwu3b8hug0u0v" path="res://assets/art/ui_elements/button_hover.png" id="1_nvwyd"]
 [ext_resource type="Texture2D" uid="uid://igj8k0askwfw" path="res://assets/art/ui_elements/button_normal.png" id="2_6n8m2"]
 [ext_resource type="FontFile" uid="uid://h728dpw3bhca" path="res://assets/art/ui_elements/yoster.ttf" id="3_aqlgn"]
-[ext_resource type="Texture2D" uid="uid://5ge2ujohf4b2" path="res://assets/art/ui_elements/Checked1.png" id="3_bvrr1"]
-[ext_resource type="Texture2D" uid="uid://b56d00vy6bbp5" path="res://assets/art/ui_elements/Unchecked1.png" id="3_u1fc6"]
+[ext_resource type="Texture2D" uid="uid://0l0cq6kpgq4y" path="res://assets/art/ui_elements/checked_button.png" id="3_qiqv0"]
+[ext_resource type="Texture2D" uid="uid://bhun7ydmaa4sx" path="res://assets/art/ui_elements/unchecked_button.png" id="4_ouf14"]
 [ext_resource type="Texture2D" uid="uid://ckg421260rcxt" path="res://assets/art/ui_elements/slider_normal.png" id="5_q2vmr"]
 [ext_resource type="Texture2D" uid="uid://cr7ae2bsvoo2w" path="res://assets/art/ui_elements/slider_inactive.png" id="6_bl8c8"]
 [ext_resource type="Texture2D" uid="uid://so6ev4sw7aja" path="res://assets/art/ui_elements/slider_highlighted.png" id="7_smcfg"]
@@ -37,6 +37,9 @@ texture = ExtResource("2_6n8m2")
 content_margin_left = 4.0
 content_margin_right = 4.0
 texture = ExtResource("1_nvwyd")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4gcjk"]
+texture = ExtResource("2_6n8m2")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vccis"]
 content_margin_top = 4.0
@@ -89,8 +92,11 @@ Button/styles/focus = SubResource("StyleBoxEmpty_2l0bi")
 Button/styles/hover = SubResource("StyleBoxTexture_x0won")
 Button/styles/normal = SubResource("StyleBoxTexture_yjr2s")
 Button/styles/pressed = SubResource("StyleBoxTexture_rjba8")
-CheckButton/icons/checked = ExtResource("3_bvrr1")
-CheckButton/icons/unchecked = ExtResource("3_u1fc6")
+CheckButton/colors/font_hover_color = Color(0.341176, 0.12549, 0.184314, 1)
+CheckButton/colors/font_hover_pressed_color = Color(0.341176, 0.12549, 0.184314, 1)
+CheckButton/icons/checked = ExtResource("3_qiqv0")
+CheckButton/icons/unchecked = ExtResource("4_ouf14")
+CheckButton/styles/focus = SubResource("StyleBoxTexture_4gcjk")
 HSlider/constants/center_grabber = 1
 HSlider/icons/grabber = ExtResource("5_q2vmr")
 HSlider/icons/grabber_disabled = ExtResource("6_bl8c8")

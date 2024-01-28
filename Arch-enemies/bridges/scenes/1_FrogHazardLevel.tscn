@@ -900,7 +900,6 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("21_dcmnv")
-theme_override_font_sizes/font_size = 10
 text = "?"
 
 [node name="Drag_or_Fox" type="CheckButton" parent="Grid/Control"]
