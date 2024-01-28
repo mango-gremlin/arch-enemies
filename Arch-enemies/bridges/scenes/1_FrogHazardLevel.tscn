@@ -923,6 +923,18 @@ scale = Vector2(0.5, 0.5)
 theme = ExtResource("21_dcmnv")
 text = "Reset"
 
+[node name="Escape" type="Button" parent="Grid/Control"]
+z_index = 5
+layout_mode = 0
+offset_left = 5.0
+offset_top = 263.0
+offset_right = 56.0
+offset_bottom = 294.0
+scale = Vector2(0.5, 0.5)
+theme = ExtResource("21_dcmnv")
+text = "Esc
+"
+
 [node name="Last_State" type="Button" parent="Grid/Control"]
 layout_mode = 0
 offset_left = 434.0
@@ -1058,6 +1070,7 @@ position = Vector2(401, 99)
 [connection signal="pressed" from="Grid/Control/Animal_Inventory/tutorial_button" to="Grid" method="_on_tutorial_button_pressed"]
 [connection signal="toggled" from="Grid/Control/Drag_or_Fox" to="Grid/Control/Drag_or_Fox" method="_on_toggled"]
 [connection signal="pressed" from="Grid/Control/Reset" to="Grid" method="_on_reset_pressed"]
+[connection signal="pressed" from="Grid/Control/Escape" to="Grid" method="open_pause_menu"]
 [connection signal="pressed" from="Grid/Control/Last_State" to="Grid" method="_on_last_state_pressed"]
 [connection signal="play_sound" from="Grid/Player" to="Sound Effects" method="_on_player_play_sound"]
 

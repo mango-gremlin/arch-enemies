@@ -449,16 +449,17 @@ func _process(delta):
 		
 	# pressing "esc" opens the pause-menu
 	if Input.is_action_just_pressed("open_menu") and not goal_reached:
-		Global.walking = false
-		var pause_menu = get_parent().find_child("bridges_pause_menu")		
-		var new_visibility = not pause_menu.visible
-		pause_menu.visible = new_visibility
-		# menu_mode is active when pause_menu is visible
-		menu_mode = new_visibility
-		change_ui_visibility(not new_visibility)
+		open_pause_menu()
 		
 
-
+func open_pause_menu():
+	Global.walking = false
+	var pause_menu = get_parent().find_child("bridges_pause_menu")
+	var new_visibility = not pause_menu.visible
+	pause_menu.visible = new_visibility
+	# menu_mode is active when pause_menu is visible
+	menu_mode = new_visibility
+	change_ui_visibility(not new_visibility)
 
 	
 # --- / 
