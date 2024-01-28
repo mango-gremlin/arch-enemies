@@ -12,7 +12,7 @@
 [ext_resource type="Script" path="res://bridges/script/walking_sound.gd" id="5_njj7s"]
 [ext_resource type="Texture2D" uid="uid://2dqqm3b306my" path="res://assets/art/tilesets/bridge_tileset/bridge_water_tiles.png" id="6_oyt87"]
 [ext_resource type="Texture2D" uid="uid://ckghjw6ynsyxv" path="res://bridges/assets/yellow.png" id="7_7dtt4"]
-[ext_resource type="PackedScene" uid="uid://mq3lgncyb3cu" path="res://bridges/scenes/tutorial_info.tscn" id="7_wqkw7"]
+[ext_resource type="PackedScene" path="res://bridges/scenes/tutorial_info.tscn" id="7_wqkw7"]
 [ext_resource type="Texture2D" uid="uid://diwvqonlr6748" path="res://assets/art/objects/bridge_squirrel.png" id="8_a65hy"]
 [ext_resource type="Texture2D" uid="uid://bax18833oqune" path="res://bridges/assets/red.png" id="9_ceti5"]
 [ext_resource type="Texture2D" uid="uid://cw66eehxwh20w" path="res://assets/art/objects/bridge_snake.png" id="10_eqte5"]
@@ -807,10 +807,10 @@ zoom = Vector2(3, 3)
 script = ExtResource("1_2mayf")
 
 [node name="Tutorial" parent="." instance=ExtResource("7_wqkw7")]
+visible = false
 scale = Vector2(0.33335, 0.333427)
 
 [node name="Grid" type="TileMap" parent="." node_paths=PackedStringArray("inventory_deer", "inventory_snake", "inventory_spider", "inventory_squirrel")]
-visible = false
 tile_set = SubResource("TileSet_ne4ig")
 format = 2
 layer_0/name = "level"
@@ -910,9 +910,9 @@ script = ExtResource("15_lhgay")
 [node name="Reset" type="Button" parent="Grid/Control"]
 layout_mode = 0
 offset_left = 356.0
-offset_top = 3.0
+offset_top = 199.0
 offset_right = 407.0
-offset_bottom = 34.0
+offset_bottom = 230.0
 scale = Vector2(0.5, 0.5)
 theme = ExtResource("21_ltn3j")
 text = "Reset"
@@ -920,9 +920,9 @@ text = "Reset"
 [node name="Last_State" type="Button" parent="Grid/Control"]
 layout_mode = 0
 offset_left = 321.0
-offset_top = 21.0
+offset_top = 3.0
 offset_right = 441.0
-offset_bottom = 52.0
+offset_bottom = 34.0
 scale = Vector2(0.5, 0.5)
 theme = ExtResource("21_ltn3j")
 text = "One Step Back"

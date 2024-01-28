@@ -916,9 +916,9 @@ script = ExtResource("15_tnxv3")
 [node name="Reset" type="Button" parent="Grid/Control"]
 layout_mode = 0
 offset_left = 469.0
-offset_top = 3.0
+offset_top = 263.0
 offset_right = 520.0
-offset_bottom = 34.0
+offset_bottom = 294.0
 scale = Vector2(0.5, 0.5)
 theme = ExtResource("21_dcmnv")
 text = "Reset"
@@ -926,9 +926,9 @@ text = "Reset"
 [node name="Last_State" type="Button" parent="Grid/Control"]
 layout_mode = 0
 offset_left = 434.0
-offset_top = 21.0
+offset_top = 3.0
 offset_right = 554.0
-offset_bottom = 52.0
+offset_bottom = 34.0
 scale = Vector2(0.5, 0.5)
 theme = ExtResource("21_dcmnv")
 text = "One Step Back"
