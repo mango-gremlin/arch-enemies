@@ -20,7 +20,7 @@ static func dialogue_snake_stefan():
 	var unsolved_pages:Array[DynamicPage] = [
 		DynamicPage.new("Hello zzere little foxzz, why are you bozzering mee?", snake_portrait),
 		DynamicPage.new("Hi, we want your help for fixing the dam to prevent more floods!", fox_portrait),
-		DynamicPage.new("Szzoo you want my help, but what do I get from zzat? I can szzwim you know, szoo I don't really caree about zze water.", snake_portrait),
+		DynamicPage.new("Szzoo you want my help, but what do I get from zzat? I don't really caree about zze water.", snake_portrait),
 		DynamicPage.new("Hmm maybe you could let me borrow one of your taszzty little szzquirrel friendszz? Szz szz szz, juszzt kidding... unlesszz?", snake_portrait),
 		DynamicPage.new("...", fox_portrait),
 		DynamicPage.new("Maybe I can find something else you could eat. Would you help us then?", fox_portrait),
