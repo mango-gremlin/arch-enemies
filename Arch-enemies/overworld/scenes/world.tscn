@@ -1,12 +1,13 @@
 [gd_scene load_steps=16 format=3 uid="uid://p30p3o0e473c"]
 
-[ext_resource type="Texture2D" uid="uid://c3k4vrbl35eqt" path="res://assets/art/tilesets/bridge_tileset/bridge_bramble_tiles.png" id="1_kejqx"]
+[ext_resource type="Texture2D" uid="uid://c3k4vrbl35eqt" path="res://assets/art/tilesets/bridge_tileset/bridge_bramble_tiles_old.png" id="1_kejqx"]
 [ext_resource type="Script" path="res://overworld/scenes/world.gd" id="1_m27wc"]
 [ext_resource type="Texture2D" uid="uid://cmyh0321x42dd" path="res://assets/art/tilesets/overworld_water_edges.png" id="4_itohn"]
 [ext_resource type="PackedScene" uid="uid://dndu4pg1i3tlf" path="res://overworld/scenes/player.tscn" id="5_bmga7"]
 [ext_resource type="Texture2D" uid="uid://5fxwrsdtkovq" path="res://assets/art/tilesets/overworld_ground_textures.png" id="7_0s13p"]
 [ext_resource type="Texture2D" uid="uid://cn8u6mbhw7e5v" path="res://assets/art/objects/overworld_animal_homes.png" id="7_le2yv"]
 [ext_resource type="Texture2D" uid="uid://b26sjntfpftsd" path="res://assets/art/objects/overworld_natural_environment_objects.png" id="8_gmsns"]
+
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_1d6p3"]
 tile_data = PackedInt32Array(0, 131080, 4, 1, 262152, 4, 3, 131080, 4)
