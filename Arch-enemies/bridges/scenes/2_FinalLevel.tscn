@@ -970,6 +970,7 @@ offset_bottom = 17.1667
 position = Vector2(624, 121)
 
 [node name="bridges_pause_menu" parent="Grid" instance=ExtResource("20_20jtq")]
+visible = false
 offset_left = 288.0
 offset_top = 187.0
 offset_right = 288.0
