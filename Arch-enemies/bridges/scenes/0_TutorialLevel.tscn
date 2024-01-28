@@ -807,10 +807,10 @@ zoom = Vector2(3, 3)
 script = ExtResource("1_2mayf")
 
 [node name="Tutorial" parent="." instance=ExtResource("7_wqkw7")]
-visible = false
 scale = Vector2(0.33335, 0.333427)
 
 [node name="Grid" type="TileMap" parent="." node_paths=PackedStringArray("inventory_deer", "inventory_snake", "inventory_spider", "inventory_squirrel")]
+visible = false
 tile_set = SubResource("TileSet_ne4ig")
 format = 2
 layer_0/name = "level"

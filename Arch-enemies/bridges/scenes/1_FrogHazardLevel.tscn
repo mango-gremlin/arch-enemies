@@ -809,12 +809,10 @@ zoom = Vector2(2.3, 2.3)
 script = ExtResource("1_0pfwb")
 
 [node name="Tutorial" parent="." instance=ExtResource("7_8o7q8")]
-visible = false
-offset_top = -33.0
-offset_bottom = -33.0
-scale = Vector2(0.434577, 0.435044)
+scale = Vector2(0.434787, 0.434781)
 
 [node name="Grid" type="TileMap" parent="." node_paths=PackedStringArray("inventory_deer", "inventory_snake", "inventory_spider", "inventory_squirrel")]
+visible = false
 tile_set = SubResource("TileSet_ne4ig")
 format = 2
 layer_0/name = "level"
@@ -960,9 +958,10 @@ scale = Vector2(1, 10)
 visible = false
 top_level = true
 offset_left = 250.0
-offset_top = 108.0
+offset_top = 141.0
 offset_right = 250.432
-offset_bottom = -136.296
+offset_bottom = -103.296
+scale = Vector2(1.2, 1.2)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
@@ -972,9 +971,10 @@ position = Vector2(469, 132)
 [node name="bridges_pause_menu" parent="Grid" instance=ExtResource("20_t104i")]
 visible = false
 offset_left = 250.0
-offset_top = 109.0
+offset_top = 141.0
 offset_right = 250.0
-offset_bottom = 109.0
+offset_bottom = 141.0
+scale = Vector2(1.2, 1.2)
 
 [node name="animal_inventory_counter" type="HBoxContainer" parent="Grid"]
 offset_top = 36.0

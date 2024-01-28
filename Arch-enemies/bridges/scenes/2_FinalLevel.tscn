@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://cxi6j8p1hopjh"]
+[gd_scene load_steps=45 format=3 uid="uid://cxi6j8p1hopjh"]
 
 [ext_resource type="Script" path="res://bridges/script/Camera.gd" id="1_e57tb"]
 [ext_resource type="AudioStream" uid="uid://n71rssah4ej4" path="res://assets/sound/Main_Menu.wav" id="1_uw4o4"]
@@ -30,6 +30,7 @@
 [ext_resource type="Theme" uid="uid://d2ijyc316xeom" path="res://assets/art/ui_elements/ui_theme.tres" id="21_5yhij"]
 [ext_resource type="PackedScene" uid="uid://dynxnwixd1bke" path="res://bridges/scenes/parallax_background.tscn" id="21_sinqj"]
 [ext_resource type="Texture2D" uid="uid://leqswdio6xwd" path="res://bridges/assets/background/background_center_v4.png" id="22_sx6wq"]
+[ext_resource type="Texture2D" uid="uid://d3s1iupr6ox8" path="res://bridges/assets/background/background_darkness.png" id="31_va2b3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gxf1m"]
 texture = ExtResource("2_361sp")
@@ -809,8 +810,6 @@ script = ExtResource("1_e57tb")
 
 [node name="Tutorial" parent="." instance=ExtResource("7_h06eb")]
 visible = false
-offset_top = -23.0
-offset_bottom = -23.0
 scale = Vector2(0.571551, 0.571476)
 
 [node name="Grid" type="TileMap" parent="." node_paths=PackedStringArray("inventory_deer", "inventory_snake", "inventory_spider", "inventory_squirrel")]
@@ -1030,21 +1029,31 @@ horizontal_alignment = 2
 [node name="parallax_background" parent="." instance=ExtResource("21_sinqj")]
 
 [node name="sprite_1" parent="parallax_background/center_layer" index="0"]
-position = Vector2(150, 148.5)
-scale = Vector2(1.525, 1.5)
-
-[node name="sprite_1" type="Sprite2D" parent="parallax_background/center_layer/sprite_1" index="0"]
-position = Vector2(396.066, -2.33333)
-scale = Vector2(1, 0.984)
-texture = ExtResource("22_sx6wq")
+position = Vector2(0, 0)
+scale = Vector2(1.5, 1.6)
+centered = false
 
 [node name="sprite_2" parent="parallax_background/center_layer" index="1"]
-position = Vector2(452, 148)
-scale = Vector2(1.5, 1.5)
+position = Vector2(300, 0)
+scale = Vector2(1.5, 1.6)
+centered = false
 
-[node name="BackgroundDarkness" parent="parallax_background/center_layer" index="2"]
-position = Vector2(328, 168.5)
-scale = Vector2(1.725, 2.075)
+[node name="sprite_3" type="Sprite2D" parent="parallax_background/center_layer" index="2"]
+position = Vector2(600, -1)
+scale = Vector2(1.5, 1.6)
+texture = ExtResource("22_sx6wq")
+centered = false
+
+[node name="BackgroundDarkness" parent="parallax_background/center_layer" index="3"]
+position = Vector2(0, 0)
+scale = Vector2(1.5, 1.6)
+centered = false
+
+[node name="BackgroundDarkness2" type="Sprite2D" parent="parallax_background/center_layer" index="4"]
+position = Vector2(300, 0)
+scale = Vector2(1.5, 1.6)
+texture = ExtResource("31_va2b3")
+centered = false
 
 [node name="sprite_left_side" parent="parallax_background/static_sides" index="0"]
 position = Vector2(108, 145.75)
