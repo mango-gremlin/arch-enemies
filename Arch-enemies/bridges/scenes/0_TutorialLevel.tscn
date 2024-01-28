@@ -949,7 +949,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 
 [node name="goal" parent="Grid" instance=ExtResource("19_i2bhv")]
-position = Vector2(320, 86)
+position = Vector2(352, 82)
 
 [node name="bridges_pause_menu" parent="Grid" instance=ExtResource("20_1ny00")]
 visible = false
