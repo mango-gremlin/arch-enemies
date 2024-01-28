@@ -1,0 +1,140 @@
+[gd_scene load_steps=14 format=3 uid="uid://c7lqfu6u0lb86"]
+
+[ext_resource type="Script" path="res://overworld/ui/menu/menu/settings_menu.gd" id="1_l5hha"]
+[ext_resource type="AudioStream" uid="uid://n71rssah4ej4" path="res://assets/sound/Main_Menu.wav" id="2_anwc3"]
+[ext_resource type="Theme" uid="uid://d2ijyc316xeom" path="res://assets/art/ui_elements/ui_theme.tres" id="3_brh7h"]
+[ext_resource type="Script" path="res://sound_scripts/background_sound.gd" id="3_t6mq8"]
+[ext_resource type="Texture2D" uid="uid://ba3leqm154y12" path="res://assets/art/ui_elements/menu_container.png" id="4_sjnaf"]
+[ext_resource type="Script" path="res://overworld/ui/menu/menu/volume_settings.gd" id="5_ck6e5"]
+[ext_resource type="Texture2D" uid="uid://y0rbyb8ymrue" path="res://assets/art/ui_elements/clouds/cloud_1.png" id="5_q4lsy"]
+[ext_resource type="Texture2D" uid="uid://tkvu5brhxdg2" path="res://assets/art/ui_elements/clouds/cloud_2.png" id="6_vlxaf"]
+[ext_resource type="Texture2D" uid="uid://hfchs1d4pd74" path="res://assets/art/ui_elements/clouds/cloud_3.png" id="7_kwwsv"]
+[ext_resource type="Texture2D" uid="uid://bq8h21mq3lqon" path="res://assets/art/ui_elements/clouds/cloud_4.png" id="8_0kfgb"]
+[ext_resource type="Texture2D" uid="uid://bor1f6u6tjguy" path="res://assets/art/ui_elements/clouds/cloud_5.png" id="9_evgwl"]
+[ext_resource type="Texture2D" uid="uid://bqtk5n8foclwk" path="res://assets/art/ui_elements/clouds/cloud_6.png" id="10_mxc1t"]
+[ext_resource type="Texture2D" uid="uid://bt3l6nwayw6ai" path="res://assets/art/ui_elements/clouds/cloud_7.png" id="11_tbogb"]
+
+[node name="sound_menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_l5hha")
+
+[node name="Background Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_anwc3")
+volume_db = -10.0
+autoplay = true
+script = ExtResource("3_t6mq8")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 1151.0
+offset_bottom = 647.0
+color = Color(0.313726, 0.882353, 0.890196, 1)
+
+[node name="MenuContainer" type="Sprite2D" parent="."]
+position = Vector2(573, 318)
+scale = Vector2(6.5, 6.5)
+texture = ExtResource("4_sjnaf")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+offset_left = 465.0
+offset_top = 140.0
+offset_right = 537.0
+offset_bottom = 276.0
+scale = Vector2(3, 3)
+
+[node name="Main" type="Label" parent="VBoxContainer"]
+z_index = 1
+layout_mode = 2
+theme = ExtResource("3_brh7h")
+text = "Main"
+horizontal_alignment = 1
+
+[node name="MainVolume" type="HSlider" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_brh7h")
+value = 50.0
+script = ExtResource("5_ck6e5")
+
+[node name="Music" type="Label" parent="VBoxContainer"]
+z_index = 1
+layout_mode = 2
+theme = ExtResource("3_brh7h")
+text = "Music"
+horizontal_alignment = 1
+
+[node name="MusicVolume" type="HSlider" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_brh7h")
+value = 50.0
+script = ExtResource("5_ck6e5")
+
+[node name="Effects" type="Label" parent="VBoxContainer"]
+z_index = 1
+layout_mode = 2
+theme = ExtResource("3_brh7h")
+text = "Effects"
+horizontal_alignment = 1
+
+[node name="EffectsVolume" type="HSlider" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_brh7h")
+value = 50.0
+script = ExtResource("5_ck6e5")
+
+[node name="Apply" type="Button" parent="VBoxContainer"]
+z_index = 1
+layout_mode = 2
+theme = ExtResource("3_brh7h")
+text = "Apply"
+
+[node name="Return" type="Button" parent="VBoxContainer"]
+z_index = 1
+layout_mode = 2
+theme = ExtResource("3_brh7h")
+text = "Return"
+
+[node name="Cloud1" type="Sprite2D" parent="."]
+position = Vector2(193, 132)
+scale = Vector2(8, 8)
+texture = ExtResource("5_q4lsy")
+
+[node name="Cloud2" type="Sprite2D" parent="."]
+position = Vector2(837, 80)
+scale = Vector2(8, 8)
+texture = ExtResource("6_vlxaf")
+
+[node name="Cloud3" type="Sprite2D" parent="."]
+position = Vector2(903, 211)
+scale = Vector2(8, 8)
+texture = ExtResource("7_kwwsv")
+
+[node name="Cloud4" type="Sprite2D" parent="."]
+position = Vector2(341, 319)
+scale = Vector2(8, 8)
+texture = ExtResource("8_0kfgb")
+
+[node name="Cloud5" type="Sprite2D" parent="."]
+position = Vector2(1041, 138)
+scale = Vector2(8, 8)
+texture = ExtResource("9_evgwl")
+
+[node name="Cloud6" type="Sprite2D" parent="."]
+position = Vector2(348, 54)
+scale = Vector2(8, 8)
+texture = ExtResource("10_mxc1t")
+
+[node name="Cloud7" type="Sprite2D" parent="."]
+position = Vector2(139, 255)
+scale = Vector2(8, 8)
+texture = ExtResource("11_tbogb")
+
+[connection signal="pressed" from="VBoxContainer/Apply" to="." method="_on_apply_pressed"]
+[connection signal="pressed" from="VBoxContainer/Return" to="." method="_on_return_pressed"]

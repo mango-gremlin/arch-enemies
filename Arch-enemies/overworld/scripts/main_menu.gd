@@ -6,7 +6,7 @@ func _on_button_pressed():
 
 
 func _on_options_pressed():
-	pass # Replace with function body.
+	get_tree().change_scene_to_file("res://overworld/ui/menu/menu/settings_menu.tscn")
 
 
 func _on_exit_pressed(): #quit

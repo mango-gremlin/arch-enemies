@@ -9,10 +9,10 @@ var quest_accepted = preload("res://assets/sound/New_Quest.wav")
 var quest_done = preload("res://assets/sound/Quest_Done.wav")
 
 func _ready():
+	self.volume_db = Settings.get_effects_volume()
 	SingletonPlayer.play_sound.connect(play_sound)
 
 func play_sound(sound:String) -> void:
-	print("entered play sound ", sound, " for overworld")
 	match sound:
 		"DEER":
 			stream = deer

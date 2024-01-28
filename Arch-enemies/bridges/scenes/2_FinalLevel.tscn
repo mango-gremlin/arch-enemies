@@ -1,8 +1,9 @@
-[gd_scene load_steps=44 format=3 uid="uid://cxi6j8p1hopjh"]
+[gd_scene load_steps=45 format=3 uid="uid://cxi6j8p1hopjh"]
 
 [ext_resource type="Script" path="res://bridges/script/Camera.gd" id="1_e57tb"]
 [ext_resource type="AudioStream" uid="uid://n71rssah4ej4" path="res://assets/sound/Main_Menu.wav" id="1_uw4o4"]
 [ext_resource type="Texture2D" uid="uid://d0o2q6fijmd1" path="res://assets/art/tilesets/bridge_tileset/bridge_background_color.png" id="2_361sp"]
+[ext_resource type="Script" path="res://sound_scripts/background_sound.gd" id="2_jufe0"]
 [ext_resource type="AudioStream" uid="uid://b1diue16pa0ld" path="res://assets/sound/Victory.wav" id="2_luntw"]
 [ext_resource type="Texture2D" uid="uid://dgoo8sdw24hp0" path="res://assets/art/tilesets/bridge_tileset/bridge_air_tiles.png" id="3_cg72c"]
 [ext_resource type="Script" path="res://bridges/script/bridge_sound.gd" id="3_scx54"]
@@ -789,6 +790,7 @@ sources/6 = SubResource("TileSetAtlasSource_meq0p")
 stream = ExtResource("1_uw4o4")
 volume_db = -10.0
 autoplay = true
+script = ExtResource("2_jufe0")
 
 [node name="Sound Effects" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_luntw")

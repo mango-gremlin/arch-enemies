@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://cjsjvpeuuqot"]
+[gd_scene load_steps=43 format=3 uid="uid://cjsjvpeuuqot"]
 
 [ext_resource type="Texture2D" uid="uid://b1yknecfgw4fs" path="res://assets/art/ui_elements/animal_inventory_scroll9.png" id="1_2vqh6"]
 [ext_resource type="Texture2D" uid="uid://d0o2q6fijmd1" path="res://assets/art/tilesets/bridge_tileset/bridge_background_color.png" id="1_uowbf"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://bridges/script/grid_visualizer.gd" id="2_d8ovy"]
 [ext_resource type="Script" path="res://bridges/script/bridge_sound.gd" id="3_dujuj"]
 [ext_resource type="AudioStream" uid="uid://b1diue16pa0ld" path="res://assets/sound/Victory.wav" id="3_kilw0"]
+[ext_resource type="Script" path="res://sound_scripts/background_sound.gd" id="3_pc0ve"]
 [ext_resource type="Texture2D" uid="uid://bbktakyncn7nc" path="res://assets/art/objects/bridge_deer.png" id="3_x44oq"]
 [ext_resource type="Texture2D" uid="uid://gyfjmxefsxu0" path="res://assets/art/tilesets/bridge_tileset/bridge_ground_tiles.png" id="4_jv8nt"]
 [ext_resource type="AudioStream" uid="uid://bgeiod4gbwy8j" path="res://assets/sound/Step.wav" id="5_a6sim"]
@@ -792,6 +793,7 @@ script = ExtResource("1_vkapa")
 stream = ExtResource("2_3o2us")
 volume_db = -10.0
 autoplay = true
+script = ExtResource("3_pc0ve")
 
 [node name="Sound Effects" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_kilw0")

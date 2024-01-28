@@ -4,6 +4,7 @@ extends AudioStreamPlayer
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	self.volume_db = Settings.get_effects_volume()
 	pass # Replace with function body.
 
 
