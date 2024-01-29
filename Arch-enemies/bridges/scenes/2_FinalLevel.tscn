@@ -899,8 +899,6 @@ script = ExtResource("1_e57tb")
 
 [node name="Tutorial" parent="." instance=ExtResource("7_h06eb")]
 visible = false
-offset_top = -23.0
-offset_bottom = -23.0
 scale = Vector2(0.571551, 0.571476)
 
 [node name="Grid" type="TileMap" parent="." node_paths=PackedStringArray("inventory_deer", "inventory_snake", "inventory_spider", "inventory_squirrel")]
