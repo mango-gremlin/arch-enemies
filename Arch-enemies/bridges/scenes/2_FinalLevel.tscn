@@ -924,7 +924,6 @@ inventory_squirrel = NodePath("animal_inventory_counter/squirrel")
 script = ExtResource("13_mxc8b")
 
 [node name="Control" type="Control" parent="Grid"]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 683.0

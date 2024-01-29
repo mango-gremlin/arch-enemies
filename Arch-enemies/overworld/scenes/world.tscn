@@ -8,7 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://cn8u6mbhw7e5v" path="res://assets/art/objects/overworld_animal_homes.png" id="7_le2yv"]
 [ext_resource type="Texture2D" uid="uid://b26sjntfpftsd" path="res://assets/art/objects/overworld_natural_environment_objects.png" id="8_gmsns"]
 
-
 [sub_resource type="TileMapPattern" id="TileMapPattern_1d6p3"]
 tile_data = PackedInt32Array(0, 131080, 4, 1, 262152, 4, 3, 131080, 4)
 
