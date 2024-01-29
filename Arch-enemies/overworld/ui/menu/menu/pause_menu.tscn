@@ -1,8 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://cv4r3ql0yg1la"]
+[gd_scene load_steps=11 format=3 uid="uid://cv4r3ql0yg1la"]
 
 [ext_resource type="Script" path="res://overworld/ui/menu/menu/pause_menu.gd" id="1_vyga1"]
 [ext_resource type="Theme" uid="uid://d2ijyc316xeom" path="res://assets/art/ui_elements/ui_theme.tres" id="2_ugltm"]
-[ext_resource type="Script" path="res://sound_scripts/background_sound.gd" id="3_g0npq"]
 [ext_resource type="Texture2D" uid="uid://ba3leqm154y12" path="res://assets/art/ui_elements/menu_container.png" id="3_kvu7j"]
 [ext_resource type="Texture2D" uid="uid://y0rbyb8ymrue" path="res://assets/art/ui_elements/clouds/cloud_1.png" id="4_s2fjd"]
 [ext_resource type="Texture2D" uid="uid://tkvu5brhxdg2" path="res://assets/art/ui_elements/clouds/cloud_2.png" id="5_2wpt6"]
@@ -11,7 +10,6 @@
 [ext_resource type="Texture2D" uid="uid://bor1f6u6tjguy" path="res://assets/art/ui_elements/clouds/cloud_5.png" id="8_frufy"]
 [ext_resource type="Texture2D" uid="uid://bqtk5n8foclwk" path="res://assets/art/ui_elements/clouds/cloud_6.png" id="9_hdjwq"]
 [ext_resource type="Texture2D" uid="uid://bt3l6nwayw6ai" path="res://assets/art/ui_elements/clouds/cloud_7.png" id="10_4l0q1"]
-[ext_resource type="AudioStream" uid="uid://n71rssah4ej4" path="res://assets/sound/Main_Menu.wav" id="11_d7i52"]
 
 [node name="pause_menu" type="Control"]
 layout_mode = 3
@@ -21,12 +19,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_vyga1")
-
-[node name="Background Music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("11_d7i52")
-volume_db = -10.0
-autoplay = true
-script = ExtResource("3_g0npq")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0

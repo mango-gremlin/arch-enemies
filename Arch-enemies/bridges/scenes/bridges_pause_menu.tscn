@@ -84,4 +84,5 @@ theme = ExtResource("2_xkekq")
 text = "Exit"
 
 [connection signal="pressed" from="VBoxContainer2/overworld" to="." method="_on_overworld_pressed"]
+[connection signal="pressed" from="VBoxContainer2/Options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="VBoxContainer2/Exit" to="." method="_on_exit_pressed"]

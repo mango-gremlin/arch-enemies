@@ -18,4 +18,4 @@ func _on_apply_pressed() -> void:
 	Settings.main_volume =  $"VBoxContainer/MainVolume".value / 100
 	Settings.music_volume = $"VBoxContainer/MusicVolume".value / 100
 	Settings.effects_volume = $"VBoxContainer/EffectsVolume".value / 100
-	$"Background Music".volume_db = Settings.get_music_volume()
+	BackgroundMusic.volume_db = Settings.get_music_volume()
