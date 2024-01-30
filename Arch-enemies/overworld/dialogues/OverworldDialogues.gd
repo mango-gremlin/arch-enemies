@@ -24,6 +24,7 @@ static func dialogue_snake_stefan():
 		DynamicPage.new("...", "You", fox_portrait),
 		DynamicPage.new("Maybe I can find something else you could eat. Would you help us then?", "You", fox_portrait),
 		DynamicPage.new("Ohh zzat would be very kind! Of courszze I would help you... aszz long as I have szzomething to szzwallow and digeszzt.", "Ssssssstefan", snake_portrait),
+
 	]
 	var solved_pages:Array[DynamicPage] = [
 		DynamicPage.new("Is zzat an eegg?? Oh zzat's szzoo niczze of youu! I will help you, but don't get too closzze to me or I might take a bite. I can't help it, it'szz a reflexzz.", "Ssssssstefan",snake_portrait)

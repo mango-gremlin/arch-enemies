@@ -21,5 +21,5 @@ func _on_overworld_pressed():
 
 func _on_exit_pressed():
 	# exit game
-	SingletonPlayer.save_game()
+	#SingletonPlayer.save_game()
 	get_tree().quit()
