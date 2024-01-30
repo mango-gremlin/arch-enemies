@@ -428,19 +428,23 @@ func tile_update(pos, current, next):
 		grid[pos.x][pos.y] = next
 
 # change the visibility of all ui elements in bridge scene
-func change_ui_visibility(visibility:bool):
-	find_child("Drag_or_Fox").visible = visibility
-	find_child("Reset").visible = visibility
-	find_child("Last_State").visible = visibility
-	find_child("Animal_Inventory").visible = visibility
-	find_child("animal_inventory_counter").visible = visibility
-	find_child("Player").visible = visibility
+func change_ui_visibility():
+	find_child("Drag_or_Fox").visible = not find_child("Drag_or_Fox").visible
+	find_child("Reset").visible = not find_child("Reset").visible
+	find_child("Last_State").visible = not find_child("Last_State").visible
+	find_child("Animal_Inventory").visible = not find_child("Animal_Inventory").visible
+	find_child("animal_inventory_counter").visible = not find_child("animal_inventory_counter").visible
+	find_child("Player").visible = not find_child("Player").visible
 
 # reset menu,drag and goal variables
 func reset_modes():
+	var mode_button = find_child("Drag_or_Fox")
+	mode_button.button_pressed = false
+	mode_button.text = "Drag Mode"
 	Global.drag_mode = true
 	menu_mode = false
 	goal_reached = false
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -449,16 +453,17 @@ func _process(delta):
 		
 	# pressing "esc" opens the pause-menu
 	if Input.is_action_just_pressed("open_menu") and not goal_reached:
-		Global.walking = false
-		var pause_menu = get_parent().find_child("bridges_pause_menu")		
-		var new_visibility = not pause_menu.visible
-		pause_menu.visible = new_visibility
-		# menu_mode is active when pause_menu is visible
-		menu_mode = new_visibility
-		change_ui_visibility(not new_visibility)
+		open_pause_menu()
 		
 
-
+func open_pause_menu():
+	Global.walking = false
+	var pause_menu = get_parent().find_child("bridges_pause_menu")
+	var new_visibility = not pause_menu.visible
+	pause_menu.visible = new_visibility
+	# menu_mode is active when pause_menu is visible
+	menu_mode = new_visibility
+	change_ui_visibility()
 
 	
 # --- / 
