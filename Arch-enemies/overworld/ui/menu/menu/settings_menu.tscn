@@ -1,8 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://c7lqfu6u0lb86"]
+[gd_scene load_steps=12 format=3 uid="uid://dlxwhx501ijs7"]
 
 [ext_resource type="Script" path="res://overworld/ui/menu/menu/settings_menu.gd" id="1_l5hha"]
+[ext_resource type="Texture2D" uid="uid://cw2m4eacnrv72" path="res://assets/art/ui_elements/menu_container_sound_settings.png" id="2_6rckc"]
 [ext_resource type="Theme" uid="uid://d2ijyc316xeom" path="res://assets/art/ui_elements/ui_theme.tres" id="3_brh7h"]
-[ext_resource type="Texture2D" uid="uid://ba3leqm154y12" path="res://assets/art/ui_elements/menu_container.png" id="4_sjnaf"]
 [ext_resource type="Script" path="res://overworld/ui/menu/menu/volume_settings.gd" id="5_ck6e5"]
 [ext_resource type="Texture2D" uid="uid://y0rbyb8ymrue" path="res://assets/art/ui_elements/clouds/cloud_1.png" id="5_q4lsy"]
 [ext_resource type="Texture2D" uid="uid://tkvu5brhxdg2" path="res://assets/art/ui_elements/clouds/cloud_2.png" id="6_vlxaf"]
@@ -30,9 +30,9 @@ offset_bottom = 647.0
 color = Color(0.313726, 0.882353, 0.890196, 1)
 
 [node name="MenuContainer" type="Sprite2D" parent="."]
-position = Vector2(573, 318)
+position = Vector2(574, 353)
 scale = Vector2(6.5, 6.5)
-texture = ExtResource("4_sjnaf")
+texture = ExtResource("2_6rckc")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
