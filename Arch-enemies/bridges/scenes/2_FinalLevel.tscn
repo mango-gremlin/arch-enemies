@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://cxi6j8p1hopjh"]
+[gd_scene load_steps=49 format=3 uid="uid://cxi6j8p1hopjh"]
 
 [ext_resource type="Script" path="res://bridges/script/Camera.gd" id="1_e57tb"]
 [ext_resource type="AudioStream" uid="uid://n71rssah4ej4" path="res://assets/sound/Main_Menu.wav" id="1_uw4o4"]
@@ -16,7 +16,9 @@
 [ext_resource type="Texture2D" uid="uid://diwvqonlr6748" path="res://assets/art/objects/bridge_squirrel.png" id="8_a8m7c"]
 [ext_resource type="Texture2D" uid="uid://bax18833oqune" path="res://bridges/assets/red.png" id="9_pvau1"]
 [ext_resource type="Texture2D" uid="uid://cw66eehxwh20w" path="res://assets/art/objects/bridge_snake.png" id="10_4kond"]
+[ext_resource type="Texture2D" uid="uid://c1etei55ew2yx" path="res://bridges/assets/dark_blue.png" id="11_4fv6i"]
 [ext_resource type="Texture2D" uid="uid://desp8tcpswyl4" path="res://assets/art/objects/bridge_spider.png" id="11_ai7rv"]
+[ext_resource type="Texture2D" uid="uid://dmy2gc7dfwago" path="res://bridges/assets/dark_yellow.png" id="12_ch1j4"]
 [ext_resource type="Script" path="res://bridges/script/grid.gd" id="12_lpmli"]
 [ext_resource type="Script" path="res://bridges/script/grid_visualizer.gd" id="13_mxc8b"]
 [ext_resource type="Script" path="res://bridges/script/grid_drag.gd" id="14_d4vvk"]
@@ -202,6 +204,20 @@ texture_region_size = Vector2i(10, 10)
 2:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 2:3/0/physics_layer_0/angular_velocity = 0.0
 2:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-5, -5, 5, -5, 5, 5, -5, 5)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6o1ru"]
+texture = ExtResource("11_4fv6i")
+texture_region_size = Vector2i(10, 10)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bpalp"]
+texture = ExtResource("12_ch1j4")
+texture_region_size = Vector2i(10, 10)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_71dc5"]
 texture = ExtResource("5_lrvsb")
@@ -873,6 +889,8 @@ sources/2 = SubResource("TileSetAtlasSource_71dc5")
 sources/3 = SubResource("TileSetAtlasSource_1v7j0")
 sources/5 = SubResource("TileSetAtlasSource_xun2x")
 sources/6 = SubResource("TileSetAtlasSource_meq0p")
+sources/11 = SubResource("TileSetAtlasSource_6o1ru")
+sources/12 = SubResource("TileSetAtlasSource_bpalp")
 
 [node name="FinalLevel" type="Node2D"]
 
