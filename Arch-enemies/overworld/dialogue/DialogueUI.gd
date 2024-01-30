@@ -10,6 +10,7 @@ func _ready():
 	set_buttons(["Previous", "Next", "Exit"])
 	set_npc_name("display name here")
 	set_image_texture("") # set default picture
+	set_buttons_state([false, false, false])
 	hide()
 	
 	SingletonPlayer.active_dialogue.npc_control_instance = self
@@ -52,8 +53,17 @@ func set_buttons(txt: Array[String]):
 			btn.show()
 		else:
 			btn.hide()
-			
 
+
+func set_buttons_state(btn_state: Array[bool]):
+	if len(btn_state) != 3:
+		print("Current UI only supportes 3 buttons")
+		return
+		
+	for btn_index in range(0, 3):
+		var btn = get_node("main_box/content_box/buttons/Btn" + str(btn_index + 1))
+		btn.disabled = btn_state[btn_index]
+		
 func _on_btn_1_pressed():
 	print("NPC INTERACTION BTN 1 PRESSED")
 	SingletonPlayer.active_dialogue.btn_action(0)

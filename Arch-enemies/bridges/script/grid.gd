@@ -2,6 +2,10 @@ extends TileMap
 
 #We define the basic variables here
 
+# 
+var menu_mode := false
+var goal_reached := false
+
 #Like the Tile Size
 var tile_size = tile_set.tile_size
 
@@ -74,6 +78,9 @@ func _ready():
 	
 	# reset walking
 	Global.walking = false
+	
+	# reset the menu_mode,drag_mode and goal_reached
+	reset_modes()
 	
 	#We save the previous states of the grid in an array, this array is initalized here
 	for i in range(save_states):
@@ -245,6 +252,9 @@ func update_grid(pos, data):
 			Vector2i(-1, 0), Vector2i(-1, 1)]
 			#Same for BOTTOM tiles
 			var new_bottom = [Vector2i(0, -1), Vector2i(1, -1), Vector2i(2, -1)]
+			# middle offset
+			x -= 1
+			y += 1
 			#These two loops just iterate over the grid cells we want to fill
 			for delta in range(4):
 				for epsilon in range(4):
@@ -273,6 +283,7 @@ func update_grid(pos, data):
 			var new_side = [Vector2i(-1, 0)]
 			#Same for BOTTOM tiles
 			var new_bottom = [Vector2i(0, -1), Vector2i(1, -1), Vector2i(2, -1), Vector2i(3, -1)]
+			x -= 2 # middle offset
 			for delta in range(5):
 				grid[x + delta][y] = ENTITY_TYPES.ANIMAL
 				set_cell(ACTIVE_LAYER_ID, Vector2i(x + delta, y), SNAKE_TILE_ID, Vector2i(delta, 0))
@@ -417,16 +428,45 @@ func tile_update(pos, current, next):
 	elif current == ENTITY_TYPES.ALLOWED and next == ENTITY_TYPES.FORBIDDEN:
 		grid[pos.x][pos.y] = next
 
+# change the visibility of all ui elements in bridge scene
+func change_ui_visibility():
+	find_child("Drag_or_Fox").visible = not find_child("Drag_or_Fox").visible
+	find_child("Reset").visible = not find_child("Reset").visible
+	find_child("Last_State").visible = not find_child("Last_State").visible
+	find_child("Animal_Inventory").visible = not find_child("Animal_Inventory").visible
+	find_child("animal_inventory_counter").visible = not find_child("animal_inventory_counter").visible
+	find_child("Player").visible = not find_child("Player").visible
+
+# reset menu,drag and goal variables
+func reset_modes():
+	var mode_button = find_child("Drag_or_Fox")
+	mode_button.button_pressed = false
+	mode_button.text = "Drag Mode"
+	Global.drag_mode = true
+	menu_mode = false
+	goal_reached = false
+	
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if(Global.currently_dragging and Input.is_action_just_released("click")):
 		make_invisible()
 		
 	# pressing "esc" opens the pause-menu
-	if Input.is_action_just_pressed("open_menu"):
-		var pause_menu = get_parent().find_child("bridges_pause_menu")
-		pause_menu.visible = not pause_menu.visible
+	if Input.is_action_just_pressed("open_menu") and not goal_reached:
+		open_pause_menu()
+		
 
+func open_pause_menu():
+	Global.walking = false
+	var pause_menu = get_parent().find_child("bridges_pause_menu")
+	var new_visibility = not pause_menu.visible
+	pause_menu.visible = new_visibility
+	# menu_mode is active when pause_menu is visible
+	menu_mode = new_visibility
+	change_ui_visibility()
+
+	
 # --- / 
 # -- / inventory management
 

@@ -1,7 +1,7 @@
 extends Dialogue_Entry
 
 
-class_name PageQuestDone
+class_name QuestDonePage
 
 
 
@@ -11,15 +11,18 @@ func _init():
 	pass
 
 func content() -> String:
-	return "Alt text for solved quest"
+	return "Finally, someone other than me does anything around here... I guess I can join."
 
 func image_src() -> String:
-	return "res://overworld/dialogues/test_dialogue/green.png"
+	return "res://assets/art/characters/portraits/Portrait_Deer.png"
 		
 	
 # "" element in array means here disable button X
 func btn_text() -> Array[String]:
-	return ["exit", "", ""]
+	return ["Exit", "", ""]
+	
+func btn_states() -> Array[bool]:
+	return [false, false, false]
 
 # btn button in from left to right, starting with 0
 func btn_action(btn: int):

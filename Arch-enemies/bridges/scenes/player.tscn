@@ -274,6 +274,7 @@ radius = 6.50001
 height = 22.0
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
+floor_max_angle = 0.872665
 script = ExtResource("1_uy84w")
 speed = 100.0
 jump_velocity = -250.0

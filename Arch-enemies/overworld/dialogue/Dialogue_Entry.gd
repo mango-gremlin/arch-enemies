@@ -22,6 +22,9 @@ func content() -> String:
 # null ement in array means here disable button X
 func btn_text() -> Array[String]:
 	return ["Accept", "Decline", "Exit"]
+	
+func btn_states() -> Array[bool]:
+	return [false, false, false]
 
 # btn button in from left to right, starting with 0
 func btn_action(btn: int):

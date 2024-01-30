@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cf5v8whte3fq3"
-path="res://.godot/imported/red.png-6c8a32143ede14e59ea8ca0923e24e34.ctex"
+uid="uid://hhxwcjfxn3gx"
+path="res://.godot/imported/green.png-eb4c946fa36ad567adf56695516828f3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://overworld/dialogues/test_dialogue/red.png"
-dest_files=["res://.godot/imported/red.png-6c8a32143ede14e59ea8ca0923e24e34.ctex"]
+source_file="res://assets/art/dialogue/green.png"
+dest_files=["res://.godot/imported/green.png-eb4c946fa36ad567adf56695516828f3.ctex"]
 
 [params]
 

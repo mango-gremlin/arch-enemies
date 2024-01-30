@@ -17,8 +17,8 @@ func _init(_content:String, _src_image, _current_page:int, _max_page:int, last_p
 	src_image = _src_image
 	is_last_page = last_page
 	
-	if src_image == null:
-		src_image = "res://overworld/dialogues/test_dialogue/red.png"
+	if src_image == null: # case already handled in DialogueUI
+		src_image = ""
 	
 	current_page = _current_page
 	max_page = _max_page
@@ -30,18 +30,11 @@ func image_src() -> String:
 	return src_image
 	
 # null ement in array means here disable button X
-func btn_text() -> Array[String]:
-	var previous_str = ""
+func btn_text() -> Array[String]:	
+	return ["Previous", "Next", "Exit"]
 	
-	if current_page > 0:
-		previous_str = "Previous"
-		
-	var next_str = ""
-	
-	if current_page < max_page:
-		next_str = "Next"
-	
-	return [previous_str, next_str, "Exit"]
+func btn_states() -> Array[bool]:
+	return [current_page == 0, current_page >= max_page, false]
 
 # btn button in from left to right, starting with 0
 func btn_action(btn: int):

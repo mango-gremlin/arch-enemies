@@ -8,6 +8,7 @@ extends CharacterBody2D
 var start_position : Vector2
 var direction : Vector2 = Vector2.ZERO
 var was_in_air : bool = false
+var parent
 
 # Saves if an animation is currently playing
 var animation_locked : bool = false
@@ -19,8 +20,11 @@ signal play_sound(sound)
 
 func _ready():
 	start_position = self.global_position
+	parent = get_parent()
 
 func _physics_process(delta):
+	if parent.menu_mode:
+		return
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y += gravity * delta
@@ -53,6 +57,7 @@ func _physics_process(delta):
 	else:
 		Global.walking = false
 	
+	
 	move_and_slide()
 	update_animation()
 	update_facing_direction()
@@ -64,10 +69,11 @@ func reset_player():
 	global_position = start_position
 	animated_sprite.play("idle")
 
-# if fox comes in contact with goal zone
-func _on_goal_area_2d_body_entered(_body):
-	var goal_menu = get_parent().find_child("goal_menu")
-	goal_menu.visible = true
+# FIXME code doesn't seem to be necessary? same as in goal.gd
+## if fox comes in contact with goal zone
+#func _on_goal_area_2d_body_entered(_body):
+	#var goal_menu = get_parent().find_child("goal_menu")
+	#goal_menu.visible = true
 
 # flip the sprite to the direction the player should be facing
 func update_facing_direction():

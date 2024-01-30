@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dm44mipi2x8pq"
-path="res://.godot/imported/blue.png-febd417ce7db2a7ddc2e4dbfd4311277.ctex"
+uid="uid://c3k4vrbl35eqt"
+path="res://.godot/imported/bridge_bramble_tiles_old.png-5e74a9a130c1c8c7d997dfbf00e1c25d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://overworld/dialogues/test_dialogue/blue.png"
-dest_files=["res://.godot/imported/blue.png-febd417ce7db2a7ddc2e4dbfd4311277.ctex"]
+source_file="res://assets/art/tilesets/bridge_tileset/bridge_bramble_tiles_old.png"
+dest_files=["res://.godot/imported/bridge_bramble_tiles_old.png-5e74a9a130c1c8c7d997dfbf00e1c25d.ctex"]
 
 [params]
 
