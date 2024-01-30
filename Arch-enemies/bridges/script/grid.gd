@@ -55,6 +55,8 @@ const DEER_TILE_ID = 10
 const GREEN_TILE_ID = 0
 const YELLOW_TILE_ID = 4
 const RED_TILE_ID = 7
+const DARK_BLUE_TILE_ID = 11
+const DARK_YELLOW_TILE_ID = 12
 
 # list of starting dropzones of their respective type
 var shore_top = []
@@ -352,9 +354,9 @@ func make_visible():
 			elif grid[x][y] == ENTITY_TYPES.SIDE:
 				set_cell(ACTIVE_LAYER_ID, Vector2i(x, y), YELLOW_TILE_ID, Vector2i(1, 1))
 			elif grid[x][y] == ENTITY_TYPES.BOTTOM:
-				set_cell(ACTIVE_LAYER_ID, Vector2i(x, y), YELLOW_TILE_ID, Vector2i(1, 1))
+				set_cell(ACTIVE_LAYER_ID, Vector2i(x, y), DARK_YELLOW_TILE_ID, Vector2i(0, 0))
 			elif grid[x][y] == ENTITY_TYPES.SHALLOW:
-				set_cell(ACTIVE_LAYER_ID, Vector2i(x, y), YELLOW_TILE_ID, Vector2i(1, 1))
+				set_cell(ACTIVE_LAYER_ID, Vector2i(x, y), DARK_BLUE_TILE_ID, Vector2i(0, 0))
 	Global.something_is_being_dragged = true
 
 func make_invisible():
