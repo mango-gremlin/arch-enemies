@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dmy2gc7dfwago"
-path="res://.godot/imported/dark_yellow.png-8d269b62cbc15b6e607a11a96bb1819a.ctex"
+uid="uid://c1etei55ew2yx"
+path="res://.godot/imported/shallows.png-403711750462311a56e1edfbc2c1f516.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://bridges/assets/dark_yellow.png"
-dest_files=["res://.godot/imported/dark_yellow.png-8d269b62cbc15b6e607a11a96bb1819a.ctex"]
+source_file="res://bridges/assets/shallows.png"
+dest_files=["res://.godot/imported/shallows.png-403711750462311a56e1edfbc2c1f516.ctex"]
 
 [params]
 
