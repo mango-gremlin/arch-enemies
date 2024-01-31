@@ -1,8 +1,8 @@
 [gd_scene load_steps=15 format=3 uid="uid://cgfkelxiskcux"]
 
 [ext_resource type="Script" path="res://overworld/overworld.gd" id="1_pwtu4"]
-[ext_resource type="Script" path="res://overworld/overworld_sound.gd" id="3_h67g3"]
 [ext_resource type="AudioStream" uid="uid://bgeiod4gbwy8j" path="res://assets/sound/Step.wav" id="3_lhjvv"]
+[ext_resource type="Script" path="res://sound/effects_sound.gd" id="3_me10j"]
 [ext_resource type="PackedScene" uid="uid://p30p3o0e473c" path="res://overworld/scenes/world.tscn" id="3_xuy1h"]
 [ext_resource type="PackedScene" uid="uid://cgvraulefjyn8" path="res://overworld/ui/overworld_ui/overworld_ui.tscn" id="4_4hawq"]
 [ext_resource type="Script" path="res://bridges/script/walking_sound.gd" id="4_f85yo"]
@@ -27,7 +27,7 @@ required_item = 6
 quest_reward = 1
 
 [node name="Dialogue_Sounds" type="AudioStreamPlayer" parent="."]
-script = ExtResource("3_h67g3")
+script = ExtResource("3_me10j")
 
 [node name="Walking Sounds" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_lhjvv")
