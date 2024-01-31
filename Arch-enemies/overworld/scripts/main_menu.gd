@@ -5,7 +5,7 @@ signal play_sound(sound_type)
 # open settings menu as new scene
 func _on_options_pressed():
 	play_sound.emit("CLICK")
-	get_tree().change_scene_to_file("res://overworld/ui/menu/menu/settings_menu.tscn")
+	get_tree().change_scene_to_file("res://overworld/ui/menu/menu/settings_menu_main.tscn")
 
 # quit game entirely
 func _on_exit_pressed():

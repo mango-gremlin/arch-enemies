@@ -14,7 +14,7 @@ func _process(delta):
 # return to pause menu
 func _on_return_pressed():
 	play_sound.emit("CLICK")
-	get_tree().change_scene_to_file("res://overworld/ui/menu/menu/pause_menu.tscn")
+	get_tree().change_scene_to_file("res://overworld/ui/main_menu/main_menu.tscn")
 
 # save current values
 func _on_apply_pressed() -> void:
