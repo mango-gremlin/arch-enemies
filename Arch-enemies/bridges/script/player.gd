@@ -29,7 +29,6 @@ func _ready():
 	start_position = self.global_position
 	parent = get_parent()
 	coyote_timer.set_wait_time(coyote_frames / 60.0)
-	print(coyote_frames / 60.0, " and ", coyote_timer.get_wait_time())
 
 func _physics_process(delta):
 	if parent.menu_mode:
