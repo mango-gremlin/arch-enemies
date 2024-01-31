@@ -880,9 +880,6 @@ script = ExtResource("5_njj7s")
 [node name="Walking_Timer" type="Timer" parent="."]
 one_shot = true
 
-[node name="Coyote_Timer" type="Timer" parent="."]
-one_shot = true
-
 [node name="Sound Effects" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_de6d8")
 max_polyphony = 3
@@ -1035,9 +1032,8 @@ scale = Vector2(0.5, 0.5)
 theme = ExtResource("21_ltn3j")
 text = "One Step Back"
 
-[node name="Player" parent="Grid" node_paths=PackedStringArray("coyote_timer") groups=["player"] instance=ExtResource("16_cholv")]
+[node name="Player" parent="Grid" groups=["player"] instance=ExtResource("16_cholv")]
 position = Vector2(57, 119)
-coyote_timer = NodePath("../../Coyote_Timer")
 
 [node name="world_edge_right" parent="Grid" instance=ExtResource("17_wdx7v")]
 position = Vector2(400, 40)

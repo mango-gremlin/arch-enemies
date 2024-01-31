@@ -9,10 +9,11 @@ var start_position : Vector2
 var direction : Vector2 = Vector2.ZERO
 var was_in_air : bool = false
 var parent
+var has_jumped:bool = false
 
 # For the coyote timer
-@export var coyote_timer:Timer
-@export var coyote_frames:int = 6
+@onready var coyote_timer:Timer = $CoyoteJumpTimer
+@export var coyote_frames:int
 var coyote:bool = false # Whether in coyote time or not
 var last_floor:bool = false # Last frame's on-floor state
 
@@ -28,18 +29,20 @@ func _ready():
 	start_position = self.global_position
 	parent = get_parent()
 	coyote_timer.set_wait_time(coyote_frames / 60.0)
+	print(coyote_frames / 60.0, " and ", coyote_timer.get_wait_time())
 
 func _physics_process(delta):
 	if parent.menu_mode:
 		return
 	# Add the gravity.
 	if not is_on_floor():
+		if last_floor:
+			coyote = true
+			coyote_timer.start()
 		velocity.y += gravity * delta
 		if velocity.y > 250:
 			animated_sprite.play("jump_fall")
 		was_in_air = true
-		if last_floor:
-			coyote = true
 	elif was_in_air == true:
 		land()
 
@@ -49,7 +52,7 @@ func _physics_process(delta):
 		return
 
 	# Handle Jump.
-	if Input.is_action_just_pressed("jump") and (is_on_floor() or coyote):
+	if Input.is_action_just_pressed("jump") and (is_on_floor() or coyote) and not has_jumped:
 		play_sound.emit("JUMP")
 		jump()
 
@@ -66,10 +69,9 @@ func _physics_process(delta):
 	else:
 		Global.walking = false
 	
-	
-	move_and_slide()
 	# Store is_on_floor for the next frame
 	last_floor = is_on_floor()
+	move_and_slide()
 	update_animation()
 	update_facing_direction()
 
@@ -105,14 +107,19 @@ func jump():
 	velocity.y = jump_velocity
 	animated_sprite.play("jump_up")
 	animation_locked = true
+	has_jumped = true
 
 func land():
 	animated_sprite.play("jump_down")
 	animation_locked = true
 	was_in_air = false
+	has_jumped = false
 
 func _on_animated_sprite_2d_animation_finished():
 	if animated_sprite.animation == "jump_down":
 		animation_locked = false
 	elif animated_sprite.animation == "jump_up":
 		animated_sprite.play("jump_fly")
+
+func _on_coyote_jump_timer_timeout():
+	coyote = false
