@@ -54,6 +54,7 @@ scale = Vector2(2.25, 2.25)
 texture = ExtResource("3_x8j61")
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="."]
+z_index = 1
 layout_mode = 2
 offset_left = -36.0
 offset_top = -33.0

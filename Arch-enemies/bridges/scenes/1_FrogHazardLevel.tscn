@@ -1058,6 +1058,11 @@ scale = Vector2(1.2, 1.2)
 
 [node name="bridges_settings_menu" parent="Grid" instance=ExtResource("28_86pay")]
 visible = false
+offset_left = 250.0
+offset_top = 141.0
+offset_right = 250.0
+offset_bottom = 141.0
+scale = Vector2(1.2, 1.2)
 
 [node name="animal_inventory_counter" type="HBoxContainer" parent="Grid"]
 offset_top = 36.0

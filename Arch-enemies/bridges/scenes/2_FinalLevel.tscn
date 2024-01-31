@@ -1065,6 +1065,11 @@ position = Vector2(624, 121)
 
 [node name="bridges_settings_menu" parent="Grid" instance=ExtResource("27_318v5")]
 visible = false
+offset_left = 288.0
+offset_top = 187.0
+offset_right = 288.0
+offset_bottom = 187.0
+scale = Vector2(1.6, 1.6)
 
 [node name="bridges_pause_menu" parent="Grid" instance=ExtResource("20_20jtq")]
 visible = false
