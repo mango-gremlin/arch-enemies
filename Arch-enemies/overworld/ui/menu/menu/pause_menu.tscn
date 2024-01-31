@@ -1,7 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://cv4r3ql0yg1la"]
+[gd_scene load_steps=13 format=3 uid="uid://cv4r3ql0yg1la"]
 
 [ext_resource type="Script" path="res://overworld/ui/menu/menu/pause_menu.gd" id="1_vyga1"]
+[ext_resource type="AudioStream" uid="uid://b1diue16pa0ld" path="res://assets/sound/Victory.wav" id="2_3ovhd"]
 [ext_resource type="Theme" uid="uid://d2ijyc316xeom" path="res://assets/art/ui_elements/ui_theme.tres" id="2_ugltm"]
+[ext_resource type="Script" path="res://sound/effects_sound.gd" id="3_7pdu0"]
 [ext_resource type="Texture2D" uid="uid://ba3leqm154y12" path="res://assets/art/ui_elements/menu_container.png" id="3_kvu7j"]
 [ext_resource type="Texture2D" uid="uid://y0rbyb8ymrue" path="res://assets/art/ui_elements/clouds/cloud_1.png" id="4_s2fjd"]
 [ext_resource type="Texture2D" uid="uid://tkvu5brhxdg2" path="res://assets/art/ui_elements/clouds/cloud_2.png" id="5_2wpt6"]
@@ -19,6 +21,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_vyga1")
+
+[node name="Sound Effects" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_3ovhd")
+max_polyphony = 3
+script = ExtResource("3_7pdu0")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
@@ -102,6 +109,7 @@ position = Vector2(139, 255)
 scale = Vector2(8, 8)
 texture = ExtResource("10_4l0q1")
 
+[connection signal="play_sound" from="." to="Sound Effects" method="_on_button_pressed"]
 [connection signal="pressed" from="VBoxContainer2/overworld" to="." method="_on_overworld_pressed"]
 [connection signal="pressed" from="VBoxContainer2/Options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="VBoxContainer2/Exit" to="." method="_on_exit_pressed"]
