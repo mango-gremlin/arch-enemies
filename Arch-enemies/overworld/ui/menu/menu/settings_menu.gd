@@ -1,5 +1,6 @@
 extends Control
 
+signal apply_volume()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -19,3 +20,7 @@ func _on_apply_pressed() -> void:
 	Settings.music_volume = $"VBoxContainer/MusicVolume".value / 100
 	Settings.effects_volume = $"VBoxContainer/EffectsVolume".value / 100
 	BackgroundMusic.volume_db = Settings.get_music_volume()
+	apply_volume.emit()
+
+func _on_bridges_pause_menu_open_settings():
+	self.visible = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://cxi6j8p1hopjh"]
+[gd_scene load_steps=44 format=3 uid="uid://cxi6j8p1hopjh"]
 
 [ext_resource type="Script" path="res://bridges/script/Camera.gd" id="1_e57tb"]
 [ext_resource type="Texture2D" uid="uid://d0o2q6fijmd1" path="res://assets/art/tilesets/bridge_tileset/bridge_background_color.png" id="2_361sp"]
@@ -29,6 +29,7 @@
 [ext_resource type="Theme" uid="uid://d2ijyc316xeom" path="res://assets/art/ui_elements/ui_theme.tres" id="21_5yhij"]
 [ext_resource type="PackedScene" uid="uid://dynxnwixd1bke" path="res://bridges/scenes/parallax_background.tscn" id="21_sinqj"]
 [ext_resource type="Texture2D" uid="uid://leqswdio6xwd" path="res://bridges/assets/background/background_center_v4.png" id="22_sx6wq"]
+[ext_resource type="PackedScene" uid="uid://cumelk772llyk" path="res://bridges/scenes/bridges_settings_menu.tscn" id="27_318v5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gxf1m"]
 texture = ExtResource("2_361sp")
@@ -963,6 +964,9 @@ offset_bottom = 17.1667
 [node name="goal" parent="Grid" instance=ExtResource("19_1q1ud")]
 position = Vector2(571, 72)
 
+[node name="bridges_settings_menu" parent="Grid" instance=ExtResource("27_318v5")]
+visible = false
+
 [node name="bridges_pause_menu" parent="Grid" instance=ExtResource("20_20jtq")]
 visible = false
 offset_left = 288.0
@@ -1070,6 +1074,9 @@ scale = Vector2(1, 0.84)
 [connection signal="pressed" from="Grid/Control/Reset" to="Grid" method="_on_reset_pressed"]
 [connection signal="pressed" from="Grid/Control/Last_State" to="Grid" method="_on_last_state_pressed"]
 [connection signal="play_sound" from="Grid/Player" to="Sound Effects" method="_on_player_play_sound"]
+[connection signal="apply_volume" from="Grid/bridges_settings_menu" to="Sound Effects" method="_on_bridges_settings_menu_apply_volume"]
+[connection signal="apply_volume" from="Grid/bridges_settings_menu" to="Walking Sound" method="_on_bridges_settings_menu_apply_volume"]
+[connection signal="open_settings" from="Grid/bridges_pause_menu" to="Grid/bridges_settings_menu" method="_on_bridges_pause_menu_open_settings"]
 
 [editable path="Grid/goal_menu"]
 [editable path="Grid/bridges_pause_menu"]

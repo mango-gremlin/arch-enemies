@@ -1,5 +1,6 @@
 extends Control
 
+signal open_settings
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -21,5 +22,12 @@ func _on_exit_pressed():
 	SingletonPlayer.save_game()
 	get_tree().quit()
 
+# only for overworld / main menu
 func _on_options_pressed():
 	get_tree().change_scene_to_file("res://overworld/ui/menu/menu/settings_menu.tscn")
+
+# only for bridges
+func _on_bridges_options_pressed():
+	self.visible = false
+	open_settings.emit()
+	pass # Replace with function body.

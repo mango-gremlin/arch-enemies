@@ -18,3 +18,7 @@ func _process(delta):
 		else:
 			playing = false
 		timer.start(0.18)
+
+
+func _on_bridges_settings_menu_apply_volume():
+	self.volume_db = Settings.get_effects_volume()

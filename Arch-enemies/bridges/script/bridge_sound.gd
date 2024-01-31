@@ -56,3 +56,7 @@ func _on_player_play_sound(sound):
 
 func _on_grid_play_sound(sound):
 	play_sound(sound)
+
+
+func _on_bridges_settings_menu_apply_volume():
+	self.volume_db = Settings.get_effects_volume()

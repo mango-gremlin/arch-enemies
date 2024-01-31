@@ -446,19 +446,34 @@ func reset_modes():
 func _process(delta):
 	if(Global.currently_dragging and Input.is_action_just_released("click")):
 		make_invisible()
-		
+	
 	# pressing "esc" opens the pause-menu
 	if Input.is_action_just_pressed("open_menu") and not goal_reached:
 		Global.walking = false
-		var pause_menu = get_parent().find_child("bridges_pause_menu")		
-		var new_visibility = not pause_menu.visible
-		pause_menu.visible = new_visibility
-		# menu_mode is active when pause_menu is visible
-		menu_mode = new_visibility
-		change_ui_visibility(not new_visibility)
+		var pause_menu = get_parent().find_child("bridges_pause_menu")
+		var settings_menu = get_parent().find_child("bridges_settings_menu")
 		
-
-
+		# if neither menu was open before -> open pause menu
+		if not pause_menu.visible and not settings_menu.visible:
+			pause_menu.visible = true
+			menu_mode = true
+			change_ui_visibility(false)
+		# if pause menu is open -> return to level
+		elif pause_menu.visible and not settings_menu.visible:
+			pause_menu.visible = false
+			settings_menu.visible = false
+			menu_mode = false
+			change_ui_visibility(true)
+		# if currently in the settings menu -> return to pause menu
+		elif settings_menu.visible:
+			pause_menu.visible = true
+			settings_menu.visible = false
+			
+		#var new_visibility = not pause_menu.visible
+		#pause_menu.visible = new_visibility
+		# menu_mode is active when pause_menu is visible
+		#menu_mode = new_visibility
+		#change_ui_visibility(not new_visibility)
 
 	
 # --- / 

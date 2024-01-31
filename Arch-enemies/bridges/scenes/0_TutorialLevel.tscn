@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://cqhrnwqvy3sgh"]
+[gd_scene load_steps=43 format=3 uid="uid://cqhrnwqvy3sgh"]
 
 [ext_resource type="Script" path="res://bridges/script/Camera.gd" id="1_2mayf"]
 [ext_resource type="AudioStream" uid="uid://b1diue16pa0ld" path="res://assets/sound/Victory.wav" id="2_de6d8"]
@@ -28,6 +28,7 @@
 [ext_resource type="PackedScene" uid="uid://cern51r1p8lkb" path="res://bridges/scenes/bridges_pause_menu.tscn" id="20_1ny00"]
 [ext_resource type="PackedScene" uid="uid://dynxnwixd1bke" path="res://bridges/scenes/parallax_background.tscn" id="21_2derg"]
 [ext_resource type="Theme" uid="uid://d2ijyc316xeom" path="res://assets/art/ui_elements/ui_theme.tres" id="21_ltn3j"]
+[ext_resource type="PackedScene" uid="uid://cumelk772llyk" path="res://bridges/scenes/bridges_settings_menu.tscn" id="28_kpc12"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gxf1m"]
 texture = ExtResource("2_toexv")
@@ -951,6 +952,9 @@ offset_top = 108.0
 offset_right = 193.0
 offset_bottom = 108.0
 
+[node name="bridges_settings_menu" parent="Grid" instance=ExtResource("28_kpc12")]
+visible = false
+
 [node name="animal_inventory_counter" type="HBoxContainer" parent="Grid"]
 offset_top = 36.0
 offset_right = 52.0
@@ -1020,6 +1024,9 @@ position = Vector2(147, 86)
 [connection signal="pressed" from="Grid/Control/Reset" to="Grid" method="_on_reset_pressed"]
 [connection signal="pressed" from="Grid/Control/Last_State" to="Grid" method="_on_last_state_pressed"]
 [connection signal="play_sound" from="Grid/Player" to="Sound Effects" method="_on_player_play_sound"]
+[connection signal="open_settings" from="Grid/bridges_pause_menu" to="Grid/bridges_settings_menu" method="_on_bridges_pause_menu_open_settings"]
+[connection signal="apply_volume" from="Grid/bridges_settings_menu" to="Sound Effects" method="_on_bridges_settings_menu_apply_volume"]
+[connection signal="apply_volume" from="Grid/bridges_settings_menu" to="Walking Sound" method="_on_bridges_settings_menu_apply_volume"]
 
 [editable path="Tutorial"]
 [editable path="Tutorial/Spider_Tutorial"]
