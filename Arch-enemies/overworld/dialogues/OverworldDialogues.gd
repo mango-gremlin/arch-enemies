@@ -27,6 +27,7 @@ static func dialogue_snake_stefan():
 
 	]
 	var solved_pages:Array[DynamicPage] = [
+		DynamicPage.new("You give Ssssssstefan an egg.", "You", fox_portrait),
 		DynamicPage.new("Is zzat an eegg?? Oh zzat's szzoo niczze of youu! I will help you, but don't get too closzze to me or I might take a bite. I can't help it, it'szz a reflexzz.", "Ssssssstefan",snake_portrait)
 	]
 	
@@ -48,6 +49,7 @@ static func dialogue_spider_grandpa():
 	]
 	
 	var solved_pages:Array[DynamicPage] = [
+		DynamicPage.new("You give Grandfather Longlegs a huge fly.", "You", fox_portrait),
 		DynamicPage.new("Many thanks, young lad. Now that my family is cared for I will aid you on your quest.", "Grandfather Longlegs",spider_portrait)
 	]
 	
@@ -70,6 +72,7 @@ static func dialogue_squirrel_egg():
 	]
 	
 	var solved_pages:Array[DynamicPage] = [
+		DynamicPage.new("You give Esther a nut.", "You", fox_portrait),
 		DynamicPage.new("This is way better than the purple one! Ill take this one and you get the purple one.", "Esther",squirrel_portrait)
 	]
 	
@@ -100,6 +103,7 @@ static func dialogue_squirrel_ol_nutter():
 	]
 	
 	var solved_pages:Array[DynamicPage] = [
+		DynamicPage.new("You tell Ol' Nutter about some evidence you found.", "You", fox_portrait),
 		DynamicPage.new("<Excited Squeaking>...this is incredible! Now everyone will believe in the NUT! We can rise up against Big Frog! We'll join your noble cause!", "Ol' Nutter",squirrel_nutter_portrait)
 	]
 	
