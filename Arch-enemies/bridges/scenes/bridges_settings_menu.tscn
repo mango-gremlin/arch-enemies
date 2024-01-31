@@ -70,7 +70,9 @@ horizontal_alignment = 1
 [node name="MainVolume" type="HSlider" parent="VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("3_f0g46")
-value = 50.0
+max_value = 1.0
+step = 0.01
+value = 0.5
 script = ExtResource("4_6vwo5")
 
 [node name="Music" type="Label" parent="VBoxContainer"]
@@ -83,7 +85,9 @@ horizontal_alignment = 1
 [node name="MusicVolume" type="HSlider" parent="VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("3_f0g46")
-value = 50.0
+max_value = 1.0
+step = 0.01
+value = 0.5
 script = ExtResource("4_6vwo5")
 
 [node name="Effects" type="Label" parent="VBoxContainer"]
@@ -96,7 +100,9 @@ horizontal_alignment = 1
 [node name="EffectsVolume" type="HSlider" parent="VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("3_f0g46")
-value = 50.0
+max_value = 1.0
+step = 0.01
+value = 0.5
 script = ExtResource("4_6vwo5")
 
 [node name="Apply" type="Button" parent="VBoxContainer"]
