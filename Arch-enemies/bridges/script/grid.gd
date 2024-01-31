@@ -468,14 +468,7 @@ func _process(delta):
 		elif settings_menu.visible:
 			pause_menu.visible = true
 			settings_menu.visible = false
-			
-		#var new_visibility = not pause_menu.visible
-		#pause_menu.visible = new_visibility
-		# menu_mode is active when pause_menu is visible
-		#menu_mode = new_visibility
-		#change_ui_visibility(not new_visibility)
 
-	
 # --- / 
 # -- / inventory management
 
