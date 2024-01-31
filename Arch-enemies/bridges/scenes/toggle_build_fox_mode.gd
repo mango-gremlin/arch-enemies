@@ -4,6 +4,7 @@ func _on_toggled(toggled_on):
 	var grid = get_parent().get_parent()
 	if not Global.drag_mode:
 		Global.drag_mode = true
+		Global.walking = false
 		self.text = "Drag Mode"
 		grid.find_child("Reset").visible = true
 		grid.find_child("Last_State").visible = true

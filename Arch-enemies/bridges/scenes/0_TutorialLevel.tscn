@@ -11,7 +11,7 @@
 [ext_resource type="Script" path="res://bridges/script/walking_sound.gd" id="5_njj7s"]
 [ext_resource type="Texture2D" uid="uid://2dqqm3b306my" path="res://assets/art/tilesets/bridge_tileset/bridge_water_tiles.png" id="6_oyt87"]
 [ext_resource type="Texture2D" uid="uid://ckghjw6ynsyxv" path="res://bridges/assets/yellow.png" id="7_7dtt4"]
-[ext_resource type="PackedScene" path="res://bridges/scenes/tutorial_info.tscn" id="7_wqkw7"]
+[ext_resource type="PackedScene" uid="uid://mq3lgncyb3cu" path="res://bridges/scenes/tutorial_info.tscn" id="7_wqkw7"]
 [ext_resource type="Texture2D" uid="uid://diwvqonlr6748" path="res://assets/art/objects/bridge_squirrel.png" id="8_a65hy"]
 [ext_resource type="Texture2D" uid="uid://bax18833oqune" path="res://bridges/assets/red.png" id="9_ceti5"]
 [ext_resource type="Texture2D" uid="uid://cw66eehxwh20w" path="res://assets/art/objects/bridge_snake.png" id="10_eqte5"]
