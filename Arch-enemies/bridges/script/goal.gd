@@ -23,7 +23,7 @@ func _on_goal_area_2d_body_entered(_body):
 		grid.goal_reached = true
 		# menu_mode is active when goal is reached		
 		grid.menu_mode = true
-		grid.change_ui_visibility(false)
+		grid.change_ui_visibility()
 		
 
 

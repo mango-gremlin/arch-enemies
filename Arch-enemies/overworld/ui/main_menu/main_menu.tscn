@@ -103,8 +103,7 @@ offset_bottom = 523.0
 layout_mode = 2
 theme_override_constants/outline_size = 0
 theme_override_font_sizes/font_size = 56
-text = "New Game
-"
+text = "New Game"
 
 [node name="Options" type="Button" parent="VBoxContainer"]
 layout_mode = 2

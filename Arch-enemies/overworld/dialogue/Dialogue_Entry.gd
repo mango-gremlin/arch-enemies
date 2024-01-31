@@ -14,10 +14,15 @@ func _init():
 # the picture should have a size of 60 x 60
 func image_src() -> String:
 	return ""
+	
+# insert header here, "" means use default name, i. e. the npc name
+# godot doesn't support returning null here with the type String in return type, 
+# ...
+func page_name() -> String:
+	return ""
 
 func content() -> String:
 	return "no text specified"
-	
 	
 # null ement in array means here disable button X
 func btn_text() -> Array[String]:

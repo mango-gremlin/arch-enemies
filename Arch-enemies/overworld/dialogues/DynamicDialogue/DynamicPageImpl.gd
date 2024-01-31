@@ -4,17 +4,19 @@ extends Dialogue_Entry
 class_name DynamigPageImpl
 
 
-var __content: String
-var src_image: String
-var current_page: int
-var max_page: int
+var __content:String
+var src_image:String
+var __page_name:String
+var current_page:int
+var max_page:int
 var is_last_page:bool 
 
 # --- /
 # -- / class constructor 
-func _init(_content:String, _src_image, _current_page:int, _max_page:int, last_page:bool):
+func _init(_content:String, _src_image:String, _page_name:String, _current_page:int, _max_page:int, last_page:bool):
 	__content = _content
 	src_image = _src_image
+	__page_name = _page_name
 	is_last_page = last_page
 	
 	if src_image == null: # case already handled in DialogueUI
@@ -22,6 +24,9 @@ func _init(_content:String, _src_image, _current_page:int, _max_page:int, last_p
 	
 	current_page = _current_page
 	max_page = _max_page
+	
+func page_name() -> String:
+	return __page_name
 
 func content() -> String:
 	return __content

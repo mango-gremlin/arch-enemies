@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://drn1loe1wknbq"]
+[gd_scene load_steps=15 format=3 uid="uid://drn1loe1wknbq"]
 
 [ext_resource type="Script" path="res://overworld/entities/interaction_overworld/npc_interaction.gd" id="1_cdxnf"]
 [ext_resource type="Texture2D" uid="uid://xd2wfewwwcqc" path="res://assets/art/characters/squirrel.png" id="2_83185"]
 [ext_resource type="PackedScene" uid="uid://cegpqm0j2vvbh" path="res://overworld/entities/interaction_overworld/interactionspot.tscn" id="2_y76uy"]
 [ext_resource type="Texture2D" uid="uid://bblggn3rh8xh7" path="res://assets/art/ui_elements/InteractionIndicator_E_animation.png" id="4_4ovrt"]
+[ext_resource type="Texture2D" uid="uid://hl5ednrb5nl6" path="res://assets/art/ui_elements/dialogue_indicator.png" id="5_mtfk6"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0ciyj"]
 atlas = ExtResource("4_4ovrt")
@@ -20,6 +21,22 @@ region = Rect2(24, 0, 10, 15)
 [sub_resource type="AtlasTexture" id="AtlasTexture_nrms4"]
 atlas = ExtResource("4_4ovrt")
 region = Rect2(36, 0, 10, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sct6q"]
+atlas = ExtResource("5_mtfk6")
+region = Rect2(0, 0, 14, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a5bii"]
+atlas = ExtResource("5_mtfk6")
+region = Rect2(14, 0, 14, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_im5xn"]
+atlas = ExtResource("5_mtfk6")
+region = Rect2(28, 0, 14, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_irs7o"]
+atlas = ExtResource("5_mtfk6")
+region = Rect2(42, 0, 14, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_dm71c"]
 animations = [{
@@ -38,6 +55,23 @@ animations = [{
 }],
 "loop": true,
 "name": &"indication",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 4.0,
+"texture": SubResource("AtlasTexture_sct6q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a5bii")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_im5xn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_irs7o")
+}],
+"loop": true,
+"name": &"npc_indication",
 "speed": 5.0
 }]
 
@@ -69,5 +103,5 @@ color = Color(0.835294, 0.564706, 0.27451, 1)
 z_index = 1
 position = Vector2(0, -20)
 sprite_frames = SubResource("SpriteFrames_dm71c")
-animation = &"indication"
-frame_progress = 0.651535
+animation = &"npc_indication"
+frame_progress = 0.809533

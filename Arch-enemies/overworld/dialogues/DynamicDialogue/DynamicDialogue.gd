@@ -3,20 +3,22 @@ extends Dialogue_Data
 
 class_name DynamicDialogue
 
-var src_image: String
-var empty_msg: String
+var src_image:String
+var _empty_page_name:String
+var empty_msg:String
 # --- /
 # -- / class constructor 
-func _init(_empty_image: String, _empty_msg: String, _quest_done_image: String, _quest_done_msg: String):
+func _init(_empty_image:String, _empty_msg:String, __empty_page_name:String, _quest_done_image:String, _quest_done_msg:String, _quest_done_page_name:String):
 	src_image = _empty_image
+	_empty_page_name = __empty_page_name
 	empty_msg = _empty_msg
 	
 	quest_undone_entries = [
-		EmptyDynamicDialoguePage.new(_empty_image, _empty_msg)
+		EmptyDynamicDialoguePage.new(_empty_image, _empty_page_name, _empty_msg)
 		]
 		
 	quest_done_entries = [
-		DynamicQuestResolved.new(_quest_done_image, _quest_done_msg)
+		DynamicQuestResolved.new(_quest_done_image, _quest_done_page_name, _quest_done_msg)
 	]
 
 func insert_pages(unsolved_pages:Array[DynamicPage],solved_pages:Array[DynamicPage]):
@@ -35,7 +37,7 @@ func add_dialogue_content(quest_done_dialogue:bool,retrieved_pages:Array[Dynamic
 	var index:int = 0
 	for page_entry:DynamicPage in retrieved_pages:
 		var is_last_page:bool = index == max_page
-		generated_pages.append(DynamigPageImpl.new(page_entry.__content, page_entry.src_image, index, max_page,is_last_page))
+		generated_pages.append(DynamigPageImpl.new(page_entry.__content, page_entry.src_image, page_entry.__page_name, index, max_page,is_last_page))
 		index += 1
 	# adding to corresponding entry
 	if quest_done_dialogue:

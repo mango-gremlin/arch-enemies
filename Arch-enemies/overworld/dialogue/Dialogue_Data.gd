@@ -37,7 +37,11 @@ func select_page(page: int):
 	# set button states
 	control_instance.set_buttons_state(entry.btn_states())
 	# set name of npc 
-	control_instance.set_npc_name(npc_name)
+	var header:String = entry.page_name()
+	if header == "":
+		header = npc_name
+		
+	control_instance.set_npc_name(header)
 	# set image resource
 	control_instance.set_image_texture(entry.image_src())
 	# show panel

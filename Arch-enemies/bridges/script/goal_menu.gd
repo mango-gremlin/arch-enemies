@@ -6,7 +6,7 @@ func _on_retry_button_pressed():
 	# reset everything
 	var grid = get_parent()
 	grid.get_node("Player").reset_player()
-	grid.change_ui_visibility(true)
+	grid.change_ui_visibility()
 	grid.reset_modes()
 	get_parent().reset_grid()
 	visible = false
