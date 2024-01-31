@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://cqhrnwqvy3sgh"]
+[gd_scene load_steps=47 format=3 uid="uid://cqhrnwqvy3sgh"]
 
 [ext_resource type="Script" path="res://bridges/script/Camera.gd" id="1_2mayf"]
 [ext_resource type="AudioStream" uid="uid://n71rssah4ej4" path="res://assets/sound/Main_Menu.wav" id="1_he7ej"]
@@ -12,12 +12,14 @@
 [ext_resource type="Script" path="res://bridges/script/walking_sound.gd" id="5_njj7s"]
 [ext_resource type="Texture2D" uid="uid://2dqqm3b306my" path="res://assets/art/tilesets/bridge_tileset/bridge_water_tiles.png" id="6_oyt87"]
 [ext_resource type="Texture2D" uid="uid://ckghjw6ynsyxv" path="res://bridges/assets/yellow.png" id="7_7dtt4"]
-[ext_resource type="PackedScene" path="res://bridges/scenes/tutorial_info.tscn" id="7_wqkw7"]
+[ext_resource type="PackedScene" uid="uid://mq3lgncyb3cu" path="res://bridges/scenes/tutorial_info.tscn" id="7_wqkw7"]
 [ext_resource type="Texture2D" uid="uid://diwvqonlr6748" path="res://assets/art/objects/bridge_squirrel.png" id="8_a65hy"]
 [ext_resource type="Texture2D" uid="uid://bax18833oqune" path="res://bridges/assets/red.png" id="9_ceti5"]
 [ext_resource type="Texture2D" uid="uid://cw66eehxwh20w" path="res://assets/art/objects/bridge_snake.png" id="10_eqte5"]
 [ext_resource type="Texture2D" uid="uid://desp8tcpswyl4" path="res://assets/art/objects/bridge_spider.png" id="11_447x7"]
+[ext_resource type="Texture2D" uid="uid://c1etei55ew2yx" path="res://bridges/assets/shallows.png" id="11_rq6vw"]
 [ext_resource type="Script" path="res://bridges/script/grid.gd" id="12_4j1x0"]
+[ext_resource type="Texture2D" uid="uid://dmy2gc7dfwago" path="res://bridges/assets/bottom.png" id="12_lkv3g"]
 [ext_resource type="Script" path="res://bridges/script/grid_visualizer.gd" id="13_vimek"]
 [ext_resource type="Script" path="res://bridges/script/grid_drag.gd" id="14_rjhoj"]
 [ext_resource type="Texture2D" uid="uid://bgtlqf6licksl" path="res://assets/art/tilesets/bridge_tileset/bridge_bramble_tiles.png" id="15_hd602"]
@@ -201,6 +203,20 @@ texture_region_size = Vector2i(10, 10)
 2:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 2:3/0/physics_layer_0/angular_velocity = 0.0
 2:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-5, -5, 5, -5, 5, 5, -5, 5)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_13i7m"]
+texture = ExtResource("11_rq6vw")
+texture_region_size = Vector2i(10, 10)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4o8p7"]
+texture = ExtResource("12_lkv3g")
+texture_region_size = Vector2i(10, 10)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_71dc5"]
 texture = ExtResource("5_ahoix")
@@ -847,6 +863,8 @@ sources/2 = SubResource("TileSetAtlasSource_71dc5")
 sources/3 = SubResource("TileSetAtlasSource_1v7j0")
 sources/5 = SubResource("TileSetAtlasSource_xun2x")
 sources/6 = SubResource("TileSetAtlasSource_meq0p")
+sources/11 = SubResource("TileSetAtlasSource_13i7m")
+sources/12 = SubResource("TileSetAtlasSource_4o8p7")
 
 [node name="TutorialLevel" type="Node2D"]
 
