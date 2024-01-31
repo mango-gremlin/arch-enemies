@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://di7cb42qmtsdi"]
+[gd_scene load_steps=8 format=3 uid="uid://di7cb42qmtsdi"]
 
 [ext_resource type="Script" path="res://overworld/starting_cutscene.gd" id="1_5f7pw"]
 [ext_resource type="Theme" uid="uid://d2ijyc316xeom" path="res://assets/art/ui_elements/ui_theme.tres" id="1_qugxp"]
 [ext_resource type="Texture2D" uid="uid://bgat8xgkrinyt" path="res://assets/art/cutscenes/cutscene_1.png" id="1_swtph"]
 [ext_resource type="Texture2D" uid="uid://bxdhhpyv0k2tu" path="res://assets/art/cutscenes/cutscene_2.png" id="2_b61kx"]
+[ext_resource type="AudioStream" uid="uid://b1diue16pa0ld" path="res://assets/sound/Victory.wav" id="3_e6ucf"]
 [ext_resource type="Texture2D" uid="uid://diyjys6gt5lej" path="res://assets/art/cutscenes/cutscene_3.png" id="3_rlk5f"]
+[ext_resource type="Script" path="res://sound/effects_sound.gd" id="4_wm0ld"]
 
 [node name="StartingCutscene" type="Control"]
 layout_mode = 3
@@ -15,6 +17,11 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_qugxp")
 script = ExtResource("1_5f7pw")
+
+[node name="Sound Effects" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_e6ucf")
+max_polyphony = 3
+script = ExtResource("4_wm0ld")
 
 [node name="Cutscene3" type="Control" parent="."]
 visible = false
@@ -93,6 +100,7 @@ offset_bottom = 57.0
 theme_override_font_sizes/font_size = 40
 text = "skip"
 
+[connection signal="play_sound" from="." to="Sound Effects" method="_on_button_pressed"]
 [connection signal="pressed" from="Cutscene3/Button3" to="." method="_on_button_3_pressed"]
 [connection signal="pressed" from="Cutscene2/Button2" to="." method="_on_button_2_pressed"]
 [connection signal="pressed" from="Cutscene1/Button1" to="." method="_on_button_1_pressed"]
