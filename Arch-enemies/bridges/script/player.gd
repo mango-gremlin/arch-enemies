@@ -10,6 +10,12 @@ var direction : Vector2 = Vector2.ZERO
 var was_in_air : bool = false
 var parent
 
+# For the coyote timer
+@export var coyote_timer:Timer
+@export var coyote_frames:int = 6
+var coyote:bool = false # Whether in coyote time or not
+var last_floor:bool = false # Last frame's on-floor state
+
 # Saves if an animation is currently playing
 var animation_locked : bool = false
 
@@ -21,6 +27,7 @@ signal play_sound(sound)
 func _ready():
 	start_position = self.global_position
 	parent = get_parent()
+	coyote_timer.set_wait_time(coyote_frames / 60.0)
 
 func _physics_process(delta):
 	if parent.menu_mode:
@@ -31,6 +38,8 @@ func _physics_process(delta):
 		if velocity.y > 250:
 			animated_sprite.play("jump_fall")
 		was_in_air = true
+		if last_floor:
+			coyote = true
 	elif was_in_air == true:
 		land()
 
@@ -40,7 +49,7 @@ func _physics_process(delta):
 		return
 
 	# Handle Jump.
-	if Input.is_action_just_pressed("jump") and is_on_floor():
+	if Input.is_action_just_pressed("jump") and (is_on_floor() or coyote):
 		play_sound.emit("JUMP")
 		jump()
 
@@ -59,6 +68,8 @@ func _physics_process(delta):
 	
 	
 	move_and_slide()
+	# Store is_on_floor for the next frame
+	last_floor = is_on_floor()
 	update_animation()
 	update_facing_direction()
 

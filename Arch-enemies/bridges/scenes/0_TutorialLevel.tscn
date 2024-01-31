@@ -873,17 +873,30 @@ stream = ExtResource("1_he7ej")
 volume_db = -10.0
 autoplay = true
 
-[node name="Sound Effects" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("2_de6d8")
-max_polyphony = 3
-script = ExtResource("3_h8x8j")
-
 [node name="Walking Sound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_4odb0")
 script = ExtResource("5_njj7s")
 
 [node name="Walking_Timer" type="Timer" parent="."]
 one_shot = true
+
+[node name="Coyote_Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Sound Effects" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_de6d8")
+max_polyphony = 3
+script = ExtResource("3_h8x8j")
+
+[node name="goal_menu" parent="Sound Effects" instance=ExtResource("18_65aa1")]
+visible = false
+top_level = true
+offset_left = 192.0
+offset_top = 108.0
+offset_right = -221.568
+offset_bottom = -136.296
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(192, 108)
@@ -1022,8 +1035,9 @@ scale = Vector2(0.5, 0.5)
 theme = ExtResource("21_ltn3j")
 text = "One Step Back"
 
-[node name="Player" parent="Grid" groups=["player"] instance=ExtResource("16_cholv")]
+[node name="Player" parent="Grid" node_paths=PackedStringArray("coyote_timer") groups=["player"] instance=ExtResource("16_cholv")]
 position = Vector2(57, 119)
+coyote_timer = NodePath("../../Coyote_Timer")
 
 [node name="world_edge_right" parent="Grid" instance=ExtResource("17_wdx7v")]
 position = Vector2(400, 40)
@@ -1032,16 +1046,6 @@ scale = Vector2(1, 10)
 [node name="world_edge_left" parent="Grid" instance=ExtResource("17_wdx7v")]
 position = Vector2(-10, 61)
 scale = Vector2(1, 10)
-
-[node name="goal_menu" parent="Grid" instance=ExtResource("18_65aa1")]
-visible = false
-top_level = true
-offset_left = 192.0
-offset_top = 108.0
-offset_right = -221.568
-offset_bottom = -136.296
-size_flags_horizontal = 4
-size_flags_vertical = 4
 
 [node name="goal" parent="Grid" instance=ExtResource("19_i2bhv")]
 position = Vector2(352, 82)
