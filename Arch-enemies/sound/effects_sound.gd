@@ -35,6 +35,8 @@ func play_sound(sound:String) -> void:
 			stream = quest_accepted
 		"QUEST_DONE":
 			stream = quest_done
+		"CLICK":
+			stream = click
 	#Then we play it
 	playing = true
 
@@ -68,6 +70,11 @@ func _on_player_play_sound(sound):
 func _on_grid_play_sound(sound):
 	play_sound(sound)
 
-
 func _on_bridges_settings_menu_apply_volume():
 	self.volume_db = Settings.get_effects_volume()
+
+# only used when button is pressed
+# sound_type is not neccessary, but requires some refactoring before it can be removed
+func _on_button_pressed(sound_type):
+	stream = click
+	playing = true

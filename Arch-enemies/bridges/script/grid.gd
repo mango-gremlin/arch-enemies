@@ -500,7 +500,7 @@ func update_inventory():
 	inventory_spider.text = str(start_animals[Animal.AnimalType.SPIDER])
 	inventory_squirrel.text = str(start_animals[Animal.AnimalType.SQUIRREL])
 
-#Down here we handle all the signal. There will be many, but most of them don't do much.
+# Down here we handle all the signal. There will be many, but most of them don't do much.
 func _on_drag_grid_need_grid():
 	current_grid.emit(grid)
 
@@ -547,9 +547,11 @@ func _on_squirrel_item_is_dragging():
 	make_visible()
 
 func _on_reset_pressed():
+	play_sound.emit("CLICK")
 	reset_grid()
 
 func _on_last_state_pressed():
+	play_sound.emit("CLICK")
 	last_state()
 
 func _on_camera_2d_send_zoom(zoom):
@@ -568,5 +570,6 @@ func _on_goal_menu_level_solved():
 
 
 func _on_tutorial_button_pressed():
+	play_sound.emit("CLICK")
 	get_parent().get_node("Tutorial").visible = true
 	self.visible = false
