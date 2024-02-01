@@ -5,6 +5,7 @@ extends TileMap
 # 
 var menu_mode := false
 var goal_reached := false
+var esc_pressed := false
 
 #Like the Tile Size
 var tile_size = tile_set.tile_size
@@ -452,7 +453,7 @@ func _process(delta):
 		make_invisible()
 	
 	# pressing "esc" opens the pause-menu
-	if Input.is_action_just_pressed("open_menu") and not goal_reached:
+	if (Input.is_action_just_pressed("open_menu") or esc_pressed) and not goal_reached:
 		Global.walking = false
 		var pause_menu = get_parent().find_child("bridges_pause_menu")
 		var settings_menu = get_parent().find_child("bridges_settings_menu")
@@ -472,6 +473,7 @@ func _process(delta):
 		elif settings_menu.visible:
 			pause_menu.visible = true
 			settings_menu.visible = false
+		esc_pressed = false
 
 # --- / 
 # -- / inventory management
@@ -573,3 +575,7 @@ func _on_tutorial_button_pressed():
 	play_sound.emit("CLICK")
 	get_parent().get_node("Tutorial").visible = true
 	self.visible = false
+
+
+func _on_escape_pressed():
+	esc_pressed = not esc_pressed
