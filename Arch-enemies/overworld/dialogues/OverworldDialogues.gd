@@ -27,6 +27,7 @@ static func dialogue_snake_stefan():
 
 	]
 	var solved_pages:Array[DynamicPage] = [
+		DynamicPage.new("~ You give Ssssssstefan an egg. ~", "You", fox_portrait),
 		DynamicPage.new("Is zzat an eegg?? Oh zzat's szzoo niczze of youu! I will help you, but don't get too closzze to me or I might take a bite. I can't help it, it'szz a reflexzz.", "Ssssssstefan",snake_portrait)
 	]
 	
@@ -48,6 +49,7 @@ static func dialogue_spider_grandpa():
 	]
 	
 	var solved_pages:Array[DynamicPage] = [
+		DynamicPage.new("~ You give Grandfather Longlegs a huge fly. ~", "You", fox_portrait),
 		DynamicPage.new("Many thanks, young lad. Now that my family is cared for, I will aid you on your quest.", "Grandfather Longlegs",spider_portrait)
 	]
 	
@@ -70,6 +72,7 @@ static func dialogue_squirrel_egg():
 	]
 	
 	var solved_pages:Array[DynamicPage] = [
+		DynamicPage.new("~ You give Esther a nut. ~", "You", fox_portrait),
 		DynamicPage.new("This is way better than the purple one! I’ll take this one and you get the purple one.", "Esther",squirrel_portrait)
 	]
 	
@@ -100,7 +103,8 @@ static func dialogue_squirrel_ol_nutter():
 	]
 	
 	var solved_pages:Array[DynamicPage] = [
-		DynamicPage.new("<Excited Squeaking>...this is incredible! Now everyone will believe in the NUT! We can rise up against Big Frog! We'll join your noble cause!", "Ol' Nutter",squirrel_nutter_portrait)
+		DynamicPage.new("~ You tell Ol' Nutter about some evidence you found. ~", "You", fox_portrait),
+		DynamicPage.new("~ Excited Squeaking ~...this is incredible! Now everyone will believe in the NUT! We can rise up against Big Frog! We'll join your noble cause!", "Ol' Nutter",squirrel_nutter_portrait)
 	]
 	
 	dynamic_dialogue.insert_pages(unsolved_pages,solved_pages)
@@ -115,8 +119,8 @@ static func dialogue_starting_conflict():
 	frog_portrait, "", "")
 	
 	var unsolved_pages:Array[DynamicPage] = [
-		DynamicPage.new("< You hear a loud discussion amongst different animals... >", "You", fox_portrait),
-		DynamicPage.new("< You and your friends decide to investigate >", "You", fox_portrait),
+		DynamicPage.new("~ You hear a loud discussion amongst different animals... ~", "You", fox_portrait),
+		DynamicPage.new("~ You and your friends decide to investigate ~", "You", fox_portrait),
 		DynamicPage.new("My precious webs are broken! The travesty! Watch your step, younglings!", "Grandfather Longlegs", spider_portrait),
 		DynamicPage.new("... if only there was somebody here with really large hooves ...", "Toadally Anonymous", frog_portrait),
 		DynamicPage.new("I'm telling you, it must be the frogs! They have trampled your nets and want your children to starve!", "Ol' Nutter", squirrel_nutter_portrait),
@@ -124,9 +128,9 @@ static func dialogue_starting_conflict():
 		DynamicPage.new("Someone do something about this flood!! Stop being so useless, you rabble!!! My glorious antlers must remain dry!", "Deerington von Antler", deer_portrait),
 		DynamicPage.new("... I would be careful; I heard the spiders want to build their new webs between your antlers ...", "Toadally Anonymous", frog_portrait),
 		DynamicPage.new("Behold!! My new nut will solve this issue!! - ... wait. What's that noise?", "Esther", squirrel_portrait),
-		DynamicPage.new("< a snake comes out of the bushes > ... I'm sssszzzo hungryyy, I need zzzsomezzing I can sssszink my teezz into...", "Ssssssstefan", snake_portrait),
+		DynamicPage.new("~ A snake comes out of the bushes ~ ... I'm sssszzzo hungryyy, I need zzzsomezzing I can sssszink my teezz into...", "Ssssssstefan", snake_portrait),
 		DynamicPage.new("... Save yourselves! The snake will devour us all! It's devious and evil ...", "Toadally Anonymous", frog_portrait),
-		DynamicPage.new("< The squirrels flee in terror, and the discussion dies down. The other animals disperse...>", "You", fox_portrait),
+		DynamicPage.new("~ The squirrels flee in terror, and the discussion dies down. The other animals disperse... ~", "You", fox_portrait),
 		DynamicPage.new("... hehehehehehehehehehehehehehe ...", "Toadally Anonymous", frog_portrait),
 		#DynamicPage.new("<<< due to a series of unfortunate events, the fox must interact with the toadally anonymous individual again after finishing this dialogue. Thank you! >>>", frog_portrait),
 	]
