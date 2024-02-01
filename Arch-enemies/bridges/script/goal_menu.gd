@@ -22,3 +22,11 @@ func _on_continue_button_pressed():
 	SingletonPlayer.add_bridge_connection(current_edge)
 	#SingletonPlayer.set_current_bridge_edge(null)
 	get_tree().change_scene_to_file("res://overworld/main_scene_overworld.tscn")
+
+func _on_back_button_pressed():
+	#reset everthing except the placed animals
+	var grid = get_parent()
+	grid.get_node("Player").reset_player()
+	grid.change_ui_visibility()
+	grid.reset_modes()
+	visible = false
