@@ -915,6 +915,10 @@ script = ExtResource("1_0pfwb")
 [node name="Tutorial" parent="." instance=ExtResource("7_8o7q8")]
 scale = Vector2(0.434787, 0.434781)
 
+[node name="Example" parent="Tutorial/Deer_Tutorial/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer" index="1"]
+text = "The water tried to drown me, but my legs were too long! 
+I can stand in shallow water without any problems, because I'm just so  tall and handsome."
+
 [node name="Grid" type="TileMap" parent="." node_paths=PackedStringArray("inventory_deer", "inventory_snake", "inventory_spider", "inventory_squirrel")]
 visible = false
 tile_set = SubResource("TileSet_ne4ig")

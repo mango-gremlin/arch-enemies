@@ -45,12 +45,12 @@ static func dialogue_spider_grandpa():
 		DynamicPage.new("Can you help solve the flooding issue?", "You", fox_portrait),
 		DynamicPage.new("You young whipper-snapper, get off my net!", "Grandfather Longlegs", spider_portrait), 
 		DynamicPage.new("The last round of rowdy blaggards already scattered my flies and I need to gather new ones to feed my 6582 grandchildren!", "", spider_portrait),
-		DynamicPage.new("Once they are cared for I will consider helping you.", "Grandfather Longlegs", spider_portrait),
+		DynamicPage.new("Once they are cared for, I will consider helping you.", "Grandfather Longlegs", spider_portrait),
 	]
 	
 	var solved_pages:Array[DynamicPage] = [
 		DynamicPage.new("~ You give Grandfather Longlegs a huge fly. ~", "You", fox_portrait),
-		DynamicPage.new("Many thanks, young lad. Now that my family is cared for I will aid you on your quest.", "Grandfather Longlegs",spider_portrait)
+		DynamicPage.new("Many thanks, young lad. Now that my family is cared for, I will aid you on your quest.", "Grandfather Longlegs",spider_portrait)
 	]
 	
 	dynamic_dialogue.insert_pages(unsolved_pages,solved_pages)
@@ -73,7 +73,7 @@ static func dialogue_squirrel_egg():
 	
 	var solved_pages:Array[DynamicPage] = [
 		DynamicPage.new("~ You give Esther a nut. ~", "You", fox_portrait),
-		DynamicPage.new("This is way better than the purple one! Ill take this one and you get the purple one.", "Esther",squirrel_portrait)
+		DynamicPage.new("This is way better than the purple one! I’ll take this one and you get the purple one.", "Esther",squirrel_portrait)
 	]
 	
 	dynamic_dialogue.insert_pages(unsolved_pages,solved_pages)
@@ -89,9 +89,9 @@ static func dialogue_squirrel_ol_nutter():
 	
 	var unsolved_pages:Array[DynamicPage] = [
 		DynamicPage.new("Did you see that nut-damned frog at the meeting back there?! I tell you, that creature is behind everything! ", "Ol' Nutter", squirrel_nutter_portrait),
-		DynamicPage.new("Well it seems like it wanted everyone to argue, instead of helping me.", "You", fox_portrait),
+		DynamicPage.new("Well, it seems like it wanted everyone to argue, instead of helping me.", "You", fox_portrait),
 		DynamicPage.new("HA! Just like I told them! But does anyone believe me? NO! ", "Ol' Nutter", squirrel_nutter_portrait),
-		DynamicPage.new("I'm telling you, whatever it is that this toad is doing, the others are in on it! Only NUT remains at the side of truth!", "Ol' Nutter", squirrel_nutter_portrait),
+		DynamicPage.new("I'm telling you, whatever it is that this toad is doing, the others are in on it! Only NUT remains on the side of truth!", "Ol' Nutter", squirrel_nutter_portrait),
 		DynamicPage.new("NUT? I'm not sure I've heard of them.", "You", fox_portrait),
 		DynamicPage.new("The New Union of Truth - or Nutters for short - of course. The only ones who are not sheep blindly following the croaking of frogs!", "Ol' Nutter", squirrel_nutter_portrait),
 		DynamicPage.new("Except you of course. Do you want to join our.. elusive ranks?", "Ol' Nutter", squirrel_nutter_portrait),
@@ -99,7 +99,7 @@ static func dialogue_squirrel_ol_nutter():
 		DynamicPage.new("But you can see how we need to band together, right? With the beavers being sick, this flooding will just get worse.", "You", fox_portrait),
 		DynamicPage.new("Can you and your... Nutters help me out dealing with the problem?", "You", fox_portrait),
 		DynamicPage.new("Hehe, I'd always help out someone interested in the truth! But the others may need some convincing...", "Ol' Nutter", squirrel_nutter_portrait),
-		DynamicPage.new("Can you travel to the frog-invested island to the east, and bring some evidence to me? I'm sure the entirety of NUT will see your noble cause!", "Ol' Nutter", squirrel_nutter_portrait)
+		DynamicPage.new("Can you travel to the frog-infested island to the east, and bring some evidence to me? I'm sure the entirety of NUT will see your noble cause!", "Ol' Nutter", squirrel_nutter_portrait)
 	]
 	
 	var solved_pages:Array[DynamicPage] = [
@@ -121,12 +121,12 @@ static func dialogue_starting_conflict():
 	var unsolved_pages:Array[DynamicPage] = [
 		DynamicPage.new("~ You hear a loud discussion amongst different animals... ~", "You", fox_portrait),
 		DynamicPage.new("~ You and your friends decide to investigate ~", "You", fox_portrait),
-		DynamicPage.new("My precious webs are broken! The travesty! Watch your step, youngins!", "Grandfather Longlegs", spider_portrait),
+		DynamicPage.new("My precious webs are broken! The travesty! Watch your step, younglings!", "Grandfather Longlegs", spider_portrait),
 		DynamicPage.new("... if only there was somebody here with really large hooves ...", "Toadally Anonymous", frog_portrait),
 		DynamicPage.new("I'm telling you, it must be the frogs! They have trampled your nets and want your children to starve!", "Ol' Nutter", squirrel_nutter_portrait),
-		DynamicPage.new("... thats hard to believe, frogs are way too small to reach your webs ...", "Toadally Anonymous", frog_portrait),
+		DynamicPage.new("... that’s hard to believe, frogs are way too small to reach your webs ...", "Toadally Anonymous", frog_portrait),
 		DynamicPage.new("Someone do something about this flood!! Stop being so useless, you rabble!!! My glorious antlers must remain dry!", "Deerington von Antler", deer_portrait),
-		DynamicPage.new("... I would be careful, I heard the spiders want to build their new webs between your antlers ...", "Toadally Anonymous", frog_portrait),
+		DynamicPage.new("... I would be careful; I heard the spiders want to build their new webs between your antlers ...", "Toadally Anonymous", frog_portrait),
 		DynamicPage.new("Behold!! My new nut will solve this issue!! - ... wait. What's that noise?", "Esther", squirrel_portrait),
 		DynamicPage.new("~ A snake comes out of the bushes ~ ... I'm sssszzzo hungryyy, I need zzzsomezzing I can sssszink my teezz into...", "Ssssssstefan", snake_portrait),
 		DynamicPage.new("... Save yourselves! The snake will devour us all! It's devious and evil ...", "Toadally Anonymous", frog_portrait),
@@ -148,7 +148,7 @@ static func dialogue_final():
 	var dynamic_dialogue = DynamicDialogue.new(squirrel_portrait, "no page here", "", frog_portrait, "", "")
 	
 	var unsolved_pages:Array[DynamicPage] = [
-		DynamicPage.new("If you ran into any problems while playing, please do not hesitate to tell us.", "Toadally Anonymous", frog_portrait),
+		DynamicPage.new("If you run into any problems while playing, please do not hesitate to tell us.", "Toadally Anonymous", frog_portrait),
 		DynamicPage.new("We also would like to know what you thought of the game in general:", "Toadally Anonymous", frog_portrait),
 		DynamicPage.new("- understandability - difficulty (esp: how many animals did you use? Did you have too many?) - fun/boring - suggestions -", "Toadally Anonymous", frog_portrait),
 		DynamicPage.new("Thanks for playing our game! We really appreciate it!", "Toadally Anonymous", frog_portrait),
