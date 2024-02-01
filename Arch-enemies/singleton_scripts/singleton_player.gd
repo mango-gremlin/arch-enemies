@@ -444,6 +444,12 @@ func check_dialogue_finished(npc_id:int) -> bool:
 		
 	return npc_dialogues[npc_id].finished
 
+func npc_check_spoke_to(npc_id:int) -> bool:
+	return npc_dialogues[npc_id].spoke_to_before
+
+func npc_set_spoke_to(npc_id:int, state:bool):
+	npc_dialogues[npc_id].spoke_to_before = state
+
 func obtain_dialogue(npc_id:int):
 	return npc_dialogues[npc_id]
 

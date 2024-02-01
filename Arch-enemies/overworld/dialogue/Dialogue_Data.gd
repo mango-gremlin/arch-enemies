@@ -9,6 +9,7 @@ var quest_done_entries: Array[Dialogue_Entry] = []
 var active_pages:Array[Dialogue_Entry] = []
 var currentEntry: int = 0
 var finished: bool = false
+var spoke_to_before:bool = false 
 var npc_name:String = ""
 
 # used to disable two dialogue options and only use the dialogue_done entries
