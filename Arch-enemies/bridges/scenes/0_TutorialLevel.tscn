@@ -873,17 +873,17 @@ stream = ExtResource("1_he7ej")
 volume_db = -10.0
 autoplay = true
 
+[node name="Sound Effects" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_de6d8")
+max_polyphony = 3
+script = ExtResource("3_h8x8j")
+
 [node name="Walking Sound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_4odb0")
 script = ExtResource("5_njj7s")
 
 [node name="Walking_Timer" type="Timer" parent="."]
 one_shot = true
-
-[node name="Sound Effects" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("2_de6d8")
-max_polyphony = 3
-script = ExtResource("3_h8x8j")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(192, 108)
