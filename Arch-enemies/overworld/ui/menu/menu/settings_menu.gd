@@ -16,11 +16,16 @@ func _on_return_pressed():
 	play_sound.emit("CLICK")
 	get_tree().change_scene_to_file("res://overworld/ui/menu/menu/pause_menu.tscn")
 
+func _on_main_menu_return_pressed():
+	play_sound.emit("CLICK")
+	get_tree().change_scene_to_file("res://overworld/ui/menu/menu/settings_menu_main.tscn")
+	
 # save current values
 func _on_apply_pressed() -> void:
 	Settings.main_volume =  $"VBoxContainer/MainVolume".value
 	Settings.music_volume = $"VBoxContainer/MusicVolume".value
 	Settings.effects_volume = $"VBoxContainer/EffectsVolume".value
+	$"Sound Effects".volume_db = Settings.get_effects_volume()
 	BackgroundMusic.volume_db = Settings.get_music_volume()
 	apply_volume.emit()
 	play_sound.emit("CLICK")
