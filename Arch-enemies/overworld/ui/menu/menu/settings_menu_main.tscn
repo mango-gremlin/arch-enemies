@@ -143,4 +143,5 @@ texture = ExtResource("13_68vqm")
 
 [connection signal="play_sound" from="." to="Sound Effects" method="_on_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/Apply" to="." method="_on_apply_pressed"]
+[connection signal="pressed" from="VBoxContainer/Apply" to="." method="_on_separate_scene_apply_pressed"]
 [connection signal="pressed" from="VBoxContainer/Return" to="." method="_on_main_menu_return_pressed"]
