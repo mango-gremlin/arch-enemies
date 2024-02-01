@@ -100,7 +100,7 @@ static func dialogue_squirrel_ol_nutter():
 	]
 	
 	var solved_pages:Array[DynamicPage] = [
-		DynamicPage.new("~Excited Squeaking~...this is incredible! Now everyone will believe in the NUT! We can rise up against Big Frog! We'll join your noble cause!", "Ol' Nutter",squirrel_nutter_portrait)
+		DynamicPage.new("~ Excited Squeaking ~...this is incredible! Now everyone will believe in the NUT! We can rise up against Big Frog! We'll join your noble cause!", "Ol' Nutter",squirrel_nutter_portrait)
 	]
 	
 	dynamic_dialogue.insert_pages(unsolved_pages,solved_pages)
@@ -124,9 +124,9 @@ static func dialogue_starting_conflict():
 		DynamicPage.new("Someone do something about this flood!! Stop being so useless, you rabble!!! My glorious antlers must remain dry!", "Deerington von Antler", deer_portrait),
 		DynamicPage.new("... I would be careful, I heard the spiders want to build their new webs between your antlers ...", "Toadally Anonymous", frog_portrait),
 		DynamicPage.new("Behold!! My new nut will solve this issue!! - ... wait. What's that noise?", "Esther", squirrel_portrait),
-		DynamicPage.new("~ a snake comes out of the bushes ~ ... I'm sssszzzo hungryyy, I need zzzsomezzing I can sssszink my teezz into...", "Ssssssstefan", snake_portrait),
+		DynamicPage.new("~ A snake comes out of the bushes ~ ... I'm sssszzzo hungryyy, I need zzzsomezzing I can sssszink my teezz into...", "Ssssssstefan", snake_portrait),
 		DynamicPage.new("... Save yourselves! The snake will devour us all! It's devious and evil ...", "Toadally Anonymous", frog_portrait),
-		DynamicPage.new("~ The squirrels flee in terror, and the discussion dies down. The other animals disperse...~", "You", fox_portrait),
+		DynamicPage.new("~ The squirrels flee in terror, and the discussion dies down. The other animals disperse... ~", "You", fox_portrait),
 		DynamicPage.new("... hehehehehehehehehehehehehehe ...", "Toadally Anonymous", frog_portrait),
 		#DynamicPage.new("<<< due to a series of unfortunate events, the fox must interact with the toadally anonymous individual again after finishing this dialogue. Thank you! >>>", frog_portrait),
 	]
