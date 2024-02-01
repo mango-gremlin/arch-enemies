@@ -885,16 +885,6 @@ stream = ExtResource("2_de6d8")
 max_polyphony = 3
 script = ExtResource("3_h8x8j")
 
-[node name="goal_menu" parent="Sound Effects" instance=ExtResource("18_65aa1")]
-visible = false
-top_level = true
-offset_left = 192.0
-offset_top = 108.0
-offset_right = -221.568
-offset_bottom = -136.296
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(192, 108)
 zoom = Vector2(3, 3)
@@ -1042,6 +1032,16 @@ scale = Vector2(1, 10)
 [node name="world_edge_left" parent="Grid" instance=ExtResource("17_wdx7v")]
 position = Vector2(-10, 61)
 scale = Vector2(1, 10)
+
+[node name="goal_menu" parent="Grid" instance=ExtResource("18_65aa1")]
+visible = false
+top_level = true
+offset_left = 192.0
+offset_top = 108.0
+offset_right = -221.568
+offset_bottom = -136.296
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
 [node name="goal" parent="Grid" instance=ExtResource("19_i2bhv")]
 position = Vector2(352, 82)
