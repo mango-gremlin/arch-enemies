@@ -103,7 +103,7 @@ static func dialogue_squirrel_ol_nutter():
 	]
 	
 	var solved_pages:Array[DynamicPage] = [
-    DynamicPage.new("~ You tell Ol' Nutter about some evidence you found. ~", "You", fox_portrait),
+		DynamicPage.new("~ You tell Ol' Nutter about some evidence you found. ~", "You", fox_portrait),
 		DynamicPage.new("~ Excited Squeaking ~...this is incredible! Now everyone will believe in the NUT! We can rise up against Big Frog! We'll join your noble cause!", "Ol' Nutter",squirrel_nutter_portrait)
 	]
 	
