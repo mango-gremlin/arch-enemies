@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://upaiprbcdv15"]
+[gd_scene load_steps=49 format=3 uid="uid://upaiprbcdv15"]
 
 [ext_resource type="Script" path="res://bridges/script/Camera.gd" id="1_0pfwb"]
 [ext_resource type="Texture2D" uid="uid://d0o2q6fijmd1" path="res://assets/art/tilesets/bridge_tileset/bridge_background_color.png" id="2_g3m8w"]
@@ -12,7 +12,9 @@
 [ext_resource type="Texture2D" uid="uid://bax18833oqune" path="res://bridges/assets/red.png" id="9_jxxeb"]
 [ext_resource type="Texture2D" uid="uid://cw66eehxwh20w" path="res://assets/art/objects/bridge_snake.png" id="10_5pkk2"]
 [ext_resource type="Texture2D" uid="uid://desp8tcpswyl4" path="res://assets/art/objects/bridge_spider.png" id="11_fjvi0"]
+[ext_resource type="Texture2D" uid="uid://c1etei55ew2yx" path="res://bridges/assets/shallows.png" id="11_nuh5v"]
 [ext_resource type="Script" path="res://bridges/script/grid.gd" id="12_nxas5"]
+[ext_resource type="Texture2D" uid="uid://dmy2gc7dfwago" path="res://bridges/assets/bottom.png" id="12_p7cd1"]
 [ext_resource type="Script" path="res://bridges/script/grid_visualizer.gd" id="13_xoj3x"]
 [ext_resource type="Script" path="res://bridges/script/grid_drag.gd" id="14_4xmqt"]
 [ext_resource type="Script" path="res://bridges/scenes/toggle_build_fox_mode.gd" id="15_tnxv3"]
@@ -202,6 +204,20 @@ texture_region_size = Vector2i(10, 10)
 2:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 2:3/0/physics_layer_0/angular_velocity = 0.0
 2:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-5, -5, 5, -5, 5, 5, -5, 5)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5wlpw"]
+texture = ExtResource("11_nuh5v")
+texture_region_size = Vector2i(10, 10)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jtm1o"]
+texture = ExtResource("12_p7cd1")
+texture_region_size = Vector2i(10, 10)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_71dc5"]
 texture = ExtResource("5_t3tft")
@@ -869,6 +885,8 @@ sources/2 = SubResource("TileSetAtlasSource_71dc5")
 sources/3 = SubResource("TileSetAtlasSource_1v7j0")
 sources/5 = SubResource("TileSetAtlasSource_xun2x")
 sources/6 = SubResource("TileSetAtlasSource_meq0p")
+sources/11 = SubResource("TileSetAtlasSource_5wlpw")
+sources/12 = SubResource("TileSetAtlasSource_jtm1o")
 
 [node name="FrogHazardLevel" type="Node2D"]
 
@@ -891,6 +909,10 @@ script = ExtResource("1_0pfwb")
 
 [node name="Tutorial" parent="." instance=ExtResource("7_8o7q8")]
 scale = Vector2(0.434787, 0.434781)
+
+[node name="Example" parent="Tutorial/Deer_Tutorial/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer" index="1"]
+text = "The water tried to drown me, but my legs were too long! 
+I can stand in shallow water without any problems, because I'm just so  tall and handsome."
 
 [node name="Grid" type="TileMap" parent="." node_paths=PackedStringArray("inventory_deer", "inventory_snake", "inventory_spider", "inventory_squirrel")]
 visible = false

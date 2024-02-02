@@ -82,5 +82,17 @@ theme = ExtResource("4_a7dfh")
 text = "Retry"
 metadata/_edit_use_anchors_ = true
 
+[node name="RetryButton" type="Button" parent="VBoxContainer/RetryButton"]
+z_index = 2
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.25
+anchor_right = 1.0
+anchor_bottom = 2.25
+theme = ExtResource("4_a7dfh")
+text = "Back"
+metadata/_edit_use_anchors_ = true
+
 [connection signal="pressed" from="VBoxContainer/ContinueButton" to="." method="_on_continue_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/RetryButton" to="." method="_on_retry_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/RetryButton/RetryButton" to="." method="_on_back_button_pressed"]

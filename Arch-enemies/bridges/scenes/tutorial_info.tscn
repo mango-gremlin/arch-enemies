@@ -36,6 +36,10 @@ custom_minimum_size = Vector2(0, 0)
 [node name="Deer_Tutorial" parent="." instance=ExtResource("4_i4jwe")]
 layout_mode = 1
 
+[node name="Example" parent="Deer_Tutorial/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer" index="1"]
+text = "The water tried to drown me, but my legs were too long! 
+I can stand in shallow water without any problems, because I'm just so  tall and handsome."
+
 [node name="Button" type="Button" parent="."]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 0

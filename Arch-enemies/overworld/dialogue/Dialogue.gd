@@ -36,12 +36,20 @@ func in_dialogue() -> bool:
 	return is_in_dialogue
 
 func exit_dialogue():
-	is_in_dialogue = false 
-	active_dialogue = null
-	print("exiting dialogue")
+	# quest could be removed if it was solved
 	if SingletonPlayer.check_dialogue_finished(current_npc_id):
 		SingletonPlayer.remove_quest_string(current_npc_id)
-	
+	is_in_dialogue = false
+	# FIXME NUll-value 
+	active_dialogue = null
+	var quest_done:bool = SingletonPlayer.obtain_npc_quest_state(current_npc_id)
+	var spoke_to_before:bool = SingletonPlayer.npc_check_spoke_to(current_npc_id)
+	SingletonPlayer.npc_set_spoke_to(current_npc_id,true)
+	print("spoke with npc " +  str(spoke_to_before))
+	if not spoke_to_before and quest_done :
+		print("showing quest done dialogue")
+		SingletonPlayer.prepare_dialogue(current_npc_id)
+		return 
 	# hide panel
 	npc_control_instance.hide()
 
