@@ -7,8 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://dhf8aj2xm2dgx" path="res://bridges/scenes/spider_tutorial.tscn" id="3_bhkkr"]
 [ext_resource type="PackedScene" uid="uid://dt7w6pe05hdo5" path="res://bridges/scenes/hazards_tutorial.tscn" id="3_pwlsu"]
 [ext_resource type="PackedScene" uid="uid://dc22g3xoe5o1o" path="res://bridges/scenes/deer_tutorial.tscn" id="4_i4jwe"]
-[ext_resource type="PackedScene" uid="uid://cq1a7a4y7mvxd" path="res://bridges/scenes/button_tutorial.tscn" id="4_mx2kl"]
 [ext_resource type="PackedScene" uid="uid://bhl7a6sahube" path="res://bridges/scenes/zones_tutorial.tscn" id="9_j2j6t"]
+[ext_resource type="PackedScene" uid="uid://dnafxpljtdpvk" path="res://bridges/scenes/buttons_tutorial.tscn" id="10_rioie"]
 [ext_resource type="PackedScene" uid="uid://dx5ngssjupvhw" path="res://bridges/scenes/level_tutorial.tscn" id="10_th33r"]
 
 [node name="Tutorial" type="Control"]
@@ -20,7 +20,7 @@ script = ExtResource("1_8xlim")
 [node name="Hazards_Tutorial" parent="." instance=ExtResource("3_pwlsu")]
 layout_mode = 1
 
-[node name="Buttons_Tutorial" parent="." instance=ExtResource("4_mx2kl")]
+[node name="Buttons_Tutorial" parent="." instance=ExtResource("10_rioie")]
 layout_mode = 1
 
 [node name="Spider_Tutorial" parent="." instance=ExtResource("3_bhkkr")]
@@ -50,7 +50,7 @@ theme_override_font_sizes/font_size = 28
 text = "x"
 
 [connection signal="pressed" from="Hazards_Tutorial/Control/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/Next_Button" to="." method="_on_hazards_button_pressed"]
-[connection signal="pressed" from="Buttons_Tutorial/Control/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/Next_Button" to="." method="_on_buttons_button_pressed"]
+[connection signal="pressed" from="Buttons_Tutorial/PanelContainer/MarginContainer/VBoxContainer/Next_Button" to="." method="_on_buttons_button_pressed"]
 [connection signal="pressed" from="Spider_Tutorial/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/Next_Button" to="." method="_on_spider_button_pressed"]
 [connection signal="pressed" from="Squirrel_Tutorial/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/Next_Button" to="." method="_on_squirrel_button_pressed"]
 [connection signal="pressed" from="Snake_Tutorial/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/Next_Button" to="." method="_on_snake_button_pressed"]
@@ -62,7 +62,6 @@ text = "x"
 [editable path="Hazards_Tutorial"]
 [editable path="Hazards_Tutorial/Control"]
 [editable path="Buttons_Tutorial"]
-[editable path="Buttons_Tutorial/Control"]
 [editable path="Spider_Tutorial"]
 [editable path="Squirrel_Tutorial"]
 [editable path="Snake_Tutorial"]

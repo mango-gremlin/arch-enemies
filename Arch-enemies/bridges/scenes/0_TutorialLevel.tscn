@@ -1139,7 +1139,6 @@ position = Vector2(147, 86)
 [editable path="Tutorial/Hazards_Tutorial"]
 [editable path="Tutorial/Hazards_Tutorial/Control"]
 [editable path="Tutorial/Buttons_Tutorial"]
-[editable path="Tutorial/Buttons_Tutorial/Control"]
 [editable path="Tutorial/Spider_Tutorial"]
 [editable path="Tutorial/Squirrel_Tutorial"]
 [editable path="Tutorial/Snake_Tutorial"]
