@@ -581,4 +581,5 @@ func _on_tutorial_button_pressed():
 
 
 func _on_escape_pressed():
+	play_sound.emit("CLICK")
 	esc_pressed = not esc_pressed
