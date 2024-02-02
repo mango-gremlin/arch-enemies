@@ -19,6 +19,7 @@
 script = ExtResource("1_pwtu4")
 
 [node name="DeeringtonVonAntler" parent="." instance=ExtResource("7_33ud0")]
+z_index = 1
 position = Vector2(271, 427)
 npc_name = "Deerington von Antler"
 npc_animal_type = 1
