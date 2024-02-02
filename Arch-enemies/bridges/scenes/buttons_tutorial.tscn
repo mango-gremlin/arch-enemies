@@ -1,0 +1,192 @@
+[gd_scene load_steps=7 format=3 uid="uid://dnafxpljtdpvk"]
+
+[ext_resource type="Theme" uid="uid://d2ijyc316xeom" path="res://assets/art/ui_elements/ui_theme.tres" id="1_sm12q"]
+[ext_resource type="Texture2D" uid="uid://b00ykicd4nlw1" path="res://assets/art/ui_elements/DialogueBox_outline.png" id="2_036ax"]
+[ext_resource type="Texture2D" uid="uid://cc8672nst5fxe" path="res://assets/tutorial_screenshots/buttons_tutorial.png" id="3_2ekmn"]
+[ext_resource type="Texture2D" uid="uid://igj8k0askwfw" path="res://assets/art/ui_elements/button_normal.png" id="4_4gbnp"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kwaor"]
+texture = ExtResource("2_036ax")
+texture_margin_top = 1.0
+texture_margin_bottom = 1.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7ctfx"]
+texture = ExtResource("4_4gbnp")
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_sm12q")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 768.0
+scale = Vector2(1.00002, 0.843768)
+theme_override_styles/panel = SubResource("StyleBoxTexture_kwaor")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Header" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 2
+theme_override_font_sizes/font_size = 28
+text = "Buttons:"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="Example_Picture" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("3_2ekmn")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="Next_Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_vertical = 10
+theme_override_font_sizes/font_size = 28
+text = "Next"
+
+[node name="PanelContainer2" type="PanelContainer" parent="."]
+layout_mode = 2
+offset_left = 452.0
+offset_top = 153.0
+offset_right = 727.0
+offset_bottom = 278.0
+theme = ExtResource("1_sm12q")
+theme_override_styles/panel = SubResource("StyleBoxTexture_7ctfx")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer2"]
+layout_mode = 2
+theme = ExtResource("1_sm12q")
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 5
+
+[node name="Example2" type="Label" parent="PanelContainer2/MarginContainer"]
+custom_minimum_size = Vector2(20, 5)
+layout_mode = 2
+theme = ExtResource("1_sm12q")
+theme_override_font_sizes/font_size = 22
+text = "switch to fox-mode to run and jump over the bridge"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="PanelContainer3" type="PanelContainer" parent="."]
+layout_mode = 2
+offset_left = 828.0
+offset_top = 153.0
+offset_right = 1078.0
+offset_bottom = 253.0
+theme = ExtResource("1_sm12q")
+theme_override_styles/panel = SubResource("StyleBoxTexture_7ctfx")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer3"]
+layout_mode = 2
+theme = ExtResource("1_sm12q")
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 5
+
+[node name="Example2" type="Label" parent="PanelContainer3/MarginContainer"]
+custom_minimum_size = Vector2(20, 5)
+layout_mode = 2
+theme = ExtResource("1_sm12q")
+theme_override_font_sizes/font_size = 22
+text = "undo your last animal placement"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="PanelContainer4" type="PanelContainer" parent="."]
+layout_mode = 2
+offset_left = 724.0
+offset_top = 433.0
+offset_right = 974.0
+offset_bottom = 533.0
+theme = ExtResource("1_sm12q")
+theme_override_styles/panel = SubResource("StyleBoxTexture_7ctfx")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer4"]
+layout_mode = 2
+theme = ExtResource("1_sm12q")
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 5
+
+[node name="Example2" type="Label" parent="PanelContainer4/MarginContainer"]
+custom_minimum_size = Vector2(20, 5)
+layout_mode = 2
+theme = ExtResource("1_sm12q")
+theme_override_font_sizes/font_size = 22
+text = "reset all animal placements"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="PanelContainer5" type="PanelContainer" parent="."]
+layout_mode = 2
+offset_left = 172.0
+offset_top = 450.0
+offset_right = 422.0
+offset_bottom = 550.0
+theme = ExtResource("1_sm12q")
+theme_override_styles/panel = SubResource("StyleBoxTexture_7ctfx")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer5"]
+layout_mode = 2
+theme = ExtResource("1_sm12q")
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 5
+
+[node name="Example2" type="Label" parent="PanelContainer5/MarginContainer"]
+custom_minimum_size = Vector2(20, 5)
+layout_mode = 2
+theme = ExtResource("1_sm12q")
+theme_override_font_sizes/font_size = 22
+text = "open the menu to leave the level"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="PanelContainer6" type="PanelContainer" parent="."]
+layout_mode = 2
+offset_left = 156.0
+offset_top = 206.0
+offset_right = 381.0
+offset_bottom = 256.0
+theme = ExtResource("1_sm12q")
+theme_override_styles/panel = SubResource("StyleBoxTexture_7ctfx")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer6"]
+layout_mode = 2
+theme = ExtResource("1_sm12q")
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 5
+
+[node name="Example2" type="Label" parent="PanelContainer6/MarginContainer"]
+custom_minimum_size = Vector2(20, 5)
+layout_mode = 2
+theme = ExtResource("1_sm12q")
+theme_override_font_sizes/font_size = 22
+text = "reopen tutorial"
+horizontal_alignment = 1
+autowrap_mode = 3

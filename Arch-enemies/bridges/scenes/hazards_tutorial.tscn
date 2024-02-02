@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://dt7w6pe05hdo5"]
+
+[ext_resource type="PackedScene" uid="uid://bs38w6qv1n2h0" path="res://bridges/scenes/tutorial_template.tscn" id="1_xm6xb"]
+[ext_resource type="Texture2D" uid="uid://8t13pl5w360y" path="res://assets/art/characters/frog.png" id="2_230ii"]
+[ext_resource type="Texture2D" uid="uid://cl4k3reh6cn3p" path="res://assets/tutorial_screenshots/spikes_tutorial.png" id="2_dmtbg"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" parent="." instance=ExtResource("1_xm6xb")]
+layout_mode = 1
+
+[node name="Example_Picture" parent="Control/PanelContainer2/MarginContainer/HBoxContainer" index="0"]
+texture = ExtResource("2_dmtbg")
+
+[node name="Header" parent="Control/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer" index="0"]
+text = "Level hazards:"
+
+[node name="Example2" parent="Control/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer" index="0"]
+text = "Avoid touching the spiky bramble, malicious frogs and the water or you will die and restart from your initial position."
+
+[node name="Animal_Picture" parent="Control/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer" index="2"]
+size_flags_horizontal = 8
+texture = ExtResource("2_230ii")
+flip_h = false
+
+[editable path="Control"]

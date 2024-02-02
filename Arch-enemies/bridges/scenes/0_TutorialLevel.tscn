@@ -31,7 +31,7 @@
 [ext_resource type="PackedScene" uid="uid://cern51r1p8lkb" path="res://bridges/scenes/bridges_pause_menu.tscn" id="20_1ny00"]
 [ext_resource type="PackedScene" uid="uid://dynxnwixd1bke" path="res://bridges/scenes/parallax_background.tscn" id="21_2derg"]
 [ext_resource type="Theme" uid="uid://d2ijyc316xeom" path="res://assets/art/ui_elements/ui_theme.tres" id="21_ltn3j"]
-[ext_resource type="PackedScene" uid="uid://cumelk772llyk" path="res://bridges/scenes/bridges_settings_menu.tscn" id="28_kpc12"]
+[ext_resource type="PackedScene" path="res://bridges/scenes/bridges_settings_menu.tscn" id="28_kpc12"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gxf1m"]
 texture = ExtResource("2_toexv")
@@ -886,14 +886,10 @@ zoom = Vector2(3, 3)
 script = ExtResource("1_2mayf")
 
 [node name="Tutorial" parent="." instance=ExtResource("7_wqkw7")]
+visible = false
 scale = Vector2(0.33335, 0.333427)
 
-[node name="Example" parent="Tutorial/Deer_Tutorial/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer" index="1"]
-text = "The water tried to drown me, but my legs were too long! 
-I can stand in shallow water without any problems, because I'm just so tall and handsome."
-
 [node name="Grid" type="TileMap" parent="." node_paths=PackedStringArray("inventory_deer", "inventory_snake", "inventory_spider", "inventory_squirrel")]
-visible = false
 tile_set = SubResource("TileSet_ne4ig")
 format = 2
 layer_0/name = "level"
@@ -1140,8 +1136,15 @@ position = Vector2(147, 86)
 [connection signal="play_sound" from="Grid/bridges_settings_menu" to="Sound Effects" method="_on_button_pressed"]
 
 [editable path="Tutorial"]
+[editable path="Tutorial/Hazards_Tutorial"]
+[editable path="Tutorial/Hazards_Tutorial/Control"]
+[editable path="Tutorial/Buttons_Tutorial"]
 [editable path="Tutorial/Spider_Tutorial"]
 [editable path="Tutorial/Squirrel_Tutorial"]
 [editable path="Tutorial/Snake_Tutorial"]
 [editable path="Tutorial/Deer_Tutorial"]
+[editable path="Tutorial/Zones_Tutorial"]
+[editable path="Tutorial/Zones_Tutorial/Control"]
+[editable path="Tutorial/Goal_Tutorial"]
+[editable path="Tutorial/Goal_Tutorial/Control"]
 [editable path="parallax_background"]

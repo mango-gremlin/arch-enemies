@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cm25y0k6wuc8m"
-path="res://.godot/imported/background_left.png-0467d083eaf2b8b9a0fc02428d40c4f8.ctex"
+uid="uid://bfpbtvm60sd2f"
+path="res://.godot/imported/green_and_red_zones.png-ac5f443eb7cac1b722c1c281aa0f7206.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://bridges/assets/background/background_left.png"
-dest_files=["res://.godot/imported/background_left.png-0467d083eaf2b8b9a0fc02428d40c4f8.ctex"]
+source_file="res://assets/tutorial_screenshots/green_and_red_zones.png"
+dest_files=["res://.godot/imported/green_and_red_zones.png-ac5f443eb7cac1b722c1c281aa0f7206.ctex"]
 
 [params]
 

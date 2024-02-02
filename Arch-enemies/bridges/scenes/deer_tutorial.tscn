@@ -1,6 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://kckgnp56pvqf"]
+[gd_scene load_steps=4 format=3 uid="uid://dc22g3xoe5o1o"]
 
-[ext_resource type="PackedScene" uid="uid://vvo04yl1cy8p" path="res://bridges/scenes/tutorial_template.tscn" id="1_gssy2"]
+[ext_resource type="PackedScene" uid="uid://bs38w6qv1n2h0" path="res://bridges/scenes/tutorial_template.tscn" id="1_gssy2"]
 [ext_resource type="Texture2D" uid="uid://b7drmw23l1wqd" path="res://assets/tutorial_screenshots/deer_tutorial.png" id="1_humsf"]
 [ext_resource type="Texture2D" uid="uid://c113ngm1rnuj0" path="res://assets/art/characters/deer.png" id="2_mo0v2"]
 
@@ -10,12 +10,11 @@
 texture = ExtResource("1_humsf")
 
 [node name="Header" parent="PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer" index="0"]
-text = "How to place deers:"
+text = "How to place deer:"
 
-[node name="Example" parent="PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer" index="1"]
+[node name="Example2" parent="PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer" index="0"]
 text = "The water tried to drown me, but my legs were too long! 
-I can stand in shallow water withouth any problems, because I'm just so  tall and handsome."
-autowrap_mode = 3
+I can stand in shallow water without any problems, because I'm just so tall and handsome."
 
 [node name="Animal_Picture" parent="PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer" index="2"]
 custom_minimum_size = Vector2(300, 300)

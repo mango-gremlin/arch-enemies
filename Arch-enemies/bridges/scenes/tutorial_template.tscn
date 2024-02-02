@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://vvo04yl1cy8p"]
+[gd_scene load_steps=6 format=3 uid="uid://bs38w6qv1n2h0"]
 
 [ext_resource type="Theme" uid="uid://d2ijyc316xeom" path="res://assets/art/ui_elements/ui_theme.tres" id="1_vgqng"]
 [ext_resource type="Texture2D" uid="uid://b00ykicd4nlw1" path="res://assets/art/ui_elements/DialogueBox_outline.png" id="2_3ahrv"]
@@ -69,11 +69,17 @@ text = "How to place :"
 horizontal_alignment = 1
 uppercase = true
 
-[node name="Example" type="Label" parent="PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_right = 20
+
+[node name="Example2" type="Label" parent="PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
-horizontal_alignment = 3
+horizontal_alignment = 1
+autowrap_mode = 3
 
 [node name="Animal_Picture" type="TextureRect" parent="PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(100, 100)
