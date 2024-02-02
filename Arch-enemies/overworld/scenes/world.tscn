@@ -59,6 +59,7 @@ margins = Vector2i(4, 0)
 5:0/0 = 0
 5:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 5:0/0/physics_layer_0/angular_velocity = 0.0
+5:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-1.94894, -4.11443, -0.925254, -5.25623, 4.11443, -5.17749, 7.028, -1.55522, 6.00431, 1.75208, -0.807137, 2.06706, -1.8702, 0.925254)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_w0ol6"]
 texture = ExtResource("4_itohn")
