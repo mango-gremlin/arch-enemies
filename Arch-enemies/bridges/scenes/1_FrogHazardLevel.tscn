@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://upaiprbcdv15"]
+[gd_scene load_steps=50 format=3 uid="uid://upaiprbcdv15"]
 
 [ext_resource type="Script" path="res://bridges/script/Camera.gd" id="1_0pfwb"]
 [ext_resource type="Texture2D" uid="uid://d0o2q6fijmd1" path="res://assets/art/tilesets/bridge_tileset/bridge_background_color.png" id="2_g3m8w"]
@@ -33,6 +33,7 @@
 [ext_resource type="Script" path="res://bridges/script/bridge_sound.gd" id="26_t4rtc"]
 [ext_resource type="AudioStream" uid="uid://bgeiod4gbwy8j" path="res://assets/sound/Step.wav" id="27_0ph6e"]
 [ext_resource type="Script" path="res://bridges/script/walking_sound.gd" id="28_bfcvy"]
+[ext_resource type="Texture2D" uid="uid://cm25y0k6wuc8m" path="res://bridges/assets/background/Background_left.png" id="34_id14f"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gxf1m"]
 texture = ExtResource("2_g3m8w")
@@ -915,10 +916,6 @@ script = ExtResource("1_0pfwb")
 [node name="Tutorial" parent="." instance=ExtResource("7_8o7q8")]
 scale = Vector2(0.434787, 0.434781)
 
-[node name="Example" parent="Tutorial/Deer_Tutorial/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer" index="1"]
-text = "The water tried to drown me, but my legs were too long! 
-I can stand in shallow water without any problems, because I'm just so  tall and handsome."
-
 [node name="Grid" type="TileMap" parent="." node_paths=PackedStringArray("inventory_deer", "inventory_snake", "inventory_spider", "inventory_squirrel")]
 visible = false
 tile_set = SubResource("TileSet_ne4ig")
@@ -1052,7 +1049,7 @@ theme = ExtResource("21_dcmnv")
 text = "One Step Back"
 
 [node name="Player" parent="Grid" groups=["player"] instance=ExtResource("16_ltm5p")]
-position = Vector2(24, 81)
+position = Vector2(24, 80)
 
 [node name="world_edge_right" parent="Grid" instance=ExtResource("17_3k0i6")]
 position = Vector2(510, 62)
@@ -1143,6 +1140,7 @@ texture = ExtResource("23_f4q6k")
 
 [node name="sprite_left_side" parent="parallax_background/static_sides" index="0"]
 position = Vector2(99, 99)
+texture = ExtResource("34_id14f")
 
 [node name="sprite_right_side" parent="parallax_background/static_sides" index="1"]
 position = Vector2(401, 99)
