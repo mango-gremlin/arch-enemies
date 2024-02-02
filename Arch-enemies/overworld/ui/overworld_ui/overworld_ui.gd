@@ -49,10 +49,10 @@ var player_item_inventory:Dictionary = {}:
 		player_item_inventory = new_dict
 		_update_item_inventory_label()
 
-var player_animal_inventory:Dictionary = {}#:
-	#set(new_dict):
-	#	player_animal_inventory = new_dict
-	#	_update_animal_inventory_label()
+var player_animal_inventory:Dictionary = {}:
+	set(new_dict):
+		player_animal_inventory = new_dict
+		_update_animal_inventory_label()
 
 var player_active_quest_dictionary:Dictionary = {}:
 	set(new_dict):
