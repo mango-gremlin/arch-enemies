@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://dx5ngssjupvhw"]
+
+[ext_resource type="PackedScene" uid="uid://bs38w6qv1n2h0" path="res://bridges/scenes/tutorial_template.tscn" id="1_5kp2g"]
+[ext_resource type="Texture2D" uid="uid://b20mjrs2jg742" path="res://assets/tutorial_screenshots/goal_tutorial.png" id="2_fnuey"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" parent="." instance=ExtResource("1_5kp2g")]
+layout_mode = 1
+
+[node name="Example_Picture" parent="Control/PanelContainer2/MarginContainer/HBoxContainer" index="0"]
+texture = ExtResource("2_fnuey")
+
+[node name="Header" parent="Control/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer" index="0"]
+text = "Reach the goal:"
+
+[node name="Example2" parent="Control/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer" index="0"]
+text = "You need to build a bridge out of your animal allies to cross the water and reach the goal on the other side."
+
+[editable path="Control"]

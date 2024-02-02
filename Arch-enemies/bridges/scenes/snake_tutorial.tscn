@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bp286phfoqyt1"]
 
 [ext_resource type="Texture2D" uid="uid://37iifgc8h671" path="res://assets/tutorial_screenshots/archenemies_snake_tutorial.png" id="1_52o8j"]
-[ext_resource type="PackedScene" uid="uid://vvo04yl1cy8p" path="res://bridges/scenes/tutorial_template.tscn" id="1_na8om"]
+[ext_resource type="PackedScene" uid="uid://bs38w6qv1n2h0" path="res://bridges/scenes/tutorial_template.tscn" id="1_na8om"]
 [ext_resource type="Texture2D" uid="uid://0j6i0mpsh8hq" path="res://assets/art/characters/snek.png" id="2_bm6y4"]
 
 [node name="Control" instance=ExtResource("1_na8om")]
@@ -12,11 +12,9 @@ texture = ExtResource("1_52o8j")
 [node name="Header" parent="PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer" index="0"]
 text = "How to place snakes:"
 
-[node name="Example" parent="PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer" index="1"]
-size_flags_vertical = 8
-text = "Zzats a taszzty looking szzquirrel. 
+[node name="Example2" parent="PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer" index="0"]
+text = "Zzats a taszzty looking animal. 
 You better not placzze it anywhere near my head or I might just take a bite szzz."
-autowrap_mode = 3
 
 [node name="Animal_Picture" parent="PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer" index="2"]
 custom_minimum_size = Vector2(300, 200)
