@@ -4,10 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://d0o2q6fijmd1" path="res://assets/art/tilesets/bridge_tileset/bridge_background_color.png" id="1_uowbf"]
 [ext_resource type="Script" path="res://bridges/script/Camera.gd" id="1_vkapa"]
 [ext_resource type="Script" path="res://bridges/script/grid.gd" id="1_xtvvi"]
-[ext_resource type="AudioStream" uid="uid://n71rssah4ej4" path="res://assets/sound/Main_Menu.wav" id="2_3o2us"]
 [ext_resource type="Texture2D" uid="uid://dgoo8sdw24hp0" path="res://assets/art/tilesets/bridge_tileset/bridge_air_tiles.png" id="2_4xri4"]
 [ext_resource type="Script" path="res://bridges/script/grid_visualizer.gd" id="2_d8ovy"]
-[ext_resource type="Script" path="res://bridges/script/bridge_sound.gd" id="3_dujuj"]
+[ext_resource type="Script" path="res://sound/effects_sound.gd" id="3_dujuj"]
 [ext_resource type="AudioStream" uid="uid://b1diue16pa0ld" path="res://assets/sound/Victory.wav" id="3_kilw0"]
 [ext_resource type="Texture2D" uid="uid://bbktakyncn7nc" path="res://assets/art/objects/bridge_deer.png" id="3_x44oq"]
 [ext_resource type="Texture2D" uid="uid://gyfjmxefsxu0" path="res://assets/art/tilesets/bridge_tileset/bridge_ground_tiles.png" id="4_jv8nt"]
@@ -30,6 +29,7 @@
 [ext_resource type="Theme" uid="uid://d2ijyc316xeom" path="res://assets/art/ui_elements/ui_theme.tres" id="16_htx1q"]
 [ext_resource type="PackedScene" uid="uid://dynxnwixd1bke" path="res://bridges/scenes/parallax_background.tscn" id="18_uekha"]
 [ext_resource type="PackedScene" uid="uid://cern51r1p8lkb" path="res://bridges/scenes/bridges_pause_menu.tscn" id="20_nac6o"]
+[ext_resource type="PackedScene" uid="uid://cumelk772llyk" path="res://bridges/scenes/bridges_settings_menu.tscn" id="27_pa0u1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gxf1m"]
 texture = ExtResource("1_uowbf")
@@ -806,11 +806,6 @@ position = Vector2(192, 108)
 zoom = Vector2(3, 3)
 script = ExtResource("1_vkapa")
 
-[node name="Background Music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("2_3o2us")
-volume_db = -10.0
-autoplay = true
-
 [node name="Sound Effects" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_kilw0")
 max_polyphony = 3
@@ -954,6 +949,10 @@ position = Vector2(340, 95)
 [node name="bridges_pause_menu" parent="Grid" instance=ExtResource("20_nac6o")]
 visible = false
 
+[node name="bridges_settings_menu" parent="Grid" instance=ExtResource("27_pa0u1")]
+visible = false
+z_index = 3
+
 [node name="animal_inventory_counter" type="HBoxContainer" parent="Grid"]
 offset_top = 36.0
 offset_right = 134.0
@@ -1016,8 +1015,15 @@ horizontal_alignment = 1
 [connection signal="need_grid" from="Grid/Control/Animal_Inventory/Squirrel_Item" to="Grid" method="_on_squirrel_item_need_grid"]
 [connection signal="play_sound" from="Grid/Control/Animal_Inventory/Squirrel_Item" to="Sound Effects" method="_on_squirrel_item_play_sound"]
 [connection signal="update_grid" from="Grid/Control/Animal_Inventory/Squirrel_Item" to="Grid" method="_on_squirrel_item_update_grid"]
+[connection signal="play_sound" from="Grid/Control/Drag_or_Fox" to="Sound Effects" method="_on_button_pressed"]
 [connection signal="toggled" from="Grid/Control/Drag_or_Fox" to="Grid/Control/Drag_or_Fox" method="_on_toggled"]
 [connection signal="pressed" from="Grid/Control/Reset" to="Grid" method="_on_reset_pressed"]
 [connection signal="pressed" from="Grid/Control/Last_State" to="Grid" method="_on_last_state_pressed"]
 [connection signal="play_sound" from="Grid/Player" to="Sound Effects" method="_on_player_play_sound"]
 [connection signal="level_solved" from="Grid/goal_menu" to="Grid" method="_on_goal_menu_level_solved"]
+[connection signal="play_sound" from="Grid/goal_menu" to="Sound Effects" method="_on_button_pressed"]
+[connection signal="open_settings" from="Grid/bridges_pause_menu" to="Grid/bridges_settings_menu" method="_on_bridges_pause_menu_open_settings"]
+[connection signal="play_sound" from="Grid/bridges_pause_menu" to="Sound Effects" method="_on_button_pressed"]
+[connection signal="apply_volume" from="Grid/bridges_settings_menu" to="Sound Effects" method="_on_bridges_settings_menu_apply_volume"]
+[connection signal="apply_volume" from="Grid/bridges_settings_menu" to="Walking Sound" method="_on_bridges_settings_menu_apply_volume"]
+[connection signal="play_sound" from="Grid/bridges_settings_menu" to="Sound Effects" method="_on_button_pressed"]

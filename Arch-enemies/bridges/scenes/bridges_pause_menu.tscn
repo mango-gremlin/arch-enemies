@@ -9,6 +9,10 @@
 z_index = 3
 layout_mode = 3
 anchors_preset = 0
+offset_left = 190.0
+offset_top = 115.0
+offset_right = 190.0
+offset_bottom = 115.0
 script = ExtResource("1_ym7wh")
 metadata/_edit_use_anchors_ = true
 
@@ -50,6 +54,7 @@ scale = Vector2(2.25, 2.25)
 texture = ExtResource("3_x8j61")
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="."]
+z_index = 1
 layout_mode = 2
 offset_left = -36.0
 offset_top = -33.0
@@ -84,4 +89,5 @@ theme = ExtResource("2_xkekq")
 text = "Exit"
 
 [connection signal="pressed" from="VBoxContainer2/overworld" to="." method="_on_overworld_pressed"]
+[connection signal="pressed" from="VBoxContainer2/Options" to="." method="_on_bridges_options_pressed"]
 [connection signal="pressed" from="VBoxContainer2/Exit" to="." method="_on_exit_pressed"]

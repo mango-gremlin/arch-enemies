@@ -1,7 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://kiso0os3bn2l"]
+[gd_scene load_steps=11 format=3 uid="uid://kiso0os3bn2l"]
 
 [ext_resource type="Texture2D" uid="uid://leqswdio6xwd" path="res://bridges/assets/background/background_center_v4.png" id="1_eux8p"]
 [ext_resource type="Script" path="res://overworld/ui/main_menu/about.gd" id="1_vo3wm"]
+[ext_resource type="AudioStream" uid="uid://b1diue16pa0ld" path="res://assets/sound/Victory.wav" id="2_47834"]
+[ext_resource type="Script" path="res://sound/effects_sound.gd" id="3_03bv3"]
 [ext_resource type="Texture2D" uid="uid://b00ykicd4nlw1" path="res://assets/art/ui_elements/DialogueBox_outline.png" id="3_12cib"]
 [ext_resource type="Theme" uid="uid://d2ijyc316xeom" path="res://assets/art/ui_elements/ui_theme.tres" id="3_41oba"]
 [ext_resource type="Texture2D" uid="uid://clicedycroinp" path="res://assets/art/characters/Frog_Sprite_Shaded.png" id="4_acgr2"]
@@ -21,6 +23,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_vo3wm")
+
+[node name="Sound Effects" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_47834")
+max_polyphony = 3
+script = ExtResource("3_03bv3")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 0
@@ -180,4 +187,5 @@ theme = ExtResource("3_41oba")
 theme_override_font_sizes/font_size = 30
 text = "back"
 
+[connection signal="play_sound" from="." to="Sound Effects" method="_on_button_pressed"]
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

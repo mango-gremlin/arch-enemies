@@ -1,0 +1,147 @@
+[gd_scene load_steps=14 format=3 uid="uid://cytdgr0aglgs7"]
+
+[ext_resource type="Script" path="res://overworld/ui/menu/menu/settings_menu.gd" id="1_itnyw"]
+[ext_resource type="AudioStream" uid="uid://b1diue16pa0ld" path="res://assets/sound/Victory.wav" id="2_3l8dl"]
+[ext_resource type="Script" path="res://sound/effects_sound.gd" id="3_ndxq4"]
+[ext_resource type="Texture2D" uid="uid://cw2m4eacnrv72" path="res://assets/art/ui_elements/menu_container_sound_settings.png" id="4_o6xwm"]
+[ext_resource type="Theme" uid="uid://d2ijyc316xeom" path="res://assets/art/ui_elements/ui_theme.tres" id="5_xt3cd"]
+[ext_resource type="Script" path="res://overworld/ui/menu/menu/volume_settings.gd" id="6_l7yq0"]
+[ext_resource type="Texture2D" uid="uid://y0rbyb8ymrue" path="res://assets/art/ui_elements/clouds/cloud_1.png" id="7_owyx7"]
+[ext_resource type="Texture2D" uid="uid://tkvu5brhxdg2" path="res://assets/art/ui_elements/clouds/cloud_2.png" id="8_wu0ti"]
+[ext_resource type="Texture2D" uid="uid://hfchs1d4pd74" path="res://assets/art/ui_elements/clouds/cloud_3.png" id="9_nrii1"]
+[ext_resource type="Texture2D" uid="uid://bq8h21mq3lqon" path="res://assets/art/ui_elements/clouds/cloud_4.png" id="10_ks8iy"]
+[ext_resource type="Texture2D" uid="uid://bor1f6u6tjguy" path="res://assets/art/ui_elements/clouds/cloud_5.png" id="11_4amla"]
+[ext_resource type="Texture2D" uid="uid://bqtk5n8foclwk" path="res://assets/art/ui_elements/clouds/cloud_6.png" id="12_6hevq"]
+[ext_resource type="Texture2D" uid="uid://bt3l6nwayw6ai" path="res://assets/art/ui_elements/clouds/cloud_7.png" id="13_68vqm"]
+
+[node name="sound_menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_itnyw")
+
+[node name="Sound Effects" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_3l8dl")
+max_polyphony = 3
+script = ExtResource("3_ndxq4")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 1151.0
+offset_bottom = 647.0
+color = Color(0.313726, 0.882353, 0.890196, 1)
+
+[node name="MenuContainer" type="Sprite2D" parent="."]
+position = Vector2(574, 353)
+scale = Vector2(6.5, 6.5)
+texture = ExtResource("4_o6xwm")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+offset_left = 465.0
+offset_top = 140.0
+offset_right = 537.0
+offset_bottom = 276.0
+scale = Vector2(3, 3)
+
+[node name="Main" type="Label" parent="VBoxContainer"]
+z_index = 1
+layout_mode = 2
+theme = ExtResource("5_xt3cd")
+text = "Main"
+horizontal_alignment = 1
+
+[node name="MainVolume" type="HSlider" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("5_xt3cd")
+max_value = 1.0
+step = 0.01
+value = 0.5
+script = ExtResource("6_l7yq0")
+
+[node name="Music" type="Label" parent="VBoxContainer"]
+z_index = 1
+layout_mode = 2
+theme = ExtResource("5_xt3cd")
+text = "Music"
+horizontal_alignment = 1
+
+[node name="MusicVolume" type="HSlider" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("5_xt3cd")
+max_value = 1.0
+step = 0.01
+value = 0.5
+script = ExtResource("6_l7yq0")
+
+[node name="Effects" type="Label" parent="VBoxContainer"]
+z_index = 1
+layout_mode = 2
+theme = ExtResource("5_xt3cd")
+text = "Effects"
+horizontal_alignment = 1
+
+[node name="EffectsVolume" type="HSlider" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("5_xt3cd")
+max_value = 1.0
+step = 0.01
+value = 0.5
+script = ExtResource("6_l7yq0")
+
+[node name="Apply" type="Button" parent="VBoxContainer"]
+z_index = 1
+layout_mode = 2
+theme = ExtResource("5_xt3cd")
+text = "Apply"
+
+[node name="Return" type="Button" parent="VBoxContainer"]
+z_index = 1
+layout_mode = 2
+theme = ExtResource("5_xt3cd")
+text = "Return"
+
+[node name="Cloud1" type="Sprite2D" parent="."]
+position = Vector2(193, 132)
+scale = Vector2(8, 8)
+texture = ExtResource("7_owyx7")
+
+[node name="Cloud2" type="Sprite2D" parent="."]
+position = Vector2(837, 80)
+scale = Vector2(8, 8)
+texture = ExtResource("8_wu0ti")
+
+[node name="Cloud3" type="Sprite2D" parent="."]
+position = Vector2(903, 211)
+scale = Vector2(8, 8)
+texture = ExtResource("9_nrii1")
+
+[node name="Cloud4" type="Sprite2D" parent="."]
+position = Vector2(341, 319)
+scale = Vector2(8, 8)
+texture = ExtResource("10_ks8iy")
+
+[node name="Cloud5" type="Sprite2D" parent="."]
+position = Vector2(1041, 138)
+scale = Vector2(8, 8)
+texture = ExtResource("11_4amla")
+
+[node name="Cloud6" type="Sprite2D" parent="."]
+position = Vector2(348, 54)
+scale = Vector2(8, 8)
+texture = ExtResource("12_6hevq")
+
+[node name="Cloud7" type="Sprite2D" parent="."]
+position = Vector2(139, 255)
+scale = Vector2(8, 8)
+texture = ExtResource("13_68vqm")
+
+[connection signal="play_sound" from="." to="Sound Effects" method="_on_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Apply" to="." method="_on_apply_pressed"]
+[connection signal="pressed" from="VBoxContainer/Apply" to="." method="_on_separate_scene_apply_pressed"]
+[connection signal="pressed" from="VBoxContainer/Return" to="." method="_on_main_menu_return_pressed"]

@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://bm4bdq6ka013n"]
+[gd_scene load_steps=15 format=3 uid="uid://bm4bdq6ka013n"]
 
 [ext_resource type="Script" path="res://overworld/scripts/main_menu.gd" id="1_w25qy"]
 [ext_resource type="Theme" uid="uid://d2ijyc316xeom" path="res://assets/art/ui_elements/ui_theme.tres" id="1_y2jls"]
 [ext_resource type="Texture2D" uid="uid://cm1xjw1g442ht" path="res://assets/main_menu_background.png" id="2_jxyfb"]
-[ext_resource type="AudioStream" uid="uid://n71rssah4ej4" path="res://assets/sound/Main_Menu.wav" id="3_j2ahf"]
+[ext_resource type="AudioStream" uid="uid://b1diue16pa0ld" path="res://assets/sound/Victory.wav" id="3_lhu23"]
 [ext_resource type="Texture2D" uid="uid://6mcb7hf0rp0k" path="res://assets/art/ui_elements/Box_border_side.png" id="4_dh2lh"]
+[ext_resource type="Script" path="res://sound/effects_sound.gd" id="4_vyu5a"]
 [ext_resource type="Texture2D" uid="uid://co3jrch10y3mb" path="res://assets/art/ui_elements/menu_container_top.png" id="5_3tcp8"]
 [ext_resource type="Texture2D" uid="uid://igj8k0askwfw" path="res://assets/art/ui_elements/button_normal.png" id="5_nsoik"]
 [ext_resource type="Texture2D" uid="uid://dwu3b8hug0u0v" path="res://assets/art/ui_elements/button_hover.png" id="6_a1ij4"]
@@ -40,10 +41,10 @@ grow_vertical = 2
 theme = ExtResource("1_y2jls")
 script = ExtResource("1_w25qy")
 
-[node name="Background Music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_j2ahf")
-volume_db = -10.0
-autoplay = true
+[node name="Sound Effects" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_lhu23")
+max_polyphony = 3
+script = ExtResource("4_vyu5a")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
@@ -167,6 +168,7 @@ texture = ExtResource("7_i5sbm")
 expand_mode = 5
 stretch_mode = 4
 
+[connection signal="play_sound" from="." to="Sound Effects" method="_on_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/overworld" to="." method="_on_overworld_pressed"]
 [connection signal="pressed" from="VBoxContainer/Options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="VBoxContainer/Exit" to="." method="_on_exit_pressed"]

@@ -2,13 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://r2o6y2vdqdgy"
-path="res://.godot/imported/Snake.wav-256ed6eaff291cfc5d4723a5d5895fef.sample"
+uid="uid://351dlyb32fc0"
+path="res://.godot/imported/Step_v4.wav-e235b21e8feb97657ffba9183ccb80e5.sample"
 
 [deps]
 
-source_file="res://assets/sound/Snake.wav"
-dest_files=["res://.godot/imported/Snake.wav-256ed6eaff291cfc5d4723a5d5895fef.sample"]
+source_file="res://assets/sound/Step_v4.wav"
+dest_files=["res://.godot/imported/Step_v4.wav-e235b21e8feb97657ffba9183ccb80e5.sample"]
 
 [params]
 

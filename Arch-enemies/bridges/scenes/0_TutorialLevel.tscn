@@ -1,11 +1,10 @@
 [gd_scene load_steps=47 format=3 uid="uid://cqhrnwqvy3sgh"]
 
 [ext_resource type="Script" path="res://bridges/script/Camera.gd" id="1_2mayf"]
-[ext_resource type="AudioStream" uid="uid://n71rssah4ej4" path="res://assets/sound/Main_Menu.wav" id="1_he7ej"]
 [ext_resource type="AudioStream" uid="uid://b1diue16pa0ld" path="res://assets/sound/Victory.wav" id="2_de6d8"]
 [ext_resource type="Texture2D" uid="uid://d0o2q6fijmd1" path="res://assets/art/tilesets/bridge_tileset/bridge_background_color.png" id="2_toexv"]
 [ext_resource type="Texture2D" uid="uid://dgoo8sdw24hp0" path="res://assets/art/tilesets/bridge_tileset/bridge_air_tiles.png" id="3_578bv"]
-[ext_resource type="Script" path="res://bridges/script/bridge_sound.gd" id="3_h8x8j"]
+[ext_resource type="Script" path="res://sound/effects_sound.gd" id="3_h8x8j"]
 [ext_resource type="AudioStream" uid="uid://bgeiod4gbwy8j" path="res://assets/sound/Step.wav" id="4_4odb0"]
 [ext_resource type="Texture2D" uid="uid://bbktakyncn7nc" path="res://assets/art/objects/bridge_deer.png" id="4_p3g7p"]
 [ext_resource type="Texture2D" uid="uid://gyfjmxefsxu0" path="res://assets/art/tilesets/bridge_tileset/bridge_ground_tiles.png" id="5_ahoix"]
@@ -32,6 +31,7 @@
 [ext_resource type="PackedScene" uid="uid://cern51r1p8lkb" path="res://bridges/scenes/bridges_pause_menu.tscn" id="20_1ny00"]
 [ext_resource type="PackedScene" uid="uid://dynxnwixd1bke" path="res://bridges/scenes/parallax_background.tscn" id="21_2derg"]
 [ext_resource type="Theme" uid="uid://d2ijyc316xeom" path="res://assets/art/ui_elements/ui_theme.tres" id="21_ltn3j"]
+[ext_resource type="PackedScene" uid="uid://cumelk772llyk" path="res://bridges/scenes/bridges_settings_menu.tscn" id="28_kpc12"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gxf1m"]
 texture = ExtResource("2_toexv")
@@ -868,11 +868,6 @@ sources/12 = SubResource("TileSetAtlasSource_4o8p7")
 
 [node name="TutorialLevel" type="Node2D"]
 
-[node name="Background Music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("1_he7ej")
-volume_db = -10.0
-autoplay = true
-
 [node name="Sound Effects" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_de6d8")
 max_polyphony = 3
@@ -980,7 +975,6 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("21_ltn3j")
-theme_override_font_sizes/font_size = 10
 text = "?"
 
 [node name="Drag_or_Fox" type="CheckButton" parent="Grid/Control"]
@@ -1057,6 +1051,14 @@ offset_top = 108.0
 offset_right = 193.0
 offset_bottom = 108.0
 
+[node name="bridges_settings_menu" parent="Grid" instance=ExtResource("28_kpc12")]
+visible = false
+z_index = 3
+offset_left = 193.0
+offset_top = 108.0
+offset_right = 193.0
+offset_bottom = 108.0
+
 [node name="animal_inventory_counter" type="HBoxContainer" parent="Grid"]
 offset_top = 36.0
 offset_right = 52.0
@@ -1094,6 +1096,8 @@ visible = false
 position = Vector2(147, 86)
 
 [connection signal="send_zoom" from="Camera2D" to="Grid" method="_on_camera_2d_send_zoom"]
+[connection signal="play_sound" from="Tutorial" to="Sound Effects" method="_on_button_pressed"]
+[connection signal="play_sound" from="Tutorial" to="Sound Effects" method="_on_tutorial_play_sound"]
 [connection signal="current_grid" from="Grid" to="Grid/Control/Drag_Grid" method="_on_grid_current_grid"]
 [connection signal="current_grid" from="Grid" to="Grid/Control/Animal_Inventory/Deer_Item" method="_on_grid_current_grid"]
 [connection signal="current_grid" from="Grid" to="Grid/Control/Animal_Inventory/Snake_Item" method="_on_grid_current_grid"]
@@ -1122,11 +1126,18 @@ position = Vector2(147, 86)
 [connection signal="play_sound" from="Grid/Control/Animal_Inventory/Squirrel_Item" to="Sound Effects" method="_on_squirrel_item_play_sound"]
 [connection signal="update_grid" from="Grid/Control/Animal_Inventory/Squirrel_Item" to="Grid" method="_on_squirrel_item_update_grid"]
 [connection signal="pressed" from="Grid/Control/Animal_Inventory/tutorial_button" to="Grid" method="_on_tutorial_button_pressed"]
+[connection signal="play_sound" from="Grid/Control/Drag_or_Fox" to="Sound Effects" method="_on_button_pressed"]
 [connection signal="toggled" from="Grid/Control/Drag_or_Fox" to="Grid/Control/Drag_or_Fox" method="_on_toggled"]
 [connection signal="pressed" from="Grid/Control/Reset" to="Grid" method="_on_reset_pressed"]
-[connection signal="pressed" from="Grid/Control/Escape" to="Grid" method="open_pause_menu"]
+[connection signal="pressed" from="Grid/Control/Escape" to="Grid" method="_on_escape_pressed"]
 [connection signal="pressed" from="Grid/Control/Last_State" to="Grid" method="_on_last_state_pressed"]
 [connection signal="play_sound" from="Grid/Player" to="Sound Effects" method="_on_player_play_sound"]
+[connection signal="play_sound" from="Grid/goal_menu" to="Sound Effects" method="_on_button_pressed"]
+[connection signal="open_settings" from="Grid/bridges_pause_menu" to="Grid/bridges_settings_menu" method="_on_bridges_pause_menu_open_settings"]
+[connection signal="play_sound" from="Grid/bridges_pause_menu" to="Sound Effects" method="_on_button_pressed"]
+[connection signal="apply_volume" from="Grid/bridges_settings_menu" to="Sound Effects" method="_on_bridges_settings_menu_apply_volume"]
+[connection signal="apply_volume" from="Grid/bridges_settings_menu" to="Walking Sound" method="_on_bridges_settings_menu_apply_volume"]
+[connection signal="play_sound" from="Grid/bridges_settings_menu" to="Sound Effects" method="_on_button_pressed"]
 
 [editable path="Tutorial"]
 [editable path="Tutorial/Spider_Tutorial"]

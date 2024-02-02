@@ -8,6 +8,8 @@ var squirrel
 var spider
 var tutorial_level
 
+signal play_sound(sound_type)
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	deer = get_node("Deer_Tutorial")
@@ -31,21 +33,25 @@ func _ready():
 
 func _on_deer_button_pressed():
 	deer.visible = false
+	play_sound.emit("CLICK")
 	is_all_closed()
 
 
 func _on_snake_button_pressed():
 	snake.visible = false
+	play_sound.emit("CLICK")
 	is_all_closed()
 
 
 func _on_squirrel_button_pressed():
 	squirrel.visible = false
+	play_sound.emit("CLICK")
 	is_all_closed()
 
 
 func _on_spider_button_pressed():
 	spider.visible = false
+	play_sound.emit("CLICK")
 	is_all_closed()
 
 
@@ -56,6 +62,7 @@ func _on_button_pressed():
 		spider.visible = false
 	visible = false
 	parent.get_node("Grid").visible = true
+	play_sound.emit("CLICK")
 
 
 func is_all_closed():
