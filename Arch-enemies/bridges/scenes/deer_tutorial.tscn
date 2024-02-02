@@ -14,7 +14,7 @@ text = "How to place deer:"
 
 [node name="Example2" parent="PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer" index="0"]
 text = "The water tried to drown me, but my legs were too long! 
-I can stand in shallow water withouth any problems, because I'm just so tall and handsome."
+I can stand in shallow water without any problems, because I'm just so tall and handsome."
 
 [node name="Animal_Picture" parent="PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer" index="2"]
 custom_minimum_size = Vector2(300, 300)

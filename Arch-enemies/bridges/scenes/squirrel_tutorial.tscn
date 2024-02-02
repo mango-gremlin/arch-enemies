@@ -13,7 +13,7 @@ texture = ExtResource("1_v31ag")
 text = "How to place squirrels:"
 
 [node name="Example2" parent="PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer" index="0"]
-text = "Since I love to climb trees and look for tasty nuts I can grab onto the sides of object, as long as it's not too spiky."
+text = "Since I love to climb trees and look for tasty nuts, I can grab onto the sides of objects, as long as it's not too spiky."
 
 [node name="Animal_Picture" parent="PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer" index="2"]
 custom_minimum_size = Vector2(100, 200)
