@@ -278,7 +278,7 @@ floor_max_angle = 0.872665
 script = ExtResource("1_uy84w")
 speed = 100.0
 jump_velocity = -250.0
-coyote_frames = 8
+coyote_frames = 6
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 2
