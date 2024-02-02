@@ -8,6 +8,11 @@ class_name OverWorldUI
 @onready var checkmarks = $Control/QuestsAndQuestBox/QuestContainer/Checkmarks.get_children()
 @onready var quest_solveable_markers = $Control/QuestSolveable.get_children()
 
+# load textures for quest solveable indicator and quest checked mark
+@onready var quest_solveable_indicator = load("res://assets/art/ui_elements/quest_solve_indicator.png")
+@onready var quest_empty_solve_indicator = load("res://assets/art/ui_elements/quest_solve_indicator_invis.png")
+@onready var checked_checkmark = load("res://assets/art/ui_elements/checkmark_checked.png")
+
 #@onready var playername_label = $Control/MarginContainer/VBoxContainer/HBoxContainer2/PlayerName
 # these two are technically redundant
 @onready var item_list_label = $Control/Items/VBoxContainer/HBoxContainer3/VBoxContainer/item_list
@@ -111,7 +116,8 @@ func _update_animal_inventory_label():
 # iterates over received list of quests
 # displays them formatted in newline 
 # compares quest list in ui to quest list in singleton, adds new quests
-# but does not remove solved quests
+# but does not remove solved quests.
+# adds an empty checkmark to new quests
 func _update_quest_list():
 	var label_string:String = ""
 	
@@ -152,9 +158,31 @@ func add_empty_checkmarks():
 			checkmark.visible = true
 			return
 
+# add a checked checkmark to solved quests in the list
+func add_solved_checkmarks():
+	for quest_id in player_quests_to_display:
+		var quest_solved = SingletonPlayer.obtain_npc_quest_state(quest_id)
+		var quest_id_idx = player_quests_to_display.keys().find(quest_id)
+		
+		if quest_solved:
+			checkmarks[quest_id_idx].texture = checked_checkmark
+			quest_solveable_markers[quest_id_idx].texture = quest_empty_solve_indicator
+
+# add an indicator to signify you can talk to the npc to solve the quest
+func add_solveable_indicators():
+	for quest_id in player_quests_to_display:
+		var npc_object:NPC_interaction = SingletonPlayer.obtain_npc_object(quest_id)
+		var is_solveable = npc_object.check_quest_condition()
+		var quest_id_idx = player_quests_to_display.keys().find(quest_id)
+		
+		# set the solveable indicator with idx = quest_id_index if quest solveable
+		if is_solveable:
+			quest_solveable_markers[quest_id_idx].texture = quest_solveable_indicator
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	add_solveable_indicators()
+	add_solved_checkmarks()
 
 
 # updates the internal inventories/lists upon signal received

@@ -77,6 +77,7 @@ text = "Quests :"
 layout_mode = 2
 
 [node name="QuestContainer" type="HBoxContainer" parent="Control/QuestsAndQuestBox"]
+visible = false
 layout_mode = 2
 
 [node name="Checkmarks" type="VBoxContainer" parent="Control/QuestsAndQuestBox/QuestContainer"]
@@ -87,24 +88,28 @@ theme = ExtResource("2_bn686")
 theme_override_constants/separation = 1
 
 [node name="check_quest" type="TextureRect" parent="Control/QuestsAndQuestBox/QuestContainer/Checkmarks"]
+visible = false
 layout_mode = 2
 texture = ExtResource("4_bqx8s")
 expand_mode = 4
 stretch_mode = 5
 
 [node name="check_quest2" type="TextureRect" parent="Control/QuestsAndQuestBox/QuestContainer/Checkmarks"]
+visible = false
 layout_mode = 2
 texture = ExtResource("4_bqx8s")
 expand_mode = 4
 stretch_mode = 5
 
 [node name="check_quest3" type="TextureRect" parent="Control/QuestsAndQuestBox/QuestContainer/Checkmarks"]
+visible = false
 layout_mode = 2
 texture = ExtResource("4_bqx8s")
 expand_mode = 4
 stretch_mode = 5
 
 [node name="check_quest4" type="TextureRect" parent="Control/QuestsAndQuestBox/QuestContainer/Checkmarks"]
+visible = false
 layout_mode = 2
 texture = ExtResource("4_bqx8s")
 expand_mode = 4
