@@ -404,6 +404,7 @@ layout_mode = 2
 [node name="QuestSolveable" type="VBoxContainer" parent="Control"]
 z_index = 1
 custom_minimum_size = Vector2(17, 0)
+layout_mode = 0
 offset_left = 774.0
 offset_top = 36.0
 offset_right = 791.0
