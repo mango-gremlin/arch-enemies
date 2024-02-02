@@ -209,6 +209,9 @@ func obtain_bridge_scene(requested_edge:BridgeEdge) -> BridgeEdge:
 # key -> npc_id | value -> String
 var active_tracked_quests:Dictionary = {}
 
+# all quests that are displayed in the ui currently (solved and unsolved)
+var displayed_quests:Dictionary = {}
+
 # takes id of npc and adds its quest to the list
 # emits signal to update ui afterwards
 # if npc does not have a quest, nothing changes

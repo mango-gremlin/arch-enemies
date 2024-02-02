@@ -439,3 +439,5 @@ texture = ExtResource("16_ml6er")
 expand_mode = 4
 stretch_mode = 5
 flip_h = true
+
+[connection signal="tree_exiting" from="." to="." method="_on_tree_exiting"]

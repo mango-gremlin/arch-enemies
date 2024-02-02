@@ -41,6 +41,12 @@ func _ready():
 	# initialize ui
 	_update_item_inventory_label()
 	_update_animal_inventory_label()
+	# get "saved" quests from singleton
+	var displayed_quests_from_singleton = SingletonPlayer.displayed_quests
+	print("SAVED QUESTS:")
+	print(displayed_quests_from_singleton)
+	_update_quest_list()
+	
 
 
 var player_item_inventory:Dictionary = {}:
@@ -194,3 +200,8 @@ func _on_animal_inventory_updated(new_animal_inventory):
 
 func _on_quest_list_updated(new_quests):
 	player_active_quest_dictionary = new_quests
+
+# when leaving scene: save quests in singleton
+func _on_tree_exiting():
+	SingletonPlayer.displayed_quests = player_quests_to_display
+	print("TRANSFERRED LIST")
