@@ -1,9 +1,10 @@
-[gd_scene load_steps=18 format=3 uid="uid://cgvraulefjyn8"]
+[gd_scene load_steps=20 format=3 uid="uid://cgvraulefjyn8"]
 
 [ext_resource type="Script" path="res://overworld/ui/overworld_ui/overworld_ui.gd" id="1_8rwqf"]
 [ext_resource type="Theme" uid="uid://d2ijyc316xeom" path="res://assets/art/ui_elements/ui_theme.tres" id="2_bn686"]
 [ext_resource type="Texture2D" uid="uid://6mcb7hf0rp0k" path="res://assets/art/ui_elements/Box_border_side.png" id="3_wm8bd"]
 [ext_resource type="Texture2D" uid="uid://b00ykicd4nlw1" path="res://assets/art/ui_elements/DialogueBox_outline.png" id="4_7h676"]
+[ext_resource type="Texture2D" uid="uid://dj52pdvg1m23x" path="res://assets/art/ui_elements/checkmark_unchecked.png" id="4_bqx8s"]
 [ext_resource type="Texture2D" uid="uid://igj8k0askwfw" path="res://assets/art/ui_elements/button_normal.png" id="4_oq26i"]
 [ext_resource type="Texture2D" uid="uid://dwu3b8hug0u0v" path="res://assets/art/ui_elements/button_hover.png" id="5_eoylr"]
 [ext_resource type="Texture2D" uid="uid://dh8jq38uahlv8" path="res://assets/art/objects/overworld_items/item_egg.png" id="6_fpsi7"]
@@ -14,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://0j6i0mpsh8hq" path="res://assets/art/characters/snek.png" id="11_m4nek"]
 [ext_resource type="Texture2D" uid="uid://xd2wfewwwcqc" path="res://assets/art/characters/squirrel.png" id="12_yo77q"]
 [ext_resource type="Texture2D" uid="uid://bxrt2ulp85yuy" path="res://assets/art/characters/spider.png" id="13_0ukdi"]
+[ext_resource type="Texture2D" uid="uid://2colnbou5ftu" path="res://assets/art/ui_elements/quest_solve_indicator_invis.png" id="16_ml6er"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6awh2"]
 texture = ExtResource("5_eoylr")
@@ -26,7 +28,7 @@ expand_margin_right = 2.0
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fcdbe"]
 content_margin_left = 2.0
-content_margin_top = 2.0
+content_margin_top = 4.0
 content_margin_right = 2.0
 content_margin_bottom = 2.0
 texture = ExtResource("4_oq26i")
@@ -34,10 +36,10 @@ texture_margin_left = 2.0
 texture_margin_top = 1.0
 texture_margin_right = 2.0
 texture_margin_bottom = 2.0
-expand_margin_left = 2.0
-expand_margin_top = 2.0
-expand_margin_right = 2.0
-expand_margin_bottom = 2.0
+expand_margin_left = 23.0
+expand_margin_top = 4.0
+expand_margin_right = 5.0
+expand_margin_bottom = 5.0
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qfba4"]
 texture = ExtResource("4_7h676")
@@ -60,10 +62,10 @@ theme = ExtResource("2_bn686")
 
 [node name="QuestsAndQuestBox" type="VBoxContainer" parent="Control"]
 layout_mode = 2
-offset_left = 814.0
+offset_left = 797.0
 offset_top = 12.0
 offset_right = 1140.0
-offset_bottom = 48.0
+offset_bottom = 97.0
 
 [node name="quest_descriptor" type="Label" parent="Control/QuestsAndQuestBox"]
 layout_mode = 2
@@ -71,9 +73,47 @@ theme = ExtResource("2_bn686")
 theme_override_styles/normal = SubResource("StyleBoxTexture_6awh2")
 text = "Quests :"
 
-[node name="quest_list" type="Label" parent="Control/QuestsAndQuestBox"]
+[node name="BoxContainer" type="BoxContainer" parent="Control/QuestsAndQuestBox"]
+layout_mode = 2
+
+[node name="QuestContainer" type="HBoxContainer" parent="Control/QuestsAndQuestBox"]
+layout_mode = 2
+
+[node name="Checkmarks" type="VBoxContainer" parent="Control/QuestsAndQuestBox/QuestContainer"]
+z_index = 1
+custom_minimum_size = Vector2(17, 0)
 layout_mode = 2
 theme = ExtResource("2_bn686")
+theme_override_constants/separation = 1
+
+[node name="check_quest" type="TextureRect" parent="Control/QuestsAndQuestBox/QuestContainer/Checkmarks"]
+layout_mode = 2
+texture = ExtResource("4_bqx8s")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="check_quest2" type="TextureRect" parent="Control/QuestsAndQuestBox/QuestContainer/Checkmarks"]
+layout_mode = 2
+texture = ExtResource("4_bqx8s")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="check_quest3" type="TextureRect" parent="Control/QuestsAndQuestBox/QuestContainer/Checkmarks"]
+layout_mode = 2
+texture = ExtResource("4_bqx8s")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="check_quest4" type="TextureRect" parent="Control/QuestsAndQuestBox/QuestContainer/Checkmarks"]
+layout_mode = 2
+texture = ExtResource("4_bqx8s")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="quest_list" type="Label" parent="Control/QuestsAndQuestBox/QuestContainer"]
+layout_mode = 2
+theme = ExtResource("2_bn686")
+theme_override_constants/line_spacing = 6
 theme_override_styles/normal = SubResource("StyleBoxTexture_fcdbe")
 
 [node name="Itembox" type="Panel" parent="Control"]
@@ -355,3 +395,41 @@ text = "available Animals:"
 
 [node name="animal_list" type="Label" parent="Control/Animals2/VBoxContainer/HBoxContainer4/VBoxContainer"]
 layout_mode = 2
+
+[node name="QuestSolveable" type="VBoxContainer" parent="Control"]
+z_index = 1
+custom_minimum_size = Vector2(17, 0)
+offset_left = 774.0
+offset_top = 36.0
+offset_right = 791.0
+offset_bottom = 107.0
+theme = ExtResource("2_bn686")
+theme_override_constants/separation = 1
+
+[node name="solveable1" type="TextureRect" parent="Control/QuestSolveable"]
+layout_mode = 2
+texture = ExtResource("16_ml6er")
+expand_mode = 4
+stretch_mode = 5
+flip_h = true
+
+[node name="solveable2" type="TextureRect" parent="Control/QuestSolveable"]
+layout_mode = 2
+texture = ExtResource("16_ml6er")
+expand_mode = 4
+stretch_mode = 5
+flip_h = true
+
+[node name="solveable3" type="TextureRect" parent="Control/QuestSolveable"]
+layout_mode = 2
+texture = ExtResource("16_ml6er")
+expand_mode = 4
+stretch_mode = 5
+flip_h = true
+
+[node name="solveable4" type="TextureRect" parent="Control/QuestSolveable"]
+layout_mode = 2
+texture = ExtResource("16_ml6er")
+expand_mode = 4
+stretch_mode = 5
+flip_h = true
