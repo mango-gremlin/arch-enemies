@@ -445,6 +445,7 @@ texture = ExtResource("8_gmsns")
 6:0/1/y_sort_origin = 9
 6:0/1/physics_layer_0/linear_velocity = Vector2(0, 0)
 6:0/1/physics_layer_0/angular_velocity = 0.0
+6:0/1/physics_layer_0/polygon_0/points = PackedVector2Array(-14.0625, -1.5625, 4.1875, -1.9375, 0.8125, 9.1875, -12.5625, 8.6875)
 6:2/size_in_atlas = Vector2i(1, 2)
 6:2/0 = 0
 6:2/0/y_sort_origin = 12
