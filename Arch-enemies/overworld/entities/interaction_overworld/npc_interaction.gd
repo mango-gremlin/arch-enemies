@@ -144,20 +144,29 @@ func obtain_required_item() -> Item.ItemType:
 func set_npc_sprite():
 	# initialize reference
 	var referenced_sprite:Sprite2D = $Sprite2D
+	# collision shape for size change
+	var npc_collision = $StaticBody2D/CollisionShape2D
 	
 	if npc_special_sprite != null:
 		referenced_sprite.texture = npc_special_sprite
+		npc_collision.position = Vector2(0,0)
+		npc_collision.scale = Vector2(0.5,0.5)
 		return
 	var path_to_sprite:String 
 	match npc_animal_type:
 		Animal.AnimalType.SNAKE: 
 			path_to_sprite = "res://assets/art/characters/snek.png"
+			npc_collision.position = Vector2(0,-1)
+			npc_collision.scale = Vector2(2,2)
 		Animal.AnimalType.DEER:
 			path_to_sprite = "res://assets/art/characters/deer.png"
+			npc_collision.position = Vector2(-6,4)
+			npc_collision.scale = Vector2(2,2)
 		Animal.AnimalType.SQUIRREL: 
 			path_to_sprite = "res://assets/art/characters/squirrel.png"
 		Animal.AnimalType.SPIDER:
 			path_to_sprite = "res://assets/art/characters/spider.png"
+			npc_collision.position = Vector2(0,0)
 	# loading texture 
 	var npc_sprite:Texture2D = load(path_to_sprite)
 	referenced_sprite.texture = npc_sprite

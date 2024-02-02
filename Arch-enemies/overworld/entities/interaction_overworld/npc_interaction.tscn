@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://drn1loe1wknbq"]
+[gd_scene load_steps=16 format=3 uid="uid://drn1loe1wknbq"]
 
 [ext_resource type="Script" path="res://overworld/entities/interaction_overworld/npc_interaction.gd" id="1_cdxnf"]
 [ext_resource type="Texture2D" uid="uid://xd2wfewwwcqc" path="res://assets/art/characters/squirrel.png" id="2_83185"]
@@ -75,6 +75,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_pbodm"]
+radius = 7.0
+
 [node name="NpcInteraction" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_cdxnf")
@@ -105,3 +108,9 @@ position = Vector2(0, -20)
 sprite_frames = SubResource("SpriteFrames_dm71c")
 animation = &"npc_indication"
 frame_progress = 0.809533
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 3)
+shape = SubResource("CircleShape2D_pbodm")
