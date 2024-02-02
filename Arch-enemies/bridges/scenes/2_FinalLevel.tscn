@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://cxi6j8p1hopjh"]
+[gd_scene load_steps=50 format=3 uid="uid://cxi6j8p1hopjh"]
 
 [ext_resource type="Script" path="res://bridges/script/Camera.gd" id="1_e57tb"]
 [ext_resource type="Texture2D" uid="uid://d0o2q6fijmd1" path="res://assets/art/tilesets/bridge_tileset/bridge_background_color.png" id="2_361sp"]
@@ -33,6 +33,7 @@
 [ext_resource type="Texture2D" uid="uid://leqswdio6xwd" path="res://bridges/assets/background/background_center_v4.png" id="22_sx6wq"]
 [ext_resource type="PackedScene" uid="uid://cumelk772llyk" path="res://bridges/scenes/bridges_settings_menu.tscn" id="27_318v5"]
 [ext_resource type="Texture2D" uid="uid://d3s1iupr6ox8" path="res://bridges/assets/background/background_darkness.png" id="31_va2b3"]
+[ext_resource type="Texture2D" uid="uid://cm25y0k6wuc8m" path="res://bridges/assets/background/Background_left.png" id="34_1m6e6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gxf1m"]
 texture = ExtResource("2_361sp")
@@ -1048,7 +1049,7 @@ theme = ExtResource("21_5yhij")
 text = "One Step Back"
 
 [node name="Player" parent="Grid" groups=["player"] instance=ExtResource("16_t16j0")]
-position = Vector2(19, 124)
+position = Vector2(19, 123)
 
 [node name="world_edge_right" parent="Grid" instance=ExtResource("17_6tnqx")]
 position = Vector2(668, 68)
@@ -1168,6 +1169,7 @@ centered = false
 [node name="sprite_left_side" parent="parallax_background/static_sides" index="0"]
 position = Vector2(108, 145.75)
 scale = Vector2(1.18, 1.4625)
+texture = ExtResource("34_1m6e6")
 
 [node name="sprite_right_side" parent="parallax_background/static_sides" index="1"]
 position = Vector2(570, 83)
