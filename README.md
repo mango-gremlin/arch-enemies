@@ -1,7 +1,5 @@
 # arch-enemies | because fighting is harmful
 
-> Buckle up gamer (we've got a city to burn).
-
 ![bridge-scene_biig](https://github.com/mango-gremlin/arch-enemies/assets/104830903/ee446310-3af2-4f7d-b8e7-890c921c138f)
 
 Arch Enemies is a bridge building puzzle game where a fox tries to bridge the differences of the animals in the forest to save their home from invasive species. It involves convincing other animals to join your cause and building bridges by using your allies to cross a flooded forest.
@@ -28,13 +26,33 @@ We are using an MIT License for this game. For more information, see [here](http
 
 ## Credits
 
-### Assets
+### Team Coordinators
+- Mara Cockburn (Main Organisation)
+- Katja Bochniak (Bridges)
+- Evelyn Stange (Overworld)
+
+### Overworld Implementation
+- Evelyn Stange
+- Simon Rappenecker
+- Paul Masan
+- Mara Cockburn
+
+### Bridge Levels Implementation
+- Marcel Schoch
+- Katja Bochniak
+- Aylin Fischbach
+- Kirian Fink
+- Paul Masan
+- Adam König
+
+### Assets and UI
 - Raffael Rack
 - Katja Bochniak
 - Mara Cockburn
 
 ### Sound Effects and Music
 - Adam König
+- Implementation: Adam König and Marcel Schoch
 
 ### Font
 yoster island - by [codeman38](http://www.zone38.net/ )
