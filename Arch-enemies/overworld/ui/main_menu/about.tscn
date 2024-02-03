@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://kiso0os3bn2l"]
+[gd_scene load_steps=16 format=3 uid="uid://kiso0os3bn2l"]
 
 [ext_resource type="Texture2D" uid="uid://leqswdio6xwd" path="res://bridges/assets/background/background_center_v4.png" id="1_eux8p"]
 [ext_resource type="Script" path="res://overworld/ui/main_menu/about.gd" id="1_vo3wm"]
@@ -9,11 +9,29 @@
 [ext_resource type="Texture2D" uid="uid://clicedycroinp" path="res://assets/art/characters/Frog_Sprite_Shaded.png" id="4_acgr2"]
 [ext_resource type="Texture2D" uid="uid://6mcb7hf0rp0k" path="res://assets/art/ui_elements/Box_border_side.png" id="4_tcqcl"]
 [ext_resource type="Texture2D" uid="uid://cl1ln5i2pymm1" path="res://assets/art/ui_elements/Box_border_middle.png" id="5_rufum"]
+[ext_resource type="Texture2D" uid="uid://igj8k0askwfw" path="res://assets/art/ui_elements/button_normal.png" id="10_8qnnk"]
+[ext_resource type="FontFile" uid="uid://h728dpw3bhca" path="res://assets/art/ui_elements/yoster.ttf" id="11_vdntk"]
+[ext_resource type="Texture2D" uid="uid://bfmjwjo32or6u" path="res://assets/art/ui_elements/speech bubble.png" id="12_bk6hp"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4r6aj"]
 texture = ExtResource("3_12cib")
 texture_margin_top = 1.0
 texture_margin_bottom = 1.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6trxk"]
+texture = ExtResource("10_8qnnk")
+texture_margin_left = 1.0
+texture_margin_right = 1.0
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_5o5kk"]
+line_spacing = 12.0
+font = ExtResource("11_vdntk")
+font_size = 24
+font_color = Color(0.356863, 0.141176, 0.188235, 1)
 
 [node name="About" type="Control"]
 layout_mode = 3
@@ -61,13 +79,25 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_4r6aj")
 
 [node name="Frög" type="TextureRect" parent="MarginContainer/Panel"]
 layout_mode = 0
-offset_left = 207.0
-offset_top = 118.0
-offset_right = 562.0
-offset_bottom = 534.0
+offset_left = 546.0
+offset_top = 325.0
+offset_right = 901.0
+offset_bottom = 741.0
 texture = ExtResource("4_acgr2")
 expand_mode = 5
 stretch_mode = 4
+
+[node name="Frög2" type="TextureRect" parent="MarginContainer/Panel"]
+visible = false
+layout_mode = 0
+offset_left = 546.0
+offset_top = 325.0
+offset_right = 901.0
+offset_bottom = 741.0
+texture = ExtResource("4_acgr2")
+expand_mode = 5
+stretch_mode = 4
+flip_h = true
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/Panel"]
 layout_mode = 0
@@ -177,15 +207,156 @@ expand_mode = 3
 stretch_mode = 4
 flip_h = true
 
-[node name="Button" type="Button" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+offset_left = 131.0
+offset_top = 113.0
+offset_right = 526.0
+offset_bottom = 548.0
+theme = ExtResource("3_41oba")
+
+[node name="Label2" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_41oba")
+theme_override_font_sizes/font_size = 36
+theme_override_styles/normal = SubResource("StyleBoxTexture_6trxk")
+text = "Skeleton Crew Team:"
+
+[node name="BoxContainer" type="BoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_41oba")
+theme_override_font_sizes/font_size = 24
+text = "Marcel Schoch
+Kirian Fink
+Adam König
+Raffael Rack
+Katja Bochniak
+Aylin Fischbach
+Evelyn Stange
+Paul Masan
+Simon Rappenecker
+Mara Cockburn"
+label_settings = SubResource("LabelSettings_5o5kk")
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+layout_mode = 2
+offset_left = 633.0
+offset_top = 113.0
+offset_right = 1028.0
+offset_bottom = 548.0
+theme = ExtResource("3_41oba")
+
+[node name="Label2" type="Label" parent="VBoxContainer2"]
+layout_mode = 2
+theme = ExtResource("3_41oba")
+theme_override_font_sizes/font_size = 36
+theme_override_styles/normal = SubResource("StyleBoxTexture_6trxk")
+text = "Art and Assets:"
+horizontal_alignment = 1
+
+[node name="BoxContainer" type="BoxContainer" parent="VBoxContainer2"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer2"]
+layout_mode = 2
+theme = ExtResource("3_41oba")
+theme_override_font_sizes/font_size = 24
+text = "Raffael Rack
+Katja Bochniak
+Mara Cockburn"
+label_settings = SubResource("LabelSettings_5o5kk")
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="BoxContainer3" type="BoxContainer" parent="VBoxContainer2"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="BoxContainer4" type="BoxContainer" parent="VBoxContainer2"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="VBoxContainer2"]
+layout_mode = 2
+theme = ExtResource("3_41oba")
+theme_override_font_sizes/font_size = 36
+theme_override_styles/normal = SubResource("StyleBoxTexture_6trxk")
+text = "Sounds and Music:"
+horizontal_alignment = 1
+
+[node name="BoxContainer2" type="BoxContainer" parent="VBoxContainer2"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="Label4" type="Label" parent="VBoxContainer2"]
+layout_mode = 2
+theme = ExtResource("3_41oba")
+theme_override_font_sizes/font_size = 24
+text = "Adam König"
+label_settings = SubResource("LabelSettings_5o5kk")
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="back" type="Button" parent="."]
 layout_mode = 0
 offset_left = 528.0
 offset_top = 552.0
 offset_right = 608.0
 offset_bottom = 582.0
 theme = ExtResource("3_41oba")
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 24
 text = "back"
 
+[node name="licensing" type="Button" parent="."]
+layout_mode = 0
+offset_left = 154.0
+offset_top = 556.0
+offset_right = 442.0
+offset_bottom = 580.0
+theme = ExtResource("3_41oba")
+theme_override_font_sizes/font_size = 24
+text = "Open Source Licenses"
+
+[node name="TextureRect3" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 487.0
+offset_top = 429.0
+offset_right = 845.0
+offset_bottom = 512.0
+texture = ExtResource("12_bk6hp")
+expand_mode = 2
+
+[node name="LinkButton" type="LinkButton" parent="."]
+layout_mode = 0
+offset_left = 516.0
+offset_top = 459.0
+offset_right = 816.0
+offset_bottom = 499.0
+theme = ExtResource("3_41oba")
+theme_override_colors/font_color = Color(0.356863, 0.141176, 0.188235, 1)
+theme_override_font_sizes/font_size = 24
+text = "Arch Enemies on Github"
+uri = "https://github.com/mango-gremlin/arch-enemies/tree/main"
+
+[node name="LinkButton2" type="LinkButton" parent="."]
+layout_mode = 2
+offset_left = 675.0
+offset_top = 284.0
+offset_right = 1117.0
+offset_bottom = 308.0
+theme = ExtResource("3_41oba")
+theme_override_colors/font_color = Color(0.356863, 0.141176, 0.188235, 1)
+theme_override_font_sizes/font_size = 18
+text = "Font: yoster island by codeman38"
+uri = "http://www.zone38.net/"
+
 [connection signal="play_sound" from="." to="Sound Effects" method="_on_button_pressed"]
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="back" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="licensing" to="." method="_on_licensing_pressed"]
