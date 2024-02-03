@@ -44,6 +44,7 @@ We are using an MIT License for this game. For more information, see [here](http
 - Kirian Fink
 - Paul Masan
 - Adam König
+- Raffael Rack
 
 ### Assets and UI
 - Raffael Rack
