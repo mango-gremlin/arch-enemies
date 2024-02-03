@@ -220,7 +220,7 @@ layout_mode = 2
 theme = ExtResource("3_41oba")
 theme_override_font_sizes/font_size = 36
 theme_override_styles/normal = SubResource("StyleBoxTexture_6trxk")
-text = "Skeleton Crew Team:"
+text = "Skeleton Crew Team"
 
 [node name="BoxContainer" type="BoxContainer" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 20)
@@ -257,7 +257,7 @@ layout_mode = 2
 theme = ExtResource("3_41oba")
 theme_override_font_sizes/font_size = 36
 theme_override_styles/normal = SubResource("StyleBoxTexture_6trxk")
-text = "Art and Assets:"
+text = "Art and Assets"
 horizontal_alignment = 1
 
 [node name="BoxContainer" type="BoxContainer" parent="VBoxContainer2"]
@@ -288,7 +288,7 @@ layout_mode = 2
 theme = ExtResource("3_41oba")
 theme_override_font_sizes/font_size = 36
 theme_override_styles/normal = SubResource("StyleBoxTexture_6trxk")
-text = "Sounds and Music:"
+text = "Sounds and Music"
 horizontal_alignment = 1
 
 [node name="BoxContainer2" type="BoxContainer" parent="VBoxContainer2"]
