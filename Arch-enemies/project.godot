@@ -13,6 +13,8 @@ config_version=5
 config/name="Arch-Enemies"
 run/main_scene="res://overworld/ui/main_menu/main_menu.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
+config/icon="res://Frog.ico"
+config/windows_native_icon="res://Frog.ico"
 
 [autoload]
 
