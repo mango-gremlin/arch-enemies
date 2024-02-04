@@ -17,7 +17,7 @@ Everything regarding **concepts**, **ideas** or **protocols**, information on Ga
 
 ## How to run the game
 Find our most recent release [here](https://github.com/mango-gremlin/arch-enemies/releases) - it should contain an .exe file you can download and play on your computer. 
-If you don't own a windows device or do not want to download questionable executables from github, you can find the game on [itch]().
+If you don't own a windows device or do not want to download questionable executables from github, you can find the game on [itch](https://mango-gremlin.itch.io/arch-enemies).
 
 ---
 
