@@ -1,0 +1,246 @@
+[gd_scene load_steps=14 format=3 uid="uid://devojqxr11k7u"]
+
+[ext_resource type="Script" path="res://overworld/ui/main_menu/licensing.gd" id="1_xu5kk"]
+[ext_resource type="AudioStream" uid="uid://b1diue16pa0ld" path="res://assets/sound/Victory.wav" id="2_nno7y"]
+[ext_resource type="Script" path="res://sound/effects_sound.gd" id="3_qsry7"]
+[ext_resource type="Texture2D" uid="uid://leqswdio6xwd" path="res://bridges/assets/background/background_center_v4.png" id="4_lu26v"]
+[ext_resource type="Texture2D" uid="uid://b00ykicd4nlw1" path="res://assets/art/ui_elements/DialogueBox_outline.png" id="5_rip7p"]
+[ext_resource type="Texture2D" uid="uid://clicedycroinp" path="res://assets/art/characters/Frog_Sprite_Shaded.png" id="6_y1dkn"]
+[ext_resource type="Texture2D" uid="uid://6mcb7hf0rp0k" path="res://assets/art/ui_elements/Box_border_side.png" id="7_lbpgi"]
+[ext_resource type="Texture2D" uid="uid://cl1ln5i2pymm1" path="res://assets/art/ui_elements/Box_border_middle.png" id="8_27ljk"]
+[ext_resource type="Theme" uid="uid://d2ijyc316xeom" path="res://assets/art/ui_elements/ui_theme.tres" id="9_mkyh7"]
+[ext_resource type="Texture2D" uid="uid://igj8k0askwfw" path="res://assets/art/ui_elements/button_normal.png" id="10_6m4nt"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4r6aj"]
+texture = ExtResource("5_rip7p")
+texture_margin_top = 1.0
+texture_margin_bottom = 1.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kt4m6"]
+content_margin_top = 3.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_24ktc"]
+texture = ExtResource("10_6m4nt")
+
+[node name="Licensing" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xu5kk")
+
+[node name="Sound Effects" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_nno7y")
+max_polyphony = 3
+script = ExtResource("3_qsry7")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 648.0
+offset_bottom = 648.0
+texture = ExtResource("4_lu26v")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 647.0
+offset_right = 1295.0
+offset_bottom = 648.0
+texture = ExtResource("4_lu26v")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_right = 1154.0
+offset_bottom = 648.0
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 100
+
+[node name="Panel" type="Panel" parent="MarginContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_4r6aj")
+
+[node name="Frög" type="TextureRect" parent="MarginContainer/Panel"]
+visible = false
+layout_mode = 0
+offset_left = 207.0
+offset_top = 118.0
+offset_right = 562.0
+offset_bottom = 534.0
+texture = ExtResource("6_y1dkn")
+expand_mode = 5
+stretch_mode = 4
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/Panel"]
+layout_mode = 0
+offset_left = -43.0
+offset_top = -37.0
+offset_right = 221.0
+offset_bottom = 3.0
+texture = ExtResource("7_lbpgi")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="TextureRect2" type="TextureRect" parent="MarginContainer/Panel"]
+layout_mode = 0
+offset_left = -43.0
+offset_top = 448.0
+offset_right = 221.0
+offset_bottom = 488.0
+texture = ExtResource("7_lbpgi")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="TextureRect3" type="TextureRect" parent="MarginContainer/Panel"]
+layout_mode = 0
+offset_left = 730.0
+offset_top = -37.0
+offset_right = 994.0
+offset_bottom = 3.0
+texture = ExtResource("7_lbpgi")
+expand_mode = 3
+stretch_mode = 4
+flip_h = true
+
+[node name="TextureRect4" type="TextureRect" parent="MarginContainer/Panel"]
+layout_mode = 0
+offset_left = 730.0
+offset_top = 448.0
+offset_right = 994.0
+offset_bottom = 488.0
+texture = ExtResource("7_lbpgi")
+expand_mode = 3
+stretch_mode = 4
+flip_h = true
+
+[node name="TextureRect5" type="TextureRect" parent="MarginContainer/Panel"]
+layout_mode = 0
+offset_left = 215.0
+offset_top = -37.0
+offset_right = 479.0
+offset_bottom = 3.0
+texture = ExtResource("8_27ljk")
+expand_mode = 3
+stretch_mode = 4
+flip_h = true
+
+[node name="TextureRect6" type="TextureRect" parent="MarginContainer/Panel"]
+layout_mode = 0
+offset_left = 215.0
+offset_top = 448.0
+offset_right = 479.0
+offset_bottom = 488.0
+texture = ExtResource("8_27ljk")
+expand_mode = 3
+stretch_mode = 4
+flip_h = true
+
+[node name="TextureRect7" type="TextureRect" parent="MarginContainer/Panel"]
+layout_mode = 0
+offset_left = 446.0
+offset_top = -37.0
+offset_right = 710.0
+offset_bottom = 3.0
+texture = ExtResource("8_27ljk")
+expand_mode = 3
+stretch_mode = 4
+flip_h = true
+
+[node name="TextureRect8" type="TextureRect" parent="MarginContainer/Panel"]
+layout_mode = 0
+offset_left = 446.0
+offset_top = 448.0
+offset_right = 710.0
+offset_bottom = 488.0
+texture = ExtResource("8_27ljk")
+expand_mode = 3
+stretch_mode = 4
+flip_h = true
+
+[node name="TextureRect9" type="TextureRect" parent="MarginContainer/Panel"]
+layout_mode = 0
+offset_left = 547.0
+offset_top = -37.0
+offset_right = 811.0
+offset_bottom = 3.0
+texture = ExtResource("8_27ljk")
+expand_mode = 3
+stretch_mode = 4
+flip_h = true
+
+[node name="TextureRect10" type="TextureRect" parent="MarginContainer/Panel"]
+layout_mode = 0
+offset_left = 547.0
+offset_top = 448.0
+offset_right = 811.0
+offset_bottom = 488.0
+texture = ExtResource("8_27ljk")
+expand_mode = 3
+stretch_mode = 4
+flip_h = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("9_mkyh7")
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxEmpty_kt4m6")
+text = "This game uses Godot Engine, available under the following license:
+
+Copyright (c) 2014-present Godot Engine contributors.
+Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the \"Software\"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE."
+horizontal_alignment = 1
+
+[node name="back" type="Button" parent="."]
+layout_mode = 0
+offset_left = 528.0
+offset_top = 552.0
+offset_right = 608.0
+offset_bottom = 582.0
+theme = ExtResource("9_mkyh7")
+theme_override_font_sizes/font_size = 24
+text = "back"
+
+[node name="LinkButton" type="LinkButton" parent="."]
+layout_mode = 2
+offset_left = 483.0
+offset_top = 523.0
+offset_right = 1437.0
+offset_bottom = 540.0
+theme = ExtResource("9_mkyh7")
+theme_override_colors/font_color = Color(0.356863, 0.141176, 0.188235, 1)
+theme_override_font_sizes/font_size = 16
+theme_override_styles/focus = SubResource("StyleBoxTexture_24ktc")
+text = "Third-Party Licenses"
+uri = "https://github.com/godotengine/godot/blob/master/COPYRIGHT.txt"
+
+[connection signal="play_sound" from="." to="Sound Effects" method="_on_button_pressed"]
+[connection signal="pressed" from="back" to="." method="_on_button_pressed"]
