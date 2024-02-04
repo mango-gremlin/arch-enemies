@@ -87,18 +87,6 @@ texture = ExtResource("4_acgr2")
 expand_mode = 5
 stretch_mode = 4
 
-[node name="Frög2" type="TextureRect" parent="MarginContainer/Panel"]
-visible = false
-layout_mode = 0
-offset_left = 546.0
-offset_top = 325.0
-offset_right = 901.0
-offset_bottom = 741.0
-texture = ExtResource("4_acgr2")
-expand_mode = 5
-stretch_mode = 4
-flip_h = true
-
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/Panel"]
 layout_mode = 0
 offset_left = -43.0
@@ -360,3 +348,5 @@ uri = "http://www.zone38.net/"
 [connection signal="play_sound" from="." to="Sound Effects" method="_on_button_pressed"]
 [connection signal="pressed" from="back" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="licensing" to="." method="_on_licensing_pressed"]
+[connection signal="pressed" from="LinkButton" to="." method="_on_link_button_pressed"]
+[connection signal="pressed" from="LinkButton2" to="." method="_on_link_button_2_pressed"]
