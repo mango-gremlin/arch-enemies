@@ -7,7 +7,7 @@ var default_undone_text:String
 # -- / class constructor 
 func _init():
 	print("initialize quest tracker")
-	default_undone_text = "I will not join you >:( The others need to do something for once. Then maybe I will help."
+	default_undone_text = "I will not join you! The others need to do something for once. Come back to me when they have done something to help! Then maybe I will join you."
 	quest_undone_entries = [
 		QuestPage.new(default_undone_text,0,0)
 		]
