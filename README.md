@@ -11,7 +11,7 @@ This repository represents the work done by 10 students aiming to program their 
 It allows for insights of struggles that we've had throughout development and will hopefully contain a playable game at the end of this semester (early 2024).
 
 ## Structure: 
-Everything regarding **concepts**, **ideas** or **protocols**, information on Game Design and Implementation, as well as more details for the game's story, see [the Wiki](https://github.com/mango-gremlin/arch-enemies/wiki) or [the docs](/docs/).
+Everything regarding **concepts**, **ideas** or **protocols**, information on Game Design and Implementation, as well as more details for the game's story, see [the Wiki](https://github.com/mango-gremlin/arch-enemies/wiki) or [the docs](/docs/) (*the wiki is up to date, the docs are not!*).
 
 ---
 
@@ -27,7 +27,7 @@ We are using an MIT License for this game. For more information, see [here](http
 ## Credits
 
 ### Team Coordinators
-- Mara Cockburn (Main Organisation)
+- Glenn Cockburn (Main Organisation)
 - Katja Bochniak (Bridges)
 - Evelyn Stange (Overworld)
 
@@ -35,7 +35,7 @@ We are using an MIT License for this game. For more information, see [here](http
 - Evelyn Stange
 - Simon Rappenecker
 - Paul Masan
-- Mara Cockburn
+- Glenn Cockburn
 
 ### Bridge Levels Implementation
 - Marcel Schoch
@@ -49,7 +49,7 @@ We are using an MIT License for this game. For more information, see [here](http
 ### Assets and UI
 - Raffael Rack
 - Katja Bochniak
-- Mara Cockburn
+- Glenn Cockburn
 
 ### Sound Effects and Music
 - Adam König
