@@ -227,7 +227,7 @@ Aylin Fischbach
 Evelyn Stange
 Paul Masan
 Simon Rappenecker
-Mara Cockburn"
+Glenn Cockburn"
 label_settings = SubResource("LabelSettings_5o5kk")
 horizontal_alignment = 1
 autowrap_mode = 3
@@ -258,7 +258,7 @@ theme = ExtResource("3_41oba")
 theme_override_font_sizes/font_size = 24
 text = "Raffael Rack
 Katja Bochniak
-Mara Cockburn"
+Glenn Cockburn"
 label_settings = SubResource("LabelSettings_5o5kk")
 horizontal_alignment = 1
 autowrap_mode = 3
