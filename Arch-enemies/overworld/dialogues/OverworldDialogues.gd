@@ -150,7 +150,7 @@ static func dialogue_final():
 	var unsolved_pages:Array[DynamicPage] = [
 		DynamicPage.new("If you run into any problems while playing, please do not hesitate to tell us.", "Toadally Anonymous", frog_portrait),
 		DynamicPage.new("We also would like to know what you thought of the game in general:", "Toadally Anonymous", frog_portrait),
-		DynamicPage.new("- understandability - difficulty (esp: how many animals did you use? Did you have too many?) - fun/boring - suggestions -", "Toadally Anonymous", frog_portrait),
+		DynamicPage.new("- understandability - difficulty, especially: how many animals did you use? Did you have too many? - fun or boring - suggestions -", "Toadally Anonymous", frog_portrait),
 		DynamicPage.new("Thanks for playing our game! We really appreciate it!", "Toadally Anonymous", frog_portrait),
 	]
 	
