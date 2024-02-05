@@ -15,7 +15,8 @@ A quick overview of what you can find here.
 
 1. [About the game](#the-game)
 2. [Story](#story)
-3. [How to run the game](#how-to-run-the-game)
+3. [Gameplay](#gameplay)
+4. [How to run the game](#how-to-run-the-game)
 5. [Need Help/Something not working/Found a bug?](#reporting-a-problem-or-bug)
 6. [Contributors and Credits](#contributors-and-credits)
 7. [Licensing](#licensing)
@@ -46,6 +47,20 @@ The devious frogs led by Toadally Anonymous, who is toa(d)tally not a frog or an
 Since the forest was flooded, the other animals can't agree on what to do, which is exacerbated by the frogs' meddling and the fact that they can't find food due to the flood.
 
 Will the fox be able to bring the animals together and save the forest, or will the invasive frog species prevail? Only one way to find out!
+
+---
+
+## Gameplay
+*Navigate through the flooded forest as the fox and talk to different animals. Help them solve their problems so they join you in saving the forest!*
+
+![Screenshot 2024-02-04 194631](https://github.com/mango-gremlin/arch-enemies/assets/104830903/08d6eef1-a8a2-4eb2-8298-99a47d16e858)
+
+
+
+*Using your allies, build a bridge across the flooded forest and jump across, avoiding dangers like spiky vines or meddling frogs!*
+
+![Screenshot 2024-02-04 195210](https://github.com/mango-gremlin/arch-enemies/assets/104830903/43013934-7a11-4cde-a78e-d45e7a42b12e)
+
 
 ---
 
