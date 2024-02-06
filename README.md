@@ -8,6 +8,11 @@ This repository represents the work done by 10 students aiming to program their 
 
 It allows for insights of struggles that we've had throughout development and now, at the end of the semester, contains a playable demo-game!
 
+
+https://github.com/mango-gremlin/arch-enemies/assets/104830903/3c05e73a-da42-4598-9d6c-300137e44355
+
+
+
 ## Table of Contents
 A quick overview of what you can find here.
 
@@ -51,6 +56,7 @@ Will the fox be able to bring the animals together and save the forest, or will 
 ---
 
 ## Gameplay
+
 *Navigate through the flooded forest as the fox and talk to different animals. Help them solve their problems so they join you in saving the forest!*
 
 ![Screenshot 2024-02-04 194631](https://github.com/mango-gremlin/arch-enemies/assets/104830903/08d6eef1-a8a2-4eb2-8298-99a47d16e858)
