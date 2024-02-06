@@ -8,6 +8,7 @@ This repository represents the work done by 10 students aiming to program their 
 
 It allows for insights of struggles that we've had throughout development and now, at the end of the semester, contains a playable demo-game!
 
+This game was developed for a course which is now over. We will not be working on the game for now, but we might come back to it later when we have time. 
 
 https://github.com/mango-gremlin/arch-enemies/assets/104830903/3c05e73a-da42-4598-9d6c-300137e44355
 
