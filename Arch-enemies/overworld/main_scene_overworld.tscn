@@ -15,7 +15,6 @@
 [ext_resource type="PackedScene" uid="uid://b0v6vdudnx0vh" path="res://overworld/entities/interaction_overworld/template/vertical_bridge_part_with_collision.tscn" id="11_byiqb"]
 [ext_resource type="Texture2D" uid="uid://8t13pl5w360y" path="res://assets/art/characters/frog.png" id="11_p1rod"]
 
-
 [node name="maingame" type="Node"]
 script = ExtResource("1_pwtu4")
 

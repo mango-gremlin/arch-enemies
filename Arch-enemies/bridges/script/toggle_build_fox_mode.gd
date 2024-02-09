@@ -2,7 +2,7 @@ extends CheckButton
 
 signal play_sound(sound_type)
 
-func _on_toggled(toggled_on):
+func _on_toggled(_toggled_on):
 	var grid = get_parent().get_parent()
 	if not Global.drag_mode:
 		Global.drag_mode = true

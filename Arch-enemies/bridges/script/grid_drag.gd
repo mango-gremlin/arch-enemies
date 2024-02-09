@@ -111,7 +111,7 @@ func _can_drop_data(_at_position, data):
 	
 	return is_allowed
 
-func _drop_data(at_position, data):
+func _drop_data(_at_position, data):
 	#The dropping itself is simple
 	#We just return the position to the grid and update it
 	var position = Vector2(int(get_global_mouse_position().x /square_size), 
