@@ -172,9 +172,9 @@ var islands_reachable:Array[bool]
 # denotes the level to choose for each interaction!
 
 @onready var bridge_level_scenes: Dictionary = {
-	BridgeEdge.new(0,1): "res://bridges/scenes/levels/0_TutorialLevel.tscn",
-	BridgeEdge.new(1,2): "res://bridges/scenes/levels/1_FrogHazardLevel.tscn",
-	BridgeEdge.new(1,3): "res://bridges/scenes/levels/2_FinalLevel.tscn"
+	BridgeEdge.new(0,1): "res://bridges/levels/0_TutorialLevel.tscn",
+	BridgeEdge.new(1,2): "res://bridges/levels/1_FrogHazardLevel.tscn",
+	BridgeEdge.new(1,3): "res://bridges/levels/2_FinalLevel.tscn"
 } 
 
 # used for the (possibly) active bridge level to find out its own bridge egde

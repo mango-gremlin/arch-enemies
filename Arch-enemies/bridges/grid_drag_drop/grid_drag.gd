@@ -5,7 +5,7 @@ var grid = [[]]
 @export var square_size = 10
 enum ENTITY_TYPES {GROUND, WATER, AIR, ANIMAL, FORBIDDEN, ALLOWED, SIDE, BOTTOM, SHALLOW}
 #We have to use our own preview scene because otherwise things are terrible
-const DRAGPREVIEW = preload("res://bridges/scenes/dragpreview.tscn")
+const DRAGPREVIEW = preload("res://bridges/grid_drag_drop/dragpreview.tscn")
 
 #And the signal we need to communicate with the grid
 signal need_grid

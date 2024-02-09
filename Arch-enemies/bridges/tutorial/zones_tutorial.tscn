@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bhl7a6sahube"]
 
-[ext_resource type="PackedScene" uid="uid://bs38w6qv1n2h0" path="res://bridges/scenes/tutorial/tutorial_template.tscn" id="1_1lcsu"]
+[ext_resource type="PackedScene" uid="uid://bs38w6qv1n2h0" path="res://bridges/tutorial/tutorial_template.tscn" id="1_1lcsu"]
 [ext_resource type="Texture2D" uid="uid://bfpbtvm60sd2f" path="res://assets/tutorial_screenshots/green_and_red_zones.png" id="2_nj5br"]
 
 

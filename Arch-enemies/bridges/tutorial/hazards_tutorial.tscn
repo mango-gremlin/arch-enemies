@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dt7w6pe05hdo5"]
 
-[ext_resource type="PackedScene" uid="uid://bs38w6qv1n2h0" path="res://bridges/scenes/tutorial/tutorial_template.tscn" id="1_xm6xb"]
+[ext_resource type="PackedScene" uid="uid://bs38w6qv1n2h0" path="res://bridges/tutorial/tutorial_template.tscn" id="1_xm6xb"]
 [ext_resource type="Texture2D" uid="uid://8t13pl5w360y" path="res://assets/art/characters/frog.png" id="2_230ii"]
 [ext_resource type="Texture2D" uid="uid://cl4k3reh6cn3p" path="res://assets/tutorial_screenshots/spikes_tutorial.png" id="2_dmtbg"]
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://dfnsuounqjr4c"]
 
-[ext_resource type="Script" path="res://bridges/script/goal.gd" id="1_3hb7h"]
+[ext_resource type="Script" path="res://bridges/bridge_components/goal.gd" id="1_3hb7h"]
 [ext_resource type="AudioStream" uid="uid://b1diue16pa0ld" path="res://assets/sound/Victory.wav" id="1_fh6hj"]
 [ext_resource type="Script" path="res://sound/goal_sound.gd" id="2_svc7o"]
 [ext_resource type="Texture2D" uid="uid://b2jweow1kfu2g" path="res://assets/art/objects/flagpost.png" id="4_13t0y"]

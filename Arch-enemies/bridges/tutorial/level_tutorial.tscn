@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dx5ngssjupvhw"]
 
-[ext_resource type="PackedScene" uid="uid://bs38w6qv1n2h0" path="res://bridges/scenes/tutorial/tutorial_template.tscn" id="1_5kp2g"]
+[ext_resource type="PackedScene" uid="uid://bs38w6qv1n2h0" path="res://bridges/tutorial/tutorial_template.tscn" id="1_5kp2g"]
 [ext_resource type="Texture2D" uid="uid://b20mjrs2jg742" path="res://assets/tutorial_screenshots/goal_tutorial.png" id="2_fnuey"]
 
 

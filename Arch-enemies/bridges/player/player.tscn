@@ -1,6 +1,6 @@
 [gd_scene load_steps=40 format=3 uid="uid://dvgr170gyuhpq"]
 
-[ext_resource type="Script" path="res://bridges/script/player.gd" id="1_uy84w"]
+[ext_resource type="Script" path="res://bridges/player/player.gd" id="1_uy84w"]
 [ext_resource type="Texture2D" uid="uid://dx3f23bd68cju" path="res://assets/art/characters/fox_idle_sheet.png" id="2_y8apf"]
 [ext_resource type="Texture2D" uid="uid://ci0ibhty1e2yg" path="res://assets/art/characters/fox_jumping_sheet_offset.png" id="3_pj1su"]
 [ext_resource type="Texture2D" uid="uid://boo3otjifsbgu" path="res://assets/art/characters/fox_walking_sheet.png" id="4_wk3ii"]
