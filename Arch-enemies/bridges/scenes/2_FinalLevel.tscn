@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://sound/effects_sound.gd" id="3_scx54"]
 [ext_resource type="Texture2D" uid="uid://bbktakyncn7nc" path="res://assets/art/objects/bridge_deer.png" id="4_10lgy"]
 [ext_resource type="AudioStream" uid="uid://bgeiod4gbwy8j" path="res://assets/sound/Step.wav" id="4_77ftb"]
-[ext_resource type="Script" path="res://bridges/script/walking_sound.gd" id="5_bo2kp"]
+[ext_resource type="Script" path="res://sound/walking_sound.gd" id="5_bo2kp"]
 [ext_resource type="Texture2D" uid="uid://gyfjmxefsxu0" path="res://assets/art/tilesets/bridge_tileset/bridge_ground_tiles.png" id="5_lrvsb"]
 [ext_resource type="Texture2D" uid="uid://2dqqm3b306my" path="res://assets/art/tilesets/bridge_tileset/bridge_water_tiles.png" id="6_0fptx"]
 [ext_resource type="PackedScene" uid="uid://mq3lgncyb3cu" path="res://bridges/scenes/tutorial/tutorial_info.tscn" id="7_h06eb"]

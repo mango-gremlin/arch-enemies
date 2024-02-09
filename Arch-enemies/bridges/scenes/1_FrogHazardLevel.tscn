@@ -32,7 +32,7 @@
 [ext_resource type="Script" path="res://sound/effects_sound.gd" id="26_t4rtc"]
 [ext_resource type="AudioStream" uid="uid://bgeiod4gbwy8j" path="res://assets/sound/Step.wav" id="27_0ph6e"]
 [ext_resource type="PackedScene" uid="uid://cumelk772llyk" path="res://bridges/scenes/menu/bridges_settings_menu.tscn" id="28_86pay"]
-[ext_resource type="Script" path="res://bridges/script/walking_sound.gd" id="28_bfcvy"]
+[ext_resource type="Script" path="res://sound/walking_sound.gd" id="28_bfcvy"]
 
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gxf1m"]

@@ -12,7 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://gyfjmxefsxu0" path="res://assets/art/tilesets/bridge_tileset/bridge_ground_tiles.png" id="4_jv8nt"]
 [ext_resource type="AudioStream" uid="uid://bgeiod4gbwy8j" path="res://assets/sound/Step.wav" id="5_a6sim"]
 [ext_resource type="Texture2D" uid="uid://2dqqm3b306my" path="res://assets/art/tilesets/bridge_tileset/bridge_water_tiles.png" id="5_satv3"]
-[ext_resource type="Script" path="res://bridges/script/walking_sound.gd" id="6_2sdlx"]
+[ext_resource type="Script" path="res://sound/walking_sound.gd" id="6_2sdlx"]
 [ext_resource type="Texture2D" uid="uid://ckghjw6ynsyxv" path="res://bridges/assets/yellow.png" id="6_ue1m2"]
 [ext_resource type="Texture2D" uid="uid://cw66eehxwh20w" path="res://assets/art/objects/bridge_snake.png" id="7_jp1m1"]
 [ext_resource type="Texture2D" uid="uid://bax18833oqune" path="res://bridges/assets/red.png" id="8_6e2b2"]

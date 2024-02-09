@@ -8,7 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://bgeiod4gbwy8j" path="res://assets/sound/Step.wav" id="4_4odb0"]
 [ext_resource type="Texture2D" uid="uid://bbktakyncn7nc" path="res://assets/art/objects/bridge_deer.png" id="4_p3g7p"]
 [ext_resource type="Texture2D" uid="uid://gyfjmxefsxu0" path="res://assets/art/tilesets/bridge_tileset/bridge_ground_tiles.png" id="5_ahoix"]
-[ext_resource type="Script" path="res://bridges/script/walking_sound.gd" id="5_njj7s"]
+[ext_resource type="Script" path="res://sound/walking_sound.gd" id="5_njj7s"]
 [ext_resource type="Texture2D" uid="uid://2dqqm3b306my" path="res://assets/art/tilesets/bridge_tileset/bridge_water_tiles.png" id="6_oyt87"]
 [ext_resource type="Texture2D" uid="uid://ckghjw6ynsyxv" path="res://bridges/assets/yellow.png" id="7_7dtt4"]
 [ext_resource type="PackedScene" uid="uid://mq3lgncyb3cu" path="res://bridges/scenes/tutorial/tutorial_info.tscn" id="7_wqkw7"]
@@ -1092,8 +1092,8 @@ visible = false
 position = Vector2(147, 86)
 
 [connection signal="send_zoom" from="Camera2D" to="Grid" method="_on_camera_2d_send_zoom"]
-[connection signal="play_sound" from="Tutorial" to="Sound Effects" method="_on_tutorial_play_sound"]
 [connection signal="play_sound" from="Tutorial" to="Sound Effects" method="_on_button_pressed"]
+[connection signal="play_sound" from="Tutorial" to="Sound Effects" method="_on_tutorial_play_sound"]
 [connection signal="current_grid" from="Grid" to="Grid/Control/Drag_Grid" method="_on_grid_current_grid"]
 [connection signal="current_grid" from="Grid" to="Grid/Control/Animal_Inventory/Deer_Item" method="_on_grid_current_grid"]
 [connection signal="current_grid" from="Grid" to="Grid/Control/Animal_Inventory/Snake_Item" method="_on_grid_current_grid"]

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://bridges/script/goal.gd" id="1_3hb7h"]
 [ext_resource type="AudioStream" uid="uid://b1diue16pa0ld" path="res://assets/sound/Victory.wav" id="1_fh6hj"]
-[ext_resource type="Script" path="res://bridges/script/goal_sound.gd" id="2_svc7o"]
+[ext_resource type="Script" path="res://sound/goal_sound.gd" id="2_svc7o"]
 [ext_resource type="Texture2D" uid="uid://b2jweow1kfu2g" path="res://assets/art/objects/flagpost.png" id="4_13t0y"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sf3ny"]
