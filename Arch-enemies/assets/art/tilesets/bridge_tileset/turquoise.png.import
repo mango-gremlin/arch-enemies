@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dmy2gc7dfwago"
-path="res://.godot/imported/bottom.png-1d4641704cc32c1f29151e1cb06f9abc.ctex"
+uid="uid://c1etei55ew2yx"
+path="res://.godot/imported/turquoise.png-d05f4ea9532ab3a45ea050800b417005.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://bridges/assets/bottom.png"
-dest_files=["res://.godot/imported/bottom.png-1d4641704cc32c1f29151e1cb06f9abc.ctex"]
+source_file="res://assets/art/tilesets/bridge_tileset/turquoise.png"
+dest_files=["res://.godot/imported/turquoise.png-d05f4ea9532ab3a45ea050800b417005.ctex"]
 
 [params]
 

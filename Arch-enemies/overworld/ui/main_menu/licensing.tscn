@@ -3,13 +3,14 @@
 [ext_resource type="Script" path="res://overworld/ui/main_menu/licensing.gd" id="1_xu5kk"]
 [ext_resource type="AudioStream" uid="uid://b1diue16pa0ld" path="res://assets/sound/Victory.wav" id="2_nno7y"]
 [ext_resource type="Script" path="res://sound/effects_sound.gd" id="3_qsry7"]
-[ext_resource type="Texture2D" uid="uid://leqswdio6xwd" path="res://bridges/assets/background/background_center_v4.png" id="4_lu26v"]
+[ext_resource type="Texture2D" uid="uid://leqswdio6xwd" path="res://assets/art/background/background_center_v4.png" id="4_lu26v"]
 [ext_resource type="Texture2D" uid="uid://b00ykicd4nlw1" path="res://assets/art/ui_elements/DialogueBox_outline.png" id="5_rip7p"]
 [ext_resource type="Texture2D" uid="uid://clicedycroinp" path="res://assets/art/characters/Frog_Sprite_Shaded.png" id="6_y1dkn"]
 [ext_resource type="Texture2D" uid="uid://6mcb7hf0rp0k" path="res://assets/art/ui_elements/Box_border_side.png" id="7_lbpgi"]
 [ext_resource type="Texture2D" uid="uid://cl1ln5i2pymm1" path="res://assets/art/ui_elements/Box_border_middle.png" id="8_27ljk"]
 [ext_resource type="Theme" uid="uid://d2ijyc316xeom" path="res://assets/art/ui_elements/ui_theme.tres" id="9_mkyh7"]
 [ext_resource type="Texture2D" uid="uid://igj8k0askwfw" path="res://assets/art/ui_elements/button_normal.png" id="10_6m4nt"]
+
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4r6aj"]
 texture = ExtResource("5_rip7p")

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bax18833oqune"
-path="res://.godot/imported/red.png-c7324b45203069077ceb10dd25b591e1.ctex"
+path="res://.godot/imported/red.png-b926e3acd48e4419799c9b952430d00d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://bridges/assets/red.png"
-dest_files=["res://.godot/imported/red.png-c7324b45203069077ceb10dd25b591e1.ctex"]
+source_file="res://assets/art/tilesets/bridge_tileset/red.png"
+dest_files=["res://.godot/imported/red.png-b926e3acd48e4419799c9b952430d00d.ctex"]
 
 [params]
 

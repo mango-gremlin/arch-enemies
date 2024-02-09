@@ -3,7 +3,8 @@
 [ext_resource type="Script" path="res://bridges/script/goal_menu.gd" id="1_e6stn"]
 [ext_resource type="Texture2D" uid="uid://ba3leqm154y12" path="res://assets/art/ui_elements/menu_container.png" id="2_i1o17"]
 [ext_resource type="Theme" uid="uid://d2ijyc316xeom" path="res://assets/art/ui_elements/ui_theme.tres" id="4_a7dfh"]
-[ext_resource type="Texture2D" uid="uid://leqswdio6xwd" path="res://bridges/assets/background/background_center_v4.png" id="5_upwcu"]
+[ext_resource type="Texture2D" uid="uid://leqswdio6xwd" path="res://assets/art/background/background_center_v4.png" id="5_upwcu"]
+
 
 [node name="goal_menu" type="Control"]
 layout_mode = 3

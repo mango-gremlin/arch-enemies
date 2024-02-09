@@ -1,9 +1,10 @@
 [gd_scene load_steps=5 format=3 uid="uid://cern51r1p8lkb"]
 
 [ext_resource type="Script" path="res://overworld/ui/menu/menu/pause_menu.gd" id="1_ym7wh"]
-[ext_resource type="Texture2D" uid="uid://leqswdio6xwd" path="res://bridges/assets/background/background_center_v4.png" id="2_0a5ka"]
+[ext_resource type="Texture2D" uid="uid://leqswdio6xwd" path="res://assets/art/background/background_center_v4.png" id="2_0a5ka"]
 [ext_resource type="Theme" uid="uid://d2ijyc316xeom" path="res://assets/art/ui_elements/ui_theme.tres" id="2_xkekq"]
 [ext_resource type="Texture2D" uid="uid://ba3leqm154y12" path="res://assets/art/ui_elements/menu_container.png" id="3_x8j61"]
+
 
 [node name="bridges_pause_menu" type="Control"]
 z_index = 3

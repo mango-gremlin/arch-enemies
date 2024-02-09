@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d3s1iupr6ox8"
-path="res://.godot/imported/background_darkness.png-2657a90caa8712596e3c909eb7afec9d.ctex"
+uid="uid://bqgilfwt6nexk"
+path="res://.godot/imported/background_right.png-c278207c74af79f47f28f33ea32535a7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://bridges/assets/background/background_darkness.png"
-dest_files=["res://.godot/imported/background_darkness.png-2657a90caa8712596e3c909eb7afec9d.ctex"]
+source_file="res://assets/art/background/background_right.png"
+dest_files=["res://.godot/imported/background_right.png-c278207c74af79f47f28f33ea32535a7.ctex"]
 
 [params]
 

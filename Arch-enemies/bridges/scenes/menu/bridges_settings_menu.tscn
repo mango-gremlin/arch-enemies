@@ -2,9 +2,10 @@
 
 [ext_resource type="Script" path="res://overworld/ui/menu/menu/settings_menu.gd" id="1_1tvav"]
 [ext_resource type="Texture2D" uid="uid://cw2m4eacnrv72" path="res://assets/art/ui_elements/menu_container_sound_settings.png" id="2_c4y2e"]
-[ext_resource type="Texture2D" uid="uid://leqswdio6xwd" path="res://bridges/assets/background/background_center_v4.png" id="2_v7t83"]
+[ext_resource type="Texture2D" uid="uid://leqswdio6xwd" path="res://assets/art/background/background_center_v4.png" id="2_v7t83"]
 [ext_resource type="Theme" uid="uid://d2ijyc316xeom" path="res://assets/art/ui_elements/ui_theme.tres" id="3_f0g46"]
 [ext_resource type="Script" path="res://overworld/ui/menu/menu/volume_settings.gd" id="4_6vwo5"]
+
 
 [node name="bridges_settings_menu" type="Control"]
 layout_mode = 3
