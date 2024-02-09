@@ -17,7 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://dmy2gc7dfwago" path="res://bridges/assets/bottom.png" id="12_p7cd1"]
 [ext_resource type="Script" path="res://bridges/script/grid_visualizer.gd" id="13_xoj3x"]
 [ext_resource type="Script" path="res://bridges/script/grid_drag.gd" id="14_4xmqt"]
-[ext_resource type="Script" path="res://bridges/scenes/toggle_build_fox_mode.gd" id="15_tnxv3"]
+[ext_resource type="Script" path="res://bridges/script/toggle_build_fox_mode.gd" id="15_tnxv3"]
 [ext_resource type="PackedScene" uid="uid://dvgr170gyuhpq" path="res://bridges/scenes/player.tscn" id="16_ltm5p"]
 [ext_resource type="PackedScene" uid="uid://cbremi6mc4sua" path="res://bridges/scenes/world_edge.tscn" id="17_3k0i6"]
 [ext_resource type="PackedScene" uid="uid://cxj1q08s3i7i8" path="res://bridges/scenes/goal_menu.tscn" id="18_ihjef"]
@@ -31,8 +31,9 @@
 [ext_resource type="AudioStream" uid="uid://b1diue16pa0ld" path="res://assets/sound/Victory.wav" id="25_i56b2"]
 [ext_resource type="Script" path="res://sound/effects_sound.gd" id="26_t4rtc"]
 [ext_resource type="AudioStream" uid="uid://bgeiod4gbwy8j" path="res://assets/sound/Step.wav" id="27_0ph6e"]
-[ext_resource type="PackedScene" path="res://bridges/scenes/bridges_settings_menu.tscn" id="28_86pay"]
+[ext_resource type="PackedScene" uid="uid://cumelk772llyk" path="res://bridges/scenes/bridges_settings_menu.tscn" id="28_86pay"]
 [ext_resource type="Script" path="res://bridges/script/walking_sound.gd" id="28_bfcvy"]
+
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gxf1m"]
 texture = ExtResource("2_g3m8w")

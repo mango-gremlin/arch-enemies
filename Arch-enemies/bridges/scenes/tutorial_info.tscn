@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://mq3lgncyb3cu"]
 
-[ext_resource type="Script" path="res://bridges/scenes/tutorial_info.gd" id="1_8xlim"]
+[ext_resource type="Script" path="res://bridges/script/tutorial_info.gd" id="1_8xlim"]
 [ext_resource type="Theme" uid="uid://d2ijyc316xeom" path="res://assets/art/ui_elements/ui_theme.tres" id="1_jrff0"]
 [ext_resource type="PackedScene" uid="uid://f05hwqiqxi84" path="res://bridges/scenes/squirrel_tutorial.tscn" id="2_aadnx"]
 [ext_resource type="PackedScene" uid="uid://bp286phfoqyt1" path="res://bridges/scenes/snake_tutorial.tscn" id="3_2lfgv"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bhl7a6sahube" path="res://bridges/scenes/zones_tutorial.tscn" id="9_j2j6t"]
 [ext_resource type="PackedScene" uid="uid://dnafxpljtdpvk" path="res://bridges/scenes/buttons_tutorial.tscn" id="10_rioie"]
 [ext_resource type="PackedScene" uid="uid://dx5ngssjupvhw" path="res://bridges/scenes/level_tutorial.tscn" id="10_th33r"]
+
 
 [node name="Tutorial" type="Control"]
 layout_mode = 3

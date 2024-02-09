@@ -21,7 +21,7 @@
 [ext_resource type="Script" path="res://bridges/script/grid.gd" id="12_lpmli"]
 [ext_resource type="Script" path="res://bridges/script/grid_visualizer.gd" id="13_mxc8b"]
 [ext_resource type="Script" path="res://bridges/script/grid_drag.gd" id="14_d4vvk"]
-[ext_resource type="Script" path="res://bridges/scenes/toggle_build_fox_mode.gd" id="15_pd5uj"]
+[ext_resource type="Script" path="res://bridges/script/toggle_build_fox_mode.gd" id="15_pd5uj"]
 [ext_resource type="PackedScene" uid="uid://dvgr170gyuhpq" path="res://bridges/scenes/player.tscn" id="16_t16j0"]
 [ext_resource type="PackedScene" uid="uid://cbremi6mc4sua" path="res://bridges/scenes/world_edge.tscn" id="17_6tnqx"]
 [ext_resource type="PackedScene" uid="uid://cxj1q08s3i7i8" path="res://bridges/scenes/goal_menu.tscn" id="18_co2ox"]
@@ -31,8 +31,9 @@
 [ext_resource type="Theme" uid="uid://d2ijyc316xeom" path="res://assets/art/ui_elements/ui_theme.tres" id="21_5yhij"]
 [ext_resource type="PackedScene" uid="uid://dynxnwixd1bke" path="res://bridges/scenes/parallax_background.tscn" id="21_sinqj"]
 [ext_resource type="Texture2D" uid="uid://leqswdio6xwd" path="res://bridges/assets/background/background_center_v4.png" id="22_sx6wq"]
-[ext_resource type="PackedScene" path="res://bridges/scenes/bridges_settings_menu.tscn" id="27_318v5"]
+[ext_resource type="PackedScene" uid="uid://cumelk772llyk" path="res://bridges/scenes/bridges_settings_menu.tscn" id="27_318v5"]
 [ext_resource type="Texture2D" uid="uid://d3s1iupr6ox8" path="res://bridges/assets/background/background_darkness.png" id="31_va2b3"]
+
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gxf1m"]
 texture = ExtResource("2_361sp")

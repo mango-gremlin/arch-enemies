@@ -20,7 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://c1etei55ew2yx" path="res://bridges/assets/shallows.png" id="10_aqm3q"]
 [ext_resource type="Texture2D" uid="uid://diwvqonlr6748" path="res://assets/art/objects/bridge_squirrel.png" id="11_a366g"]
 [ext_resource type="Texture2D" uid="uid://dmy2gc7dfwago" path="res://bridges/assets/bottom.png" id="11_gtdg4"]
-[ext_resource type="Script" path="res://bridges/scenes/toggle_build_fox_mode.gd" id="12_o1ngo"]
+[ext_resource type="Script" path="res://bridges/script/toggle_build_fox_mode.gd" id="12_o1ngo"]
 [ext_resource type="Script" path="res://bridges/script/grid_drag.gd" id="12_re1q8"]
 [ext_resource type="PackedScene" uid="uid://dvgr170gyuhpq" path="res://bridges/scenes/player.tscn" id="12_y7gdk"]
 [ext_resource type="PackedScene" uid="uid://cbremi6mc4sua" path="res://bridges/scenes/world_edge.tscn" id="15_7vrq2"]
@@ -30,6 +30,7 @@
 [ext_resource type="PackedScene" uid="uid://dynxnwixd1bke" path="res://bridges/scenes/parallax_background.tscn" id="18_uekha"]
 [ext_resource type="PackedScene" uid="uid://cern51r1p8lkb" path="res://bridges/scenes/bridges_pause_menu.tscn" id="20_nac6o"]
 [ext_resource type="PackedScene" uid="uid://cumelk772llyk" path="res://bridges/scenes/bridges_settings_menu.tscn" id="27_pa0u1"]
+
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gxf1m"]
 texture = ExtResource("1_uowbf")
