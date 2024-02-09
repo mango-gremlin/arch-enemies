@@ -42,7 +42,7 @@ func obtain_item_description(type:ItemType) -> String:
 		ItemType.EVIDENCE:
 			return "THEY ARE ALL IN ON IT"
 		ItemType.EGG:
-			return "Very noticeably not a hazlenut"
+			return "Very noticeably not a hazelnut"
 		ItemType.HAZELNUT:
 			return "A tasteful hazelnut"
 		ItemType.FLIES:
@@ -105,8 +105,8 @@ static func item_type_to_string(item_type: ItemType) -> String:
 
 # converts string to enum of type item
 # returns obtained type
-static func string_to_item_type(str):
-	match str:
+static func string_to_item_type(item_string):
+	match item_string:
 		"EVIDENCE": 
 			return ItemType.EVIDENCE
 		"EGG": 

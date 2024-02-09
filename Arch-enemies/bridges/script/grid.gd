@@ -212,7 +212,7 @@ func spawn_danger_area2D(area, squares):
 		instance.body_entered.connect(on_contact_danger)
 
 # when contacting a danger, reset the position of fox
-func on_contact_danger(body):
+func on_contact_danger(_body):
 	if not Global.drag_mode:
 		play_sound.emit("DEATH")
 		$Player.reset_player()
@@ -451,7 +451,7 @@ func reset_modes():
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	if(Global.currently_dragging and Input.is_action_just_released("click")):
 		make_invisible()
 	

@@ -98,7 +98,7 @@ func player_movement(delta):
 	
 	move_and_collide(velocity * delta)
 
-func player_idle_animation(delta):
+func player_idle_animation(_delta):
 	match current_direction:
 		DIRECTION.SIDE:
 			anim.flip_h = h_flipped
@@ -110,7 +110,7 @@ func player_idle_animation(delta):
 		_:
 			anim.play("side_idle")
 
-func player_rotate_hitbox(delta):
+func player_rotate_hitbox(_delta):
 	match current_direction:
 		DIRECTION.SIDE:
 			player_hitbox.set_rotation_degrees(0)
@@ -119,7 +119,7 @@ func player_rotate_hitbox(delta):
 		DIRECTION.BACK:
 			player_hitbox.set_rotation_degrees(90)
 
-func toggle_indicator_visibility(delta):
+func toggle_indicator_visibility(_delta):
 	# indicator displayed until first movement, then its set to invisible
 	indicator_how_to_walk.visible = false
 	

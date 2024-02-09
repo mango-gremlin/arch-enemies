@@ -10,7 +10,7 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	#The normal drag does not work with zoom so we do our own
 	var global = get_global_mouse_position()
 	Global.currently_dragging = true

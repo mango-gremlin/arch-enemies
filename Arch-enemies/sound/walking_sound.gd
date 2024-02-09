@@ -9,7 +9,7 @@ func _ready():
 
 
 # check if the fox is walking as defined in the global script, play run sounds accordingly
-func _process(delta):
+func _process(_delta):
 	#Here we check when we play the sound. The Timer limits it to ever 0.18 sec with the sound being ~0.1 sec
 	if timer.is_stopped():
 		#If the timer has run through we check if the walking sound is supposed to be displayed

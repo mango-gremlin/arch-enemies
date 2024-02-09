@@ -23,7 +23,7 @@ func image_src() -> String:
 	return "res://assets/art/characters/portraits/Portrait_Deer.png"
 	
 # null ement in array means here disable button X
-func btn_text() -> Array[String]:			
+func btn_text() -> Array[String]:
 	return ["Previous", "Next", "Exit"]
 	
 func btn_states() -> Array[bool]:

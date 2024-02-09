@@ -27,5 +27,5 @@ func get_effects_volume() -> float:
 	return linear_to_db(main_volume * effects_volume)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass

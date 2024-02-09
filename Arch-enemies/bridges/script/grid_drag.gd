@@ -26,10 +26,10 @@ func _ready():
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass
 
-func _get_drag_data(at_position):
+func _get_drag_data(_at_position):
 	# check for drag mode and if trying to drag an animal
 	if Global.drag_mode and tooltip_text != "":
 		# First we need to check if we have some animals of the requested type left in the inventory
@@ -87,7 +87,7 @@ func _get_drag_data(at_position):
 		data["animal"] = animal
 		return data
 
-func _can_drop_data(at_position, data):
+func _can_drop_data(_at_position, data):
 	#To check if we can drop we need to check the grid
 	#The Mouse is on a pixel base, while the grid has 10x10 cells
 	#Therefore we convert

@@ -16,7 +16,7 @@ func _ready():
 	SingletonPlayer.active_dialogue.npc_control_instance = self
 	
 # keep window on the buttom, does not working using canvas layers
-func _process(delta):
+func _process(_delta):
 	var window_size = window.size
 	position.y = 0.0083102 * window_size.y + 426
 	
