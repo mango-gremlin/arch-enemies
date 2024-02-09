@@ -21,7 +21,7 @@ func _on_goal_area_2d_body_entered(_body):
 		goal_menu.visible = true
 		Global.walking = false
 		grid.goal_reached = true
-		# menu_mode is active when goal is reached		
+		# menu_mode is active when goal is reached
 		grid.menu_mode = true
 		grid.change_ui_visibility()
 		

@@ -2,15 +2,14 @@
 
 [ext_resource type="Script" path="res://bridges/script/tutorial_info.gd" id="1_8xlim"]
 [ext_resource type="Theme" uid="uid://d2ijyc316xeom" path="res://assets/art/ui_elements/ui_theme.tres" id="1_jrff0"]
-[ext_resource type="PackedScene" uid="uid://f05hwqiqxi84" path="res://bridges/scenes/squirrel_tutorial.tscn" id="2_aadnx"]
-[ext_resource type="PackedScene" uid="uid://bp286phfoqyt1" path="res://bridges/scenes/snake_tutorial.tscn" id="3_2lfgv"]
-[ext_resource type="PackedScene" uid="uid://dhf8aj2xm2dgx" path="res://bridges/scenes/spider_tutorial.tscn" id="3_bhkkr"]
-[ext_resource type="PackedScene" uid="uid://dt7w6pe05hdo5" path="res://bridges/scenes/hazards_tutorial.tscn" id="3_pwlsu"]
-[ext_resource type="PackedScene" uid="uid://dc22g3xoe5o1o" path="res://bridges/scenes/deer_tutorial.tscn" id="4_i4jwe"]
-[ext_resource type="PackedScene" uid="uid://bhl7a6sahube" path="res://bridges/scenes/zones_tutorial.tscn" id="9_j2j6t"]
-[ext_resource type="PackedScene" uid="uid://dnafxpljtdpvk" path="res://bridges/scenes/buttons_tutorial.tscn" id="10_rioie"]
-[ext_resource type="PackedScene" uid="uid://dx5ngssjupvhw" path="res://bridges/scenes/level_tutorial.tscn" id="10_th33r"]
-
+[ext_resource type="PackedScene" uid="uid://f05hwqiqxi84" path="res://bridges/scenes/tutorial/squirrel_tutorial.tscn" id="2_aadnx"]
+[ext_resource type="PackedScene" uid="uid://bp286phfoqyt1" path="res://bridges/scenes/tutorial/snake_tutorial.tscn" id="3_2lfgv"]
+[ext_resource type="PackedScene" uid="uid://dhf8aj2xm2dgx" path="res://bridges/scenes/tutorial/spider_tutorial.tscn" id="3_bhkkr"]
+[ext_resource type="PackedScene" uid="uid://dt7w6pe05hdo5" path="res://bridges/scenes/tutorial/hazards_tutorial.tscn" id="3_pwlsu"]
+[ext_resource type="PackedScene" uid="uid://dc22g3xoe5o1o" path="res://bridges/scenes/tutorial/deer_tutorial.tscn" id="4_i4jwe"]
+[ext_resource type="PackedScene" uid="uid://bhl7a6sahube" path="res://bridges/scenes/tutorial/zones_tutorial.tscn" id="9_j2j6t"]
+[ext_resource type="PackedScene" uid="uid://dnafxpljtdpvk" path="res://bridges/scenes/tutorial/buttons_tutorial.tscn" id="10_rioie"]
+[ext_resource type="PackedScene" uid="uid://dx5ngssjupvhw" path="res://bridges/scenes/tutorial/level_tutorial.tscn" id="10_th33r"]
 
 [node name="Tutorial" type="Control"]
 layout_mode = 3

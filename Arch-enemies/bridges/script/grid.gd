@@ -159,7 +159,7 @@ func _ready():
 	# assign forbidden zones around the fox' starting position
 	grid = assign_fox_forbidden_zones(grid)
 	
-	var danger_area = preload("res://bridges/scenes/danger_detection.tscn")
+	var danger_area = preload("res://bridges/scenes/bridge_components/danger_detection.tscn")
 	var danger_squares = water_squares + hazard_squares
 	spawn_danger_area2D(danger_area, danger_squares)
 	
