@@ -159,9 +159,11 @@ func _ready():
 	# assign forbidden zones around the fox' starting position
 	grid = assign_fox_forbidden_zones(grid)
 	
-	var danger_area = preload("res://bridges/bridge_components/danger_detection.tscn")
-	var danger_squares = water_squares + hazard_squares
-	spawn_danger_area2D(danger_area, danger_squares)
+	var water_area = preload("res://bridges/bridge_components/water_detection.tscn")
+	var hazard_area = preload("res://bridges/bridge_components/hazard_detection.tscn")
+	print("hazard squares: ", hazard_squares)
+	spawn_danger_area2D(water_area, water_squares)
+	spawn_danger_area2D(hazard_area, hazard_squares)
 	
 	color_grid()
 	#Now we save the inital state of the grid for reset and previous state
@@ -214,6 +216,7 @@ func spawn_danger_area2D(area, squares):
 # when contacting a danger, reset the position of fox
 func on_contact_danger(_body):
 	if not Global.drag_mode:
+		print("hazard/water entered!", _body)
 		play_sound.emit("DEATH")
 		$Player.reset_player()
 

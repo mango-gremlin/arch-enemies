@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bxx8x10fpkfvq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rquk4"]
+size = Vector2(8, 8)
+
+[node name="hazard_detection" type="Area2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_rquk4")
