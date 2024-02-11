@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://b1yknecfgw4fs" path="res://assets/art/ui_elements/animal_inventory_scroll9.png" id="1_2vqh6"]
 [ext_resource type="Texture2D" uid="uid://d0o2q6fijmd1" path="res://assets/art/tilesets/bridge_tileset/green.png" id="1_uowbf"]
-[ext_resource type="Script" path="res://bridges/bridge_components/Camera.gd" id="1_vkapa"]
+[ext_resource type="Script" path="res://bridges/bridge_components/camera.gd" id="1_vkapa"]
 [ext_resource type="Script" path="res://bridges/grid_drag_drop/grid.gd" id="1_xtvvi"]
 [ext_resource type="Texture2D" uid="uid://dgoo8sdw24hp0" path="res://assets/art/tilesets/bridge_tileset/bridge_air_tiles.png" id="2_4xri4"]
 [ext_resource type="Script" path="res://bridges/grid_drag_drop/grid_visualizer.gd" id="2_d8ovy"]
@@ -20,7 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://c1etei55ew2yx" path="res://assets/art/tilesets/bridge_tileset/turquoise.png" id="10_aqm3q"]
 [ext_resource type="Texture2D" uid="uid://diwvqonlr6748" path="res://assets/art/objects/bridge_squirrel.png" id="11_a366g"]
 [ext_resource type="Texture2D" uid="uid://dmy2gc7dfwago" path="res://assets/art/tilesets/bridge_tileset/purple.png" id="11_gtdg4"]
-[ext_resource type="Script" path="res://bridges/toggle_build_fox_mode.gd" id="12_o1ngo"]
+[ext_resource type="Script" path="res://bridges/grid_drag_drop/toggle_build_fox_mode.gd" id="12_o1ngo"]
 [ext_resource type="Script" path="res://bridges/grid_drag_drop/grid_drag.gd" id="12_re1q8"]
 [ext_resource type="PackedScene" uid="uid://dvgr170gyuhpq" path="res://bridges/player/player.tscn" id="12_y7gdk"]
 [ext_resource type="PackedScene" uid="uid://cbremi6mc4sua" path="res://bridges/bridge_components/world_edge.tscn" id="15_7vrq2"]
