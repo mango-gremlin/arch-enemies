@@ -1092,8 +1092,8 @@ visible = false
 position = Vector2(147, 86)
 
 [connection signal="send_zoom" from="Camera2D" to="Grid" method="_on_camera_2d_send_zoom"]
-[connection signal="play_sound" from="Tutorial" to="Sound Effects" method="_on_button_pressed"]
 [connection signal="play_sound" from="Tutorial" to="Sound Effects" method="_on_tutorial_play_sound"]
+[connection signal="play_sound" from="Tutorial" to="Sound Effects" method="_on_button_pressed"]
 [connection signal="current_grid" from="Grid" to="Grid/Control/Drag_Grid" method="_on_grid_current_grid"]
 [connection signal="current_grid" from="Grid" to="Grid/Control/Animal_Inventory/Deer_Item" method="_on_grid_current_grid"]
 [connection signal="current_grid" from="Grid" to="Grid/Control/Animal_Inventory/Snake_Item" method="_on_grid_current_grid"]
