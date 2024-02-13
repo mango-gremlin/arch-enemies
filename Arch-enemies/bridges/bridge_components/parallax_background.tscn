@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://dynxnwixd1bke"]
+
+[ext_resource type="Texture2D" uid="uid://leqswdio6xwd" path="res://assets/art/background/background_center_v4.png" id="1_b03hw"]
+[ext_resource type="Texture2D" uid="uid://d3s1iupr6ox8" path="res://assets/art/background/background_darkness.png" id="2_1d16b"]
+[ext_resource type="Texture2D" uid="uid://cm25y0k6wuc8m" path="res://assets/art/background/background_left.png" id="3_1bjgy"]
+[ext_resource type="Texture2D" uid="uid://bqgilfwt6nexk" path="res://assets/art/background/background_right.png" id="3_ob517"]
+
+
+[node name="parallax_background" type="ParallaxBackground"]
+
+[node name="center_layer" type="ParallaxLayer" parent="."]
+
+[node name="sprite_1" type="Sprite2D" parent="center_layer"]
+position = Vector2(100, 100)
+texture = ExtResource("1_b03hw")
+
+[node name="sprite_2" type="Sprite2D" parent="center_layer"]
+position = Vector2(300, 100)
+texture = ExtResource("1_b03hw")
+
+[node name="BackgroundDarkness" type="Sprite2D" parent="center_layer"]
+position = Vector2(200, 100)
+texture = ExtResource("2_1d16b")
+
+[node name="static_sides" type="ParallaxLayer" parent="."]
+
+[node name="sprite_left_side" type="Sprite2D" parent="static_sides"]
+position = Vector2(100, 100)
+texture = ExtResource("3_1bjgy")
+
+[node name="sprite_right_side" type="Sprite2D" parent="static_sides"]
+position = Vector2(300, 100)
+texture = ExtResource("3_ob517")

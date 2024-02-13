@@ -186,7 +186,7 @@ func add_solveable_indicators():
 			quest_solveable_markers[quest_id_idx].texture = quest_solveable_indicator
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	add_solveable_indicators()
 	add_solved_checkmarks()
 

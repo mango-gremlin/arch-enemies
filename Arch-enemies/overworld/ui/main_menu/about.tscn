@@ -1,6 +1,6 @@
 [gd_scene load_steps=16 format=3 uid="uid://kiso0os3bn2l"]
 
-[ext_resource type="Texture2D" uid="uid://leqswdio6xwd" path="res://bridges/assets/background/background_center_v4.png" id="1_eux8p"]
+[ext_resource type="Texture2D" uid="uid://leqswdio6xwd" path="res://assets/art/background/background_center_v4.png" id="1_eux8p"]
 [ext_resource type="Script" path="res://overworld/ui/main_menu/about.gd" id="1_vo3wm"]
 [ext_resource type="AudioStream" uid="uid://b1diue16pa0ld" path="res://assets/sound/Victory.wav" id="2_47834"]
 [ext_resource type="Script" path="res://sound/effects_sound.gd" id="3_03bv3"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://igj8k0askwfw" path="res://assets/art/ui_elements/button_normal.png" id="10_8qnnk"]
 [ext_resource type="FontFile" uid="uid://h728dpw3bhca" path="res://assets/art/ui_elements/yoster.ttf" id="11_vdntk"]
 [ext_resource type="Texture2D" uid="uid://bfmjwjo32or6u" path="res://assets/art/ui_elements/speech bubble.png" id="12_bk6hp"]
+
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4r6aj"]
 texture = ExtResource("3_12cib")

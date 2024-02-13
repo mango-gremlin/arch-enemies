@@ -1,0 +1,72 @@
+[gd_scene load_steps=11 format=3 uid="uid://mq3lgncyb3cu"]
+
+[ext_resource type="Script" path="res://bridges/tutorial/tutorial_info.gd" id="1_8xlim"]
+[ext_resource type="Theme" uid="uid://d2ijyc316xeom" path="res://assets/art/ui_elements/ui_theme.tres" id="1_jrff0"]
+[ext_resource type="PackedScene" uid="uid://f05hwqiqxi84" path="res://bridges/tutorial/squirrel_tutorial.tscn" id="2_aadnx"]
+[ext_resource type="PackedScene" uid="uid://bp286phfoqyt1" path="res://bridges/tutorial/snake_tutorial.tscn" id="3_2lfgv"]
+[ext_resource type="PackedScene" uid="uid://dhf8aj2xm2dgx" path="res://bridges/tutorial/spider_tutorial.tscn" id="3_bhkkr"]
+[ext_resource type="PackedScene" uid="uid://dt7w6pe05hdo5" path="res://bridges/tutorial/hazards_tutorial.tscn" id="3_pwlsu"]
+[ext_resource type="PackedScene" uid="uid://dc22g3xoe5o1o" path="res://bridges/tutorial/deer_tutorial.tscn" id="4_i4jwe"]
+[ext_resource type="PackedScene" uid="uid://bhl7a6sahube" path="res://bridges/tutorial/zones_tutorial.tscn" id="9_j2j6t"]
+[ext_resource type="PackedScene" uid="uid://dnafxpljtdpvk" path="res://bridges/tutorial/buttons_tutorial.tscn" id="10_rioie"]
+[ext_resource type="PackedScene" uid="uid://dx5ngssjupvhw" path="res://bridges/tutorial/level_tutorial.tscn" id="10_th33r"]
+
+[node name="Tutorial" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+theme = ExtResource("1_jrff0")
+script = ExtResource("1_8xlim")
+
+[node name="Hazards_Tutorial" parent="." instance=ExtResource("3_pwlsu")]
+layout_mode = 1
+
+[node name="Buttons_Tutorial" parent="." instance=ExtResource("10_rioie")]
+layout_mode = 1
+
+[node name="Spider_Tutorial" parent="." instance=ExtResource("3_bhkkr")]
+layout_mode = 1
+
+[node name="Squirrel_Tutorial" parent="." instance=ExtResource("2_aadnx")]
+layout_mode = 1
+
+[node name="Snake_Tutorial" parent="." instance=ExtResource("3_2lfgv")]
+layout_mode = 1
+
+[node name="Deer_Tutorial" parent="." instance=ExtResource("4_i4jwe")]
+layout_mode = 1
+
+[node name="Zones_Tutorial" parent="." instance=ExtResource("9_j2j6t")]
+layout_mode = 1
+
+[node name="Goal_Tutorial" parent="." instance=ExtResource("10_th33r")]
+layout_mode = 1
+
+[node name="Button" type="Button" parent="."]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+theme_override_font_sizes/font_size = 28
+text = "x"
+
+[connection signal="pressed" from="Hazards_Tutorial/Control/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/Next_Button" to="." method="_on_hazards_button_pressed"]
+[connection signal="pressed" from="Buttons_Tutorial/PanelContainer/MarginContainer/VBoxContainer/Next_Button" to="." method="_on_buttons_button_pressed"]
+[connection signal="pressed" from="Spider_Tutorial/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/Next_Button" to="." method="_on_spider_button_pressed"]
+[connection signal="pressed" from="Squirrel_Tutorial/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/Next_Button" to="." method="_on_squirrel_button_pressed"]
+[connection signal="pressed" from="Snake_Tutorial/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/Next_Button" to="." method="_on_snake_button_pressed"]
+[connection signal="pressed" from="Deer_Tutorial/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/Next_Button" to="." method="_on_deer_button_pressed"]
+[connection signal="pressed" from="Zones_Tutorial/Control/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/Next_Button" to="." method="_on_zones_button_pressed"]
+[connection signal="pressed" from="Goal_Tutorial/Control/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/Next_Button" to="." method="_on_goal_button_pressed"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+
+[editable path="Hazards_Tutorial"]
+[editable path="Hazards_Tutorial/Control"]
+[editable path="Buttons_Tutorial"]
+[editable path="Spider_Tutorial"]
+[editable path="Squirrel_Tutorial"]
+[editable path="Snake_Tutorial"]
+[editable path="Deer_Tutorial"]
+[editable path="Zones_Tutorial"]
+[editable path="Zones_Tutorial/Control"]
+[editable path="Goal_Tutorial"]
+[editable path="Goal_Tutorial/Control"]

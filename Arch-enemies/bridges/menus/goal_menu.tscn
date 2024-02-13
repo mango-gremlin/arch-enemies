@@ -1,0 +1,99 @@
+[gd_scene load_steps=5 format=3 uid="uid://cxj1q08s3i7i8"]
+
+[ext_resource type="Script" path="res://bridges/menus/goal_menu.gd" id="1_e6stn"]
+[ext_resource type="Texture2D" uid="uid://ba3leqm154y12" path="res://assets/art/ui_elements/menu_container.png" id="2_i1o17"]
+[ext_resource type="Theme" uid="uid://d2ijyc316xeom" path="res://assets/art/ui_elements/ui_theme.tres" id="4_a7dfh"]
+[ext_resource type="Texture2D" uid="uid://leqswdio6xwd" path="res://assets/art/background/background_center_v4.png" id="5_upwcu"]
+
+
+[node name="goal_menu" type="Control"]
+layout_mode = 3
+anchor_right = 0.359
+anchor_bottom = 0.377
+offset_right = -413.568
+offset_bottom = -244.296
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_e6stn")
+
+[node name="BackgroundCenterV7" type="Sprite2D" parent="."]
+modulate = Color(0.498039, 0.498039, 0.498039, 1)
+z_index = 2
+position = Vector2(235, -118)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("5_upwcu")
+centered = false
+
+[node name="BackgroundCenterV4" type="Sprite2D" parent="."]
+modulate = Color(0.498039, 0.498039, 0.498039, 1)
+z_index = 2
+position = Vector2(-238, -118)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("5_upwcu")
+centered = false
+
+[node name="BackgroundCenterV6" type="Sprite2D" parent="."]
+modulate = Color(0.498039, 0.498039, 0.498039, 1)
+z_index = 2
+position = Vector2(-473, -118)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("5_upwcu")
+centered = false
+
+[node name="BackgroundCenterV5" type="Sprite2D" parent="."]
+modulate = Color(0.498039, 0.498039, 0.498039, 1)
+z_index = 2
+position = Vector2(-2, -118)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("5_upwcu")
+centered = false
+
+[node name="MenuContainer" type="Sprite2D" parent="."]
+z_index = 2
+scale = Vector2(2, 2)
+texture = ExtResource("2_i1o17")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = -33.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 33.0
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+z_index = 2
+layout_mode = 2
+theme = ExtResource("4_a7dfh")
+text = "Success!"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="ContinueButton" type="Button" parent="VBoxContainer"]
+z_index = 2
+layout_mode = 2
+theme = ExtResource("4_a7dfh")
+text = "Continue"
+metadata/_edit_use_anchors_ = true
+
+[node name="RetryButton" type="Button" parent="VBoxContainer"]
+z_index = 2
+layout_mode = 2
+theme = ExtResource("4_a7dfh")
+text = "Retry"
+metadata/_edit_use_anchors_ = true
+
+[node name="RetryButton" type="Button" parent="VBoxContainer/RetryButton"]
+z_index = 2
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.25
+anchor_right = 1.0
+anchor_bottom = 2.25
+theme = ExtResource("4_a7dfh")
+text = "Back"
+metadata/_edit_use_anchors_ = true
+
+[connection signal="pressed" from="VBoxContainer/ContinueButton" to="." method="_on_continue_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/RetryButton" to="." method="_on_retry_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/RetryButton/RetryButton" to="." method="_on_back_button_pressed"]

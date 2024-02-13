@@ -18,7 +18,7 @@ config/windows_native_icon="res://Frog.ico"
 
 [autoload]
 
-Global="*res://bridges/script/global.gd"
+Global="*res://bridges/global.gd"
 SingletonPlayer="*res://singleton_scripts/singleton_player.gd"
 Settings="*res://settings_scripts/settings.gd"
 BackgroundMusic="*res://sound/background_music.tscn"

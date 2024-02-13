@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://dfnsuounqjr4c"]
+
+[ext_resource type="Script" path="res://bridges/bridge_components/goal.gd" id="1_3hb7h"]
+[ext_resource type="AudioStream" uid="uid://b1diue16pa0ld" path="res://assets/sound/Victory.wav" id="1_fh6hj"]
+[ext_resource type="Script" path="res://sound/goal_sound.gd" id="2_svc7o"]
+[ext_resource type="Texture2D" uid="uid://b2jweow1kfu2g" path="res://assets/art/objects/flagpost.png" id="4_13t0y"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sf3ny"]
+size = Vector2(38, 37.6385)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Victory" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_fh6hj")
+script = ExtResource("2_svc7o")
+
+[node name="GoalArea2D" type="Area2D" parent="."]
+script = ExtResource("1_3hb7h")
+
+[node name="GoalCollisionShape2D" type="CollisionShape2D" parent="GoalArea2D"]
+position = Vector2(19, 19)
+shape = SubResource("RectangleShape2D_sf3ny")
+debug_color = Color(0.521569, 0.560784, 0.341176, 0.419608)
+
+[node name="Flagpost" type="Sprite2D" parent="."]
+position = Vector2(2, 14)
+texture = ExtResource("4_13t0y")
+
+[connection signal="body_entered" from="GoalArea2D" to="GoalArea2D" method="_on_goal_area_2d_body_entered"]
+[connection signal="play_sound" from="GoalArea2D" to="Victory" method="_on_goal_area_2d_play_sound"]

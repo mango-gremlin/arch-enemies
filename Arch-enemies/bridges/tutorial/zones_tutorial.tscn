@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://bhl7a6sahube"]
+
+[ext_resource type="PackedScene" uid="uid://bs38w6qv1n2h0" path="res://bridges/tutorial/tutorial_template.tscn" id="1_1lcsu"]
+[ext_resource type="Texture2D" uid="uid://bfpbtvm60sd2f" path="res://assets/tutorial_screenshots/green_and_red_zones.png" id="2_nj5br"]
+
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" parent="." instance=ExtResource("1_1lcsu")]
+layout_mode = 1
+
+[node name="Example_Picture" parent="Control/PanelContainer2/MarginContainer/HBoxContainer" index="0"]
+texture = ExtResource("2_nj5br")
+
+[node name="Header" parent="Control/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer" index="0"]
+text = "How to place animals:"
+
+[node name="Example2" parent="Control/PanelContainer2/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer" index="0"]
+text = "You can place animals by dragging them from the scroll and dropping them where they are allowed. 
+
+All animals can be placed in green zones, but none in  the red ones. 
+Zones with other colours are only allowed for some types of animals."
+
+[editable path="Control"]

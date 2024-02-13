@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://sound/effects_sound.gd" id="3_me10j"]
 [ext_resource type="PackedScene" uid="uid://p30p3o0e473c" path="res://overworld/scenes/world.tscn" id="3_xuy1h"]
 [ext_resource type="PackedScene" uid="uid://cgvraulefjyn8" path="res://overworld/ui/overworld_ui/overworld_ui.tscn" id="4_4hawq"]
-[ext_resource type="Script" path="res://bridges/script/walking_sound.gd" id="4_f85yo"]
+[ext_resource type="Script" path="res://sound/walking_sound.gd" id="4_f85yo"]
 [ext_resource type="PackedScene" uid="uid://dbffmmmqyknux" path="res://overworld/dialogue/DialogueUI.tscn" id="4_fdft7"]
 [ext_resource type="PackedScene" uid="uid://bj3a1sw80l6wj" path="res://overworld/entities/interaction_overworld/item_interaction.tscn" id="6_66i44"]
 [ext_resource type="PackedScene" uid="uid://drn1loe1wknbq" path="res://overworld/entities/interaction_overworld/npc_interaction.tscn" id="7_33ud0"]

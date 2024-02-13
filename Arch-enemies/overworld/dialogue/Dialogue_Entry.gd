@@ -32,5 +32,5 @@ func btn_states() -> Array[bool]:
 	return [false, false, false]
 
 # btn button in from left to right, starting with 0
-func btn_action(btn: int):
+func btn_action(_btn: int):
 	pass

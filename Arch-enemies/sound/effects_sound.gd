@@ -46,7 +46,7 @@ func _ready():
 	SingletonPlayer.play_sound.connect(play_sound)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass
 
 func _on_drag_grid_play_sound(sound):
@@ -75,6 +75,6 @@ func _on_bridges_settings_menu_apply_volume():
 
 # only used when button is pressed
 # sound_type is not neccessary, but requires some refactoring before it can be removed
-func _on_button_pressed(sound_type):
+func _on_button_pressed(_sound_type):
 	stream = click
 	playing = true

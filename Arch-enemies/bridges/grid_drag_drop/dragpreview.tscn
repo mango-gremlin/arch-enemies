@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cmiidt630v023"]
+
+[ext_resource type="Script" path="res://bridges/grid_drag_drop/dragpreview.gd" id="1_7u6q0"]
+
+[node name="dragpreview" type="TextureRect"]
+top_level = true
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_7u6q0")

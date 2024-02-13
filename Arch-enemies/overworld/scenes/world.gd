@@ -9,5 +9,5 @@ func _ready():
 func transfer_sound(sound):
 	play_sound.emit(sound)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass
